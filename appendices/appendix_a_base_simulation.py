@@ -1,18 +1,14 @@
-# Complete Optimized Simulation Script - Ready to Run & Commit
-# Features:
-# - Realistic harvest: FRICTION=0.001, THERMO=0.0005
-# - Proper unit conversion in calc_power_budget (0.1s step → mWh)
-# - Turbo-compressed cooling (0.85 retention)
-# - Structural battery thermal mass effect
-# - Pre-allocated history arrays
-# - Checkpoint saving & resumption
-# - Checkpoint file cleanup
-# - Material failure warning only once
-# - No unused variables
+# Complete Updated Simulation Script - All Fixes Applied & Ready for Commit
+# Changes:
+# - Removed unused VOLTAGE_LOW constant
+# - Added structural battery thermal mass constants and applied to heat gains
+# - Fixed process_heat() and move_servo() to apply THERMAL_MASS_FACTOR
+# - Cleaned up subplot layout: Removed duplicate net_power plot on reflection axis
+# - Color shift is now a static bar chart on axs[4] (no animation)
+# - All other realism features preserved
 
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
 import networkx as nx
 import sys
 from tqdm import tqdm
@@ -24,9 +20,8 @@ sys.setrecursionlimit(1500)
 # Constants
 LIGHT_INTENSITY_MAX = 1000.0
 TEMP_THRESHOLD_WARM = 30.0
-VOLTAGE_LOW = 1.0
-FRICTION_ENERGY_FACTOR = 0.001      # Realistic (reduced 100×)
-THERMO_ENERGY_FACTOR_INITIAL = 0.0005  # Realistic (reduced 100×)
+FRICTION_ENERGY_FACTOR = 0.001      # Realistic
+THERMO_ENERGY_FACTOR_INITIAL = 0.0005  # Realistic
 SERVO_MAX_ANGLE = 180.0
 TIME_STEPS = 200  # Adjustable
 MAX_RECURSION_DEPTH = 3
@@ -46,6 +41,11 @@ AMBIENT_TEMP = 20.0
 COOLING_COEFF = 0.85  # Turbo-compressed
 CHECKPOINT_INTERVAL = 50
 CHECKPOINT_FILE = 'simulation_checkpoint.pkl'
+
+# Structural battery thermal mass constants
+BATTERY_MASS = 1.5  # kg
+SPECIFIC_HEAT_CAPACITY = 900  # J/kg·°C (aluminum + cells average)
+THERMAL_MASS_FACTOR = 1.0 / (1 + BATTERY_MASS * SPECIFIC_HEAT_CAPACITY / 1000)  # Reduces temp change
 
 class SimpleSNN:
     def __init__(self, num_neurons=5, threshold=0.5):
@@ -133,7 +133,7 @@ class RoboticSystem:
 
     def process_heat(self, light_signal):
         heat_gain = light_signal * 2.0
-        self.temperature += heat_gain - 0.5
+        self.temperature += (heat_gain - 0.5) * THERMAL_MASS_FACTOR
         thermo_energy = max(0, (self.temperature - 20) * self.thermo_energy_factor)
         return thermo_energy
 
@@ -151,7 +151,7 @@ class RoboticSystem:
         gross_friction = abs(movement) * FRICTION_ENERGY_FACTOR
         friction_energy = max(0, gross_friction - waste)
         self.servo_angle = np.clip(self.servo_angle + movement, 0, SERVO_MAX_ANGLE)
-        self.temperature += abs(movement) * 0.1
+        self.temperature += (abs(movement) * 0.1) * THERMAL_MASS_FACTOR
         return friction_energy
 
     def calc_power_budget(self, thermo_energy, friction_energy):
@@ -194,7 +194,7 @@ class RoboticSystem:
         self.history['degradation'][idx] = self.thermo_energy_factor
 
         # Turbo-compressed cooling
-        self.temperature = AMBIENT_TEMP + (self.temperature - AMBIENT_TEMP) * 0.85
+        self.temperature = AMBIENT_TEMP + (self.temperature - AMBIENT_TEMP) * COOLING_COEFF
 
         self.current_step += 1
 
@@ -260,11 +260,74 @@ if os.path.exists(CHECKPOINT_FILE):
     os.remove(CHECKPOINT_FILE)
     print("Checkpoint cleaned up.")
 
-# Final output for commit verification
-print("\n=== COMMIT VERIFICATION OUTPUT ===")
+# Final Battery Capacity Degradation Plot
+plt.figure(figsize=(10, 4))
+plt.plot(robot.history['battery_capacity'][:robot.current_step], color='blue', linewidth=2, label='Battery Capacity')
+plt.axhline(y=50.0, color='green', linestyle='--', label='Initial (50 mWh)')
+plt.xlabel('Time Step')
+plt.ylabel('Battery Capacity (mWh)')
+plt.title('Battery Capacity Degradation Over Time')
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+# Static Plots
+fig, axs = plt.subplots(6, 1, figsize=(10, 18))
+axs[0].plot(robot.history['light'], label='Light Intensity (Lux)')
+axs[0].set_title('Light Sensing')
+axs[1].plot(robot.history['temp'], label='Temperature (°C)', color='orange')
+axs[1].set_title('Heat Gain/Loss')
+axs[2].plot(robot.history['energy'], label='Energy Level', color='green')
+axs[2].set_title('Energy (with Realistic Deficit)')
+axs[3].plot(robot.history['angle'], label='Servo Angle (°)', color='purple')
+axs[3].set_title('Servo Movements')
+axs[4].bar(['R', 'G', 'B'], [robot.history['color_r'][-1], robot.history['color_g'][-1], robot.history['color_b'][-1]], color='gray')
+axs[4].set_title('Final Color Shift (RGB)')
+axs[4].set_ylim(0, 1)
+axs[5].plot(robot.history['reflection'], label='Reflective Output', color='red')
+axs[5].plot(robot.history['net_power'], label='Net Power (mWh/step)', color='black', linestyle='--')
+axs[5].set_title('Recursive Reflection & Net Power')
+axs[5].legend()
+
+# Connection Graph
+G = nx.DiGraph()
+components = [
+    'External Light/Sun', 'Printed Membrane', 'Photodiodes', 'Lenses',
+    'Thermo Crystalline Pads', 'Optical Bundles', 'Neuromorphic CPU',
+    'Neurosystem', 'Servos', 'Friction Charging', 'Energy Cells (Grounded)',
+    'Ground (Earth)', 'Color Shift', 'Feedback Loop', 'Recursive Reflection'
+]
+G.add_nodes_from(components)
+edges = [
+    ('External Light/Sun', 'Printed Membrane'),
+    ('Printed Membrane', 'Photodiodes'), ('Printed Membrane', 'Thermo Crystalline Pads'),
+    ('Printed Membrane', 'Color Shift'), ('Photodiodes', 'Optical Bundles'),
+    ('Lenses', 'Photodiodes'), ('Thermo Crystalline Pads', 'Energy Cells (Grounded)'),
+    ('Optical Bundles', 'Neuromorphic CPU'), ('Neuromorphic CPU', 'Neurosystem'),
+    ('Neurosystem', 'Servos'), ('Servos', 'Friction Charging'),
+    ('Friction Charging', 'Energy Cells (Grounded)'), ('Energy Cells (Grounded)', 'Ground (Earth)'),
+    ('Servos', 'Feedback Loop'), ('Feedback Loop', 'Neuromorphic CPU'),
+    ('Feedback Loop', 'Ground (Earth)'), ('Color Shift', 'Feedback Loop'),
+    ('Ground (Earth)', 'Energy Cells (Grounded)'), ('Ground (Earth)', 'Neuromorphic CPU'),
+    ('Ground (Earth)', 'Servos'), ('Neuromorphic CPU', 'Recursive Reflection'),
+    ('Recursive Reflection', 'Feedback Loop'), ('Recursive Reflection', 'Neuromorphic CPU')
+]
+G.add_edges_from(edges)
+
+plt.figure(figsize=(12, 8))
+pos = nx.spring_layout(G, seed=42)
+nx.draw(G, pos, with_labels=True, node_color='lightgreen', node_size=2500, font_size=9, arrows=True)
+plt.title('Connected Dots: With Recursive Loops')
+
+plt.tight_layout()
+plt.show()
+
+# Final output for verification
+print("\n=== SIMULATION COMPLETE ===")
 print(f"Steps executed: {robot.current_step}")
 print(f"Final energy: {robot.energy:.4f} mWh")
 print(f"Final battery capacity: {robot.battery_capacity:.4f} mWh")
 print(f"Final temperature: {robot.temperature:.2f}°C")
 print(f"Thermo factor: {robot.thermo_energy_factor:.6f}")
-print("Simulation complete. Ready to commit.")
+print("All plots displayed. Ready to commit.")
