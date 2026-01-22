@@ -140,21 +140,25 @@ class IntegratedConsciousnessSystem:
         movement = (target_angle - self.state.servo_angle) * 0.3
         self.state.servo_angle += movement
 
-        # LAYER 6: ENERGY HARVESTING
+        # LAYER 6: ENERGY HARVESTING (Reduced 100x for realism)
         # Friction from movement
+        # Proper unit conversion: (power_mW) * (time_step_hours) = energy_mWh
         if abs(movement) > 0.1:
-            self.state.friction_harvest = abs(movement) * 0.05
+            friction_power = abs(movement) * 0.0005  # mW (reduced 100x)
+            self.state.friction_harvest = friction_power * 0.005  # energy in mWh
         else:
             self.state.friction_harvest = 0.0
 
-        # Thermal from temperature
+        # Thermal from temperature (reduced 100x)
         temp_diff = abs(self.state.membrane_temp - 20)
-        self.state.thermal_harvest = temp_diff * 0.02
+        thermal_power = temp_diff * 0.0002  # mW (reduced 100x)
+        self.state.thermal_harvest = thermal_power * 0.005  # energy in mWh
 
         # Update energy storage
         total_harvest = self.state.friction_harvest + self.state.thermal_harvest
-        consumption = 0.3  # Base consumption
-        self.state.energy_storage += (total_harvest - consumption) * 0.1
+        consumption_mw = 470.0  # 470mW realistic consumption
+        consumption_mwh = consumption_mw * 0.005  # 18 seconds = 0.005 hours
+        self.state.energy_storage += (total_harvest - consumption_mwh)
 
         # LAYER 7: GROUND REFERENCE
         self.state.ground_voltage = np.random.randn() * 0.01  # Minimal noise

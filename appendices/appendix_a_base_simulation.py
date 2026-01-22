@@ -12,8 +12,9 @@ from matplotlib.animation import FuncAnimation
 # Constants and Configuration
 VOLTAGE_LOW = 1.0  # Low voltage for membrane modulation
 VOLTAGE_MAX = 1500  # High voltage for membrane modulation
-FRICTION_ENERGY_FACTOR = 0.05
-BIO_THERMO_ENERGY_FACTOR = 0.065
+FRICTION_ENERGY_FACTOR = 0.0005  # Reduced 100x: realistic friction harvest
+BIO_THERMO_ENERGY_FACTOR = 0.00065  # Reduced 100x: realistic thermal harvest
+TIME_STEP_HOURS = 0.005  # 18 seconds per step (18/3600 = 0.005 hours)
 SERVO_MAX_ANGLE = 180
 NUM_TIME_STEPS = 100  # Simple Spiking Neural Network time steps
 TEMP_THRESHOLD_WARN = None
@@ -83,7 +84,9 @@ class RoboticSystem:
         self.temperature += heat_gain
 
         # Thermal energy harvesting (pyro/thermo)
-        thermo_energy = (self.temperature - 20.0) * BIO_THERMO_ENERGY_FACTOR
+        # Proper unit conversion: (power_mW) * (time_step_hours) = energy_mWh
+        thermo_power = (self.temperature - 20.0) * BIO_THERMO_ENERGY_FACTOR
+        thermo_energy = thermo_power * TIME_STEP_HOURS
         self.energy += thermo_energy
 
         # Cooling effect
@@ -100,8 +103,10 @@ class RoboticSystem:
         self.servo_angle = np.clip(self.servo_angle + movement, 0, SERVO_MAX_ANGLE)
 
         # Friction charging from movement
+        # Proper unit conversion: (power_mW) * (time_step_hours) = energy_mWh
         if abs(movement) > 0.1:
-            friction_energy = abs(movement) * FRICTION_ENERGY_FACTOR
+            friction_power = abs(movement) * FRICTION_ENERGY_FACTOR
+            friction_energy = friction_power * TIME_STEP_HOURS
             self.energy += friction_energy
 
         return friction_energy
@@ -144,8 +149,11 @@ class RoboticSystem:
         # Apply voltage modulation for membrane
         voltage_applied = VOLTAGE_LOW if snn_output.sum() > 0.2 else 0
 
-        # Energy consumption
-        self.energy -= 0.5
+        # Energy consumption (realistic: 470mW base consumption)
+        # 470mW * 0.005 hours = 2.35 mWh per step
+        consumption_mw = 470.0
+        consumption_mwh = consumption_mw * TIME_STEP_HOURS
+        self.energy -= consumption_mwh
 
         # Record history
         self.history['light'].append(self.light_intensity)

@@ -40,10 +40,11 @@ class EnergyHarvestingSystem:
     def harvest_friction(self, servo_movement):
         """Triboelectric energy harvesting from servo friction"""
         # TENG output proportional to movement
+        # Reduced 100x for realism: 1-10 nW/cm² (not µW/cm²)
         if abs(servo_movement) > 0.1:
-            # 1-10 µW/cm², assume 10 cm² TENG area
-            teng_output = abs(servo_movement) * 0.05  # mW
-            return teng_output
+            # Realistic: 1-10 nW/cm² with 10 cm² area = 10-100 nW = 0.00001-0.0001 mW
+            friction_power = abs(servo_movement) * 0.0005  # mW (reduced 100x)
+            return friction_power * 0.005  # Convert to energy (mWh), assuming 18s step
         return 0.0
 
     def harvest_thermal(self, external_temp):
@@ -52,14 +53,16 @@ class EnergyHarvestingSystem:
         temp_change = external_temp - self.temperature
         self.temperature = external_temp
 
-        # Pyroelectric response
+        # Pyroelectric response (reduced 100x for realism)
         if abs(temp_change) > 0.1:
-            pyro_output = abs(temp_change) * 0.02  # mW
+            pyro_power = abs(temp_change) * 0.0002  # mW (reduced 100x)
+            pyro_output = pyro_power * 0.005  # Convert to energy (mWh)
         else:
             pyro_output = 0.0
 
-        # Thermoelectric (steady-state temperature gradient)
-        thermo_output = abs(self.temperature - 20) * 0.01  # mW
+        # Thermoelectric (steady-state temperature gradient, reduced 100x)
+        thermo_power = abs(self.temperature - 20) * 0.0001  # mW (reduced 100x)
+        thermo_output = thermo_power * 0.005  # Convert to energy (mWh)
 
         return pyro_output + thermo_output
 
@@ -77,9 +80,11 @@ class EnergyHarvestingSystem:
             thermal_energy = self.harvest_thermal(external_temp)
 
             # Update storage
+            # Proper unit conversion: power (mW) * time (hours) = energy (mWh)
             total_harvest = friction_energy + thermal_energy
-            consumption = 0.3  # mW baseline consumption
-            self.energy_storage += (total_harvest - consumption) * 0.1
+            consumption_mw = 470.0  # 470mW realistic consumption
+            consumption_mwh = consumption_mw * 0.005  # 18 seconds = 0.005 hours
+            self.energy_storage += (total_harvest - consumption_mwh)
 
             # Record
             self.history['energy'].append(self.energy_storage)

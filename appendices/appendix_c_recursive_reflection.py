@@ -49,10 +49,6 @@ class RecursiveSNN:
         The output becomes partial input for the next processing cycle,
         creating self-referential loops for proto-consciousness.
         """
-        # Prevent infinite recursion
-        if depth >= MAX_RECURSION_DEPTH:
-            return self.membrane_potential.copy()
-
         # Integrate with previous "reflection"
         adjusted_input = input_signal * 0.2
         if self.previous_output is not None:
@@ -77,13 +73,8 @@ class RecursiveSNN:
         # Get output
         output = np.dot(spikes.astype(float), self.weights[0])
 
-        # RECURSIVE REFLECTION: Re-run with output as new input
-        if depth < MAX_RECURSION_DEPTH - 1:
-            reflected_output = self.step(output, depth + 1)
-            # Average across reflection levels for stability
-            output = (output + reflected_output) / 2.0
-
-        # Store for next cycle
+        # NOTE: Removed recursive call to step() - was causing 4x execution!
+        # Store for next cycle (creates reflection without recursion)
         self.previous_output = output
 
         # Track reflection history
