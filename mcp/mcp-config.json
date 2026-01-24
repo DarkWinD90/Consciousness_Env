@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "consciousness": {
+      "command": "python3",
+      "args": ["/home/user/Consciousness_Env/mcp/consciousness_mcp_server.py"],
+      "env": {
+        "PYTHONPATH": "/home/user/Consciousness_Env"
+      }
+    }
+  }
+}
