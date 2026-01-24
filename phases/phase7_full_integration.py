@@ -20,11 +20,22 @@ Success Criteria:
 - System self-charges during operation
 - Adaptive responses observable (color shift, movement, reflection)
 - All data logged to history for analysis
+
+REFACTORED: Now uses shared core modules (BaseSNN, ThermochromicMixin, EnergyHarvester, HistoryTracker).
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 from dataclasses import dataclass
+import sys
+sys.path.insert(0, '/home/user/Consciousness_Env')
+
+from core import (
+    BaseSNN, SNNConfig,
+    ThermochromicMixin, ColorState,
+    EnergyHarvester, EnergyConfig,
+    HistoryTracker
+)
 
 
 @dataclass
@@ -64,34 +75,48 @@ class SystemState:
             self.membrane_color = [0.5, 0.5, 0.5]
 
 
-class IntegratedConsciousnessSystem:
+class IntegratedConsciousnessSystem(ThermochromicMixin):
     """
     Phase 7: Full system integration - all 8 layers working together.
 
     Complete signal flow with feedback loops and self-charging capability.
+
+    REFACTORED: Uses shared core modules for SNN, thermochromic, energy, and history.
     """
+
+    # Override thermochromic parameters
+    neutral_temp = 20.0
+    warm_threshold = 25.0
+    temp_range = 15.0
 
     def __init__(self):
         self.state = SystemState()
-        self.previous_reflection = None
 
-        # SNN parameters
-        self.num_neurons = 20
-        self.membrane_potential = np.zeros(self.num_neurons)
-        self.weights = np.random.rand(self.num_neurons, self.num_neurons) * 0.1
-        self.threshold = 0.5
+        # Use shared BaseSNN from core module
+        self.snn = BaseSNN(SNNConfig(
+            num_neurons=20,
+            threshold=0.5,
+            leak_factor=0.1,
+            refractory_period=2,
+            weight_scale=0.1
+        ))
 
-        self.history = {
-            'light': [],
-            'temp': [],
-            'energy': [],
-            'servo_angle': [],
-            'color_r': [],
-            'color_g': [],
-            'color_b': [],
-            'reflection': [],
-            'spikes': []
-        }
+        # Use shared EnergyHarvester from core module
+        self.energy_harvester = EnergyHarvester(
+            config=EnergyConfig(
+                friction_factor=0.0005,   # Reduced 100x for realism
+                thermal_factor=0.0002,    # Reduced 100x for realism
+                time_step_hours=0.005,    # 18 seconds = 0.005 hours
+                base_consumption_mw=470.0
+            ),
+            initial_energy=50.0
+        )
+
+        # Use shared HistoryTracker from core module
+        self.history = HistoryTracker(fields=[
+            'light', 'temp', 'energy', 'servo_angle',
+            'color_r', 'color_g', 'color_b', 'reflection', 'spikes'
+        ])
 
     def consciousness_loop(self, external_light):
         """
@@ -104,12 +129,9 @@ class IntegratedConsciousnessSystem:
         self.state.membrane_temp += external_light / 500
         self.state.membrane_temp *= 0.95  # Cooling
 
-        # Update membrane color (thermochromic)
-        if self.state.membrane_temp > 25:
-            intensity = min((self.state.membrane_temp - 25) / 15, 1.0)
-            self.state.membrane_color = [0.5 + 0.5 * intensity, 0.5, 0.5 - 0.5 * intensity]
-        else:
-            self.state.membrane_color = [0.5, 0.5, 0.5]
+        # Update membrane color using shared ThermochromicMixin
+        color_state = self.compute_thermochromic_color(self.state.membrane_temp)
+        self.state.membrane_color = color_state.to_list()
 
         # LAYER 3: OPTICAL TRANSMISSION
         self.state.signal_voltage = external_light / 1000 * 5.0
@@ -117,66 +139,49 @@ class IntegratedConsciousnessSystem:
         # LAYER 4: NEUROMORPHIC PROCESSING with LAYER 8: RECURSIVE REFLECTION
         snn_input = self.state.signal_voltage / 5.0
 
-        # Add recursive reflection
-        if self.previous_reflection is not None:
-            snn_input += self.previous_reflection * 0.2
-
-        # SNN step
-        self.membrane_potential *= 0.9
-        self.membrane_potential[0] += snn_input
-        spikes = self.membrane_potential > self.threshold
-        self.membrane_potential[spikes] = 0.0
-
-        if np.any(spikes):
-            self.membrane_potential += np.dot(spikes.astype(float), self.weights)
-            self.state.spikes = np.sum(spikes)
-        else:
-            self.state.spikes = 0
-
-        self.state.snn_output = self.membrane_potential.mean()
+        # Process through shared BaseSNN with reflection support
+        potentials, spikes = self.snn.step(snn_input, reflection_coeff=0.2)
+        self.state.snn_output = self.snn.get_output()
+        self.state.spikes = np.sum(spikes)
 
         # LAYER 5: SERVO ACTUATION
         target_angle = np.clip(self.state.snn_output * 180, 0, 180)
         movement = (target_angle - self.state.servo_angle) * 0.3
         self.state.servo_angle += movement
 
-        # LAYER 6: ENERGY HARVESTING
-        # Friction from movement
-        if abs(movement) > 0.1:
-            self.state.friction_harvest = abs(movement) * 0.05
-        else:
-            self.state.friction_harvest = 0.0
+        # LAYER 6: ENERGY HARVESTING using shared EnergyHarvester
+        friction_energy = self.energy_harvester.harvest_friction(movement)
+        thermal_energy = self.energy_harvester.harvest_thermal(self.state.membrane_temp)
+        self.energy_harvester.update_storage(friction_energy, thermal_energy)
 
-        # Thermal from temperature
-        temp_diff = abs(self.state.membrane_temp - 20)
-        self.state.thermal_harvest = temp_diff * 0.02
-
-        # Update energy storage
-        total_harvest = self.state.friction_harvest + self.state.thermal_harvest
-        consumption = 0.3  # Base consumption
-        self.state.energy_storage += (total_harvest - consumption) * 0.1
+        # Update state from harvester
+        self.state.friction_harvest = friction_energy
+        self.state.thermal_harvest = thermal_energy
+        self.state.energy_storage = self.energy_harvester.energy_storage
 
         # LAYER 7: GROUND REFERENCE
         self.state.ground_voltage = np.random.randn() * 0.01  # Minimal noise
 
-        # LAYER 8: RECURSIVE REFLECTION (store for next cycle)
-        self.state.reflection_state = self.state.snn_output
-        self.previous_reflection = self.state.reflection_state
+        # LAYER 8: RECURSIVE REFLECTION (handled by BaseSNN's previous_output)
+        self.state.reflection_state = self.snn.previous_output
 
-        # Log history
-        self.history['light'].append(self.state.light_intensity)
-        self.history['temp'].append(self.state.membrane_temp)
-        self.history['energy'].append(self.state.energy_storage)
-        self.history['servo_angle'].append(self.state.servo_angle)
-        self.history['color_r'].append(self.state.membrane_color[0])
-        self.history['color_g'].append(self.state.membrane_color[1])
-        self.history['color_b'].append(self.state.membrane_color[2])
-        self.history['reflection'].append(self.state.reflection_state)
-        self.history['spikes'].append(self.state.spikes)
+        # Log history using shared HistoryTracker
+        self.history.record(
+            light=self.state.light_intensity,
+            temp=self.state.membrane_temp,
+            energy=self.state.energy_storage,
+            servo_angle=self.state.servo_angle,
+            color_r=self.state.membrane_color[0],
+            color_g=self.state.membrane_color[1],
+            color_b=self.state.membrane_color[2],
+            reflection=self.state.reflection_state,
+            spikes=self.state.spikes
+        )
 
     def run_full_test(self, num_steps=100):
         """Run complete integrated system test"""
         print("Running full system integration test...")
+        print("(Using shared core modules: BaseSNN, ThermochromicMixin, EnergyHarvester, HistoryTracker)")
 
         for step in range(num_steps):
             # Simulated solar/environmental light
@@ -197,24 +202,25 @@ class IntegratedConsciousnessSystem:
         print("=" * 70)
 
         # Criterion 1: Loop executes autonomously
-        criterion_1 = len(self.history['light']) > 0
+        criterion_1 = len(self.history.get('light')) > 0
         print(f"✓ Complete loop executes autonomously: {'PASS' if criterion_1 else 'FAIL'}")
 
         # Criterion 2: Self-charging
-        energy_final = self.history['energy'][-1]
-        energy_initial = self.history['energy'][0]
+        energy_data = self.history.get('energy')
+        energy_final = energy_data[-1]
+        energy_initial = energy_data[0]
         net_charge = energy_final - energy_initial
         criterion_2 = net_charge > -10  # Not draining too fast
         print(f"✓ System self-charging (net: {net_charge:.2f} mWh): {'PASS' if criterion_2 else 'FAIL'}")
 
         # Criterion 3: Adaptive responses observable
-        color_variance = np.var(self.history['color_r'])
-        movement_variance = np.var(self.history['servo_angle'])
+        color_variance = np.var(self.history.get('color_r'))
+        movement_variance = np.var(self.history.get('servo_angle'))
         criterion_3 = color_variance > 0.01 and movement_variance > 10
         print(f"✓ Adaptive responses (color var: {color_variance:.4f}, move var: {movement_variance:.2f}): {'PASS' if criterion_3 else 'FAIL'}")
 
         # Criterion 4: Data logging
-        criterion_4 = all(len(v) > 0 for v in self.history.values())
+        criterion_4 = all(len(self.history.get(k)) > 0 for k in self.history.data.keys())
         print(f"✓ All data logged for analysis: {'PASS' if criterion_4 else 'FAIL'}")
 
         all_pass = criterion_1 and criterion_2 and criterion_3 and criterion_4
@@ -227,41 +233,41 @@ class IntegratedConsciousnessSystem:
         fig, axes = plt.subplots(3, 2, figsize=(15, 12))
 
         # Plot 1: Light sensing
-        axes[0, 0].plot(self.history['light'], color='orange', linewidth=2)
+        axes[0, 0].plot(self.history.get('light'), color='orange', linewidth=2)
         axes[0, 0].set_ylabel('Light Intensity')
         axes[0, 0].set_title('Layer 1-2: Environmental Sensing')
         axes[0, 0].grid(True, alpha=0.3)
 
         # Plot 2: Neural activity
-        axes[0, 1].plot(self.history['spikes'], color='purple', linewidth=2)
+        axes[0, 1].plot(self.history.get('spikes'), color='purple', linewidth=2)
         axes[0, 1].set_ylabel('Spike Count')
-        axes[0, 1].set_title('Layer 4: Neuromorphic Processing')
+        axes[0, 1].set_title('Layer 4: Neuromorphic Processing (via core.BaseSNN)')
         axes[0, 1].grid(True, alpha=0.3)
 
         # Plot 3: Servo actuation
-        axes[1, 0].plot(self.history['servo_angle'], color='blue', linewidth=2)
+        axes[1, 0].plot(self.history.get('servo_angle'), color='blue', linewidth=2)
         axes[1, 0].set_ylabel('Servo Angle (deg)')
         axes[1, 0].set_title('Layer 5: Motor Actuation')
         axes[1, 0].grid(True, alpha=0.3)
 
         # Plot 4: Energy storage
-        axes[1, 1].plot(self.history['energy'], color='green', linewidth=2)
+        axes[1, 1].plot(self.history.get('energy'), color='green', linewidth=2)
         axes[1, 1].set_ylabel('Energy (mWh)')
-        axes[1, 1].set_title('Layer 6: Self-Charging Energy')
+        axes[1, 1].set_title('Layer 6: Self-Charging (via core.EnergyHarvester)')
         axes[1, 1].grid(True, alpha=0.3)
 
         # Plot 5: Thermochromic color
-        axes[2, 0].plot(self.history['color_r'], label='Red', color='red')
-        axes[2, 0].plot(self.history['color_g'], label='Green', color='green')
-        axes[2, 0].plot(self.history['color_b'], label='Blue', color='blue')
+        axes[2, 0].plot(self.history.get('color_r'), label='Red', color='red')
+        axes[2, 0].plot(self.history.get('color_g'), label='Green', color='green')
+        axes[2, 0].plot(self.history.get('color_b'), label='Blue', color='blue')
         axes[2, 0].set_xlabel('Time Step')
         axes[2, 0].set_ylabel('Color Intensity')
-        axes[2, 0].set_title('Layer 1: Adaptive Membrane Color')
+        axes[2, 0].set_title('Layer 1: Adaptive Color (via core.ThermochromicMixin)')
         axes[2, 0].legend()
         axes[2, 0].grid(True, alpha=0.3)
 
         # Plot 6: Recursive reflection
-        axes[2, 1].plot(self.history['reflection'], color='darkviolet', linewidth=2)
+        axes[2, 1].plot(self.history.get('reflection'), color='darkviolet', linewidth=2)
         axes[2, 1].set_xlabel('Time Step')
         axes[2, 1].set_ylabel('Reflection State')
         axes[2, 1].set_title('Layer 8: Conscious Self-Reflection')
@@ -276,6 +282,7 @@ if __name__ == "__main__":
     print("=" * 70)
     print("PHASE 7: FULL SYSTEM INTEGRATION")
     print("Complete Consciousness Loop: All 8 Layers")
+    print("(Refactored to use all core modules)")
     print("=" * 70)
     print()
 

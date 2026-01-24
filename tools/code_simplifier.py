@@ -7,20 +7,24 @@ for simplification. It can identify:
 - Overly complex functions
 - Deeply nested code
 - Redundant patterns
+- Duplicate code across files
 - Opportunities for refactoring
 
 Usage:
     python -m tools.code_simplifier <file_or_directory>
     python -m tools.code_simplifier --analyze phases/
     python -m tools.code_simplifier --suggest appendices/appendix_a_base_simulation.py
+    python -m tools.code_simplifier --duplicates .
 """
 
 import ast
 import os
+import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple, Any
+from collections import defaultdict
 
 
 @dataclass
@@ -269,6 +273,100 @@ class SimplificationAnalyzer(ast.NodeVisitor):
         return max_depth
 
 
+class DuplicateDetector:
+    """Detects duplicate code patterns across files."""
+
+    def __init__(self, root_path: str):
+        self.root_path = Path(root_path)
+        self.files: Dict[str, str] = {}
+        self.classes: Dict[str, List[str]] = defaultdict(list)
+        self.duplicates: List[Dict] = []
+
+    def scan_files(self) -> List[str]:
+        """Scan for Python files"""
+        py_files = []
+        for pattern in ['**/*.py']:
+            py_files.extend(self.root_path.glob(pattern))
+
+        # Filter out tools directory and __pycache__
+        py_files = [f for f in py_files
+                   if 'tools' not in str(f)
+                   and '__pycache__' not in str(f)
+                   and 'core' not in str(f)]
+
+        return [str(f) for f in py_files]
+
+    def read_files(self):
+        """Read all Python files"""
+        for filepath in self.scan_files():
+            try:
+                with open(filepath, 'r') as f:
+                    self.files[filepath] = f.read()
+            except Exception as e:
+                print(f"  Warning: Could not read {filepath}: {e}")
+
+    def find_duplicate_patterns(self) -> List[Dict]:
+        """Identify duplicate code patterns"""
+        duplicates = []
+
+        # Pattern 1: SNN implementations
+        snn_files = []
+        for filepath, content in self.files.items():
+            if 'membrane_potential' in content and 'threshold' in content:
+                if 'spikes' in content or 'spike' in content:
+                    snn_files.append(filepath)
+
+        if len(snn_files) > 1:
+            duplicates.append({
+                'type': 'SNN Implementation',
+                'files': snn_files,
+                'pattern': 'Spiking Neural Network with membrane potential and threshold'
+            })
+
+        # Pattern 2: Thermochromic color shift
+        color_files = []
+        for filepath, content in self.files.items():
+            if 'color' in content.lower() and 'temperature' in content.lower():
+                if 'rgb' in content.lower() or 'color_r' in content:
+                    color_files.append(filepath)
+
+        if len(color_files) > 1:
+            duplicates.append({
+                'type': 'Thermochromic Color',
+                'files': color_files,
+                'pattern': 'Temperature-based color shifting logic'
+            })
+
+        # Pattern 3: Energy harvesting
+        energy_files = []
+        for filepath, content in self.files.items():
+            if 'energy' in content.lower() and ('harvest' in content.lower() or 'friction' in content.lower()):
+                energy_files.append(filepath)
+
+        if len(energy_files) > 1:
+            duplicates.append({
+                'type': 'Energy Harvesting',
+                'files': energy_files,
+                'pattern': 'Energy harvesting from friction/thermal sources'
+            })
+
+        # Pattern 4: History tracking
+        history_files = []
+        for filepath, content in self.files.items():
+            if "self.history = {" in content or "self.history[" in content:
+                history_files.append(filepath)
+
+        if len(history_files) > 1:
+            duplicates.append({
+                'type': 'History Tracking',
+                'files': history_files,
+                'pattern': 'Dictionary-based history logging'
+            })
+
+        self.duplicates = duplicates
+        return duplicates
+
+
 class CodeSimplifier:
     """Main class for code analysis and simplification."""
 
@@ -412,6 +510,13 @@ def simplify_file(filepath: str, output: bool = True) -> List[SimplificationSugg
     return suggestions
 
 
+def find_duplicates(path: str) -> List[Dict]:
+    """Find duplicate code patterns in a directory."""
+    detector = DuplicateDetector(path)
+    detector.read_files()
+    return detector.find_duplicate_patterns()
+
+
 def main():
     """Main CLI entry point."""
     import argparse
@@ -423,7 +528,8 @@ def main():
 Examples:
   %(prog)s phases/                          # Analyze all files in phases/
   %(prog)s --suggest appendices/            # Show simplification suggestions
-  %(prog)s --summary .                       # Summary of entire codebase
+  %(prog)s --summary .                      # Summary of entire codebase
+  %(prog)s --duplicates .                   # Find duplicate code patterns
         """
     )
 
@@ -432,6 +538,8 @@ Examples:
                        help='Show simplification suggestions')
     parser.add_argument('--summary', action='store_true',
                        help='Show summary only')
+    parser.add_argument('--duplicates', '-d', action='store_true',
+                       help='Find duplicate code patterns')
     parser.add_argument('--verbose', '-v', action='store_true',
                        help='Verbose output')
     parser.add_argument('--json', action='store_true',
@@ -442,6 +550,27 @@ Examples:
     if not os.path.exists(args.path):
         print(f"Error: Path does not exist: {args.path}")
         sys.exit(1)
+
+    # Handle duplicates mode
+    if args.duplicates:
+        print(f"\n{'='*60}")
+        print(f"Duplicate Code Analysis: {args.path}")
+        print(f"{'='*60}")
+
+        duplicates = find_duplicates(args.path)
+
+        if duplicates:
+            print(f"\nFound {len(duplicates)} duplicate patterns:\n")
+            for dup in duplicates:
+                print(f"  {dup['type']}:")
+                print(f"    Pattern: {dup['pattern']}")
+                print(f"    Files affected: {len(dup['files'])}")
+                for f in dup['files']:
+                    print(f"      - {Path(f).relative_to(args.path) if args.path != '.' else f}")
+                print()
+        else:
+            print("\nNo significant duplicate patterns found.")
+        return
 
     simplifier = CodeSimplifier(verbose=args.verbose)
 
