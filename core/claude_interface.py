@@ -440,21 +440,42 @@ Respond with valid JSON only:
         return prompt
 
     def _call_claude(self, prompt: str, urgency: float) -> str:
-        """Call Claude CLI with timeout based on urgency"""
-        timeout = self.latency_budget * (1 - urgency * 0.5) / 1000  # Convert to seconds
-
+        """Call Claude API using Anthropic SDK"""
         try:
-            result = subprocess.run(
-                ['claude', '-p', prompt, '--output-format', 'json'],
-                capture_output=True,
-                text=True,
-                timeout=timeout
+            import anthropic
+
+            client = anthropic.Anthropic()  # Uses ANTHROPIC_API_KEY env var
+
+            # Use haiku for fast responses, sonnet for complex queries
+            model = "claude-3-5-haiku-20241022" if urgency > 0.7 else "claude-3-5-sonnet-20241022"
+
+            message = client.messages.create(
+                model=model,
+                max_tokens=500,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt + "\n\nRespond with valid JSON only, no markdown formatting."
+                    }
+                ]
             )
-            return result.stdout
-        except subprocess.TimeoutExpired:
-            return '{"error": "timeout"}'
-        except FileNotFoundError:
-            return '{"error": "claude_not_found"}'
+
+            # Extract text from response
+            response_text = message.content[0].text
+
+            # Clean up any markdown formatting
+            if response_text.startswith("```"):
+                lines = response_text.split("\n")
+                response_text = "\n".join(lines[1:-1])
+
+            return response_text
+
+        except ImportError:
+            return '{"error": "anthropic_not_installed"}'
+        except anthropic.AuthenticationError:
+            return '{"error": "invalid_api_key"}'
+        except anthropic.RateLimitError:
+            return '{"error": "rate_limited"}'
         except Exception as e:
             return f'{{"error": "{str(e)}"}}'
 
