@@ -10,12 +10,18 @@ Components:
 - Thermistors or IR detectors for warmth sensing
 - Flexible PCB substrate (polyimide or PDMS)
 - ADC (analog-to-digital converter) for signal processing
+
+REFACTORED: Now uses shared core.HistoryTracker module.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 from dataclasses import dataclass
 from typing import List, Tuple
+import sys
+sys.path.insert(0, '/home/user/Consciousness_Env')
+
+from core import HistoryTracker
 
 
 @dataclass
@@ -40,6 +46,8 @@ class OpticalSensingSystem:
     """
     Phase 1: Multi-bundle optical sensing foundation with photodiode/thermistor
     hybrid pads for light and temperature detection.
+
+    REFACTORED: Uses shared HistoryTracker from core module.
     """
 
     def __init__(self, num_bundles: int = 6, strands_per_bundle: int = 15):
@@ -63,13 +71,10 @@ class OpticalSensingSystem:
             )
             self.bundles.append(bundle)
 
-        # System state
-        self.history = {
-            'light': [],
-            'temp': [],
-            'voltage': [],
-            'adc_values': []
-        }
+        # Use shared HistoryTracker from core module
+        self.history = HistoryTracker(fields=[
+            'light', 'temp', 'voltage', 'adc_values'
+        ])
 
     def sense_light(self, bundle_idx: int, external_light: float) -> float:
         """
@@ -187,6 +192,7 @@ class OpticalSensingSystem:
         - Signals are clean and ready for ADC sampling
         """
         print("Running Phase 1 test sequence...")
+        print("(Using shared core.HistoryTracker)")
 
         for step in range(num_steps):
             # Simulate varying light and temperature
@@ -208,16 +214,18 @@ class OpticalSensingSystem:
             # Sample all bundles
             readings = self.sample_all_bundles(light_pattern, temp_pattern)
 
-            # Store history (average across bundles)
+            # Store history using shared HistoryTracker
             avg_light = np.mean([b.light_intensity for b in self.bundles])
             avg_temp = np.mean([b.temperature for b in self.bundles])
             avg_voltage = np.mean(readings['light_voltages'])
             avg_adc = np.mean([adc[0] for adc in readings['adc_values']])
 
-            self.history['light'].append(avg_light)
-            self.history['temp'].append(avg_temp)
-            self.history['voltage'].append(avg_voltage)
-            self.history['adc_values'].append(avg_adc)
+            self.history.record(
+                light=avg_light,
+                temp=avg_temp,
+                voltage=avg_voltage,
+                adc_values=avg_adc
+            )
 
         print("✓ Test sequence complete!")
         self._validate_success_criteria()
@@ -229,17 +237,17 @@ class OpticalSensingSystem:
         print("=" * 70)
 
         # Criterion 1: Light → Voltage conversion
-        light_voltage_corr = np.corrcoef(self.history['light'], self.history['voltage'])[0, 1]
+        light_voltage_corr = np.corrcoef(self.history.get('light'), self.history.get('voltage'))[0, 1]
         criterion_1 = light_voltage_corr > 0.8
         print(f"✓ Bundle converts light → voltage (corr: {light_voltage_corr:.3f}): {'PASS' if criterion_1 else 'FAIL'}")
 
         # Criterion 2: Warmth detection
-        light_temp_corr = np.corrcoef(self.history['light'], self.history['temp'])[0, 1]
+        light_temp_corr = np.corrcoef(self.history.get('light'), self.history.get('temp'))[0, 1]
         criterion_2 = light_temp_corr > 0.6
         print(f"✓ Warmth from light detected (corr: {light_temp_corr:.3f}): {'PASS' if criterion_2 else 'FAIL'}")
 
         # Criterion 3: Signal quality (low noise)
-        voltage_std = np.std(self.history['voltage'])
+        voltage_std = np.std(self.history.get('voltage'))
         criterion_3 = voltage_std < 1.0  # Should be relatively stable
         print(f"✓ Signals clean for ADC (std: {voltage_std:.3f}V): {'PASS' if criterion_3 else 'FAIL'}")
 
@@ -254,7 +262,7 @@ class OpticalSensingSystem:
 
         # Plot 1: Light intensity
         ax1 = axes[0, 0]
-        ax1.plot(self.history['light'], color='orange', linewidth=2)
+        ax1.plot(self.history.get('light'), color='orange', linewidth=2)
         ax1.set_xlabel('Time Step')
         ax1.set_ylabel('Light Intensity')
         ax1.set_title('Optical Fiber Light Capture')
@@ -262,7 +270,7 @@ class OpticalSensingSystem:
 
         # Plot 2: Temperature
         ax2 = axes[0, 1]
-        ax2.plot(self.history['temp'], color='red', linewidth=2)
+        ax2.plot(self.history.get('temp'), color='red', linewidth=2)
         ax2.set_xlabel('Time Step')
         ax2.set_ylabel('Temperature (°C)')
         ax2.set_title('Thermistor Warmth Detection')
@@ -270,7 +278,7 @@ class OpticalSensingSystem:
 
         # Plot 3: Voltage output
         ax3 = axes[1, 0]
-        ax3.plot(self.history['voltage'], color='blue', linewidth=2)
+        ax3.plot(self.history.get('voltage'), color='blue', linewidth=2)
         ax3.set_xlabel('Time Step')
         ax3.set_ylabel('Voltage (V)')
         ax3.set_title('Photodiode Voltage Output')
@@ -279,7 +287,7 @@ class OpticalSensingSystem:
 
         # Plot 4: ADC digital values
         ax4 = axes[1, 1]
-        ax4.plot(self.history['adc_values'], color='green', linewidth=2)
+        ax4.plot(self.history.get('adc_values'), color='green', linewidth=2)
         ax4.set_xlabel('Time Step')
         ax4.set_ylabel('ADC Value (12-bit)')
         ax4.set_title('Digital Signal (Ready for CPU)')
@@ -296,6 +304,7 @@ class OpticalSensingSystem:
 if __name__ == "__main__":
     print("=" * 70)
     print("PHASE 1: OPTICAL SENSING FOUNDATION")
+    print("(Refactored to use core.HistoryTracker)")
     print("=" * 70)
     print()
 

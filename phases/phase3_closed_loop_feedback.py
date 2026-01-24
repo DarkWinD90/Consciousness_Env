@@ -10,14 +10,24 @@ Components:
 - PWM servo controllers (50Hz, 1-2ms pulse width)
 - Ground plane copper layers in flexible PCB
 - Shielded bundles and ferrite beads for EMI protection
+
+REFACTORED: Now uses shared core.HistoryTracker module.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
+sys.path.insert(0, '/home/user/Consciousness_Env')
+
+from core import HistoryTracker
 
 
 class GroundedFeedbackSystem:
-    """Phase 3: Closed-loop feedback with ground reference"""
+    """
+    Phase 3: Closed-loop feedback with ground reference.
+
+    REFACTORED: Uses shared HistoryTracker from core module.
+    """
 
     def __init__(self, num_servos=4):
         self.num_servos = num_servos
@@ -25,12 +35,10 @@ class GroundedFeedbackSystem:
         self.target_positions = np.zeros(num_servos)
         self.ground_reference_voltage = 0.0
 
-        self.history = {
-            'servo_pos': [],
-            'target': [],
-            'error': [],
-            'ground_noise': []
-        }
+        # Use shared HistoryTracker from core module
+        self.history = HistoryTracker(fields=[
+            'servo_pos', 'target', 'error', 'ground_noise'
+        ])
 
     def set_target(self, snn_output):
         """Convert SNN output to servo target positions"""
@@ -50,31 +58,39 @@ class GroundedFeedbackSystem:
 
     def run_test(self, num_steps=100):
         """Test feedback loop stability"""
+        print("Running Phase 3 test sequence...")
+        print("(Using shared core.HistoryTracker)")
+
         for step in range(num_steps):
             # Simulated SNN output
             snn_out = np.random.rand(self.num_servos) * 0.5 + 0.25
             self.set_target(snn_out)
             pos, error = self.update_servos()
 
-            self.history['servo_pos'].append(pos.mean())
-            self.history['target'].append(self.target_positions.mean())
-            self.history['error'].append(np.abs(error).mean())
-            self.history['ground_noise'].append(self.ground_reference_voltage)
+            # Record using shared HistoryTracker
+            self.history.record(
+                servo_pos=pos.mean(),
+                target=self.target_positions.mean(),
+                error=np.abs(error).mean(),
+                ground_noise=self.ground_reference_voltage
+            )
+
+        print("✓ Test sequence complete!")
 
     def plot_results(self):
         """Visualize feedback performance"""
         fig, axes = plt.subplots(2, 1, figsize=(12, 8))
 
         ax1 = axes[0]
-        ax1.plot(self.history['target'], label='Target', linestyle='--', color='blue')
-        ax1.plot(self.history['servo_pos'], label='Actual Position', color='green', linewidth=2)
+        ax1.plot(self.history.get('target'), label='Target', linestyle='--', color='blue')
+        ax1.plot(self.history.get('servo_pos'), label='Actual Position', color='green', linewidth=2)
         ax1.set_ylabel('Servo Position (degrees)')
-        ax1.set_title('Closed-Loop Servo Control')
+        ax1.set_title('Closed-Loop Servo Control (via core.HistoryTracker)')
         ax1.legend()
         ax1.grid(True, alpha=0.3)
 
         ax2 = axes[1]
-        ax2.plot(self.history['error'], color='red', linewidth=2)
+        ax2.plot(self.history.get('error'), color='red', linewidth=2)
         ax2.set_xlabel('Time Step')
         ax2.set_ylabel('Tracking Error')
         ax2.set_title('Feedback Loop Stability')
@@ -88,6 +104,7 @@ class GroundedFeedbackSystem:
 if __name__ == "__main__":
     print("=" * 70)
     print("PHASE 3: CLOSED-LOOP FEEDBACK WITH GROUND REFERENCE")
+    print("(Refactored to use core.HistoryTracker)")
     print("=" * 70)
 
     system = GroundedFeedbackSystem(num_servos=4)
