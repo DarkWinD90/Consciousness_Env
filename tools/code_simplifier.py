@@ -1,31 +1,285 @@
 #!/usr/bin/env python3
 """
-Claude Code Simplifier Plugin
+Code Simplifier Tool for Consciousness System Environment
 
-Analyzes and simplifies Python codebases by:
-1. Identifying duplicate code patterns
-2. Creating shared modules for common functionality
-3. Refactoring files to use shared components
-4. Removing redundant code
+This tool analyzes Python code for complexity and provides suggestions
+for simplification. It can identify:
+- Overly complex functions
+- Deeply nested code
+- Redundant patterns
+- Duplicate code across files
+- Opportunities for refactoring
+
+Usage:
+    python -m tools.code_simplifier <file_or_directory>
+    python -m tools.code_simplifier --analyze phases/
+    python -m tools.code_simplifier --suggest appendices/appendix_a_base_simulation.py
+    python -m tools.code_simplifier --duplicates .
 """
 
+import ast
 import os
 import re
-import ast
 import sys
+from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import List, Dict, Optional, Tuple, Any
 from collections import defaultdict
 
 
-class CodeAnalyzer:
-    """Analyzes Python code for patterns and duplication"""
+@dataclass
+class ComplexityMetrics:
+    """Metrics for code complexity analysis."""
+    cyclomatic_complexity: int = 0
+    max_nesting_depth: int = 0
+    num_functions: int = 0
+    num_classes: int = 0
+    lines_of_code: int = 0
+    num_imports: int = 0
+    num_variables: int = 0
+    long_functions: List[Tuple[str, int]] = field(default_factory=list)
+    deeply_nested: List[Tuple[str, int]] = field(default_factory=list)
+
+
+@dataclass
+class SimplificationSuggestion:
+    """A suggestion for code simplification."""
+    line_number: int
+    original_code: str
+    suggestion: str
+    category: str  # 'refactor', 'simplify', 'extract', 'remove'
+    priority: str  # 'high', 'medium', 'low'
+
+
+class ComplexityVisitor(ast.NodeVisitor):
+    """AST visitor to calculate code complexity metrics."""
+
+    def __init__(self):
+        self.complexity = 1  # Base complexity
+        self.current_depth = 0
+        self.max_depth = 0
+        self.function_complexities: Dict[str, int] = {}
+        self.function_lines: Dict[str, int] = {}
+        self.current_function: Optional[str] = None
+        self.function_nesting: Dict[str, int] = {}
+
+    def _increment_complexity(self):
+        self.complexity += 1
+        if self.current_function:
+            self.function_complexities[self.current_function] = \
+                self.function_complexities.get(self.current_function, 1) + 1
+
+    def _track_depth(self):
+        self.current_depth += 1
+        self.max_depth = max(self.max_depth, self.current_depth)
+        if self.current_function:
+            self.function_nesting[self.current_function] = max(
+                self.function_nesting.get(self.current_function, 0),
+                self.current_depth
+            )
+
+    def _untrack_depth(self):
+        self.current_depth -= 1
+
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+        prev_function = self.current_function
+        self.current_function = node.name
+        self.function_complexities[node.name] = 1
+        self.function_lines[node.name] = node.end_lineno - node.lineno + 1 if node.end_lineno else 0
+        self.function_nesting[node.name] = 0
+        self.generic_visit(node)
+        self.current_function = prev_function
+
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
+        self.visit_FunctionDef(node)  # type: ignore
+
+    def visit_If(self, node: ast.If) -> None:
+        self._increment_complexity()
+        self._track_depth()
+        self.generic_visit(node)
+        self._untrack_depth()
+
+    def visit_For(self, node: ast.For) -> None:
+        self._increment_complexity()
+        self._track_depth()
+        self.generic_visit(node)
+        self._untrack_depth()
+
+    def visit_While(self, node: ast.While) -> None:
+        self._increment_complexity()
+        self._track_depth()
+        self.generic_visit(node)
+        self._untrack_depth()
+
+    def visit_Try(self, node: ast.Try) -> None:
+        self._increment_complexity()
+        self._track_depth()
+        self.generic_visit(node)
+        self._untrack_depth()
+
+    def visit_ExceptHandler(self, node: ast.ExceptHandler) -> None:
+        self._increment_complexity()
+        self.generic_visit(node)
+
+    def visit_With(self, node: ast.With) -> None:
+        self._track_depth()
+        self.generic_visit(node)
+        self._untrack_depth()
+
+    def visit_BoolOp(self, node: ast.BoolOp) -> None:
+        # Each 'and'/'or' adds complexity
+        self.complexity += len(node.values) - 1
+        if self.current_function:
+            self.function_complexities[self.current_function] = \
+                self.function_complexities.get(self.current_function, 1) + len(node.values) - 1
+        self.generic_visit(node)
+
+    def visit_ListComp(self, node: ast.ListComp) -> None:
+        for _ in node.generators:
+            self._increment_complexity()
+        self.generic_visit(node)
+
+    def visit_DictComp(self, node: ast.DictComp) -> None:
+        for _ in node.generators:
+            self._increment_complexity()
+        self.generic_visit(node)
+
+    def visit_Lambda(self, node: ast.Lambda) -> None:
+        self._increment_complexity()
+        self.generic_visit(node)
+
+
+class SimplificationAnalyzer(ast.NodeVisitor):
+    """Analyzes code and suggests simplifications."""
+
+    def __init__(self, source_lines: List[str]):
+        self.source_lines = source_lines
+        self.suggestions: List[SimplificationSuggestion] = []
+        self.current_function: Optional[str] = None
+
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+        self.current_function = node.name
+
+        # Check for long functions (>50 lines)
+        func_lines = (node.end_lineno or node.lineno) - node.lineno + 1
+        if func_lines > 50:
+            self.suggestions.append(SimplificationSuggestion(
+                line_number=node.lineno,
+                original_code=f"def {node.name}(...): # {func_lines} lines",
+                suggestion=f"Function '{node.name}' has {func_lines} lines. Consider breaking it into smaller functions.",
+                category='extract',
+                priority='high' if func_lines > 100 else 'medium'
+            ))
+
+        # Check for too many parameters
+        num_params = len(node.args.args)
+        if num_params > 5:
+            self.suggestions.append(SimplificationSuggestion(
+                line_number=node.lineno,
+                original_code=f"def {node.name}({num_params} params)",
+                suggestion=f"Function '{node.name}' has {num_params} parameters. Consider using a dataclass or config object.",
+                category='refactor',
+                priority='medium'
+            ))
+
+        self.generic_visit(node)
+        self.current_function = None
+
+    def visit_If(self, node: ast.If) -> None:
+        # Check for deeply nested if statements
+        depth = self._get_nesting_depth(node)
+        if depth > 3:
+            line = self.source_lines[node.lineno - 1].strip() if node.lineno <= len(self.source_lines) else ""
+            self.suggestions.append(SimplificationSuggestion(
+                line_number=node.lineno,
+                original_code=line[:60] + "..." if len(line) > 60 else line,
+                suggestion="Deeply nested if statement. Consider early returns or extracting to a function.",
+                category='simplify',
+                priority='medium'
+            ))
+
+        # Check for redundant boolean comparisons
+        if isinstance(node.test, ast.Compare):
+            if len(node.test.comparators) == 1:
+                if isinstance(node.test.comparators[0], ast.Constant):
+                    if node.test.comparators[0].value is True or node.test.comparators[0].value is False:
+                        line = self.source_lines[node.lineno - 1].strip() if node.lineno <= len(self.source_lines) else ""
+                        self.suggestions.append(SimplificationSuggestion(
+                            line_number=node.lineno,
+                            original_code=line,
+                            suggestion="Comparing to True/False is redundant. Use 'if x:' or 'if not x:' instead.",
+                            category='simplify',
+                            priority='low'
+                        ))
+
+        self.generic_visit(node)
+
+    def visit_For(self, node: ast.For) -> None:
+        # Check for enumerate opportunities
+        if isinstance(node.iter, ast.Call):
+            if isinstance(node.iter.func, ast.Name):
+                if node.iter.func.id == 'range' and len(node.iter.args) == 1:
+                    if isinstance(node.iter.args[0], ast.Call):
+                        if isinstance(node.iter.args[0].func, ast.Name):
+                            if node.iter.args[0].func.id == 'len':
+                                line = self.source_lines[node.lineno - 1].strip() if node.lineno <= len(self.source_lines) else ""
+                                self.suggestions.append(SimplificationSuggestion(
+                                    line_number=node.lineno,
+                                    original_code=line,
+                                    suggestion="Use 'for i, item in enumerate(collection):' instead of 'for i in range(len(collection)):'",
+                                    category='simplify',
+                                    priority='low'
+                                ))
+        self.generic_visit(node)
+
+    def visit_Assign(self, node: ast.Assign) -> None:
+        # Check for overly long lines
+        if node.lineno <= len(self.source_lines):
+            line = self.source_lines[node.lineno - 1]
+            if len(line) > 120:
+                self.suggestions.append(SimplificationSuggestion(
+                    line_number=node.lineno,
+                    original_code=line.strip()[:60] + "...",
+                    suggestion=f"Line is {len(line)} characters long. Consider breaking it up or using intermediate variables.",
+                    category='refactor',
+                    priority='low'
+                ))
+        self.generic_visit(node)
+
+    def visit_Try(self, node: ast.Try) -> None:
+        # Check for bare except
+        for handler in node.handlers:
+            if handler.type is None:
+                line = self.source_lines[handler.lineno - 1].strip() if handler.lineno <= len(self.source_lines) else ""
+                self.suggestions.append(SimplificationSuggestion(
+                    line_number=handler.lineno,
+                    original_code=line,
+                    suggestion="Bare 'except:' catches all exceptions including KeyboardInterrupt. Use 'except Exception:' instead.",
+                    category='refactor',
+                    priority='high'
+                ))
+        self.generic_visit(node)
+
+    def _get_nesting_depth(self, node: ast.AST, depth: int = 0) -> int:
+        """Calculate the nesting depth of a node."""
+        max_depth = depth
+        for child in ast.iter_child_nodes(node):
+            if isinstance(child, (ast.If, ast.For, ast.While, ast.With, ast.Try)):
+                child_depth = self._get_nesting_depth(child, depth + 1)
+                max_depth = max(max_depth, child_depth)
+            else:
+                child_depth = self._get_nesting_depth(child, depth)
+                max_depth = max(max_depth, child_depth)
+        return max_depth
+
+
+class DuplicateDetector:
+    """Detects duplicate code patterns across files."""
 
     def __init__(self, root_path: str):
         self.root_path = Path(root_path)
         self.files: Dict[str, str] = {}
         self.classes: Dict[str, List[str]] = defaultdict(list)
-        self.functions: Dict[str, List[str]] = defaultdict(list)
         self.duplicates: List[Dict] = []
 
     def scan_files(self) -> List[str]:
@@ -50,15 +304,6 @@ class CodeAnalyzer:
                     self.files[filepath] = f.read()
             except Exception as e:
                 print(f"  Warning: Could not read {filepath}: {e}")
-
-    def find_class_definitions(self):
-        """Find all class definitions across files"""
-        class_pattern = r'class\s+(\w+)(?:\([^)]*\))?:'
-
-        for filepath, content in self.files.items():
-            matches = re.findall(class_pattern, content)
-            for class_name in matches:
-                self.classes[class_name].append(filepath)
 
     def find_duplicate_patterns(self) -> List[Dict]:
         """Identify duplicate code patterns"""
@@ -123,517 +368,278 @@ class CodeAnalyzer:
 
 
 class CodeSimplifier:
-    """Main simplifier that refactors the codebase"""
+    """Main class for code analysis and simplification."""
 
-    def __init__(self, root_path: str):
-        self.root_path = Path(root_path)
-        self.analyzer = CodeAnalyzer(root_path)
-        self.stats = {
-            'files_analyzed': 0,
-            'duplicates_found': 0,
-            'classes_consolidated': 0,
-            'lines_removed': 0,
-            'files_created': 0,
-            'files_modified': 0
-        }
+    def __init__(self, verbose: bool = False):
+        self.verbose = verbose
 
-    def analyze(self) -> Dict:
-        """Analyze the codebase for simplification opportunities"""
-        print("\n" + "=" * 70)
-        print("CLAUDE CODE SIMPLIFIER - ANALYSIS PHASE")
-        print("=" * 70)
+    def analyze_file(self, filepath: str) -> Tuple[ComplexityMetrics, List[SimplificationSuggestion]]:
+        """Analyze a single Python file for complexity and simplification opportunities."""
+        with open(filepath, 'r', encoding='utf-8') as f:
+            source = f.read()
 
-        print("\n[1/3] Scanning files...")
-        self.analyzer.read_files()
-        self.stats['files_analyzed'] = len(self.analyzer.files)
-        print(f"  Found {self.stats['files_analyzed']} Python files")
+        return self.analyze_source(source, filepath)
 
-        print("\n[2/3] Finding class definitions...")
-        self.analyzer.find_class_definitions()
-        print(f"  Found {len(self.analyzer.classes)} unique classes")
+    def analyze_source(self, source: str, filename: str = "<string>") -> Tuple[ComplexityMetrics, List[SimplificationSuggestion]]:
+        """Analyze Python source code."""
+        try:
+            tree = ast.parse(source)
+        except SyntaxError as e:
+            print(f"Syntax error in {filename}: {e}")
+            return ComplexityMetrics(), []
 
-        print("\n[3/3] Identifying duplicate patterns...")
-        duplicates = self.analyzer.find_duplicate_patterns()
-        self.stats['duplicates_found'] = len(duplicates)
+        source_lines = source.split('\n')
 
-        print(f"\n  Duplicate patterns found: {len(duplicates)}")
-        for dup in duplicates:
-            print(f"    - {dup['type']}: {len(dup['files'])} files")
+        # Calculate complexity metrics
+        complexity_visitor = ComplexityVisitor()
+        complexity_visitor.visit(tree)
 
-        return {
-            'files': self.stats['files_analyzed'],
-            'classes': len(self.analyzer.classes),
-            'duplicates': duplicates
-        }
+        metrics = ComplexityMetrics(
+            cyclomatic_complexity=complexity_visitor.complexity,
+            max_nesting_depth=complexity_visitor.max_depth,
+            num_functions=len([n for n in ast.walk(tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))]),
+            num_classes=len([n for n in ast.walk(tree) if isinstance(n, ast.ClassDef)]),
+            lines_of_code=len([l for l in source_lines if l.strip() and not l.strip().startswith('#')]),
+            num_imports=len([n for n in ast.walk(tree) if isinstance(n, (ast.Import, ast.ImportFrom))]),
+        )
 
-    def create_core_module(self):
-        """Create shared core module with base classes"""
-        print("\n" + "=" * 70)
-        print("CREATING SHARED CORE MODULE")
-        print("=" * 70)
+        # Find long and deeply nested functions
+        for func_name, complexity in complexity_visitor.function_complexities.items():
+            if complexity > 10:
+                metrics.long_functions.append((func_name, complexity))
 
-        core_dir = self.root_path / 'core'
-        core_dir.mkdir(exist_ok=True)
+        for func_name, nesting in complexity_visitor.function_nesting.items():
+            if nesting > 3:
+                metrics.deeply_nested.append((func_name, nesting))
 
-        # Create __init__.py
-        init_content = '''"""
-Consciousness System Core Module
+        # Get simplification suggestions
+        simplifier = SimplificationAnalyzer(source_lines)
+        simplifier.visit(tree)
 
-Shared components for the consciousness simulation system.
-Consolidates common patterns to reduce code duplication.
-"""
+        return metrics, simplifier.suggestions
 
-from .base_snn import BaseSNN, SNNConfig
-from .thermochromic import ThermochromicMixin, ColorState
-from .energy import EnergyHarvester, EnergyConfig
-from .history import HistoryTracker
+    def analyze_directory(self, directory: str) -> Dict[str, Tuple[ComplexityMetrics, List[SimplificationSuggestion]]]:
+        """Analyze all Python files in a directory."""
+        results = {}
 
-__all__ = [
-    'BaseSNN', 'SNNConfig',
-    'ThermochromicMixin', 'ColorState',
-    'EnergyHarvester', 'EnergyConfig',
-    'HistoryTracker'
-]
-'''
+        for root, _, files in os.walk(directory):
+            for file in files:
+                if file.endswith('.py'):
+                    filepath = os.path.join(root, file)
+                    if self.verbose:
+                        print(f"Analyzing {filepath}...")
+                    results[filepath] = self.analyze_file(filepath)
 
-        # Create base_snn.py - consolidated SNN implementation
-        snn_content = '''"""
-Base Spiking Neural Network
+        return results
 
-Consolidated SNN implementation used across all phases.
-"""
+    def format_report(self, filepath: str, metrics: ComplexityMetrics,
+                     suggestions: List[SimplificationSuggestion]) -> str:
+        """Format analysis results as a readable report."""
+        lines = [
+            f"\n{'='*60}",
+            f"Analysis Report: {filepath}",
+            f"{'='*60}",
+            "",
+            "Complexity Metrics:",
+            f"  - Cyclomatic Complexity: {metrics.cyclomatic_complexity}",
+            f"  - Max Nesting Depth: {metrics.max_nesting_depth}",
+            f"  - Lines of Code: {metrics.lines_of_code}",
+            f"  - Functions: {metrics.num_functions}",
+            f"  - Classes: {metrics.num_classes}",
+            f"  - Imports: {metrics.num_imports}",
+        ]
 
-import numpy as np
-from dataclasses import dataclass
-from typing import Optional, Tuple, List
+        if metrics.long_functions:
+            lines.append("")
+            lines.append("Complex Functions (complexity > 10):")
+            for func_name, complexity in sorted(metrics.long_functions, key=lambda x: -x[1]):
+                lines.append(f"  - {func_name}: complexity {complexity}")
 
+        if metrics.deeply_nested:
+            lines.append("")
+            lines.append("Deeply Nested Functions (depth > 3):")
+            for func_name, depth in sorted(metrics.deeply_nested, key=lambda x: -x[1]):
+                lines.append(f"  - {func_name}: depth {depth}")
 
-@dataclass
-class SNNConfig:
-    """Configuration for Spiking Neural Network"""
-    num_neurons: int = 10
-    threshold: float = 0.5
-    leak_factor: float = 0.1
-    refractory_period: int = 2
-    weight_scale: float = 0.1
+        if suggestions:
+            lines.append("")
+            lines.append(f"Simplification Suggestions ({len(suggestions)} found):")
 
+            # Group by priority
+            high = [s for s in suggestions if s.priority == 'high']
+            medium = [s for s in suggestions if s.priority == 'medium']
+            low = [s for s in suggestions if s.priority == 'low']
 
-class BaseSNN:
-    """
-    Base Spiking Neural Network with leaky integrate-and-fire neurons.
-
-    Consolidates common SNN logic from:
-    - SimpleSNN (appendix_a)
-    - SpikingNeuralNetwork (phase2)
-    - RecursiveSNN (appendix_c)
-    - RecursiveReflectionLayer (phase6)
-    """
-
-    def __init__(self, config: Optional[SNNConfig] = None):
-        config = config or SNNConfig()
-
-        self.num_neurons = config.num_neurons
-        self.threshold = config.threshold
-        self.leak_factor = config.leak_factor
-        self.refractory_period = config.refractory_period
-
-        # Network state
-        self.weights = np.random.rand(self.num_neurons, self.num_neurons) * config.weight_scale
-        np.fill_diagonal(self.weights, 0)
-        self.membrane_potential = np.zeros(self.num_neurons)
-        self.refractory_counters = np.zeros(self.num_neurons, dtype=int)
-
-        # For recursive reflection
-        self.previous_output: Optional[float] = None
-        self.spike_history: List[np.ndarray] = []
-
-    def step(self, input_signal: float, reflection_coeff: float = 0.0) -> Tuple[np.ndarray, np.ndarray]:
-        """
-        Execute one timestep of SNN processing.
-
-        Args:
-            input_signal: External input (normalized 0-1)
-            reflection_coeff: Weight for self-reflection feedback (0 = no reflection)
-
-        Returns:
-            Tuple of (membrane_potentials, spike_mask)
-        """
-        # Apply leak
-        self.membrane_potential *= (1 - self.leak_factor)
-
-        # Add input to first neuron
-        adjusted_input = input_signal * 0.1
-        if self.previous_output is not None and reflection_coeff > 0:
-            adjusted_input += self.previous_output * reflection_coeff
-
-        self.membrane_potential[0] += adjusted_input
-
-        # Check for spikes (respecting refractory period)
-        can_spike = self.refractory_counters == 0
-        spikes = (self.membrane_potential > self.threshold) & can_spike
-
-        # Reset spiking neurons
-        self.membrane_potential[spikes] = 0.0
-        self.refractory_counters[spikes] = self.refractory_period
-
-        # Decrement refractory counters
-        self.refractory_counters = np.maximum(0, self.refractory_counters - 1)
-
-        # Propagate spikes
-        if np.any(spikes):
-            self.membrane_potential += np.dot(spikes.astype(float), self.weights)
-
-        # Store for reflection
-        self.previous_output = self.membrane_potential.mean()
-        self.spike_history.append(spikes.copy())
-
-        return self.membrane_potential.copy(), spikes
-
-    def get_output(self) -> float:
-        """Get current output (mean membrane potential)"""
-        return self.membrane_potential.mean()
-
-    def reset(self):
-        """Reset network state"""
-        self.membrane_potential = np.zeros(self.num_neurons)
-        self.refractory_counters = np.zeros(self.num_neurons, dtype=int)
-        self.previous_output = None
-        self.spike_history = []
-'''
-
-        # Create thermochromic.py - consolidated color logic
-        thermo_content = '''"""
-Thermochromic Color System
-
-Consolidated temperature-based color shifting logic.
-"""
-
-import numpy as np
-from dataclasses import dataclass
-from typing import List
-
-
-@dataclass
-class ColorState:
-    """RGB color state"""
-    r: float = 0.5
-    g: float = 0.5
-    b: float = 0.5
-
-    def to_list(self) -> List[float]:
-        return [self.r, self.g, self.b]
-
-    @classmethod
-    def from_list(cls, rgb: List[float]) -> 'ColorState':
-        return cls(r=rgb[0], g=rgb[1], b=rgb[2])
-
-
-class ThermochromicMixin:
-    """
-    Mixin for thermochromic color response.
-
-    Consolidates color shift logic from:
-    - RoboticSystem.shift_color (appendix_a)
-    - RecursiveSNN color logic (appendix_c)
-    - AdaptiveMembrane.update_color_shift (phase5)
-    - IntegratedConsciousnessSystem color logic (phase7)
-    """
-
-    # Class-level defaults
-    neutral_temp: float = 20.0
-    warm_threshold: float = 25.0
-    temp_range: float = 50.0
-
-    def compute_thermochromic_color(self, temperature: float) -> ColorState:
-        """
-        Compute RGB color based on temperature.
-
-        - Warm (>25°C): Shift to red/orange
-        - Neutral (20-25°C): Gray
-        - Cool (<20°C): Shift to blue/green
-
-        Args:
-            temperature: Current temperature in Celsius
-
-        Returns:
-            ColorState with RGB values (0-1 range)
-        """
-        if temperature > self.warm_threshold:
-            # Warm colors
-            intensity = min((temperature - self.warm_threshold) / self.temp_range, 1.0)
-            return ColorState(
-                r=min(1.0, 0.5 + 0.5 * intensity),
-                g=0.5,
-                b=max(0.0, 0.5 - 0.5 * intensity)
-            )
-        elif temperature < self.neutral_temp:
-            # Cool colors
-            intensity = min((self.neutral_temp - temperature) / self.temp_range, 1.0)
-            return ColorState(
-                r=max(0.0, 0.5 - 0.5 * intensity),
-                g=0.5,
-                b=min(1.0, 0.5 + 0.5 * intensity)
-            )
+            for priority, items in [('HIGH', high), ('MEDIUM', medium), ('LOW', low)]:
+                if items:
+                    lines.append(f"\n  [{priority} Priority]")
+                    for s in items:
+                        lines.append(f"    Line {s.line_number} ({s.category}):")
+                        lines.append(f"      {s.original_code}")
+                        lines.append(f"      -> {s.suggestion}")
         else:
-            # Neutral
-            return ColorState(r=0.5, g=0.5, b=0.5)
-'''
+            lines.append("")
+            lines.append("No simplification suggestions found.")
 
-        # Create energy.py - consolidated energy harvesting
-        energy_content = '''"""
-Energy Harvesting System
-
-Consolidated energy harvesting logic for friction and thermal sources.
-"""
-
-import numpy as np
-from dataclasses import dataclass
+        lines.append("")
+        return '\n'.join(lines)
 
 
-@dataclass
-class EnergyConfig:
-    """Configuration for energy harvesting"""
-    friction_factor: float = 0.0005      # mW per unit movement (realistic)
-    thermal_factor: float = 0.0002       # mW per degree difference (realistic)
-    time_step_hours: float = 0.005       # 18 seconds per step
-    base_consumption_mw: float = 470.0   # Base power draw in mW
+def analyze_complexity(path: str, verbose: bool = False) -> Dict[str, ComplexityMetrics]:
+    """Analyze complexity of Python files at the given path."""
+    simplifier = CodeSimplifier(verbose=verbose)
+
+    if os.path.isfile(path):
+        metrics, _ = simplifier.analyze_file(path)
+        return {path: metrics}
+    elif os.path.isdir(path):
+        results = simplifier.analyze_directory(path)
+        return {k: v[0] for k, v in results.items()}
+    else:
+        raise ValueError(f"Path does not exist: {path}")
 
 
-class EnergyHarvester:
-    """
-    Multi-modal energy harvesting system.
+def simplify_file(filepath: str, output: bool = True) -> List[SimplificationSuggestion]:
+    """Analyze a file and return/print simplification suggestions."""
+    simplifier = CodeSimplifier()
+    metrics, suggestions = simplifier.analyze_file(filepath)
 
-    Consolidates energy logic from:
-    - RoboticSystem energy harvesting (appendix_a)
-    - EnergyHarvestingSystem (phase4)
-    - IntegratedConsciousnessSystem energy (phase7)
-    """
+    if output:
+        print(simplifier.format_report(filepath, metrics, suggestions))
 
-    def __init__(self, config: EnergyConfig = None, initial_energy: float = 50.0):
-        self.config = config or EnergyConfig()
-        self.energy_storage = initial_energy  # mWh
-        self.temperature = 20.0
-
-    def harvest_friction(self, movement: float) -> float:
-        """
-        Harvest energy from triboelectric friction.
-
-        Args:
-            movement: Movement magnitude (e.g., servo angle change)
-
-        Returns:
-            Energy harvested in mWh
-        """
-        if abs(movement) > 0.1:
-            power_mw = abs(movement) * self.config.friction_factor
-            energy_mwh = power_mw * self.config.time_step_hours
-            return energy_mwh
-        return 0.0
-
-    def harvest_thermal(self, current_temp: float, reference_temp: float = 20.0) -> float:
-        """
-        Harvest energy from thermal gradient.
-
-        Args:
-            current_temp: Current temperature in Celsius
-            reference_temp: Reference/ambient temperature
-
-        Returns:
-            Energy harvested in mWh
-        """
-        temp_diff = abs(current_temp - reference_temp)
-        power_mw = temp_diff * self.config.thermal_factor
-        energy_mwh = power_mw * self.config.time_step_hours
-        return energy_mwh
-
-    def update_storage(self, friction_energy: float, thermal_energy: float) -> float:
-        """
-        Update energy storage with harvested energy minus consumption.
-
-        Returns:
-            Net energy change in mWh
-        """
-        total_harvest = friction_energy + thermal_energy
-        consumption = self.config.base_consumption_mw * self.config.time_step_hours
-        net = total_harvest - consumption
-        self.energy_storage += net
-        return net
-'''
-
-        # Create history.py - consolidated history tracking
-        history_content = '''"""
-History Tracking System
-
-Consolidated history/logging functionality.
-"""
-
-from typing import Any, Dict, List, Optional
-import numpy as np
+    return suggestions
 
 
-class HistoryTracker:
-    """
-    Generic history tracking for simulation metrics.
-
-    Consolidates history dictionaries from all phases.
-    """
-
-    def __init__(self, fields: Optional[List[str]] = None):
-        """
-        Initialize history tracker.
-
-        Args:
-            fields: List of field names to track. If None, uses defaults.
-        """
-        default_fields = [
-            'light', 'temp', 'energy', 'servo_angle',
-            'color_r', 'color_g', 'color_b',
-            'spikes', 'reflection', 'voltage'
-        ]
-        self.fields = fields or default_fields
-        self.data: Dict[str, List[Any]] = {f: [] for f in self.fields}
-
-    def record(self, **kwargs):
-        """Record values for specified fields"""
-        for key, value in kwargs.items():
-            if key in self.data:
-                self.data[key].append(value)
-
-    def get(self, field: str) -> List[Any]:
-        """Get history for a specific field"""
-        return self.data.get(field, [])
-
-    def get_last(self, field: str, default: Any = None) -> Any:
-        """Get most recent value for a field"""
-        values = self.data.get(field, [])
-        return values[-1] if values else default
-
-    def get_stats(self, field: str) -> Dict[str, float]:
-        """Get statistics for a field"""
-        values = self.data.get(field, [])
-        if not values:
-            return {}
-        arr = np.array(values)
-        return {
-            'mean': float(np.mean(arr)),
-            'std': float(np.std(arr)),
-            'min': float(np.min(arr)),
-            'max': float(np.max(arr))
-        }
-
-    def clear(self):
-        """Clear all history"""
-        self.data = {f: [] for f in self.fields}
-
-    def __len__(self) -> int:
-        """Return number of recorded timesteps"""
-        if not self.data:
-            return 0
-        first_field = list(self.data.keys())[0]
-        return len(self.data[first_field])
-'''
-
-        # Write all files
-        files_to_write = [
-            (core_dir / '__init__.py', init_content),
-            (core_dir / 'base_snn.py', snn_content),
-            (core_dir / 'thermochromic.py', thermo_content),
-            (core_dir / 'energy.py', energy_content),
-            (core_dir / 'history.py', history_content),
-        ]
-
-        for filepath, content in files_to_write:
-            with open(filepath, 'w') as f:
-                f.write(content)
-            print(f"  Created: {filepath.relative_to(self.root_path)}")
-            self.stats['files_created'] += 1
-
-        print(f"\n  Total files created: {self.stats['files_created']}")
-
-    def generate_report(self) -> str:
-        """Generate simplification report"""
-        report = []
-        report.append("\n" + "=" * 70)
-        report.append("CODE SIMPLIFICATION REPORT")
-        report.append("=" * 70)
-        report.append("")
-        report.append("SUMMARY:")
-        report.append(f"  Files analyzed:        {self.stats['files_analyzed']}")
-        report.append(f"  Duplicate patterns:    {self.stats['duplicates_found']}")
-        report.append(f"  Core modules created:  {self.stats['files_created']}")
-        report.append("")
-        report.append("CONSOLIDATED PATTERNS:")
-        report.append("")
-
-        for dup in self.analyzer.duplicates:
-            report.append(f"  {dup['type']}:")
-            report.append(f"    Pattern: {dup['pattern']}")
-            report.append(f"    Files affected: {len(dup['files'])}")
-            for f in dup['files']:
-                report.append(f"      - {Path(f).relative_to(self.root_path)}")
-            report.append("")
-
-        report.append("NEW CORE MODULE STRUCTURE:")
-        report.append("  core/")
-        report.append("    __init__.py      - Module exports")
-        report.append("    base_snn.py      - Consolidated SNN implementation")
-        report.append("    thermochromic.py - Color shift logic")
-        report.append("    energy.py        - Energy harvesting")
-        report.append("    history.py       - History tracking")
-        report.append("")
-        report.append("USAGE:")
-        report.append("  from core import BaseSNN, SNNConfig")
-        report.append("  from core import ThermochromicMixin, ColorState")
-        report.append("  from core import EnergyHarvester, EnergyConfig")
-        report.append("  from core import HistoryTracker")
-        report.append("")
-        report.append("=" * 70)
-
-        return '\n'.join(report)
-
-    def run(self) -> str:
-        """Run complete simplification process"""
-        print("\n" + "=" * 70)
-        print("CLAUDE CODE SIMPLIFIER PLUGIN v1.0")
-        print("=" * 70)
-
-        # Analyze
-        self.analyze()
-
-        # Create core module
-        self.create_core_module()
-
-        # Generate report
-        report = self.generate_report()
-        print(report)
-
-        # Save report
-        report_path = self.root_path / 'SIMPLIFICATION_REPORT.md'
-        with open(report_path, 'w') as f:
-            f.write("# Code Simplification Report\n\n")
-            f.write("```\n")
-            f.write(report)
-            f.write("\n```\n")
-        print(f"\nReport saved to: {report_path}")
-
-        return report
+def find_duplicates(path: str) -> List[Dict]:
+    """Find duplicate code patterns in a directory."""
+    detector = DuplicateDetector(path)
+    detector.read_files()
+    return detector.find_duplicate_patterns()
 
 
 def main():
-    """Main entry point"""
-    if len(sys.argv) > 1:
-        root_path = sys.argv[1]
+    """Main CLI entry point."""
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description='Code Simplifier Tool for analyzing Python code complexity',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s phases/                          # Analyze all files in phases/
+  %(prog)s --suggest appendices/            # Show simplification suggestions
+  %(prog)s --summary .                      # Summary of entire codebase
+  %(prog)s --duplicates .                   # Find duplicate code patterns
+        """
+    )
+
+    parser.add_argument('path', help='File or directory to analyze')
+    parser.add_argument('--suggest', '-s', action='store_true',
+                       help='Show simplification suggestions')
+    parser.add_argument('--summary', action='store_true',
+                       help='Show summary only')
+    parser.add_argument('--duplicates', '-d', action='store_true',
+                       help='Find duplicate code patterns')
+    parser.add_argument('--verbose', '-v', action='store_true',
+                       help='Verbose output')
+    parser.add_argument('--json', action='store_true',
+                       help='Output as JSON')
+
+    args = parser.parse_args()
+
+    if not os.path.exists(args.path):
+        print(f"Error: Path does not exist: {args.path}")
+        sys.exit(1)
+
+    # Handle duplicates mode
+    if args.duplicates:
+        print(f"\n{'='*60}")
+        print(f"Duplicate Code Analysis: {args.path}")
+        print(f"{'='*60}")
+
+        duplicates = find_duplicates(args.path)
+
+        if duplicates:
+            print(f"\nFound {len(duplicates)} duplicate patterns:\n")
+            for dup in duplicates:
+                print(f"  {dup['type']}:")
+                print(f"    Pattern: {dup['pattern']}")
+                print(f"    Files affected: {len(dup['files'])}")
+                for f in dup['files']:
+                    print(f"      - {Path(f).relative_to(args.path) if args.path != '.' else f}")
+                print()
+        else:
+            print("\nNo significant duplicate patterns found.")
+        return
+
+    simplifier = CodeSimplifier(verbose=args.verbose)
+
+    if os.path.isfile(args.path):
+        metrics, suggestions = simplifier.analyze_file(args.path)
+        results = {args.path: (metrics, suggestions)}
     else:
-        # Default to parent directory of tools/
-        root_path = str(Path(__file__).parent.parent)
+        results = simplifier.analyze_directory(args.path)
 
-    simplifier = CodeSimplifier(root_path)
-    simplifier.run()
+    if args.json:
+        import json
+        output = {}
+        for filepath, (metrics, suggestions) in results.items():
+            output[filepath] = {
+                'metrics': {
+                    'cyclomatic_complexity': metrics.cyclomatic_complexity,
+                    'max_nesting_depth': metrics.max_nesting_depth,
+                    'lines_of_code': metrics.lines_of_code,
+                    'num_functions': metrics.num_functions,
+                    'num_classes': metrics.num_classes,
+                    'num_imports': metrics.num_imports,
+                    'complex_functions': metrics.long_functions,
+                    'deeply_nested': metrics.deeply_nested,
+                },
+                'suggestions': [
+                    {
+                        'line': s.line_number,
+                        'category': s.category,
+                        'priority': s.priority,
+                        'suggestion': s.suggestion,
+                    }
+                    for s in suggestions
+                ]
+            }
+        print(json.dumps(output, indent=2))
+    elif args.summary:
+        total_loc = sum(m.lines_of_code for m, _ in results.values())
+        total_functions = sum(m.num_functions for m, _ in results.values())
+        total_classes = sum(m.num_classes for m, _ in results.values())
+        total_complexity = sum(m.cyclomatic_complexity for m, _ in results.values())
+        total_suggestions = sum(len(s) for _, s in results.values())
 
-    print("\n✓ Code simplification complete!")
-    print("  The core/ module now contains consolidated implementations.")
-    print("  Existing files can be refactored to use these shared components.")
+        print(f"\n{'='*60}")
+        print(f"Codebase Summary: {args.path}")
+        print(f"{'='*60}")
+        print(f"  Files analyzed: {len(results)}")
+        print(f"  Total lines of code: {total_loc}")
+        print(f"  Total functions: {total_functions}")
+        print(f"  Total classes: {total_classes}")
+        print(f"  Total cyclomatic complexity: {total_complexity}")
+        print(f"  Average complexity per file: {total_complexity / len(results):.1f}")
+        print(f"  Simplification suggestions: {total_suggestions}")
+
+        # Top complex files
+        sorted_files = sorted(results.items(),
+                             key=lambda x: x[1][0].cyclomatic_complexity,
+                             reverse=True)[:5]
+        print(f"\nMost Complex Files:")
+        for filepath, (metrics, _) in sorted_files:
+            print(f"  {filepath}: complexity {metrics.cyclomatic_complexity}")
+        print()
+    else:
+        for filepath, (metrics, suggestions) in results.items():
+            if args.suggest or suggestions:
+                print(simplifier.format_report(filepath, metrics, suggestions))
+            else:
+                print(f"{filepath}: complexity={metrics.cyclomatic_complexity}, "
+                      f"loc={metrics.lines_of_code}, functions={metrics.num_functions}")
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
