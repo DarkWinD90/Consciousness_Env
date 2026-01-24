@@ -21,77 +21,66 @@ Success Criteria:
 - System modifies behavior based on self-observed state changes
 - Recursive loops stable without runaway feedback
 - Emergent responses appear beyond programmed thresholds
+
+REFACTORED: Now uses shared core.BaseSNN module with reflection support.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
+sys.path.insert(0, '/home/user/Consciousness_Env')
+
+from core import BaseSNN, SNNConfig, HistoryTracker
 
 
 class RecursiveReflectionLayer:
-    """Phase 6: Self-referential processing for proto-consciousness"""
+    """Phase 6: Self-referential processing using shared BaseSNN"""
 
     def __init__(self, num_neurons=50, max_depth=3):
-        sys.setrecursionlimit(1500)
-
-        self.num_neurons = num_neurons
         self.max_depth = max_depth
-        self.threshold = 0.5
 
-        # Network state
-        self.weights = np.random.rand(num_neurons, num_neurons) * 0.1
-        self.membrane_potential = np.zeros(num_neurons)
-        self.previous_output = None
+        # Use shared BaseSNN with reflection support
+        self.snn = BaseSNN(SNNConfig(
+            num_neurons=num_neurons,
+            threshold=0.5,
+            leak_factor=0.1,
+            refractory_period=2,
+            weight_scale=0.1
+        ))
 
-        # Consciousness metrics
-        self.reflection_coefficient = 0.15  # How much to weight self-reflection
+        # Reflection coefficient - how much to weight self-reflection
+        self.reflection_coefficient = 0.15
 
-        self.history = {
-            'input': [],
-            'output': [],
-            'reflection': [],
-            'depth_reached': []
-        }
+        # Use shared history tracker
+        self.history = HistoryTracker(fields=[
+            'input', 'output', 'reflection', 'depth_reached'
+        ])
 
     def process_with_reflection(self, external_input, depth=0):
         """
-        Recursive processing with self-reflection.
+        Recursive processing with self-reflection using shared BaseSNN.
 
         The system observes its own output and feeds it back as input,
         creating proto-conscious self-awareness.
         """
         # Prevent infinite recursion
         if depth >= self.max_depth:
-            return self.membrane_potential.mean()
+            return self.snn.get_output()
 
-        # Integrate external input
-        adjusted_input = external_input * 0.3
-
-        # Add self-reflection from previous cycle
-        if self.previous_output is not None:
-            adjusted_input += self.previous_output * self.reflection_coefficient
-
-        # Update membrane potential
-        self.membrane_potential *= 0.9  # Leak
-        self.membrane_potential[0] += adjusted_input
-
-        # Spike propagation
-        spikes = self.membrane_potential > self.threshold
-        if np.any(spikes):
-            self.membrane_potential[spikes] = 0.0
-            self.membrane_potential += np.dot(spikes.astype(float), self.weights)
+        # Process through shared SNN with reflection coefficient
+        potentials, spikes = self.snn.step(
+            external_input * 0.3,
+            reflection_coeff=self.reflection_coefficient
+        )
 
         # Get current output
-        output = self.membrane_potential.mean()
+        output = self.snn.get_output()
 
         # RECURSIVE REFLECTION: Process again with own output
         if depth < self.max_depth - 1:
             reflected_output = self.process_with_reflection(output, depth + 1)
             # Blend outputs across recursion levels
             output = (output + reflected_output) / 2.0
-
-        # Store for next cycle
-        self.previous_output = output
 
         return output
 
@@ -104,26 +93,28 @@ class RecursiveReflectionLayer:
             # Process with recursive reflection
             output = self.process_with_reflection(external_input, depth=0)
 
-            # Record
-            self.history['input'].append(external_input)
-            self.history['output'].append(output)
-            self.history['reflection'].append(self.previous_output)
-            self.history['depth_reached'].append(self.max_depth)
+            # Record using shared history tracker
+            self.history.record(
+                input=external_input,
+                output=output,
+                reflection=self.snn.previous_output,
+                depth_reached=self.max_depth
+            )
 
     def plot_results(self):
         """Visualize recursive reflection dynamics"""
         fig, axes = plt.subplots(2, 1, figsize=(12, 8))
 
         ax1 = axes[0]
-        ax1.plot(self.history['input'], label='External Input', color='blue', alpha=0.7)
-        ax1.plot(self.history['output'], label='Reflected Output', color='purple', linewidth=2)
+        ax1.plot(self.history.get('input'), label='External Input', color='blue', alpha=0.7)
+        ax1.plot(self.history.get('output'), label='Reflected Output', color='purple', linewidth=2)
         ax1.set_ylabel('Signal Intensity')
-        ax1.set_title('Recursive Self-Reflection: Input vs Conscious Output')
+        ax1.set_title('Recursive Self-Reflection via core.BaseSNN')
         ax1.legend()
         ax1.grid(True, alpha=0.3)
 
         ax2 = axes[1]
-        ax2.plot(self.history['reflection'], color='darkviolet', linewidth=2)
+        ax2.plot(self.history.get('reflection'), color='darkviolet', linewidth=2)
         ax2.set_xlabel('Time Step')
         ax2.set_ylabel('Reflection Signal')
         ax2.set_title('Self-Observation State (Proto-Consciousness)')
@@ -137,6 +128,7 @@ class RecursiveReflectionLayer:
 if __name__ == "__main__":
     print("=" * 70)
     print("PHASE 6: RECURSIVE REFLECTION LAYER")
+    print("(Refactored to use core.BaseSNN)")
     print("=" * 70)
 
     layer = RecursiveReflectionLayer(num_neurons=50, max_depth=3)
