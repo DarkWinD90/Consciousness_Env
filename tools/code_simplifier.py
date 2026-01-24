@@ -198,7 +198,7 @@ class SimplificationAnalyzer(ast.NodeVisitor):
         if isinstance(node.test, ast.Compare):
             if len(node.test.comparators) == 1:
                 if isinstance(node.test.comparators[0], ast.Constant):
-                    if node.test.comparators[0].value in (True, False):
+                    if node.test.comparators[0].value is True or node.test.comparators[0].value is False:
                         line = self.source_lines[node.lineno - 1].strip() if node.lineno <= len(self.source_lines) else ""
                         self.suggestions.append(SimplificationSuggestion(
                             line_number=node.lineno,
