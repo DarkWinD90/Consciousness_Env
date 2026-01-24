@@ -6,6 +6,11 @@
       "env": {
         "PYTHONPATH": "/home/user/Consciousness_Env"
       }
+    },
+    "consciousness-cognitive": {
+      "command": "python",
+      "args": ["/home/user/Consciousness_Env/mcp/consciousness_server.py"],
+      "description": "Cognitive query interface for Enhanced Consciousness System"
     }
   }
 }
