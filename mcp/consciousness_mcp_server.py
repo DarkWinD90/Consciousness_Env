@@ -38,7 +38,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.base_snn import BaseSNN, SNNConfig
 from core.thermochromic import ThermochromicMixin, ColorState
-from core.energy import EnergyHarvester, EnergyConfig
+from core.energy import EnergyHarvester, BalancedEnergyConfig
 from core.history import HistoryTracker
 
 
@@ -88,12 +88,7 @@ class ConsciousnessSystem(ThermochromicMixin):
         ))
 
         self.harvester = EnergyHarvester(
-            config=EnergyConfig(
-                friction_factor=0.0005,
-                thermal_factor=0.0002,
-                time_step_hours=0.005,
-                base_consumption_mw=100.0
-            ),
+            config=BalancedEnergyConfig(),  # Self-sustaining at medium activity
             initial_energy=50.0
         )
 
@@ -122,11 +117,11 @@ class ConsciousnessSystem(ThermochromicMixin):
         self.state.snn_output = float(self.snn.get_output())
         self.state.pattern_type = self._classify_pattern(spikes)
 
-        # Energy harvesting
-        activity = self.state.spike_count * 0.1
+        # Energy harvesting (BalancedEnergyConfig: activity drives piezoelectric harvest)
+        activity = self.state.spike_count  # Direct spike count for balanced config
         friction_energy = self.harvester.harvest_friction(activity)
         thermal_energy = self.harvester.harvest_thermal(self.state.temperature_c)
-        self.harvester.update_storage(friction_energy, thermal_energy)
+        self.harvester.update_storage(friction_energy, thermal_energy, spike_count=self.state.spike_count)
         self.state.energy_mwh = float(self.harvester.energy_storage)
 
         # Temperature dynamics
