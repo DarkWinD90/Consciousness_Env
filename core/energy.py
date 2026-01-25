@@ -11,10 +11,37 @@ from dataclasses import dataclass
 @dataclass
 class EnergyConfig:
     """Configuration for energy harvesting"""
-    friction_factor: float = 0.0005      # mW per unit movement (realistic)
+    friction_factor: float = 0.0005      # mW per unit movement (realistic macro-scale)
     thermal_factor: float = 0.0002       # mW per degree difference (realistic)
     time_step_hours: float = 0.005       # 18 seconds per step
-    base_consumption_mw: float = 470.0   # Base power draw in mW
+    base_consumption_mw: float = 470.0   # Base power draw in mW (macro robot)
+
+
+@dataclass
+class BalancedEnergyConfig(EnergyConfig):
+    """
+    Balanced configuration for self-sustaining micro-scale neural systems.
+
+    Tuned so that:
+    - Rest state: significant energy drain (must stay active)
+    - Low activity (5-15 spikes): slight drain
+    - Medium activity (30-50 spikes): positive balance (sweet spot)
+    - High activity (70-85 spikes): slight drain
+    - Burst activity (100 spikes): significant drain (emergency only)
+
+    This creates interesting energy management dynamics where the system
+    must regulate its activity level to maintain energy homeostasis.
+    The "sweet spot" is medium activity - not too little, not too much.
+    """
+    friction_factor: float = 18.0        # mW per unit activity (piezoelectric harvesting)
+    thermal_factor: float = 8.0          # mW per °C difference (thermoelectric)
+    time_step_hours: float = 0.005       # 18 seconds per step
+    base_consumption_mw: float = 45.0    # 45mW base (higher idle cost)
+
+    # Activity-dependent consumption scaling (quadratic for realistic neural cost)
+    # Creates a "sweet spot" where medium activity is most efficient
+    activity_cost_mw: float = 1.2        # Linear cost per spike (lower)
+    activity_cost_quadratic: float = 0.06  # Higher quadratic penalty for bursts
 
 
 class EnergyHarvester:
@@ -64,15 +91,47 @@ class EnergyHarvester:
         energy_mwh = power_mw * self.config.time_step_hours
         return energy_mwh
 
-    def update_storage(self, friction_energy: float, thermal_energy: float) -> float:
+    def update_storage(self, friction_energy: float, thermal_energy: float,
+                        spike_count: int = 0) -> float:
         """
         Update energy storage with harvested energy minus consumption.
+
+        Args:
+            friction_energy: Energy from friction harvesting (mWh)
+            thermal_energy: Energy from thermal harvesting (mWh)
+            spike_count: Number of neural spikes (for activity-dependent consumption)
 
         Returns:
             Net energy change in mWh
         """
         total_harvest = friction_energy + thermal_energy
+
+        # Base consumption
         consumption = self.config.base_consumption_mw * self.config.time_step_hours
+
+        # Activity-dependent consumption (if configured)
+        if hasattr(self.config, 'activity_cost_mw'):
+            # Linear cost
+            activity_consumption = spike_count * self.config.activity_cost_mw * self.config.time_step_hours
+            consumption += activity_consumption
+
+            # Quadratic cost for burst penalty (if configured)
+            if hasattr(self.config, 'activity_cost_quadratic'):
+                quadratic_cost = (spike_count ** 2) * self.config.activity_cost_quadratic * self.config.time_step_hours
+                consumption += quadratic_cost
+
         net = total_harvest - consumption
         self.energy_storage += net
         return net
+
+    def get_consumption_breakdown(self, spike_count: int = 0) -> dict:
+        """Get detailed consumption breakdown for analysis."""
+        base = self.config.base_consumption_mw * self.config.time_step_hours
+        activity = 0
+        if hasattr(self.config, 'activity_cost_mw'):
+            activity = spike_count * self.config.activity_cost_mw * self.config.time_step_hours
+        return {
+            'base_mwh': base,
+            'activity_mwh': activity,
+            'total_mwh': base + activity
+        }
