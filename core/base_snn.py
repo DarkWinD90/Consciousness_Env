@@ -17,6 +17,7 @@ class SNNConfig:
     leak_factor: float = 0.1
     refractory_period: int = 2
     weight_scale: float = 0.1
+    input_scale: float = 0.8  # Scale factor for external input
 
 
 class BaseSNN:
@@ -37,6 +38,7 @@ class BaseSNN:
         self.threshold = config.threshold
         self.leak_factor = config.leak_factor
         self.refractory_period = config.refractory_period
+        self.input_scale = config.input_scale
 
         # Network state
         self.weights = np.random.rand(self.num_neurons, self.num_neurons) * config.weight_scale
@@ -62,8 +64,8 @@ class BaseSNN:
         # Apply leak
         self.membrane_potential *= (1 - self.leak_factor)
 
-        # Add input to first neuron
-        adjusted_input = input_signal * 0.1
+        # Add input to first neuron (scaled for proper threshold crossings)
+        adjusted_input = input_signal * self.input_scale
         if self.previous_output is not None and reflection_coeff > 0:
             adjusted_input += self.previous_output * reflection_coeff
 
