@@ -83,7 +83,8 @@ class ConsciousnessSystem(ThermochromicMixin):
             threshold=0.5,
             leak_factor=0.1,
             refractory_period=2,
-            weight_scale=0.1
+            weight_scale=0.15,  # Strong enough for activity propagation
+            input_scale=0.8    # Strong enough to trigger firing
         ))
 
         self.harvester = EnergyHarvester(
