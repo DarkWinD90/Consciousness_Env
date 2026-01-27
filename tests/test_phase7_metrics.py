@@ -27,6 +27,15 @@ def run_baseline():
         u = Kp * (θ_ref - θ) - Kd * ω
         ω_next = ω + (u - c * ω - k * θ) / m
         θ_next = θ + ω_next
+
+        # Enforce physical joint limits (servo hard stops)
+        if θ_next < 0:
+            θ_next = 0.0
+            ω_next = 0.0
+        elif θ_next > 180:
+            θ_next = 180.0
+            ω_next = 0.0
+
         E_next = E + α * (0.0 - (C0 + C_move * abs(u)))
         E_next = np.clip(E_next, E_min, E_max)
         T += β * L - γ * (T - T_amb)

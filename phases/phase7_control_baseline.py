@@ -22,9 +22,9 @@ m = 1.0                         # mass
 c = 0.5                         # damping
 k = 1.0                         # stiffness
 
-# PD controller gains
-Kp = 1.5
-Kd = 0.6
+# PD controller gains (tuned for stable Euler integration at Δt=1.0)
+Kp = 0.3
+Kd = 0.4
 
 # Reference trajectory parameters
 θ_mid = 90.0                    # center angle (deg)
@@ -100,9 +100,18 @@ def run_baseline():
         u = pd_controller(θ_ref, θ, ω)
         history['u'][t] = u
 
-        # 4. Plant update (second-order Euler)
+        # 4. Plant update (second-order Euler with servo joint limits)
         ω_next = ω + Δt * (u - c * ω - k * θ) / m
         θ_next = θ + Δt * ω_next
+
+        # Enforce physical joint limits (servo hard stops at 0° and 180°)
+        if θ_next < 0:
+            θ_next = 0.0
+            ω_next = 0.0  # zero velocity at hard stop
+        elif θ_next > 180:
+            θ_next = 180.0
+            ω_next = 0.0
+
         history['θ'][t] = θ_next
         history['ω'][t] = ω_next
 
