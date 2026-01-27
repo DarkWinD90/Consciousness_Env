@@ -45,12 +45,44 @@ Consciousness_Env/
 
 ## Installation
 
-### Prerequisites
+### Option 1: Using Homebrew (macOS/Linux)
+
+For the easiest installation, use Homebrew:
+
+```bash
+# Add the tap
+brew tap DarkWinD90/Consciousness_Env https://github.com/DarkWinD90/Consciousness_Env
+
+# Install consciousness-env
+brew install consciousness-env
+```
+
+After installation, you can use the `consciousness` command:
+
+```bash
+consciousness version
+consciousness run
+consciousness run --phase 1
+```
+
+### Option 2: Using pip
+
+Install directly from the repository:
+
+```bash
+pip install git+https://github.com/DarkWinD90/Consciousness_Env.git
+```
+
+Then use the `consciousness` command as above.
+
+### Option 3: Manual Installation
+
+#### Prerequisites
 
 - Python 3.8 or higher
 - pip package manager
 
-### Setup
+#### Setup
 
 1. Clone the repository:
 ```bash
@@ -63,9 +95,38 @@ cd Consciousness_Env
 pip install -r requirements.txt
 ```
 
+3. (Optional) Install as editable package:
+```bash
+pip install -e .
+```
+
 ## Usage
 
-### Run Individual Components
+### Using the CLI (if installed via Homebrew or pip)
+
+The `consciousness` command provides a convenient interface:
+
+```bash
+# Show help
+consciousness --help
+
+# Show version
+consciousness version
+
+# Run full integration (Phase 7)
+consciousness run
+
+# Run specific phase
+consciousness run --phase 1
+consciousness run --phase 2
+
+# Run appendix simulations
+consciousness appendix a        # Base simulation
+consciousness appendix graph    # System graph visualization
+consciousness appendix reflection  # Recursive reflection
+```
+
+### Run Individual Components (Manual Installation)
 
 Each appendix and phase can be run independently:
 
