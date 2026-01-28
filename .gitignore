@@ -68,3 +68,7 @@ simulation_checkpoint.pkl
 
 # Fallback state snapshots
 mcp/.snapshots/
+
+# Generated repo dump files
+REPO_DUMP_FOR_REVIEW.txt
+REPO_SNAPSHOT_FOR_REVIEW.txt
