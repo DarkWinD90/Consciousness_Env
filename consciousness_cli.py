@@ -12,27 +12,52 @@ from pathlib import Path
 
 
 def get_script_path(module_dir, script_name):
-    """Get the absolute path to a script file in the package."""
+    """Get the absolute path to a script file in the package.
+
+    Resolution order:
+    1. Relative to this file (works for development and standard installs)
+    2. Parent directory fallback (handles alternate layouts)
+    3. importlib.resources (handles wheel/zip installs where the package
+       is properly installed but located outside the CLI module's parent)
+    """
     # First, try relative to this file (works for both installed and development mode)
     script_dir = Path(__file__).parent.resolve()
     script_path = script_dir / module_dir / script_name
-    
+
     if script_path.exists():
         return str(script_path)
-    
+
     # Fallback: search in common installation paths
-    possible_paths = [
-        script_dir / module_dir / script_name,
-        script_dir.parent / module_dir / script_name,
+    parent_path = script_dir.parent / module_dir / script_name
+    if parent_path.exists():
+        return str(parent_path)
+
+    # Fallback: use importlib.resources to locate the script inside an
+    # installed package.  This covers wheels and other packaging layouts
+    # where the file-relative approach does not resolve.
+    try:
+        import importlib.resources as _resources
+        if sys.version_info >= (3, 9):
+            ref = _resources.files(module_dir).joinpath(script_name)
+            resource_path = str(ref)
+            if os.path.exists(resource_path):
+                return resource_path
+        else:
+            # Python 3.8: use the older context-manager API
+            with _resources.path(module_dir, script_name) as p:
+                if p.exists():
+                    return str(p)
+    except (ImportError, ModuleNotFoundError, TypeError):
+        pass
+
+    searched = [
+        str(script_dir / module_dir / script_name),
+        str(parent_path),
+        f"importlib.resources({module_dir}/{script_name})",
     ]
-    
-    for path in possible_paths:
-        if path.exists():
-            return str(path)
-    
     raise FileNotFoundError(
         f"Could not find {module_dir}/{script_name}. "
-        f"Searched in: {[str(p) for p in possible_paths]}"
+        f"Searched in: {searched}"
     )
 
 
