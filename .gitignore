@@ -65,3 +65,6 @@ venv.bak/
 simulation_checkpoint.pkl
 *.png
 *.jpg
+
+# Fallback state snapshots
+mcp/.snapshots/

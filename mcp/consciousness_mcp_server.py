@@ -11,6 +11,16 @@ Architecture:
     MCP Server (this file)
          ↓ controls
     Consciousness System (SNN + Energy + Thermochromic)
+         ↓ (on disconnect)
+    Autonomous Fallback (keeps the loop alive)
+
+Fallback support:
+    When the cognitive layer (Claude) stops sending commands for longer
+    than ``heartbeat_timeout`` seconds, the system enters autonomous
+    fallback mode.  It continues stepping the SNN with a self-regulating
+    input generator, snapshots state to disk periodically, and buffers
+    all history.  When Claude reconnects, a ``resync`` tool returns
+    everything that happened while the connection was down.
 
 Usage:
     claude --mcp-config mcp/mcp-config.json
@@ -23,14 +33,18 @@ Tools exposed:
     - apply_cognitive_response: Apply modulation from Claude's reasoning
     - set_goal: Set a goal for the system
     - get_attention_needs: What stimuli need attention?
+    - get_fallback_status: Check autonomous fallback state
+    - resync: Retrieve buffered history from an autonomous fallback period
 """
 
 import sys
 import json
 import asyncio
+import time
 import numpy as np
-from typing import Any, Dict, Optional
-from dataclasses import dataclass, asdict
+from typing import Any, Dict, List, Optional
+from dataclasses import dataclass, asdict, field
+from pathlib import Path
 import os
 
 # Add parent directory to path for imports
@@ -41,6 +55,25 @@ from core.thermochromic import ThermochromicMixin, ColorState
 from core.energy import EnergyHarvester, BalancedEnergyConfig
 from core.history import HistoryTracker
 
+
+# ---------------------------------------------------------------------------
+# Configuration
+# ---------------------------------------------------------------------------
+
+SNAPSHOT_DIR = Path(__file__).parent / ".snapshots"
+
+@dataclass
+class FallbackConfig:
+    """Configuration for autonomous fallback behaviour."""
+    heartbeat_timeout: float = 30.0     # seconds without a tool call before fallback
+    fallback_step_interval: float = 0.5 # seconds between autonomous steps
+    snapshot_interval: int = 50         # steps between disk snapshots
+    max_autonomous_steps: int = 10000   # hard cap so runaway loops can't spin forever
+
+
+# ---------------------------------------------------------------------------
+# Consciousness state
+# ---------------------------------------------------------------------------
 
 @dataclass
 class ConsciousnessState:
@@ -65,6 +98,10 @@ class ConsciousnessState:
     last_modulation: float = 0.0
 
 
+# ---------------------------------------------------------------------------
+# Consciousness system (physics + SNN)
+# ---------------------------------------------------------------------------
+
 class ConsciousnessSystem(ThermochromicMixin):
     """
     The consciousness system that MCP exposes to Claude.
@@ -84,7 +121,7 @@ class ConsciousnessSystem(ThermochromicMixin):
             leak_factor=0.1,
             refractory_period=2,
             weight_scale=0.15,  # Strong enough for activity propagation
-            input_scale=0.8    # Strong enough to trigger firing
+            input_scale=0.8     # Strong enough to trigger firing
         ))
 
         self.harvester = EnergyHarvester(
@@ -187,16 +224,282 @@ class ConsciousnessSystem(ThermochromicMixin):
 
         return needs
 
+    # ------------------------------------------------------------------
+    # Snapshot / restore (for crash recovery)
+    # ------------------------------------------------------------------
+
+    def snapshot(self) -> Dict[str, Any]:
+        """Serialise the full system state to a JSON-safe dict."""
+        return {
+            "state": asdict(self.state),
+            "energy_storage": float(self.harvester.energy_storage),
+            "temperature": float(self.state.temperature_c),
+            "membrane_potential": self.snn.membrane_potential.tolist(),
+            "refractory_counters": self.snn.refractory_counters.tolist(),
+            "previous_output": self.snn.previous_output,
+            "weights": self.snn.weights.tolist(),
+            "stimuli": self.stimuli,
+        }
+
+    def restore(self, snap: Dict[str, Any]):
+        """Restore system state from a snapshot dict."""
+        s = snap["state"]
+        self.state.step = s["step"]
+        self.state.num_neurons = s["num_neurons"]
+        self.state.spike_count = s["spike_count"]
+        self.state.mean_potential = s["mean_potential"]
+        self.state.snn_output = s["snn_output"]
+        self.state.pattern_type = s["pattern_type"]
+        self.state.energy_mwh = s["energy_mwh"]
+        self.state.temperature_c = s["temperature_c"]
+        self.state.color_rgb = tuple(s["color_rgb"])
+        self.state.current_goal = s.get("current_goal")
+        self.state.attention_focus = s.get("attention_focus")
+        self.state.last_modulation = s.get("last_modulation", 0.0)
+
+        self.harvester.energy_storage = snap["energy_storage"]
+        self.snn.membrane_potential = np.array(snap["membrane_potential"])
+        self.snn.refractory_counters = np.array(snap["refractory_counters"], dtype=int)
+        self.snn.previous_output = snap["previous_output"]
+        self.snn.weights = np.array(snap["weights"])
+        self.stimuli = snap.get("stimuli", {})
+
+
+# ---------------------------------------------------------------------------
+# Autonomous fallback runner
+# ---------------------------------------------------------------------------
+
+class AutonomousRunner:
+    """
+    Background loop that keeps the consciousness system alive when the
+    cognitive layer (Claude / MCP connection) is unavailable.
+
+    Uses a self-regulating input generator:
+      - Circadian-like sinusoidal base signal
+      - Random attention bursts (10% chance each step)
+      - Energy-aware modulation: inhibits when energy is low,
+        excites when energy is abundant
+    """
+
+    def __init__(self, system: ConsciousnessSystem, config: FallbackConfig):
+        self.system = system
+        self.config = config
+
+        # Bookkeeping
+        self.active = False
+        self.steps_taken: int = 0
+        self.entered_at_step: int = 0
+        self.entered_at_time: float = 0.0
+        self.exited_at_step: Optional[int] = None
+
+        # Buffer history recorded during fallback so resync can report it
+        self._buffer: List[Dict[str, Any]] = []
+
+    # ------------------------------------------------------------------
+    # Input generator
+    # ------------------------------------------------------------------
+
+    def _generate_input(self, step: int) -> tuple:
+        """Produce (external_input, modulation) for one autonomous step."""
+        t = step / 200.0  # normalised time
+
+        # Circadian base
+        circadian = 0.5 + 0.2 * np.sin(2 * np.pi * t * 3)
+
+        # Random attention burst
+        burst = 0.3 if np.random.random() < 0.10 else 0.0
+        external_input = float(np.clip(circadian + burst, 0.0, 1.0))
+
+        # Self-regulating modulation based on energy
+        energy = self.system.state.energy_mwh
+        if energy < 15:
+            modulation = -0.4   # conserve
+        elif energy < 30:
+            modulation = -0.1   # cautious
+        elif energy > 80:
+            modulation = 0.3    # spend surplus
+        else:
+            modulation = 0.0    # neutral
+
+        return external_input, modulation
+
+    # ------------------------------------------------------------------
+    # Lifecycle
+    # ------------------------------------------------------------------
+
+    def enter(self):
+        """Activate autonomous fallback."""
+        self.active = True
+        self.steps_taken = 0
+        self.entered_at_step = self.system.state.step
+        self.entered_at_time = time.time()
+        self.exited_at_step = None
+        self._buffer.clear()
+
+    def exit(self):
+        """Deactivate autonomous fallback (Claude is back)."""
+        self.active = False
+        self.exited_at_step = self.system.state.step
+
+    async def run_loop(self):
+        """
+        Async loop that steps the system while ``self.active`` is True.
+        Yields control between steps so the MCP server can still process
+        incoming requests that would deactivate fallback.
+        """
+        while self.active and self.steps_taken < self.config.max_autonomous_steps:
+            ext, mod = self._generate_input(self.system.state.step)
+            state = self.system.step(ext, mod)
+            self.steps_taken += 1
+
+            # Buffer a summary for resync
+            self._buffer.append({
+                "step": state.step,
+                "input": round(ext, 4),
+                "modulation": round(mod, 4),
+                "spikes": state.spike_count,
+                "energy": round(state.energy_mwh, 2),
+                "temperature": round(state.temperature_c, 2),
+                "pattern": state.pattern_type,
+            })
+
+            # Periodic snapshot
+            if self.steps_taken % self.config.snapshot_interval == 0:
+                self._write_snapshot()
+
+            await asyncio.sleep(self.config.fallback_step_interval)
+
+        # Final snapshot on exit
+        if self.steps_taken > 0:
+            self._write_snapshot()
+
+    def _write_snapshot(self):
+        """Persist current state to disk."""
+        SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
+        snap = self.system.snapshot()
+        snap["_meta"] = {
+            "fallback_steps": self.steps_taken,
+            "timestamp": time.time(),
+        }
+        path = SNAPSHOT_DIR / "latest.json"
+        tmp = path.with_suffix(".tmp")
+        tmp.write_text(json.dumps(snap))
+        tmp.replace(path)  # atomic on POSIX
+
+    def get_resync_payload(self) -> Dict[str, Any]:
+        """Return everything that happened during the last fallback period."""
+        payload = {
+            "fallback_occurred": len(self._buffer) > 0,
+            "steps_autonomous": self.steps_taken,
+            "entered_at_step": self.entered_at_step,
+            "exited_at_step": self.exited_at_step,
+            "duration_seconds": round(time.time() - self.entered_at_time, 2) if self.entered_at_time else 0,
+            "current_state": asdict(self.system.state),
+            "buffer_length": len(self._buffer),
+        }
+        if self._buffer:
+            payload["first_buffered"] = self._buffer[0]
+            payload["last_buffered"] = self._buffer[-1]
+            # Energy delta across the autonomous period
+            payload["energy_delta"] = round(
+                self._buffer[-1]["energy"] - self._buffer[0]["energy"], 2
+            )
+            # Summary stats
+            energies = [b["energy"] for b in self._buffer]
+            spikes = [b["spikes"] for b in self._buffer]
+            payload["summary"] = {
+                "energy_min": round(min(energies), 2),
+                "energy_max": round(max(energies), 2),
+                "energy_mean": round(sum(energies) / len(energies), 2),
+                "spikes_mean": round(sum(spikes) / len(spikes), 2),
+            }
+        return payload
+
+    def drain_buffer(self) -> List[Dict[str, Any]]:
+        """Return and clear the full buffer (for detailed resync)."""
+        buf = list(self._buffer)
+        self._buffer.clear()
+        return buf
+
+
+# ---------------------------------------------------------------------------
+# MCP Server
+# ---------------------------------------------------------------------------
 
 class MCPConsciousnessServer:
     """
     MCP Server that exposes consciousness system tools to Claude Code.
+    Includes autonomous fallback when the cognitive layer disconnects.
     """
 
-    def __init__(self):
+    def __init__(self, fallback_config: FallbackConfig = None):
         self.system: Optional[ConsciousnessSystem] = None
         self.name = "consciousness-system"
-        self.version = "1.0.0"
+        self.version = "1.1.0"
+
+        self._fb_config = fallback_config or FallbackConfig()
+        self._runner: Optional[AutonomousRunner] = None
+        self._fallback_task: Optional[asyncio.Task] = None
+        self._last_heartbeat: float = time.time()
+
+    # ------------------------------------------------------------------
+    # Heartbeat / fallback management
+    # ------------------------------------------------------------------
+
+    def _touch_heartbeat(self):
+        """Record that Claude is alive (a tool call just arrived)."""
+        self._last_heartbeat = time.time()
+        # If fallback is running, stop it — Claude is back
+        if self._runner and self._runner.active:
+            self._runner.exit()
+            if self._fallback_task and not self._fallback_task.done():
+                self._fallback_task.cancel()
+            print("[fallback] cognitive layer reconnected — "
+                  f"autonomous ran {self._runner.steps_taken} steps",
+                  file=sys.stderr)
+
+    async def _heartbeat_watchdog(self):
+        """
+        Background coroutine that monitors the heartbeat and engages
+        autonomous fallback when Claude goes silent.
+        """
+        while True:
+            await asyncio.sleep(5)  # check every 5 s
+
+            if self.system is None:
+                continue
+
+            elapsed = time.time() - self._last_heartbeat
+            already_running = self._runner and self._runner.active
+
+            if elapsed > self._fb_config.heartbeat_timeout and not already_running:
+                print(f"[fallback] no heartbeat for {elapsed:.0f}s — "
+                      "engaging autonomous mode", file=sys.stderr)
+                self._runner = AutonomousRunner(self.system, self._fb_config)
+                self._runner.enter()
+                self._fallback_task = asyncio.ensure_future(self._runner.run_loop())
+
+    def _try_restore_snapshot(self) -> bool:
+        """Attempt to restore from the latest disk snapshot."""
+        path = SNAPSHOT_DIR / "latest.json"
+        if not path.exists():
+            return False
+        try:
+            snap = json.loads(path.read_text())
+            if self.system is None:
+                num_neurons = snap["state"]["num_neurons"]
+                self.system = ConsciousnessSystem(num_neurons=num_neurons)
+            self.system.restore(snap)
+            print(f"[fallback] restored from snapshot at step "
+                  f"{self.system.state.step}", file=sys.stderr)
+            return True
+        except Exception as e:
+            print(f"[fallback] snapshot restore failed: {e}", file=sys.stderr)
+            return False
+
+    # ------------------------------------------------------------------
+    # Tool definitions
+    # ------------------------------------------------------------------
 
     def get_tools(self):
         """Return tool definitions"""
@@ -330,14 +633,49 @@ class MCPConsciousnessServer:
                         }
                     }
                 }
+            },
+            {
+                "name": "get_fallback_status",
+                "description": "Check whether autonomous fallback is active, and if so how many steps it has run.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {}
+                }
+            },
+            {
+                "name": "resync",
+                "description": "Retrieve buffered history from an autonomous fallback period. Returns summary stats and energy delta so the cognitive layer can catch up.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "include_full_buffer": {
+                            "type": "boolean",
+                            "description": "Include every buffered step (can be large). Default false.",
+                            "default": False
+                        }
+                    }
+                }
             }
         ]
 
+    # ------------------------------------------------------------------
+    # Tool dispatch
+    # ------------------------------------------------------------------
+
     async def handle_tool_call(self, name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Handle a tool call from Claude"""
+        self._touch_heartbeat()
 
         if name == "initialize_consciousness":
             num_neurons = arguments.get("num_neurons", 50)
+            # Try restoring from a previous snapshot first
+            if self._try_restore_snapshot():
+                return {
+                    "status": "restored_from_snapshot",
+                    "num_neurons": self.system.state.num_neurons,
+                    "restored_step": self.system.state.step,
+                    "state": asdict(self.system.state)
+                }
             self.system = ConsciousnessSystem(num_neurons=num_neurons)
             return {
                 "status": "initialized",
@@ -371,13 +709,15 @@ class MCPConsciousnessServer:
             }
 
         elif name == "get_system_status":
+            fb_active = self._runner.active if self._runner else False
             return {
                 "state": asdict(self.system.state),
                 "energy_status": "critical" if self.system.state.energy_mwh < 10 else
                                 "low" if self.system.state.energy_mwh < 25 else "ok",
                 "temperature_status": "hot" if self.system.state.temperature_c > 35 else
                                      "cold" if self.system.state.temperature_c < 18 else "ok",
-                "current_stimuli": self.system.stimuli
+                "current_stimuli": self.system.stimuli,
+                "fallback_active": fb_active,
             }
 
         elif name == "apply_cognitive_response":
@@ -418,12 +758,38 @@ class MCPConsciousnessServer:
         elif name == "get_history":
             num_steps = arguments.get("num_steps", 20)
             history = {}
-            for field in ['spikes', 'energy', 'temperature', 'output']:
-                data = self.system.history.get(field)
-                history[field] = data[-num_steps:] if len(data) > num_steps else data
+            for f in ['spikes', 'energy', 'temperature', 'output']:
+                data = self.system.history.get(f)
+                history[f] = data[-num_steps:] if len(data) > num_steps else data
             return {"history": history, "total_steps": self.system.state.step}
 
+        elif name == "get_fallback_status":
+            if self._runner is None:
+                return {"fallback_available": True, "fallback_active": False,
+                        "steps_autonomous": 0}
+            return {
+                "fallback_available": True,
+                "fallback_active": self._runner.active,
+                "steps_autonomous": self._runner.steps_taken,
+                "entered_at_step": self._runner.entered_at_step,
+                "heartbeat_timeout": self._fb_config.heartbeat_timeout,
+            }
+
+        elif name == "resync":
+            if self._runner is None:
+                return {"fallback_occurred": False, "message": "No fallback period recorded."}
+            payload = self._runner.get_resync_payload()
+            if arguments.get("include_full_buffer", False):
+                payload["full_buffer"] = self._runner.drain_buffer()
+            else:
+                self._runner.drain_buffer()  # clear it either way
+            return payload
+
         return {"error": f"Unknown tool: {name}"}
+
+    # ------------------------------------------------------------------
+    # JSON-RPC request handling
+    # ------------------------------------------------------------------
 
     async def handle_request(self, request: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Handle incoming MCP request"""
@@ -432,6 +798,7 @@ class MCPConsciousnessServer:
         request_id = request.get("id")
 
         if method == "initialize":
+            self._touch_heartbeat()
             return {
                 "jsonrpc": "2.0",
                 "id": request_id,
@@ -443,6 +810,7 @@ class MCPConsciousnessServer:
             }
 
         elif method == "tools/list":
+            self._touch_heartbeat()
             return {
                 "jsonrpc": "2.0",
                 "id": request_id,
@@ -464,6 +832,7 @@ class MCPConsciousnessServer:
             }
 
         elif method == "notifications/initialized":
+            self._touch_heartbeat()
             return None
 
         return {
@@ -472,32 +841,50 @@ class MCPConsciousnessServer:
             "error": {"code": -32601, "message": f"Method not found: {method}"}
         }
 
+    # ------------------------------------------------------------------
+    # Main event loop
+    # ------------------------------------------------------------------
+
     async def run(self):
-        """Run the MCP server on stdin/stdout"""
-        print(f"Consciousness MCP Server v{self.version} starting...", file=sys.stderr)
+        """Run the MCP server on stdin/stdout with heartbeat watchdog."""
+        print(f"Consciousness MCP Server v{self.version} starting...",
+              file=sys.stderr)
+        print(f"[fallback] heartbeat timeout: "
+              f"{self._fb_config.heartbeat_timeout}s", file=sys.stderr)
 
-        while True:
-            try:
-                line = await asyncio.get_event_loop().run_in_executor(
-                    None, sys.stdin.readline
-                )
-                if not line:
-                    break
+        # Start the heartbeat watchdog
+        watchdog = asyncio.ensure_future(self._heartbeat_watchdog())
 
-                request = json.loads(line.strip())
-                response = await self.handle_request(request)
+        try:
+            while True:
+                try:
+                    line = await asyncio.get_event_loop().run_in_executor(
+                        None, sys.stdin.readline
+                    )
+                    if not line:
+                        break
 
-                if response:
-                    print(json.dumps(response), flush=True)
+                    request = json.loads(line.strip())
+                    response = await self.handle_request(request)
 
-            except json.JSONDecodeError:
-                continue
-            except Exception as e:
-                print(json.dumps({
-                    "jsonrpc": "2.0",
-                    "id": None,
-                    "error": {"code": -32603, "message": str(e)}
-                }), flush=True)
+                    if response:
+                        print(json.dumps(response), flush=True)
+
+                except json.JSONDecodeError:
+                    continue
+                except Exception as e:
+                    print(json.dumps({
+                        "jsonrpc": "2.0",
+                        "id": None,
+                        "error": {"code": -32603, "message": str(e)}
+                    }), flush=True)
+        finally:
+            watchdog.cancel()
+            # Final snapshot on shutdown
+            if self.system is not None:
+                runner = AutonomousRunner(self.system, self._fb_config)
+                runner._write_snapshot()
+                print("[fallback] shutdown snapshot saved", file=sys.stderr)
 
 
 def main():
