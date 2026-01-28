@@ -18,6 +18,14 @@ class SNNConfig:
     refractory_period: int = 2
     weight_scale: float = 0.1
     input_scale: float = 0.8  # Scale factor for external input
+    # STDP parameters
+    stdp_enabled: bool = False
+    a_plus: float = 0.01      # LTP amplitude (potentiation)
+    a_minus: float = 0.012    # LTD amplitude (depression, slightly stronger for stability)
+    tau_plus: float = 20.0    # LTP trace time constant (steps)
+    tau_minus: float = 20.0   # LTD trace time constant (steps)
+    w_min: float = 0.0        # Minimum synaptic weight
+    w_max: float = 0.5        # Maximum synaptic weight
 
 
 class BaseSNN:
@@ -49,6 +57,17 @@ class BaseSNN:
         # For recursive reflection
         self.previous_output: Optional[float] = None
         self.spike_history: List[np.ndarray] = []
+
+        # STDP state
+        self.stdp_enabled = config.stdp_enabled
+        self.a_plus = config.a_plus
+        self.a_minus = config.a_minus
+        self.tau_plus = config.tau_plus
+        self.tau_minus = config.tau_minus
+        self.w_min = config.w_min
+        self.w_max = config.w_max
+        self.pre_trace = np.zeros(self.num_neurons)
+        self.post_trace = np.zeros(self.num_neurons)
 
     def step(self, input_signal: float, reflection_coeff: float = 0.0) -> Tuple[np.ndarray, np.ndarray]:
         """
@@ -86,19 +105,60 @@ class BaseSNN:
         if np.any(spikes):
             self.membrane_potential += np.dot(spikes.astype(float), self.weights)
 
+        # STDP weight update (before storing history)
+        if self.stdp_enabled:
+            self._stdp_update(spikes)
+
         # Store for reflection
         self.previous_output = self.membrane_potential.mean()
         self.spike_history.append(spikes.copy())
 
         return self.membrane_potential.copy(), spikes
 
+    def _stdp_update(self, spikes: np.ndarray):
+        """
+        Apply Spike-Timing Dependent Plasticity weight update.
+
+        Uses trace-based STDP: each neuron maintains pre- and post-synaptic
+        eligibility traces that decay exponentially and increment on spike.
+
+        Weight convention: weights[i, j] = connection from neuron i to neuron j.
+
+        LTP: When post-synaptic neuron j fires, strengthen connections from
+             recently-active pre-synaptic neurons: w[i,j] += A+ * pre_trace[i]
+        LTD: When pre-synaptic neuron i fires, weaken connections to
+             recently-active post-synaptic neurons: w[i,j] -= A- * post_trace[j]
+        """
+        spike_float = spikes.astype(float)
+
+        # LTP: potentiate incoming weights to neurons that just fired
+        dw_ltp = self.a_plus * np.outer(self.pre_trace, spike_float)
+
+        # LTD: depress outgoing weights from neurons that just fired
+        dw_ltd = self.a_minus * np.outer(spike_float, self.post_trace)
+
+        # Apply weight update
+        self.weights += dw_ltp - dw_ltd
+
+        # Enforce constraints
+        np.fill_diagonal(self.weights, 0)
+        np.clip(self.weights, self.w_min, self.w_max, out=self.weights)
+
+        # Update traces: decay then increment for spiking neurons
+        self.pre_trace *= np.exp(-1.0 / self.tau_plus)
+        self.post_trace *= np.exp(-1.0 / self.tau_minus)
+        self.pre_trace += spike_float
+        self.post_trace += spike_float
+
     def get_output(self) -> float:
         """Get current output (mean membrane potential)"""
         return self.membrane_potential.mean()
 
     def reset(self):
-        """Reset network state"""
+        """Reset network state (preserves weights and STDP config)"""
         self.membrane_potential = np.zeros(self.num_neurons)
         self.refractory_counters = np.zeros(self.num_neurons, dtype=int)
         self.previous_output = None
         self.spike_history = []
+        self.pre_trace = np.zeros(self.num_neurons)
+        self.post_trace = np.zeros(self.num_neurons)
