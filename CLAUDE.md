@@ -173,7 +173,8 @@ Consciousness_Env/
 │   ├── phase5_adaptive_membrane.py
 │   ├── phase6_recursive_reflection.py
 │   ├── phase7_control_baseline.py    # ◄── 2000-step falsifiable control
-│   └── phase7_full_integration.py    # ◄── 8-layer loop, harsh energy (7.1 control)
+│   ├── phase7_full_integration.py    # ◄── 8-layer loop, harsh energy (7.1 control)
+│   └── phase8_stdp.py               # ◄── STDP validation (F8.1-F8.3)
 │
 ├── appendices/              # Supplementary simulations (PACKAGE — has __init__.py)
 │   ├── __init__.py
@@ -338,29 +339,68 @@ it succeeds with X" is sufficient.
 
 ## 9. Forward Roadmap — Next Phases
 
-### Phase 8: Synaptic Plasticity (STDP)
+### Phase 8: Synaptic Plasticity (STDP) — COMPLETE
 
 **Objective**: Enable the SNN to learn from temporal correlations without
 external training.  Spike-Timing Dependent Plasticity strengthens connections
 between neurons that fire in causal sequence and weakens connections between
 neurons that fire in anti-causal sequence.
 
-**Implementation**:
-- Add `stdp_update(pre_spikes, post_spikes, dt)` method to BaseSNN
-- Learning rate, potentiation window, depression window as configurable params
-- Weight bounds to prevent runaway excitation
+**Implementation** (core/base_snn.py):
+- Trace-based STDP via `_stdp_update()` method in BaseSNN
+- Pre/post eligibility traces decay exponentially (τ=20 steps), increment on spike
+- LTP: w[i,j] += A+ × pre_trace[i] when post neuron j fires
+- LTD: w[i,j] -= A- × post_trace[j] when pre neuron i fires
+- A- > A+ (depression slightly stronger) prevents runaway excitation
+- Weight bounds [w_min, w_max] enforced; self-connections zeroed each step
+- Opt-in via `stdp_enabled=True` in SNNConfig — all prior phases unaffected
 
-**Falsifiable claims**:
-- F8.1: "After 1000 steps of periodic input, STDP networks develop weight
-  distributions with lower entropy than initial random weights" (structure
-  emerges from noise)
-- F8.2: "STDP networks exposed to structured input show >20% higher mutual
-  information between input and output than networks with frozen weights"
-- F8.3: "Weight topology converges: Frobenius norm of weight delta between
-  step 900-1000 is <10% of delta between step 0-100"
+**New SNNConfig parameters**:
 
-**Control**: Same network with STDP disabled (frozen weights).  Same input.
-Compare weight entropy, mutual information, and convergence.
+| Parameter | Default | Purpose |
+|-----------|---------|---------|
+| `stdp_enabled` | `False` | Opt-in toggle — existing code unchanged |
+| `a_plus` | `0.01` | LTP amplitude (potentiation strength) |
+| `a_minus` | `0.012` | LTD amplitude (depression strength, >A+ for stability) |
+| `tau_plus` | `20.0` | LTP trace time constant (steps) |
+| `tau_minus` | `20.0` | LTD trace time constant (steps) |
+| `w_min` | `0.0` | Minimum synaptic weight bound |
+| `w_max` | `0.5` | Maximum synaptic weight bound |
+
+**Validation parameters** (phases/phase8_stdp.py):
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| `threshold` | `0.3` | Lower than default (0.5) to enable cascading downstream spikes |
+| `weight_scale` | `0.2` | Higher than default (0.1) so propagated spikes reach threshold |
+| `input_scale` | `1.0` | Full-strength input drive |
+| `a_plus` | `0.005` | Moderate learning rate (prevents saturation at w_max) |
+| `a_minus` | `0.006` | 1.2:1 LTD/LTP ratio preserved |
+| `N_STEPS` | `1000` | 5 full input cycles (period=200) |
+| `SEED` | `42` | Reproducible |
+
+**Falsifiable claims — ALL PASS**:
+
+| Claim | Criterion | Measured | Threshold | Result |
+|-------|-----------|----------|-----------|--------|
+| F8.1 | Weight entropy decreases | 2.9546 → 2.0151 bits (Δ = 0.9395) | final < initial | **PASS** |
+| F8.2 | STDP MI > 1.2× frozen MI | 0.1016 / 0.0156 = 6.52× | ratio > 1.20 | **PASS** |
+| F8.3 | Late weight Δ < 10% of early Δ | 0.0000 / 1.3051 = 0.00% | ratio < 0.10 | **PASS** |
+
+**Control**: Same network with `stdp_enabled=False` (frozen weights), same
+input sequence, same random seed.  Identical initial conditions.
+
+**Phase 7 regression**: All 5 control baseline claims (A-E) still PASS after
+STDP changes to BaseSNN.  STDP is opt-in (`stdp_enabled=False` by default),
+so the existing step() pipeline is unchanged when STDP is disabled.
+
+**Key insight from validation**: The default BaseSNN parameters (threshold=0.5,
+weight_scale=0.1) produce only single-neuron spiking — insufficient cascading
+activity for STDP to operate.  The validation script uses threshold=0.3 and
+weight_scale=0.2, which creates multi-neuron cascade dynamics where ~70% of
+downstream neurons reach firing threshold from propagated spikes.  This is not
+a bug in STDP — it is a parameter regime requirement.  STDP needs multi-neuron
+activity to detect temporal correlations.
 
 ---
 
@@ -695,12 +735,13 @@ The model follows the ARM Holdings pattern:
 
 | File | Purpose | Critical? |
 |------|---------|-----------|
-| `core/base_snn.py` | Spiking neural network with reflection | YES — all paths depend on this |
+| `core/base_snn.py` | Spiking neural network with reflection + STDP | YES — all paths depend on this |
 | `core/energy.py` | EnergyConfig + BalancedEnergyConfig | YES — defines both energy regimes |
 | `core/thermochromic.py` | Temperature → color mapping | YES — Layer 1 physics |
 | `core/history.py` | Time-series recorder | YES — all validation depends on this |
 | `phases/phase7_control_baseline.py` | 2000-step falsifiable control | YES — canonical validation |
 | `phases/phase7_full_integration.py` | 8-layer loop, harsh energy (7.1) | YES — null hypothesis |
+| `phases/phase8_stdp.py` | STDP validation (3 falsifiable claims) | YES — Phase 8 validation |
 | `mcp/consciousness_mcp_server.py` | Physics server + fallback (v1.1.0) | YES — operational system |
 | `mcp/consciousness_server.py` | Cognitive layer (stateless) | YES — reasoning interface |
 | `consciousness_cli.py` | CLI entry point | YES — package install path |
