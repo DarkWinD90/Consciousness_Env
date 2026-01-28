@@ -21,6 +21,10 @@ setup(
     author='DarkWinD90',
     url='https://github.com/DarkWinD90/Consciousness_Env',
     packages=find_packages(include=['appendices', 'phases', 'core', 'mcp', 'tools']),
+    package_data={
+        'mcp': ['*.json'],
+    },
+    include_package_data=True,
     py_modules=['consciousness_cli', 'repo_dump', 'repo_snapshot_for_review', 'phase7_report'],
     install_requires=requirements,
     entry_points={
