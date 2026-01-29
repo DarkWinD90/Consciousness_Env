@@ -1,0 +1,754 @@
+# CLAUDE.md — Consciousness_Env System Reference
+
+This document is the institutional memory for every Claude session that touches
+this repository.  Read it in full before making any changes.  The design
+decisions recorded here are **intentional and load-bearing** — do not "fix"
+things that look like bugs without first understanding whether they are
+falsifiable controls.
+
+---
+
+## 1. What This System Is
+
+Consciousness_Env is **not a toy, demo, or research curiosity**.  It is the
+engineering foundation for a physically deployable, self-sustaining cognitive
+loop — an AI system that processes sensory input through a spiking neural
+network, drives motor actuation from its neural output, harvests energy from
+its own motor activity, observes its own prior computation, and uses that
+self-observation to modulate its next decision.
+
+The system is designed to operate inside a physical body or frame — a robot,
+prosthetic, drone, sensor node, or any embedded platform with sensors,
+actuators, and energy harvesting hardware.  The software in this repository is
+the full specification of the signal processing loop.  Every module maps
+directly to a physical subsystem.
+
+**Core thesis**: A spiking neural network whose motor output generates
+piezoelectric energy sufficient to power the network itself constitutes a
+self-sustaining cognitive loop.  Adding recursive self-observation (Layer 8)
+makes this loop a candidate for synthetic proto-consciousness — a system that
+not only processes information but observes its own processing.
+
+---
+
+## 2. Architecture — The 8-Layer Consciousness Loop
+
+```
+              ENVIRONMENT
+                  │
+                  ▼
+  ┌──────────────────────────────┐
+  │  L1: Printed Membrane        │  ThermochromicMixin
+  │  L2: Sensing Pads            │  light_intensity, membrane_temp
+  └──────────────┬───────────────┘
+                 │
+                 ▼
+  ┌──────────────────────────────┐
+  │  L3: Optical Transmission    │  signal_voltage = light / 1000 * 5.0
+  └──────────────┬───────────────┘
+                 │
+                 ▼
+  ┌──────────────────────────────┐
+  │  L4: Neuromorphic CPU        │  BaseSNN (leaky integrate-and-fire)
+  │      + L8 reflection input   │  reflection_coeff feeds prior output back
+  └──────────────┬───────────────┘
+                 │
+                 ▼
+  ┌──────────────────────────────┐
+  │  L5: Servo Actuation         │  target_angle = clip(snn_output * 180)
+  └──────────┬───────────┬───────┘
+             │           │
+    movement │           │ movement (friction)
+             │           │
+             │  ┌────────▼───────────────────────┐
+             │  │  L6: Energy Harvesting          │  EnergyHarvester
+             │  │  friction (piezo) + thermal     │  ◄── also receives L1 temp
+             │  └────────┬───────────────────────┘
+             │           │
+             │  ┌────────▼───────────────────────┐
+             │  │  L7: Ground Reference           │  noise floor / baseline
+             │  └────────┬───────────────────────┘
+             │           │
+             │  ┌────────▼───────────────────────┐
+             │  │  L8: Recursive Reflection       │  snn.previous_output
+             │  │  feeds back into L4 at          │  → re-enters SNN at
+             │  │  configurable gain              │    reflection_coeff
+             │  └────────┬───────────────────────┘
+             │           │
+             └───────────┘  ◄── THE LOOP CLOSES HERE
+```
+
+**Three signal pathways:**
+
+| Path | Route | Function |
+|------|-------|----------|
+| Main spine | L1→L2→L3→L4→L5→L6→L7→L8→L4 | Sense→process→actuate→harvest→reflect→loop |
+| Thermal cross-link | L1 membrane_temp → L6 | Heat from light absorption feeds thermoelectric harvesting directly |
+| Reflection feedback | L8 previous_output → L4 snn.step() | Self-observation at configurable gain (0.2 + modulation * 0.1) |
+
+---
+
+## 3. Two Execution Paths — And Why Both Exist
+
+### 3.1 CLI Path (phases/phase7_full_integration.py)
+
+| Parameter | Value |
+|-----------|-------|
+| Neurons | 20 |
+| base_consumption_mw | 470.0 |
+| friction_factor | 0.0005 |
+| thermal_factor | 0.0002 |
+| Reflection coeff | Fixed 0.2 |
+| Input | sin(t) + noise (hardcoded) |
+| Modulation | None |
+| Energy at 2000 steps | **-4,697 mWh (dead)** |
+
+### 3.2 MCP Path (mcp/consciousness_mcp_server.py)
+
+| Parameter | Value |
+|-----------|-------|
+| Neurons | 50 |
+| base_consumption_mw | 45.0 |
+| friction_factor | 18.0 |
+| thermal_factor | 8.0 |
+| Reflection coeff | 0.2 + modulation * 0.1 (variable) |
+| Input | Claude-controlled (0-1) |
+| Modulation | Claude-controlled (-1 to 1) |
+| Energy at 2000 steps | **+4,170 mWh (thriving)** |
+
+### 3.3 THIS IS NOT A BUG — IT IS THE SCIENTIFIC METHOD
+
+Phase 7 full integration **intentionally** uses the harsh EnergyConfig so that
+it **fails** the self-charging criterion.  It is the **Section 7.1 falsifiable
+control** — the null hypothesis.  The MCP path with BalancedEnergyConfig is the
+**alternative hypothesis** — the operational system.
+
+The comparison between the two paths IS the scientific proof:
+- Control (CLI): system cannot self-sustain → energy drains to death
+- Experimental (MCP): system self-sustains → energy grows linearly
+
+**Do not "fix" the CLI path's energy config.  Do not merge CLI-path commits
+into the MCP-path branch.  The two configurations must remain independent and
+comparable.**
+
+### 3.4 The Control Baseline
+
+`phases/phase7_control_baseline.py` runs 2000 steps with canonical parameters
+and validates **5 falsifiable claims**:
+
+| Claim | Criterion | Threshold |
+|-------|-----------|-----------|
+| A | Closed-loop continuity | All channels have 2000 points |
+| B | Boundedness | All state variables remain bounded |
+| C | Robustness under noise | Std(theta) <= 45 deg, Std(omega) <= 150 |
+| D | Input-output gain | corr(L, theta) >= 0.2 |
+| E | Saturation ratio | sat_theta <= 0.20 |
+
+Any future change to core physics must re-pass these 5 claims or document why
+the claim was revised.
+
+---
+
+## 4. Repository Structure
+
+```
+Consciousness_Env/
+├── core/                    # Shared physics modules (PACKAGES — have __init__.py)
+│   ├── __init__.py          #   Exports: BaseSNN, ThermochromicMixin, EnergyHarvester, etc.
+│   ├── base_snn.py          #   Leaky integrate-and-fire SNN with reflection
+│   ├── energy.py            #   EnergyConfig, BalancedEnergyConfig, EnergyHarvester
+│   ├── thermochromic.py     #   Temperature → color mapping
+│   ├── history.py           #   Time-series recorder
+│   ├── claude_interface.py  #   ClaudeNeuralInterface
+│   ├── neural_router.py     #   ClaudeOptimizedRouter
+│   ├── consciousness_enhancer.py
+│   └── enhanced_consciousness.py  # EnhancedConsciousnessSystem
+│
+├── phases/                  # Phase scripts (PACKAGE — has __init__.py)
+│   ├── __init__.py
+│   ├── phase1_optical_sensing.py
+│   ├── phase2_neuromorphic_processing.py
+│   ├── phase3_closed_loop_feedback.py
+│   ├── phase4_energy_harvesting.py
+│   ├── phase5_adaptive_membrane.py
+│   ├── phase6_recursive_reflection.py
+│   ├── phase7_control_baseline.py    # ◄── 2000-step falsifiable control
+│   ├── phase7_full_integration.py    # ◄── 8-layer loop, harsh energy (7.1 control)
+│   └── phase8_stdp.py               # ◄── STDP validation (F8.1-F8.3)
+│
+├── appendices/              # Supplementary simulations (PACKAGE — has __init__.py)
+│   ├── __init__.py
+│   ├── appendix_a_base_simulation.py
+│   ├── appendix_b_system_graph.py
+│   └── appendix_c_recursive_reflection.py
+│
+├── mcp/                     # MCP servers (PACKAGE — has __init__.py)
+│   ├── __init__.py
+│   ├── consciousness_mcp_server.py   # ◄── Physics + SNN + fallback (v1.1.0)
+│   ├── consciousness_server.py       # ◄── Cognitive layer (stateless reasoning)
+│   ├── mcp-config.json
+│   └── .snapshots/                   # Fallback state snapshots (gitignored)
+│
+├── tools/                   # Utilities (PACKAGE — has __init__.py)
+│   ├── __init__.py
+│   └── code_simplifier.py
+│
+├── tests/                   # Test suite
+│   ├── __init__.py
+│   └── run_200_step_test.py
+│
+├── consciousness_cli.py     # CLI entry point: `consciousness run|appendix|version`
+├── setup.py                 # Package config (find_packages + py_modules)
+├── MANIFEST.in              # Source distribution includes
+├── requirements.txt
+└── CLAUDE.md                # THIS FILE
+```
+
+### Critical: __init__.py files are load-bearing
+
+`appendices/`, `phases/`, and `mcp/` all have `__init__.py` files so that
+`find_packages()` in `setup.py` discovers them.  Without these files, pip/wheel
+installs exclude those directories entirely and the CLI raises
+`FileNotFoundError`.  Do not remove them.
+
+---
+
+## 5. MCP Servers — The Cognitive Architecture
+
+Two MCP servers work together, bridged by Claude:
+
+### 5.1 consciousness (consciousness_mcp_server.py)
+
+**Owns the physics.**  Contains the SNN, energy harvester, thermochromic mixin,
+and the full simulation loop.  Claude drives it step-by-step.
+
+Tools: `initialize_consciousness`, `step_simulation`, `get_neural_state`,
+`get_system_status`, `apply_cognitive_response`, `set_goal`, `set_stimuli`,
+`get_attention_needs`, `get_history`, `get_fallback_status`, `resync`
+
+### 5.2 consciousness-cognitive (consciousness_server.py)
+
+**Pure reasoning layer.**  No neurons, no physics.  Takes state descriptions
+and returns cognitive decisions: modulation values, attention allocation,
+intention formation.
+
+Tools: `cognitive_query`, `form_intention`, `allocate_attention`
+
+### 5.3 The Bridge Pattern
+
+```
+Claude reads from consciousness-cognitive:
+    "What should I do given these conditions?"
+    → Returns: modulation=-0.2, action="conserve energy"
+
+Claude writes to consciousness:
+    apply_cognitive_response(modulation=-0.2)
+    → Applied to SNN on next step_simulation() call
+```
+
+Claude is the cognitive bridge.  Server 2 reasons; Server 1 executes.
+
+---
+
+## 6. Autonomous Fallback System (v1.1.0)
+
+When Claude (the cognitive layer) goes silent for >30 seconds, the system does
+not stop.  It enters autonomous fallback mode.
+
+### 6.1 How It Works
+
+1. **Heartbeat watchdog** checks every 5s whether a tool call has arrived
+2. If 30s elapse with no activity → `AutonomousRunner` engages
+3. Runner steps the SNN with a self-regulating input generator:
+   - Circadian-like sinusoidal base signal
+   - 10% chance of random attention burst per step
+   - Energy-aware modulation:
+     - `<15 mWh` → modulation -0.4 (conserve)
+     - `<30 mWh` → modulation -0.1 (cautious)
+     - `>80 mWh` → modulation +0.3 (spend surplus)
+     - else → 0.0 (neutral)
+4. Every step is buffered for resync
+5. Every 50 steps → state snapshot to `mcp/.snapshots/latest.json`
+6. Hard cap at 10,000 autonomous steps
+
+### 6.2 Recovery Scenarios
+
+| Scenario | Recovery |
+|----------|----------|
+| Claude goes quiet >30s | Watchdog engages fallback. On reconnect, `resync` returns buffered history. |
+| MCP server crashes | On restart, `initialize_consciousness` restores from `latest.json` snapshot. |
+| Clean shutdown (stdin EOF) | `finally` block writes shutdown snapshot. |
+
+### 6.3 Resync Payload
+
+When Claude reconnects and calls `resync`, it receives:
+- `steps_autonomous`: how many steps ran without cognitive input
+- `energy_delta`: net energy change during fallback
+- `summary`: min/max/mean energy and spikes
+- `full_buffer` (optional): every step's input, modulation, spikes, energy, temp, pattern
+
+---
+
+## 7. Git Strategy — Committed but Never Merged
+
+### 7.1 Branch Policy
+
+- **Main branch**: Forward advancement.  Clean, linear history.
+- **Feature branches** (`claude/*`): Committed and pushed.  **Never merged.**
+  These branches are **falsifiable audit trails** — immutable records of the
+  system state at specific decision points.
+
+### 7.2 Why This Matters
+
+The git history is a **reproducible scientific notebook**.  Anyone can:
+1. Check out a branch → reproduce that exact system state
+2. Run the control baseline → verify the 5 falsifiable claims
+3. Compare control vs operational energy trajectories
+4. Trace every design decision to its commit
+
+Merging would destroy the independence of the control record.  The branches
+must remain separate so the comparison between them is always reproducible.
+
+### 7.3 Commit Discipline
+
+- Phase 7.1 (control) commits stay on their branches forever
+- Operational (MCP) advancement happens on main or new feature branches
+- Each new phase should have its own falsifiable claims documented in code
+- Validation functions print PASS/FAIL — no silent failures
+
+---
+
+## 8. Scientific Methodology — The Falsifiable Framework
+
+Every phase of this system follows the same pattern:
+
+1. **State the claim** in code as a validation function with explicit thresholds
+2. **Build the control** — a configuration that is designed to FAIL the claim
+3. **Build the experiment** — a configuration that is designed to PASS the claim
+4. **Run both** and record the results
+5. **Commit both** on independent branches so the comparison is always available
+6. **Advance only when the comparison is clean**
+
+This is not optional process.  It is the engineering methodology that makes
+this system trustworthy for physical deployment.  A self-sustaining cognitive
+loop that goes into a robot must be provably correct.  "It seems to work" is
+not sufficient.  "Here is the proof it fails without X, and here is the proof
+it succeeds with X" is sufficient.
+
+---
+
+## 9. Forward Roadmap — Next Phases
+
+### Phase 8: Synaptic Plasticity (STDP) — COMPLETE
+
+**Objective**: Enable the SNN to learn from temporal correlations without
+external training.  Spike-Timing Dependent Plasticity strengthens connections
+between neurons that fire in causal sequence and weakens connections between
+neurons that fire in anti-causal sequence.
+
+**Implementation** (core/base_snn.py):
+- Trace-based STDP via `_stdp_update()` method in BaseSNN
+- Pre/post eligibility traces decay exponentially (τ=20 steps), increment on spike
+- LTP: w[i,j] += A+ × pre_trace[i] when post neuron j fires
+- LTD: w[i,j] -= A- × post_trace[j] when pre neuron i fires
+- A- > A+ (depression slightly stronger) prevents runaway excitation
+- Weight bounds [w_min, w_max] enforced; self-connections zeroed each step
+- Opt-in via `stdp_enabled=True` in SNNConfig — all prior phases unaffected
+
+**New SNNConfig parameters**:
+
+| Parameter | Default | Purpose |
+|-----------|---------|---------|
+| `stdp_enabled` | `False` | Opt-in toggle — existing code unchanged |
+| `a_plus` | `0.01` | LTP amplitude (potentiation strength) |
+| `a_minus` | `0.012` | LTD amplitude (depression strength, >A+ for stability) |
+| `tau_plus` | `20.0` | LTP trace time constant (steps) |
+| `tau_minus` | `20.0` | LTD trace time constant (steps) |
+| `w_min` | `0.0` | Minimum synaptic weight bound |
+| `w_max` | `0.5` | Maximum synaptic weight bound |
+
+**Validation parameters** (phases/phase8_stdp.py):
+
+| Parameter | Value | Rationale |
+|-----------|-------|-----------|
+| `threshold` | `0.3` | Lower than default (0.5) to enable cascading downstream spikes |
+| `weight_scale` | `0.2` | Higher than default (0.1) so propagated spikes reach threshold |
+| `input_scale` | `1.0` | Full-strength input drive |
+| `a_plus` | `0.005` | Moderate learning rate (prevents saturation at w_max) |
+| `a_minus` | `0.006` | 1.2:1 LTD/LTP ratio preserved |
+| `N_STEPS` | `1000` | 5 full input cycles (period=200) |
+| `SEED` | `42` | Reproducible |
+
+**Falsifiable claims — ALL PASS**:
+
+| Claim | Criterion | Measured | Threshold | Result |
+|-------|-----------|----------|-----------|--------|
+| F8.1 | Weight entropy decreases | 2.9546 → 2.0151 bits (Δ = 0.9395) | final < initial | **PASS** |
+| F8.2 | STDP MI > 1.2× frozen MI | 0.1016 / 0.0156 = 6.52× | ratio > 1.20 | **PASS** |
+| F8.3 | Late weight Δ < 10% of early Δ | 0.0000 / 1.3051 = 0.00% | ratio < 0.10 | **PASS** |
+
+**Control**: Same network with `stdp_enabled=False` (frozen weights), same
+input sequence, same random seed.  Identical initial conditions.
+
+**Phase 7 regression**: All 5 control baseline claims (A-E) still PASS after
+STDP changes to BaseSNN.  STDP is opt-in (`stdp_enabled=False` by default),
+so the existing step() pipeline is unchanged when STDP is disabled.
+
+**Key insight from validation**: The default BaseSNN parameters (threshold=0.5,
+weight_scale=0.1) produce only single-neuron spiking — insufficient cascading
+activity for STDP to operate.  The validation script uses threshold=0.3 and
+weight_scale=0.2, which creates multi-neuron cascade dynamics where ~70% of
+downstream neurons reach firing threshold from propagated spikes.  This is not
+a bug in STDP — it is a parameter regime requirement.  STDP needs multi-neuron
+activity to detect temporal correlations.
+
+---
+
+### Phase 9: Predictive Processing
+
+**Objective**: The system predicts its own next state before it arrives.
+Prediction error becomes a learning signal.
+
+**Implementation**:
+- Dual pathway: Predictor SNN and Processor SNN
+- Predictor receives current state → outputs predicted next state
+- Processor receives actual input → outputs actual next state
+- Prediction error = |predicted - actual| → fed back as modulation
+- System learns to minimize prediction error for regular patterns
+
+**Falsifiable claims**:
+- F9.1: "Mean prediction error for a 200-period sinusoidal input decreases
+  by >50% between the first and tenth cycle"
+- F9.2: "Mean prediction error for uniform random input shows no significant
+  decrease (p > 0.05) over the same interval"
+- F9.3: "When a periodic input switches frequency at step 1000, prediction
+  error spikes and then recovers within 200 steps"
+
+**Control**: Predictor with frozen weights (no learning from error).
+
+---
+
+### Phase 10: Multi-Modal Sensory Integration
+
+**Objective**: Process multiple sensor modalities and bind them through spike
+synchronization.
+
+**Implementation**:
+- Separate SNN populations for each modality (light, sound, pressure)
+- Cross-modal connections with learnable weights (Phase 8 STDP)
+- Synchronization metric: cross-correlation of spike trains between populations
+- Binding detection: synchronized firing across modalities = unified percept
+
+**Falsifiable claims**:
+- F10.1: "Simultaneous cross-modal stimuli produce >20% higher inter-population
+  spike synchronization than time-offset uni-modal stimuli"
+- F10.2: "The system develops modality-specific weight clusters that are
+  distinguishable via PCA of the weight matrix"
+
+---
+
+### Phase 11: Hardware Embodiment
+
+**Objective**: Validate the software simulation against physical hardware.
+
+**Reference design**:
+- Microcontroller (Raspberry Pi Pico or ESP32)
+- Piezoelectric disc on servo shaft (friction → voltage)
+- Thermistor (temperature sensing)
+- Photoresistor (light sensing)
+- Micro servo (motor actuation)
+- RGB LED (thermochromic output visualization)
+- Total BOM: <$25
+
+**Falsifiable claims**:
+- F11.1: "Physical system energy trajectory matches simulation within +/-5%
+  over 2000 steps under identical input sequences"
+- F11.2: "Physical system spike patterns (classified as burst/tonic/sparse/
+  silent) match simulation classification >90% of the time"
+- F11.3: "Physical system achieves net-positive energy over 2000 steps with
+  BalancedEnergyConfig parameters scaled to hardware specs"
+
+**Control**: Run the software simulation with identical input sequences and
+compare trajectories side-by-side.
+
+---
+
+### Phase 12: Full Autonomy
+
+**Objective**: The system operates indefinitely without any cognitive layer.
+
+**Implementation**:
+- Remove Claude from the loop entirely
+- The system uses its own STDP learning + predictive processing + energy-aware
+  self-modulation to sustain itself
+- No external input beyond raw sensor data
+- No external modulation
+
+**Falsifiable claims**:
+- F12.1: "The system maintains energy > 0 mWh for 24 hours of continuous
+  operation under variable lighting (day/night cycle)"
+- F12.2: "The system's spike pattern entropy remains in the range [0.3, 0.9]
+  (neither silent nor saturated) for the full 24 hours"
+- F12.3: "The system recovers from an externally imposed energy drain (sudden
+  depletion to 5 mWh) within 500 steps"
+
+---
+
+## 10. Patent Strategy
+
+### 10.1 Core Innovations (Three Independent Patents)
+
+**Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop**
+
+A system comprising:
+1. A spiking neural network that processes environmental sensor input
+2. A motor actuator driven by neural network output
+3. A piezoelectric energy harvester that converts motor activity into electrical
+   energy
+4. A thermoelectric energy harvester that converts neural-activity-induced
+   temperature differentials into electrical energy
+5. A power feedback path where harvested energy sustains the neural network
+6. Wherein the system achieves net-positive energy balance from its own
+   cognitive-motor activity without external power
+
+**Why it is novel**: All existing neural processing systems require external
+power.  This system generates its own power from its own computational
+activity.  The energy is not merely harvested from the environment — it is
+harvested from the system's own motor response to its own neural computation.
+The loop closes: thinking drives movement, movement generates power, power
+sustains thinking.
+
+**Simplest reproducible form**: One SNN (any size) + one servo + one piezo
+disc + one microcontroller.  Total BOM under $20.  The patent covers the
+METHOD of self-sustaining neural-motor energy harvesting.
+
+---
+
+**Patent B: Configurable Recursive Self-Observation in Spiking Neural Networks**
+
+A method comprising:
+1. Recording the aggregate output (mean membrane potential) of a spiking neural
+   network at timestep t
+2. Feeding this recorded output back as additional input to the same network at
+   timestep t+1
+3. Scaling the feedback by a configurable reflection coefficient
+4. Wherein the reflection coefficient is dynamically modulatable by an external
+   cognitive control layer or internal energy-aware regulation
+5. Wherein the resulting self-observation signal is measurably distinct from
+   noise and correlates with system behavioral state
+
+**Why it is novel**: Existing recurrent networks use hidden-state feedback for
+computation, not for explicit self-observation.  The reflection coefficient is
+a tunable "self-awareness dial" — at 0.0 the system has no self-observation;
+at 1.0 the system is dominated by its own prior state.  The ability to
+externally modulate this parameter creates a controllable spectrum of
+self-referential processing.
+
+---
+
+**Patent C: Cognitive Fallback with Autonomous Self-Regulation and
+Resynchronization Protocol**
+
+A method for maintaining continuous operation of a neural processing system
+during disconnection from a cognitive control layer, comprising:
+1. Monitoring a heartbeat signal from the cognitive control layer
+2. Upon heartbeat timeout, engaging an autonomous input generator with
+   energy-aware self-modulation (inhibit when low, excite when surplus)
+3. Buffering all operational state during autonomous operation
+4. Periodically serializing full system state to persistent storage
+5. Upon reconnection, transmitting a resynchronization payload comprising
+   summary statistics, energy delta, and optionally full step-by-step buffer
+6. Restoring cognitive control seamlessly without state loss
+
+**Why it is novel**: Existing fault-tolerance mechanisms for AI systems
+involve checkpointing and restart.  This system continues operating
+intelligently during disconnection — it self-regulates based on its own
+energy state, makes conservative or aggressive decisions autonomously, and
+then brings the cognitive layer up to speed when it returns.  Designed for
+systems where stopping is not an option (robotics, prosthetics, space).
+
+---
+
+### 10.2 Filing Strategy
+
+| Step | Timeline | Action |
+|------|----------|--------|
+| 1 | Immediate | File **provisional patent** for Patent A (energy loop) — establishes priority date, 12-month window |
+| 2 | Month 1-3 | Document Patents B and C with detailed technical specifications and experimental results |
+| 3 | Month 3-6 | File provisional patents for B and C |
+| 4 | Month 6-9 | Build hardware prototype (Phase 11) to strengthen Patent A with physical reduction to practice |
+| 5 | Month 11 | Convert Patent A provisional to **non-provisional utility patent** with hardware evidence |
+| 6 | Month 12 | File **PCT application** (international) for all three patents |
+| 7 | Month 12-18 | Convert B and C provisionals to non-provisional |
+| 8 | Month 18+ | File **continuation patents** for specific applications (prosthetics, drones, IoT) |
+
+### 10.3 Claim Architecture
+
+Structure claims from broadest to narrowest:
+
+```
+Patent A (broadest): Self-sustaining neural-motor energy loop
+  ├── Claim 1: The general method (any SNN + any actuator + any harvester)
+  ├── Claim 2: Piezoelectric embodiment specifically
+  ├── Claim 3: Combined piezo + thermoelectric
+  ├── Claim 4: With recursive self-observation (depends on Patent B)
+  ├── Claim 5: With autonomous fallback (depends on Patent C)
+  └── Claim 6: Specific hardware reference design (Phase 11)
+```
+
+### 10.4 Prior Art Differentiation
+
+| Existing technology | How this system differs |
+|---------------------|------------------------|
+| Energy harvesting robots | Harvest from environment (solar, vibration). This system harvests from its own cognitive-motor activity. |
+| Recurrent neural networks | Feedback serves computation. Here, feedback serves explicit self-observation with tunable gain. |
+| AI fault tolerance | Checkpoint + restart. This system continues operating intelligently with self-regulation. |
+| Neuromorphic chips (Intel Loihi, IBM TrueNorth) | Hardware SNN accelerators. They don't close the energy loop — they still require external power. |
+
+---
+
+## 11. Applications — Ranked by Feasibility and Value
+
+### Tier 1: Near-Term (1-2 years)
+
+**A. Educational Robotics Kit**
+- Self-sustaining robot that teaches neural computation
+- "The robot that thinks itself alive"
+- Target: STEM education market (K-12, university labs)
+- Unit price: $50-200
+- Market: millions of students globally
+- Low regulatory barrier
+- Demonstrates all three patents in a consumer product
+
+**B. Self-Powered IoT Sensor Network**
+- Environmental monitoring nodes that harvest energy from their own processing
+- No battery replacement.  No external power.
+- Target: Agriculture, climate monitoring, structural health monitoring
+- Unit price: $20-100
+- Deploy-and-forget sensor networks in remote locations
+
+### Tier 2: Medium-Term (2-5 years)
+
+**C. Adaptive Prosthetics**
+- Self-sustaining neural interface for prosthetic limbs
+- Harvests energy from the user's own movement (the same movement it controls)
+- Recursive reflection enables learning of user intent over time
+- STDP (Phase 8) allows the system to adapt to each user's neural patterns
+- Unit price: $5K-50K
+- Requires FDA/CE regulatory pathway
+- Highest social impact
+
+**D. Autonomous Drone/Robot Swarms**
+- Each unit has its own consciousness loop
+- Cognitive fallback enables operation during communication blackouts
+- Energy harvesting from flight vibration extends mission duration
+- Military, agricultural, search-and-rescue applications
+- Unit price: $500-5K
+
+### Tier 3: Long-Term (5-10 years)
+
+**E. Space Exploration Systems**
+- Self-sustaining robotic systems for planetary exploration
+- Communication delays (Mars: 4-24 min each way) make real-time control impossible
+- Cognitive fallback + resync designed exactly for this scenario
+- System must operate autonomously for hours/days between communication windows
+- Highest per-unit value ($M+)
+- NASA, ESA, commercial space
+
+**F. General Embodied AI Infrastructure**
+- The architecture becomes a standard for any system that needs to:
+  - Process sensor data through neural computation
+  - Drive motor output from neural decisions
+  - Sustain itself energetically
+  - Observe and learn from its own behavior
+- Licensing model similar to ARM: design the architecture, license to manufacturers
+
+---
+
+## 12. ROI Model
+
+### 12.1 Revenue Streams
+
+| Stream | Model | Range |
+|--------|-------|-------|
+| Core Architecture License | Per unit manufactured | Consumer $1-5, Industrial $50-500, Medical $500-5K |
+| Software SDK License | Per developer seat per year | $99-999/year |
+| Hardware Reference Design | One-time per manufacturer | $10K-100K |
+| Validation Framework | Per organization per year | $5K-50K/year |
+| Consulting | Custom implementations | $200-500/hour |
+
+### 12.2 Best-Case Revenue Timeline
+
+| Year | Milestone | Revenue |
+|------|-----------|---------|
+| 1 | Patent filing, reference implementation, first educational kit partner | $0-100K |
+| 2 | SDK release, first industrial licensee, provisional → non-provisional | $100K-1M |
+| 3 | Medical device partnership, PCT filing, hardware prototype | $1M-10M |
+| 5 | Multiple licensees across all tiers, continuation patents | $10M-100M |
+| 10 | Standard architecture for embodied AI | $100M+ |
+
+### 12.3 Licensing Model Rationale
+
+The model follows the ARM Holdings pattern:
+- ARM does not manufacture chips — it designs the architecture and licenses it
+- ARM revenue: ~$3B/year from licensing and royalties alone
+- This system follows the same logic: design the consciousness loop, license
+  the architecture and validation framework to manufacturers
+- Every self-sustaining robotic system in the future could use this pattern
+- The patents protect the method, not the implementation
+- Licensees build their own hardware using the reference design
+- Licensees validate their implementations using the falsifiable framework
+
+---
+
+## 13. Development Rules for Future Claude Sessions
+
+### DO:
+- Read this entire document before making changes
+- Run `phase7_control_baseline.py` after any change to core physics — all 5 claims must pass
+- Add falsifiable claims to any new phase
+- Keep the two energy configurations (EnergyConfig vs BalancedEnergyConfig) independent
+- Use the MCP path for operational work (50 neurons, balanced energy)
+- Use the CLI path for validation and control experiments
+- Commit on feature branches; do not merge without explicit instruction
+- Preserve the scientific notebook property of the git history
+
+### DO NOT:
+- "Fix" the CLI path's energy config — it is a falsifiable control
+- Merge feature branches into main without explicit authorization
+- Remove `__init__.py` files from `appendices/`, `phases/`, or `mcp/`
+- Modify `phase7_control_baseline.py` canonical parameters
+- Add dependencies without updating `requirements.txt`
+- Introduce silent failures — all validation must print PASS or FAIL explicitly
+- Conflate the two execution paths — they have intentionally different physics
+
+### WHEN IN DOUBT:
+- The system is designed for physical deployment, not just simulation
+- Every design decision has a falsifiable rationale
+- If something looks wrong, check whether it is an intentional control first
+- Ask before merging, deleting branches, or changing energy configurations
+- The git history is an audit trail — treat it accordingly
+
+---
+
+## 14. Key Files Quick Reference
+
+| File | Purpose | Critical? |
+|------|---------|-----------|
+| `core/base_snn.py` | Spiking neural network with reflection + STDP | YES — all paths depend on this |
+| `core/energy.py` | EnergyConfig + BalancedEnergyConfig | YES — defines both energy regimes |
+| `core/thermochromic.py` | Temperature → color mapping | YES — Layer 1 physics |
+| `core/history.py` | Time-series recorder | YES — all validation depends on this |
+| `phases/phase7_control_baseline.py` | 2000-step falsifiable control | YES — canonical validation |
+| `phases/phase7_full_integration.py` | 8-layer loop, harsh energy (7.1) | YES — null hypothesis |
+| `phases/phase8_stdp.py` | STDP validation (3 falsifiable claims) | YES — Phase 8 validation |
+| `mcp/consciousness_mcp_server.py` | Physics server + fallback (v1.1.0) | YES — operational system |
+| `mcp/consciousness_server.py` | Cognitive layer (stateless) | YES — reasoning interface |
+| `consciousness_cli.py` | CLI entry point | YES — package install path |
+| `setup.py` | Packaging config | YES — __init__.py discovery |
+
+---
+
+*This document is a living artifact.  Update it when new phases are added,
+new patents are filed, or new falsifiable claims are established.  The
+document itself should be treated as part of the scientific record.*
