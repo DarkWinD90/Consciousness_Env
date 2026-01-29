@@ -410,17 +410,27 @@ Feature branch created → Work committed → PR opened → Validated → Merged
 Each Claude session that modifies this repo should:
 
 1. **Read CLAUDE.md first** — understand what exists and what is frozen
-2. **Check tags** — `git tag -l -n1` shows the current milestone registry
-3. **Branch from `main`** — not from another `claude/*` branch
-4. **Run all validations before committing** — record results in commit msg
-5. **Update Section 7.2** of this file if a new tag is created
-6. **Update Section 9** of this file if a new phase is completed
+2. **Fetch everything** — `git fetch origin --tags` to sync remote state
+3. **Check tags** — `git tag -l -n1` shows the current milestone registry
+4. **Check main** — `git log --oneline -10 origin/main` to see recent history
+5. **Compare tags to Section 7.2** — if the tags already exist on the remote,
+   DO NOT recreate them.  If `git tag -l` returns the tags listed in Section
+   7.2, the milestone registry is already set up.  Move on.
+6. **Branch from `main`** — not from another `claude/*` branch
+7. **Run all validations before committing** — record results in commit msg
+8. **Update Section 7.2** of this file if a new tag is created
+9. **Update Section 9** of this file if a new phase is completed
+
+**CRITICAL**: Always `git fetch origin --tags` BEFORE checking tags.  Without
+this fetch, a fresh session may not see tags that exist on the remote and will
+incorrectly conclude they need to be created.  The fetch is non-negotiable.
 
 This ensures continuity across sessions.  A new Claude instance can reconstruct
 the full project state from tags alone:
 ```bash
-git tag -l -n1              # See all milestones
-git log v1.0.0-phase8-stdp  # See history up to Phase 8
+git fetch origin --tags         # ALWAYS fetch first
+git tag -l -n1                  # See all milestones
+git log v1.0.0-phase8-stdp     # See history up to Phase 8
 git checkout v1.0.0-phase8-stdp  # Reproduce Phase 8 exactly
 ```
 
@@ -818,9 +828,11 @@ The model follows the ARM Holdings pattern:
 
 ### FIRST STEPS (every session):
 1. Read this entire document
-2. Run `git tag -l -n1` to see the milestone registry
-3. Run `git log --oneline -10 origin/main` to see recent main history
-4. Branch from `main` for new work: `git checkout -b claude/<description>-<session-id>`
+2. Run `git fetch origin --tags` to sync all remote state (MANDATORY — do not skip)
+3. Run `git tag -l -n1` to see the milestone registry — if tags from Section
+   7.2 already exist, do NOT recreate them
+4. Run `git log --oneline -10 origin/main` to see recent main history
+5. Branch from `main` for new work: `git checkout -b claude/<description>-<session-id>`
 
 ### DO:
 - Run **ALL** validation scripts before committing (see Section 7.4)
