@@ -289,32 +289,140 @@ When Claude reconnects and calls `resync`, it receives:
 
 ---
 
-## 7. Git Strategy — Committed but Never Merged
+## 7. Git Workflow — Tags, Branches, and Forward Progress
 
-### 7.1 Branch Policy
+### 7.1 Core Principles
 
-- **Main branch**: Forward advancement.  Clean, linear history.
-- **Feature branches** (`claude/*`): Committed and pushed.  **Never merged.**
-  These branches are **falsifiable audit trails** — immutable records of the
-  system state at specific decision points.
+1. **`main` is the advancing frontier.**  Every commit on `main` has passed
+   all prior phase validations.  It is always the latest "known good" state.
+2. **Tags are the scientific record.**  Annotated tags mark validated
+   milestones.  Tags are immutable — they pin a commit hash forever.
+3. **Feature branches are workspaces.**  `claude/*` branches are where work
+   happens.  Once merged to `main` via PR, the branch stays on GitHub as a
+   read-only audit trail.  Never commit to a merged branch again.
+4. **Validation scripts are frozen.**  Once a phase's validation script is
+   merged, it is never modified.  New phases get new scripts.
 
-### 7.2 Why This Matters
+### 7.2 Version Tags — The Milestone Registry
 
-The git history is a **reproducible scientific notebook**.  Anyone can:
-1. Check out a branch → reproduce that exact system state
-2. Run the control baseline → verify the 5 falsifiable claims
-3. Compare control vs operational energy trajectories
-4. Trace every design decision to its commit
+Tags use semantic versioning: `vMAJOR.MINOR.PATCH-label`.  Major version
+increments when a new phase with falsifiable claims is validated.
 
-Merging would destroy the independence of the control record.  The branches
-must remain separate so the comparison between them is always reproducible.
+```
+v0.1.0-architecture      52cca38  Initial 8-layer architecture
+v0.2.0-energy-physics    1fa4488  Energy physics corrected
+v0.3.0-balanced-energy   1545083  BalancedEnergyConfig (experimental hypothesis)
+v0.4.0-mcp-servers       da842a6  MCP physics server operational
+v0.5.0-phase7-baseline   7c369d8  Phase 7 claims A-E established
+v0.6.0-mcp-fallback      307c5f6  Autonomous fallback v1.1.0
+v0.7.0-package-fix       517bd26  Package install fix
+v1.0.0-phase8-stdp       80cf3e5  Phase 8 STDP (F8.1-F8.3 PASS + regression PASS)
+```
 
-### 7.3 Commit Discipline
+**Reproduce any validated state:**
+```bash
+git checkout v0.5.0-phase7-baseline   # exact Phase 7 state
+git checkout v1.0.0-phase8-stdp       # exact Phase 8 state
+```
 
-- Phase 7.1 (control) commits stay on their branches forever
-- Operational (MCP) advancement happens on main or new feature branches
-- Each new phase should have its own falsifiable claims documented in code
-- Validation functions print PASS/FAIL — no silent failures
+### 7.3 New Phase Workflow (Step-by-Step)
+
+This is the concrete procedure for adding any new phase (e.g., Phase 9):
+
+```
+1. START FROM MAIN
+   git checkout main && git pull origin main
+
+2. CREATE FEATURE BRANCH
+   git checkout -b claude/phase9-predictive-processing-<session-id>
+
+3. IMPLEMENT
+   - Add core logic to core/ (if shared) or phases/ (if phase-specific)
+   - Write phases/phase9_predictive.py with falsifiable claims
+   - Each claim: explicit threshold, prints PASS or FAIL, never silent
+
+4. VALIDATE — RUN ALL PRIOR PHASES + NEW PHASE
+   python phases/phase7_control_baseline.py    # Claims A-E must PASS
+   python phases/phase8_stdp.py                # Claims F8.1-F8.3 must PASS
+   python phases/phase9_predictive.py          # Claims F9.1-F9.3 must PASS
+
+5. COMMIT WITH VALIDATION RESULTS IN MESSAGE
+   git add <specific files>
+   git commit -m "Phase 9: Predictive processing — F9.1-F9.3 PASS
+
+   Regression: Phase 7 A-E PASS, Phase 8 F8.1-F8.3 PASS"
+
+6. PUSH AND OPEN PR
+   git push -u origin claude/phase9-predictive-processing-<session-id>
+   gh pr create --title "Phase 9: Predictive Processing" ...
+
+7. AFTER MERGE — TAG THE MILESTONE
+   git checkout main && git pull origin main
+   git tag -a v2.0.0-phase9-predictive <hash> -m "Phase 9: Predictive Processing
+   - F9.1 PASS: Prediction error decreases >50% over 10 cycles
+   - F9.2 PASS: Random input shows no decrease (p > 0.05)
+   - F9.3 PASS: Error recovers within 200 steps after frequency switch
+   - Regression: Phase 7 A-E PASS, Phase 8 F8.1-F8.3 PASS"
+   git push origin --tags
+```
+
+### 7.4 Regression Validation Rule
+
+**Before any PR is merged to `main`, ALL prior phase validation scripts must
+PASS.**  This is non-negotiable.  The validation commands to run:
+
+```bash
+python phases/phase7_control_baseline.py   # Claims A-E
+python phases/phase8_stdp.py               # Claims F8.1-F8.3
+# ... add each new phase script as phases are added
+```
+
+If a new phase breaks a prior validation:
+- **Do not modify the prior validation script**
+- Fix the new code until all validations pass
+- If the prior claim is genuinely obsoleted, document why in the new phase
+  script and in the commit message — but the old script stays unchanged
+
+### 7.5 Branch Lifecycle
+
+```
+Feature branch created → Work committed → PR opened → Validated → Merged
+    │                                                              │
+    │                                                              ▼
+    │                                                    Tag created on main
+    │
+    └── Branch stays on GitHub as read-only audit trail
+        (never deleted, never committed to again)
+```
+
+### 7.6 What NOT To Do
+
+- **Don't avoid merging to `main`.**  Main must advance.  Reproducibility
+  comes from tags and commit hashes, not from branch isolation.
+- **Don't modify old validation scripts.**  Write new ones.
+- **Don't merge without running ALL prior validations.**
+- **Don't delete `claude/*` branches.**  They are the audit trail of how
+  each piece of work was developed.
+- **Don't tag unvalidated states.**  Tags mean "all claims PASS at this point."
+
+### 7.7 Handoff Protocol for Claude Sessions
+
+Each Claude session that modifies this repo should:
+
+1. **Read CLAUDE.md first** — understand what exists and what is frozen
+2. **Check tags** — `git tag -l -n1` shows the current milestone registry
+3. **Branch from `main`** — not from another `claude/*` branch
+4. **Run all validations before committing** — record results in commit msg
+5. **Update Section 7.2** of this file if a new tag is created
+6. **Update Section 9** of this file if a new phase is completed
+
+This ensures continuity across sessions.  A new Claude instance can reconstruct
+the full project state from tags alone:
+```bash
+git tag -l -n1              # See all milestones
+git log v1.0.0-phase8-stdp  # See history up to Phase 8
+git checkout v1.0.0-phase8-stdp  # Reproduce Phase 8 exactly
+```
 
 ---
 
@@ -326,14 +434,19 @@ Every phase of this system follows the same pattern:
 2. **Build the control** — a configuration that is designed to FAIL the claim
 3. **Build the experiment** — a configuration that is designed to PASS the claim
 4. **Run both** and record the results
-5. **Commit both** on independent branches so the comparison is always available
-6. **Advance only when the comparison is clean**
+5. **Tag the validated state** on `main` so it is permanently reproducible
+6. **Advance only when all prior claims still pass** (regression validation)
 
 This is not optional process.  It is the engineering methodology that makes
 this system trustworthy for physical deployment.  A self-sustaining cognitive
 loop that goes into a robot must be provably correct.  "It seems to work" is
 not sufficient.  "Here is the proof it fails without X, and here is the proof
 it succeeds with X" is sufficient.
+
+**The two energy configs (EnergyConfig vs BalancedEnergyConfig) must remain
+independent.**  Both live in `core/energy.py`.  The control baseline always
+uses the harsh config.  The operational system uses the balanced config.  This
+separation is enforced by the validation scripts, not by branch isolation.
 
 ---
 
@@ -703,31 +816,40 @@ The model follows the ARM Holdings pattern:
 
 ## 13. Development Rules for Future Claude Sessions
 
+### FIRST STEPS (every session):
+1. Read this entire document
+2. Run `git tag -l -n1` to see the milestone registry
+3. Run `git log --oneline -10 origin/main` to see recent main history
+4. Branch from `main` for new work: `git checkout -b claude/<description>-<session-id>`
+
 ### DO:
-- Read this entire document before making changes
-- Run `phase7_control_baseline.py` after any change to core physics — all 5 claims must pass
+- Run **ALL** validation scripts before committing (see Section 7.4)
 - Add falsifiable claims to any new phase
 - Keep the two energy configurations (EnergyConfig vs BalancedEnergyConfig) independent
 - Use the MCP path for operational work (50 neurons, balanced energy)
 - Use the CLI path for validation and control experiments
-- Commit on feature branches; do not merge without explicit instruction
-- Preserve the scientific notebook property of the git history
+- Record validation results in commit messages
+- Tag validated milestones after merge to `main` (see Section 7.3)
+- Update Section 7.2 of this file when creating new tags
+- Update Section 9 of this file when completing new phases
 
 ### DO NOT:
 - "Fix" the CLI path's energy config — it is a falsifiable control
-- Merge feature branches into main without explicit authorization
+- Modify any existing phase validation script (`phase7_control_baseline.py`,
+  `phase8_stdp.py`, etc.) — write new scripts for new phases
 - Remove `__init__.py` files from `appendices/`, `phases/`, or `mcp/`
-- Modify `phase7_control_baseline.py` canonical parameters
 - Add dependencies without updating `requirements.txt`
 - Introduce silent failures — all validation must print PASS or FAIL explicitly
 - Conflate the two execution paths — they have intentionally different physics
+- Delete `claude/*` branches — they are the development audit trail
+- Commit to a branch that has already been merged
 
 ### WHEN IN DOUBT:
 - The system is designed for physical deployment, not just simulation
 - Every design decision has a falsifiable rationale
 - If something looks wrong, check whether it is an intentional control first
-- Ask before merging, deleting branches, or changing energy configurations
-- The git history is an audit trail — treat it accordingly
+- Ask before changing energy configurations
+- Check `git tag -l -n1` — if a state is tagged, it is frozen and validated
 
 ---
 
