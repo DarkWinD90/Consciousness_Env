@@ -410,17 +410,27 @@ Feature branch created → Work committed → PR opened → Validated → Merged
 Each Claude session that modifies this repo should:
 
 1. **Read CLAUDE.md first** — understand what exists and what is frozen
-2. **Check tags** — `git tag -l -n1` shows the current milestone registry
-3. **Branch from `main`** — not from another `claude/*` branch
-4. **Run all validations before committing** — record results in commit msg
-5. **Update Section 7.2** of this file if a new tag is created
-6. **Update Section 9** of this file if a new phase is completed
+2. **Fetch everything** — `git fetch origin --tags` to sync remote state
+3. **Check tags** — `git tag -l -n1` shows the current milestone registry
+4. **Check main** — `git log --oneline -10 origin/main` to see recent history
+5. **Compare tags to Section 7.2** — if the tags already exist on the remote,
+   DO NOT recreate them.  If `git tag -l` returns the tags listed in Section
+   7.2, the milestone registry is already set up.  Move on.
+6. **Branch from `main`** — not from another `claude/*` branch
+7. **Run all validations before committing** — record results in commit msg
+8. **Update Section 7.2** of this file if a new tag is created
+9. **Update Section 9** of this file if a new phase is completed
+
+**CRITICAL**: Always `git fetch origin --tags` BEFORE checking tags.  Without
+this fetch, a fresh session may not see tags that exist on the remote and will
+incorrectly conclude they need to be created.  The fetch is non-negotiable.
 
 This ensures continuity across sessions.  A new Claude instance can reconstruct
 the full project state from tags alone:
 ```bash
-git tag -l -n1              # See all milestones
-git log v1.0.0-phase8-stdp  # See history up to Phase 8
+git fetch origin --tags         # ALWAYS fetch first
+git tag -l -n1                  # See all milestones
+git log v1.0.0-phase8-stdp     # See history up to Phase 8
 git checkout v1.0.0-phase8-stdp  # Reproduce Phase 8 exactly
 ```
 
@@ -684,16 +694,26 @@ systems where stopping is not an option (robotics, prosthetics, space).
 
 ### 10.2 Filing Strategy
 
+**STATUS: ALL THREE PROVISIONAL PATENTS FILED 2026-01-30**
+
+| Patent | Filing Date | Status | Non-Provisional Deadline |
+|--------|-------------|--------|--------------------------|
+| Patent A (Energy Loop) | 2026-01-30 | Provisional Filed | 2027-01-30 |
+| Patent B (Self-Observation) | 2026-01-30 | Provisional Filed | 2027-01-30 |
+| Patent C (Cognitive Fallback) | 2026-01-30 | Provisional Filed | 2027-01-30 |
+
+**12-Month Timeline**:
+
 | Step | Timeline | Action |
 |------|----------|--------|
-| 1 | Immediate | File **provisional patent** for Patent A (energy loop) — establishes priority date, 12-month window |
-| 2 | Month 1-3 | Document Patents B and C with detailed technical specifications and experimental results |
-| 3 | Month 3-6 | File provisional patents for B and C |
-| 4 | Month 6-9 | Build hardware prototype (Phase 11) to strengthen Patent A with physical reduction to practice |
-| 5 | Month 11 | Convert Patent A provisional to **non-provisional utility patent** with hardware evidence |
-| 6 | Month 12 | File **PCT application** (international) for all three patents |
-| 7 | Month 12-18 | Convert B and C provisionals to non-provisional |
-| 8 | Month 18+ | File **continuation patents** for specific applications (prosthetics, drones, IoT) |
+| ✅ 1 | 2026-01-30 | **COMPLETE** — All three provisional patents filed |
+| 2 | Month 1-3 (by 2026-04-30) | Validate Phase 8 STDP claims, create git tag history |
+| 3 | Month 3-6 (by 2026-07-30) | Build hardware prototype (Phase 11) for physical reduction to practice |
+| 4 | Month 6-9 (by 2026-10-30) | Document hardware validation results (Claims F11.1-F11.3) |
+| 5 | Month 9-11 (by 2026-12-30) | Prepare non-provisional filings with hardware evidence |
+| 6 | Month 11-12 (by 2027-01-15) | File **PCT application** (international) for all three patents |
+| 7 | Before 2027-01-30 | Convert all three provisionals to **non-provisional utility patents** |
+| 8 | Month 12-18 | File **continuation patents** for specific applications (prosthetics, drones, IoT) |
 
 ### 10.3 Claim Architecture
 
@@ -818,9 +838,11 @@ The model follows the ARM Holdings pattern:
 
 ### FIRST STEPS (every session):
 1. Read this entire document
-2. Run `git tag -l -n1` to see the milestone registry
-3. Run `git log --oneline -10 origin/main` to see recent main history
-4. Branch from `main` for new work: `git checkout -b claude/<description>-<session-id>`
+2. Run `git fetch origin --tags` to sync all remote state (MANDATORY — do not skip)
+3. Run `git tag -l -n1` to see the milestone registry — if tags from Section
+   7.2 already exist, do NOT recreate them
+4. Run `git log --oneline -10 origin/main` to see recent main history
+5. Branch from `main` for new work: `git checkout -b claude/<description>-<session-id>`
 
 ### DO:
 - Run **ALL** validation scripts before committing (see Section 7.4)
