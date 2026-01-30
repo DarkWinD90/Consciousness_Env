@@ -694,16 +694,26 @@ systems where stopping is not an option (robotics, prosthetics, space).
 
 ### 10.2 Filing Strategy
 
+**STATUS: ALL THREE PROVISIONAL PATENTS FILED 2026-01-30**
+
+| Patent | Filing Date | Status | Non-Provisional Deadline |
+|--------|-------------|--------|--------------------------|
+| Patent A (Energy Loop) | 2026-01-30 | Provisional Filed | 2027-01-30 |
+| Patent B (Self-Observation) | 2026-01-30 | Provisional Filed | 2027-01-30 |
+| Patent C (Cognitive Fallback) | 2026-01-30 | Provisional Filed | 2027-01-30 |
+
+**12-Month Timeline**:
+
 | Step | Timeline | Action |
 |------|----------|--------|
-| 1 | Immediate | File **provisional patent** for Patent A (energy loop) — establishes priority date, 12-month window |
-| 2 | Month 1-3 | Document Patents B and C with detailed technical specifications and experimental results |
-| 3 | Month 3-6 | File provisional patents for B and C |
-| 4 | Month 6-9 | Build hardware prototype (Phase 11) to strengthen Patent A with physical reduction to practice |
-| 5 | Month 11 | Convert Patent A provisional to **non-provisional utility patent** with hardware evidence |
-| 6 | Month 12 | File **PCT application** (international) for all three patents |
-| 7 | Month 12-18 | Convert B and C provisionals to non-provisional |
-| 8 | Month 18+ | File **continuation patents** for specific applications (prosthetics, drones, IoT) |
+| ✅ 1 | 2026-01-30 | **COMPLETE** — All three provisional patents filed |
+| 2 | Month 1-3 (by 2026-04-30) | Validate Phase 8 STDP claims, create git tag history |
+| 3 | Month 3-6 (by 2026-07-30) | Build hardware prototype (Phase 11) for physical reduction to practice |
+| 4 | Month 6-9 (by 2026-10-30) | Document hardware validation results (Claims F11.1-F11.3) |
+| 5 | Month 9-11 (by 2026-12-30) | Prepare non-provisional filings with hardware evidence |
+| 6 | Month 11-12 (by 2027-01-15) | File **PCT application** (international) for all three patents |
+| 7 | Before 2027-01-30 | Convert all three provisionals to **non-provisional utility patents** |
+| 8 | Month 12-18 | File **continuation patents** for specific applications (prosthetics, drones, IoT) |
 
 ### 10.3 Claim Architecture
 
