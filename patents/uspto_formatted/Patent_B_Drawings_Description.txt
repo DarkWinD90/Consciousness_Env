@@ -1,0 +1,248 @@
+DRAWING DESCRIPTIONS — PATENT B
+
+Configurable Recursive Self-Observation Method and System for Spiking Neural
+Networks with Dynamic Reflection Coefficient Modulation
+
+
+BRIEF DESCRIPTION OF THE DRAWINGS
+
+FIG. 1 is a block diagram of the self-observation feedback loop showing how
+the aggregate output of the spiking neural network at timestep t is fed back
+as additional input at timestep t+1.
+
+FIG. 2 is a spectrum diagram showing the behavioral effects of the reflection
+coefficient across its full range from 0.0 to 1.0.
+
+FIG. 3 is a block diagram showing the dual modulation sources that
+dynamically control the reflection coefficient value.
+
+FIG. 4 is a flow diagram of the self-referential learning loop combining
+STDP synaptic plasticity with recursive self-observation.
+
+FIG. 5 is a control diagram showing energy-aware self-observation regulation
+where the reflection coefficient is modulated based on system energy state.
+
+
+DETAILED DESCRIPTION OF THE DRAWINGS
+
+
+FIG. 1 — Self-Observation Feedback Loop
+
+This figure shows the core self-observation mechanism as a feedback loop.
+
+Main components (arranged left to right with feedback loop):
+
+Left side:
+- Arrow entering from left labeled "External Input I_ext(t)"
+- Summing junction (circle with + inside)
+
+Center:
+- Large rectangle labeled "Spiking Neural Network (N LIF neurons)"
+- Inside the rectangle:
+  - Small circles representing neurons
+  - Label: "V_i(t+1) = V_i(t) x leak + I_adjusted x dt"
+
+Right side:
+- Arrow exiting right labeled "Spike Output S(t)"
+- Arrow down to a processing block
+
+Bottom path (feedback):
+- Rectangle labeled "Aggregate Output Computation"
+- Inside: "O(t) = mean(V_1, V_2, ..., V_N)"
+- Label below: "Mean membrane potential across all neurons"
+- Arrow from aggregate output going left
+
+Left bottom:
+- Rectangle labeled "Reflection Scaling"
+- Inside: "I_reflection = O(t) x reflection_coeff"
+- Arrow up to the summing junction
+
+At the summing junction:
+- "I_adjusted(t+1) = I_ext(t+1) + I_reflection(t)"
+
+Key labels:
+- The feedback path should be drawn as a bold line
+- Delay element (z^-1 block) on the feedback path indicating one-timestep delay
+- Label: "Self-observation: the network observes its own prior aggregate state"
+
+
+FIG. 2 — Reflection Coefficient Spectrum
+
+This figure shows a horizontal spectrum bar with behavioral annotations.
+
+Horizontal bar spanning the full width:
+- Left end labeled "0.0"
+- Right end labeled "1.0"
+- Current operational range marked: "0.1 to 0.3 (typical)"
+
+Five labeled regions along the spectrum:
+
+Region 1 (0.0):
+- Label: "No self-observation"
+- Annotation: "Pure feedforward processing"
+- Behavior: "System responds only to external input"
+
+Region 2 (0.0 to 0.2):
+- Label: "Minimal self-awareness"
+- Annotation: "Slight influence of prior state"
+- Behavior: "Primarily externally driven"
+
+Region 3 (0.2 to 0.4):
+- Label: "Balanced self-observation"
+- Annotation: "OPERATIONAL RANGE" (emphasized)
+- Behavior: "External input + meaningful self-reference"
+- Mark: "Default = 0.2 + modulation x 0.1"
+
+Region 4 (0.4 to 0.7):
+- Label: "Self-dominated processing"
+- Annotation: "Internal state dominates"
+- Behavior: "Risk of echo chamber dynamics"
+
+Region 5 (0.7 to 1.0):
+- Label: "Self-absorption"
+- Annotation: "External input overwhelmed"
+- Behavior: "System locks onto its own prior state"
+
+Below the spectrum:
+- Arrow indicating "Increasing self-referential processing"
+- Note: "The reflection coefficient is the system's self-awareness dial"
+
+
+FIG. 3 — Dynamic Modulation Sources
+
+This figure shows two modulation pathways converging on the reflection
+coefficient computation.
+
+Center element:
+- Rectangle labeled "Reflection Coefficient Computation"
+- Inside: "reflection_coeff = base_coeff + modulation x sensitivity"
+- Default values: "base_coeff = 0.2, sensitivity = 0.1"
+
+Top pathway (External Modulation):
+- Cloud shape labeled "External Cognitive Control Layer"
+- Arrow down labeled "modulation value (-1.0 to +1.0)"
+- Decision examples in callout boxes:
+  - "modulation = -0.5: Reduce self-observation (focus outward)"
+  - "modulation = 0.0: Neutral (use base coefficient)"
+  - "modulation = +0.8: Increase self-observation (introspect)"
+
+Bottom pathway (Internal Modulation):
+- Rectangle labeled "Energy State Monitor"
+- Arrow up labeled "energy-aware modulation"
+- Decision rules in callout boxes:
+  - "energy < 15 mWh: modulation = -0.4 (conserve)"
+  - "energy < 30 mWh: modulation = -0.1 (cautious)"
+  - "energy > 80 mWh: modulation = +0.3 (explore)"
+  - "otherwise: modulation = 0.0 (neutral)"
+
+Right side output:
+- Arrow from computation block going right
+- Label: "reflection_coeff (applied at next SNN step)"
+- Range annotation: "Resulting range: 0.1 to 0.3 (typical operation)"
+
+Selector switch symbol between the two pathways:
+- Label: "Source priority: External overrides Internal when cognitive layer active"
+
+
+FIG. 4 — Self-Referential Learning Loop (STDP + Self-Observation)
+
+This figure shows how STDP learning interacts with the self-observation signal.
+
+Main loop (clockwise):
+
+Top:
+- Rectangle labeled "SNN Processing Step t"
+- Outputs two arrows:
+  - Right: "Spike output S(t)"
+  - Down: "Weight update signal"
+
+Right:
+- Rectangle labeled "STDP Weight Update"
+- Inside:
+  - "If post fires: W[i,j] += A+ x pre_trace[i]"
+  - "If pre fires: W[i,j] -= A- x post_trace[j]"
+- Label: "Temporal correlation learning"
+- Output arrow down
+
+Bottom:
+- Rectangle labeled "Updated Weight Matrix W(t+1)"
+- Arrow left to SNN
+
+Left:
+- The self-observation feedback path from FIG. 1
+- Rectangle labeled "Self-Observation O(t)"
+- Arrow up to SNN
+
+Center annotation:
+- "The network learns which temporal spike patterns correlate with
+  its own self-observation signal"
+- "Self-referential learning: the network learns about itself"
+
+Key insight callout:
+- "STDP strengthens connections between neurons that fire in causal sequence"
+- "Self-observation provides an additional input that correlates with the
+  network's own aggregate behavior"
+- "Result: the network develops internal representations of its own
+  processing patterns"
+
+Timeline at bottom:
+- "Step t: Process input + self-observation"
+- "Step t: Fire spikes, update STDP traces"
+- "Step t: Compute new self-observation O(t)"
+- "Step t+1: Apply updated weights + new self-observation"
+
+
+FIG. 5 — Energy-Aware Self-Observation Regulation
+
+This figure shows a control diagram for energy-based reflection modulation.
+
+Top — Energy State:
+- Horizontal bar labeled "Energy Level (mWh)"
+- Four colored/hatched regions:
+  - Region 1 (0-15 mWh): Hatched, labeled "CRITICAL"
+  - Region 2 (15-30 mWh): Light hatch, labeled "LOW"
+  - Region 3 (30-80 mWh): Clear, labeled "NORMAL"
+  - Region 4 (80+ mWh): Light hatch, labeled "SURPLUS"
+
+Middle — Modulation Mapping:
+- Four arrows from energy regions down to modulation values:
+  - CRITICAL -> modulation = -0.4
+  - LOW -> modulation = -0.1
+  - NORMAL -> modulation = 0.0
+  - SURPLUS -> modulation = +0.3
+
+Bottom — Effect on Reflection Coefficient:
+- Number line from 0.0 to 0.5
+- Four markers showing resulting reflection_coeff:
+  - CRITICAL: 0.2 + (-0.4)(0.1) = 0.16
+  - LOW: 0.2 + (-0.1)(0.1) = 0.19
+  - NORMAL: 0.2 + (0.0)(0.1) = 0.20
+  - SURPLUS: 0.2 + (0.3)(0.1) = 0.23
+
+Behavioral annotation for each:
+- 0.16: "Reduced self-observation — conserve cognitive resources"
+- 0.19: "Slightly reduced — cautious operation"
+- 0.20: "Baseline — normal self-observation"
+- 0.23: "Enhanced self-observation — energy allows exploration"
+
+Bottom note:
+- "Energy-aware regulation ensures the system reduces cognitive overhead
+  when energy is scarce and explores deeper self-reference when energy
+  is abundant"
+
+
+GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
+
+- Paper size: 8.5 x 11 inches (US Letter)
+- Top margin: 1 inch
+- Left margin: 1 inch
+- Right margin: 5/8 inch
+- Bottom margin: 3/8 inch
+- Black lines on white background ONLY
+- No color, no grayscale shading (use hatching patterns instead)
+- Line weight: sufficiently heavy for adequate reproduction
+- Each figure labeled: "FIG. 1", "FIG. 2", etc.
+- Sheet numbers at top center: "1/5", "2/5", etc.
+- No frames or borders around drawing area
+- All text in figures must be at least 1/8 inch (3.2 mm) high
+- Reference numerals must be used consistently across all figures

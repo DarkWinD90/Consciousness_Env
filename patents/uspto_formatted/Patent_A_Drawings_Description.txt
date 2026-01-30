@@ -1,0 +1,293 @@
+DRAWING DESCRIPTIONS — PATENT A
+
+Self-Sustaining Neural-Motor Energy Harvesting Loop for Autonomous Cognitive Systems
+
+
+BRIEF DESCRIPTION OF THE DRAWINGS
+
+FIG. 1 is a system architecture block diagram showing the eight-layer
+self-sustaining neural-motor energy harvesting loop.
+
+FIG. 2 is a comparative energy balance chart showing control system energy
+depletion versus experimental system energy growth over 2000 operational steps.
+
+FIG. 3 is a schematic diagram of the spiking neural network architecture
+showing the leaky integrate-and-fire neuron model with synaptic connections.
+
+FIG. 4 is a circuit schematic of the energy harvesting subsystem comprising
+piezoelectric and thermoelectric transducers with rectification and storage.
+
+FIG. 5 is a graph showing the activity-dependent energy dynamics curve
+illustrating the quadratic cost model and optimal activity operating region.
+
+FIG. 6 is a hardware reference design layout diagram showing component
+placement and interconnections for the physical embodiment.
+
+FIG. 7 is a validation results summary table confirming all falsifiable
+claims pass the specified thresholds.
+
+
+DETAILED DESCRIPTION OF THE DRAWINGS
+
+
+FIG. 1 — System Architecture Block Diagram (8-Layer Loop)
+
+This figure shows eight labeled blocks arranged in a vertical flow with arrows
+indicating signal direction, forming a closed loop.
+
+Block layout (top to bottom, then looping back):
+
+    ENVIRONMENT (external, at top)
+        |
+        v
+    [L1: Printed Membrane] — labeled "ThermochromicMixin"
+        |
+        v
+    [L2: Sensing Pads] — labeled "light_intensity, membrane_temp"
+        |
+        v
+    [L3: Optical Transmission] — labeled "signal_voltage = light / 1000 x 5.0"
+        |
+        v
+    [L4: Neuromorphic CPU (SNN)] — labeled "BaseSNN (LIF neurons)"
+        |                           Arrow entering from L8 labeled
+        |                           "reflection feedback"
+        v
+    [L5: Servo Actuation] — labeled "target_angle = clip(output x 180)"
+        |
+        +-----> [L6: Energy Harvesting] — labeled "piezo + thermal"
+                    |
+                    v
+                [L7: Ground Reference] — labeled "noise floor / baseline"
+                    |
+                    v
+                [L8: Recursive Reflection] — labeled "previous_output"
+                    |
+                    +-----> (arrow loops back to L4)
+
+Three signal pathways should be distinguished by line style:
+- Solid line: Main spine (L1 through L8 to L4)
+- Dashed line: Thermal cross-link (L1 membrane_temp directly to L6)
+- Dotted line: Reflection feedback (L8 to L4)
+
+All blocks are rectangles with rounded corners. Environment is shown as a
+cloud shape. The loop-back arrow from L8 to L4 should be prominent and labeled
+"THE LOOP CLOSES HERE."
+
+
+FIG. 2 — Energy Balance Comparison
+
+This figure shows a dual-panel line graph or single graph with two curves.
+
+X-axis: Operational Steps (0 to 2000)
+Y-axis: Cumulative Energy (mWh)
+
+Curve 1 (Control — solid line, labeled "EnergyConfig (Control)"):
+- Starts at 50.0 mWh
+- Decreases linearly
+- Ends at approximately -4,697 mWh at step 2000
+- Label: "base_consumption = 470 mW"
+
+Curve 2 (Experimental — dashed line, labeled "BalancedEnergyConfig (Experimental)"):
+- Starts at 50.0 mWh
+- Increases linearly
+- Ends at approximately +4,170 mWh at step 2000
+- Label: "base_consumption = 45 mW, activity-dependent cost"
+
+A horizontal dashed line at y = 0 labeled "Self-Sustaining Threshold."
+
+Annotations:
+- Arrow pointing to control curve: "System fails — energy depleted"
+- Arrow pointing to experimental curve: "System thrives — net positive energy"
+
+The area between the two curves should be lightly shaded to emphasize the
+divergence.
+
+
+FIG. 3 — SNN Architecture (LIF Neuron Model)
+
+This figure shows the internal structure of the spiking neural network.
+
+Top section — Single LIF Neuron Detail:
+- Circle labeled "Neuron i"
+- Input arrows entering from left: "I_external" and "I_reflection"
+- Inside the circle: equation written as "V(t+1) = V(t) x leak + I x dt"
+- Threshold line: horizontal dashed line labeled "V_threshold = 0.5"
+- Output arrow exiting right: "spike (0 or 1)"
+- Below neuron: "If V >= threshold: spike, V = V_reset"
+
+Bottom section — Network Topology:
+- N circles (labeled "1" through "N") arranged in a single layer
+- All-to-all connections shown as lines between neurons
+- Weight matrix notation: "W[i,j]" on one representative connection
+- Input arrow from left entering all neurons: "adjusted_input"
+- Output arrows from all neurons going right: "spike_vector"
+- Self-connections shown as small loops, crossed out (zeroed)
+- Label: "N = 50 neurons (operational), N = 20 neurons (control)"
+
+Inset box showing STDP rule:
+- "If post fires: W += A+ x pre_trace (LTP)"
+- "If pre fires: W -= A- x post_trace (LTD)"
+- "A- > A+ (stability bias)"
+
+
+FIG. 4 — Energy Harvesting Circuit
+
+This figure shows an electrical circuit schematic.
+
+Left side — Piezoelectric Harvester:
+- Piezo disc symbol (capacitor with "PIEZO" label)
+- Connected to servo shaft via mechanical coupling (zigzag line)
+- Label: "27mm piezoelectric disc"
+- Output leads to full-bridge rectifier (4 diodes in bridge configuration)
+- Rectifier output to smoothing capacitor
+- Label: "friction_factor = 18.0"
+
+Center — LC Resonance Circuit:
+- Inductor symbol in series with piezo output
+- Label: "Laird ferrite-backed inductor"
+- Resonance annotation: "f_res = 1 / (2 x pi x sqrt(L x C))"
+- Label: "3-10x voltage amplification at resonance"
+
+Right side — Thermoelectric Harvester:
+- Thermistor/thermocouple symbol
+- Label: "NTC 10K 3950"
+- Connected to separate rectifier path
+- Label: "thermal_factor = 8.0"
+
+Bottom — Energy Storage:
+- Both harvester outputs combine at a summing junction
+- Arrow to storage element (battery/capacitor symbol)
+- Label: "energy_stored (mWh)"
+- Output arrow labeled "Power to SNN (L4)"
+
+Power budget annotation box:
+- "Harvest = friction_harvest + thermal_harvest"
+- "Cost = base_consumption + activity_cost x spike_count^2"
+- "Net = Harvest - Cost"
+
+
+FIG. 5 — Activity-Dependent Energy Dynamics
+
+This figure shows a single graph illustrating the energy sweet spot.
+
+X-axis: "Neural Activity (spike_count / N)" ranging from 0.0 to 1.0
+Y-axis: "Energy Rate (mWh/step)"
+
+Three curves:
+1. Harvest curve (solid, increasing): Linear function of activity
+   - Label: "E_harvest = friction_factor x angular_velocity + thermal_factor x delta_T"
+   - Starts near zero, increases linearly with activity
+
+2. Cost curve (dashed, quadratic): Quadratic function of activity
+   - Label: "E_cost = base + activity_cost x (spikes/N)^2"
+   - Starts at base_consumption, curves upward quadratically
+
+3. Net energy curve (bold): Harvest minus Cost
+   - Shows positive region (shaded green/light) at moderate activity
+   - Shows negative regions at very low and very high activity
+   - Peak labeled "Optimal Operating Point"
+
+Vertical dashed lines marking regions:
+- 0.0 to 0.2: "Low activity — insufficient harvesting"
+- 0.2 to 0.7: "Sweet spot — net positive energy" (shaded region)
+- 0.7 to 1.0: "High activity — quadratic cost dominates"
+
+Annotation: "Self-sustaining operation requires maintaining activity in the
+sweet spot region"
+
+
+FIG. 6 — Hardware Reference Design
+
+This figure shows a top-down component layout diagram.
+
+Central component:
+- Rectangle labeled "Raspberry Pi Pico (RP2040)" with pin labels on edges
+
+Connected components (arranged around the Pico):
+
+Top left:
+- Circle labeled "Piezo Disc 27mm"
+- Connected to Pico via ADC pin (GP26/ADC0)
+- Mechanical coupling line to Servo
+
+Top right:
+- Rectangle labeled "SG90 Micro Servo"
+- Connected to Pico via PWM pin (GP0)
+- Mechanical coupling to Piezo disc (zigzag line)
+
+Bottom left:
+- Small component labeled "NTC 10K Thermistor"
+- Connected to Pico via ADC pin (GP27/ADC1)
+
+Bottom center:
+- Small component labeled "GL5528 LDR"
+- Connected to Pico via ADC pin (GP28/ADC2)
+
+Bottom right:
+- Small square labeled "WS2812B RGB LED"
+- Connected to Pico via digital pin (GP15)
+
+Left side:
+- Component labeled "Laird Ferrite Inductor"
+- Connected in series between Piezo and rectifier
+- Label: "LC resonance circuit"
+
+Power section:
+- Rectifier bridge symbol
+- Storage capacitor
+- Arrow labeled "Harvested energy feedback"
+
+BOM annotation box in corner:
+- "Pi Pico: $4"
+- "Piezo 27mm: $2"
+- "SG90 Servo: $3"
+- "Thermistor: $0.15"
+- "LDR: $0.10"
+- "WS2812B: $0.25"
+- "Laird Inductor: $0 (inventor stock)"
+- "Total BOM: <$15"
+
+
+FIG. 7 — Validation Results Summary
+
+This figure shows a structured table summarizing all validated claims.
+
+Table with columns: Claim | Criterion | Measured Value | Threshold | Result
+
+Section header: "Phase 7 Control Baseline (EnergyConfig)"
+Row A: Closed-loop continuity | All channels 2000 points | 2000 | 2000 | PASS
+Row B: Boundedness | All state variables bounded | bounded | bounded | PASS
+Row C: Robustness under noise | Std(theta) <= 45 deg | [value] | 45 | PASS
+Row D: Input-output gain | corr(L,theta) >= 0.2 | [value] | 0.2 | PASS
+Row E: Saturation ratio | sat_theta <= 0.20 | [value] | 0.20 | PASS
+
+Section header: "Phase 7 Full Integration (Control confirms energy depletion)"
+Row: Energy at 2000 steps | Energy depleted | -4,697 mWh | < 0 | CONFIRMED
+
+Section header: "MCP Integration (BalancedEnergyConfig)"
+Row: Energy at 2000 steps | Net positive energy | +4,170 mWh | > 0 | CONFIRMED
+
+Section header: "Phase 8 STDP"
+Row F8.1: Weight entropy decrease | final < initial | 2.95 to 2.02 bits | decrease | PASS
+Row F8.2: STDP MI > 1.2x frozen | ratio | 6.52x | > 1.20 | PASS
+Row F8.3: Late weight delta < 10% early | ratio | 0.00% | < 10% | PASS
+
+Footer: "All claims validated. System is reproducible via git tags."
+
+
+GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
+
+- Paper size: 8.5 x 11 inches (US Letter)
+- Top margin: 1 inch
+- Left margin: 1 inch
+- Right margin: 5/8 inch
+- Bottom margin: 3/8 inch
+- Black lines on white background ONLY
+- No color, no grayscale shading (use hatching patterns instead)
+- Line weight: sufficiently heavy for adequate reproduction
+- Each figure labeled: "FIG. 1", "FIG. 2", etc.
+- Sheet numbers at top center: "1/7", "2/7", etc.
+- No frames or borders around drawing area
+- All text in figures must be at least 1/8 inch (3.2 mm) high
+- Reference numerals must be used consistently across all figures

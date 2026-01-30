@@ -1,0 +1,151 @@
+PROVISIONAL APPLICATION FOR PATENT
+
+UNDER 35 U.S.C. 111(b)
+
+
+TITLE OF THE INVENTION
+
+Configurable Recursive Self-Observation Method and System for Spiking Neural Networks with Dynamic Reflection Coefficient Modulation
+
+
+INVENTOR(S)
+
+[INVENTOR FULL LEGAL NAME]
+[CITY, STATE, COUNTRY OF RESIDENCE]
+
+
+CROSS-REFERENCE TO RELATED APPLICATIONS
+
+[0001] This application is related to co-pending provisional patent applications filed on January 30, 2026: (1) "Self-Sustaining Neural-Motor Energy Harvesting Loop for Autonomous Cognitive Systems"; and (2) "Method and System for Autonomous Self-Regulation and Cognitive Resynchronization in Neural Processing Systems During Disconnection from External Control Layers."
+
+
+FIELD OF THE INVENTION
+
+[0002] The present invention relates to spiking neural network architectures, and more specifically to a method and system for enabling a spiking neural network to observe its own prior computational output through a configurable recursive feedback pathway with dynamically adjustable gain, creating a tunable spectrum of self-referential processing.
+
+
+BACKGROUND OF THE INVENTION
+
+[0003] Current neural network architectures, including both artificial neural networks (ANNs) and spiking neural networks (SNNs), lack a mechanism for explicit self-observation. While recurrent neural networks (RNNs), including Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) architectures, feed hidden state information back into the network, this feedback serves computational purposes. It enables the network to maintain memory and context for sequential processing.
+
+[0004] No existing architecture provides a dedicated self-observation channel separate from the computational feedback, a continuously tunable awareness parameter that controls the degree of self-referential processing, dynamic external modulation of the self-observation gain during operation, or measurable correlation between the self-observation signal and behavioral state.
+
+[0005] Recurrent neural networks such as LSTMs, GRUs, and Transformers use hidden state feedback for computation. The feedback is an implementation detail of the learning algorithm, not an explicit self-observation mechanism.
+
+[0006] Reservoir computing and echo state networks use recurrent dynamics in a fixed random network as a computational substrate. The recurrence serves temporal processing, not self-observation. There is no configurable gain on the self-referential signal.
+
+[0007] Metacognitive AI systems reason about their own confidence or uncertainty but do so through separate metacognitive modules, not through recursive observation of their own neural dynamics.
+
+[0008] There exists no prior system that records the aggregate output of a neural network at each timestep, feeds that recorded output back as explicit input to the same network at the next timestep, scales this feedback by a configurable coefficient that can be adjusted during operation, creates a measurable tunable spectrum from zero self-observation to full self-dominance, and enables external cognitive layers to dynamically control the degree of self-awareness.
+
+
+SUMMARY OF THE INVENTION
+
+[0009] The present invention provides a method and system for recursive self-observation in spiking neural networks comprising: (1) recording the aggregate output, specifically the mean membrane potential, of a spiking neural network at each timestep t; (2) feeding back this recorded output as additional input to the same network at timestep t+1; (3) scaling the feedback by a configurable reflection coefficient ranging from 0.0 to 1.0; (4) dynamic modulation of said reflection coefficient by an external cognitive control layer or internal energy-aware regulation mechanism; and (5) measurable distinction between the self-observation signal and noise, with demonstrable correlation to system behavioral state.
+
+[0010] The reflection coefficient creates a tunable self-awareness spectrum. At 0.0 the network has no self-observation and processes only external input. At 0.2 the network operates at baseline self-observation with subtle influence on neural dynamics. At 0.5 the network experiences strong self-observation and is significantly influenced by its own prior state. At 1.0 the network reaches maximum self-observation and is dominated by its own prior output.
+
+
+DETAILED DESCRIPTION OF THE INVENTION
+
+Core Mechanism
+
+[0011] At each timestep t, the spiking neural network receives external input I_ext(t) and processes it through leaky integrate-and-fire dynamics. For each neuron i, the membrane potential V_i(t) equals V_i(t-1) multiplied by the quantity 1 minus leak_factor, plus I_ext(t) multiplied by input_scale multiplied by the Kronecker delta of i and 0, plus I_reflection(t), plus the sum over j of w_ij multiplied by spike_j(t). The external input enters at neuron 0, and w_ij represents the synaptic weight from neuron j to neuron i.
+
+Recording Aggregate Output
+
+[0012] After spike generation and propagation, the network's aggregate output is computed and stored as previous_output equals the mean of V_i(t) for all neurons i. This single scalar value represents the network's overall activation state, constituting a compressed representation of the full neural state.
+
+Self-Observation Feedback
+
+[0013] At timestep t+1, the recorded output is fed back as additional input. The reflection input I_reflection(t+1) equals the previous_output multiplied by the reflection coefficient. This feedback is added to the external input at the input neuron such that the adjusted input equals I_ext(t+1) multiplied by input_scale plus previous_output multiplied by reflection_coeff, and V_0(t+1) is incremented by the adjusted input.
+
+Dynamic Modulation
+
+[0014] The reflection coefficient is not fixed but can be dynamically adjusted during operation. For external modulation through cognitive control, the reflection coefficient equals base_reflection plus modulation multiplied by sensitivity, where base_reflection is 0.2 as the default baseline, modulation is an external cognitive signal ranging from negative 1.0 to positive 1.0, and sensitivity is 0.1 as the modulation gain. At modulation of negative 1.0 the reflection coefficient is 0.1 representing minimal self-observation. At modulation of 0.0 the reflection coefficient is 0.2 representing baseline. At modulation of positive 1.0 the reflection coefficient is 0.3 representing enhanced self-observation.
+
+[0015] For internal energy-aware modulation, when energy is below 15 milliwatt-hours the modulation is negative 0.4 to conserve and reduce self-observation. When energy is below 30 milliwatt-hours the modulation is negative 0.1 for cautious operation. When energy exceeds 80 milliwatt-hours the modulation is positive 0.3 to increase self-observation for exploration and learning. Otherwise the modulation is 0.0 for neutral operation. This creates a biologically plausible dynamic wherein when resources are scarce, the system reduces self-referential processing to focus on survival, and when resources are abundant, it increases self-observation for learning and adaptation.
+
+Implementation
+
+[0016] The self-observation mechanism is implemented in the neural network step method. The membrane potential is first decayed by the leak factor. The adjusted input is computed by scaling the external input signal by the input scale and, if a previous output exists and the reflection coefficient is greater than zero, adding the previous output multiplied by the reflection coefficient. This adjusted input is applied to the first neuron. After spike detection, propagation, and optional STDP weight update, the network's aggregate output is recorded as the mean of all membrane potentials. This recorded value persists across timesteps and is fed back at configurable gain.
+
+[0017] The previous_output field is the self-observation state. It is architecturally distinct from the synaptic weights which serve computation, and from the spike history which serves recording.
+
+Interaction with STDP Learning
+
+[0018] When the spiking neural network has Spike-Timing Dependent Plasticity enabled, the self-observation feedback creates a novel interaction. The reflection signal modulates the input neuron's firing pattern. This changes the timing relationships between the input neuron and downstream neurons. STDP adjusts synaptic weights based on these timing relationships. The adjusted weights change the network's response to subsequent reflection signals. This creates a self-referential learning loop wherein the network learns about its own dynamics through the interaction of self-observation and synaptic plasticity.
+
+Measurable Properties
+
+[0019] The self-observation signal can be distinguished from noise through several measurable properties. The reflection signal has temporal autocorrelation structure that matches the input-driven dynamics, unlike white noise which has zero autocorrelation at all lags greater than zero. The reflection state correlates with system behavioral state including spike pattern type, energy level, and temperature in ways that random noise does not. Changing the reflection coefficient produces measurable changes in mean firing rate, spike pattern classification, weight entropy when STDP is enabled, and energy trajectory.
+
+
+EXPERIMENTAL VALIDATION
+
+[0020] Phase 7 Control Baseline with Claims A through E demonstrates that the system with reflection coefficient of 0.2 passes all five falsifiable claims, including input-output gain at Claim D with correlation at least 0.2. Setting the reflection coefficient to 0.0 changes the system dynamics measurably.
+
+[0021] Phase 8 STDP validation with Claims F8.1 through F8.3 demonstrates that the STDP network with self-observation feedback achieves 6.52 times higher mutual information between input and output compared to a frozen-weight control, as validated by Claim F8.2. The self-observation pathway contributes to this information gain by providing the network with temporal context about its own prior state.
+
+[0022] The MCP operational path demonstrates that the cognitive control layer dynamically adjusts the reflection coefficient based on pattern type, energy state, and attention allocation. The system's behavior measurably changes with different modulation values. At modulation of negative 0.4 for conservation there is reduced spike activity and lower energy consumption. At modulation of 0.0 for neutral operation there is baseline dynamics. At modulation of positive 0.3 for exploration there is increased spike activity and higher energy consumption.
+
+
+CLAIMS
+
+[0023] What is claimed is:
+
+1. A method for enabling recursive self-observation in a spiking neural network comprising:
+
+(a) processing input signals through a spiking neural network comprising a plurality of leaky integrate-and-fire neurons to produce membrane potentials and spike events;
+
+(b) computing an aggregate output value from said membrane potentials at timestep t, said aggregate output representing a compressed state observation of the network's overall activation;
+
+(c) storing said aggregate output value as a self-observation state;
+
+(d) at timestep t+1, feeding said stored self-observation state back as additional input to said spiking neural network, scaled by a reflection coefficient;
+
+(e) dynamically adjusting said reflection coefficient during operation based on at least one of: an external cognitive control signal, an internal energy-aware regulation signal, or a combination thereof;
+
+wherein said self-observation feedback creates a tunable spectrum of self-referential processing ranging from zero self-observation when the reflection coefficient equals zero to maximum self-observation when the reflection coefficient equals one, and wherein said self-observation signal is measurably distinct from noise and correlates with system behavioral state.
+
+2. A spiking neural network system with configurable self-observation comprising:
+
+(a) a spiking neural network processor having a plurality of neurons, each having a membrane potential, a firing threshold, and synaptic connections;
+
+(b) an output aggregation module that computes a scalar aggregate output from said membrane potentials at each timestep;
+
+(c) a self-observation state register that stores said aggregate output between timesteps;
+
+(d) a reflection coefficient register that stores a configurable scalar value between 0.0 and 1.0;
+
+(e) a feedback injection module that multiplies said stored self-observation state by said reflection coefficient and adds the result to the input of said spiking neural network at the subsequent timestep;
+
+(f) a modulation interface that allows dynamic adjustment of said reflection coefficient during operation;
+
+wherein said system provides a continuously tunable degree of self-referential processing without architectural changes to the underlying spiking neural network.
+
+3. The method of claim 1 wherein said aggregate output value is computed as the arithmetic mean of membrane potentials across all neurons in the network, being one divided by N multiplied by the sum over i of V_i(t), where N is the number of neurons and V_i(t) is the membrane potential of neuron i at timestep t.
+
+4. The method of claim 1 wherein said external cognitive control signal is provided by a separate reasoning system through a defined protocol interface, said reasoning system analyzing the neural network's state including spike pattern type, energy level, and temperature and determining an appropriate modulation value in the range of negative 1.0 to positive 1.0.
+
+5. The method of claim 1 wherein said internal energy-aware regulation signal is computed from the system's current energy storage level according to a multi-threshold rule: when energy is below a critical threshold the modulation is negative 0.4 for maximal conservation; when energy is below a low threshold the modulation is negative 0.1 for cautious operation; when energy exceeds a high threshold the modulation is positive 0.3 for exploration; and otherwise the modulation is 0.0 for neutral operation.
+
+6. The method of claim 1 wherein said reflection coefficient is computed as reflection_coeff equals base_reflection plus modulation multiplied by sensitivity, where base_reflection is a configurable baseline value defaulting to 0.2, modulation is a control signal in the range of negative 1.0 to positive 1.0, and sensitivity is a configurable gain defaulting to 0.1.
+
+7. The method of claim 1 further comprising applying spike-timing dependent plasticity to the synaptic weights of said spiking neural network simultaneously with said self-observation feedback, wherein the self-observation signal modulates the firing pattern of at least one neuron, STDP adjusts synaptic weights based on temporal correlations between neuron firings, and the combination creates a self-referential learning loop wherein the network learns about its own dynamics through the interaction of self-observation and synaptic plasticity.
+
+8. The method of claim 1 wherein the self-observation feedback is injected at a single designated input neuron of said spiking neural network, combined with external environmental input such that V_input at t+1 is incremented by the sum of external_input multiplied by input_scale and stored_output multiplied by reflection_coeff.
+
+9. The system of claim 2 wherein said modulation interface supports at least two modulation sources operating simultaneously: (a) an external cognitive control layer that provides goal-directed modulation based on reasoning about the network's state; and (b) an internal energy-aware regulator that provides survival-oriented modulation based on the system's energy reserves; and wherein the final reflection coefficient is determined by a combination of both sources.
+
+10. The method of claim 1 used in combination with a self-sustaining neural-motor energy harvesting loop, wherein the spiking neural network's motor output generates energy through piezoelectric and thermoelectric harvesting, the harvested energy powers the neural network's continued operation, and the self-observation feedback enables the system to modulate its own behavior for energy homeostasis, such that the degree of self-observation is adapted based on the system's energy state.
+
+
+ABSTRACT OF THE DISCLOSURE
+
+A method and system for enabling configurable recursive self-observation in spiking neural networks. At each timestep, the aggregate output being the mean membrane potential of a spiking neural network is recorded and fed back as additional input at the subsequent timestep, scaled by a configurable reflection coefficient ranging from 0.0 representing no self-observation to 1.0 representing maximum self-observation. The reflection coefficient is dynamically adjustable during operation through an external cognitive control layer that provides goal-directed modulation, an internal energy-aware regulation mechanism that adjusts self-observation based on resource availability, or a combination thereof. This creates a tunable self-awareness parameter that enables a continuous spectrum of self-referential processing without architectural changes to the underlying neural network. When combined with spike-timing dependent plasticity, the self-observation creates a novel self-referential learning loop wherein the network learns about its own dynamics. Validated through falsifiable experimental claims demonstrating measurable behavioral changes across the reflection coefficient spectrum and 6.52 times higher mutual information with plasticity-enabled self-observation compared to frozen-weight controls.
+
+
+REFERENCE TO SOURCE CODE
+
+The complete implementation of this invention is available at the following repository: github.com/DarkWinD90/Consciousness_Env, validated state tagged as v1.0.0-phase8-stdp at commit 80cf3e5. Key implementation file is core/base_snn.py. Dynamic modulation is implemented in mcp/consciousness_mcp_server.py.
