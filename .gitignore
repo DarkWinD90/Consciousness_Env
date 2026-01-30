@@ -65,3 +65,12 @@ venv.bak/
 simulation_checkpoint.pkl
 *.png
 *.jpg
+
+# Test output artifacts
+tests/*.json
+
+# MCP fallback snapshots
+mcp/.snapshots/
+
+# Build system artifacts
+oryx-build-commands.txt
