@@ -1,8 +1,8 @@
 ================================================================================
 CONSCIOUSNESS_ENV — COMPLETE REPOSITORY DUMP FOR PEER REVIEW
-Generated: 2026-01-31 04:56:35 UTC
+Generated: 2026-01-31 05:24:25 UTC
 Branch: main
-Commit: 6b3c85c4acf24144002ded416db87d2fd1c78908
+Commit: 50e549173f005f89fe8027f57d4ef362799ed058
 Inventor: Kevin Christopher Ward
 Residence: Moreno Valley, California, United States
 ================================================================================
@@ -21,37 +21,37 @@ TABLE OF CONTENTS
     9. MANIFEST.in                                                  (17 lines)
    10. QUICK_START.md                                               (67 lines)
    11. README.md                                                    (323 lines)
-   12. REPO_DUMP_FOR_REVIEW.txt                                     (23 lines)
-   13. appendices/__init__.py                                       (1 lines)
-   14. appendices/appendix_a_base_simulation.py                     (361 lines)
-   15. appendices/appendix_b_system_graph.py                        (254 lines)
-   16. appendices/appendix_c_recursive_reflection.py                (246 lines)
-   17. consciousness_cli.py                                         (165 lines)
-   18. core/__init__.py                                             (99 lines)
-   19. core/base_snn.py                                             (164 lines)
-   20. core/claude_interface.py                                     (587 lines)
-   21. core/consciousness_enhancer.py                               (651 lines)
-   22. core/energy.py                                               (137 lines)
-   23. core/enhanced_consciousness.py                               (550 lines)
-   24. core/history.py                                              (70 lines)
-   25. core/neural_router.py                                        (528 lines)
-   26. core/thermochromic.py                                        (75 lines)
-   27. docs/brutal_reality_check.md                                 (714 lines)
-   28. docs/hardware/Phase11_Hardware_BOM.md                        (256 lines)
-   29. docs/hardware/Phase11_Shopping_Links_With_Laird.md           (261 lines)
-   30. docs/hardware/Phase11_Shopping_List_$300.md                  (361 lines)
-   31. docs/phase7_control_baseline.md                              (295 lines)
-   32. environment.yml                                              (11 lines)
-   33. mcp/__init__.py                                              (1 lines)
-   34. mcp/consciousness_mcp_server.py                              (509 lines)
-   35. mcp/consciousness_server.py                                  (289 lines)
-   36. mcp/mcp-config.json                                          (16 lines)
+   12. appendices/__init__.py                                       (1 lines)
+   13. appendices/appendix_a_base_simulation.py                     (361 lines)
+   14. appendices/appendix_b_system_graph.py                        (254 lines)
+   15. appendices/appendix_c_recursive_reflection.py                (246 lines)
+   16. consciousness_cli.py                                         (165 lines)
+   17. core/__init__.py                                             (99 lines)
+   18. core/base_snn.py                                             (164 lines)
+   19. core/claude_interface.py                                     (587 lines)
+   20. core/consciousness_enhancer.py                               (651 lines)
+   21. core/energy.py                                               (137 lines)
+   22. core/enhanced_consciousness.py                               (550 lines)
+   23. core/history.py                                              (70 lines)
+   24. core/neural_router.py                                        (528 lines)
+   25. core/thermochromic.py                                        (75 lines)
+   26. docs/brutal_reality_check.md                                 (714 lines)
+   27. docs/hardware/Phase11_Hardware_BOM.md                        (256 lines)
+   28. docs/hardware/Phase11_Shopping_Links_With_Laird.md           (261 lines)
+   29. docs/hardware/Phase11_Shopping_List_$300.md                  (361 lines)
+   30. docs/phase7_control_baseline.md                              (295 lines)
+   31. environment.yml                                              (11 lines)
+   32. mcp/__init__.py                                              (1 lines)
+   33. mcp/consciousness_mcp_server.py                              (509 lines)
+   34. mcp/consciousness_server.py                                  (289 lines)
+   35. mcp/mcp-config.json                                          (16 lines)
+   36. patents/Energy_Bounded_Recursive_Control_System.txt          (193 lines)
    37. patents/Filing_Package_Index.md                              (231 lines)
    38. patents/Patent_A_Energy_Loop.md                              (470 lines)
    39. patents/Patent_B_Self_Observation.md                         (366 lines)
    40. patents/Patent_C_Cognitive_Fallback.md                       (588 lines)
    41. patents/uspto_formatted/FILING_INSTRUCTIONS.md               (289 lines)
-   42. patents/uspto_formatted/Patent_A_Drawings_Description.txt    (381 lines)
+   42. patents/uspto_formatted/Patent_A_Drawings_Description.txt    (502 lines)
    43. patents/uspto_formatted/Patent_A_USPTO.txt                   (229 lines)
    44. patents/uspto_formatted/Patent_B_Drawings_Description.txt    (334 lines)
    45. patents/uspto_formatted/Patent_B_USPTO.txt                   (159 lines)
@@ -1664,7 +1664,7 @@ The architecture follows a layered approach, each building upon the previous:
 | Layer | Function | Key Components |
 |-------|----------|----------------|
 | **1. Outer Membrane** | Light input, color shift, signal modulation | Printed perovskite/ITO layers, thermochromic compounds |
-| **2. Sensing Pads** | Light-to-warmth interpretation, multimodal input |pyroelectrics, IR sensors, thermistors, pyroelectric crystals |
+| **2. Sensing Pads** | Light-to-warmth interpretation, multimodal input | Photodiodes, IR sensors, thermistors, pyroelectric crystals |
 | **3. Optical Bundles** | Signal harvest, harness distribution | Multi-mode fiber optic strands, conductive nanowires |
 | **4. Neuromorphic CPU** | Event-driven processing, spike-based decisions | Intel Loihi-style chip, SNN architecture |
 | **5. Servo System** | Physical actuation, micro-movements | PWM-controlled servos, nearly-locked joints |
@@ -1973,11 +1973,6 @@ Inspired by biological systems, neuromorphic computing research, and the emergen
 
 **Received January 22, 2026 | 2:00 AM**
 *While resting. Listening. Calm and clear.*
-
-
-================================================================================
-FILE: REPO_DUMP_FOR_REVIEW.txt
-================================================================================
 
 
 ================================================================================
@@ -8702,6 +8697,204 @@ FILE: mcp/mcp-config.json
 
 
 ================================================================================
+FILE: patents/Energy_Bounded_Recursive_Control_System.txt
+================================================================================
+ENERGY-BOUNDED RECURSIVE CONTROL SYSTEM: REFERENCE ARCHITECTURE
+
+Kevin Christopher Ward
+Moreno Valley, California, United States
+January 30, 2026
+
+
+REFERENCE SIGNAL FLOW DIAGRAM
+
+
+┌───────────────────────────────────────────────────────────┐
+│                   PHYSICAL ENVIRONMENT                     │
+└───────────────┬───────────────────────────────┬───────────┘
+                │                               │
+        (Light / Temp / Force)          (Mechanical Load)
+                │                               │
+                ▼                               ▼
+┌────────────────────────┐          ┌────────────────────────┐
+│   SENSOR INTERFACE     │          │   ENERGY HARVESTING     │
+│  (BH1750, DS18B20,     │          │  (Piezo → Rectifier →   │
+│   Piezo Input)         │          │   Supercap)             │
+└───────────────┬────────┘          └───────────────┬────────┘
+                │                                   │
+                ▼                                   ▼
+┌───────────────────────────────────────────────────────────┐
+│                NEUROMORPHIC CORE (SNN)                     │
+│                                                           │
+│  • Spiking Neurons (Leaky Integrate-and-Fire)             │
+│  • Membrane Dynamics: V(t) = V(t-1) x leak + I_adj       │
+│  • Optional STDP (Spike-Timing Dependent Plasticity)      │
+│  • Activity-Dependent Energy Cost: base + k(spikes/N)^2   │
+└───────────────┬───────────────────────────────┬───────────┘
+                │                               │
+                │                               │
+                ▼                               ▼
+┌────────────────────────┐          ┌────────────────────────┐
+│  RECURSIVE REFLECTION  │          │   ENERGY GOVERNOR       │
+│                        │          │                        │
+│  • Prior State Memory  │          │  • Storage Level       │
+│  • Output Feedback     │◄────────►│  • Cost Function       │
+│  • Temporal Context    │          │  • Activity Damping    │
+└───────────────┬────────┘          └───────────────┬────────┘
+                │                                   │
+                ▼                                   ▼
+┌───────────────────────────────────────────────────────────┐
+│            COGNITIVE MODULATION LAYER                      │
+│                                                           │
+│  • Attention Weighting                                    │
+│  • Intention Bias                                         │
+│  • Contextual Suppression / Amplification                 │
+│  • (Optional) External Advisory Input                     │
+└───────────────┬───────────────────────────────┬───────────┘
+                │                               │
+                ▼                               ▼
+┌────────────────────────┐          ┌────────────────────────┐
+│   NEURAL ROUTER        │          │   TELEMETRY & LOGGING   │
+│                        │          │                        │
+│  • Priority Arbitration│          │  • Energy              │
+│  • Energy Gating       │          │  • State               │
+│  • Congestion Control  │          │  • Reflection Metrics  │
+└───────────────┬────────┘          └────────────────────────┘
+                │
+                ▼
+┌───────────────────────────────────────────────────────────┐
+│               ACTUATION & RESPONSE                         │
+│                                                           │
+│  • Servo Control (PWM-driven, position feedback)          │
+│  • Mechanical Interaction (physical work output)          │
+│  • Environmental Perturbation (closes sensory loop)       │
+└───────────┬───────────────────────────────┬───────────────┘
+            │                               │
+            │  (perturbs environment)        │  (generates mechanical load)
+            │                               │
+            ▼                               ▼
+    Back to PHYSICAL              Back to ENERGY
+    ENVIRONMENT (top)             HARVESTING (top right)
+
+
+FEEDBACK LOOPS:
+
+    A. ENERGY LOOP (bold):     Actuation → Mechanical Load → Energy
+                               Harvesting → Neuromorphic Core
+    B. REFLECTION LOOP (dotted): Neuromorphic Core → Recursive Reflection
+                               → Neuromorphic Core (one-step delay)
+    C. SENSORY LOOP (dashed):  Actuation → Environment → Sensor Interface
+                               → Neuromorphic Core
+    D. REGULATION LOOP (thin): Energy Harvesting → Energy Governor ↔
+                               Recursive Reflection → Cognitive Modulation
+
+
+SYSTEM DESCRIPTION
+
+This document describes the reference architecture for an energy-bounded
+recursive control system. The system is physically grounded: a spiking
+neural network receives environmental sensor input, processes it through
+leaky integrate-and-fire neuron dynamics, and produces motor actuation
+commands. The motor activity generates mechanical energy that is harvested
+through piezoelectric transduction, rectified, and stored in a
+supercapacitor. This harvested energy powers the neural network, closing a
+self-sustaining energy loop. All computation is constrained by real-time
+energy availability derived from the system's own physical interaction with
+its environment. The system cannot operate beyond its energy budget. An
+energy governor enforces activity-dependent cost (quadratic in spike rate),
+ensuring that neural computation remains bounded. A recursive reflection
+module feeds the network's prior aggregate output back as input at
+configurable gain, providing temporal context for state-dependent
+processing. The energy governor and reflection module are bidirectionally
+coupled: energy state modulates reflection gain, while reflection-driven
+activity influences energy consumption. A cognitive modulation layer applies
+attention weighting, intention bias, and contextual gating to the neural
+output before it reaches the actuator. When an external advisory system is
+available, it provides modulation signals; when disconnected, the system
+self-regulates based on energy state alone.
+
+
+SCOPE AND LIMITATIONS
+
+No claim is made regarding phenomenological consciousness, subjective
+experience, qualia, or sentience. The system described herein is an
+entirely operational, measurable engineering artifact. All system behavior
+is deterministic and fully characterized by explicit mathematical equations
+with published validation thresholds. The term "recursive reflection"
+refers to a signal feedback mechanism with configurable gain, not to any
+form of introspection or awareness. The term "cognitive modulation" refers
+to computational parameter adjustment, not to any form of thought or
+understanding. Every claim associated with this architecture pertains to
+measurable, falsifiable properties of signal processing, energy dynamics,
+and control system behavior. The system has been validated through a
+rigorous experimental framework comprising a null-hypothesis control
+configuration (energy depletes to -4,697 mWh after 2000 steps) and an
+alternative-hypothesis experimental configuration (energy grows to +4,170
+mWh after 2000 steps), with all validation claims documented as explicit
+pass/fail thresholds reproducible via version-controlled source code.
+
+
+ASSOCIATED PATENT APPLICATIONS
+
+This reference architecture is described in three co-pending provisional
+patent applications filed January 30, 2026:
+
+    Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop for
+    Autonomous Cognitive Systems (11 claims)
+
+    Patent B: Configurable Recursive Self-Observation Method and System for
+    Spiking Neural Networks with Dynamic Reflection Coefficient Modulation
+    (10 claims)
+
+    Patent C: Method and System for Autonomous Self-Regulation and Cognitive
+    Resynchronization in Neural Processing Systems During Disconnection from
+    External Control Layers (12 claims)
+
+Total: 33 claims across 3 applications.
+
+
+VALIDATION SUMMARY
+
+Phase 7 Control Baseline (5 claims, all PASS):
+    A. Closed-loop continuity — all channels have 2000 data points
+    B. Boundedness — all state variables remain within physical limits
+    C. Robustness under noise — Std(theta) <= 45 deg
+    D. Input-output gain — corr(L, theta) >= 0.2
+    E. Saturation ratio — sat_theta <= 0.20
+
+Phase 8 STDP (3 claims, all PASS):
+    F8.1. Weight entropy decreases (2.95 → 2.02 bits)
+    F8.2. STDP mutual information > 1.2x frozen (measured: 6.52x)
+    F8.3. Weight convergence (late delta < 10% of early delta)
+
+Energy Self-Sustainability:
+    Control (EnergyConfig): -4,697 mWh at 2000 steps (fails)
+    Experimental (BalancedEnergyConfig): +4,170 mWh at 2000 steps (passes)
+
+
+HARDWARE REFERENCE DESIGN
+
+    Microcontroller: Raspberry Pi Pico (RP2040)
+    Actuator: SG90 micro servo
+    Energy Harvester: 27mm piezoelectric disc + Laird ferrite-backed inductor
+    Sensors: BH1750 (light), DS18B20 (temperature), piezo (force)
+    Output: WS2812B RGB LED (state visualization)
+    Total BOM: < $25
+
+
+REPRODUCIBILITY
+
+All source code, validation scripts, and experimental parameters are
+available in the public repository:
+
+    https://github.com/DarkWinD90/Consciousness_Env
+
+Any validated state can be reproduced exactly via git tags:
+
+    git checkout v1.0.0-phase8-stdp
+
+
+================================================================================
 FILE: patents/Filing_Package_Index.md
 ================================================================================
 # PATENT FILING PACKAGE — CONSOLIDATED INDEX
@@ -10701,9 +10894,10 @@ placement and interconnections for the physical embodiment.
 FIG. 7 is a validation results summary table confirming all falsifiable
 claims pass the specified thresholds.
 
-FIG. 8 is an end-to-end signal flow diagram showing the complete path from
-sensor input through neural processing, cognitive modulation, motor actuation,
-energy harvesting, and self-observation feedback in a single unified view.
+FIG. 8 is a reference architecture diagram of the energy-bounded recursive
+control system showing the canonical signal flow from sensor interface through
+neuromorphic core, recursive reflection, energy governor, cognitive modulation,
+neural router, and actuation, with energy harvesting feedback.
 
 
 DETAILED DESCRIPTION OF THE DRAWINGS
@@ -10955,86 +11149,206 @@ Row F8.3: Late weight delta < 10% early | ratio | 0.00% | < 10% | PASS
 Footer: "All claims validated. System is reproducible via git tags."
 
 
-FIG. 8 — End-to-End Signal Flow Diagram
+FIG. 8 — Energy-Bounded Recursive Control Architecture
 
-This figure shows the complete signal path through the entire system in a
-single horizontal flow diagram with feedback loops. This is the master
-overview diagram that captures all pathways in one view.
+This figure is the canonical embodiment and reference signal flow for the
+entire system. It shows the complete architecture as a vertically stacked
+block diagram with bidirectional control paths and energy feedback. This is
+the primary reference figure for patent examination.
 
-Layout (left to right, with feedback loops returning):
+System operation is constrained by real-time energy availability derived from
+physical interaction with the environment, thereby ensuring bounded,
+non-abstract execution.
 
-Left side — Input:
-    [ENVIRONMENT] (cloud shape)
-        |
-        v
-    [Sensors] — rectangle
-    Label: "Light, Temperature, Pressure"
-    Label below: "L1-L2: Transduction"
 
-Center-left — Neural Processing:
-    [Spiking Neural Network] — large rectangle, bold border
-    Label inside: "N LIF Neurons"
-    Label inside: "Spike Pattern Encoding"
-    Two inputs entering from left:
-        - Solid arrow from Sensors: "Sensor Input"
-        - Dotted arrow from bottom: "Self-Observation Feedback"
-    One input entering from top:
-        - Dashed arrow: "Cognitive Modulation"
-    Label above top arrow: "reflection_coeff, modulation"
+Layout — Vertically stacked functional blocks with lateral connections:
 
-Center — Cognitive Modulation:
-    [Cognitive Modulation] — rectangle above the main flow
-    Label inside: "External AI Control Layer"
-    Label inside: "OR Internal Energy-Aware Regulation"
-    Dashed bidirectional arrow to SNN
-    Label: "Adjusts reflection_coeff and activity level"
 
-Center-right — Motor Output:
-    [Motor Actuator] — rectangle
-    Label: "Servo / Stepper / Linear"
-    Label: "target_angle = clip(output x 180)"
-    Arrow from SNN to Actuator: "Neural Output (spike pattern -> motor command)"
+TOP — Physical Environment:
+    ┌───────────────────────────────────────────────────────────┐
+    │                   PHYSICAL ENVIRONMENT                     │
+    └───────────────┬───────────────────────────────┬───────────┘
 
-Right side — Energy Harvesting:
-    [Piezo Harvester] — rectangle
-    Label: "Friction -> Voltage"
-    Mechanical coupling line from Motor Actuator (zigzag)
+    Two downward arrows from Environment:
+    Left arrow: "(Light / Temp / Force)" — to Sensor Interface
+    Right arrow: "(Mechanical Load)" — to Energy Harvesting
 
-    [Thermal Harvester] — rectangle below Piezo
-    Label: "delta_T -> Voltage"
-    Arrow from environment heat
 
-    Both harvesters feed into:
-    [Energy Gate] — diamond shape
-    Label: "Net = Harvest - Cost"
-    Decision: "Net > 0?"
-    Yes arrow (bold): "Self-Sustaining"
-    No arrow (thin): "Energy Depleting"
+TIER 1 — Dual Input (left and right, same level):
 
-Bottom — Feedback Loops (returning right to left):
+    Left block:
+    ┌────────────────────────┐
+    │   SENSOR INTERFACE     │
+    │  (BH1750, DS18B20,     │
+    │   Piezo Input)         │
+    └───────────────┬────────┘
+    Label: Specific sensor ICs for light (BH1750), temperature (DS18B20),
+    and force (piezo input)
+    Arrow down to Neuromorphic Core
 
-    Feedback Loop 1 — Energy:
-    Bold arrow from Energy Gate back to SNN (along bottom)
-    Label: "Harvested Energy Powers Neural Network"
-    Label: "ENERGY LOOP CLOSES HERE"
+    Right block:
+    ┌────────────────────────┐
+    │   ENERGY HARVESTING     │
+    │  (Piezo → Rectifier →   │
+    │   Supercap)             │
+    └───────────────┬────────┘
+    Label: Physical energy transduction chain: piezoelectric element through
+    full-bridge rectifier to supercapacitor storage
+    Arrow down to Neuromorphic Core
 
-    Feedback Loop 2 — Self-Observation:
-    Dotted arrow from SNN output back to SNN input (along bottom, below energy)
-    Label: "previous_output x reflection_coeff"
-    Label: "REFLECTION LOOP CLOSES HERE"
-    Delay element (z^-1 block) on this path
 
-Key annotations:
-- The main forward path (Sensors -> SNN -> Actuator -> Harvester) drawn as
-  solid bold arrows
-- The energy feedback path drawn as bold dashed arrows
-- The self-observation feedback path drawn as dotted arrows
-- The cognitive modulation path drawn as thin dashed arrows from above
-- All four pathways should be visually distinguishable by line style
+TIER 2 — Central Processing (full width):
+    ┌───────────────────────────────────────────────────────────┐
+    │                NEUROMORPHIC CORE (SNN)                     │
+    │                                                           │
+    │  • Spiking Neurons                                        │
+    │  • Membrane Dynamics                                      │
+    │  • Optional STDP                                          │
+    │  • Activity-Dependent Energy Cost                         │
+    └───────────────┬───────────────────────────────┬───────────┘
 
-Summary label at bottom of figure:
-"Complete self-sustaining cognitive loop: Sense -> Process -> Modulate ->
-Actuate -> Harvest -> Power -> Self-Observe -> Loop"
+    Two downward arrows from Neuromorphic Core:
+    Left arrow: to Recursive Reflection
+    Right arrow: to Energy Governor
+
+    Internal labels:
+    - "Spiking Neurons" — leaky integrate-and-fire neural population
+    - "Membrane Dynamics" — V(t) = V(t-1) x leak + I_adjusted
+    - "Optional STDP" — spike-timing dependent plasticity (opt-in)
+    - "Activity-Dependent Energy Cost" — quadratic: base + k x (spikes/N)^2
+
+
+TIER 3 — Dual Processing (left and right, same level, BIDIRECTIONAL):
+
+    Left block:
+    ┌────────────────────────┐
+    │  RECURSIVE REFLECTION  │
+    │                        │
+    │  • Prior State Memory  │
+    │  • Output Feedback     │
+    │  • Temporal Context    │
+    └───────────────┬────────┘
+    Label: Self-observation mechanism — feeds aggregate output at timestep t
+    back as input at timestep t+1, scaled by reflection coefficient
+
+    Right block:
+    ┌────────────────────────┐
+    │   ENERGY GOVERNOR       │
+    │                        │
+    │  • Storage Level       │
+    │  • Cost Function       │
+    │  • Activity Damping    │
+    └───────────────┬────────┘
+    Label: Energy constraint enforcement — monitors storage level, applies
+    activity-dependent cost function, damps activity when energy is low
+
+    CRITICAL: Bidirectional arrow between Recursive Reflection and
+    Energy Governor (◄────────►)
+    Label: "Energy state modulates reflection gain; reflection state
+    influences energy cost through activity level"
+
+    Both blocks have arrows downward to Cognitive Modulation Layer
+
+
+TIER 4 — Modulation (full width):
+    ┌───────────────────────────────────────────────────────────┐
+    │            COGNITIVE MODULATION LAYER                      │
+    │                                                           │
+    │  • Attention Weighting                                    │
+    │  • Intention Bias                                         │
+    │  • Contextual Suppression / Amplification                 │
+    │  • (Optional) External Advisory Input                     │
+    └───────────────┬───────────────────────────────┬───────────┘
+
+    Two downward arrows:
+    Left arrow: to Neural Router
+    Right arrow: to Telemetry & Logging
+
+    Internal labels:
+    - "Attention Weighting" — prioritizes input channels
+    - "Intention Bias" — goal-directed modulation
+    - "Contextual Suppression / Amplification" — state-dependent gating
+    - "(Optional) External Advisory Input" — external control layer when connected
+
+
+TIER 5 — Output (left and right, same level):
+
+    Left block:
+    ┌────────────────────────┐
+    │   NEURAL ROUTER        │
+    │                        │
+    │  • Priority Arbitration│
+    │  • Energy Gating       │
+    │  • Congestion Control  │
+    └───────────────┬────────┘
+    Label: Signal arbitration — routes neural output to actuators based on
+    priority, gates signals when energy is insufficient, prevents output
+    saturation through congestion control
+    Arrow down to Actuation & Response
+
+    Right block:
+    ┌────────────────────────┐
+    │   TELEMETRY & LOGGING   │
+    │                        │
+    │  • Energy              │
+    │  • State               │
+    │  • Reflection Metrics  │
+    └────────────────────────┘
+    Label: Observability output — records energy level, system state, and
+    reflection metrics for validation and monitoring
+    No downward arrow (terminal output)
+
+
+TIER 6 — Actuation (full width):
+    ┌───────────────────────────────────────────────────────────┐
+    │               ACTUATION & RESPONSE                         │
+    │                                                           │
+    │  • Servo Control                                          │
+    │  • Mechanical Interaction                                 │
+    │  • Environmental Perturbation                             │
+    └───────────────────────────────────────────────────────────┘
+
+    Label: Physical output — servo control drives mechanical interaction,
+    which perturbs the environment (closing the loop back to Physical
+    Environment at top) and generates mechanical load (feeding Energy
+    Harvesting at Tier 1)
+
+    Two upward feedback arrows from Actuation:
+    1. Arrow back to PHYSICAL ENVIRONMENT (top): "Environmental Perturbation"
+    2. Arrow back to ENERGY HARVESTING (Tier 1 right): "Mechanical Load
+       generates piezoelectric energy"
+
+
+FEEDBACK LOOPS (mark each distinctly):
+
+    Loop A — Energy Harvesting Loop:
+    Actuation → Mechanical Load → Energy Harvesting → Neuromorphic Core
+    Style: Bold solid arrows
+    Label: "ENERGY LOOP — Motor activity generates power for neural computation"
+
+    Loop B — Recursive Reflection Loop:
+    Neuromorphic Core → Recursive Reflection → Neuromorphic Core
+    Style: Dotted arrows
+    Label: "REFLECTION LOOP — Prior state observation at configurable gain"
+
+    Loop C — Environmental Perturbation Loop:
+    Actuation → Environment → Sensor Interface → Neuromorphic Core
+    Style: Dashed arrows
+    Label: "SENSORY LOOP — Actions change environment, environment changes input"
+
+    Loop D — Energy Governor Feedback:
+    Energy Harvesting → Energy Governor ↔ Recursive Reflection → Cognitive Modulation
+    Style: Thin solid arrows
+    Label: "REGULATION LOOP — Energy availability constrains all processing"
+
+
+Key annotations at bottom of figure:
+    "This architecture is physically grounded: all computation is constrained
+     by real-time energy availability derived from the system's own mechanical
+     interaction with its environment."
+
+    "No external power source is required for sustained operation under the
+     balanced energy configuration."
 
 Sheet numbering: "8/8" at top center
 
@@ -11168,9 +11482,9 @@ EXPERIMENTAL VALIDATION
 
 [0030] Phase 8 validation incorporates Spike-Timing Dependent Plasticity (STDP) for synaptic learning with three claims that all pass. Claim F8.1 confirms weight entropy decreases from 2.9546 to 2.0151 bits with a decrease of 0.9395 bits, demonstrating structure emergence. Claim F8.2 confirms STDP mutual information exceeds 1.2 times frozen mutual information with a measured ratio of 6.52 times, demonstrating learning improves encoding. Claim F8.3 confirms weight convergence with late delta less than 10 percent of early delta at a measured ratio of 0.00 percent.
 
-End-to-End Signal Flow
+Reference Architecture
 
-[0031] Referring to FIG. 8, the complete end-to-end signal flow of the system is shown. Environmental sensors transduce physical stimuli into electrical signals. These signals enter the spiking neural network, which encodes them as spike patterns. The spike patterns pass through a cognitive modulation stage where an external cognitive control layer or internal energy-aware regulation adjusts processing parameters including reflection coefficient and activity level. The modulated neural output is routed to the motor actuator, which produces physical movement. The movement generates mechanical energy through piezoelectric transduction, and the thermal differential generates additional energy through thermoelectric transduction. The harvested energy passes through an energy gate that determines whether sufficient energy exists to sustain operation. The energy feeds back to power the spiking neural network, closing the self-sustaining loop. Simultaneously, the neural network's aggregate output at each timestep is fed back as self-observation input at the next timestep through the reflection feedback pathway. This single diagram captures the complete closed-loop operation of the system: sensing, neural processing, pattern encoding, cognitive modulation, routing, actuation, energy harvesting, and self-observation feedback.
+[0031] Referring to FIG. 8, the canonical embodiment of the energy-bounded recursive control architecture is shown as the reference signal flow for the complete system. The physical environment provides light, temperature, and force stimuli to a sensor interface comprising specific transducers (BH1750 light sensor, DS18B20 temperature sensor, piezoelectric force input). Simultaneously, mechanical load from the environment feeds an energy harvesting subsystem (piezoelectric element through rectifier to supercapacitor). Both pathways converge at the neuromorphic core, a spiking neural network with leaky integrate-and-fire neurons, optional spike-timing dependent plasticity, and activity-dependent energy cost. The neuromorphic core feeds two parallel subsystems: a recursive reflection module that maintains prior state memory and output feedback for temporal context, and an energy governor that monitors storage level, applies cost functions, and damps activity when reserves are low. These two subsystems are bidirectionally coupled, such that energy state modulates reflection gain while reflection-driven activity influences energy cost. Both feed into a cognitive modulation layer that applies attention weighting, intention bias, and contextual suppression or amplification, with optional external advisory input when a control layer is connected. The modulated output passes through a neural router with priority arbitration, energy gating, and congestion control, then drives the actuation and response stage comprising servo control and mechanical interaction. The actuation perturbs the physical environment and generates mechanical load that feeds energy harvesting, closing the self-sustaining loop. As shown in FIG. 8, system operation is constrained by real-time energy availability derived from physical interaction with the environment, thereby ensuring bounded, non-abstract execution.
 
 Scope of Claims
 
