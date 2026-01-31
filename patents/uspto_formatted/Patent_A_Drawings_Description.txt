@@ -482,6 +482,10 @@ Key annotations at bottom of figure:
     "No external power source is required for sustained operation under the
      balanced energy configuration."
 
+FIG. 8 illustrates one exemplary embodiment; alternative embodiments may
+omit, combine, or substitute individual modules while preserving the
+energy-bounded recursive control loop.
+
 Sheet numbering: "8/8" at top center
 
 
