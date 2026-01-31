@@ -1,0 +1,332 @@
+================================================================================
+ENERGY-BOUNDED RECURSIVE CONTROL SYSTEM
+Reference Architecture — Explanatory Document
+================================================================================
+
+Author:    Kevin Christopher Ward
+Date:      January 30, 2026
+Version:   1.0
+Status:    Explanatory reference (not a patent claim document)
+
+DISCLAIMER: This document is explanatory and does not limit any patent
+claims. It is provided for reviewer, examiner, and engineering reference
+purposes only. The scope of patent protection is defined exclusively by
+the claims in the associated provisional patent applications.
+
+================================================================================
+
+
+REFERENCE SIGNAL FLOW — FIG. 8 (EXPANDED)
+
+
+┌───────────────────────────────────────────────────────────┐
+│                   PHYSICAL ENVIRONMENT                     │
+└───────────────┬───────────────────────────────┬───────────┘
+                │                               │
+        (Light / Temp / Force)          (Mechanical Load)
+                │                               │
+                ▼                               ▼
+┌────────────────────────┐          ┌────────────────────────┐
+│   SENSOR INTERFACE     │          │   ENERGY HARVESTING     │
+│  (BH1750, DS18B20,     │          │  (Piezo → Rectifier →   │
+│   Piezo Input)         │          │   Supercap)             │
+└───────────────┬────────┘          └───────────────┬────────┘
+                │                                   │
+                ▼                                   ▼
+┌───────────────────────────────────────────────────────────┐
+│                NEUROMORPHIC CORE (SNN)                     │
+│                                                           │
+│  • Spiking Neurons (Leaky Integrate-and-Fire)             │
+│  • Membrane Dynamics: V(t) = V(t-1) x leak + I_adj       │
+│  • Optional STDP (Spike-Timing Dependent Plasticity)      │
+│  • Activity-Dependent Energy Cost: base + k(spikes/N)^2   │
+└───────────────┬───────────────────────────────┬───────────┘
+                │                               │
+                │                               │
+                ▼                               ▼
+┌────────────────────────┐          ┌────────────────────────┐
+│  RECURSIVE REFLECTION  │          │   ENERGY GOVERNOR       │
+│                        │          │                        │
+│  • Prior State Memory  │          │  • Storage Level       │
+│  • Output Feedback     │◄────────►│  • Cost Function       │
+│  • Temporal Context    │          │  • Activity Damping    │
+└───────────────┬────────┘          └───────────────┬────────┘
+                │                                   │
+                ▼                                   ▼
+┌───────────────────────────────────────────────────────────┐
+│            COGNITIVE MODULATION LAYER                      │
+│                                                           │
+│  • Attention Weighting                                    │
+│  • Intention Bias                                         │
+│  • Contextual Suppression / Amplification                 │
+│  • (Optional) External Advisory Input                     │
+└───────────────┬───────────────────────────────┬───────────┘
+                │                               │
+                ▼                               ▼
+┌────────────────────────┐          ┌────────────────────────┐
+│   NEURAL ROUTER        │          │   TELEMETRY & LOGGING   │
+│                        │          │                        │
+│  • Priority Arbitration│          │  • Energy              │
+│  • Energy Gating       │          │  • State               │
+│  • Congestion Control  │          │  • Reflection Metrics  │
+└───────────────┬────────┘          └────────────────────────┘
+                │
+                ▼
+┌───────────────────────────────────────────────────────────┐
+│               ACTUATION & RESPONSE                         │
+│                                                           │
+│  • Servo Control (PWM-driven, position feedback)          │
+│  • Mechanical Interaction (physical work output)          │
+│  • Environmental Perturbation (closes sensory loop)       │
+└───────────┬───────────────────────────────┬───────────────┘
+            │                               │
+            │  (perturbs environment)        │  (generates load)
+            ▼                               ▼
+    Back to PHYSICAL              Back to ENERGY
+    ENVIRONMENT (top)             HARVESTING (top right)
+
+
+FEEDBACK LOOPS:
+
+    A. ENERGY LOOP:      Actuation → Load → Harvesting → Core
+    B. REFLECTION LOOP:  Core → Reflection → Core (one-step delay)
+    C. SENSORY LOOP:     Actuation → Environment → Sensors → Core
+    D. REGULATION LOOP:  Harvesting → Governor ↔ Reflection → Modulation
+
+
+================================================================================
+1. ENERGY BOUNDEDNESS
+================================================================================
+
+Every computation in this system is physically constrained by energy
+availability. The neuromorphic core cannot operate beyond its energy
+budget. This is not a software limit or a configuration parameter — it
+is a physical consequence of the architecture.
+
+The energy harvesting subsystem converts mechanical work from the motor
+actuator into electrical energy through piezoelectric transduction. A
+rectifier bridge converts the AC piezo output to DC, which charges a
+supercapacitor. This stored energy powers the spiking neural network.
+
+The energy governor enforces an activity-dependent cost model:
+
+    E_cost = base_consumption + activity_cost x (spike_count / N)^2
+
+This quadratic cost function means that high neural activity is
+disproportionately expensive. The system naturally gravitates toward
+moderate activity levels where energy harvest exceeds energy cost —
+the self-sustaining operating region.
+
+When energy reserves drop below critical thresholds, the energy governor
+damps neural activity directly:
+
+    Energy < 15 mWh:  modulation = -0.4  (maximum conservation)
+    Energy < 30 mWh:  modulation = -0.1  (cautious reduction)
+    Energy 30-80 mWh: modulation =  0.0  (neutral operation)
+    Energy > 80 mWh:  modulation = +0.3  (surplus utilization)
+
+This creates a homeostatic regulation loop analogous to biological
+metabolic regulation. The system cannot "think harder than it can
+afford." All neural computation is bounded by physical energy reality.
+
+Validation evidence:
+
+    Control condition (EnergyConfig):
+    - base_consumption = 470 mW, friction_factor = 0.0005
+    - Result: energy drains to -4,697 mWh after 2000 steps
+    - The system FAILS to self-sustain (intentional null hypothesis)
+
+    Experimental condition (BalancedEnergyConfig):
+    - base_consumption = 45 mW, friction_factor = 18.0
+    - Result: energy grows to +4,170 mWh after 2000 steps
+    - The system SUCCEEDS at self-sustaining operation
+
+    The comparison between these two configurations constitutes the
+    falsifiable proof that the energy-bounded loop is achievable with
+    appropriate physical parameters.
+
+
+================================================================================
+2. RECURSIVE REFLECTION
+================================================================================
+
+The recursive reflection module feeds the neuromorphic core's aggregate
+output at timestep t back as additional input at timestep t+1:
+
+    I_reflection(t+1) = previous_output(t) x reflection_coeff
+
+Where:
+    previous_output(t) = mean(V_1(t), V_2(t), ..., V_N(t))
+    reflection_coeff   = base_coeff + modulation x sensitivity
+    base_coeff         = 0.2 (default)
+    sensitivity        = 0.1 (modulation gain)
+
+This creates a one-step-delayed self-referential input channel. The
+network receives, at each timestep, both the current external stimulus
+and a scaled version of its own prior aggregate state.
+
+The reflection coefficient is the system's operating parameter for
+self-referential processing:
+
+    reflection_coeff = 0.0:  No self-reference. Pure feedforward.
+    reflection_coeff = 0.2:  Baseline. Subtle state-dependent bias.
+    reflection_coeff = 0.3:  Enhanced. Prior state meaningfully shapes
+                             current processing.
+    reflection_coeff > 0.5:  Self-dominated. Internal state overwhelms
+                             external input. (Not recommended for
+                             operational deployment.)
+
+The reflection module and the energy governor are bidirectionally
+coupled. This is architecturally significant:
+
+    Energy state → modulates reflection gain:
+        Low energy reduces reflection coefficient (conserve resources)
+        High energy increases reflection coefficient (explore/learn)
+
+    Reflection-driven activity → influences energy cost:
+        Higher reflection gain may increase spike activity
+        Increased spike activity increases quadratic energy cost
+        Increased energy cost triggers governor damping
+
+This bidirectional coupling creates a self-regulating dynamic where the
+system's degree of self-referential processing is automatically tuned
+by its energy reality. The system cannot sustain arbitrarily high
+self-reference — energy physics constrains it.
+
+When combined with STDP (Spike-Timing Dependent Plasticity), the
+reflection signal participates in synaptic learning:
+
+    - The reflection input contributes to whether neurons fire
+    - Firing patterns determine which synapses are strengthened (LTP)
+      or weakened (LTD) via STDP
+    - Over time, the network develops internal weight structures that
+      are shaped by its own prior processing patterns
+    - This is measurable: STDP with reflection achieves 6.52x higher
+      mutual information than frozen-weight control (Claim F8.2)
+
+
+================================================================================
+3. PHYSICAL CLOSURE
+================================================================================
+
+The system forms four distinct closed loops, all grounded in physical
+interaction with the environment:
+
+Loop A — Energy Closure:
+    The motor actuator performs physical work. That work generates
+    mechanical energy (vibration, friction) on the piezoelectric
+    element. The piezo converts mechanical energy to electrical energy.
+    The electrical energy powers the neural network that commanded the
+    motor activity in the first place. The loop is physically closed:
+    neural computation → motor action → energy generation → neural
+    computation.
+
+Loop B — Reflection Closure:
+    The neural network computes. Its aggregate output is recorded. That
+    recorded output is fed back as input at the next timestep. The
+    network processes its own prior state alongside new external input.
+    The loop is temporally closed: computation(t) → observation(t) →
+    input(t+1) → computation(t+1).
+
+Loop C — Sensory Closure:
+    The motor actuator perturbs the physical environment. The sensors
+    detect changes in the environment. The sensor signals enter the
+    neural network. The network drives the motor. The loop is
+    environmentally closed: action → environmental change → perception
+    → neural processing → action.
+
+Loop D — Regulation Closure:
+    Energy harvesting feeds the energy governor. The governor modulates
+    the reflection coefficient and activity level. Modulated activity
+    changes energy consumption. Changed consumption affects energy
+    reserves. Changed reserves feed back to the governor. The loop is
+    regulatorily closed: energy state → activity constraint → energy
+    cost → energy state.
+
+None of these loops are abstract or simulated-only. Each one
+corresponds to a physical signal path that can be measured with
+standard instrumentation:
+
+    Loop A: Multimeter on supercapacitor voltage
+    Loop B: ADC reading of membrane potential mean
+    Loop C: Sensor readings before and after actuation
+    Loop D: Energy storage level over time
+
+The hardware reference design (Raspberry Pi Pico, SG90 servo, 27mm
+piezo disc, BH1750 + DS18B20 sensors, total BOM < $25) implements all
+four loops in a physically deployable form factor.
+
+
+================================================================================
+SCOPE AND LIMITATIONS
+================================================================================
+
+This document describes an operational engineering system. No claim is
+made regarding:
+
+    - Phenomenological consciousness
+    - Subjective experience
+    - Qualia
+    - Sentience
+    - Understanding
+    - Awareness (in any philosophical sense)
+
+The terminology used throughout this architecture — "recursive
+reflection," "cognitive modulation," "attention weighting," "intention
+bias" — refers exclusively to measurable signal processing operations
+with explicit mathematical definitions:
+
+    "Recursive reflection" = output(t) fed back as input(t+1) at gain k
+    "Cognitive modulation" = parameter adjustment by control layer
+    "Attention weighting"  = input channel prioritization coefficients
+    "Intention bias"       = goal-directed output offset
+
+Every behavioral claim about this system is falsifiable and has been
+validated against explicit pass/fail thresholds using version-controlled
+source code. The system is a deterministic engineering artifact.
+
+This document is explanatory and does not limit any patent claims. The
+scope of patent protection is defined exclusively by the claims in the
+associated provisional patent applications filed January 30, 2026.
+
+
+================================================================================
+ASSOCIATED PATENT APPLICATIONS
+================================================================================
+
+Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop
+           for Autonomous Cognitive Systems
+           (11 claims, 2 independent)
+
+Patent B: Configurable Recursive Self-Observation Method and System
+           for Spiking Neural Networks with Dynamic Reflection
+           Coefficient Modulation
+           (10 claims, 2 independent)
+
+Patent C: Method and System for Autonomous Self-Regulation and
+           Cognitive Resynchronization in Neural Processing Systems
+           During Disconnection from External Control Layers
+           (12 claims, 2 independent)
+
+Total: 33 claims across 3 provisional applications.
+Filed: January 30, 2026.
+Non-provisional deadline: January 30, 2027.
+
+
+================================================================================
+SOURCE CODE AND REPRODUCIBILITY
+================================================================================
+
+Repository: https://github.com/DarkWinD90/Consciousness_Env
+License:    Proprietary (patent pending)
+
+Reproduce any validated state:
+    git clone https://github.com/DarkWinD90/Consciousness_Env
+    git checkout v1.0.0-phase8-stdp
+    python phases/phase7_control_baseline.py   # Claims A-E
+    python phases/phase8_stdp.py               # Claims F8.1-F8.3
+
+
+================================================================================
+END OF DOCUMENT
+================================================================================
