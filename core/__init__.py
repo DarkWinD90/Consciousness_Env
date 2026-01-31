@@ -25,6 +25,7 @@ from .base_snn import BaseSNN, SNNConfig
 from .thermochromic import ThermochromicMixin, ColorState
 from .energy import EnergyHarvester, EnergyConfig
 from .history import HistoryTracker
+from .predictive import PredictiveProcessor, PredictiveConfig
 
 # Cognitive Layer Components (Claude Integration)
 from .claude_interface import (
@@ -66,6 +67,7 @@ __all__ = [
     'ThermochromicMixin', 'ColorState',
     'EnergyHarvester', 'EnergyConfig',
     'HistoryTracker',
+    'PredictiveProcessor', 'PredictiveConfig',
 
     # Cognitive Layer - Claude Interface
     'ClaudeNeuralInterface',
