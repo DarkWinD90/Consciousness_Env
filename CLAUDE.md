@@ -332,7 +332,7 @@ v0.5.0-phase7-baseline   7c369d8  Phase 7 claims A-E established
 v0.6.0-mcp-fallback      307c5f6  Autonomous fallback v1.1.0
 v0.7.0-package-fix       517bd26  Package install fix
 v1.0.0-phase8-stdp       80cf3e5  Phase 8 STDP (F8.1-F8.3 PASS + regression PASS)
-v2.0.0-phase9-predictive <hash>   Phase 9 Predictive Processing (F9.1-F9.3 PASS + regression PASS)
+v2.0.0-phase9-predictive 4baa21f  Phase 9 Predictive Processing (F9.1-F9.3 PASS + regression PASS)
 ```
 
 **Reproduce any validated state:**
