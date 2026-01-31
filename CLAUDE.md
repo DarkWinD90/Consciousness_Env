@@ -197,6 +197,19 @@ Consciousness_Env/
 │   ├── __init__.py
 │   └── run_200_step_test.py
 │
+├── patent_drawings/         # USPTO-compliant SVG drawings (37 CFR 1.84)
+│   ├── patent_a/            #   Patent A: 8 figures (fig1-fig8.svg)
+│   ├── patent_b/            #   Patent B: 6 figures (fig1-fig6.svg)
+│   └── patent_c/            #   Patent C: 7 figures (fig1-fig7.svg)
+│
+├── generate_patent_a_drawings.py  # Generates Patent A SVGs
+├── generate_patent_b_drawings.py  # Generates Patent B SVGs
+├── generate_patent_c_drawings.py  # Generates Patent C SVGs
+├── export_drawings_pdf.py         # Exports SVGs to per-patent PDFs
+├── Patent_Drawings_A.pdf          # EFS-Web ready (8 sheets)
+├── Patent_Drawings_B.pdf          # EFS-Web ready (6 sheets)
+├── Patent_Drawings_C.pdf          # EFS-Web ready (7 sheets)
+│
 ├── consciousness_cli.py     # CLI entry point: `consciousness run|appendix|version`
 ├── setup.py                 # Package config (find_packages + py_modules)
 ├── MANIFEST.in              # Source distribution includes
@@ -707,6 +720,7 @@ systems where stopping is not an option (robotics, prosthetics, space).
 | Step | Timeline | Action |
 |------|----------|--------|
 | ✅ 1 | 2026-01-30 | **COMPLETE** — All three provisional patents filed |
+| ✅ 1b | 2026-01-31 | **COMPLETE** — All 21 patent drawings validated (37 CFR 1.84 compliant) |
 | 2 | Month 1-3 (by 2026-04-30) | Validate Phase 8 STDP claims, create git tag history |
 | 3 | Month 3-6 (by 2026-07-30) | Build hardware prototype (Phase 11) for physical reduction to practice |
 | 4 | Month 6-9 (by 2026-10-30) | Document hardware validation results (Claims F11.1-F11.3) |
@@ -890,6 +904,10 @@ The model follows the ARM Holdings pattern:
 | `mcp/consciousness_server.py` | Cognitive layer (stateless) | YES — reasoning interface |
 | `consciousness_cli.py` | CLI entry point | YES — package install path |
 | `setup.py` | Packaging config | YES — __init__.py discovery |
+| `generate_patent_a_drawings.py` | Patent A drawing generation (8 figs) | YES — patent filing |
+| `generate_patent_b_drawings.py` | Patent B drawing generation (6 figs) | YES — patent filing |
+| `generate_patent_c_drawings.py` | Patent C drawing generation (7 figs) | YES — patent filing |
+| `export_drawings_pdf.py` | SVG → PDF export for EFS-Web | YES — patent filing |
 
 ---
 
