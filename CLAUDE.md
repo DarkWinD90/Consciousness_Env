@@ -326,7 +326,7 @@ increments when a new phase with falsifiable claims is validated.
 ```
 v0.1.0-architecture      52cca38  Initial 8-layer architecture
 v0.2.0-energy-physics    1fa4488  Energy physics corrected
-v0.3.0-balanced-energy   1545083  BalancedEnergyConfig (experimental hypothesis)
+v0.3.0-balanced-energy   f76ffe8  BalancedEnergyConfig (experimental hypothesis)
 v0.4.0-mcp-servers       da842a6  MCP physics server operational
 v0.5.0-phase7-baseline   7c369d8  Phase 7 claims A-E established
 v0.6.0-mcp-fallback      307c5f6  Autonomous fallback v1.1.0
