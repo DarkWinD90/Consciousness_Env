@@ -22,6 +22,11 @@ STDP synaptic plasticity with recursive self-observation.
 FIG. 5 is a control diagram showing energy-aware self-observation regulation
 where the reflection coefficient is modulated based on system energy state.
 
+FIG. 6 is an end-to-end signal flow diagram showing how the self-observation
+mechanism integrates within the complete self-sustaining cognitive loop,
+distinguishing the self-observation feedback pathway from the energy feedback
+pathway and the synaptic computation pathway.
+
 
 DETAILED DESCRIPTION OF THE DRAWINGS
 
@@ -231,6 +236,87 @@ Bottom note:
   is abundant"
 
 
+FIG. 6 — End-to-End Signal Flow with Self-Observation Integration
+
+This figure shows the complete signal flow of the self-sustaining cognitive
+loop with the self-observation pathway highlighted as architecturally distinct.
+
+Layout (left to right, with three feedback loops):
+
+Left — Input Stage:
+    [Environmental Sensors] — rectangle
+    Label: "Light, Temperature, Pressure"
+    Arrow right: "Sensor signals"
+
+Center-left — Neural Processing (main focus of this patent):
+    [Spiking Neural Network] — large rectangle, bold border
+    Three distinct input arrows entering from left and bottom:
+        1. Solid arrow from Sensors: "External Input I_ext(t)"
+        2. Dotted arrow from bottom-left: "Self-Observation: previous_output x reflection_coeff"
+           (THIS IS THE PATENT B PATHWAY — drawn bold and labeled prominently)
+        3. Thin arrows between neurons: "Synaptic Computation w_ij x spike_j"
+
+    Inside the SNN rectangle, show:
+        - Small circles for neurons
+        - Label: "V_i(t) = V_i(t-1) x leak + I_ext + I_reflection + I_synaptic"
+        - Label: "output = mean(V_1, V_2, ..., V_N)"
+
+    Output arrow right: "Spike Pattern + Aggregate Output"
+
+Center — Cognitive Modulation:
+    [Cognitive Modulation] — rectangle above main flow
+    Two input arrows:
+        - "External cognitive commands" from above
+        - "Internal energy state" from below
+    Output arrow down to SNN:
+        - "reflection_coeff = base + modulation x sensitivity"
+    Label: "Dynamic reflection coefficient adjustment"
+
+Center-right — Motor + Harvesting:
+    [Motor Actuator] — rectangle
+    Arrow from SNN: "Motor command"
+    [Energy Harvester] — rectangle below
+    Arrow from Motor: "Mechanical energy"
+    Arrow from Harvester back toward SNN (along bottom):
+        "Harvested energy powers SNN"
+    Label: "ENERGY FEEDBACK (Patent A pathway)"
+
+Bottom — Three Feedback Loops (visually distinguished):
+
+    Loop 1 — Self-Observation (Patent B — THIS PATENT):
+        Dotted bold line from SNN output back to SNN input
+        Label: "SELF-OBSERVATION FEEDBACK"
+        Label: "previous_output(t) -> I_reflection(t+1)"
+        Label: "Scaled by reflection_coeff (0.0 to 1.0)"
+        Delay element z^-1 on path
+        THIS LOOP DRAWN MOST PROMINENTLY
+
+    Loop 2 — Energy (Patent A):
+        Dashed line from Harvester back to SNN
+        Label: "ENERGY FEEDBACK"
+        Label: "Harvested energy sustains computation"
+        Drawn less prominently than Loop 1
+
+    Loop 3 — Synaptic (internal):
+        Thin line within SNN rectangle
+        Label: "SYNAPTIC COMPUTATION"
+        Label: "w_ij updated by STDP"
+        Internal to the SNN, not a system-level loop
+
+Legend box:
+    "--- Dotted bold: Self-Observation pathway (this patent)"
+    "--- Dashed: Energy feedback pathway (co-pending Patent A)"
+    "--- Thin: Synaptic computation (internal to SNN)"
+
+Key callout:
+    "The self-observation pathway is architecturally distinct from both
+     the energy feedback and the synaptic computation. It is the only
+     pathway that feeds the network's own aggregate state back as
+     explicit input at configurable gain."
+
+Sheet numbering: "6/6" at top center
+
+
 GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
 
 - Paper size: 8.5 x 11 inches (US Letter)
@@ -242,7 +328,7 @@ GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
 - No color, no grayscale shading (use hatching patterns instead)
 - Line weight: sufficiently heavy for adequate reproduction
 - Each figure labeled: "FIG. 1", "FIG. 2", etc.
-- Sheet numbers at top center: "1/5", "2/5", etc.
+- Sheet numbers at top center: "1/6", "2/6", etc.
 - No frames or borders around drawing area
 - All text in figures must be at least 1/8 inch (3.2 mm) high
 - Reference numerals must be used consistently across all figures

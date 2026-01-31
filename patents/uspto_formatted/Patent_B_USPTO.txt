@@ -89,10 +89,18 @@ EXPERIMENTAL VALIDATION
 
 [0022] The MCP operational path demonstrates that the cognitive control layer dynamically adjusts the reflection coefficient based on pattern type, energy state, and attention allocation. The system's behavior measurably changes with different modulation values. At modulation of negative 0.4 for conservation there is reduced spike activity and lower energy consumption. At modulation of 0.0 for neutral operation there is baseline dynamics. At modulation of positive 0.3 for exploration there is increased spike activity and higher energy consumption.
 
+End-to-End Signal Flow
+
+[0023] Referring to FIG. 6, the complete end-to-end signal flow is shown for a system incorporating recursive self-observation. Environmental sensors produce input signals that enter the spiking neural network. The network encodes these signals as spike patterns while simultaneously receiving self-observation feedback from its own prior aggregate output, scaled by the reflection coefficient. The cognitive modulation stage adjusts the reflection coefficient dynamically based on external cognitive commands or internal energy state. The modulated neural output drives a motor actuator, which generates movement. Energy harvested from that movement powers the network. The self-observation feedback pathway is architecturally distinct from both the energy feedback pathway and the synaptic computation pathway. This diagram illustrates how the self-observation mechanism integrates within the broader self-sustaining cognitive loop described in the co-pending application for the Neural-Motor Energy Harvesting Loop.
+
+Scope of Claims
+
+[0024] No claim is made herein regarding phenomenological consciousness, subjective experience, qualia, or sentience. The term "self-observation" as used throughout this specification refers exclusively to the engineering mechanism of feeding a neural network's aggregate output back as measurable input at configurable gain. The term "self-awareness" refers to the degree of self-referential signal magnitude relative to external input magnitude, as quantified by the reflection coefficient. All claims pertain to measurable, falsifiable properties of signal feedback, gain modulation, and neural dynamics. The system is a deterministic engineering artifact whose operation is fully characterized by the mathematical equations and validation thresholds described herein.
+
 
 CLAIMS
 
-[0023] What is claimed is:
+[0025] What is claimed is:
 
 1. A method for enabling recursive self-observation in a spiking neural network comprising:
 

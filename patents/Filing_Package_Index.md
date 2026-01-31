@@ -1,7 +1,7 @@
 # PATENT FILING PACKAGE — CONSOLIDATED INDEX
 
 **Filing Date**: January 30, 2026
-**Inventor**: [INVENTOR NAME]
+**Inventor**: Kevin Christopher Ward
 **Three Provisional Applications Filed Simultaneously**
 
 ---
@@ -59,7 +59,7 @@ Claim 2 (Independent — SYSTEM): SNN system with self-observation components
 Claim 1 (Independent — METHOD): Autonomous operation during disconnection
 ├── Claim 3: 30-second timeout, 5-second polling
 ├── Claim 4: Four-region energy-aware modulation scheme
-├── Claim 5: Periodic state serialization (every 50 steps)
+├── Claim 5: Periodic state serializatiostate0 steps)
 ├── Claim 6: Two resync granularity levels (summary vs. full buffer)
 ├── Claim 7: Hard cap at 10,000 autonomous steps
 ├── Claim 8: Combined with energy harvesting loop (→ Patent A)

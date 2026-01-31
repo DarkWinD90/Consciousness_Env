@@ -26,6 +26,12 @@ to the cognitive control layer upon reconnection.
 FIG. 6 is a set of timeline diagrams showing three recovery scenarios:
 normal reconnection, crash recovery, and clean shutdown.
 
+FIG. 7 is an end-to-end signal flow diagram showing the complete system
+during both connected and autonomous operation, illustrating how the fallback
+mechanism seamlessly replaces external cognitive modulation with internal
+energy-aware self-modulation without interrupting neural processing or
+energy harvesting.
+
 
 DETAILED DESCRIPTION OF THE DRAWINGS
 
@@ -309,6 +315,89 @@ Common annotations for all three timelines:
 - Bold marker at each state change: "No data loss at any transition"
 
 
+FIG. 7 — End-to-End Signal Flow: Connected vs. Autonomous Operation
+
+This figure shows the complete system signal flow in a split-view format,
+with connected operation on top and autonomous operation on bottom, sharing
+the same core processing pipeline.
+
+Layout — Two parallel horizontal flows sharing a common center:
+
+TOP HALF — Connected Operation:
+Label in top-left corner: "CONNECTED MODE"
+
+    [External Cognitive Layer] — cloud shape at top
+        |
+        v (dashed arrow: "Cognitive modulation commands")
+    [Sensors] -> [SNN] -> [Cognitive Modulation] -> [Motor Actuator] -> [Energy Harvester]
+                   ^                                                          |
+                   |_________ Energy feedback (bold dashed) __________________|
+                   ^
+                   |_________ Self-observation feedback (dotted) ___ from SNN output
+
+    Label on Cognitive Modulation block: "External AI sets reflection_coeff, modulation"
+    Label: "Heartbeat active (tool calls within 30s)"
+
+DIVIDING LINE — Horizontal dashed line across full width
+    Label on line: "DISCONNECTION EVENT (heartbeat timeout > 30s)"
+    Arrow pointing down: "Seamless transition — no interruption to SNN or Harvester"
+
+BOTTOM HALF — Autonomous Operation:
+Label in bottom-left corner: "AUTONOMOUS MODE"
+
+    [Autonomous Input Generator] — rectangle replacing Sensors
+        Label inside: "Circadian base signal"
+        Label inside: "10% stochastic attention bursts"
+        |
+        v
+    [SNN] -> [Energy-Aware Self-Modulation] -> [Motor Actuator] -> [Energy Harvester]
+       ^                                                                  |
+       |_________ Energy feedback (bold dashed) _________________________|
+       ^
+       |_________ Self-observation feedback (dotted) ___ from SNN output
+
+    Label on Self-Modulation block: "Internal energy-aware regulation"
+    Four modulation regions shown as small annotation:
+        "<15 mWh: -0.4 | <30 mWh: -0.1 | 30-80 mWh: 0.0 | >80 mWh: +0.3"
+
+    Additional components in autonomous mode:
+    [State Buffer] — cylinder/database shape
+        Arrow from SNN: "Every step buffered"
+        Label: "Rolling buffer (max 10,000 entries)"
+
+    [Snapshot Writer] — disk shape
+        Arrow from State Buffer: "Every 50 steps"
+        Label: "latest.json (persistent storage)"
+
+RIGHT SIDE — Reconnection:
+    Arrow from bottom half back to top half
+    Label: "resync() called"
+    [Resync Payload] — rectangle
+    Label inside: "steps_autonomous, energy_delta, summary"
+    Label inside: "Optional: full step-by-step buffer"
+    Arrow up to External Cognitive Layer: "Cognitive layer catches up"
+
+Shared components (drawn once, spanning both halves):
+    The SNN, Motor Actuator, and Energy Harvester are the SAME blocks
+    in both halves — drawn in the center spanning the dividing line
+    Label: "Core pipeline never stops"
+
+Key annotations:
+    "The fallback system changes the INPUT SOURCE and MODULATION SOURCE"
+    "The core neural processing, motor actuation, and energy harvesting"
+    "continue WITHOUT INTERRUPTION through the transition"
+
+Legend box:
+    "Solid arrows: Forward signal path"
+    "Bold dashed: Energy feedback loop"
+    "Dotted: Self-observation feedback loop"
+    "Thin dashed: Cognitive/modulation control path"
+    "The transition between modes changes only the control paths,"
+    "never the core processing paths"
+
+Sheet numbering: "7/7" at top center
+
+
 GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
 
 - Paper size: 8.5 x 11 inches (US Letter)
@@ -320,7 +409,7 @@ GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
 - No color, no grayscale shading (use hatching patterns instead)
 - Line weight: sufficiently heavy for adequate reproduction
 - Each figure labeled: "FIG. 1", "FIG. 2", etc.
-- Sheet numbers at top center: "1/6", "2/6", etc.
+- Sheet numbers at top center: "1/7", "2/7", etc.
 - No frames or borders around drawing area
 - All text in figures must be at least 1/8 inch (3.2 mm) high
 - Reference numerals must be used consistently across all figures

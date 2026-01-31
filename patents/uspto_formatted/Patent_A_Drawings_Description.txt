@@ -26,6 +26,10 @@ placement and interconnections for the physical embodiment.
 FIG. 7 is a validation results summary table confirming all falsifiable
 claims pass the specified thresholds.
 
+FIG. 8 is an end-to-end signal flow diagram showing the complete path from
+sensor input through neural processing, cognitive modulation, motor actuation,
+energy harvesting, and self-observation feedback in a single unified view.
+
 
 DETAILED DESCRIPTION OF THE DRAWINGS
 
@@ -276,6 +280,90 @@ Row F8.3: Late weight delta < 10% early | ratio | 0.00% | < 10% | PASS
 Footer: "All claims validated. System is reproducible via git tags."
 
 
+FIG. 8 — End-to-End Signal Flow Diagram
+
+This figure shows the complete signal path through the entire system in a
+single horizontal flow diagram with feedback loops. This is the master
+overview diagram that captures all pathways in one view.
+
+Layout (left to right, with feedback loops returning):
+
+Left side — Input:
+    [ENVIRONMENT] (cloud shape)
+        |
+        v
+    [Sensors] — rectangle
+    Label: "Light, Temperature, Pressure"
+    Label below: "L1-L2: Transduction"
+
+Center-left — Neural Processing:
+    [Spiking Neural Network] — large rectangle, bold border
+    Label inside: "N LIF Neurons"
+    Label inside: "Spike Pattern Encoding"
+    Two inputs entering from left:
+        - Solid arrow from Sensors: "Sensor Input"
+        - Dotted arrow from bottom: "Self-Observation Feedback"
+    One input entering from top:
+        - Dashed arrow: "Cognitive Modulation"
+    Label above top arrow: "reflection_coeff, modulation"
+
+Center — Cognitive Modulation:
+    [Cognitive Modulation] — rectangle above the main flow
+    Label inside: "External AI Control Layer"
+    Label inside: "OR Internal Energy-Aware Regulation"
+    Dashed bidirectional arrow to SNN
+    Label: "Adjusts reflection_coeff and activity level"
+
+Center-right — Motor Output:
+    [Motor Actuator] — rectangle
+    Label: "Servo / Stepper / Linear"
+    Label: "target_angle = clip(output x 180)"
+    Arrow from SNN to Actuator: "Neural Output (spike pattern -> motor command)"
+
+Right side — Energy Harvesting:
+    [Piezo Harvester] — rectangle
+    Label: "Friction -> Voltage"
+    Mechanical coupling line from Motor Actuator (zigzag)
+
+    [Thermal Harvester] — rectangle below Piezo
+    Label: "delta_T -> Voltage"
+    Arrow from environment heat
+
+    Both harvesters feed into:
+    [Energy Gate] — diamond shape
+    Label: "Net = Harvest - Cost"
+    Decision: "Net > 0?"
+    Yes arrow (bold): "Self-Sustaining"
+    No arrow (thin): "Energy Depleting"
+
+Bottom — Feedback Loops (returning right to left):
+
+    Feedback Loop 1 — Energy:
+    Bold arrow from Energy Gate back to SNN (along bottom)
+    Label: "Harvested Energy Powers Neural Network"
+    Label: "ENERGY LOOP CLOSES HERE"
+
+    Feedback Loop 2 — Self-Observation:
+    Dotted arrow from SNN output back to SNN input (along bottom, below energy)
+    Label: "previous_output x reflection_coeff"
+    Label: "REFLECTION LOOP CLOSES HERE"
+    Delay element (z^-1 block) on this path
+
+Key annotations:
+- The main forward path (Sensors -> SNN -> Actuator -> Harvester) drawn as
+  solid bold arrows
+- The energy feedback path drawn as bold dashed arrows
+- The self-observation feedback path drawn as dotted arrows
+- The cognitive modulation path drawn as thin dashed arrows from above
+- All four pathways should be visually distinguishable by line style
+
+Summary label at bottom of figure:
+"Complete self-sustaining cognitive loop: Sense -> Process -> Modulate ->
+Actuate -> Harvest -> Power -> Self-Observe -> Loop"
+
+Sheet numbering: "8/8" at top center
+
+
 GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
 
 - Paper size: 8.5 x 11 inches (US Letter)
@@ -287,7 +375,7 @@ GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
 - No color, no grayscale shading (use hatching patterns instead)
 - Line weight: sufficiently heavy for adequate reproduction
 - Each figure labeled: "FIG. 1", "FIG. 2", etc.
-- Sheet numbers at top center: "1/7", "2/7", etc.
+- Sheet numbers at top center: "1/8", "2/8", etc.
 - No frames or borders around drawing area
 - All text in figures must be at least 1/8 inch (3.2 mm) high
 - Reference numerals must be used consistently across all figures

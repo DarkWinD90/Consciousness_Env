@@ -112,10 +112,18 @@ APPLICATION DOMAINS
 
 [0031] For industrial IoT, sensor nodes in remote locations that lose cellular connectivity continue collecting and processing data, buffer all readings for resync, and adjust sampling rate based on power reserves.
 
+End-to-End Signal Flow
+
+[0032] Referring to FIG. 7, the complete end-to-end signal flow is shown for a system incorporating the cognitive fallback mechanism. During connected operation, environmental sensors feed the spiking neural network, which produces spike patterns that are cognitively modulated by the external control layer, routed to the motor actuator, and harvested for energy in a self-sustaining loop. When the cognitive control layer disconnects, the fallback system seamlessly replaces the external cognitive modulation with internal energy-aware self-modulation. The autonomous input generator replaces external sensor-driven input with a self-generated circadian signal augmented by stochastic attention bursts. The energy gate continues to regulate the loop based on harvested energy. All operational state is buffered during autonomous operation. Upon reconnection, the resynchronization protocol transmits the buffered state to the cognitive layer, which resumes external modulation. The transition between connected and autonomous operation occurs without interruption to the neural processing, motor actuation, or energy harvesting pathways.
+
+Scope of Claims
+
+[0033] No claim is made herein regarding phenomenological consciousness, subjective experience, qualia, or sentience. The term "cognitive" as used throughout this specification refers exclusively to computational decision-making processes performed by software systems, whether external AI reasoning layers or internal rule-based controllers. The term "autonomous" refers to operation without external control input, not to any form of agency or intentionality. All claims pertain to measurable, falsifiable properties of heartbeat monitoring, state buffering, energy-aware modulation, and resynchronization protocols. The system is a deterministic engineering artifact whose operation is fully characterized by the mathematical equations and validation thresholds described herein.
+
 
 CLAIMS
 
-[0032] What is claimed is:
+[0034] What is claimed is:
 
 1. A method for maintaining continuous intelligent operation of a neural processing system during disconnection from an external cognitive control layer, comprising:
 
