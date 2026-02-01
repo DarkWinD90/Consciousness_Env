@@ -3,7 +3,7 @@
 ## CONFIGURABLE RECURSIVE SELF-OBSERVATION IN SPIKING NEURAL NETWORKS
 
 **Filing Date**: January 30, 2026
-**Inventor**: [INVENTOR NAME]
+**Inventor**: Kevin Christopher Ward
 **Status**: Provisional Patent Application
 
 ---
@@ -349,6 +349,9 @@ Flow diagram showing: Self-observation → Modulated firing pattern → STDP wei
 
 ### Figure 5: Energy-Aware Self-Observation Regulation
 Plot showing reflection coefficient as a function of energy level, with conservation zone (low energy, low reflection), neutral zone, and exploration zone (high energy, high reflection).
+
+### Figure 6: End-to-End Signal Flow with Self-Observation Integration
+Complete signal flow diagram of the self-sustaining cognitive loop with the self-observation pathway highlighted as architecturally distinct. Shows environmental sensors, spiking neural network with three input pathways (external, self-observation, synaptic), cognitive modulation layer, motor actuator, energy harvester, and the recursive self-observation feedback loop drawn prominently as the Patent B pathway.
 
 ---
 

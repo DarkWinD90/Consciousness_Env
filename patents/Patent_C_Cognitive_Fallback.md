@@ -3,7 +3,7 @@
 ## COGNITIVE FALLBACK WITH AUTONOMOUS SELF-REGULATION AND RESYNCHRONIZATION PROTOCOL
 
 **Filing Date**: January 30, 2026
-**Inventor**: [INVENTOR NAME]
+**Inventor**: Kevin Christopher Ward
 **Status**: Provisional Patent Application
 
 ---
@@ -571,6 +571,9 @@ Hierarchical diagram showing resync payload: steps_autonomous, energy_delta, sum
 
 ### Figure 6: Recovery Timeline Diagrams
 Four timeline diagrams showing the four recovery scenarios: brief disconnection, extended disconnection, system crash, and clean shutdown.
+
+### Figure 7: End-to-End Signal Flow (Connected vs. Autonomous)
+Split-view signal flow diagram showing connected operation (top) with external cognitive layer providing modulation commands, and autonomous operation (bottom) with internal self-regulation replacing the cognitive layer. Both modes share the same core processing pipeline (SNN, motor actuator, energy harvester). A horizontal dividing line represents the disconnection event with seamless transition.
 
 ---
 

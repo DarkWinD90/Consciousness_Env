@@ -3,7 +3,7 @@
 ## SELF-SUSTAINING NEURAL-MOTOR ENERGY HARVESTING LOOP
 
 **Filing Date**: January 30, 2026
-**Inventor**: [INVENTOR NAME]
+**Inventor**: Kevin Christopher Ward
 **Status**: Provisional Patent Application
 
 ---
@@ -450,7 +450,10 @@ Plot showing the energy balance "sweet spot" — net energy gain as a function o
 Physical layout diagram showing Raspberry Pi Pico (or ESP32) microcontroller, SG90 servo, 27mm piezo disc, photoresistor, thermistor, WS2812B RGB LED, and power management circuit arranged on a breadboard or PCB.
 
 ### Figure 7: Validation Results Summary
-Table and bar chart showing Phase 7 Claims A-E (all PASS) and Phase 8 Claims F8.1-F8.3 (all PASS) with measured values and thresholds.
+Table and bar chart showing all 14 falsifiable claims across Phases 7-10 (all PASS) with measured values and thresholds.
+
+### Figure 8: Energy-Bounded Recursive Control Architecture
+Reference architecture diagram showing the complete system as a vertically stacked block diagram with bidirectional control paths and energy feedback. System operation is constrained by real-time energy availability derived from physical interaction with the environment, ensuring bounded, non-abstract execution. Shows sensor interface, spiking neural network, cognitive modulation, motor actuator, energy harvester with capacity ceiling, and recursive self-observation feedback loop.
 
 ---
 
