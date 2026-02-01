@@ -2,7 +2,7 @@
 
 ## COGNITIVE FALLBACK WITH AUTONOMOUS SELF-REGULATION AND RESYNCHRONIZATION PROTOCOL
 
-**Filing Date**: January 31, 2026
+**Filing Date**: February 1, 2026
 **Inventor**: Kevin Christopher Ward
 **Status**: Provisional Patent Application
 
@@ -17,8 +17,8 @@ Method and System for Autonomous Self-Regulation and Cognitive Resynchronization
 ## CROSS-REFERENCE TO RELATED APPLICATIONS
 
 This application is related to co-pending provisional applications:
-- "Self-Sustaining Neural-Motor Energy Harvesting Loop" (filed January 31, 2026)
-- "Configurable Recursive Self-Observation in Spiking Neural Networks" (filed January 31, 2026)
+- "Self-Sustaining Neural-Motor Energy Harvesting Loop" (filed February 1, 2026)
+- "Configurable Recursive Self-Observation in Spiking Neural Networks" (filed February 1, 2026)
 
 ---
 

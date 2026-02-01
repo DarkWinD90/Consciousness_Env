@@ -1,4 +1,4 @@
-# 2026-01-31 Patent Filing Summary
+# 2026-02-01 Patent Filing Summary
 
 ## What Happened Today
 
@@ -11,8 +11,8 @@ This establishes full intellectual property protection for the consciousness loo
 ## Patents Filed
 
 ### Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop
-**Filing Date**: 2026-01-31
-**Non-Provisional Deadline**: 2027-01-31
+**Filing Date**: 2026-02-01
+**Non-Provisional Deadline**: 2027-02-01
 
 **Core Innovation**: A spiking neural network whose motor output generates piezoelectric + thermoelectric energy sufficient to power the network itself.
 
@@ -29,8 +29,8 @@ This establishes full intellectual property protection for the consciousness loo
 ---
 
 ### Patent B: Configurable Recursive Self-Observation in Spiking Neural Networks
-**Filing Date**: 2026-01-31
-**Non-Provisional Deadline**: 2027-01-31
+**Filing Date**: 2026-02-01
+**Non-Provisional Deadline**: 2027-02-01
 
 **Core Innovation**: A tunable "self-awareness dial" that feeds a network's previous output back as input at configurable gain.
 
@@ -46,8 +46,8 @@ This establishes full intellectual property protection for the consciousness loo
 ---
 
 ### Patent C: Cognitive Fallback with Autonomous Self-Regulation and Resynchronization Protocol
-**Filing Date**: 2026-01-31
-**Non-Provisional Deadline**: 2027-01-31
+**Filing Date**: 2026-02-01
+**Non-Provisional Deadline**: 2027-02-01
 
 **Core Innovation**: Continuous operation during cognitive layer disconnection via energy-aware autonomous regulation.
 
@@ -91,13 +91,13 @@ The three patents form an interlocking suite:
 
 | Deadline | Milestone | Status |
 |----------|-----------|--------|
-| **2026-01-31** | All three provisionals filed | ✅ **COMPLETE** |
+| **2026-02-01** | All three provisionals filed | ✅ **COMPLETE** |
 | 2026-04-30 | Phase 8 STDP validation complete, tags created | ✅ **COMPLETE** |
 | 2026-07-30 | Phase 11 hardware prototype built and validated | 🔄 In planning |
 | 2026-10-30 | Hardware validation results documented (F11.1-F11.3) | ⏳ Pending |
 | 2026-12-30 | Non-provisional filings prepared with hardware evidence | ⏳ Pending |
 | **2027-01-15** | PCT international application filed | ⏳ Pending |
-| **2027-01-31** | All three provisionals converted to non-provisional | ⏳ Pending |
+| **2027-02-01** | All three provisionals converted to non-provisional | ⏳ Pending |
 
 ---
 

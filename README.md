@@ -26,7 +26,7 @@ loop a candidate for synthetic proto-consciousness.
 control condition, and a measured value. Every validated state is pinned by an
 annotated git tag and reproducible with `git checkout <tag>`.
 
-**3 provisional patents filed** (2026-01-31):
+**3 provisional patents filed** (2026-02-01):
 - Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop
 - Patent B: Configurable Recursive Self-Observation in SNNs
 - Patent C: Cognitive Fallback with Autonomous Self-Regulation

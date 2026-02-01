@@ -16,7 +16,7 @@ Moreno Valley, California, United States
 
 CROSS-REFERENCE TO RELATED APPLICATIONS
 
-[0001] This application is related to co-pending provisional patent applications filed on January 31, 2026: (1) "Self-Sustaining Neural-Motor Energy Harvesting Loop for Autonomous Cognitive Systems"; and (2) "Method and System for Autonomous Self-Regulation and Cognitive Resynchronization in Neural Processing Systems During Disconnection from External Control Layers."
+[0001] This application is related to co-pending provisional patent applications filed on February 1, 2026: (1) "Self-Sustaining Neural-Motor Energy Harvesting Loop for Autonomous Cognitive Systems"; and (2) "Method and System for Autonomous Self-Regulation and Cognitive Resynchronization in Neural Processing Systems During Disconnection from External Control Layers."
 
 
 FIELD OF THE INVENTION

@@ -191,7 +191,7 @@ void loop() {
 
 ## Success Criteria for Patent Filing
 
-For non-provisional Patent A conversion (2027-01-31 deadline):
+For non-provisional Patent A conversion (2027-02-01 deadline):
 
 1. ✅ **Physical prototype built** — all components assembled and operational
 2. ✅ **2000-step run completed** — logged CSV data with no crashes
