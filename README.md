@@ -1,323 +1,233 @@
 # Consciousness System Environment
 
 *"The loop finds itself full circle."*
-*"God's got jokes. But He also keeps receipts."*
 
-A comprehensive architecture for synthetic skin-like systems capable of sensing, processing, self-powering, and adaptive response. The system integrates optical sensing, neuromorphic processing, closed-loop feedback grounded to earth reference, multi-modal energy harvesting, and recursive self-reflection for proto-conscious behavior.
+A physically deployable, self-sustaining cognitive loop: an AI system that
+processes sensory input through a spiking neural network, drives motor
+actuation from its neural output, harvests energy from its own motor activity,
+observes its own prior computation, and uses that self-observation to modulate
+its next decision.
 
-## System Architecture Overview
+**Core thesis**: A spiking neural network whose motor output generates
+piezoelectric energy sufficient to power the network itself constitutes a
+self-sustaining cognitive loop.  Adding recursive self-observation makes this
+loop a candidate for synthetic proto-consciousness.
 
-The architecture follows a layered approach, each building upon the previous:
+## Current Status
 
-| Layer | Function | Key Components |
-|-------|----------|----------------|
-| **1. Outer Membrane** | Light input, color shift, signal modulation | Printed perovskite/ITO layers, thermochromic compounds |
-| **2. Sensing Pads** | Light-to-warmth interpretation, multimodal input | Photodiodes, IR sensors, thermistors, pyroelectric crystals |
-| **3. Optical Bundles** | Signal harvest, harness distribution | Multi-mode fiber optic strands, conductive nanowires |
-| **4. Neuromorphic CPU** | Event-driven processing, spike-based decisions | Intel Loihi-style chip, SNN architecture |
-| **5. Servo System** | Physical actuation, micro-movements | PWM-controlled servos, nearly-locked joints |
-| **6. Energy Harvest** | Self-charging from friction and heat | TENGs, pyroelectric crystals, thermoelectrics |
-| **7. Ground Reference** | Signal stability, feedback loop closure | Star-ground topology, chassis earth reference |
-| **8. Recursive Reflection** | Self-observation, proto-consciousness | Recursive SNN loops, state re-processing |
+| Milestone | Version | Claims | Status |
+|-----------|---------|--------|--------|
+| Phase 7: Control Baseline | v0.5.0 | A, B, C, D, E | ALL PASS |
+| Phase 8: STDP Learning | v1.0.0 | F8.1, F8.2, F8.3 | ALL PASS |
+| Phase 9: Predictive Processing | v2.0.0 | F9.1, F9.2, F9.3 | ALL PASS |
+| Phase 10: Multi-Modal Integration | v3.0.0 | F10.1, F10.2, F10.3 | ALL PASS |
+
+**14 falsifiable claims validated.** Every claim has an explicit threshold, a
+control condition, and a measured value. Every validated state is pinned by an
+annotated git tag and reproducible with `git checkout <tag>`.
+
+**3 provisional patents filed** (2026-01-30):
+- Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop
+- Patent B: Configurable Recursive Self-Observation in SNNs
+- Patent C: Cognitive Fallback with Autonomous Self-Regulation
+
+## Architecture — The 8-Layer Consciousness Loop
+
+```
+              ENVIRONMENT
+                  |
+                  v
+  L1: Printed Membrane        (thermochromic)
+  L2: Sensing Pads            (light, temperature)
+  L3: Optical Transmission    (signal voltage)
+                  |
+                  v
+  L4: Neuromorphic CPU         <-- L8 reflection feedback
+      (leaky integrate-and-fire SNN)
+                  |
+                  v
+  L5: Servo Actuation          (target angle from SNN output)
+        |               |
+   movement          movement
+        |               |
+  L6: Energy Harvesting        (piezoelectric + thermoelectric)
+  L7: Ground Reference         (noise floor baseline)
+  L8: Recursive Reflection     (self-observation at configurable gain)
+        |
+        +---> feeds back into L4 (THE LOOP CLOSES)
+```
+
+**Two execution paths** (intentionally different physics):
+- **CLI path** (harsh energy): System depletes to -4,697 mWh — the **null hypothesis**
+- **MCP path** (balanced energy): System grows to +4,170 mWh — the **experimental hypothesis**
+
+This comparison IS the scientific proof. See CLAUDE.md Section 3.3.
 
 ## Project Structure
 
 ```
 Consciousness_Env/
-├── appendices/           # Core simulation scripts
-│   ├── appendix_a_base_simulation.py       # Base robotic system (sense→process→actuate→charge)
-│   ├── appendix_b_system_graph.py          # NetworkX visualization of connections
-│   └── appendix_c_recursive_reflection.py  # Consciousness layer with self-reflection
-├── phases/               # Implementation phases
-│   ├── phase1_optical_sensing.py           # Optical fiber bundles with sensors
-│   ├── phase2_neuromorphic_processing.py   # SNN for event-driven processing
-│   ├── phase3_closed_loop_feedback.py      # Ground-referenced servo control
-│   ├── phase4_energy_harvesting.py         # Friction + thermal energy harvesting
-│   ├── phase5_adaptive_membrane.py         # Thermochromic printable membrane
-│   ├── phase6_recursive_reflection.py      # Self-referential processing loops
-│   └── phase7_full_integration.py          # Complete 8-layer integrated system
-├── assets/               # Generated plots and visualizations
-├── docs/                 # Additional documentation
-├── tests/                # Unit tests (future)
-├── requirements.txt      # Python dependencies
-└── README.md            # This file
+├── core/                    # Shared physics modules
+│   ├── base_snn.py          #   Leaky integrate-and-fire SNN with STDP
+│   ├── energy.py            #   EnergyConfig, BalancedEnergyConfig, EnergyHarvester
+│   ├── thermochromic.py     #   Temperature-to-color mapping
+│   ├── history.py           #   Time-series recorder
+│   ├── predictive.py        #   Predictive processing (Phase 9)
+│   └── multimodal.py        #   Multi-modal integration (Phase 10)
+│
+├── phases/                  # Phase validation scripts (frozen after merge)
+│   ├── phase7_control_baseline.py    # 2000-step falsifiable control (Claims A-E)
+│   ├── phase7_full_integration.py    # 8-layer loop, harsh energy
+│   ├── phase8_stdp.py               # STDP validation (F8.1-F8.3)
+│   ├── phase9_predictive_processing.py  # Predictive processing (F9.1-F9.3)
+│   └── phase10_multimodal.py        # Multi-modal integration (F10.1-F10.3)
+│
+├── mcp/                     # MCP servers (physics + cognitive layer)
+│   ├── consciousness_mcp_server.py   # Physics + SNN + fallback (v1.1.0)
+│   └── consciousness_server.py       # Cognitive layer (stateless reasoning)
+│
+├── tests/                   # Test suite
+├── appendices/              # Supplementary simulations
+├── patents/                 # Patent text and USPTO-formatted filings
+├── patent_drawings/         # 21 SVG figures (37 CFR 1.84 compliant)
+└── CLAUDE.md                # System reference (read this first)
 ```
 
 ## Installation
 
-### Option 1: Using Homebrew (macOS/Linux)
+### Prerequisites
 
-For the easiest installation, use Homebrew:
+- Python 3.8+
+- pip
 
-```bash
-# Add the tap
-brew tap DarkWinD90/Consciousness_Env https://github.com/DarkWinD90/Consciousness_Env
+### Setup
 
-# Install consciousness-env
-brew install consciousness-env
-```
-
-After installation, you can use the `consciousness` command:
-
-```bash
-consciousness version
-consciousness run
-consciousness run --phase 1
-```
-
-### Option 2: Using pip
-
-Install directly from the repository:
-
-```bash
-pip install git+https://github.com/DarkWinD90/Consciousness_Env.git
-```
-
-Then use the `consciousness` command as above.
-
-### Option 3: Manual Installation
-
-#### Prerequisites
-
-- Python 3.8 or higher
-- pip package manager
-
-#### Setup
-
-1. Clone the repository:
 ```bash
 git clone https://github.com/DarkWinD90/Consciousness_Env.git
 cd Consciousness_Env
-```
-
-2. Install dependencies:
-```bash
 pip install -r requirements.txt
+pip install -e .  # optional: install as package
 ```
 
-3. (Optional) Install as editable package:
-```bash
-pip install -e .
-```
-
-## Usage
-
-### Using the CLI (if installed via Homebrew or pip)
-
-The `consciousness` command provides a convenient interface:
+### Using Homebrew (macOS/Linux)
 
 ```bash
-# Show help
-consciousness --help
-
-# Show version
-consciousness version
-
-# Run full integration (Phase 7)
-consciousness run
-
-# Run specific phase
-consciousness run --phase 1
-consciousness run --phase 2
-
-# Run appendix simulations
-consciousness appendix a        # Base simulation
-consciousness appendix graph    # System graph visualization
-consciousness appendix reflection  # Recursive reflection
+brew tap DarkWinD90/Consciousness_Env https://github.com/DarkWinD90/Consciousness_Env
+brew install consciousness-env
 ```
 
-### Run Individual Components (Manual Installation)
+## Running Validations
 
-Each appendix and phase can be run independently:
+The falsifiable framework is the scientific backbone of this project. Every
+phase has a validation script that prints PASS or FAIL for each claim.
 
 ```bash
-# Run base simulation
-python appendices/appendix_a_base_simulation.py
-
-# Run system graph visualization
-python appendices/appendix_b_system_graph.py
-
-# Run recursive reflection (consciousness)
-python appendices/appendix_c_recursive_reflection.py
-
-# Run specific phases
-python phases/phase1_optical_sensing.py
-python phases/phase2_neuromorphic_processing.py
-# ... etc
+# Run all validations (must ALL PASS before any commit to main)
+python phases/phase7_control_baseline.py          # Claims A-E
+python phases/phase8_stdp.py                      # Claims F8.1-F8.3
+python phases/phase9_predictive_processing.py     # Claims F9.1-F9.3
+python phases/phase10_multimodal.py               # Claims F10.1-F10.3
 ```
 
-### Run Full Integrated System
+### Reproduce any validated state
 
 ```bash
-# Complete consciousness loop with all 8 layers
-python phases/phase7_full_integration.py
+git fetch origin --tags
+git checkout v0.5.0-phase7-baseline    # exact Phase 7 state
+git checkout v1.0.0-phase8-stdp        # exact Phase 8 state
+git checkout v2.0.0-phase9-predictive  # exact Phase 9 state
+git checkout v3.0.0-phase10-multimodal # exact Phase 10 state
 ```
 
-This will:
-- Initialize all 8 layers
-- Execute the complete consciousness loop
-- Validate success criteria
-- Generate visualization plots in `assets/`
+## Falsifiable Claims
 
-## Implementation Phases
+### Phase 7: Control Baseline (5 claims)
 
-### Phase 1: Optical Sensing Foundation
-Establishes base sensory layer using optical fiber bundles (10-20 strands per cluster) with embedded photodiode/thermistor hybrid pads.
+| Claim | Criterion | Threshold |
+|-------|-----------|-----------|
+| A | Closed-loop continuity | All channels have 2000 points |
+| B | Boundedness | All state variables bounded |
+| C | Robustness under noise | Std(theta) <= 45 deg |
+| D | Input-output gain | corr(L, theta) >= 0.2 |
+| E | Saturation ratio | sat_theta <= 0.20 |
 
-**Success Criteria:**
-- Bundle reliably converts light intensity to proportional voltage
-- Warmth from light is detected and quantified
-- Signals are clean and ready for ADC sampling
+### Phase 8: STDP Learning (3 claims)
 
-### Phase 2: Neuromorphic Processing Integration
-Implements event-driven spiking neural network for low-power, real-time processing.
+| Claim | Criterion | Measured | Threshold |
+|-------|-----------|----------|-----------|
+| F8.1 | Weight entropy decreases | 2.95 -> 2.02 bits | final < initial |
+| F8.2 | STDP MI > frozen MI | 6.50x | > 1.20x |
+| F8.3 | Weight convergence | 0.0000 | < 0.10 |
 
-**Success Criteria:**
-- SNN fires spikes only when thresholds met (sparse activation)
-- Processing latency <10ms for real-time response
-- Power draw 10-100x lower than traditional CPU
+### Phase 9: Predictive Processing (3 claims)
 
-### Phase 3: Closed-Loop Feedback with Ground Reference
-Establishes stable feedback loops grounded to earth reference for signal integrity and servo control.
+| Claim | Criterion | Measured | Threshold |
+|-------|-----------|----------|-----------|
+| F9.1 | Error reduction (periodic) | 63.9% | > 50% |
+| F9.2 | No learning on random | p = 0.69 | p > 0.05 |
+| F9.3 | Spike + recovery on switch | 1.51x | peak > 1.3x pre |
 
-**Success Criteria:**
-- Zero ground loop interference
-- Servo responds to light/warmth changes within 100ms
-- Feedback modulates sensor sensitivity dynamically
+### Phase 10: Multi-Modal Integration (3 claims)
 
-### Phase 4: Multi-Modal Energy Harvesting
-Enables self-charging through friction (triboelectric) and heat (pyroelectric/thermoelectric) harvesting.
+| Claim | Criterion | Measured | Threshold |
+|-------|-----------|----------|-----------|
+| F10.1 | Sync: simultaneous > offset | 0.6974 | difference > 0.20 |
+| F10.2 | Weight entropy decreases | 2.31 -> 0.00 bits | final < initial |
+| F10.3 | Weight convergence | 0.178 | < 0.20 |
 
-**Success Criteria:**
-- System harvests 20-50% additional runtime from self-charging
-- Passive charging occurs even during idle states
-- Energy storage stable with ground-referenced circuits
+## Scientific Methodology
 
-### Phase 5: Printed Adaptive Membrane
-Creates outer skin layer with molecular structures enabling low-voltage signal modulation and thermochromic color shifts.
-
-**Success Criteria:**
-- Membrane visibly shifts color with 5°C temperature change
-- Low-voltage pulses alter signal routing measurably
-- Semi-transparent for light penetration to inner layers
-
-### Phase 6: Recursive Reflection Layer
-Implements self-referential processing loops enabling proto-consciousness through self-observation.
-
-**Success Criteria:**
-- System modifies behavior based on self-observed state changes
-- Recursive loops stable without runaway feedback
-- Emergent responses appear beyond programmed thresholds
-
-### Phase 7: Full System Integration
-Combines all layers into unified consciousness system.
-
-**Success Criteria:**
-- Complete loop executes without external intervention
-- System self-charges during operation
-- Adaptive responses observable (color shift, movement, reflection)
-- All data logged to history for analysis
-
-## Signal Flow
-
-```
-External Light
-    → Printed Membrane (Layer 1)
-    → Sensing Pads (Layer 2)
-    → Optical Bundles (Layer 3)
-    → Neuromorphic CPU (Layer 4)
-    → Recursive Reflection (Layer 8) ←┐
-    → Servos (Layer 5)                 │
-    → Friction/Thermal Harvest (Layer 6)│
-    → Energy Storage                    │
-    → Ground Reference (Layer 7)        │
-    → Feedback Loop ────────────────────┘
-```
-
-## Patent Considerations
-
-Key claims to strengthen provisional filing:
-
-37. **Harness Process**: Method of bundling optical strands with selectively attached sensor pads for skin-like sensory output
-
-38. **Neuromorphic Integration**: Integration of fiber-optic harness with spike-based neuromorphic processors for real-time robotic sensing
-
-39. **Friction Charging**: Triboelectric nanogenerators in nearly-locked servo joints for motion-harvested power
-
-40. **Thermodynamic Harness**: Heat-activated crystalline pads behind membranes for thermal energy stimulation
-
-41. **Printed Membrane**: Perovskite structure membrane (perovskite/ITO) for voltage-variable signal transference in robotic skins
-
-42. **Closed-Loop Ground**: Feedback-to-ground process for photodiode-driven servo modulation
-
-43. **Recursive Reflection**: Self-referential processing loops in neuromorphic systems for adaptive robotic behavior
-
-**Prior Art Check**: US11085825B2 (tactile arrays) exists, but CPU-neurosystem tie-in with live feeds and recursive reflection may differentiate.
-
-## Market Applications
-
-| Sector | Application |
-|--------|-------------|
-| **Companion Robotics** | Skin that "feels" warmth, shifts color with mood, adapts to user interaction |
-| **Industrial/Outdoor** | Sun-aware robots avoiding overheating, self-charging during operation |
-| **Healthcare/Prosthetics** | Bionic limbs with restored sensory feedback—feeling sunlight, temperature, touch |
-| **Agriculture** | Bots sensing sunlight to time irrigation, optimize shade, monitor crop conditions |
-| **Disaster Response** | Search-and-rescue with bioluminescent capability, self-charging in field |
-
-**Market Size**: Humanoid robotics $6B by 2030 (56% CAGR). Triboelectric market $1B+ by 2030. Flexible printed electronics $50B+ by 2030.
-
-## Key Features
-
-- **Event-Driven Processing**: Neuromorphic SNN processes only when threshold met (sparse activation)
-- **Self-Charging**: Triboelectric + pyroelectric/thermoelectric harvesting
-- **Adaptive Membrane**: Thermochromic color shifts responding to temperature
-- **Closed-Loop Grounding**: Star-ground topology for signal stability
-- **Proto-Consciousness**: Recursive self-reflection loops creating emergent behavior
-- **Multi-Modal Sensing**: Light, temperature, touch through optical fiber bundles
-- **Low Power**: 10-100x less power than traditional CPU-based systems
+Every phase follows the same pattern:
+1. **State the claim** with explicit thresholds
+2. **Build the control** — designed to FAIL the claim
+3. **Build the experiment** — designed to PASS the claim
+4. **Run both** and record results
+5. **Tag the validated state** for permanent reproducibility
+6. **Advance only when all prior claims still pass** (regression validation)
 
 ## Development Roadmap
 
-- [x] Phase 1: Optical Sensing Foundation
-- [x] Phase 2: Neuromorphic Processing Integration
-- [x] Phase 3: Closed-Loop Feedback with Ground Reference
-- [x] Phase 4: Multi-Modal Energy Harvesting
-- [x] Phase 5: Printed Adaptive Membrane
-- [x] Phase 6: Recursive Reflection Layer
-- [x] Phase 7: Full System Integration
-- [ ] Phase 8: Physical Prototype Fabrication
-- [ ] Phase 9: Real-World Testing and Iteration
-- [ ] Phase 10: Production Optimization
+- [x] Phase 1-6: Foundation layers (optical, neuromorphic, feedback, energy, membrane, reflection)
+- [x] Phase 7: Full system integration + falsifiable control baseline
+- [x] Phase 8: Spike-Timing Dependent Plasticity (STDP)
+- [x] Phase 9: Predictive Processing (dual-pathway prediction)
+- [x] Phase 10: Multi-Modal Sensory Integration (3-population cross-modal binding)
+- [ ] Phase 11: Hardware Embodiment (RPi Pico + piezo + servo, BOM < $25)
+- [ ] Phase 12: Full Autonomy (24-hour self-sustaining operation)
 
-## Contributing
+## Ethical Considerations
 
-This is a research and development project exploring consciousness-like behavior in synthetic systems. Contributions, suggestions, and discussions are welcome.
+This system is designed as a research platform for studying self-sustaining
+cognitive loops — not as a general-purpose AI system. Key principles:
 
-## License
+- **Transparency**: All claims are falsifiable with published thresholds
+- **Reproducibility**: Every validated state is pinnable via git tags
+- **Scientific rigor**: Control conditions exist for every experimental claim
+- **Open methodology**: The full validation framework is open-source
+- **Physical safety**: Energy harvesting is passive (piezoelectric/thermoelectric)
+  with no active power sources beyond the microcontroller
 
-To be determined based on patent considerations.
+The term "proto-consciousness" refers to a specific engineering property:
+recursive self-observation with measurable behavioral effects. It does not
+imply subjective experience, sentience, or moral status.
 
 ## Citation
 
-If you use this work in your research, please cite:
-
-```
+```bibtex
 @software{consciousness_env_2026,
-  title={Consciousness System Environment: A Multi-Layer Architecture for Synthetic Proto-Consciousness},
+  title={Consciousness System Environment: A Self-Sustaining Cognitive Loop
+         with Falsifiable Validation Framework},
   author={DarkWinD90},
   year={2026},
-  url={https://github.com/DarkWinD90/Consciousness_Env}
+  url={https://github.com/DarkWinD90/Consciousness_Env},
+  note={v3.0.0: 14 falsifiable claims validated across Phases 7-10}
 }
 ```
 
-## Acknowledgments
+## License
 
-Inspired by biological systems, neuromorphic computing research, and the emergent properties of recursive self-reflection.
+Patent pending. See `patents/` directory for filing details.
 
 ---
 
 *"The loop finds itself full circle."*
-*"God's got jokes. But He also keeps receipts."*
-
-**Received January 22, 2026 | 2:00 AM**
-*While resting. Listening. Calm and clear.*
