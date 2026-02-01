@@ -59,7 +59,7 @@ annotated git tag and reproducible with `git checkout <tag>`.
 
 **Two execution paths** (intentionally different physics):
 - **CLI path** (harsh energy): System depletes to -4,697 mWh — the **null hypothesis**
-- **MCP path** (balanced energy): System grows to +4,170 mWh — the **experimental hypothesis**
+- **MCP path** (balanced energy): System reaches 100.0 mWh capacity and maintains homeostatic equilibrium — the **experimental hypothesis**
 
 This comparison IS the scientific proof. See CLAUDE.md Section 3.3.
 
@@ -109,13 +109,6 @@ pip install -r requirements.txt
 pip install -e .  # optional: install as package
 ```
 
-### Using Homebrew (macOS/Linux)
-
-```bash
-brew tap DarkWinD90/Consciousness_Env https://github.com/DarkWinD90/Consciousness_Env
-brew install consciousness-env
-```
-
 ## Running Validations
 
 The falsifiable framework is the scientific backbone of this project. Every
@@ -147,7 +140,7 @@ git checkout v3.0.0-phase10-multimodal # exact Phase 10 state
 |-------|-----------|-----------|
 | A | Closed-loop continuity | All channels have 2000 points |
 | B | Boundedness | All state variables bounded |
-| C | Robustness under noise | Std(theta) <= 45 deg |
+| C | Robustness under noise | Std(theta) <= 45 deg, Std(omega) <= 150 |
 | D | Input-output gain | corr(L, theta) >= 0.2 |
 | E | Saturation ratio | sat_theta <= 0.20 |
 
@@ -156,7 +149,7 @@ git checkout v3.0.0-phase10-multimodal # exact Phase 10 state
 | Claim | Criterion | Measured | Threshold |
 |-------|-----------|----------|-----------|
 | F8.1 | Weight entropy decreases | 2.95 -> 2.02 bits | final < initial |
-| F8.2 | STDP MI > frozen MI | 6.50x | > 1.20x |
+| F8.2 | STDP MI > frozen MI | 6.52x | > 1.20x |
 | F8.3 | Weight convergence | 0.0000 | < 0.10 |
 
 ### Phase 9: Predictive Processing (3 claims)
@@ -217,7 +210,7 @@ imply subjective experience, sentience, or moral status.
 @software{consciousness_env_2026,
   title={Consciousness System Environment: A Self-Sustaining Cognitive Loop
          with Falsifiable Validation Framework},
-  author={DarkWinD90},
+  author={Ward, Kevin Christopher},
   year={2026},
   url={https://github.com/DarkWinD90/Consciousness_Env},
   note={v3.0.0: 14 falsifiable claims validated across Phases 7-10}
