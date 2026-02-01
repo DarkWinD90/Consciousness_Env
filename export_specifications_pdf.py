@@ -21,7 +21,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_JUSTIFY
 from reportlab.platypus import (
     BaseDocTemplate, Frame, PageTemplate, Paragraph, Spacer, PageBreak,
-    KeepTogether,
+    CondPageBreak, KeepTogether,
 )
 from reportlab.lib.colors import black
 
@@ -246,7 +246,11 @@ def build_pdf(txt_path, pdf_path):
         # --- Major section heading ---
         if stripped in MAJOR_SECTIONS:
             if stripped in PAGE_BREAK_BEFORE:
-                flowables.append(PageBreak())
+                # CondPageBreak with full frame height: only emits a page
+                # break if we are NOT already at the top of a fresh page.
+                # Avoids spurious blank pages when prior content ends exactly
+                # at a page boundary.
+                flowables.append(CondPageBreak(FRAME_H))
 
             if stripped == "CLAIMS":
                 in_claims = True
