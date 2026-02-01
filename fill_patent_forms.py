@@ -1,0 +1,234 @@
+"""
+Fill USPTO PTO/SB/16 (Cover Sheet) and PTO/SB/15A (Micro Entity Certification)
+forms for all three provisional patent applications.
+
+Uses the official blank forms downloaded from USPTO and fills them
+programmatically with inventor information and patent details.
+
+Signature and date fields are left blank — those must be completed
+by the inventor at filing time.
+
+Requires: pypdf >= 3.0
+"""
+
+import copy
+from pypdf import PdfReader, PdfWriter
+from pypdf.generic import NameObject, BooleanObject
+
+
+# ---------------------------------------------------------------------------
+# Inventor information
+# ---------------------------------------------------------------------------
+INVENTOR = {
+    "given_name": "Kevin Christopher",
+    "family_name": "Ward",
+    "full_name": "Kevin Christopher Ward",
+    "residence": "Moreno Valley, California, US",
+    "address": "27289 Cottonwood Ave.",
+    "city": "Moreno Valley",
+    "state": "CA",
+    "zip": "92555",
+    "country": "US",
+    "phone": "951-706-1234",
+    "email": "kevinward.research@gmail.com",
+}
+
+# ---------------------------------------------------------------------------
+# Patent details
+# ---------------------------------------------------------------------------
+PATENTS = [
+    {
+        "id": "A",
+        "docket": "CONSCIOUSNESS-2026-001",
+        "title": (
+            "Self-Sustaining Neural-Motor Energy Harvesting Loop "
+            "for Autonomous Cognitive Systems"
+        ),
+        "spec_pages": "18",
+        "drawing_sheets": "8",
+        "fee": "$65.00",
+    },
+    {
+        "id": "B",
+        "docket": "CONSCIOUSNESS-2026-002",
+        "title": (
+            "Configurable Recursive Self-Observation Method and System "
+            "for Spiking Neural Networks with Dynamic Reflection "
+            "Coefficient Modulation"
+        ),
+        "spec_pages": "13",
+        "drawing_sheets": "6",
+        "fee": "$65.00",
+    },
+    {
+        "id": "C",
+        "docket": "CONSCIOUSNESS-2026-003",
+        "title": (
+            "Method and System for Autonomous Self-Regulation and "
+            "Cognitive Resynchronization in Neural Processing Systems "
+            "During Disconnection from External Control Layers"
+        ),
+        "spec_pages": "18",
+        "drawing_sheets": "7",
+        "fee": "$65.00",
+    },
+]
+
+# ---------------------------------------------------------------------------
+# Blank form paths
+# ---------------------------------------------------------------------------
+SB16_BLANK = "patents/forms/sb0016.pdf"
+SB15A_BLANK = "patents/forms/sb0015a.pdf"
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+def set_checkbox(writer, field_name, on=True):
+    """Set a checkbox field to On or Off in the writer."""
+    value = NameObject("/On") if on else NameObject("/Off")
+    writer.update_page_form_field_values(
+        writer.pages[0],
+        {field_name: value},
+    )
+
+
+def fill_sb16(patent, output_path):
+    """Fill a PTO/SB/16 cover sheet for one patent."""
+    reader = PdfReader(SB16_BLANK)
+    writer = PdfWriter()
+    # clone_reader_document_root preserves AcroForm + field structure
+    writer.clone_reader_document_root(reader)
+
+    # --- Text fields ---
+    text_fields = {
+        "DOCKET NUMBER": patent["docket"],
+        "TITLE OF THE INVENTION 500 characters maxRow1": patent["title"],
+
+        # Inventor row 1
+        "Given Name first and middle if anyRow1": INVENTOR["given_name"],
+        "Family Name or SurnameRow1": INVENTOR["family_name"],
+        "Residence City and either State or Foreign CountryRow1": INVENTOR["residence"],
+
+        # Correspondence address — direct to individual
+        "Firm or Individual Name": INVENTOR["full_name"],
+        "Address": INVENTOR["address"],
+        "City": INVENTOR["city"],
+        "State": INVENTOR["state"],
+        "zip code": INVENTOR["zip"],
+        "Country": INVENTOR["country"],
+        "Telephone_2": INVENTOR["phone"],
+        "Email_2": INVENTOR["email"],
+        "TELEPHONE": INVENTOR["phone"],
+
+        # Enclosures
+        "Number of Pages": patent["spec_pages"],
+        "Number of Sheets": patent["drawing_sheets"],
+
+        # Fee
+        "TOTAL FEE AMOUNT": patent["fee"],
+
+        # Signature block — name filled, signature/date left blank
+        "TYPED OR PRINTED NAME": INVENTOR["full_name"],
+    }
+
+    # Checkbox fields — set to /On
+    checkbox_fields = {
+        # Micro entity
+        "ME": NameObject("/On"),
+        # Specification enclosed
+        "Specification eg description of the invention": NameObject("/On"),
+        # Drawings enclosed
+        "Drawings": NameObject("/On"),
+        # Not made by US Gov agency
+        "No": NameObject("/On"),
+        # Direct correspondence to individual (not customer number)
+        "undefined": NameObject("/On"),
+    }
+
+    # Merge text + checkbox and apply to all pages
+    all_fields = {**text_fields, **checkbox_fields}
+    for page in writer.pages:
+        writer.update_page_form_field_values(page, all_fields)
+
+    writer.write(output_path)
+    return output_path
+
+
+def fill_sb15a(patent, output_path):
+    """Fill a PTO/SB/15A micro entity certification for one patent."""
+    reader = PdfReader(SB15A_BLANK)
+    writer = PdfWriter()
+    # clone_reader_document_root preserves AcroForm + field structure
+    writer.clone_reader_document_root(reader)
+
+    fields = {
+        "Title of Invention": patent["title"],
+        "First Named Inventor": INVENTOR["full_name"],
+        "Name": INVENTOR["full_name"],
+        "Telephone": INVENTOR["phone"],
+        # Application number left blank — assigned by USPTO at filing
+        "Application Number or Control Number if applicable": "",
+        # Signature and date left blank for inventor to complete
+    }
+
+    for page in writer.pages:
+        writer.update_page_form_field_values(page, fields)
+
+    writer.write(output_path)
+    return output_path
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+def main():
+    import os
+
+    print("USPTO Form Filler — PTO/SB/16 + PTO/SB/15A")
+    print("=" * 50)
+    print()
+    print(f"Inventor:  {INVENTOR['full_name']}")
+    print(f"Address:   {INVENTOR['address']}, {INVENTOR['city']}, "
+          f"{INVENTOR['state']} {INVENTOR['zip']}")
+    print(f"Phone:     {INVENTOR['phone']}")
+    print(f"Email:     {INVENTOR['email']}")
+    print(f"Entity:    Micro Entity")
+    print()
+
+    for patent in PATENTS:
+        print(f"--- Patent {patent['id']}: {patent['docket']} ---")
+        print(f"  Title: {patent['title'][:70]}...")
+
+        # PTO/SB/16 Cover Sheet
+        sb16_out = f"Patent_{patent['id']}_CoverSheet_SB16.pdf"
+        fill_sb16(patent, sb16_out)
+        size = os.path.getsize(sb16_out)
+        print(f"  Cover Sheet:  {sb16_out} ({size:,} bytes)")
+
+        # PTO/SB/15A Micro Entity
+        sb15a_out = f"Patent_{patent['id']}_MicroEntity_SB15A.pdf"
+        fill_sb15a(patent, sb15a_out)
+        size = os.path.getsize(sb15a_out)
+        print(f"  Micro Entity: {sb15a_out} ({size:,} bytes)")
+
+        print()
+
+    print("=" * 50)
+    print("IMPORTANT — Before submitting:")
+    print("  1. Open each PDF and verify all fields are correct")
+    print("  2. Add your SIGNATURE and DATE to each form")
+    print("  3. The Application Number on SB/15A is assigned by")
+    print("     USPTO at filing — leave blank or fill after receipt")
+    print()
+    print("Filing checklist per patent:")
+    print("  [ ] PTO/SB/16 Cover Sheet (signed)")
+    print("  [ ] PTO/SB/15A Micro Entity Certification (signed)")
+    print("  [ ] Specification PDF")
+    print("  [ ] Drawing Descriptions PDF")
+    print("  [ ] Drawing Sheets PDF")
+    print("  [ ] Payment: $65 per patent ($195 total)")
+
+
+if __name__ == "__main__":
+    main()
