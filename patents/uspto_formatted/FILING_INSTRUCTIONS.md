@@ -198,7 +198,7 @@ Save as:
 - [ ] Save all 3 filing receipts
 - [ ] Record application numbers
 - [ ] Record confirmation numbers
-- [ ] Save the filing date (should be January 30, 2026 if filing today)
+- [ ] Save the filing date (should be January 31, 2026 if filing today)
 
 ### Update This Repository:
 - [ ] Add application numbers to `CLAUDE.md` Section 10.2
@@ -210,7 +210,7 @@ Save as:
 - [ ] Confirm entity status is correct
 - [ ] Check for any USPTO notices or deficiency letters
 
-### Within 12 Months (by January 30, 2027):
+### Within 12 Months (by January 31, 2027):
 - [ ] Convert all 3 provisionals to non-provisional utility patents
 - [ ] File PCT international application by January 15, 2027
 - [ ] Build hardware prototype (Phase 11) for evidence
