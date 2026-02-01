@@ -126,8 +126,9 @@ class ConsciousnessSystem(ThermochromicMixin):
 
         # Temperature dynamics
         activity_heat = self.state.spike_count * 0.02
+        overflow_heat = self.harvester.overflow_heat  # Excess energy dissipated as heat
         cooling = (self.state.temperature_c - 20.0) * 0.05
-        self.state.temperature_c += activity_heat - cooling
+        self.state.temperature_c += activity_heat + overflow_heat - cooling
         self.state.temperature_c = float(np.clip(self.state.temperature_c, 15.0, 45.0))
 
         # Thermochromic color

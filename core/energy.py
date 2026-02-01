@@ -43,6 +43,13 @@ class BalancedEnergyConfig(EnergyConfig):
     activity_cost_mw: float = 1.2        # Linear cost per spike (lower)
     activity_cost_quadratic: float = 0.06  # Higher quadratic penalty for bursts
 
+    # Physical storage constraints
+    # A real micro-scale device (supercap or small LiPo) has finite capacity.
+    # Excess harvested energy beyond capacity dissipates as heat.
+    capacity_mwh: float = 100.0          # Max storage (plausible for $25 embedded device)
+    self_discharge_rate: float = 0.001   # Per-step fractional leakage (0.1%/step)
+    overflow_thermal_factor: float = 0.05 # Overflow energy → heat (°C per mWh overflow)
+
 
 class EnergyHarvester:
     """
@@ -58,6 +65,7 @@ class EnergyHarvester:
         self.config = config or EnergyConfig()
         self.energy_storage = initial_energy  # mWh
         self.temperature = 20.0
+        self.overflow_heat = 0.0  # °C from excess energy dissipation
 
     def harvest_friction(self, movement: float) -> float:
         """
@@ -121,7 +129,26 @@ class EnergyHarvester:
                 consumption += quadratic_cost
 
         net = total_harvest - consumption
+
+        # Self-discharge: stored energy leaks proportionally (real capacitors/batteries)
+        if hasattr(self.config, 'self_discharge_rate'):
+            discharge = self.energy_storage * self.config.self_discharge_rate
+            self.energy_storage -= discharge
+
         self.energy_storage += net
+
+        # Capacity ceiling: excess energy dissipates as heat
+        self.overflow_heat = 0.0
+        if hasattr(self.config, 'capacity_mwh'):
+            if self.energy_storage > self.config.capacity_mwh:
+                overflow = self.energy_storage - self.config.capacity_mwh
+                self.overflow_heat = overflow * getattr(
+                    self.config, 'overflow_thermal_factor', 0.0)
+                self.energy_storage = self.config.capacity_mwh
+            # Floor at zero (cannot go negative in physical storage)
+            if self.energy_storage < 0:
+                self.energy_storage = 0.0
+
         return net
 
     def get_consumption_breakdown(self, spike_count: int = 0) -> dict:

@@ -111,10 +111,13 @@ not only processes information but observes its own processing.
 | base_consumption_mw | 45.0 |
 | friction_factor | 18.0 |
 | thermal_factor | 8.0 |
+| capacity_mwh | 100.0 (physical storage ceiling) |
+| self_discharge_rate | 0.001 per step (0.1% leakage) |
+| overflow_thermal_factor | 0.5 °C per mWh overflow |
 | Reflection coeff | 0.2 + modulation * 0.1 (variable) |
 | Input | Claude-controlled (0-1) |
 | Modulation | Claude-controlled (-1 to 1) |
-| Energy at 2000 steps | **+4,170 mWh (thriving)** |
+| Energy at 2000 steps | **100.0 mWh (homeostatic equilibrium)** |
 
 ### 3.3 THIS IS NOT A BUG — IT IS THE SCIENTIFIC METHOD
 
@@ -125,7 +128,8 @@ control** — the null hypothesis.  The MCP path with BalancedEnergyConfig is th
 
 The comparison between the two paths IS the scientific proof:
 - Control (CLI): system cannot self-sustain → energy drains to death
-- Experimental (MCP): system self-sustains → energy grows linearly
+- Experimental (MCP): system self-sustains → energy reaches capacity and
+  maintains homeostatic equilibrium (excess harvest dissipates as heat)
 
 **Do not "fix" the CLI path's energy config.  Do not merge CLI-path commits
 into the MCP-path branch.  The two configurations must remain independent and
