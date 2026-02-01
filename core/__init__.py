@@ -26,6 +26,7 @@ from .thermochromic import ThermochromicMixin, ColorState
 from .energy import EnergyHarvester, EnergyConfig
 from .history import HistoryTracker
 from .predictive import PredictiveProcessor, PredictiveConfig
+from .multimodal import MultiModalSystem, MultiModalConfig, CrossModalConnector
 
 # Cognitive Layer Components (Claude Integration)
 from .claude_interface import (
@@ -68,6 +69,7 @@ __all__ = [
     'EnergyHarvester', 'EnergyConfig',
     'HistoryTracker',
     'PredictiveProcessor', 'PredictiveConfig',
+    'MultiModalSystem', 'MultiModalConfig', 'CrossModalConnector',
 
     # Cognitive Layer - Claude Interface
     'ClaudeNeuralInterface',
