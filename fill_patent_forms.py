@@ -128,8 +128,10 @@ def fill_sb16(patent, output_path):
         # Fee
         "TOTAL FEE AMOUNT": patent["fee"],
 
-        # Signature block — name filled, signature/date left blank
+        # Signature block — S-signature per 37 CFR 1.4(d)(2), date left
+        # blank (entered on Patent Center at submission time)
         "TYPED OR PRINTED NAME": INVENTOR["full_name"],
+        "signature": f"/{INVENTOR['full_name']}/",
     }
 
     # Checkbox fields — set to /On
@@ -169,7 +171,9 @@ def fill_sb15a(patent, output_path):
         "Telephone": INVENTOR["phone"],
         # Application number left blank — assigned by USPTO at filing
         "Application Number or Control Number if applicable": "",
-        # Signature and date left blank for inventor to complete
+        # S-signature per 37 CFR 1.4(d)(2), date left blank
+        # (entered on Patent Center at submission time)
+        "Signature": f"/{INVENTOR['full_name']}/",
     }
 
     for page in writer.pages:
@@ -217,8 +221,10 @@ def main():
     print("=" * 50)
     print("IMPORTANT — Before submitting:")
     print("  1. Open each PDF and verify all fields are correct")
-    print("  2. Add your SIGNATURE and DATE to each form")
-    print("  3. The Application Number on SB/15A is assigned by")
+    print("  2. S-signature is pre-filled per 37 CFR 1.4(d)(2)")
+    print("  3. DATE field is left blank — enter on Patent Center")
+    print("     at submission time")
+    print("  4. The Application Number on SB/15A is assigned by")
     print("     USPTO at filing — leave blank or fill after receipt")
     print()
     print("Filing checklist per patent:")
