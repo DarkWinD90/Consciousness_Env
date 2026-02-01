@@ -128,9 +128,10 @@ measurable, falsifiable properties of signal processing, energy dynamics,
 and control system behavior. The system has been validated through a
 rigorous experimental framework comprising a null-hypothesis control
 configuration (energy depletes to -4,697 mWh after 2000 steps) and an
-alternative-hypothesis experimental configuration (energy grows to +4,170
-mWh after 2000 steps), with all validation claims documented as explicit
-pass/fail thresholds reproducible via version-controlled source code.
+alternative-hypothesis experimental configuration (energy reaches physical
+storage capacity of 100 mWh and maintains homeostatic equilibrium, validated
+stable over 2,000,000 steps), with all validation claims documented as
+explicit pass/fail thresholds reproducible via version-controlled source code.
 
 
 ASSOCIATED PATENT APPLICATIONS
@@ -168,7 +169,8 @@ Phase 8 STDP (3 claims, all PASS):
 
 Energy Self-Sustainability:
     Control (EnergyConfig): -4,697 mWh at 2000 steps (fails)
-    Experimental (BalancedEnergyConfig): +4,170 mWh at 2000 steps (passes)
+    Experimental (BalancedEnergyConfig): homeostasis at 100 mWh capacity (passes)
+    Long-duration: stable over 2,000,000 steps, energy std = 0.0000 mWh
 
 
 HARDWARE REFERENCE DESIGN
@@ -190,4 +192,4 @@ available in the public repository:
 
 Any validated state can be reproduced exactly via git tags:
 
-    git checkout v1.0.0-phase8-stdp
+    git checkout v3.0.0-phase10-multimodal

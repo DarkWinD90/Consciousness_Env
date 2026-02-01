@@ -156,4 +156,4 @@ A method and system for enabling configurable recursive self-observation in spik
 
 REFERENCE TO SOURCE CODE
 
-The complete implementation of this invention is available at the following repository: github.com/DarkWinD90/Consciousness_Env, validated state tagged as v1.0.0-phase8-stdp at commit 80cf3e5. Key implementation file is core/base_snn.py. Dynamic modulation is implemented in mcp/consciousness_mcp_server.py.
+The complete implementation of this invention is available at the following repository: github.com/DarkWinD90/Consciousness_Env, validated state tagged as v3.0.0-phase10-multimodal at commit 9e2c333. Key implementation file is core/base_snn.py. Dynamic modulation is implemented in mcp/consciousness_mcp_server.py.

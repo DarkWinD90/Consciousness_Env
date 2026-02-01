@@ -134,7 +134,7 @@ Create simple black and white line drawings for each patent. You can use:
 - Sheet numbers at top center: "1/7", "2/7", etc.
 - NO frames or borders around drawing area
 
-### Patent A Drawings (7 figures):
+### Patent A Drawings (8 figures):
 - FIG. 1: System Architecture Block Diagram (8-layer loop)
 - FIG. 2: Energy Balance Comparison (control vs. experimental)
 - FIG. 3: SNN Architecture (LIF neuron model)
@@ -142,21 +142,24 @@ Create simple black and white line drawings for each patent. You can use:
 - FIG. 5: Activity-Dependent Energy Dynamics (sweet spot curve)
 - FIG. 6: Hardware Reference Design (component layout)
 - FIG. 7: Validation Results Summary (claims table)
+- FIG. 8: Energy-Bounded Recursive Control Architecture
 
-### Patent B Drawings (5 figures):
+### Patent B Drawings (6 figures):
 - FIG. 1: Self-Observation Feedback Loop
 - FIG. 2: Reflection Coefficient Spectrum
 - FIG. 3: Dynamic Modulation Sources
 - FIG. 4: Self-Referential Learning Loop (STDP + self-observation)
 - FIG. 5: Energy-Aware Self-Observation Regulation
+- FIG. 6: End-to-End Signal Flow with Self-Observation Integration
 
-### Patent C Drawings (6 figures):
+### Patent C Drawings (7 figures):
 - FIG. 1: System Architecture with Fallback
 - FIG. 2: State Transition Diagram
 - FIG. 3: Energy-Aware Modulation Curve
 - FIG. 4: Autonomous Input Generator Output
 - FIG. 5: Resynchronization Payload Structure
 - FIG. 6: Recovery Timeline Diagrams
+- FIG. 7: End-to-End Signal Flow (Connected vs. Autonomous)
 
 Save as:
 - `Patent_A_Drawings.pdf`

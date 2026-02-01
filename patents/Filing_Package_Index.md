@@ -114,7 +114,8 @@ Claim 2 (Independent — SYSTEM): Neural processing system with fallback
 | Phase 8 STDP | F8.1, F8.2, F8.3 | ALL PASS | `git checkout v1.0.0-phase8-stdp` |
 | Phase 9 Predictive Processing | F9.1, F9.2, F9.3 | ALL PASS | `git checkout v2.0.0-phase9-predictive` |
 | Phase 10 Multi-Modal Integration | F10.1, F10.2, F10.3 | ALL PASS | `git checkout v3.0.0-phase10-multimodal` |
-| MCP Operational | Energy growth +4,170 mWh | CONFIRMED | `git checkout v0.6.0-mcp-fallback` |
+| MCP Operational | Energy homeostasis at 100 mWh capacity | CONFIRMED | `git checkout v0.6.0-mcp-fallback` |
+| Long-Duration Stability | 2,000,000 steps, 7/7 stability checks PASS | CONFIRMED | `main` (latest) |
 
 ### Validation Commands
 

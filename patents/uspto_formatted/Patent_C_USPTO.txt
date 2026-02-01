@@ -195,4 +195,4 @@ A method and system for maintaining continuous intelligent operation of a neural
 
 REFERENCE TO SOURCE CODE
 
-The complete implementation of this invention is available at the following repository: github.com/DarkWinD90/Consciousness_Env, validated state tagged as v0.6.0-mcp-fallback at commit 307c5f6. Key implementation file is mcp/consciousness_mcp_server.py. Persistent state snapshots are stored in mcp/.snapshots/ directory.
+The complete implementation of this invention is available at the following repository: github.com/DarkWinD90/Consciousness_Env, validated state tagged as v3.0.0-phase10-multimodal at commit 9e2c333. Key implementation file is mcp/consciousness_mcp_server.py. Persistent state snapshots are stored in mcp/.snapshots/ directory.

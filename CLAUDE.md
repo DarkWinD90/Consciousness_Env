@@ -113,7 +113,7 @@ not only processes information but observes its own processing.
 | thermal_factor | 8.0 |
 | capacity_mwh | 100.0 (physical storage ceiling) |
 | self_discharge_rate | 0.001 per step (0.1% leakage) |
-| overflow_thermal_factor | 0.5 °C per mWh overflow |
+| overflow_thermal_factor | 0.05 °C per mWh overflow |
 | Reflection coeff | 0.2 + modulation * 0.1 (variable) |
 | Input | Claude-controlled (0-1) |
 | Modulation | Claude-controlled (-1 to 1) |

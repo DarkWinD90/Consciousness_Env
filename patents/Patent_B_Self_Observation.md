@@ -355,7 +355,7 @@ Plot showing reflection coefficient as a function of energy level, with conserva
 ## SOURCE CODE REFERENCE
 
 Repository: https://github.com/DarkWinD90/Consciousness_Env
-Validated State: git tag v1.0.0-phase8-stdp (commit 80cf3e5)
+Validated State: git tag v3.0.0-phase10-multimodal (commit 9e2c333)
 
 Key implementation: `core/base_snn.py`, lines 80-105 (step method with reflection)
 Dynamic modulation: `mcp/consciousness_mcp_server.py`, line 106 (reflection_coeff = 0.2 + modulation * 0.1)

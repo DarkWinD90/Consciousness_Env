@@ -518,7 +518,7 @@ The method of Claim 1 wherein said hard cap on autonomous operation is set to a 
 The method of Claim 1 used in combination with a self-sustaining neural-motor energy harvesting loop, wherein:
 - the neural processing system's motor output generates electrical energy through piezoelectric and thermoelectric transduction;
 - the autonomous fallback controller adjusts neural activity to maintain energy homeostasis;
-- the system can operate indefinitely without external power or cognitive control, limited only by the hard cap on autonomous steps.
+- the system can operate indefinitely without external power or cognitive control, sustained by its own energy harvesting within the physical storage capacity of the energy storage medium, limited only by the hard cap on autonomous steps.
 
 **Claim 9**:
 The method of Claim 1 used in combination with configurable recursive self-observation, wherein:
@@ -577,7 +577,7 @@ Four timeline diagrams showing the four recovery scenarios: brief disconnection,
 ## SOURCE CODE REFERENCE
 
 Repository: https://github.com/DarkWinD90/Consciousness_Env
-Validated State: git tag v0.6.0-mcp-fallback (commit 307c5f6)
+Validated State: git tag v3.0.0-phase10-multimodal (commit 9e2c333)
 
 Key implementation files:
 - `mcp/consciousness_mcp_server.py` — MCP server with fallback system (v1.1.0)

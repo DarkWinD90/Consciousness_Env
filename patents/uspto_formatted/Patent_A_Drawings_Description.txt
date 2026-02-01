@@ -95,15 +95,16 @@ Curve 1 (Control — solid line, labeled "EnergyConfig (Control)"):
 
 Curve 2 (Experimental — dashed line, labeled "BalancedEnergyConfig (Experimental)"):
 - Starts at 50.0 mWh
-- Increases linearly
-- Ends at approximately +4,170 mWh at step 2000
-- Label: "base_consumption = 45 mW, activity-dependent cost"
+- Rises rapidly to 100.0 mWh (storage capacity) within approximately 30 steps
+- Plateaus at 100.0 mWh for remaining steps (homeostatic equilibrium)
+- Label: "base_consumption = 45 mW, capacity = 100 mWh, overflow → heat"
 
 A horizontal dashed line at y = 0 labeled "Self-Sustaining Threshold."
+A horizontal dashed line at y = 100 labeled "Storage Capacity (100 mWh)."
 
 Annotations:
 - Arrow pointing to control curve: "System fails — energy depleted"
-- Arrow pointing to experimental curve: "System thrives — net positive energy"
+- Arrow pointing to experimental curve plateau: "System achieves homeostasis at capacity"
 
 The area between the two curves should be lightly shaded to emphasize the
 divergence.
@@ -271,7 +272,8 @@ Section header: "Phase 7 Full Integration (Control confirms energy depletion)"
 Row: Energy at 2000 steps | Energy depleted | -4,697 mWh | < 0 | CONFIRMED
 
 Section header: "MCP Integration (BalancedEnergyConfig)"
-Row: Energy at 2000 steps | Net positive energy | +4,170 mWh | > 0 | CONFIRMED
+Row: Energy at 2000 steps | Homeostasis at capacity | 100.0 mWh | = capacity | CONFIRMED
+Row: Stability at 2,000,000 steps | Energy std in last 50% | 0.0000 mWh | < 1.0 | CONFIRMED
 
 Section header: "Phase 8 STDP"
 Row F8.1: Weight entropy decrease | final < initial | 2.95 to 2.02 bits | decrease | PASS

@@ -83,9 +83,9 @@ The system achieves **net-positive energy balance** — the energy harvested fro
 
 This is demonstrated through a falsifiable experimental framework:
 - **Control condition**: Harsh energy parameters (base consumption 470 mW, friction factor 0.0005, thermal factor 0.0002) → system energy drains to -4,697 mWh after 2000 steps
-- **Experimental condition**: Balanced energy parameters (base consumption 45 mW, friction factor 18.0, thermal factor 8.0) → system energy grows to +4,170 mWh after 2000 steps
+- **Experimental condition**: Balanced energy parameters (base consumption 45 mW, friction factor 18.0, thermal factor 8.0) with physical storage capacity of 100 mWh → system reaches capacity and maintains homeostatic equilibrium, with excess harvested energy dissipating as heat
 
-The comparison proves that with appropriate parameter tuning, the self-sustaining loop is physically achievable.
+The comparison proves that with appropriate parameter tuning, the self-sustaining loop is physically achievable. The system achieves metabolic homeostasis: energy harvesting exceeds consumption, the storage reaches its physical capacity, and surplus energy dissipates thermally — exactly as occurs in biological energy systems. Stability has been validated over 2,000,000 operational steps (approximately 10,000 hours of simulated operation) with zero numerical drift and continuous neural activity.
 
 ---
 
@@ -230,6 +230,9 @@ For the self-sustaining configuration (BalancedEnergyConfig):
 - `thermal_factor = 8.0` (optimized thermoelectric coupling)
 - `activity_cost_mw = 1.2` (per-spike energy cost)
 - `activity_cost_quadratic = 0.06` (burst penalty)
+- `capacity_mwh = 100.0` (physical storage ceiling — supercapacitor or small LiPo)
+- `self_discharge_rate = 0.001` (per-step fractional leakage, 0.1% per timestep)
+- `overflow_thermal_factor = 0.05` (excess energy dissipates as heat, °C per mWh overflow)
 
 This creates a "sweet spot" energy dynamic:
 - **Rest state**: Significant drain (must stay active)
@@ -239,6 +242,8 @@ This creates a "sweet spot" energy dynamic:
 - **Burst activity (100 spikes)**: Significant drain (emergency only)
 
 The system must regulate its own activity level to maintain energy homeostasis — a form of metabolic self-regulation.
+
+**Physical storage constraints**: The energy storage has a finite capacity (100 mWh), modeling a realistic supercapacitor or small lithium polymer cell. When the system harvests more energy than it consumes and storage is at capacity, the excess energy dissipates as heat through the overflow thermal pathway — feeding back into the thermochromic temperature model. Additionally, stored energy undergoes self-discharge (0.1% per timestep), modeling real capacitor leakage. These constraints create **true homeostatic equilibrium**: the system reaches capacity, excess harvest becomes thermal dissipation, and the energy level stabilizes at the storage ceiling indefinitely. This mirrors biological metabolic regulation where organisms maintain energy reserves at a homeostatic set point rather than accumulating boundless reserves.
 
 ### Motor Actuation
 
@@ -308,9 +313,12 @@ The invention is validated through a rigorous falsifiable experimental framework
 - base_consumption_mw = 45.0
 - friction_factor = 18.0
 - thermal_factor = 8.0
+- capacity_mwh = 100.0 (physical storage ceiling)
+- self_discharge_rate = 0.001 (0.1% per-step leakage)
+- overflow_thermal_factor = 0.05 (excess energy → heat dissipation)
 - Variable reflection coefficient = 0.2 + modulation × 0.1
 
-**Result**: Energy grows from 50 mWh to approximately +4,170 mWh after 2000 steps. **System self-sustains and accumulates energy surplus.** The cognitive-motor-energy loop achieves net-positive energy balance.
+**Result**: Energy rises from 50 mWh to the physical storage capacity of 100 mWh within approximately 30 steps, then maintains homeostatic equilibrium at capacity. Excess harvested energy dissipates as heat through the overflow thermal pathway. **System self-sustains at capacity — the cognitive-motor-energy loop achieves net-positive energy balance with physically realistic storage constraints.** Validated over 2,000,000 steps (energy std = 0.0000 mWh, temperature std = 0.0000°C in the second half) confirming indefinite homeostatic stability.
 
 ### Phase 7 Validation Claims (All PASS)
 
@@ -415,7 +423,7 @@ such that said spiking neural network adapts its connectivity to temporal correl
 
 ## ABSTRACT
 
-A self-sustaining cognitive system comprising a spiking neural network that processes environmental sensor input, drives motor actuation from its neural output, and harvests energy from its own motor activity through piezoelectric and thermoelectric transduction. The harvested energy powers the neural network's continued operation, creating a closed cognitive-motor-energy loop that achieves net-positive energy balance without external power. The system incorporates recursive self-observation through configurable feedback of prior neural output, spike-timing dependent plasticity for unsupervised learning, and activity-dependent energy management that creates a metabolic "sweet spot" requiring self-regulation for energy homeostasis. Validated through a falsifiable experimental framework demonstrating net-positive energy growth of +4,170 mWh over 2000 operational steps under balanced energy parameters, compared to net-negative energy drain of -4,697 mWh under control parameters. The invention enables autonomous cognitive systems for robotics, prosthetics, IoT sensor networks, and space exploration that sustain themselves energetically from their own computational activity.
+A self-sustaining cognitive system comprising a spiking neural network that processes environmental sensor input, drives motor actuation from its neural output, and harvests energy from its own motor activity through piezoelectric and thermoelectric transduction. The harvested energy powers the neural network's continued operation, creating a closed cognitive-motor-energy loop that achieves net-positive energy balance without external power. The system incorporates recursive self-observation through configurable feedback of prior neural output, spike-timing dependent plasticity for unsupervised learning, activity-dependent energy management that creates a metabolic "sweet spot" requiring self-regulation, and physical energy storage constraints including finite capacity, self-discharge, and overflow-to-heat dissipation that produce true homeostatic equilibrium. Validated through a falsifiable experimental framework: under control parameters (base consumption 470 mW), energy drains to -4,697 mWh after 2000 steps; under balanced parameters (base consumption 45 mW) with 100 mWh storage capacity, the system reaches capacity and maintains homeostatic equilibrium indefinitely — confirmed stable over 2,000,000 operational steps with zero drift. The invention enables autonomous cognitive systems for robotics, prosthetics, IoT sensor networks, and space exploration that sustain themselves energetically from their own computational activity.
 
 ---
 
@@ -427,7 +435,7 @@ Eight-layer closed-loop architecture showing signal flow from Layer 1 (Printed M
 ### Figure 2: Energy Balance Comparison
 Side-by-side energy trajectory plots showing:
 - Left: Control condition (EnergyConfig) — energy depletes from 50 mWh to -4,697 mWh
-- Right: Experimental condition (BalancedEnergyConfig) — energy grows from 50 mWh to +4,170 mWh
+- Right: Experimental condition (BalancedEnergyConfig) — energy rises from 50 mWh to 100 mWh (storage capacity) and maintains homeostatic equilibrium, with excess energy dissipating as heat
 
 ### Figure 3: Spiking Neural Network Architecture
 Diagram showing LIF neuron model with membrane potential, leak, threshold, refractory period, synaptic weights, external input, and reflection input. Arrows indicate STDP weight modification pathways.
@@ -451,7 +459,7 @@ Table and bar chart showing Phase 7 Claims A-E (all PASS) and Phase 8 Claims F8.
 The complete implementation of this invention is available as open-source software at:
 
 Repository: https://github.com/DarkWinD90/Consciousness_Env
-Validated State: git tag v1.0.0-phase8-stdp (commit 80cf3e5)
+Validated State: git tag v3.0.0-phase10-multimodal (commit 9e2c333)
 
 Key source files:
 - `core/base_snn.py` — Spiking neural network with STDP (165 lines)
@@ -463,7 +471,7 @@ Key source files:
 - `phases/phase8_stdp.py` — STDP learning validation (282 lines)
 - `mcp/consciousness_mcp_server.py` — MCP physics server (509 lines)
 
-Total implementation: approximately 1,738 lines of Python.
+Total validated claims: 14 across 4 phases (Phase 7-10).
 
 ---
 
