@@ -2,7 +2,7 @@ ENERGY-BOUNDED RECURSIVE CONTROL SYSTEM: REFERENCE ARCHITECTURE
 
 Kevin Christopher Ward
 Moreno Valley, California, United States
-January 30, 2026
+January 31, 2026
 
 
 REFERENCE SIGNAL FLOW DIAGRAM
@@ -137,7 +137,7 @@ explicit pass/fail thresholds reproducible via version-controlled source code.
 ASSOCIATED PATENT APPLICATIONS
 
 This reference architecture is described in three co-pending provisional
-patent applications filed January 30, 2026:
+patent applications filed January 31, 2026:
 
     Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop for
     Autonomous Cognitive Systems (11 claims)

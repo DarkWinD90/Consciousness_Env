@@ -16,7 +16,7 @@ Moreno Valley, California, United States
 
 CROSS-REFERENCE TO RELATED APPLICATIONS
 
-[0001] This application is related to co-pending provisional patent applications filed on January 30, 2026: (1) "Self-Sustaining Neural-Motor Energy Harvesting Loop for Autonomous Cognitive Systems"; and (2) "Configurable Recursive Self-Observation Method and System for Spiking Neural Networks with Dynamic Reflection Coefficient Modulation."
+[0001] This application is related to co-pending provisional patent applications filed on January 31, 2026: (1) "Self-Sustaining Neural-Motor Energy Harvesting Loop for Autonomous Cognitive Systems"; and (2) "Configurable Recursive Self-Observation Method and System for Spiking Neural Networks with Dynamic Reflection Coefficient Modulation."
 
 
 FIELD OF THE INVENTION

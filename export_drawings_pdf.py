@@ -100,7 +100,7 @@ def draw_separator_page(c, patent):
     c.drawCentredString(PAGE_W / 2, 1.0 * inch,
                         "Inventor: Kevin Christopher Ward")
     c.drawCentredString(PAGE_W / 2, 0.75 * inch,
-                        "Provisional Patent Application — Filed January 30, 2026")
+                        "Provisional Patent Application — Filed January 31, 2026")
 
     c.showPage()
 
