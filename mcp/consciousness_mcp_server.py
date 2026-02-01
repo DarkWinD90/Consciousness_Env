@@ -334,97 +334,119 @@ class MCPConsciousnessServer:
             }
         ]
 
+    # ── Tool handlers ──────────────────────────────────────────────
+    # Each _handle_<tool> method returns a dict.  Adding a new tool
+    # requires only a new method and a TOOL_HANDLERS entry.
+
+    def _handle_initialize_consciousness(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        num_neurons = arguments.get("num_neurons", 50)
+        self.system = ConsciousnessSystem(num_neurons=num_neurons)
+        return {
+            "status": "initialized",
+            "num_neurons": num_neurons,
+            "initial_state": asdict(self.system.state)
+        }
+
+    def _handle_step_simulation(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        num_steps = arguments.get("num_steps", 1)
+        external_input = arguments.get("external_input", 0.5)
+        modulation = arguments.get("modulation", 0)
+
+        for _ in range(num_steps):
+            state = self.system.step(external_input, modulation)
+
+        return asdict(state)
+
+    def _handle_get_neural_state(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        return {
+            "step": self.system.state.step,
+            "num_neurons": self.system.state.num_neurons,
+            "spike_count": self.system.state.spike_count,
+            "mean_potential": self.system.state.mean_potential,
+            "snn_output": self.system.state.snn_output,
+            "pattern_type": self.system.state.pattern_type,
+            "membrane_potentials_sample": self.system.snn.membrane_potential[:10].tolist()
+        }
+
+    def _handle_get_system_status(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        return {
+            "state": asdict(self.system.state),
+            "energy_status": "critical" if self.system.state.energy_mwh < 10 else
+                            "low" if self.system.state.energy_mwh < 25 else "ok",
+            "temperature_status": "hot" if self.system.state.temperature_c > 35 else
+                                 "cold" if self.system.state.temperature_c < 18 else "ok",
+            "current_stimuli": self.system.stimuli
+        }
+
+    def _handle_apply_cognitive_response(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        modulation = arguments.get("modulation", 0)
+        attention = arguments.get("attention_focus")
+        action = arguments.get("action")
+        reasoning = arguments.get("reasoning", "")
+
+        self.system.state.last_modulation = modulation
+        if attention:
+            self.system.state.attention_focus = attention
+
+        return {
+            "applied": True,
+            "modulation": modulation,
+            "attention_focus": attention,
+            "action": action,
+            "reasoning": reasoning
+        }
+
+    def _handle_set_goal(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        goal = arguments.get("goal", "")
+        self.system.state.current_goal = goal
+        return {"goal_set": goal}
+
+    def _handle_set_stimuli(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        stimuli = arguments.get("stimuli", {})
+        self.system.set_stimuli(stimuli)
+        return {"stimuli_set": list(stimuli.keys())}
+
+    def _handle_get_attention_needs(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        needs = self.system.get_attention_needs()
+        return {
+            "attention_needs": needs,
+            "recommended_focus": max(needs, key=lambda k: needs[k]["urgency"]) if needs else None
+        }
+
+    def _handle_get_history(self, arguments: Dict[str, Any]) -> Dict[str, Any]:
+        num_steps = arguments.get("num_steps", 20)
+        history = {}
+        for field in ['spikes', 'energy', 'temperature', 'output']:
+            data = self.system.history.get(field)
+            history[field] = data[-num_steps:] if len(data) > num_steps else data
+        return {"history": history, "total_steps": self.system.state.step}
+
+    # Tools that do NOT require an initialized system
+    _NO_INIT_REQUIRED = {"initialize_consciousness"}
+
+    # Dispatch table: tool name → handler method name
+    TOOL_HANDLERS = {
+        "initialize_consciousness": "_handle_initialize_consciousness",
+        "step_simulation": "_handle_step_simulation",
+        "get_neural_state": "_handle_get_neural_state",
+        "get_system_status": "_handle_get_system_status",
+        "apply_cognitive_response": "_handle_apply_cognitive_response",
+        "set_goal": "_handle_set_goal",
+        "set_stimuli": "_handle_set_stimuli",
+        "get_attention_needs": "_handle_get_attention_needs",
+        "get_history": "_handle_get_history",
+    }
+
     async def handle_tool_call(self, name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
-        """Handle a tool call from Claude"""
+        """Handle a tool call from Claude via dispatch table."""
+        handler_name = self.TOOL_HANDLERS.get(name)
+        if handler_name is None:
+            return {"error": f"Unknown tool: {name}"}
 
-        if name == "initialize_consciousness":
-            num_neurons = arguments.get("num_neurons", 50)
-            self.system = ConsciousnessSystem(num_neurons=num_neurons)
-            return {
-                "status": "initialized",
-                "num_neurons": num_neurons,
-                "initial_state": asdict(self.system.state)
-            }
-
-        # All other tools require initialization
-        if self.system is None:
+        if name not in self._NO_INIT_REQUIRED and self.system is None:
             return {"error": "System not initialized. Call initialize_consciousness first."}
 
-        if name == "step_simulation":
-            num_steps = arguments.get("num_steps", 1)
-            external_input = arguments.get("external_input", 0.5)
-            modulation = arguments.get("modulation", 0)
-
-            for _ in range(num_steps):
-                state = self.system.step(external_input, modulation)
-
-            return asdict(state)
-
-        elif name == "get_neural_state":
-            return {
-                "step": self.system.state.step,
-                "num_neurons": self.system.state.num_neurons,
-                "spike_count": self.system.state.spike_count,
-                "mean_potential": self.system.state.mean_potential,
-                "snn_output": self.system.state.snn_output,
-                "pattern_type": self.system.state.pattern_type,
-                "membrane_potentials_sample": self.system.snn.membrane_potential[:10].tolist()
-            }
-
-        elif name == "get_system_status":
-            return {
-                "state": asdict(self.system.state),
-                "energy_status": "critical" if self.system.state.energy_mwh < 10 else
-                                "low" if self.system.state.energy_mwh < 25 else "ok",
-                "temperature_status": "hot" if self.system.state.temperature_c > 35 else
-                                     "cold" if self.system.state.temperature_c < 18 else "ok",
-                "current_stimuli": self.system.stimuli
-            }
-
-        elif name == "apply_cognitive_response":
-            modulation = arguments.get("modulation", 0)
-            attention = arguments.get("attention_focus")
-            action = arguments.get("action")
-            reasoning = arguments.get("reasoning", "")
-
-            self.system.state.last_modulation = modulation
-            if attention:
-                self.system.state.attention_focus = attention
-
-            return {
-                "applied": True,
-                "modulation": modulation,
-                "attention_focus": attention,
-                "action": action,
-                "reasoning": reasoning
-            }
-
-        elif name == "set_goal":
-            goal = arguments.get("goal", "")
-            self.system.state.current_goal = goal
-            return {"goal_set": goal}
-
-        elif name == "set_stimuli":
-            stimuli = arguments.get("stimuli", {})
-            self.system.set_stimuli(stimuli)
-            return {"stimuli_set": list(stimuli.keys())}
-
-        elif name == "get_attention_needs":
-            needs = self.system.get_attention_needs()
-            return {
-                "attention_needs": needs,
-                "recommended_focus": max(needs, key=lambda k: needs[k]["urgency"]) if needs else None
-            }
-
-        elif name == "get_history":
-            num_steps = arguments.get("num_steps", 20)
-            history = {}
-            for field in ['spikes', 'energy', 'temperature', 'output']:
-                data = self.system.history.get(field)
-                history[field] = data[-num_steps:] if len(data) > num_steps else data
-            return {"history": history, "total_steps": self.system.state.step}
-
-        return {"error": f"Unknown tool: {name}"}
+        return getattr(self, handler_name)(arguments)
 
     async def handle_request(self, request: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """Handle incoming MCP request"""
