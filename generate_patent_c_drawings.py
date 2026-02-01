@@ -33,19 +33,28 @@ font_small = 8
 line_width = 1.5
 TOTAL_SHEETS = 7
 
+# Safe drawing bounds (absolute coordinates, 0.15" inset from margins)
+SAFE_LEFT = left_margin + 0.15       # 1.15
+SAFE_RIGHT = paper_width - right_margin - 0.15  # 7.725
+SAFE_BOTTOM = bottom_margin + 0.15   # 0.525
+SAFE_TOP = paper_height - top_margin - 0.15     # 9.85
+SAFE_WIDTH = SAFE_RIGHT - SAFE_LEFT   # 6.575
+SAFE_CX = (SAFE_LEFT + SAFE_RIGHT) / 2  # ~4.4375
+
 arrow_props = {'arrowstyle': '->', 'lw': line_width}
 
 
 def setup_figure(fig_num):
     fig = plt.figure(figsize=(paper_width, paper_height), dpi=dpi)
-    # Constrain drawing area to safe margins (+0.1" inset to prevent overflow)
-    safe_left = (left_margin + 0.1) / paper_width
-    safe_bottom = (bottom_margin + 0.1) / paper_height
-    safe_width = (paper_width - left_margin - right_margin - 0.2) / paper_width
-    safe_height = (paper_height - top_margin - bottom_margin - 0.2) / paper_height
+    # Constrain drawing area to safe margins (+0.15" inset to prevent overflow)
+    safe_left = SAFE_LEFT / paper_width
+    safe_bottom = SAFE_BOTTOM / paper_height
+    safe_width = SAFE_WIDTH / paper_width
+    safe_height = (SAFE_TOP - SAFE_BOTTOM) / paper_height
     ax = fig.add_axes([safe_left, safe_bottom, safe_width, safe_height])
-    ax.set_xlim(left_margin + 0.1, paper_width - right_margin - 0.1)
-    ax.set_ylim(bottom_margin + 0.1, paper_height - top_margin - 0.1)
+    ax.set_xlim(SAFE_LEFT, SAFE_RIGHT)
+    ax.set_ylim(SAFE_BOTTOM, SAFE_TOP)
+    ax.set_clip_on(True)
     ax.axis('off')
     # Sheet number at top center (on fig, outside ax)
     fig.text(0.5, 1.0 - 0.5 / paper_height,
@@ -75,9 +84,9 @@ ax.text(4.25, 9.5, 'External Cognitive Control Layer (e.g., Claude)',
 ax.text(4.25, 9.1, 'Provides intelligent cognitive decisions',
         ha='center', va='center', fontsize=8)
 ax.add_patch(Ellipse((4.25, 9.5), 3, 1, fill=False, lw=line_width, ls='dashed'))
-ax.text(6, 9.5, 'May become unavailable', ha='left', va='center', fontsize=8)
-ax.text(6.2, 9.8, '100', ha='left', fontsize=8)
-ax.annotate('', xy=(5.75, 9.5), xytext=(6.2, 9.75), arrowprops=leader_props)
+ax.text(5.8, 9.5, 'May disconnect', ha='left', va='center', fontsize=8)
+ax.text(5.9, 9.8, '100', ha='left', fontsize=8)
+ax.annotate('', xy=(5.75, 9.5), xytext=(5.9, 9.75), arrowprops=leader_props)
 
 # Arrows downward
 ax.add_patch(FancyArrowPatch((3, 8.5), (3, 8), **arrow_props))
@@ -104,7 +113,7 @@ ax.annotate('', xy=(5.5, 7.5), xytext=(5.65, 7.5), arrowprops=leader_props)
 auto_left = 5.0
 auto_width = 2.3
 auto_cx = auto_left + auto_width / 2
-ax.add_patch(FancyArrowPatch((3.5, 6.5), (2, 6), ls='solid', **arrow_props))
+ax.add_patch(FancyArrowPatch((3.5, 6.5), (SAFE_LEFT + 1.0, 6), ls='solid', **arrow_props))
 ax.text(2.5, 6.25, 'Heartbeat active -> Connected Mode',
         ha='center', va='center', fontsize=8)
 ax.add_patch(FancyArrowPatch((5, 6.5), (auto_cx, 6), ls='dashed', **arrow_props))
@@ -112,16 +121,16 @@ ax.text(5.5, 6.25, 'Heartbeat timeout -> Autonomous Mode',
         ha='center', va='center', fontsize=8)
 
 # Left path - Connected Mode (ref 104)
-ax.add_patch(Rectangle((1, 5), 2, 1, fill=False, lw=line_width))
-ax.text(2, 5.75, 'Cognitive-Driven Operation',
-        ha='center', va='center', fontsize=10)
-ax.text(2, 5.5, 'Input: Claude-controlled (0-1)',
+ax.add_patch(Rectangle((SAFE_LEFT, 5), 2, 1, fill=False, lw=line_width))
+ax.text(SAFE_LEFT + 1.0, 5.75, 'Cognitive-Driven Operation',
+        ha='center', va='center', fontsize=9)
+ax.text(SAFE_LEFT + 1.0, 5.5, 'Input: Claude-controlled (0-1)',
         ha='center', va='center', fontsize=8)
-ax.text(2, 5.25, 'Modulation: Claude-controlled (-1 to +1)',
+ax.text(SAFE_LEFT + 1.0, 5.25, 'Mod: Claude-controlled (-1 to +1)',
         ha='center', va='center', fontsize=8)
-ax.text(1, 5.85, '104', ha='right', fontsize=8)
-ax.annotate('', xy=(1.0, 5.7), xytext=(0.95, 5.8), arrowprops=leader_props)
-ax.add_patch(FancyArrowPatch((2, 4.5), (2, 4), **arrow_props))
+ax.text(SAFE_LEFT + 2.15, 5.85, '104', ha='left', fontsize=8)
+ax.annotate('', xy=(SAFE_LEFT + 2.0, 5.7), xytext=(SAFE_LEFT + 2.1, 5.8), arrowprops=leader_props)
+ax.add_patch(FancyArrowPatch((SAFE_LEFT + 1.0, 4.5), (SAFE_LEFT + 1.0, 4), **arrow_props))
 
 # Right path - Autonomous Mode (ref 106) — constrained within right margin
 # auto_left, auto_width, auto_cx already defined above for arrow targeting
@@ -245,25 +254,13 @@ plt.close()
 # ════════════════════════════════════════════════════════════════════
 # FIG. 3 — Energy-Aware Modulation Curve
 # ════════════════════════════════════════════════════════════════════
-fig = plt.figure(figsize=(paper_width, paper_height), dpi=dpi)
-safe_left = (left_margin + 0.1) / paper_width
-safe_bottom = (bottom_margin + 0.1) / paper_height
-safe_width = (paper_width - left_margin - right_margin - 0.2) / paper_width
-safe_height = (paper_height - top_margin - bottom_margin - 0.2) / paper_height
-ax = fig.add_axes([safe_left, safe_bottom, safe_width, safe_height])
-ax.set_xlim(left_margin + 0.1, paper_width - right_margin - 0.1)
-ax.set_ylim(bottom_margin + 0.1, paper_height - top_margin - 0.1)
-ax.axis('off')
-fig.text(0.5, 1.0 - 0.5 / paper_height, f"3/{TOTAL_SHEETS}",
-         ha='center', va='center', fontsize=10)
-fig.text(left_margin / paper_width, (bottom_margin + 0.2) / paper_height, "FIG. 3",
-         ha='left', va='bottom', fontsize=font_size_label)
+fig, ax = setup_figure(3)
 
-# Graph area — inset with 0.1" safety padding
-graph_ax = fig.add_axes([(left_margin + 0.1) / paper_width,
-                          (bottom_margin + 1.1) / paper_height,
-                          (paper_width - left_margin - right_margin - 0.2) / paper_width,
-                          (paper_height - top_margin - bottom_margin - 2.2) / paper_height])
+# Graph area — inset with safe padding (+0.5" left for y-axis labels)
+graph_ax = fig.add_axes([(SAFE_LEFT + 0.5) / paper_width,
+                          (SAFE_BOTTOM + 1.0) / paper_height,
+                          (SAFE_WIDTH - 0.5) / paper_width,
+                          (SAFE_TOP - SAFE_BOTTOM - 2.0) / paper_height])
 graph_ax.set_xlabel('System Energy Level (mWh)', fontsize=10)
 graph_ax.set_ylabel('Autonomous Modulation Value', fontsize=10)
 graph_ax.set_xticks([0, 1])
@@ -310,24 +307,12 @@ plt.close()
 # ════════════════════════════════════════════════════════════════════
 # FIG. 4 — Autonomous Input Generator Output
 # ════════════════════════════════════════════════════════════════════
-fig = plt.figure(figsize=(paper_width, paper_height), dpi=dpi)
-safe_left = (left_margin + 0.1) / paper_width
-safe_bottom = (bottom_margin + 0.1) / paper_height
-safe_width = (paper_width - left_margin - right_margin - 0.2) / paper_width
-safe_height = (paper_height - top_margin - bottom_margin - 0.2) / paper_height
-ax = fig.add_axes([safe_left, safe_bottom, safe_width, safe_height])
-ax.set_xlim(left_margin + 0.1, paper_width - right_margin - 0.1)
-ax.set_ylim(bottom_margin + 0.1, paper_height - top_margin - 0.1)
-ax.axis('off')
-fig.text(0.5, 1.0 - 0.5 / paper_height, f"4/{TOTAL_SHEETS}",
-         ha='center', va='center', fontsize=10)
-fig.text(left_margin / paper_width, (bottom_margin + 0.2) / paper_height, "FIG. 4",
-         ha='left', va='bottom', fontsize=font_size_label)
+fig, ax = setup_figure(4)
 
-# Main graph — inset with 0.1" safety padding
-main_ax = fig.add_axes([(left_margin + 0.1) / paper_width,
-                         (bottom_margin + 3.1) / paper_height,
-                         (paper_width - left_margin - right_margin - 0.2) / paper_width,
+# Main graph — inset with safe padding (+0.5" left for y-axis labels)
+main_ax = fig.add_axes([(SAFE_LEFT + 0.5) / paper_width,
+                         (SAFE_BOTTOM + 3.0) / paper_height,
+                         (SAFE_WIDTH - 0.5) / paper_width,
                          3.8 / paper_height])
 main_ax.set_xlabel('Autonomous Step Number', fontsize=10)
 main_ax.set_ylabel('Input Value', fontsize=10)
@@ -361,10 +346,10 @@ main_ax.text(400, 0.95, 'base = 0.5 + 0.3×sin(2π×step/500)',
 main_ax.text(400, 0.88, '10% probability attention bursts',
              fontsize=8, ha='right')
 
-# Small energy graph — inset with 0.1" safety padding
-small_ax = fig.add_axes([(left_margin + 0.1) / paper_width,
-                          (bottom_margin + 1.1) / paper_height,
-                          (paper_width - left_margin - right_margin - 0.2) / paper_width,
+# Small energy graph — inset with safe padding (+0.5" left for y-axis labels)
+small_ax = fig.add_axes([(SAFE_LEFT + 0.5) / paper_width,
+                          (SAFE_BOTTOM + 1.0) / paper_height,
+                          (SAFE_WIDTH - 0.5) / paper_width,
                           1.4 / paper_height])
 small_ax.set_xlabel('Autonomous Step Number', fontsize=8)
 small_ax.set_ylabel('Energy (mWh)', fontsize=8)
@@ -420,11 +405,11 @@ ax.text(4, 5, text_buffer, ha='center', va='center',
 ax.text(4, 4.25, 'OPTIONAL (~100 bytes × N steps)',
         ha='center', va='center', fontsize=8)
 
-# Granularity labels
+# Granularity labels — positioned inside safe area with left-aligned text
 ax.add_patch(FancyArrowPatch((2, 8.75), (1.5, 8.75), **arrow_props))
-ax.text(1.4, 8.75, 'Level 1: Summary only', ha='right', va='center', fontsize=8)
+ax.text(1.5, 9.0, 'Level 1:\nSummary only', ha='center', va='bottom', fontsize=8)
 ax.add_patch(FancyArrowPatch((2, 5), (1.5, 5), **arrow_props))
-ax.text(1.4, 5, 'Level 2: Full buffer', ha='right', va='center', fontsize=8)
+ax.text(1.5, 5.25, 'Level 2:\nFull buffer', ha='center', va='bottom', fontsize=8)
 
 # Decision diamond
 ax.add_patch(Polygon([[4, 3], [3.5, 2.5], [4, 2], [4.5, 2.5]],
@@ -444,57 +429,57 @@ plt.close()
 # ════════════════════════════════════════════════════════════════════
 fig, ax = setup_figure(6)
 
-# Timeline A
-ax.text(left_margin, 9.2, 'Timeline A — Normal Reconnection:',
+# Timeline A — compressed x positions to stay within right margin
+ax.text(SAFE_LEFT, 9.2, 'Timeline A — Normal Reconnection:',
         ha='left', fontsize=10, weight='bold')
-ax.add_patch(FancyArrowPatch((left_margin, 8.5),
-                              (paper_width - right_margin, 8.5),
+ax.add_patch(FancyArrowPatch((SAFE_LEFT, 8.5),
+                              (SAFE_RIGHT, 8.5),
                               arrowstyle='->', lw=line_width))
 phases_a = [
-    (1.0, '-- Connected --', '[Claude active]'),
-    (2.5, '-- Timeout --', '[Watchdog counting]'),
-    (4.0, '-- Autonomous --', '[Self-regulated]'),
-    (5.5, '-- Resync --', '[Buffer sent]'),
-    (7.0, '-- Connected -->', '[Control restored]'),
+    (1.2, 'Connected', '[Claude active]'),
+    (2.5, 'Timeout', '[Watchdog]'),
+    (3.8, 'Autonomous', '[Self-regulated]'),
+    (5.1, 'Resync', '[Buffer sent]'),
+    (6.3, 'Connected', '[Restored]'),
 ]
 for x, label, sub in phases_a:
-    ax.text(x, 8.65, label, ha='left', va='bottom', fontsize=8)
-    ax.text(x, 8.35, sub, ha='left', va='top', fontsize=8)
+    ax.text(x, 8.65, label, ha='left', va='bottom', fontsize=8, weight='bold')
+    ax.text(x, 8.35, sub, ha='left', va='top', fontsize=7)
 
-# Timeline B
-ax.text(left_margin, 7.0, 'Timeline B — Crash Recovery:',
+# Timeline B — compressed x positions
+ax.text(SAFE_LEFT, 7.0, 'Timeline B — Crash Recovery:',
         ha='left', fontsize=10, weight='bold')
-ax.add_patch(FancyArrowPatch((left_margin, 6.3),
-                              (paper_width - right_margin, 6.3),
+ax.add_patch(FancyArrowPatch((SAFE_LEFT, 6.3),
+                              (SAFE_RIGHT, 6.3),
                               arrowstyle='->', lw=line_width))
 phases_b = [
-    (1.0, '-- Connected --', '[Normal operation]'),
-    (2.5, '-- CRASH --', '[Server terminates]'),
-    (4.0, '-- Restart --', '[Process relaunched]'),
-    (5.5, '-- Snapshot --', '[Reads latest.json]'),
-    (7.0, '-- Connected -->', '[State restored]'),
+    (1.2, 'Connected', '[Normal op]'),
+    (2.5, 'CRASH', '[Server dies]'),
+    (3.8, 'Restart', '[Relaunched]'),
+    (5.1, 'Snapshot', '[latest.json]'),
+    (6.3, 'Connected', '[Restored]'),
 ]
 for x, label, sub in phases_b:
-    ax.text(x, 6.45, label, ha='left', va='bottom', fontsize=8)
-    ax.text(x, 6.15, sub, ha='left', va='top', fontsize=8)
+    ax.text(x, 6.45, label, ha='left', va='bottom', fontsize=8, weight='bold')
+    ax.text(x, 6.15, sub, ha='left', va='top', fontsize=7)
 ax.text(4.25, 5.6, 'Max state loss = 50 steps (snapshot interval)',
         ha='center', fontsize=8)
 
-# Timeline C
-ax.text(left_margin, 4.5, 'Timeline C — Clean Shutdown:',
+# Timeline C — compressed x positions
+ax.text(SAFE_LEFT, 4.5, 'Timeline C — Clean Shutdown:',
         ha='left', fontsize=10, weight='bold')
-ax.add_patch(FancyArrowPatch((left_margin, 3.8),
-                              (paper_width - right_margin - 1, 3.8),
+ax.add_patch(FancyArrowPatch((SAFE_LEFT, 3.8),
+                              (SAFE_RIGHT - 1.0, 3.8),
                               arrowstyle='->', lw=line_width))
 phases_c = [
-    (1.0, '-- Connected --', '[Normal operation]'),
-    (2.8, '-- Autonomous --', '[Fallback operation]'),
-    (4.6, '-- EOF Signal --', '[stdin closed]'),
-    (6.0, '-- Shutdown', '[Final snapshot written]'),
+    (1.2, 'Connected', '[Normal op]'),
+    (2.8, 'Autonomous', '[Fallback]'),
+    (4.4, 'EOF Signal', '[stdin closed]'),
+    (5.8, 'Shutdown', '[Snapshot written]'),
 ]
 for x, label, sub in phases_c:
-    ax.text(x, 3.95, label, ha='left', va='bottom', fontsize=8)
-    ax.text(x, 3.65, sub, ha='left', va='top', fontsize=8)
+    ax.text(x, 3.95, label, ha='left', va='bottom', fontsize=8, weight='bold')
+    ax.text(x, 3.65, sub, ha='left', va='top', fontsize=7)
 ax.text(4.25, 3.1, 'State preserved for next session — zero data loss',
         ha='center', fontsize=8)
 
@@ -515,11 +500,12 @@ plt.close()
 # ════════════════════════════════════════════════════════════════════
 fig, ax = setup_figure(7)
 
-ax.text(4.25, 10.3, 'End-to-End Signal Flow: Connected vs. Autonomous Operation',
+ax.text(SAFE_CX, SAFE_TOP - 0.15,
+        'End-to-End Signal Flow: Connected vs. Autonomous Operation',
         ha='center', fontsize=font_body, weight='bold')
 
 # ── TOP HALF: Connected Mode ──
-ax.text(left_margin, 9.8, 'CONNECTED MODE', fontsize=font_body, weight='bold')
+ax.text(SAFE_LEFT, 9.8, 'CONNECTED MODE', fontsize=font_body, weight='bold')
 
 # External Cognitive Layer (cloud)
 ax.add_patch(Ellipse((4.25, 9.3), 2.5, 0.6, fill=False, lw=line_width))
@@ -531,14 +517,14 @@ ax.add_patch(FancyArrowPatch((4.25, 9.0), (4.25, 8.65),
                               linestyle='dashed', **arrow_props))
 ax.text(5.5, 8.8, 'Cognitive modulation\ncommands', fontsize=8)
 
-# Connected mode pipeline — constrained within margins
+# Connected mode pipeline — constrained within safe margins
 pipe_y_top = 8.0
 blocks_top = [
-    (1.2, 'Sensors', 1.0),
-    (2.5, 'SNN', 1.0),
-    (3.8, 'Cognitive\nModulation', 1.3),
-    (5.4, 'Motor\nActuator', 1.0),
-    (6.7, 'Energy\nHarvester', 1.0),
+    (1.2, 'Sensors', 0.9),
+    (2.35, 'SNN', 0.9),
+    (3.5, 'Cognitive\nModulation', 1.2),
+    (4.95, 'Motor\nActuator', 0.9),
+    (6.1, 'Energy\nHarvester', 0.9),
 ]
 bh = 0.55
 
@@ -548,17 +534,17 @@ for bx, label, bw in blocks_top:
             ha='center', va='center', fontsize=8)
 
 # Forward arrows in top pipeline
-ax.add_patch(FancyArrowPatch((2.2, pipe_y_top + bh / 2),
-                              (2.5, pipe_y_top + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((3.5, pipe_y_top + bh / 2),
-                              (3.8, pipe_y_top + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((5.1, pipe_y_top + bh / 2),
-                              (5.4, pipe_y_top + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((6.4, pipe_y_top + bh / 2),
-                              (6.7, pipe_y_top + bh / 2), **arrow_props))
+ax.add_patch(FancyArrowPatch((2.1, pipe_y_top + bh / 2),
+                              (2.35, pipe_y_top + bh / 2), **arrow_props))
+ax.add_patch(FancyArrowPatch((3.25, pipe_y_top + bh / 2),
+                              (3.5, pipe_y_top + bh / 2), **arrow_props))
+ax.add_patch(FancyArrowPatch((4.7, pipe_y_top + bh / 2),
+                              (4.95, pipe_y_top + bh / 2), **arrow_props))
+ax.add_patch(FancyArrowPatch((5.85, pipe_y_top + bh / 2),
+                              (6.1, pipe_y_top + bh / 2), **arrow_props))
 
-# Energy feedback (bold dashed)
-ax.add_patch(FancyArrowPatch((7.2, pipe_y_top),
+# Energy feedback (bold dashed) — right edge at 7.0, within safe bounds
+ax.add_patch(FancyArrowPatch((7.0, pipe_y_top),
                               (3.0, pipe_y_top),
                               connectionstyle="arc3,rad=-0.3",
                               linestyle='dashed', lw=line_width * 1.5,
@@ -567,8 +553,8 @@ ax.text(5.0, pipe_y_top - 0.3, 'Energy feedback',
         ha='center', fontsize=8)
 
 # Self-observation (dotted)
-ax.add_patch(FancyArrowPatch((3.0, pipe_y_top + bh),
-                              (2.5, pipe_y_top + bh),
+ax.add_patch(FancyArrowPatch((2.9, pipe_y_top + bh),
+                              (2.35, pipe_y_top + bh),
                               connectionstyle="arc3,rad=0.3",
                               linestyle='dotted', lw=line_width * 1.5,
                               arrowstyle='->', color='black'))
@@ -576,15 +562,15 @@ ax.text(2.5, pipe_y_top + bh + 0.2, 'Self-observation',
         ha='center', fontsize=8)
 
 # Cognitive modulation arrow from cloud
-ax.add_patch(FancyArrowPatch((4.25, 8.65), (4.45, pipe_y_top + bh),
+ax.add_patch(FancyArrowPatch((4.25, 8.65), (4.1, pipe_y_top + bh),
                               linestyle='dashed', **arrow_props))
 
-ax.text(1.5, 7.4, 'Heartbeat active (tool calls within 30s)',
+ax.text(SAFE_LEFT + 0.35, 7.4, 'Heartbeat active (tool calls within 30s)',
         fontsize=8, style='italic')
 
 # ── DIVIDING LINE ──
 div_y = 6.8
-ax.plot([left_margin, paper_width - right_margin], [div_y, div_y],
+ax.plot([SAFE_LEFT, SAFE_RIGHT], [div_y, div_y],
         'k--', lw=line_width)
 ax.text(4.25, div_y + 0.15,
         'DISCONNECTION EVENT (heartbeat timeout > 30s)',
@@ -594,37 +580,37 @@ ax.text(4.25, div_y - 0.15,
         ha='center', fontsize=8, style='italic')
 
 # ── BOTTOM HALF: Autonomous Mode ──
-ax.text(left_margin, 6.4, 'AUTONOMOUS MODE', fontsize=font_body, weight='bold')
+ax.text(SAFE_LEFT, 6.4, 'AUTONOMOUS MODE', fontsize=font_body, weight='bold')
 
 pipe_y_bot = 5.5
 
-# Autonomous pipeline — constrained within margins
+# Autonomous pipeline — constrained within safe margins (right edge < 7.725)
 blocks_bot = [
-    (1.2, 'Autonomous\nInput Gen', 1.3),
-    (2.8, 'SNN', 1.0),
-    (4.1, 'Energy-Aware\nSelf-Modulation', 1.6),
-    (6.0, 'Motor\nActuator', 0.9),
-    (7.1, 'Energy\nHarvest', 0.6),
+    (1.2, 'Autonomous\nInput Gen', 1.2),
+    (2.65, 'SNN', 0.9),
+    (3.8, 'Energy-Aware\nSelf-Mod', 1.4),
+    (5.45, 'Motor\nActuator', 0.85),
+    (6.55, 'Energy\nHarvest', 0.85),
 ]
 
 for bx, label, bw in blocks_bot:
     ax.add_patch(Rectangle((bx, pipe_y_bot), bw, bh, fill=False, lw=line_width))
     ax.text(bx + bw / 2, pipe_y_bot + bh / 2, label,
-            ha='center', va='center', fontsize=8)
+            ha='center', va='center', fontsize=7)
 
 # Forward arrows
-ax.add_patch(FancyArrowPatch((2.5, pipe_y_bot + bh / 2),
-                              (2.8, pipe_y_bot + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((3.8, pipe_y_bot + bh / 2),
-                              (4.1, pipe_y_bot + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((5.7, pipe_y_bot + bh / 2),
-                              (6.0, pipe_y_bot + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((6.9, pipe_y_bot + bh / 2),
-                              (7.1, pipe_y_bot + bh / 2), **arrow_props))
+ax.add_patch(FancyArrowPatch((2.4, pipe_y_bot + bh / 2),
+                              (2.65, pipe_y_bot + bh / 2), **arrow_props))
+ax.add_patch(FancyArrowPatch((3.55, pipe_y_bot + bh / 2),
+                              (3.8, pipe_y_bot + bh / 2), **arrow_props))
+ax.add_patch(FancyArrowPatch((5.2, pipe_y_bot + bh / 2),
+                              (5.45, pipe_y_bot + bh / 2), **arrow_props))
+ax.add_patch(FancyArrowPatch((6.3, pipe_y_bot + bh / 2),
+                              (6.55, pipe_y_bot + bh / 2), **arrow_props))
 
-# Energy feedback (bold dashed)
+# Energy feedback (bold dashed) — right edge at 7.4, within safe bounds
 ax.add_patch(FancyArrowPatch((7.4, pipe_y_bot),
-                              (3.3, pipe_y_bot),
+                              (3.1, pipe_y_bot),
                               connectionstyle="arc3,rad=-0.3",
                               linestyle='dashed', lw=line_width * 1.5,
                               arrowstyle='->', color='black'))
@@ -632,8 +618,8 @@ ax.text(5.2, pipe_y_bot - 0.35, 'Energy feedback',
         ha='center', fontsize=8)
 
 # Self-observation (dotted)
-ax.add_patch(FancyArrowPatch((3.3, pipe_y_bot + bh),
-                              (2.8, pipe_y_bot + bh),
+ax.add_patch(FancyArrowPatch((3.1, pipe_y_bot + bh),
+                              (2.65, pipe_y_bot + bh),
                               connectionstyle="arc3,rad=0.3",
                               linestyle='dotted', lw=line_width * 1.5,
                               arrowstyle='->', color='black'))
@@ -649,8 +635,8 @@ ax.text(5.2, pipe_y_bot - 0.2,
         '<15:−0.4 | <30:−0.1 | 30-80:0.0 | >80:+0.3',
         ha='center', fontsize=8)
 
-# State Buffer (cylinder)
-buf_x, buf_y = 1.0, 3.8
+# State Buffer (cylinder) — left edge within safe bounds
+buf_x, buf_y = SAFE_LEFT, 3.8
 ax.add_patch(Ellipse((buf_x + 0.5, buf_y + 0.6), 1.0, 0.3,
                       fill=False, lw=line_width))
 ax.add_patch(Rectangle((buf_x, buf_y), 1.0, 0.6, fill=False, lw=line_width))
@@ -658,18 +644,18 @@ ax.add_patch(Ellipse((buf_x + 0.5, buf_y), 1.0, 0.3,
                       fill=False, lw=line_width))
 ax.text(buf_x + 0.5, buf_y + 0.3, 'State\nBuffer',
         ha='center', va='center', fontsize=8)
-ax.add_patch(FancyArrowPatch((2.8, pipe_y_bot), (buf_x + 1.0, buf_y + 0.6),
+ax.add_patch(FancyArrowPatch((2.65, pipe_y_bot), (buf_x + 1.0, buf_y + 0.6),
                               **arrow_props))
 ax.text(2.2, 4.6, 'Every step', fontsize=8)
 
-# Snapshot Writer (disk)
-snap_x, snap_y = 1.0, 2.5
+# Snapshot Writer (disk) — left edge within safe bounds
+snap_x, snap_y = SAFE_LEFT, 2.5
 ax.add_patch(Rectangle((snap_x, snap_y), 1.0, 0.6, fill=False, lw=line_width))
 ax.text(snap_x + 0.5, snap_y + 0.3, 'Snapshots\nlatest.json',
         ha='center', va='center', fontsize=8)
 ax.add_patch(FancyArrowPatch((buf_x + 0.5, buf_y), (snap_x + 0.5, snap_y + 0.6),
                               **arrow_props))
-ax.text(0.5, 3.3, 'Every 50\nsteps', fontsize=8, ha='center')
+ax.text(SAFE_LEFT + 0.5, 3.3, 'Every 50\nsteps', fontsize=8, ha='center')
 
 # Right side — Reconnection — constrained within right margin
 recon_x, recon_y = 5.7, 3.5
@@ -691,28 +677,28 @@ ax.add_patch(FancyArrowPatch((buf_x + 1.0, buf_y + 0.3),
 ax.add_patch(FancyArrowPatch((recon_x + recon_w / 2, recon_y + 1.2),
                               (recon_x + recon_w / 2, div_y),
                               linestyle='dashed', **arrow_props))
-ax.text(recon_x + recon_w + 0.05, 5.0, 'resync() called',
+ax.text(recon_x + recon_w / 2 + 0.2, 5.0, 'resync()',
         fontsize=8, ha='left')
 
 # Key annotations
-ax.text(4.25, 1.8,
-        'The fallback system changes the INPUT SOURCE and MODULATION SOURCE',
+ax.text(SAFE_CX, 1.8,
+        'Fallback changes INPUT SOURCE and MODULATION SOURCE',
         ha='center', fontsize=font_small, weight='bold')
-ax.text(4.25, 1.4,
-        'The core neural processing, motor actuation, and energy harvesting',
+ax.text(SAFE_CX, 1.4,
+        'Core neural processing, motor actuation, energy harvesting',
         ha='center', fontsize=font_small)
-ax.text(4.25, 1.1,
+ax.text(SAFE_CX, 1.1,
         'continue WITHOUT INTERRUPTION through the transition',
         ha='center', fontsize=font_small, weight='bold')
 
-# Legend
-leg_y = 0.5
-ax.plot([1.0, 1.8], [leg_y, leg_y], 'k-', lw=line_width)
-ax.text(2.0, leg_y, 'Forward signal', va='center', fontsize=8)
-ax.plot([3.0, 3.8], [leg_y, leg_y], 'k--', lw=line_width * 1.5)
-ax.text(4.0, leg_y, 'Energy feedback', va='center', fontsize=8)
-ax.plot([5.0, 5.8], [leg_y, leg_y], 'k:', lw=line_width * 1.5)
-ax.text(6.0, leg_y, 'Self-observation', va='center', fontsize=8)
+# Legend — within safe bounds
+leg_y = SAFE_BOTTOM + 0.1
+ax.plot([SAFE_LEFT + 0.1, SAFE_LEFT + 0.8], [leg_y, leg_y], 'k-', lw=line_width)
+ax.text(SAFE_LEFT + 1.0, leg_y, 'Forward signal', va='center', fontsize=8)
+ax.plot([3.2, 4.0], [leg_y, leg_y], 'k--', lw=line_width * 1.5)
+ax.text(4.2, leg_y, 'Energy feedback', va='center', fontsize=8)
+ax.plot([5.4, 6.2], [leg_y, leg_y], 'k:', lw=line_width * 1.5)
+ax.text(6.4, leg_y, 'Self-observation', va='center', fontsize=8)
 
 plt.savefig(f'{OUT_DIR}/fig7.svg', format='svg')
 plt.close()

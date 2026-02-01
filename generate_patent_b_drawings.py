@@ -293,8 +293,8 @@ ax.add_patch(FancyArrowPatch((comp_cx, 4.5), (comp_cx, 5.5),
 ax.text(comp_cx + 0.1, 5.0, 'energy-aware modulation',
         ha='left', va='center', fontsize=8)
 
-# Right output — kept within bounds
-out_arrow_end = min(comp_left + comp_width + 1.0, SAFE_RIGHT - 0.5)
+# Right output — constrained within safe bounds
+out_arrow_end = min(comp_left + comp_width + 0.6, SAFE_RIGHT - 1.2)
 ax.add_patch(FancyArrowPatch((comp_left + comp_width, 6.1), (out_arrow_end, 6.1),
              arrowstyle='->', lw=line_width))
 ax.text(out_arrow_end + 0.05, 6.3, 'reflection_coeff',
@@ -532,7 +532,7 @@ ax.add_patch(FancyArrowPatch((snn_x + snn_w / 2, snn_y),
 ax.add_patch(FancyArrowPatch((1.8, 4.5), (snn_x, snn_y + 0.5),
                               linestyle='dotted', lw=line_width * 2,
                               arrowstyle='->', color='black'))
-ax.text(SAFE_LEFT + 0.2, 5.0, 'SELF-OBSERVATION\nprevious_output x\nreflection_coeff',
+ax.text(SAFE_LEFT + 0.6, 5.0, 'SELF-OBS.\nprev_output x\nrefl_coeff',
         ha='center', fontsize=8, weight='bold')
 
 # ── Cognitive Modulation (above SNN) ──
