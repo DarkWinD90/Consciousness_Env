@@ -25,16 +25,25 @@ dpi = 300
 font_size_label = 12
 line_width = 1.5
 
+# Safe drawing bounds (absolute coordinates, 0.15" inset from margins)
+SAFE_LEFT = left_margin + 0.15       # 1.15
+SAFE_RIGHT = paper_width - right_margin - 0.15  # 7.725
+SAFE_BOTTOM = bottom_margin + 0.15   # 0.525
+SAFE_TOP = paper_height - top_margin - 0.15     # 9.85
+SAFE_WIDTH = SAFE_RIGHT - SAFE_LEFT   # 6.575
+SAFE_CX = (SAFE_LEFT + SAFE_RIGHT) / 2  # ~4.4375
+
 def setup_figure(fig_num, total_sheets):
     fig = plt.figure(figsize=(paper_width, paper_height), dpi=dpi)
-    # Constrain drawing area to safe margins (+0.1" inset to prevent overflow)
-    safe_left = (left_margin + 0.1) / paper_width
-    safe_bottom = (bottom_margin + 0.1) / paper_height
-    safe_width = (paper_width - left_margin - right_margin - 0.2) / paper_width
-    safe_height = (paper_height - top_margin - bottom_margin - 0.2) / paper_height
+    # Constrain drawing area to safe margins (+0.15" inset to prevent overflow)
+    safe_left = SAFE_LEFT / paper_width
+    safe_bottom = SAFE_BOTTOM / paper_height
+    safe_width = SAFE_WIDTH / paper_width
+    safe_height = (SAFE_TOP - SAFE_BOTTOM) / paper_height
     ax = fig.add_axes([safe_left, safe_bottom, safe_width, safe_height])
-    ax.set_xlim(left_margin + 0.1, paper_width - right_margin - 0.1)
-    ax.set_ylim(bottom_margin + 0.1, paper_height - top_margin - 0.1)
+    ax.set_xlim(SAFE_LEFT, SAFE_RIGHT)
+    ax.set_ylim(SAFE_BOTTOM, SAFE_TOP)
+    ax.set_clip_on(True)
     ax.axis('off')
     # Sheet number at top center (on fig, outside ax)
     fig.text(0.5, 1.0 - 0.5 / paper_height,
@@ -87,23 +96,23 @@ for i, (title, sublabel, ref) in enumerate(blocks):
         ax.add_patch(FancyArrowPatch((4.5, by), (4.5, by - 0.2),
                                       arrowstyle='->', lw=line_width))
 
-# Thermal cross-link dashed (ref 118)
-ax.add_patch(FancyArrowPatch((5.5, 8.6), (6.5, 5.6),
+# Thermal cross-link dashed (ref 118) — constrained within right margin
+ax.add_patch(FancyArrowPatch((5.5, 8.6), (6.3, 5.6),
              connectionstyle="arc3,rad=-0.5", ls='dashed',
              arrowstyle='->', lw=line_width))
-ax.text(6.6, 7.5, '118', ha='left', va='center', fontsize=8)
-ax.annotate('', xy=(6.3, 7.2), xytext=(6.6, 7.45), arrowprops=leader_props)
+ax.text(6.4, 7.5, '118', ha='left', va='center', fontsize=8)
+ax.annotate('', xy=(6.1, 7.2), xytext=(6.4, 7.45), arrowprops=leader_props)
 
-# Reflection feedback dotted (ref 120)
-ax.add_patch(FancyArrowPatch((5.5, 2.6), (6, 2),
+# Reflection feedback dotted (ref 120) — constrained within right margin
+ax.add_patch(FancyArrowPatch((5.5, 2.6), (5.8, 2),
              connectionstyle="arc3,rad=0.3", arrowstyle='->',
              lw=line_width, ls='dotted'))
-ax.add_patch(FancyArrowPatch((6, 2), (4.5, 5.4),
+ax.add_patch(FancyArrowPatch((5.8, 2), (4.5, 5.4),
              connectionstyle="arc3,rad=0.3", arrowstyle='->',
              lw=line_width, ls='dotted'))
-ax.text(6.5, 3.8, 'reflection feedback', ha='left', va='center', fontsize=8)
-ax.text(6.5, 4.1, '120', ha='left', va='center', fontsize=8)
-ax.annotate('', xy=(6.1, 3.5), xytext=(6.5, 4.0), arrowprops=leader_props)
+ax.text(6.2, 3.8, 'reflection feedback', ha='left', va='center', fontsize=8)
+ax.text(6.2, 4.1, '120', ha='left', va='center', fontsize=8)
+ax.annotate('', xy=(5.9, 3.5), xytext=(6.2, 4.0), arrowprops=leader_props)
 
 # Loop close label
 ax.text(2, 4, 'THE LOOP CLOSES HERE.', ha='center', va='center',
@@ -131,13 +140,14 @@ plt.close(fig)
 fig, ax = setup_figure(2, 8)
 
 graph_ax = fig.add_axes([
-    (left_margin + 0.1) / paper_width,
-    (bottom_margin + 1.1) / paper_height,
-    (paper_width - left_margin - right_margin - 0.2) / paper_width,
-    (paper_height - top_margin - bottom_margin - 2.2) / paper_height
+    (SAFE_LEFT + 0.9) / paper_width,
+    (SAFE_BOTTOM + 1.0) / paper_height,
+    (SAFE_WIDTH - 0.9) / paper_width,
+    (SAFE_TOP - SAFE_BOTTOM - 2.0) / paper_height
 ])
 graph_ax.set_xlabel('Operational Steps', fontsize=10)
-graph_ax.set_ylabel('Cumulative Energy (mWh)', fontsize=10)
+graph_ax.set_ylabel('Cumulative Energy (mWh)', fontsize=9)
+graph_ax.tick_params(axis='y', labelsize=8)
 
 x = np.linspace(0, 2000, 100)
 control_y = 50 - (470 / 1000) * x   # Drops to ~-890 at x=2000
@@ -247,9 +257,9 @@ for i in range(5):
 
 # Input/output arrows
 ax.add_patch(FancyArrowPatch((1.5, 5), (1.8, 5), arrowstyle='->', lw=line_width))
-ax.text(1.4, 5.15, 'adjusted_input', ha='right', va='bottom', fontsize=8)
-ax.text(1.2, 5.4, '316', ha='right', fontsize=8)
-ax.annotate('', xy=(1.5, 5.1), xytext=(1.25, 5.35), arrowprops=leader_props)
+ax.text(1.5, 5.15, 'adjusted_input', ha='left', va='bottom', fontsize=8)
+ax.text(1.5, 5.5, '316', ha='left', fontsize=8)
+ax.annotate('', xy=(1.5, 5.1), xytext=(1.5, 5.45), arrowprops=leader_props)
 ax.add_patch(FancyArrowPatch((6.2, 5), (6.5, 5), arrowstyle='->', lw=line_width))
 ax.text(6.6, 5.15, 'spike_vector', ha='left', va='bottom', fontsize=8)
 ax.text(6.8, 5.4, '318', ha='left', fontsize=8)
@@ -284,13 +294,13 @@ leader_props = dict(arrowstyle='->', lw=0.5, color='black')
 ax.add_patch(Rectangle((1.5, 7), 1.5, 1.2, fill=False, lw=line_width))
 ax.text(2.25, 7.7, 'PIEZO', ha='center', va='center', fontsize=10, weight='bold')
 ax.text(2.25, 7.3, '27mm disc', ha='center', fontsize=8)
-ax.text(1.2, 7.6, '400', ha='right', fontsize=8)
-ax.annotate('', xy=(1.5, 7.6), xytext=(1.25, 7.6), arrowprops=leader_props)
+ax.text(1.3, 7.6, '400', ha='right', fontsize=8)
+ax.annotate('', xy=(1.5, 7.6), xytext=(1.35, 7.6), arrowprops=leader_props)
 
-# Mechanical coupling (ref 406)
-ax.add_patch(FancyArrowPatch((1.1, 7.6), (1.5, 7.6), arrowstyle='->', lw=line_width))
-ax.text(1.3, 7.9, 'servo shaft', ha='center', fontsize=8)
-ax.text(1.3, 7.2, 'friction_factor = 18.0', ha='center', fontsize=8)
+# Mechanical coupling (ref 406) — left edge within safe bounds
+ax.add_patch(FancyArrowPatch((SAFE_LEFT + 0.05, 7.6), (1.5, 7.6), arrowstyle='->', lw=line_width))
+ax.text(1.35, 7.9, 'servo shaft', ha='center', fontsize=8)
+ax.text(1.5, 7.2, 'friction = 18.0', ha='left', fontsize=8)
 
 # Full-bridge rectifier (ref 402)
 ax.add_patch(FancyArrowPatch((3, 7.6), (3.8, 7.6), arrowstyle='->', lw=line_width))
@@ -311,8 +321,8 @@ ax.annotate('', xy=(6.3, 7.6), xytext=(6.5, 7.6), arrowprops=leader_props)
 ax.add_patch(Rectangle((1.5, 5), 1.5, 1.2, fill=False, lw=line_width))
 ax.text(2.25, 5.7, 'TEG', ha='center', va='center', fontsize=10, weight='bold')
 ax.text(2.25, 5.3, 'NTC 10K\nThermistor', ha='center', fontsize=8)
-ax.text(1.2, 5.6, '408', ha='right', fontsize=8)
-ax.annotate('', xy=(1.5, 5.6), xytext=(1.25, 5.6), arrowprops=leader_props)
+ax.text(1.3, 5.6, '408', ha='right', fontsize=8)
+ax.annotate('', xy=(1.5, 5.6), xytext=(1.35, 5.6), arrowprops=leader_props)
 
 ax.add_patch(FancyArrowPatch((3, 5.6), (3.8, 5.6), arrowstyle='->', lw=line_width))
 ax.add_patch(Rectangle((3.8, 5.1), 1.2, 1.0, fill=False, lw=line_width))
@@ -326,24 +336,24 @@ ax.text(5.9, 5.6, 'C', ha='center', va='center', fontsize=10)
 ax.text(6.5, 5.6, '412', ha='left', fontsize=8)
 ax.annotate('', xy=(6.3, 5.6), xytext=(6.5, 5.6), arrowprops=leader_props)
 
-# Summing node
-ax.add_patch(FancyArrowPatch((6.3, 7.6), (6.8, 6.8), arrowstyle='->', lw=line_width))
-ax.add_patch(FancyArrowPatch((6.3, 5.6), (6.8, 6.4), arrowstyle='->', lw=line_width))
-ax.add_patch(Circle((7, 6.6), 0.3, fill=False, lw=line_width))
-ax.text(7, 6.6, '+', ha='center', va='center', fontsize=12)
+# Summing node — shifted left to keep storage within right margin
+ax.add_patch(FancyArrowPatch((6.3, 7.6), (6.5, 6.8), arrowstyle='->', lw=line_width))
+ax.add_patch(FancyArrowPatch((6.3, 5.6), (6.5, 6.4), arrowstyle='->', lw=line_width))
+ax.add_patch(Circle((6.7, 6.6), 0.3, fill=False, lw=line_width))
+ax.text(6.7, 6.6, '+', ha='center', va='center', fontsize=12)
 
-# Storage (ref 414)
-ax.add_patch(FancyArrowPatch((7, 6.3), (7, 4.5), arrowstyle='->', lw=line_width))
-ax.add_patch(Rectangle((6, 3.5), 2, 1, fill=False, lw=line_width))
-ax.text(7, 4, 'Energy Storage\n(battery/supercap)', ha='center', va='center', fontsize=8)
-ax.text(7, 3.3, '414', ha='center', fontsize=8)
-ax.annotate('', xy=(7, 3.5), xytext=(7, 3.38), arrowprops=leader_props)
+# Storage (ref 414) — constrained: right edge at 7.5 (within 7.725 safe)
+ax.add_patch(FancyArrowPatch((6.7, 6.3), (6.5, 4.5), arrowstyle='->', lw=line_width))
+ax.add_patch(Rectangle((5.5, 3.5), 2, 1, fill=False, lw=line_width))
+ax.text(6.5, 4, 'Energy Storage\n(battery/supercap)', ha='center', va='center', fontsize=8)
+ax.text(6.5, 3.3, '414', ha='center', fontsize=8)
+ax.annotate('', xy=(6.5, 3.5), xytext=(6.5, 3.38), arrowprops=leader_props)
 
 # Output to SNN
-ax.add_patch(FancyArrowPatch((6, 4), (5, 4), arrowstyle='->', lw=line_width))
-ax.text(5.5, 4.2, 'Power to SNN', ha='center', fontsize=8)
+ax.add_patch(FancyArrowPatch((5.5, 4), (4.5, 4), arrowstyle='->', lw=line_width))
+ax.text(5.0, 4.2, 'Power to SNN', ha='center', fontsize=8)
 
-ax.text(1.25, 5.0, 'thermal_factor = 8.0', ha='center', fontsize=8)
+ax.text(2.25, 5.0, 'thermal_factor = 8.0', ha='center', fontsize=8)
 
 fig.savefig(f'{OUT_DIR}/fig4.svg', format='svg')
 plt.close(fig)
@@ -355,10 +365,10 @@ plt.close(fig)
 fig, ax = setup_figure(5, 8)
 
 graph_ax = fig.add_axes([
-    (left_margin + 0.1) / paper_width,
-    (bottom_margin + 1.1) / paper_height,
-    (paper_width - left_margin - right_margin - 0.2) / paper_width,
-    (paper_height - top_margin - bottom_margin - 2.2) / paper_height
+    (SAFE_LEFT + 0.5) / paper_width,
+    (SAFE_BOTTOM + 1.0) / paper_height,
+    (SAFE_WIDTH - 0.5) / paper_width,
+    (SAFE_TOP - SAFE_BOTTOM - 2.0) / paper_height
 ])
 graph_ax.set_xlabel('Neural Activity (spikes/step)', fontsize=10)
 graph_ax.set_ylabel('Net Energy (mWh/step)', fontsize=10)
@@ -414,13 +424,13 @@ ax.annotate('', xy=(2.0, 9), xytext=(2.15, 9), arrowprops=leader_props)
 ax.add_patch(FancyArrowPatch((2, 9), (3, 8.5), arrowstyle='->', lw=line_width))
 ax.text(2.5, 8.9, 'ADC', ha='center', fontsize=8)
 
-# SG90 Servo (ref 604)
-ax.add_patch(Rectangle((5.8, 8.5), 1.4, 0.8, fill=False, lw=line_width))
-ax.text(6.5, 8.9, 'SG90 Servo', ha='center', fontsize=8)
-ax.text(7.35, 8.9, '604', ha='left', fontsize=8)
-ax.annotate('', xy=(7.2, 8.9), xytext=(7.35, 8.9), arrowprops=leader_props)
-ax.add_patch(FancyArrowPatch((5.5, 8.1), (5.8, 8.9), arrowstyle='->', lw=line_width))
-ax.text(5.7, 8.6, 'PWM', ha='center', fontsize=8)
+# SG90 Servo (ref 604) — constrained within right margin
+ax.add_patch(Rectangle((5.6, 8.5), 1.3, 0.8, fill=False, lw=line_width))
+ax.text(6.25, 8.9, 'SG90 Servo', ha='center', fontsize=8)
+ax.text(7.05, 8.9, '604', ha='left', fontsize=8)
+ax.annotate('', xy=(6.9, 8.9), xytext=(7.05, 8.9), arrowprops=leader_props)
+ax.add_patch(FancyArrowPatch((5.5, 8.1), (5.6, 8.9), arrowstyle='->', lw=line_width))
+ax.text(5.6, 8.6, 'PWM', ha='center', fontsize=8)
 
 # NTC 10K Thermistor (ref 606)
 ax.add_patch(Rectangle((1, 6.5), 1.5, 0.8, fill=False, lw=line_width))
@@ -430,13 +440,13 @@ ax.annotate('', xy=(2.5, 6.9), xytext=(2.65, 6.9), arrowprops=leader_props)
 ax.add_patch(FancyArrowPatch((2.5, 6.9), (3, 7.8), arrowstyle='->', lw=line_width))
 ax.text(2.8, 7.4, 'ADC', ha='center', fontsize=8)
 
-# WS2812B RGB LED (ref 608)
-ax.add_patch(Rectangle((5.8, 6.5), 1.4, 0.8, fill=False, lw=line_width))
-ax.text(6.5, 6.9, 'WS2812B\nRGB LED', ha='center', va='center', fontsize=8)
-ax.text(7.35, 6.9, '608', ha='left', fontsize=8)
-ax.annotate('', xy=(7.2, 6.9), xytext=(7.35, 6.9), arrowprops=leader_props)
-ax.add_patch(FancyArrowPatch((5.5, 7.8), (5.8, 6.9), arrowstyle='->', lw=line_width))
-ax.text(5.7, 7.3, 'GPIO', ha='center', fontsize=8)
+# WS2812B RGB LED (ref 608) — constrained within right margin
+ax.add_patch(Rectangle((5.6, 6.5), 1.3, 0.8, fill=False, lw=line_width))
+ax.text(6.25, 6.9, 'WS2812B\nRGB LED', ha='center', va='center', fontsize=8)
+ax.text(7.05, 6.9, '608', ha='left', fontsize=8)
+ax.annotate('', xy=(6.9, 6.9), xytext=(7.05, 6.9), arrowprops=leader_props)
+ax.add_patch(FancyArrowPatch((5.5, 7.8), (5.6, 6.9), arrowstyle='->', lw=line_width))
+ax.text(5.6, 7.3, 'GPIO', ha='center', fontsize=8)
 
 # Photoresistor (ref 610)
 ax.add_patch(Rectangle((1, 5), 1.5, 0.8, fill=False, lw=line_width))
@@ -493,16 +503,16 @@ data = [
 ]
 
 table_ax = fig.add_axes([
-    (left_margin + 0.1) / paper_width,
-    (bottom_margin + 1.1) / paper_height,
-    (paper_width - left_margin - right_margin - 0.2) / paper_width,
-    (paper_height - top_margin - bottom_margin - 2.2) / paper_height
+    (SAFE_LEFT + 0.2) / paper_width,
+    (SAFE_BOTTOM + 1.0) / paper_height,
+    (SAFE_WIDTH - 0.4) / paper_width,
+    (SAFE_TOP - SAFE_BOTTOM - 2.0) / paper_height
 ])
 table_ax.axis('off')
 table = table_ax.table(cellText=data, loc='center', cellLoc='center',
                         edges='closed')
-table.set_fontsize(9)
-table.scale(1, 1.8)
+table.set_fontsize(8)
+table.scale(1, 1.5)
 
 # Bold header row
 for j in range(5):
@@ -540,9 +550,9 @@ ax.text(cx + 1.7, cy, '800', ha='left', fontsize=8)
 ax.annotate('', xy=(cx + 1.5, cy), xytext=(cx + 1.7, cy),
             arrowprops=dict(arrowstyle='->', lw=0.5, color='black'))
 
-# SNN Processing (ref 802) — kept within right margin
-snn_left = cx + 1.8
-snn_width = 1.8
+# SNN Processing (ref 802) — constrained within right margin (7.725 safe)
+snn_left = cx + 1.5  # 5.75
+snn_width = 1.6      # right edge = 7.35
 snn_cx = snn_left + snn_width / 2
 ax.add_patch(FancyArrowPatch((cx + 1.5, cy), (snn_left, cy),
              arrowstyle='->', lw=line_width))
@@ -551,15 +561,15 @@ ax.text(snn_cx, cy + 0.1, 'SNN Processing',
         ha='center', va='center', fontsize=10)
 ax.text(snn_cx, cy - 0.2, '(50 LIF neurons)',
         ha='center', va='center', fontsize=8)
-ax.text(snn_left + snn_width + 0.15, cy + 0.3, '802', ha='left', fontsize=8)
+ax.text(snn_left + snn_width + 0.1, cy + 0.3, '802', ha='left', fontsize=8)
 ax.annotate('', xy=(snn_left + snn_width, cy + 0.3),
-            xytext=(snn_left + snn_width + 0.1, cy + 0.3),
+            xytext=(snn_left + snn_width + 0.05, cy + 0.3),
             arrowprops=dict(arrowstyle='->', lw=0.5, color='black'))
 
-# Feedback loop arcs — constrained
+# Feedback loop arcs — constrained within safe bounds
 ax.add_patch(FancyArrowPatch((snn_left + snn_width, cy + 0.5),
              (snn_cx, cy + 1.5),
-             connectionstyle="arc3,rad=0.5", arrowstyle='->', lw=line_width))
+             connectionstyle="arc3,rad=0.4", arrowstyle='->', lw=line_width))
 ax.add_patch(FancyArrowPatch((snn_cx, cy + 1.5), (cx, cy + 1.5),
              connectionstyle="arc3,rad=0.3", arrowstyle='->', lw=line_width))
 ax.text(cx + 1.0, cy + 1.8, 'self-observation feedback',
