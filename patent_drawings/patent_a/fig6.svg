@@ -37,10 +37,12 @@
 <line x1="170" y1="195" x2="170.0" y2="350" stroke="black" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#ah)"/>
 <polygon points="640,195 665,220 640,245 615,220" fill="none" stroke="black" stroke-width="2"/>
 <text x="640" y="225" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Rect</text>
+<text x="640" y="265" font-family="Courier New, monospace" font-size="14" text-anchor="middle">614</text>
 <line x1="695" y1="210" x2="695" y2="230" stroke="black" stroke-width="3"/>
 <line x1="701" y1="213" x2="701" y2="227" stroke="black" stroke-width="2"/>
 <line x1="665" y1="220" x2="695" y2="220" stroke="black" stroke-width="1.5"/>
 <text x="698" y="205" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Storage</text>
+<text x="720" y="220" font-family="Courier New, monospace" font-size="14">616</text>
 <polyline points="230,375 260,375 260,220 615,220" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#ah)"/>
 <polyline points="698,230 698,370.0 535.0,370.0" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
 <text x="680" y="388" font-family="Courier New, monospace" font-size="14" text-anchor="end">Harvested energy</text>
