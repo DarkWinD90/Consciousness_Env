@@ -175,32 +175,41 @@ Power budget annotation box:
 
 FIG. 5 — Activity-Dependent Energy Dynamics
 
-This figure shows a single graph illustrating the energy sweet spot.
+This figure shows a graph derived from BalancedEnergyConfig parameters
+(core/energy.py) illustrating the energy harvesting and consumption curves
+as functions of neural spike count.
 
-X-axis: "Neural Activity (spike_count / N)" ranging from 0.0 to 1.0
-Y-axis: "Energy Rate (mWh/step)"
+X-axis: "Neural Activity (Spikes / Step)" ranging from 0 to 50
+Y-axis: "Energy per Step (mWh)"
 
-Three curves:
-1. Harvest curve (solid, increasing): Linear function of activity
-   - Label: "E_harvest = friction_factor x angular_velocity + thermal_factor x delta_T"
-   - Starts near zero, increases linearly with activity
+Two curves:
 
-2. Cost curve (dashed, quadratic): Quadratic function of activity
-   - Label: "E_cost = base + activity_cost x (spikes/N)^2"
-   - Starts at base_consumption, curves upward quadratically
+1. Harvest curve (ref 500, dashed line): Nearly linear, gently increasing
+   - Formula: Harvest = 0.20 + (0.09 x spikes) mWh/step
+   - Composed of thermal baseline (0.20 mWh at delta_T = 5 degrees C) plus
+     piezoelectric harvest proportional to spike-driven motor activity
+   - Rises from 0.20 mWh at 0 spikes to approximately 4.7 mWh at 50 spikes
 
-3. Net energy curve (bold): Harvest minus Cost
-   - Shows positive region (shaded green/light) at moderate activity
-   - Shows negative regions at very low and very high activity
-   - Peak labeled "Optimal Operating Point"
+2. Cost curve (ref 502, solid line): Quadratic, starting near harvest level
+   - Formula: Cost = 0.225 + (0.006 x s) + (0.0003 x s squared) mWh/step
+   - Composed of base consumption (45 mW x 0.005 h = 0.225 mWh) plus
+     linear activity cost (1.2 mW x 0.005 h = 0.006 mWh/spike) plus
+     quadratic burst penalty (0.06 x 0.005 = 0.0003 mWh/spike squared)
+   - Rises from 0.225 mWh at 0 spikes to approximately 1.3 mWh at 50 spikes
 
-Vertical dashed lines marking regions:
-- 0.0 to 0.2: "Low activity — insufficient harvesting"
-- 0.2 to 0.7: "Sweet spot — net positive energy" (shaded region)
-- 0.7 to 1.0: "High activity — quadratic cost dominates"
+Crossover point (ref 506): Harvest equals Cost at approximately 0.3 spikes.
+Below this point (0 to 0.3 spikes), cost exceeds harvest (quiescent drain).
+Above this point (0.3 to 50+ spikes), harvest exceeds cost (net positive).
 
-Annotation: "Self-sustaining operation requires maintaining activity in the
-sweet spot region"
+Shaded region (ref 504, hatched): Area between curves where harvest exceeds
+cost, labeled "NET POSITIVE REGION" with sublabel "Harvest >> Cost
+(Self-Sustaining)."
+
+Formula annotation box (ref 508): Contains exact formulas for both curves.
+
+Zone annotation at bottom: "Zone 1: Quiescent Drain — 0-1 Spikes: Cost > Harvest"
+
+Zero reference line: Horizontal dotted line at y = 0.
 
 
 FIG. 6 — Hardware Reference Design
@@ -245,14 +254,13 @@ Power section:
 - Arrow labeled "Harvested energy feedback"
 
 BOM annotation box in corner:
-- "Pi Pico: $4"
-- "Piezo 27mm: $2"
-- "SG90 Servo: $3"
-- "Thermistor: $0.15"
-- "LDR: $0.10"
-- "WS2812B: $0.25"
-- "Laird Inductor: $0 (inventor stock)"
-- "Total BOM: <$15"
+- "Raspberry Pi Pico (RP2040)"
+- "SG90 Micro Servo"
+- "27mm Piezoelectric Disc"
+- "NTC 10K Thermistor"
+- "Photoresistor (LDR)"
+- "WS2812B RGB LED"
+- "Misc (wires, board, inductor)"
 
 
 FIG. 7 — Validation Results Summary
@@ -272,8 +280,7 @@ Section header: "Phase 7 Full Integration (Control confirms energy depletion)"
 Row: Energy at 2000 steps | Energy depleted | -4,697 mWh | < 0 | CONFIRMED
 
 Section header: "MCP Integration (BalancedEnergyConfig)"
-Row: Energy at 2000 steps | Homeostasis at capacity | 100.0 mWh | = capacity | CONFIRMED
-Row: Stability at 2,000,000 steps | Energy std in last 50% | 0.0000 mWh | < 1.0 | CONFIRMED
+Row: Energy at 2000 steps | Homeostasis at capacity | 100.0 mWh (capped) | > 0 | CONFIRMED
 
 Section header: "Phase 8 STDP"
 Row F8.1: Weight entropy decrease | final < initial | 2.95 to 2.02 bits | decrease | PASS

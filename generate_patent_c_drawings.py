@@ -254,50 +254,73 @@ plt.close()
 # ════════════════════════════════════════════════════════════════════
 # FIG. 3 — Energy-Aware Modulation Curve
 # ════════════════════════════════════════════════════════════════════
+# Data from CLAUDE.md Section 6.1 (Autonomous Fallback Rules):
+#   energy < 15 mWh:  modulation = -0.4  (conserve)
+#   energy < 30 mWh:  modulation = -0.1  (cautious)
+#   energy > 80 mWh:  modulation = +0.3  (explore)
+#   otherwise:        modulation =  0.0  (neutral)
+# These modulation values feed into: reflection_coeff = 0.2 + modulation * 0.1
 fig, ax = setup_figure(3)
 
-# Graph area — inset with safe padding (+0.5" left for y-axis labels)
-graph_ax = fig.add_axes([(SAFE_LEFT + 0.5) / paper_width,
+# Graph area — real units on both axes
+graph_ax = fig.add_axes([(SAFE_LEFT + 0.8) / paper_width,
                           (SAFE_BOTTOM + 1.0) / paper_height,
-                          (SAFE_WIDTH - 0.5) / paper_width,
+                          (SAFE_WIDTH - 1.0) / paper_width,
                           (SAFE_TOP - SAFE_BOTTOM - 2.0) / paper_height])
 graph_ax.set_xlabel('System Energy Level (mWh)', fontsize=10)
 graph_ax.set_ylabel('Autonomous Modulation Value', fontsize=10)
-graph_ax.set_xticks([0, 1])
-graph_ax.set_xticklabels(['0', '100+'])
-graph_ax.set_yticks([0, 1])
-graph_ax.set_yticklabels(['-0.5', '+0.5'])
 
-# Step function
-energy_norm = np.array([0, 0.15, 0.3, 0.8, 1.0])
-mod_norm = np.array([0.1, 0.4, 0.5, 0.5, 0.8])
+# Real energy axis: 0 to 100 mWh
+# Real modulation axis: -0.5 to +0.4
+graph_ax.set_xlim(0, 105)
+graph_ax.set_ylim(-0.55, 0.45)
+graph_ax.set_xticks([0, 15, 30, 50, 80, 100])
+graph_ax.set_yticks([-0.4, -0.1, 0.0, 0.3])
+
+# Step function in real units
+energy_pts = np.array([0, 15, 30, 80, 100])
+mod_pts = np.array([-0.4, -0.1, 0.0, 0.0, 0.3])
 for i in range(4):
-    graph_ax.plot([energy_norm[i], energy_norm[i+1]], [mod_norm[i], mod_norm[i]],
+    graph_ax.plot([energy_pts[i], energy_pts[i+1]], [mod_pts[i], mod_pts[i]],
                   color='black', lw=line_width)
     if i < 3:
-        graph_ax.plot([energy_norm[i+1], energy_norm[i+1]],
-                      [mod_norm[i], mod_norm[i+1]], color='black', lw=line_width)
+        graph_ax.plot([energy_pts[i+1], energy_pts[i+1]],
+                      [mod_pts[i], mod_pts[i+1]], color='black', lw=line_width)
 
-for thresh in [0.15, 0.3, 0.8]:
-    graph_ax.axvline(x=thresh, ls='dashed', color='black', lw=line_width)
+# Threshold dashed lines
+for thresh in [15, 30, 80]:
+    graph_ax.axvline(x=thresh, ls='dashed', color='black', lw=0.5)
 
-# Hatching
-graph_ax.add_patch(Rectangle((0, 0), 0.15, 1, hatch='xxx', fill=False, lw=0))
-graph_ax.add_patch(Rectangle((0.15, 0), 0.15, 1, hatch='/', fill=False, lw=0))
-graph_ax.add_patch(Rectangle((0.8, 0), 0.2, 1, hatch='/', fill=False, lw=0))
+# Zero modulation reference line
+graph_ax.axhline(0, ls=':', color='black', lw=0.5)
 
-# Labels
-graph_ax.text(0.075, 0.95, 'CRITICAL\nMaximum conservation',
-              ha='center', va='top', fontsize=8, transform=graph_ax.transAxes)
-graph_ax.text(0.225, 0.95, 'LOW\nCautious operation',
-              ha='center', va='top', fontsize=8, transform=graph_ax.transAxes)
-graph_ax.text(0.55, 0.95, 'NORMAL\nNeutral operation',
-              ha='center', va='top', fontsize=8, transform=graph_ax.transAxes)
-graph_ax.text(0.9, 0.95, 'SURPLUS\nExploration',
-              ha='center', va='top', fontsize=8, transform=graph_ax.transAxes)
+# Hatched zones
+graph_ax.add_patch(Rectangle((0, -0.55), 15, 1.0, hatch='xxx', fill=False, lw=0))
+graph_ax.add_patch(Rectangle((15, -0.55), 15, 1.0, hatch='/', fill=False, lw=0))
+graph_ax.add_patch(Rectangle((80, -0.55), 20, 1.0, hatch='/', fill=False, lw=0))
+
+# Zone labels using axes coordinates for vertical positioning
+graph_ax.text(7.5, 0.38, 'CRITICAL', ha='center', fontsize=8, weight='bold')
+graph_ax.text(7.5, 0.32, 'Conserve', ha='center', fontsize=7)
+graph_ax.text(22.5, 0.38, 'LOW', ha='center', fontsize=8, weight='bold')
+graph_ax.text(22.5, 0.32, 'Cautious', ha='center', fontsize=7)
+graph_ax.text(55, 0.38, 'NORMAL', ha='center', fontsize=8, weight='bold')
+graph_ax.text(55, 0.32, 'Neutral', ha='center', fontsize=7)
+graph_ax.text(90, 0.38, 'SURPLUS', ha='center', fontsize=8, weight='bold')
+graph_ax.text(90, 0.32, 'Explore', ha='center', fontsize=7)
+
+# Modulation value annotations at each step level
+graph_ax.text(7.5, -0.43, 'mod = -0.4', ha='center', fontsize=7)
+graph_ax.text(22.5, -0.13, 'mod = -0.1', ha='center', fontsize=7)
+graph_ax.text(55, 0.03, 'mod = 0.0', ha='center', fontsize=7)
+graph_ax.text(90, 0.23, 'mod = +0.3', ha='center', fontsize=7)
+
+# Step markers
+for e, m in zip(energy_pts, mod_pts):
+    graph_ax.plot(e, m, 'ko', markersize=4)
 
 ax.text(4.25, bottom_margin + 0.5,
-        'System autonomously adjusts processing intensity based on energy — mimicking metabolic regulation',
+        'System autonomously adjusts processing intensity based on energy',
         ha='center', fontsize=8)
 
 plt.savefig(f'{OUT_DIR}/fig3.svg', format='svg')
@@ -347,20 +370,46 @@ main_ax.text(400, 0.88, '10% probability attention bursts',
              fontsize=8, ha='right')
 
 # Small energy graph — inset with safe padding (+0.5" left for y-axis labels)
+# Realistic energy trajectory: system starts depleted (10 mWh = CRITICAL zone),
+# autonomous fallback engages with mod=-0.4, system recovers through zones.
+# Under BalancedEnergyConfig, net gain at medium activity ~1.2 mWh/step
+# but modulation reduces activity in CRITICAL zone, so recovery is slower initially.
 small_ax = fig.add_axes([(SAFE_LEFT + 0.5) / paper_width,
                           (SAFE_BOTTOM + 1.0) / paper_height,
                           (SAFE_WIDTH - 0.5) / paper_width,
                           1.4 / paper_height])
 small_ax.set_xlabel('Autonomous Step Number', fontsize=8)
 small_ax.set_ylabel('Energy (mWh)', fontsize=8)
-energy = 50 + np.cumsum(np.random.normal(0.01, 0.3, 501))
-energy = np.clip(energy, 0, 100)
-small_ax.plot(steps, energy, color='black', lw=1)
+
+# Simulate realistic recovery: start at 10 mWh, ramp up with zone-dependent rates
+np.random.seed(42)
+energy_trace = np.zeros(501)
+energy_trace[0] = 10.0  # Start depleted (CRITICAL zone — why fallback engaged)
+for i in range(1, 501):
+    e = energy_trace[i - 1]
+    # Zone-dependent net gain (slower when conserving, faster in normal)
+    if e < 15:
+        net_gain = 0.15   # CRITICAL: low activity -> small gain
+    elif e < 30:
+        net_gain = 0.25   # LOW: cautious -> moderate gain
+    elif e < 80:
+        net_gain = 0.40   # NORMAL: neutral -> steady gain
+    else:
+        net_gain = 0.10   # SURPLUS: near cap, self-discharge balances harvest
+    # Add small noise for realism
+    energy_trace[i] = min(100.0, max(0.0, e + net_gain + np.random.normal(0, 0.05)))
+
+small_ax.plot(steps, energy_trace, color='black', lw=1)
 for thresh in [15, 30, 80]:
     small_ax.axhline(thresh, ls='dashed', color='black', lw=0.5)
     small_ax.text(500, thresh + 1, f'{thresh} mWh', fontsize=8, ha='right')
+# Zone labels in margin
+small_ax.text(5, 7, 'CRITICAL', fontsize=6, va='center')
+small_ax.text(5, 22, 'LOW', fontsize=6, va='center')
+small_ax.text(5, 55, 'NORMAL', fontsize=6, va='center')
+small_ax.text(5, 90, 'SURPLUS', fontsize=6, va='center')
 small_ax.set_xlim(0, 500)
-small_ax.set_ylim(0, 100)
+small_ax.set_ylim(0, 105)
 
 ax.text(4.25, bottom_margin + 0.5, 'Energy-aware modulation adjusts intensity',
         ha='center', fontsize=8)

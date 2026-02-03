@@ -2,7 +2,7 @@
 
 ## CONFIGURABLE RECURSIVE SELF-OBSERVATION IN SPIKING NEURAL NETWORKS
 
-**Filing Date**: January 31, 2026
+**Filing Date**: February 2, 2026
 **Inventor**: Kevin Christopher Ward
 **Status**: Provisional Patent Application
 
@@ -17,8 +17,8 @@ Configurable Recursive Self-Observation Method and System for Spiking Neural Net
 ## CROSS-REFERENCE TO RELATED APPLICATIONS
 
 This application is related to co-pending provisional applications:
-- "Self-Sustaining Neural-Motor Energy Harvesting Loop" (filed January 31, 2026)
-- "Cognitive Fallback with Autonomous Self-Regulation and Resynchronization Protocol" (filed January 31, 2026)
+- "Self-Sustaining Neural-Motor Energy Harvesting Loop" (filed February 2, 2026)
+- "Cognitive Fallback with Autonomous Self-Regulation and Resynchronization Protocol" (filed February 2, 2026)
 
 ---
 
