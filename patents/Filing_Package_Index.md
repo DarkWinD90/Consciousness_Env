@@ -1,6 +1,6 @@
 # PATENT FILING PACKAGE — CONSOLIDATED INDEX
 
-**Filing Date**: January 31, 2026
+**Filing Date**: February 2, 2026
 **Inventor**: Kevin Christopher Ward
 **Three Provisional Applications Filed Simultaneously**
 
@@ -34,7 +34,7 @@ Claim 2 (Independent — SYSTEM): Hardware system with SNN + actuator + harveste
 ├── Claim 6: + autonomous fallback controller (→ Patent C)
 ├── Claim 7: Piezoelectric disc embodiment (27mm on servo shaft)
 │   └── Claim 8: + LC resonance with ferrite-backed inductor (Laird)
-└── Claim 10: Specific reference design (Pi Pico, <$25 BOM)
+└── Claim 10: Specific reference design (Pi Pico, servo, piezo disc)
 ```
 
 ### Patent B — Self-Observation
@@ -142,16 +142,15 @@ python phases/phase10_multimodal.py               # Claims F10.1-F10.3: ALL PASS
 **Target completion**: 2026-07-30 (Month 6 of 12)
 **Purpose**: Strengthen all three patents with physical evidence
 
-| Component | Specification | Cost |
-|-----------|--------------|------|
-| Microcontroller | Raspberry Pi Pico (RP2040) | $4 |
-| Piezoelectric Disc | 27mm | $2 |
-| Ferrite-backed Inductor | Laird (inventor's stock) | $0 |
-| Micro Servo | SG90 9g | $3 |
-| Thermistor | NTC 10K 3950 | $0.15 |
-| Photoresistor | GL5528 LDR | $0.10 |
-| RGB LED | WS2812B | $0.25 |
-| **Total BOM** | | **<$15** |
+| Component | Specification |
+|-----------|--------------|
+| Microcontroller | Raspberry Pi Pico (RP2040) |
+| Piezoelectric Disc | 27mm |
+| Ferrite-backed Inductor | Laird |
+| Micro Servo | SG90 9g |
+| Thermistor | NTC 10K 3950 |
+| Photoresistor | GL5528 LDR |
+| RGB LED | WS2812B |
 
 ### Hardware Validation Claims (Planned)
 
@@ -167,13 +166,13 @@ python phases/phase10_multimodal.py               # Claims F10.1-F10.3: ALL PASS
 
 | Month | Milestone | Status |
 |-------|-----------|--------|
-| **0 (Jan 31, 2026)** | All three provisionals filed | ✅ COMPLETE |
+| **0 (Feb 2, 2026)** | File all three provisionals | ⏳ READY |
 | 1-3 | Software validation documented, tags created (14 claims across 4 phases) | ✅ COMPLETE |
 | 3-6 | Hardware prototype built and validated (Phase 11) | 🔄 PLANNED |
 | 6-9 | Hardware results documented (F11.1-F11.3) | ⏳ |
 | 9-11 | Non-provisional applications prepared | ⏳ |
 | 11-12 | PCT international application filed | ⏳ |
-| **12 (Jan 31, 2027)** | All three provisionals converted to non-provisional | ⏳ |
+| **12 (Feb 2, 2027)** | All three provisionals converted to non-provisional | ⏳ |
 
 ---
 
@@ -194,7 +193,7 @@ python phases/phase10_multimodal.py               # Claims F10.1-F10.3: ALL PASS
 - [x] Source Code Reference
 - [ ] **Inventor declaration** (to be signed)
 - [ ] **Filing fee payment** (to be submitted)
-- [ ] **Patent drawings** (to be prepared from figure descriptions)
+- [x] **Patent drawings** (21 figures across 3 patents, 37 CFR 1.84 compliant)
 - [ ] **Information Disclosure Statement** (prior art references)
 
 ### Post-Filing
@@ -233,4 +232,4 @@ patents/
 
 ---
 
-*Filing Package Complete — January 31, 2026*
+*Filing Package Prepared — Target Filing Date: February 2, 2026*

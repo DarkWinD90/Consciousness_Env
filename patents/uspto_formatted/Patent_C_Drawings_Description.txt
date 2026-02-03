@@ -142,7 +142,8 @@ FIG. 3 — Energy-Aware Modulation Curve
 This figure shows the step function mapping energy level to modulation value.
 
 X-axis: "System Energy Level (mWh)" ranging from 0 to 100+
-Y-axis: "Autonomous Modulation Value" ranging from -0.5 to +0.5
+Y-axis: "Autonomous Modulation Value" ranging from -0.55 to +0.45
+(tick marks at -0.4, -0.1, 0.0, +0.3 corresponding to actual modulation values)
 
 Step function with four plateaus:
 
@@ -189,7 +190,7 @@ Main waveform components:
 Component 1 — Circadian Base Signal:
 - Smooth sinusoidal curve
 - Equation annotation: "base = 0.5 + 0.3 x sin(2 x pi x step / period)"
-- Period labeled: "period = 100 steps"
+- Period labeled: "period = 500 steps"
 - Amplitude range: 0.2 to 0.8
 
 Component 2 — Attention Bursts:
@@ -204,9 +205,15 @@ Component 3 — Composite Signal:
 
 Below the main graph, a smaller graph showing the corresponding energy
 level over the same time period:
-- Shows energy fluctuating based on activity
-- Annotations showing where modulation changes (at 15, 30, 80 mWh thresholds)
-- Label: "Energy-aware modulation applied to composite input"
+- Y-axis: "Energy (mWh)" ranging from 0 to 105
+- Shows a monotonic recovery trajectory starting at 10 mWh (CRITICAL zone)
+  and rising through all four modulation zones to capacity ceiling (100 mWh)
+- Recovery rate is zone-dependent: slow in CRITICAL (0.15 mWh/step), moderate
+  in LOW (0.25 mWh/step), steady in NORMAL (0.40 mWh/step), slow near
+  SURPLUS (0.10 mWh/step as self-discharge balances harvest)
+- Three horizontal dashed lines at 15, 30, and 80 mWh thresholds with labels
+- Zone labels in left margin: CRITICAL, LOW, NORMAL, SURPLUS
+- Label at bottom: "Energy-aware modulation adjusts intensity"
 
 Annotation:
 - "Circadian rhythm provides structured temporal variation"

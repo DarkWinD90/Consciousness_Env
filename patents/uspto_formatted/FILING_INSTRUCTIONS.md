@@ -109,9 +109,11 @@ Fill out ONE cover sheet per patent application. You will submit 3 total.
 - Leave blank for first filing (cross-references are in the specification)
 
 Save each completed cover sheet as PDF:
-- `Patent_A_CoverSheet.pdf`
-- `Patent_B_CoverSheet.pdf`
-- `Patent_C_CoverSheet.pdf`
+- `Patent_A_CoverSheet_SB16.pdf`
+- `Patent_B_CoverSheet_SB16.pdf`
+- `Patent_C_CoverSheet_SB16.pdf`
+
+> **Note**: Pre-filled cover sheets already exist in the repository root. Review and verify they are correct before filing.
 
 ---
 
@@ -162,9 +164,11 @@ Create simple black and white line drawings for each patent. You can use:
 - FIG. 7: End-to-End Signal Flow (Connected vs. Autonomous)
 
 Save as:
-- `Patent_A_Drawings.pdf`
-- `Patent_B_Drawings.pdf`
-- `Patent_C_Drawings.pdf`
+- `Patent_Drawings_A.pdf`
+- `Patent_Drawings_B.pdf`
+- `Patent_Drawings_C.pdf`
+
+> **Note**: All drawing PDFs are already generated and ready in the repository root. These were auto-generated from validated SVG source files using `export_drawings_pdf.py`.
 
 ---
 
@@ -175,18 +179,20 @@ Save as:
 1. Go to: https://patentcenter.uspto.gov
 2. Log in with your USPTO account
 3. Click **"New Submission"** → **"Provisional Application"**
-4. Upload your **Cover Sheet PDF** (PTO/SB/16)
-5. Upload your **Specification PDF** (the main patent document)
-6. Upload your **Drawings PDF** (if prepared)
-7. Select your **Entity Status** (Micro or Small)
-8. If Micro Entity: you must also submit **Form PTO/SB/15A** (Micro Entity Certification — Gross Income Basis)
-   - Download: https://www.uspto.gov/sites/default/files/documents/sb0015a.pdf
-9. Pay the filing fee:
-   - Micro Entity: **$65**
-   - Small Entity: **$130**
-10. Review all documents for accuracy
-11. Click **Submit**
-12. **SAVE YOUR FILING RECEIPT** — it contains your Application Number
+4. Upload your **Cover Sheet PDF** (PTO/SB/16) — e.g. `Patent_A_CoverSheet_SB16.pdf`
+5. Upload your **Specification PDF** (the main patent document) — e.g. `Patent_A_Specification.pdf`
+6. Upload your **Drawings Description PDF** — e.g. `Patent_A_Drawings_Description.pdf`
+7. Upload your **Drawings PDF** — e.g. `Patent_Drawings_A.pdf`
+8. Select your **Entity Status** (Micro or Small)
+9. If Micro Entity: you must also submit **Form PTO/SB/15A** — e.g. `Patent_A_MicroEntity_SB15A.pdf`
+   - Pre-filled forms already exist in the repository root
+   - Blank form: https://www.uspto.gov/sites/default/files/documents/sb0015a.pdf
+10. Pay the filing fee:
+    - Micro Entity: **$65**
+    - Small Entity: **$130**
+11. Review all documents for accuracy
+12. Click **Submit**
+13. **SAVE YOUR FILING RECEIPT** — it contains your Application Number
 
 ### Repeat for all 3 patents
 
@@ -198,7 +204,7 @@ Save as:
 - [ ] Save all 3 filing receipts
 - [ ] Record application numbers
 - [ ] Record confirmation numbers
-- [ ] Save the filing date (should be January 31, 2026 if filing today)
+- [ ] Save the filing date (should be February 2, 2026 if filing today)
 
 ### Update This Repository:
 - [ ] Add application numbers to `CLAUDE.md` Section 10.2
@@ -210,7 +216,7 @@ Save as:
 - [ ] Confirm entity status is correct
 - [ ] Check for any USPTO notices or deficiency letters
 
-### Within 12 Months (by January 31, 2027):
+### Within 12 Months (by February 2, 2027):
 - [ ] Convert all 3 provisionals to non-provisional utility patents
 - [ ] File PCT international application by January 15, 2027
 - [ ] Build hardware prototype (Phase 11) for evidence
@@ -245,11 +251,12 @@ Save as:
 
 ## File Checklist (Per Patent)
 
-### Documents to Upload:
-- [ ] PTO/SB/16 Cover Sheet (filled out, PDF)
-- [ ] PTO/SB/15A Micro Entity Certification (if micro entity, PDF)
-- [ ] Specification Document (formatted, PDF)
-- [ ] Drawing Sheets (formatted, PDF)
+### Documents to Upload (per patent):
+- [ ] PTO/SB/16 Cover Sheet — `Patent_X_CoverSheet_SB16.pdf`
+- [ ] PTO/SB/15A Micro Entity Certification (if micro entity) — `Patent_X_MicroEntity_SB15A.pdf`
+- [ ] Specification Document — `Patent_X_Specification.pdf`
+- [ ] Drawings Description — `Patent_X_Drawings_Description.pdf`
+- [ ] Drawing Sheets — `Patent_Drawings_X.pdf`
 
 ### Information You Need:
 - [ ] Your full legal name

@@ -137,7 +137,21 @@ plt.close(fig)
 # ════════════════════════════════════════════════════════════════════
 # FIG. 2 — Energy Balance Comparison
 # ════════════════════════════════════════════════════════════════════
+# Data derived from actual simulation runs:
+#
+# CONTROL (EnergyConfig — phase7_full_integration.py):
+#   base_consumption_mw=470.0, time_step_hours=0.005
+#   drain_per_step = 470.0 × 0.005 = 2.35 mWh/step (harvesting negligible)
+#   initial=50 mWh → final ≈ -4,650 mWh at step 2000
+#
+# EXPERIMENTAL (BalancedEnergyConfig — consciousness_mcp_server.py):
+#   base_consumption_mw=45.0, friction_factor=18.0, thermal_factor=8.0
+#   capacity_mwh=100.0 (physical storage ceiling)
+#   initial=50 mWh → reaches 100 mWh cap at step ~43, then flat plateau
 fig, ax = setup_figure(2, 8)
+
+# Leader line style
+leader_props = dict(arrowstyle='->', lw=0.5, color='black')
 
 graph_ax = fig.add_axes([
     (SAFE_LEFT + 0.9) / paper_width,
@@ -149,46 +163,67 @@ graph_ax.set_xlabel('Operational Steps', fontsize=10)
 graph_ax.set_ylabel('Cumulative Energy (mWh)', fontsize=9)
 graph_ax.tick_params(axis='y', labelsize=8)
 
-x = np.linspace(0, 2000, 100)
-control_y = 50 - (470 / 1000) * x   # Drops to ~-890 at x=2000
+x = np.linspace(0, 2000, 2001)
+
+# CONTROL: linear drain at 2.35 mWh/step (470 mW × 0.005 h)
+# Harvesting is negligible with friction_factor=0.0005, thermal_factor=0.0002
+control_y = 50.0 - 2.35 * x  # 50 - 4700 = -4650 at step 2000
+
+# EXPERIMENTAL: rapid rise to 100 mWh cap, then flat plateau
+# Net gain ≈ +1.2 mWh/step at medium activity → caps at step ~43
+# After cap: energy stays at 100 mWh (self-discharge ≈ overflow harvest)
+exp_y = np.minimum(50.0 + 1.2 * x, 100.0)
+
 graph_ax.plot(x, control_y, ls='-', color='black', lw=line_width,
-              label='Control (470 mW)')
-
-exp_y = 50 + (45 / 1000 - 0.002) * x  # Rises to ~140 at x=2000
+              label='Control (EnergyConfig, 470 mW)')
 graph_ax.plot(x, exp_y, ls='--', color='black', lw=line_width,
-              label='Experimental (45 mW)')
+              label='Experimental (BalancedEnergyConfig, 45 mW)')
 
-# Set y-limits to fit the actual data with room for annotations
-graph_ax.set_xlim(0, 2050)
-graph_ax.set_ylim(-1050, 200)
+# Axis limits to fit actual data
+graph_ax.set_xlim(0, 2100)
+graph_ax.set_ylim(-5000, 300)
 
 # Self-sustaining threshold line (ref 204)
 graph_ax.axhline(0, ls=':', color='black', lw=1)
-graph_ax.text(1050, 10, '204  Self-Sustaining Threshold (0 mWh)',
+graph_ax.text(1200, 30, '204  Self-Sustaining Threshold (0 mWh)',
               ha='center', va='bottom', fontsize=8)
 
-# Control line label (ref 200) — in the middle of the control curve
-graph_ax.text(1400, -500, '200', ha='left', fontsize=8)
-graph_ax.annotate('', xy=(1300, control_y[65]), xytext=(1400, -490),
-                  arrowprops=dict(arrowstyle='->', lw=0.5, color='black'))
+# Capacity ceiling line (ref 206)
+graph_ax.axhline(100, ls=':', color='black', lw=0.5)
+graph_ax.text(1200, 110, '206  Storage Capacity (100 mWh)',
+              ha='center', va='bottom', fontsize=8)
 
-# Experimental line label (ref 202) — above experimental line
-graph_ax.text(1400, 150, '202', ha='left', fontsize=8)
-graph_ax.annotate('', xy=(1300, exp_y[65]), xytext=(1400, 145),
-                  arrowprops=dict(arrowstyle='->', lw=0.5, color='black'))
+# Control line label (ref 200)
+graph_ax.text(800, -1500, '200', ha='left', fontsize=8)
+graph_ax.annotate('', xy=(700, control_y[700]), xytext=(800, -1480),
+                  arrowprops=leader_props)
 
-# Outcome annotations — positioned within y-limits
-graph_ax.annotate('System fails\n(energy depleted)',
-                  xy=(1900, control_y[95]), xytext=(1400, -800),
+# Experimental line label (ref 202)
+graph_ax.text(400, 220, '202', ha='left', fontsize=8)
+graph_ax.annotate('', xy=(300, exp_y[300]), xytext=(400, 215),
+                  arrowprops=leader_props)
+
+# Outcome annotations
+graph_ax.annotate('System fails\n(energy depleted)\n-4,650 mWh',
+                  xy=(1900, control_y[1900]), xytext=(1200, -3800),
                   arrowprops=dict(arrowstyle='->'), fontsize=8)
-graph_ax.annotate('System thrives\n(net positive)',
-                  xy=(1900, exp_y[95]), xytext=(600, 150),
+graph_ax.annotate('System thrives\n(homeostatic equilibrium)\n100 mWh',
+                  xy=(1900, exp_y[1900]), xytext=(1400, 250),
                   arrowprops=dict(arrowstyle='->'), fontsize=8)
 
-graph_ax.fill_between(x, control_y, exp_y, hatch='.', alpha=0.1)
+# Shaded region between curves
+graph_ax.fill_between(x, control_y, exp_y, hatch='.', alpha=0.08)
 
-# Legend in lower-left of graph (within bounds)
-graph_ax.legend(loc='lower left', fontsize=8, frameon=True)
+# Legend in upper-left of graph (within bounds, above the control drop)
+graph_ax.legend(loc='upper left', fontsize=7, frameon=True)
+
+# Formula annotations in lower region
+graph_ax.text(300, -4200,
+              'Control: drain = 470 mW \u00d7 0.005 h = 2.35 mWh/step',
+              fontsize=7)
+graph_ax.text(300, -4500,
+              'Experimental: net gain \u2248 1.2 mWh/step \u2192 cap at step ~43',
+              fontsize=7)
 
 fig.savefig(f'{OUT_DIR}/fig2.svg', format='svg')
 plt.close(fig)
@@ -362,40 +397,95 @@ plt.close(fig)
 # ════════════════════════════════════════════════════════════════════
 # FIG. 5 — Activity-Dependent Energy Dynamics
 # ════════════════════════════════════════════════════════════════════
+# Data derived from BalancedEnergyConfig (core/energy.py):
+#   friction_factor=18.0, thermal_factor=8.0, base_consumption_mw=45.0,
+#   activity_cost_mw=1.2, activity_cost_quadratic=0.06, time_step_hours=0.005
+#   Assumes ΔT=5°C (typical operating thermal gradient)
+#
+#   Harvest = 0.20 + 0.09 * s           (thermal baseline + piezo per spike)
+#   Cost    = 0.225 + 0.006 * s + 0.0003 * s²  (base + linear + quadratic)
+#   Crossover at s ≈ 0.3 spikes (net = 0)
 fig, ax = setup_figure(5, 8)
 
+# Leader line style
+leader_props = dict(arrowstyle='->', lw=0.5, color='black')
+
 graph_ax = fig.add_axes([
-    (SAFE_LEFT + 0.5) / paper_width,
-    (SAFE_BOTTOM + 1.0) / paper_height,
-    (SAFE_WIDTH - 0.5) / paper_width,
-    (SAFE_TOP - SAFE_BOTTOM - 2.0) / paper_height
+    (SAFE_LEFT + 0.8) / paper_width,
+    (SAFE_BOTTOM + 1.5) / paper_height,
+    (SAFE_WIDTH - 1.0) / paper_width,
+    (SAFE_TOP - SAFE_BOTTOM - 2.8) / paper_height
 ])
-graph_ax.set_xlabel('Neural Activity (spikes/step)', fontsize=10)
-graph_ax.set_ylabel('Net Energy (mWh/step)', fontsize=10)
-graph_ax.set_title('Activity vs Net Energy', fontsize=10)
+graph_ax.set_xlabel('Neural Activity (Spikes / Step)', fontsize=10)
+graph_ax.set_ylabel('Energy per Step (mWh)', fontsize=10)
 
-activity = np.linspace(0, 1.0, 100)
-cost = 0.05 * activity**2
-harvest = 0.1 - 0.05 * activity
-net = harvest - cost
-graph_ax.plot(activity, net, color='black', lw=line_width)
-graph_ax.text(0.5, 0.07, '500', ha='center', fontsize=8)
-graph_ax.annotate('', xy=(0.5, 0.05), xytext=(0.5, 0.065),
-                  arrowprops=dict(arrowstyle='->', lw=0.5, color='black'))
+# Spike range: 0 to 50 (N=50 neurons max)
+s = np.linspace(0, 50, 200)
 
+# Harvest: thermal baseline (0.20 mWh) + piezo per spike (0.09 mWh/spike)
+harvest = 0.20 + 0.09 * s
+
+# Cost: base (0.225 mWh) + linear (0.006/spike) + quadratic (0.0003/spike²)
+cost = 0.225 + 0.006 * s + 0.0003 * s**2
+
+# Plot harvest curve (dashed — ref 500)
+graph_ax.plot(s, harvest, ls='--', color='black', lw=line_width)
+graph_ax.text(51, harvest[-1], 'Harvest\n~4.7 mWh', ha='left', va='center', fontsize=8)
+graph_ax.text(30, 3.2, '500', ha='center', fontsize=8)
+graph_ax.annotate('', xy=(30, harvest[120]), xytext=(30, 3.15),
+                  arrowprops=leader_props)
+
+# Plot cost curve (solid — ref 502)
+graph_ax.plot(s, cost, ls='-', color='black', lw=line_width)
+graph_ax.text(51, cost[-1], 'Cost\n~1.3 mWh', ha='left', va='center', fontsize=8)
+graph_ax.text(40, 0.55, '502', ha='center', fontsize=8)
+graph_ax.annotate('', xy=(40, cost[160]), xytext=(40, 0.6),
+                  arrowprops=leader_props)
+
+# Shade net-positive region between curves (ref 504)
+graph_ax.fill_between(s, cost, harvest, where=(harvest >= cost),
+                      hatch='/', alpha=0.08, edgecolor='black')
+graph_ax.text(25, 2.0, 'NET POSITIVE REGION', ha='center', va='center',
+              fontsize=10, weight='bold')
+graph_ax.text(25, 1.7, 'Harvest >> Cost', ha='center', va='center', fontsize=8)
+graph_ax.text(25, 1.45, '(Self-Sustaining)', ha='center', va='center', fontsize=8)
+graph_ax.text(25, 1.15, '504', ha='center', fontsize=8)
+graph_ax.annotate('', xy=(25, 1.3), xytext=(25, 1.2),
+                  arrowprops=leader_props)
+
+# Crossover point circle and label (ref 506)
+crossover_s = 0.3
+crossover_y = 0.20 + 0.09 * crossover_s  # ≈ 0.227
+graph_ax.plot(crossover_s, crossover_y, 'o', color='black', markersize=8,
+              fillstyle='none', markeredgewidth=line_width)
+graph_ax.text(3, -0.08, 'Crossover (0.3 spikes)', ha='left', fontsize=8)
+graph_ax.text(3, -0.15, '506', ha='left', fontsize=8)
+graph_ax.annotate('', xy=(crossover_s + 0.3, crossover_y),
+                  xytext=(3, -0.05),
+                  arrowprops=leader_props)
+
+# Zero line
 graph_ax.axhline(0, ls=':', color='black', lw=0.5)
-graph_ax.text(0.95, 0.002, '0 mWh', ha='right', fontsize=8)
 
-graph_ax.axvspan(0, 0.2, hatch='xxx', alpha=0.05, edgecolor='black')
-graph_ax.axvspan(0.2, 0.7, hatch='/', alpha=0.05, edgecolor='black')
-graph_ax.axvspan(0.7, 1.0, hatch='xxx', alpha=0.05, edgecolor='black')
+# Axis limits
+graph_ax.set_xlim(-1, 55)
+graph_ax.set_ylim(-0.2, 5.2)
 
-graph_ax.text(0.1, -0.02, 'Low activity\ninsufficient\nharvesting',
-              fontsize=8, ha='center')
-graph_ax.text(0.45, 0.08, 'Sweet spot\nnet positive energy',
-              fontsize=8, ha='center')
-graph_ax.text(0.85, -0.02, 'High activity\nquadratic cost\ndominates',
-              fontsize=8, ha='center')
+# Formula box at top (ref 508)
+formula_text = ('Harvest = 0.20 + (0.09 \u00d7 spikes)\n'
+                'Cost = 0.225 + (0.006 \u00d7 s) + (0.0003 \u00d7 s\u00b2)')
+graph_ax.text(1, 4.9, formula_text, fontsize=8, va='top',
+              bbox=dict(boxstyle='round,pad=0.3', facecolor='white',
+                        edgecolor='black', lw=0.5))
+graph_ax.text(22, 4.95, '508', ha='left', fontsize=8)
+graph_ax.annotate('', xy=(20, 4.7), xytext=(22, 4.9),
+                  arrowprops=leader_props)
+
+# Zone 1 label at bottom of drawing area
+ax.text(SAFE_CX, SAFE_BOTTOM + 0.6, 'Zone 1: Quiescent Drain',
+        ha='center', fontsize=9, weight='bold')
+ax.text(SAFE_CX, SAFE_BOTTOM + 0.35, '0-1 Spikes: Cost > Harvest',
+        ha='center', fontsize=8)
 
 fig.savefig(f'{OUT_DIR}/fig5.svg', format='svg')
 plt.close(fig)
@@ -457,23 +547,20 @@ ax.add_patch(FancyArrowPatch((2.5, 5.4), (3, 7.6),
              arrowstyle='->', lw=line_width, ls='dashed'))
 ax.text(2.8, 6.5, 'ADC', ha='center', fontsize=8)
 
-# BOM table
+# BOM table (component list only — no prices per USPTO guidelines)
 ax.add_patch(Rectangle((1.5, 2), 5.5, 2.5, fill=False, lw=line_width))
 ax.text(4.25, 4.2, 'Bill of Materials', ha='center', fontsize=10, weight='bold')
 bom = [
-    ('Raspberry Pi Pico', '$4'),
-    ('SG90 Micro Servo', '$3'),
-    ('27mm Piezo Disc', '$2'),
-    ('NTC 10K Thermistor', '$1'),
-    ('Photoresistor (LDR)', '$1'),
-    ('WS2812B RGB LED', '$1'),
-    ('Misc (wires, board)', '$3'),
+    'Raspberry Pi Pico (RP2040)',
+    'SG90 Micro Servo',
+    '27mm Piezoelectric Disc',
+    'NTC 10K Thermistor',
+    'Photoresistor (LDR)',
+    'WS2812B RGB LED',
+    'Misc (wires, board, inductor)',
 ]
-for i, (part, cost) in enumerate(bom):
+for i, part in enumerate(bom):
     ax.text(2, 3.9 - i * 0.25, part, fontsize=8)
-    ax.text(6.5, 3.9 - i * 0.25, cost, fontsize=8, ha='right')
-
-ax.text(4.25, 1.6, 'Total BOM Cost: <$25', ha='center', fontsize=10, weight='bold')
 
 fig.savefig(f'{OUT_DIR}/fig6.svg', format='svg')
 plt.close(fig)
@@ -495,7 +582,7 @@ data = [
     ['', 'Phase 7 Full Integration (Control)', '', '', ''],
     ['--', 'Energy at 2000 steps', '-4,697 mWh', '< 0', 'CONFIRMED'],
     ['', 'MCP Integration (BalancedEnergyConfig)', '', '', ''],
-    ['--', 'Energy at 2000 steps', '+4,170 mWh', '> 0', 'CONFIRMED'],
+    ['--', 'Energy at 2000 steps', '100.0 mWh (capped)', '> 0', 'CONFIRMED'],
     ['', 'Phase 8 STDP', '', '', ''],
     ['F8.1', 'Weight entropy decrease', '2.95\u21922.02', 'decrease', 'PASS'],
     ['F8.2', 'STDP MI > 1.2x frozen', '6.52x', '> 1.20', 'PASS'],

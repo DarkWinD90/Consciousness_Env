@@ -2,7 +2,7 @@
 
 ## SELF-SUSTAINING NEURAL-MOTOR ENERGY HARVESTING LOOP
 
-**Filing Date**: January 31, 2026
+**Filing Date**: February 2, 2026
 **Inventor**: Kevin Christopher Ward
 **Status**: Provisional Patent Application
 
@@ -17,8 +17,8 @@ Self-Sustaining Neural-Motor Energy Harvesting Loop for Autonomous Cognitive Sys
 ## CROSS-REFERENCE TO RELATED APPLICATIONS
 
 This application is related to co-pending provisional applications:
-- "Configurable Recursive Self-Observation in Spiking Neural Networks" (filed January 31, 2026)
-- "Cognitive Fallback with Autonomous Self-Regulation and Resynchronization Protocol" (filed January 31, 2026)
+- "Configurable Recursive Self-Observation in Spiking Neural Networks" (filed February 2, 2026)
+- "Cognitive Fallback with Autonomous Self-Regulation and Resynchronization Protocol" (filed February 2, 2026)
 
 ---
 
@@ -408,8 +408,7 @@ The system of Claim 2 wherein:
 - said motor actuator is a micro servo motor;
 - said piezoelectric energy harvesting element is a 27mm piezoelectric disc;
 - said environmental sensor comprises at least one photoresistor and one thermistor;
-- said energy storage circuit comprises at least one electrolytic capacitor;
-and wherein the total bill of materials cost is less than $25.
+- said energy storage circuit comprises at least one electrolytic capacitor.
 
 **Claim 11** (STDP Learning):
 The method of Claim 1 further comprising applying spike-timing dependent plasticity (STDP) to said synaptic weights, wherein:

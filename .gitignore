@@ -74,3 +74,13 @@ mcp/.snapshots/
 
 # Build system artifacts
 oryx-build-commands.txt
+
+# Claude Code session data
+.claude/
+
+# Unrelated archive files
+Archive/
+
+# Temporary figure development files
+Fig*.svg
+gen_fig*.py
