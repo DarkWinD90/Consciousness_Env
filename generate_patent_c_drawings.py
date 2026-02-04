@@ -7,715 +7,840 @@ from External Control Layers
 7 Figures per Patent_C_Drawings_Description.txt
 All drawings comply with 37 CFR 1.84.
 
-NOTE: Previous version generated only 6 figures with sheet numbering X/6.
-      This version corrects to 7 figures (X/7) and adds FIG. 7.
+REVAMPED VERSION - Consistent reference numerals across all figures:
+  100 - External Cognitive Control Layer
+  102 - Heartbeat Watchdog
+  104 - Connected Mode Controller
+  106 - Autonomous Fallback Controller
+  108 - Spiking Neural Network + Energy Harvester (Core Pipeline)
+  110 - Heartbeat Signal Path
+  112 - Modulation Command Path
+  114 - Step Buffer
+  116 - State Snapshots (Persistent Storage)
+  118 - Autonomous Input Generator
+  120 - Energy-Aware Self-Modulation
+  122 - Resynchronization Payload
+  124 - Resync Signal Path
 """
 
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import (Rectangle, FancyArrowPatch, Ellipse, Polygon,
-                                 FancyBboxPatch)
+                                 FancyBboxPatch, Circle)
 import numpy as np
 import os
 
-# Common settings for all figures (per 37 CFR 1.84)
-paper_width = 8.5  # inches
-paper_height = 11  # inches
-top_margin = 1
-left_margin = 1
-right_margin = 0.625
-bottom_margin = 0.375
-dpi = 300
-font_size_label = 12
-font_body = 9
-font_small = 8
-line_width = 1.5
+# ═══════════════════════════════════════════════════════════════════════════
+# COMMON SETTINGS (per 37 CFR 1.84)
+# ═══════════════════════════════════════════════════════════════════════════
+PAPER_WIDTH = 8.5    # inches
+PAPER_HEIGHT = 11    # inches
+TOP_MARGIN = 1.0     # inch
+LEFT_MARGIN = 1.0    # inch
+RIGHT_MARGIN = 0.625 # 5/8 inch
+BOTTOM_MARGIN = 0.375 # 3/8 inch
+DPI = 300
+
+# Font sizes (must be >= 1/8 inch = 9pt at 72 dpi)
+FONT_TITLE = 11      # Major labels
+FONT_BODY = 10       # Block text
+FONT_SMALL = 9       # Annotations (minimum compliant)
+FONT_REF = 9         # Reference numerals
+
+LINE_WIDTH = 1.5     # Sufficiently heavy for reproduction
+LINE_THIN = 0.8      # Leader lines
+
 TOTAL_SHEETS = 7
-
-arrow_props = {'arrowstyle': '->', 'lw': line_width}
-
-
-def setup_figure(fig_num):
-    fig = plt.figure(figsize=(paper_width, paper_height), dpi=dpi)
-    # Constrain drawing area to safe margins (+0.1" inset to prevent overflow)
-    safe_left = (left_margin + 0.1) / paper_width
-    safe_bottom = (bottom_margin + 0.1) / paper_height
-    safe_width = (paper_width - left_margin - right_margin - 0.2) / paper_width
-    safe_height = (paper_height - top_margin - bottom_margin - 0.2) / paper_height
-    ax = fig.add_axes([safe_left, safe_bottom, safe_width, safe_height])
-    ax.set_xlim(left_margin + 0.1, paper_width - right_margin - 0.1)
-    ax.set_ylim(bottom_margin + 0.1, paper_height - top_margin - 0.1)
-    ax.axis('off')
-    # Sheet number at top center (on fig, outside ax)
-    fig.text(0.5, 1.0 - 0.5 / paper_height,
-             f"{fig_num}/{TOTAL_SHEETS}", ha='center', va='center', fontsize=10)
-    # Figure label at bottom left (on fig, outside ax)
-    fig.text(left_margin / paper_width, (bottom_margin + 0.2) / paper_height,
-             f"FIG. {fig_num}", ha='left', va='bottom', fontsize=font_size_label)
-    return fig, ax
-
 
 OUT_DIR = 'patent_drawings/patent_c'
 os.makedirs(OUT_DIR, exist_ok=True)
 
-# Leader line style for reference numerals (thin, per 37 CFR 1.84(q))
-leader_props = dict(arrowstyle='->', lw=0.5, color='black')
+# Arrow styles
+ARROW_PROPS = {'arrowstyle': '->', 'lw': LINE_WIDTH, 'color': 'black'}
+LEADER_PROPS = {'arrowstyle': '->', 'lw': LINE_THIN, 'color': 'black'}
 
 
-# ════════════════════════════════════════════════════════════════════
+def setup_figure(fig_num):
+    """Create a figure with USPTO-compliant margins and labels."""
+    fig = plt.figure(figsize=(PAPER_WIDTH, PAPER_HEIGHT), dpi=DPI)
+
+    # Safe drawing area with 0.1" inset from margins
+    safe_left = (LEFT_MARGIN + 0.1) / PAPER_WIDTH
+    safe_bottom = (BOTTOM_MARGIN + 0.1) / PAPER_HEIGHT
+    safe_width = (PAPER_WIDTH - LEFT_MARGIN - RIGHT_MARGIN - 0.2) / PAPER_WIDTH
+    safe_height = (PAPER_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN - 0.2) / PAPER_HEIGHT
+
+    ax = fig.add_axes([safe_left, safe_bottom, safe_width, safe_height])
+    ax.set_xlim(LEFT_MARGIN + 0.1, PAPER_WIDTH - RIGHT_MARGIN - 0.1)
+    ax.set_ylim(BOTTOM_MARGIN + 0.1, PAPER_HEIGHT - TOP_MARGIN - 0.1)
+    ax.axis('off')
+
+    # Sheet number at top center
+    fig.text(0.5, 1.0 - 0.5 / PAPER_HEIGHT,
+             f"{fig_num}/{TOTAL_SHEETS}", ha='center', va='center', fontsize=FONT_BODY)
+
+    # Figure label at bottom left
+    fig.text(LEFT_MARGIN / PAPER_WIDTH, (BOTTOM_MARGIN + 0.15) / PAPER_HEIGHT,
+             f"FIG. {fig_num}", ha='left', va='bottom', fontsize=FONT_TITLE)
+
+    return fig, ax
+
+
+def add_ref_label(ax, x, y, ref_num, anchor='left', offset=(0.15, 0)):
+    """Add a reference numeral with leader line."""
+    text_x = x + offset[0] if anchor == 'left' else x - offset[0]
+    ax.text(text_x, y + offset[1], str(ref_num), ha=anchor, va='center',
+            fontsize=FONT_REF, weight='bold')
+    ax.annotate('', xy=(x, y), xytext=(text_x - 0.05 if anchor == 'left' else text_x + 0.05, y + offset[1]),
+                arrowprops=LEADER_PROPS)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
 # FIG. 1 — System Architecture with Fallback
-# ════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════
 fig, ax = setup_figure(1)
 
-# Top section - Cognitive Control Layer (ref 100)
-ax.add_patch(Ellipse((4.25, 9.5), 3, 1, fill=False, lw=line_width))
-ax.text(4.25, 9.5, 'External Cognitive Control Layer (e.g., Claude)',
-        ha='center', va='center', fontsize=10)
-ax.text(4.25, 9.1, 'Provides intelligent cognitive decisions',
-        ha='center', va='center', fontsize=8)
-ax.add_patch(Ellipse((4.25, 9.5), 3, 1, fill=False, lw=line_width, ls='dashed'))
-ax.text(6, 9.5, 'May become unavailable', ha='left', va='center', fontsize=8)
-ax.text(6.2, 9.8, '100', ha='left', fontsize=8)
-ax.annotate('', xy=(5.75, 9.5), xytext=(6.2, 9.75), arrowprops=leader_props)
+# Title
+ax.text(4.25, 9.8, 'System Architecture with Cognitive Fallback',
+        ha='center', va='center', fontsize=FONT_TITLE, weight='bold')
 
-# Arrows downward
-ax.add_patch(FancyArrowPatch((3, 8.5), (3, 8), **arrow_props))
-ax.text(3.1, 8.25, 'Modulation commands (-1.0 to +1.0)',
-        ha='left', va='center', fontsize=8)
-ax.add_patch(FancyArrowPatch((5.5, 8.5), (5.5, 8), **arrow_props))
-ax.text(5.1, 8.25, 'Heartbeat signal\n(implicit via tool calls)',
-        ha='center', va='center', fontsize=8)
+# ─── TOP: External Cognitive Control Layer (100) ───
+cloud_cx, cloud_cy = 4.25, 9.0
+ax.add_patch(Ellipse((cloud_cx, cloud_cy), 3.5, 0.9, fill=False, lw=LINE_WIDTH))
+ax.add_patch(Ellipse((cloud_cx, cloud_cy), 3.5, 0.9, fill=False, lw=LINE_WIDTH, ls='dashed'))
+ax.text(cloud_cx, cloud_cy + 0.15, 'External Cognitive Control Layer',
+        ha='center', va='center', fontsize=FONT_BODY)
+ax.text(cloud_cx, cloud_cy - 0.2, '(e.g., Claude AI)',
+        ha='center', va='center', fontsize=FONT_SMALL)
+add_ref_label(ax, cloud_cx + 1.75, cloud_cy, 100, anchor='left', offset=(0.15, 0))
 
-# Middle section - Transition Controller (ref 102)
-ax.add_patch(Rectangle((3.5, 7), 2, 1, fill=False, lw=line_width))
-ax.text(4.25, 7.75, 'Heartbeat Watchdog', ha='center', va='center', fontsize=10)
-ax.text(4.25, 7.5, 'Monitors time since last cognitive input',
-        ha='center', va='center', fontsize=8)
-ax.text(4.25, 7.3, 'Timeout threshold: 30 seconds',
-        ha='center', va='center', fontsize=8)
-ax.text(4.25, 7.1, 'Check interval: 5 seconds',
-        ha='center', va='center', fontsize=8)
-ax.text(5.65, 7.5, '102', ha='left', fontsize=8)
-ax.annotate('', xy=(5.5, 7.5), xytext=(5.65, 7.5), arrowprops=leader_props)
+# Annotation: May become unavailable
+ax.text(cloud_cx + 2.3, cloud_cy + 0.3, '(may become unavailable)',
+        ha='left', va='center', fontsize=FONT_SMALL, style='italic')
 
-# Two output paths
-# Pre-calculate autonomous box center for arrow target
-auto_left = 5.0
-auto_width = 2.3
-auto_cx = auto_left + auto_width / 2
-ax.add_patch(FancyArrowPatch((3.5, 6.5), (2, 6), ls='solid', **arrow_props))
-ax.text(2.5, 6.25, 'Heartbeat active -> Connected Mode',
-        ha='center', va='center', fontsize=8)
-ax.add_patch(FancyArrowPatch((5, 6.5), (auto_cx, 6), ls='dashed', **arrow_props))
-ax.text(5.5, 6.25, 'Heartbeat timeout -> Autonomous Mode',
-        ha='center', va='center', fontsize=8)
+# ─── Arrows from cognitive layer ───
+# Modulation commands (112)
+ax.add_patch(FancyArrowPatch((cloud_cx - 0.8, cloud_cy - 0.45), (cloud_cx - 0.8, 7.7),
+                              **ARROW_PROPS))
+ax.text(cloud_cx - 1.5, 8.2, 'Modulation', ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(cloud_cx - 1.5, 8.0, '(-1.0 to +1.0)', ha='center', va='center', fontsize=FONT_SMALL)
+add_ref_label(ax, cloud_cx - 0.6, 8.3, 112, anchor='left', offset=(0.15, 0))
 
-# Left path - Connected Mode (ref 104)
-ax.add_patch(Rectangle((1, 5), 2, 1, fill=False, lw=line_width))
-ax.text(2, 5.75, 'Cognitive-Driven Operation',
-        ha='center', va='center', fontsize=10)
-ax.text(2, 5.5, 'Input: Claude-controlled (0-1)',
-        ha='center', va='center', fontsize=8)
-ax.text(2, 5.25, 'Modulation: Claude-controlled (-1 to +1)',
-        ha='center', va='center', fontsize=8)
-ax.text(1, 5.85, '104', ha='right', fontsize=8)
-ax.annotate('', xy=(1.0, 5.7), xytext=(0.95, 5.8), arrowprops=leader_props)
-ax.add_patch(FancyArrowPatch((2, 4.5), (2, 4), **arrow_props))
+# Heartbeat signal (110)
+ax.add_patch(FancyArrowPatch((cloud_cx + 0.8, cloud_cy - 0.45), (cloud_cx + 0.8, 7.7),
+                              **ARROW_PROPS))
+ax.text(cloud_cx + 1.5, 8.2, 'Heartbeat', ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(cloud_cx + 1.5, 8.0, '(via tool calls)', ha='center', va='center', fontsize=FONT_SMALL)
+add_ref_label(ax, cloud_cx + 1.0, 8.3, 110, anchor='left', offset=(0.15, 0))
 
-# Right path - Autonomous Mode (ref 106) — constrained within right margin
-# auto_left, auto_width, auto_cx already defined above for arrow targeting
-ax.add_patch(Rectangle((auto_left, 5), auto_width, 1, fill=False, lw=line_width))
-ax.text(auto_cx, 5.75, 'Autonomous Fallback Controller',
-        ha='center', va='center', fontsize=9)
-ax.text(auto_cx, 5.5, 'Input: Self-generated (circadian)',
-        ha='center', va='center', fontsize=8)
-ax.text(auto_cx, 5.25, 'Modulation: Energy-aware (-0.4 to +0.3)',
-        ha='center', va='center', fontsize=8)
-ax.text(auto_left + auto_width + 0.1, 5.75, '106', ha='left', fontsize=8)
-ax.annotate('', xy=(auto_left + auto_width, 5.6),
-            xytext=(auto_left + auto_width + 0.1, 5.7), arrowprops=leader_props)
-ax.add_patch(FancyArrowPatch((auto_cx, 4.5), (auto_cx, 4), **arrow_props))
+# ─── MIDDLE: Heartbeat Watchdog (102) ───
+wd_x, wd_y, wd_w, wd_h = 3.0, 7.0, 2.5, 0.7
+ax.add_patch(Rectangle((wd_x, wd_y), wd_w, wd_h, fill=False, lw=LINE_WIDTH))
+ax.text(wd_x + wd_w/2, wd_y + wd_h/2 + 0.1, 'Heartbeat Watchdog',
+        ha='center', va='center', fontsize=FONT_BODY, weight='bold')
+ax.text(wd_x + wd_w/2, wd_y + wd_h/2 - 0.15, 'Timeout: 30s | Check: 5s',
+        ha='center', va='center', fontsize=FONT_SMALL)
+add_ref_label(ax, wd_x + wd_w, wd_y + wd_h/2, 102, anchor='left', offset=(0.15, 0))
 
-# Additional outputs from Autonomous — constrained
-buf_x = auto_left + auto_width - 0.3
-ax.add_patch(FancyArrowPatch((buf_x, 5), (buf_x, 4.75), **arrow_props))
-ax.add_patch(Rectangle((buf_x - 0.4, 4.25), 0.8, 0.5, fill=False, lw=line_width))
-ax.text(buf_x, 4.5, 'Step\nBuffer', ha='center', va='center', fontsize=8)
-ax.add_patch(FancyArrowPatch((buf_x, 4.25), (buf_x, 3.85), **arrow_props))
-ax.add_patch(Ellipse((buf_x, 3.6), 0.9, 0.4, fill=False, lw=line_width))
-ax.text(buf_x, 3.6, 'Snapshots', ha='center', va='center', fontsize=8)
+# ─── Two paths from watchdog ───
+# Left path: Connected Mode (104)
+ax.add_patch(FancyArrowPatch((wd_x + 0.3, wd_y), (2.0, 6.0),
+                              connectionstyle="arc3,rad=0.2", **ARROW_PROPS))
+ax.text(1.8, 6.3, 'Active', ha='center', va='center', fontsize=FONT_SMALL)
 
-# Bottom section - Neural Processing (ref 108)
-ax.add_patch(Rectangle((1.5, 2), 5, 1.5, fill=False, lw=line_width))
-ax.text(4.25, 2.75, 'Spiking Neural Network + Energy Harvester',
-        ha='center', va='center', fontsize=10)
-ax.text(4.25, 2.5, 'Continuous operation regardless of control source',
-        ha='center', va='center', fontsize=8)
-ax.text(4.25, 2.25, 'THE SYSTEM NEVER STOPS',
-        ha='center', va='center', fontsize=10)
-ax.text(6.65, 2.75, '108', ha='left', fontsize=8)
-ax.annotate('', xy=(6.5, 2.75), xytext=(6.65, 2.75), arrowprops=leader_props)
+conn_x, conn_y, conn_w, conn_h = 1.2, 5.0, 2.0, 1.0
+ax.add_patch(Rectangle((conn_x, conn_y), conn_w, conn_h, fill=False, lw=LINE_WIDTH))
+ax.text(conn_x + conn_w/2, conn_y + conn_h - 0.2, 'Connected Mode',
+        ha='center', va='center', fontsize=FONT_BODY, weight='bold')
+ax.text(conn_x + conn_w/2, conn_y + conn_h/2 - 0.1, 'Claude-controlled',
+        ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(conn_x + conn_w/2, conn_y + 0.2, 'input & modulation',
+        ha='center', va='center', fontsize=FONT_SMALL)
+add_ref_label(ax, conn_x, conn_y + conn_h/2, 104, anchor='right', offset=(0.2, 0))
 
-# Annotations
-ax.text(4.25, 1.5, 'Seamless transition: SNN continues processing without interruption',
-        ha='center', va='center', fontsize=8)
-ax.text(4.25, 1.2, 'The control source changes; the computation continues',
-        ha='center', va='center', fontsize=8)
+# Right path: Autonomous Mode (106)
+ax.add_patch(FancyArrowPatch((wd_x + wd_w - 0.3, wd_y), (6.0, 6.0),
+                              connectionstyle="arc3,rad=-0.2", ls='dashed', **ARROW_PROPS))
+ax.text(6.2, 6.3, 'Timeout', ha='center', va='center', fontsize=FONT_SMALL)
+
+auto_x, auto_y, auto_w, auto_h = 5.0, 5.0, 2.3, 1.0
+ax.add_patch(Rectangle((auto_x, auto_y), auto_w, auto_h, fill=False, lw=LINE_WIDTH))
+ax.text(auto_x + auto_w/2, auto_y + auto_h - 0.2, 'Autonomous Mode',
+        ha='center', va='center', fontsize=FONT_BODY, weight='bold')
+ax.text(auto_x + auto_w/2, auto_y + auto_h/2 - 0.1, 'Self-generated input',
+        ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(auto_x + auto_w/2, auto_y + 0.2, 'Energy-aware modulation',
+        ha='center', va='center', fontsize=FONT_SMALL)
+add_ref_label(ax, auto_x + auto_w, auto_y + auto_h/2, 106, anchor='left', offset=(0.15, 0))
+
+# ─── Autonomous mode outputs ───
+# Step Buffer (114)
+buf_x, buf_y, buf_w, buf_h = 5.3, 3.8, 0.8, 0.5
+ax.add_patch(FancyArrowPatch((auto_x + auto_w/2 - 0.5, auto_y), (buf_x + buf_w/2, buf_y + buf_h),
+                              **ARROW_PROPS))
+ax.add_patch(Rectangle((buf_x, buf_y), buf_w, buf_h, fill=False, lw=LINE_WIDTH))
+ax.text(buf_x + buf_w/2, buf_y + buf_h/2, 'Buffer',
+        ha='center', va='center', fontsize=FONT_SMALL)
+add_ref_label(ax, buf_x + buf_w, buf_y + buf_h/2, 114, anchor='left', offset=(0.15, 0))
+
+# State Snapshots (116)
+snap_x, snap_y = 6.5, 3.8
+ax.add_patch(Ellipse((snap_x, snap_y + 0.15), 0.7, 0.2, fill=False, lw=LINE_WIDTH))
+ax.add_patch(Rectangle((snap_x - 0.35, snap_y - 0.2), 0.7, 0.35, fill=False, lw=LINE_WIDTH))
+ax.add_patch(Ellipse((snap_x, snap_y - 0.2), 0.7, 0.2, fill=False, lw=LINE_WIDTH))
+ax.text(snap_x, snap_y, 'Snap', ha='center', va='center', fontsize=FONT_SMALL)
+ax.add_patch(FancyArrowPatch((buf_x + buf_w, buf_y + buf_h/2), (snap_x - 0.35, snap_y),
+                              **ARROW_PROPS))
+add_ref_label(ax, snap_x + 0.35, snap_y, 116, anchor='left', offset=(0.15, 0))
+
+# ─── BOTTOM: Core Pipeline (108) ───
+core_x, core_y, core_w, core_h = 1.5, 1.5, 5.5, 1.5
+ax.add_patch(Rectangle((core_x, core_y), core_w, core_h, fill=False, lw=LINE_WIDTH * 1.5))
+ax.text(core_x + core_w/2, core_y + core_h - 0.3, 'Spiking Neural Network + Energy Harvester',
+        ha='center', va='center', fontsize=FONT_BODY, weight='bold')
+ax.text(core_x + core_w/2, core_y + core_h/2, 'CORE PIPELINE',
+        ha='center', va='center', fontsize=FONT_TITLE, weight='bold')
+ax.text(core_x + core_w/2, core_y + 0.3, 'Continuous operation regardless of control source',
+        ha='center', va='center', fontsize=FONT_SMALL)
+add_ref_label(ax, core_x + core_w, core_y + core_h/2, 108, anchor='left', offset=(0.15, 0))
+
+# Arrows to core pipeline
+ax.add_patch(FancyArrowPatch((conn_x + conn_w/2, conn_y), (core_x + 1.0, core_y + core_h),
+                              **ARROW_PROPS))
+ax.add_patch(FancyArrowPatch((auto_x + auto_w/2, auto_y), (core_x + core_w - 1.0, core_y + core_h),
+                              **ARROW_PROPS))
+
+# Key annotation
+ax.text(4.25, 0.8, 'THE SYSTEM NEVER STOPS',
+        ha='center', va='center', fontsize=FONT_TITLE, weight='bold')
+ax.text(4.25, 0.5, 'Control source changes; computation continues seamlessly',
+        ha='center', va='center', fontsize=FONT_SMALL, style='italic')
 
 plt.savefig(f'{OUT_DIR}/fig1.svg', format='svg')
 plt.close()
 
 
-# ════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════
 # FIG. 2 — State Transition Diagram
-# ════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════
 fig, ax = setup_figure(2)
 
-# Three states
-# State 1 CONNECTED left
-ax.add_patch(FancyBboxPatch((1.5, 6), 2, 2, boxstyle="round,pad=0.1",
-                             fill=False, lw=line_width))
-ax.text(2.5, 7.5, 'CONNECTED', ha='center', va='center', fontsize=10,
-        weight='bold')
-ax.text(2.5, 7.2, 'Cognitive layer active',
-        ha='center', va='center', fontsize=8)
-ax.text(2.5, 7, 'Input from cognitive layer',
-        ha='center', va='center', fontsize=8)
-ax.text(2.5, 6.8, 'Modulation from cognitive layer',
-        ha='center', va='center', fontsize=8)
+ax.text(4.25, 9.8, 'State Transition Diagram',
+        ha='center', va='center', fontsize=FONT_TITLE, weight='bold')
 
-# State 2 AUTONOMOUS right
-ax.add_patch(FancyBboxPatch((5, 6), 2, 2, boxstyle="round,pad=0.1",
-                             fill=False, lw=line_width))
-ax.text(6, 7.5, 'AUTONOMOUS', ha='center', va='center', fontsize=10)
-ax.text(6, 7.2, 'Fallback active', ha='center', va='center', fontsize=8)
-ax.text(6, 7, 'Self-generated input', ha='center', va='center', fontsize=8)
-ax.text(6, 6.8, 'Energy-aware modulation',
-        ha='center', va='center', fontsize=8)
-ax.text(6, 6.6, 'State buffering active',
-        ha='center', va='center', fontsize=8)
+# State dimensions
+state_w, state_h = 2.2, 1.6
 
-# State 3 RECOVERING bottom
-ax.add_patch(FancyBboxPatch((3.75, 3), 2, 1.5, boxstyle="round,pad=0.1",
-                             fill=False, lw=line_width))
-ax.text(4.75, 4, 'RECOVERING', ha='center', va='center', fontsize=10)
-ax.text(4.75, 3.8, 'Resynchronization', ha='center', va='center', fontsize=8)
-ax.text(4.75, 3.6, 'Transmitting buffer', ha='center', va='center', fontsize=8)
-ax.text(4.75, 3.4, 'Restoring cognitive control',
-        ha='center', va='center', fontsize=8)
+# ─── CONNECTED state (left) ───
+conn_cx, conn_cy = 2.2, 7.5
+ax.add_patch(FancyBboxPatch((conn_cx - state_w/2, conn_cy - state_h/2),
+                             state_w, state_h, boxstyle="round,pad=0.1",
+                             fill=False, lw=LINE_WIDTH * 1.5))
+ax.text(conn_cx, conn_cy + 0.45, 'CONNECTED', ha='center', va='center',
+        fontsize=FONT_BODY, weight='bold')
+ax.text(conn_cx, conn_cy + 0.15, 'Cognitive layer active', ha='center', va='center',
+        fontsize=FONT_SMALL)
+ax.text(conn_cx, conn_cy - 0.15, 'External input', ha='center', va='center',
+        fontsize=FONT_SMALL)
+ax.text(conn_cx, conn_cy - 0.4, 'External modulation', ha='center', va='center',
+        fontsize=FONT_SMALL)
 
-# Transitions
-ax.add_patch(FancyArrowPatch((3.5, 7), (5, 7),
-                              connectionstyle="arc3,rad=0.3", **arrow_props))
-ax.text(4.25, 7.1, 'Heartbeat timeout (>30s no tool call)',
-        ha='center', va='bottom', fontsize=8)
+# Start indicator
+ax.add_patch(FancyArrowPatch((conn_cx, conn_cy + 1.5), (conn_cx, conn_cy + state_h/2 + 0.1),
+                              **ARROW_PROPS))
+ax.add_patch(Circle((conn_cx, conn_cy + 1.6), 0.1, fill=True, color='black'))
+ax.text(conn_cx, conn_cy + 1.85, 'Start', ha='center', va='center', fontsize=FONT_SMALL)
 
-ax.add_patch(FancyArrowPatch((6, 6), (4.75, 4.5),
-                              connectionstyle="arc3,rad=-0.3", **arrow_props))
-ax.text(5.5, 5.25, 'Cognitive layer reconnects',
-        ha='left', va='center', fontsize=8)
+# ─── AUTONOMOUS state (right) ───
+auto_cx, auto_cy = 6.3, 7.5
+ax.add_patch(FancyBboxPatch((auto_cx - state_w/2, auto_cy - state_h/2),
+                             state_w, state_h, boxstyle="round,pad=0.1",
+                             fill=False, lw=LINE_WIDTH))
+ax.text(auto_cx, auto_cy + 0.45, 'AUTONOMOUS', ha='center', va='center',
+        fontsize=FONT_BODY, weight='bold')
+ax.text(auto_cx, auto_cy + 0.15, 'Fallback active', ha='center', va='center',
+        fontsize=FONT_SMALL)
+ax.text(auto_cx, auto_cy - 0.15, 'Self-generated input', ha='center', va='center',
+        fontsize=FONT_SMALL)
+ax.text(auto_cx, auto_cy - 0.4, 'Energy-aware mod.', ha='center', va='center',
+        fontsize=FONT_SMALL)
 
-ax.add_patch(FancyArrowPatch((3.75, 4), (2.5, 6),
-                              connectionstyle="arc3,rad=0.3", **arrow_props))
-ax.text(3, 5, 'Resync complete', ha='right', va='center', fontsize=8)
+# ─── RECOVERING state (bottom center) ───
+recov_cx, recov_cy = 4.25, 4.0
+ax.add_patch(FancyBboxPatch((recov_cx - state_w/2, recov_cy - state_h/2 + 0.2),
+                             state_w, state_h - 0.4, boxstyle="round,pad=0.1",
+                             fill=False, lw=LINE_WIDTH))
+ax.text(recov_cx, recov_cy + 0.35, 'RECOVERING', ha='center', va='center',
+        fontsize=FONT_BODY, weight='bold')
+ax.text(recov_cx, recov_cy + 0.05, 'Resynchronization', ha='center', va='center',
+        fontsize=FONT_SMALL)
+ax.text(recov_cx, recov_cy - 0.25, 'Transmitting buffer', ha='center', va='center',
+        fontsize=FONT_SMALL)
+
+# ─── Transitions ───
+# CONNECTED -> AUTONOMOUS (top arc)
+ax.add_patch(FancyArrowPatch((conn_cx + state_w/2, conn_cy + 0.3),
+                              (auto_cx - state_w/2, auto_cy + 0.3),
+                              connectionstyle="arc3,rad=0.3", **ARROW_PROPS))
+ax.text(4.25, 8.5, 'Heartbeat timeout', ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(4.25, 8.25, '(>30s no tool call)', ha='center', va='center', fontsize=FONT_SMALL)
+
+# AUTONOMOUS -> CONNECTED (bottom arc, dashed - direct reconnect)
+ax.add_patch(FancyArrowPatch((auto_cx - state_w/2, auto_cy - 0.3),
+                              (conn_cx + state_w/2, conn_cy - 0.3),
+                              connectionstyle="arc3,rad=0.3", ls='dashed', **ARROW_PROPS))
+ax.text(4.25, 6.4, 'Any tool call', ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(4.25, 6.15, '(direct reconnect)', ha='center', va='center', fontsize=FONT_SMALL)
+
+# AUTONOMOUS -> RECOVERING
+ax.add_patch(FancyArrowPatch((auto_cx - 0.3, auto_cy - state_h/2),
+                              (recov_cx + state_w/2, recov_cy + 0.4),
+                              connectionstyle="arc3,rad=-0.2", **ARROW_PROPS))
+ax.text(5.8, 5.3, 'resync() called', ha='center', va='center', fontsize=FONT_SMALL)
+
+# RECOVERING -> CONNECTED
+ax.add_patch(FancyArrowPatch((recov_cx - state_w/2, recov_cy + 0.2),
+                              (conn_cx + 0.3, conn_cy - state_h/2),
+                              connectionstyle="arc3,rad=0.2", **ARROW_PROPS))
+ax.text(2.5, 5.3, 'Resync complete', ha='center', va='center', fontsize=FONT_SMALL)
 
 # AUTONOMOUS self-loop
-ax.add_patch(FancyArrowPatch((6.8, 7), (6.8, 7),
-                              connectionstyle="arc3,rad=1", **arrow_props))
-ax.text(6.2, 7.7, 'Each autonomous step\n(up to 10,000)',
-        ha='center', va='center', fontsize=8)
-
-# AUTONOMOUS -> CONNECTED direct dashed
-ax.add_patch(FancyArrowPatch((5, 7), (3.5, 7), ls='dashed',
-                              connectionstyle="arc3,rad=-0.3", **arrow_props))
-ax.text(4.25, 6.5, 'Any tool call received\n(heartbeat reset)',
-        ha='center', va='center', fontsize=8)
+ax.add_patch(FancyArrowPatch((auto_cx + state_w/2 - 0.2, auto_cy + state_h/2),
+                              (auto_cx + state_w/2, auto_cy + state_h/2 - 0.2),
+                              connectionstyle="arc3,rad=-2.5", **ARROW_PROPS))
+ax.text(auto_cx + 1.5, auto_cy + 0.8, 'Each step', ha='left', va='center', fontsize=FONT_SMALL)
+ax.text(auto_cx + 1.5, auto_cy + 0.5, '(up to 10,000)', ha='left', va='center', fontsize=FONT_SMALL)
 
 # Annotations
-ax.text(2.5, 8.5, 'Initial state', ha='center', va='center', fontsize=8)
-ax.add_patch(FancyArrowPatch((2.5, 8.7), (2.5, 8.2), **arrow_props))
-ax.text(6, 5.5, 'Snapshot every 50 steps', ha='center', va='center', fontsize=8)
-ax.text(6.2, 6.1, 'Hard cap: 10,000 steps', ha='center', va='center', fontsize=8)
+ax.text(auto_cx, auto_cy - 1.3, 'Snapshot every 50 steps', ha='center', va='center',
+        fontsize=FONT_SMALL, style='italic')
+ax.text(4.25, 2.5, 'Hard cap: 10,000 autonomous steps',
+        ha='center', va='center', fontsize=FONT_SMALL, style='italic')
+
+# Legend
+ax.plot([1.5, 2.3], [1.5, 1.5], 'k-', lw=LINE_WIDTH)
+ax.text(2.5, 1.5, 'Standard transition', va='center', fontsize=FONT_SMALL)
+ax.plot([4.5, 5.3], [1.5, 1.5], 'k--', lw=LINE_WIDTH)
+ax.text(5.5, 1.5, 'Direct reconnection', va='center', fontsize=FONT_SMALL)
 
 plt.savefig(f'{OUT_DIR}/fig2.svg', format='svg')
 plt.close()
 
 
-# ════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════
 # FIG. 3 — Energy-Aware Modulation Curve
-# ════════════════════════════════════════════════════════════════════
-fig = plt.figure(figsize=(paper_width, paper_height), dpi=dpi)
-safe_left = (left_margin + 0.1) / paper_width
-safe_bottom = (bottom_margin + 0.1) / paper_height
-safe_width = (paper_width - left_margin - right_margin - 0.2) / paper_width
-safe_height = (paper_height - top_margin - bottom_margin - 0.2) / paper_height
-ax = fig.add_axes([safe_left, safe_bottom, safe_width, safe_height])
-ax.set_xlim(left_margin + 0.1, paper_width - right_margin - 0.1)
-ax.set_ylim(bottom_margin + 0.1, paper_height - top_margin - 0.1)
-ax.axis('off')
-fig.text(0.5, 1.0 - 0.5 / paper_height, f"3/{TOTAL_SHEETS}",
-         ha='center', va='center', fontsize=10)
-fig.text(left_margin / paper_width, (bottom_margin + 0.2) / paper_height, "FIG. 3",
-         ha='left', va='bottom', fontsize=font_size_label)
+# ═══════════════════════════════════════════════════════════════════════════
+fig = plt.figure(figsize=(PAPER_WIDTH, PAPER_HEIGHT), dpi=DPI)
 
-# Graph area — inset with 0.1" safety padding
-graph_ax = fig.add_axes([(left_margin + 0.1) / paper_width,
-                          (bottom_margin + 1.1) / paper_height,
-                          (paper_width - left_margin - right_margin - 0.2) / paper_width,
-                          (paper_height - top_margin - bottom_margin - 2.2) / paper_height])
-graph_ax.set_xlabel('System Energy Level (mWh)', fontsize=10)
-graph_ax.set_ylabel('Autonomous Modulation Value', fontsize=10)
-graph_ax.set_xticks([0, 1])
-graph_ax.set_xticklabels(['0', '100+'])
-graph_ax.set_yticks([0, 1])
-graph_ax.set_yticklabels(['-0.5', '+0.5'])
+# Sheet number
+fig.text(0.5, 1.0 - 0.5 / PAPER_HEIGHT, f"3/{TOTAL_SHEETS}",
+         ha='center', va='center', fontsize=FONT_BODY)
+# Figure label
+fig.text(LEFT_MARGIN / PAPER_WIDTH, (BOTTOM_MARGIN + 0.15) / PAPER_HEIGHT,
+         "FIG. 3", ha='left', va='bottom', fontsize=FONT_TITLE)
+
+# Title area
+title_ax = fig.add_axes([0.15, 0.88, 0.7, 0.06])
+title_ax.axis('off')
+title_ax.text(0.5, 0.5, 'Energy-Aware Modulation Curve (120)',
+              ha='center', va='center', fontsize=FONT_TITLE, weight='bold')
+
+# Main graph
+graph_ax = fig.add_axes([0.15, 0.35, 0.7, 0.48])
+graph_ax.set_xlabel('System Energy Level (mWh)', fontsize=FONT_BODY)
+graph_ax.set_ylabel('Autonomous Modulation Value', fontsize=FONT_BODY)
+graph_ax.set_xlim(0, 100)
+graph_ax.set_ylim(-0.5, 0.5)
+graph_ax.set_xticks([0, 15, 30, 80, 100])
+graph_ax.set_yticks([-0.4, -0.1, 0.0, 0.3])
+graph_ax.grid(True, ls=':', alpha=0.5)
 
 # Step function
-energy_norm = np.array([0, 0.15, 0.3, 0.8, 1.0])
-mod_norm = np.array([0.1, 0.4, 0.5, 0.5, 0.8])
-for i in range(4):
-    graph_ax.plot([energy_norm[i], energy_norm[i+1]], [mod_norm[i], mod_norm[i]],
-                  color='black', lw=line_width)
-    if i < 3:
-        graph_ax.plot([energy_norm[i+1], energy_norm[i+1]],
-                      [mod_norm[i], mod_norm[i+1]], color='black', lw=line_width)
+energy = [0, 15, 15, 30, 30, 80, 80, 100]
+mod = [-0.4, -0.4, -0.1, -0.1, 0.0, 0.0, 0.3, 0.3]
+graph_ax.plot(energy, mod, 'k-', lw=LINE_WIDTH * 1.5)
 
-for thresh in [0.15, 0.3, 0.8]:
-    graph_ax.axvline(x=thresh, ls='dashed', color='black', lw=line_width)
+# Threshold lines
+for thresh in [15, 30, 80]:
+    graph_ax.axvline(x=thresh, ls='--', color='black', lw=LINE_THIN)
 
-# Hatching
-graph_ax.add_patch(Rectangle((0, 0), 0.15, 1, hatch='xxx', fill=False, lw=0))
-graph_ax.add_patch(Rectangle((0.15, 0), 0.15, 1, hatch='/', fill=False, lw=0))
-graph_ax.add_patch(Rectangle((0.8, 0), 0.2, 1, hatch='/', fill=False, lw=0))
+# Region hatching
+graph_ax.fill_between([0, 15], -0.5, 0.5, hatch='xxx', facecolor='none',
+                       edgecolor='black', linewidth=0)
+graph_ax.fill_between([15, 30], -0.5, 0.5, hatch='//', facecolor='none',
+                       edgecolor='black', linewidth=0)
+graph_ax.fill_between([80, 100], -0.5, 0.5, hatch='\\\\', facecolor='none',
+                       edgecolor='black', linewidth=0)
 
-# Labels
-graph_ax.text(0.075, 0.95, 'CRITICAL\nMaximum conservation',
-              ha='center', va='top', fontsize=8, transform=graph_ax.transAxes)
-graph_ax.text(0.225, 0.95, 'LOW\nCautious operation',
-              ha='center', va='top', fontsize=8, transform=graph_ax.transAxes)
-graph_ax.text(0.55, 0.95, 'NORMAL\nNeutral operation',
-              ha='center', va='top', fontsize=8, transform=graph_ax.transAxes)
-graph_ax.text(0.9, 0.95, 'SURPLUS\nExploration',
-              ha='center', va='top', fontsize=8, transform=graph_ax.transAxes)
+# Region labels
+graph_ax.text(7.5, 0.42, 'CRITICAL', ha='center', va='center', fontsize=FONT_SMALL, weight='bold')
+graph_ax.text(7.5, 0.32, '-0.4', ha='center', va='center', fontsize=FONT_SMALL)
+graph_ax.text(22.5, 0.42, 'LOW', ha='center', va='center', fontsize=FONT_SMALL, weight='bold')
+graph_ax.text(22.5, 0.32, '-0.1', ha='center', va='center', fontsize=FONT_SMALL)
+graph_ax.text(55, 0.42, 'NORMAL', ha='center', va='center', fontsize=FONT_SMALL, weight='bold')
+graph_ax.text(55, 0.32, '0.0', ha='center', va='center', fontsize=FONT_SMALL)
+graph_ax.text(90, 0.42, 'SURPLUS', ha='center', va='center', fontsize=FONT_SMALL, weight='bold')
+graph_ax.text(90, 0.32, '+0.3', ha='center', va='center', fontsize=FONT_SMALL)
 
-ax.text(4.25, bottom_margin + 0.5,
-        'System autonomously adjusts processing intensity based on energy — mimicking metabolic regulation',
-        ha='center', fontsize=8)
+# Annotation area
+annot_ax = fig.add_axes([0.15, 0.12, 0.7, 0.18])
+annot_ax.axis('off')
+annot_ax.text(0.5, 0.8, 'The system autonomously adjusts processing intensity based on energy',
+              ha='center', va='center', fontsize=FONT_BODY)
+annot_ax.text(0.5, 0.5, 'CRITICAL: Maximum conservation to prevent shutdown',
+              ha='center', va='center', fontsize=FONT_SMALL)
+annot_ax.text(0.5, 0.3, 'SURPLUS: Opportunistic exploration using excess energy',
+              ha='center', va='center', fontsize=FONT_SMALL)
+annot_ax.text(0.5, 0.1, 'Mimics biological metabolic regulation',
+              ha='center', va='center', fontsize=FONT_SMALL, style='italic')
 
 plt.savefig(f'{OUT_DIR}/fig3.svg', format='svg')
 plt.close()
 
 
-# ════════════════════════════════════════════════════════════════════
-# FIG. 4 — Autonomous Input Generator Output
-# ════════════════════════════════════════════════════════════════════
-fig = plt.figure(figsize=(paper_width, paper_height), dpi=dpi)
-safe_left = (left_margin + 0.1) / paper_width
-safe_bottom = (bottom_margin + 0.1) / paper_height
-safe_width = (paper_width - left_margin - right_margin - 0.2) / paper_width
-safe_height = (paper_height - top_margin - bottom_margin - 0.2) / paper_height
-ax = fig.add_axes([safe_left, safe_bottom, safe_width, safe_height])
-ax.set_xlim(left_margin + 0.1, paper_width - right_margin - 0.1)
-ax.set_ylim(bottom_margin + 0.1, paper_height - top_margin - 0.1)
-ax.axis('off')
-fig.text(0.5, 1.0 - 0.5 / paper_height, f"4/{TOTAL_SHEETS}",
-         ha='center', va='center', fontsize=10)
-fig.text(left_margin / paper_width, (bottom_margin + 0.2) / paper_height, "FIG. 4",
-         ha='left', va='bottom', fontsize=font_size_label)
+# ═══════════════════════════════════════════════════════════════════════════
+# FIG. 4 — Autonomous Input Generator Output (118)
+# ═══════════════════════════════════════════════════════════════════════════
+fig = plt.figure(figsize=(PAPER_WIDTH, PAPER_HEIGHT), dpi=DPI)
 
-# Main graph — inset with 0.1" safety padding
-main_ax = fig.add_axes([(left_margin + 0.1) / paper_width,
-                         (bottom_margin + 3.1) / paper_height,
-                         (paper_width - left_margin - right_margin - 0.2) / paper_width,
-                         3.8 / paper_height])
-main_ax.set_xlabel('Autonomous Step Number', fontsize=10)
-main_ax.set_ylabel('Input Value', fontsize=10)
-main_ax.set_title('Autonomous Input Generator Output', fontsize=10, weight='bold')
+# Sheet number and figure label
+fig.text(0.5, 1.0 - 0.5 / PAPER_HEIGHT, f"4/{TOTAL_SHEETS}",
+         ha='center', va='center', fontsize=FONT_BODY)
+fig.text(LEFT_MARGIN / PAPER_WIDTH, (BOTTOM_MARGIN + 0.15) / PAPER_HEIGHT,
+         "FIG. 4", ha='left', va='bottom', fontsize=FONT_TITLE)
 
-steps = np.linspace(0, 500, 501)
-base = 0.5 + 0.3 * np.sin(2 * np.pi * steps / 500)
-main_ax.plot(steps, base, ls='-', color='black', lw=1,
-             label='Circadian base signal')
+# Title
+title_ax = fig.add_axes([0.15, 0.88, 0.7, 0.06])
+title_ax.axis('off')
+title_ax.text(0.5, 0.5, 'Autonomous Input Generator Output (118)',
+              ha='center', va='center', fontsize=FONT_TITLE, weight='bold')
 
-# Bursts
-np.random.seed(42)
-burst_indices = np.random.choice(range(501), int(501 * 0.1), replace=False)
-composite = base.copy()
-for idx in burst_indices:
-    burst_val = np.random.uniform(0.3, 0.8)
-    composite[idx] = min(1.0, base[idx] + 0.2)
-
-main_ax.plot(steps, composite, color='black', lw=0.5, alpha=0.5)
-# Mark a few representative bursts
-for idx in sorted(burst_indices)[:8]:
-    main_ax.plot([steps[idx], steps[idx]], [base[idx], composite[idx]],
-                 color='black', lw=1.5)
-
+# Main waveform graph
+main_ax = fig.add_axes([0.15, 0.48, 0.7, 0.36])
+main_ax.set_xlabel('Autonomous Step Number', fontsize=FONT_BODY)
+main_ax.set_ylabel('Input Value', fontsize=FONT_BODY)
 main_ax.set_xlim(0, 500)
 main_ax.set_ylim(0, 1.05)
-main_ax.legend(fontsize=8)
 
-main_ax.text(400, 0.95, 'base = 0.5 + 0.3×sin(2π×step/500)',
-             fontsize=8, ha='right')
-main_ax.text(400, 0.88, '10% probability attention bursts',
-             fontsize=8, ha='right')
+# Generate signals
+np.random.seed(42)
+steps = np.arange(501)
+period = 100
+base = 0.5 + 0.3 * np.sin(2 * np.pi * steps / period)
 
-# Small energy graph — inset with 0.1" safety padding
-small_ax = fig.add_axes([(left_margin + 0.1) / paper_width,
-                          (bottom_margin + 1.1) / paper_height,
-                          (paper_width - left_margin - right_margin - 0.2) / paper_width,
-                          1.4 / paper_height])
-small_ax.set_xlabel('Autonomous Step Number', fontsize=8)
-small_ax.set_ylabel('Energy (mWh)', fontsize=8)
-energy = 50 + np.cumsum(np.random.normal(0.01, 0.3, 501))
+# Add bursts
+composite = base.copy()
+burst_mask = np.random.random(501) < 0.10
+composite[burst_mask] = np.minimum(1.0, composite[burst_mask] + 0.2)
+
+# Plot
+main_ax.plot(steps, base, 'k--', lw=LINE_THIN, label='Circadian base')
+main_ax.plot(steps, composite, 'k-', lw=LINE_WIDTH, label='Composite signal')
+
+# Mark some bursts
+burst_indices = np.where(burst_mask)[0][:5]
+for idx in burst_indices:
+    main_ax.plot([idx, idx], [base[idx], composite[idx]], 'k-', lw=LINE_WIDTH)
+    main_ax.plot(idx, composite[idx], 'ko', markersize=4)
+
+main_ax.legend(loc='upper right', fontsize=FONT_SMALL)
+main_ax.text(400, 0.15, 'base = 0.5 + 0.3 sin(2\u03c0 step/100)', fontsize=FONT_SMALL)
+main_ax.text(400, 0.05, '10% probability attention bursts', fontsize=FONT_SMALL)
+
+# Energy tracking graph
+energy_ax = fig.add_axes([0.15, 0.18, 0.7, 0.22])
+energy_ax.set_xlabel('Autonomous Step Number', fontsize=FONT_BODY)
+energy_ax.set_ylabel('Energy (mWh)', fontsize=FONT_BODY)
+energy_ax.set_xlim(0, 500)
+energy_ax.set_ylim(0, 100)
+
+# Simulate energy
+energy = 50 + np.cumsum(np.random.normal(0.02, 0.4, 501))
 energy = np.clip(energy, 0, 100)
-small_ax.plot(steps, energy, color='black', lw=1)
-for thresh in [15, 30, 80]:
-    small_ax.axhline(thresh, ls='dashed', color='black', lw=0.5)
-    small_ax.text(500, thresh + 1, f'{thresh} mWh', fontsize=8, ha='right')
-small_ax.set_xlim(0, 500)
-small_ax.set_ylim(0, 100)
+energy_ax.plot(steps, energy, 'k-', lw=LINE_WIDTH)
 
-ax.text(4.25, bottom_margin + 0.5, 'Energy-aware modulation adjusts intensity',
-        ha='center', fontsize=8)
+# Threshold lines
+for thresh, label in [(15, '15'), (30, '30'), (80, '80')]:
+    energy_ax.axhline(thresh, ls='--', color='black', lw=LINE_THIN)
+    energy_ax.text(505, thresh, label, va='center', fontsize=FONT_SMALL)
+
+# Annotation
+annot_ax = fig.add_axes([0.15, 0.08, 0.7, 0.08])
+annot_ax.axis('off')
+annot_ax.text(0.5, 0.5, 'Circadian rhythm provides structured temporal variation',
+              ha='center', va='center', fontsize=FONT_SMALL)
+annot_ax.text(0.5, 0.1, 'Energy level determines modulation via curve in FIG. 3',
+              ha='center', va='center', fontsize=FONT_SMALL, style='italic')
 
 plt.savefig(f'{OUT_DIR}/fig4.svg', format='svg')
 plt.close()
 
 
-# ════════════════════════════════════════════════════════════════════
-# FIG. 5 — Resynchronization Payload Structure
-# ════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════
+# FIG. 5 — Resynchronization Payload Structure (122)
+# ═══════════════════════════════════════════════════════════════════════════
 fig, ax = setup_figure(5)
 
-# Top-level
-ax.add_patch(Rectangle((2, 7), 4, 3, fill=False, lw=line_width))
-ax.text(4, 9.75, 'Resynchronization Payload',
-        ha='center', va='center', fontsize=10)
+ax.text(4.25, 9.8, 'Resynchronization Payload Structure (122)',
+        ha='center', va='center', fontsize=FONT_TITLE, weight='bold')
 
-# Section 1
-ax.add_patch(Rectangle((2.5, 8.5), 3, 1, fill=False, lw=line_width))
-ax.text(4, 9.25, 'Summary Statistics', ha='center', va='center', fontsize=10)
-text_summary = ("steps_autonomous: [integer]\n"
-                "energy_delta: [float] mWh\n"
-                "min/max/mean_energy: [float] mWh\n"
-                "total_spikes: [integer]\n"
-                "mean_spikes_per_step: [float]")
-ax.text(4, 8.8, text_summary, ha='center', va='center',
-        fontsize=8, linespacing=1.5)
-ax.text(4, 8.1, 'ALWAYS included (~200 bytes)',
-        ha='center', va='center', fontsize=8)
+# Main payload container
+payload_x, payload_y, payload_w, payload_h = 1.8, 3.5, 5.0, 6.0
+ax.add_patch(Rectangle((payload_x, payload_y), payload_w, payload_h,
+                        fill=False, lw=LINE_WIDTH * 1.5))
+ax.text(payload_x + payload_w/2, payload_y + payload_h - 0.3,
+        'Resynchronization Payload', ha='center', va='center',
+        fontsize=FONT_BODY, weight='bold')
 
-# Section 2
-ax.add_patch(Rectangle((2.5, 4), 3, 2, fill=False, lw=line_width))
-ax.text(4, 5.75, 'Full Step Buffer (Optional)', ha='center', va='center',
-        fontsize=10)
-text_buffer = ("Step 0: {input, mod, spikes, energy, temp, pattern}\n"
-               "Step 1: {input, mod, spikes, energy, temp, pattern}\n"
-               "...\n"
-               "Step N: {input, mod, spikes, energy, temp, pattern}")
-ax.text(4, 5, text_buffer, ha='center', va='center',
-        fontsize=8, linespacing=1.5)
-ax.text(4, 4.25, 'OPTIONAL (~100 bytes × N steps)',
-        ha='center', va='center', fontsize=8)
+# Section 1: Summary Statistics (always included)
+sec1_x, sec1_y, sec1_w, sec1_h = 2.0, 7.2, 4.6, 2.0
+ax.add_patch(Rectangle((sec1_x, sec1_y), sec1_w, sec1_h, fill=False, lw=LINE_WIDTH))
+ax.text(sec1_x + sec1_w/2, sec1_y + sec1_h - 0.25, 'Summary Statistics',
+        ha='center', va='center', fontsize=FONT_BODY, weight='bold')
+ax.text(sec1_x + sec1_w/2, sec1_y + sec1_h - 0.5, '(ALWAYS included)',
+        ha='center', va='center', fontsize=FONT_SMALL, style='italic')
 
-# Granularity labels
-ax.add_patch(FancyArrowPatch((2, 8.75), (1.5, 8.75), **arrow_props))
-ax.text(1.4, 8.75, 'Level 1: Summary only', ha='right', va='center', fontsize=8)
-ax.add_patch(FancyArrowPatch((2, 5), (1.5, 5), **arrow_props))
-ax.text(1.4, 5, 'Level 2: Full buffer', ha='right', va='center', fontsize=8)
+summary_text = [
+    'steps_autonomous: [integer]',
+    'energy_delta: [float] mWh',
+    'min/max/mean_energy: [float]',
+    'total_spikes: [integer]',
+    'mean_spikes_per_step: [float]'
+]
+for i, line in enumerate(summary_text):
+    ax.text(sec1_x + 0.2, sec1_y + sec1_h - 0.85 - i * 0.28, line,
+            ha='left', va='center', fontsize=FONT_SMALL, family='monospace')
 
-# Decision diamond
-ax.add_patch(Polygon([[4, 3], [3.5, 2.5], [4, 2], [4.5, 2.5]],
-                      closed=True, fill=False, lw=line_width))
-ax.text(4, 2.5, 'Full buffer\nrequested?', ha='center', va='center', fontsize=8)
-ax.add_patch(FancyArrowPatch((4.5, 2.5), (5.5, 2.5), **arrow_props))
-ax.text(5.6, 2.5, 'Yes: Level 2', ha='left', va='center', fontsize=8)
-ax.add_patch(FancyArrowPatch((3.5, 2.5), (2.5, 2.5), **arrow_props))
-ax.text(2.4, 2.5, 'No: Level 1', ha='right', va='center', fontsize=8)
+ax.text(sec1_x + sec1_w + 0.2, sec1_y + sec1_h/2, '~200 bytes',
+        ha='left', va='center', fontsize=FONT_SMALL)
+
+# Section 2: Full Step Buffer (optional)
+sec2_x, sec2_y, sec2_w, sec2_h = 2.0, 3.8, 4.6, 3.0
+ax.add_patch(Rectangle((sec2_x, sec2_y), sec2_w, sec2_h, fill=False, lw=LINE_WIDTH, ls='dashed'))
+ax.text(sec2_x + sec2_w/2, sec2_y + sec2_h - 0.25, 'Full Step Buffer',
+        ha='center', va='center', fontsize=FONT_BODY, weight='bold')
+ax.text(sec2_x + sec2_w/2, sec2_y + sec2_h - 0.5, '(OPTIONAL)',
+        ha='center', va='center', fontsize=FONT_SMALL, style='italic')
+
+buffer_text = [
+    'Step 0: {input, mod, spikes, energy, temp}',
+    'Step 1: {input, mod, spikes, energy, temp}',
+    '...',
+    'Step N: {input, mod, spikes, energy, temp}'
+]
+for i, line in enumerate(buffer_text):
+    ax.text(sec2_x + 0.2, sec2_y + sec2_h - 0.9 - i * 0.35, line,
+            ha='left', va='center', fontsize=FONT_SMALL, family='monospace')
+
+ax.text(sec2_x + sec2_w + 0.2, sec2_y + sec2_h/2, '~100 bytes',
+        ha='left', va='center', fontsize=FONT_SMALL)
+ax.text(sec2_x + sec2_w + 0.2, sec2_y + sec2_h/2 - 0.3, 'per step',
+        ha='left', va='center', fontsize=FONT_SMALL)
+
+# Granularity indicators
+ax.add_patch(FancyArrowPatch((payload_x, sec1_y + sec1_h/2), (payload_x - 0.5, sec1_y + sec1_h/2),
+                              **ARROW_PROPS))
+ax.text(payload_x - 0.6, sec1_y + sec1_h/2, 'Level 1:', ha='right', va='center',
+        fontsize=FONT_SMALL, weight='bold')
+ax.text(payload_x - 0.6, sec1_y + sec1_h/2 - 0.3, 'Summary only', ha='right', va='center',
+        fontsize=FONT_SMALL)
+
+ax.add_patch(FancyArrowPatch((payload_x, sec2_y + sec2_h/2), (payload_x - 0.5, sec2_y + sec2_h/2),
+                              **ARROW_PROPS))
+ax.text(payload_x - 0.6, sec2_y + sec2_h/2, 'Level 2:', ha='right', va='center',
+        fontsize=FONT_SMALL, weight='bold')
+ax.text(payload_x - 0.6, sec2_y + sec2_h/2 - 0.3, 'Full buffer', ha='right', va='center',
+        fontsize=FONT_SMALL)
+
+# Decision flow
+diamond_cx, diamond_cy = 4.25, 2.5
+ax.add_patch(Polygon([[diamond_cx, diamond_cy + 0.5],
+                       [diamond_cx - 0.7, diamond_cy],
+                       [diamond_cx, diamond_cy - 0.5],
+                       [diamond_cx + 0.7, diamond_cy]],
+                      closed=True, fill=False, lw=LINE_WIDTH))
+ax.text(diamond_cx, diamond_cy, 'Full buffer\nrequested?', ha='center', va='center',
+        fontsize=FONT_SMALL)
+
+ax.add_patch(FancyArrowPatch((diamond_cx + 0.7, diamond_cy), (diamond_cx + 1.5, diamond_cy),
+                              **ARROW_PROPS))
+ax.text(diamond_cx + 1.6, diamond_cy, 'Yes: Level 2', ha='left', va='center', fontsize=FONT_SMALL)
+
+ax.add_patch(FancyArrowPatch((diamond_cx - 0.7, diamond_cy), (diamond_cx - 1.5, diamond_cy),
+                              **ARROW_PROPS))
+ax.text(diamond_cx - 1.6, diamond_cy, 'No: Level 1', ha='right', va='center', fontsize=FONT_SMALL)
+
+# Connection from payload to decision
+ax.add_patch(FancyArrowPatch((payload_x + payload_w/2, payload_y), (diamond_cx, diamond_cy + 0.5),
+                              **ARROW_PROPS))
 
 plt.savefig(f'{OUT_DIR}/fig5.svg', format='svg')
 plt.close()
 
 
-# ════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════
 # FIG. 6 — Recovery Timeline Diagrams
-# ════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════
 fig, ax = setup_figure(6)
 
-# Timeline A
-ax.text(left_margin, 9.2, 'Timeline A — Normal Reconnection:',
-        ha='left', fontsize=10, weight='bold')
-ax.add_patch(FancyArrowPatch((left_margin, 8.5),
-                              (paper_width - right_margin, 8.5),
-                              arrowstyle='->', lw=line_width))
+ax.text(4.25, 9.8, 'Recovery Timeline Diagrams',
+        ha='center', va='center', fontsize=FONT_TITLE, weight='bold')
+
+# Timeline dimensions
+tl_left = 1.2
+tl_right = 7.5
+tl_len = tl_right - tl_left
+
+def draw_timeline(ax, y, title, phases, annotation):
+    """Draw a single timeline."""
+    # Title
+    ax.text(tl_left, y + 0.7, title, ha='left', va='center',
+            fontsize=FONT_BODY, weight='bold')
+
+    # Arrow axis
+    ax.add_patch(FancyArrowPatch((tl_left, y), (tl_right, y), **ARROW_PROPS))
+    ax.text(tl_right + 0.1, y, 'time', ha='left', va='center', fontsize=FONT_SMALL)
+
+    # Phase markers
+    n_phases = len(phases)
+    for i, (label, sublabel) in enumerate(phases):
+        x = tl_left + (i + 0.5) * tl_len / n_phases
+        ax.plot([x - tl_len/(2*n_phases) + 0.1, x + tl_len/(2*n_phases) - 0.1],
+                [y, y], 'k-', lw=LINE_WIDTH * 2)
+        ax.text(x, y + 0.35, label, ha='center', va='center', fontsize=FONT_SMALL, weight='bold')
+        ax.text(x, y + 0.15, sublabel, ha='center', va='center', fontsize=FONT_SMALL)
+
+    # Annotation
+    ax.text(4.25, y - 0.35, annotation, ha='center', va='center',
+            fontsize=FONT_SMALL, style='italic')
+
+# Timeline A: Normal Reconnection
 phases_a = [
-    (1.0, '-- Connected --', '[Claude active]'),
-    (2.5, '-- Timeout --', '[Watchdog counting]'),
-    (4.0, '-- Autonomous --', '[Self-regulated]'),
-    (5.5, '-- Resync --', '[Buffer sent]'),
-    (7.0, '-- Connected -->', '[Control restored]'),
+    ('CONNECTED', '[Claude active]'),
+    ('TIMEOUT', '[Watchdog counting]'),
+    ('AUTONOMOUS', '[Self-regulated]'),
+    ('RESYNC', '[Buffer sent]'),
+    ('CONNECTED', '[Restored]')
 ]
-for x, label, sub in phases_a:
-    ax.text(x, 8.65, label, ha='left', va='bottom', fontsize=8)
-    ax.text(x, 8.35, sub, ha='left', va='top', fontsize=8)
+draw_timeline(ax, 8.0, 'Timeline A: Normal Reconnection', phases_a,
+              'Seamless transition with full state capture')
 
-# Timeline B
-ax.text(left_margin, 7.0, 'Timeline B — Crash Recovery:',
-        ha='left', fontsize=10, weight='bold')
-ax.add_patch(FancyArrowPatch((left_margin, 6.3),
-                              (paper_width - right_margin, 6.3),
-                              arrowstyle='->', lw=line_width))
+# Timeline B: Crash Recovery
 phases_b = [
-    (1.0, '-- Connected --', '[Normal operation]'),
-    (2.5, '-- CRASH --', '[Server terminates]'),
-    (4.0, '-- Restart --', '[Process relaunched]'),
-    (5.5, '-- Snapshot --', '[Reads latest.json]'),
-    (7.0, '-- Connected -->', '[State restored]'),
+    ('CONNECTED', '[Normal op.]'),
+    ('CRASH', '[Server dies]'),
+    ('RESTART', '[Relaunched]'),
+    ('SNAPSHOT', '[Load JSON]'),
+    ('CONNECTED', '[Restored]')
 ]
-for x, label, sub in phases_b:
-    ax.text(x, 6.45, label, ha='left', va='bottom', fontsize=8)
-    ax.text(x, 6.15, sub, ha='left', va='top', fontsize=8)
-ax.text(4.25, 5.6, 'Max state loss = 50 steps (snapshot interval)',
-        ha='center', fontsize=8)
+draw_timeline(ax, 5.8, 'Timeline B: Crash Recovery', phases_b,
+              'Max state loss = 50 steps (snapshot interval)')
 
-# Timeline C
-ax.text(left_margin, 4.5, 'Timeline C — Clean Shutdown:',
-        ha='left', fontsize=10, weight='bold')
-ax.add_patch(FancyArrowPatch((left_margin, 3.8),
-                              (paper_width - right_margin - 1, 3.8),
-                              arrowstyle='->', lw=line_width))
+# Timeline C: Clean Shutdown
 phases_c = [
-    (1.0, '-- Connected --', '[Normal operation]'),
-    (2.8, '-- Autonomous --', '[Fallback operation]'),
-    (4.6, '-- EOF Signal --', '[stdin closed]'),
-    (6.0, '-- Shutdown', '[Final snapshot written]'),
+    ('CONNECTED', '[Normal op.]'),
+    ('AUTONOMOUS', '[Fallback]'),
+    ('EOF', '[stdin closed]'),
+    ('SHUTDOWN', '[Final snap]')
 ]
-for x, label, sub in phases_c:
-    ax.text(x, 3.95, label, ha='left', va='bottom', fontsize=8)
-    ax.text(x, 3.65, sub, ha='left', va='top', fontsize=8)
-ax.text(4.25, 3.1, 'State preserved for next session — zero data loss',
-        ha='center', fontsize=8)
+draw_timeline(ax, 3.6, 'Timeline C: Clean Shutdown', phases_c,
+              'State preserved for next session - zero data loss')
 
-# Common legend
-ax.text(4.25, 2.0, 'Solid segments: System actively processing',
-        ha='center', fontsize=8)
-ax.text(4.25, 1.7, 'Dashed segments: System in transition',
-        ha='center', fontsize=8)
-ax.text(4.25, 1.4, 'Bold marker at each state change: No data loss at any transition',
-        ha='center', fontsize=8, weight='bold')
+# Legend
+ax.text(4.25, 1.8, 'Legend:', ha='center', va='center', fontsize=FONT_BODY, weight='bold')
+ax.plot([2.5, 3.3], [1.4, 1.4], 'k-', lw=LINE_WIDTH * 2)
+ax.text(3.5, 1.4, 'System actively processing', va='center', fontsize=FONT_SMALL)
+ax.text(4.25, 1.0, 'Bold markers indicate NO DATA LOSS at transitions',
+        ha='center', va='center', fontsize=FONT_SMALL, weight='bold')
 
 plt.savefig(f'{OUT_DIR}/fig6.svg', format='svg')
 plt.close()
 
 
-# ════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════
 # FIG. 7 — End-to-End Signal Flow: Connected vs. Autonomous Operation
-# ════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════
 fig, ax = setup_figure(7)
 
-ax.text(4.25, 10.3, 'End-to-End Signal Flow: Connected vs. Autonomous Operation',
-        ha='center', fontsize=font_body, weight='bold')
+ax.text(4.25, 9.8, 'End-to-End Signal Flow',
+        ha='center', va='center', fontsize=FONT_TITLE, weight='bold')
 
-# ── TOP HALF: Connected Mode ──
-ax.text(left_margin, 9.8, 'CONNECTED MODE', fontsize=font_body, weight='bold')
+# Block dimensions
+bw, bh = 1.2, 0.5
 
-# External Cognitive Layer (cloud)
-ax.add_patch(Ellipse((4.25, 9.3), 2.5, 0.6, fill=False, lw=line_width))
-ax.text(4.25, 9.3, 'External Cognitive Layer',
-        ha='center', va='center', fontsize=font_small)
+# ═══ TOP HALF: CONNECTED MODE ═══
+ax.text(1.2, 9.3, 'CONNECTED MODE', ha='left', va='center',
+        fontsize=FONT_BODY, weight='bold')
 
-# Dashed arrow down from cloud
-ax.add_patch(FancyArrowPatch((4.25, 9.0), (4.25, 8.65),
-                              linestyle='dashed', **arrow_props))
-ax.text(5.5, 8.8, 'Cognitive modulation\ncommands', fontsize=8)
+# External Cognitive Layer (100)
+cloud_cx, cloud_cy = 4.25, 8.8
+ax.add_patch(Ellipse((cloud_cx, cloud_cy), 2.5, 0.5, fill=False, lw=LINE_WIDTH))
+ax.text(cloud_cx, cloud_cy, 'External Cognitive Layer (100)',
+        ha='center', va='center', fontsize=FONT_SMALL)
 
-# Connected mode pipeline — constrained within margins
-pipe_y_top = 8.0
-blocks_top = [
-    (1.2, 'Sensors', 1.0),
-    (2.5, 'SNN', 1.0),
-    (3.8, 'Cognitive\nModulation', 1.3),
-    (5.4, 'Motor\nActuator', 1.0),
-    (6.7, 'Energy\nHarvester', 1.0),
-]
-bh = 0.55
+# Arrow down from cloud
+ax.add_patch(FancyArrowPatch((cloud_cx, cloud_cy - 0.25), (cloud_cx, 8.1),
+                              ls='dashed', **ARROW_PROPS))
+ax.text(cloud_cx + 1.0, 8.4, 'Cognitive', ha='left', va='center', fontsize=FONT_SMALL)
+ax.text(cloud_cx + 1.0, 8.2, 'modulation', ha='left', va='center', fontsize=FONT_SMALL)
 
-for bx, label, bw in blocks_top:
-    ax.add_patch(Rectangle((bx, pipe_y_top), bw, bh, fill=False, lw=line_width))
-    ax.text(bx + bw / 2, pipe_y_top + bh / 2, label,
-            ha='center', va='center', fontsize=8)
-
-# Forward arrows in top pipeline
-ax.add_patch(FancyArrowPatch((2.2, pipe_y_top + bh / 2),
-                              (2.5, pipe_y_top + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((3.5, pipe_y_top + bh / 2),
-                              (3.8, pipe_y_top + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((5.1, pipe_y_top + bh / 2),
-                              (5.4, pipe_y_top + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((6.4, pipe_y_top + bh / 2),
-                              (6.7, pipe_y_top + bh / 2), **arrow_props))
-
-# Energy feedback (bold dashed)
-ax.add_patch(FancyArrowPatch((7.2, pipe_y_top),
-                              (3.0, pipe_y_top),
-                              connectionstyle="arc3,rad=-0.3",
-                              linestyle='dashed', lw=line_width * 1.5,
-                              arrowstyle='->', color='black'))
-ax.text(5.0, pipe_y_top - 0.3, 'Energy feedback',
-        ha='center', fontsize=8)
-
-# Self-observation (dotted)
-ax.add_patch(FancyArrowPatch((3.0, pipe_y_top + bh),
-                              (2.5, pipe_y_top + bh),
-                              connectionstyle="arc3,rad=0.3",
-                              linestyle='dotted', lw=line_width * 1.5,
-                              arrowstyle='->', color='black'))
-ax.text(2.5, pipe_y_top + bh + 0.2, 'Self-observation',
-        ha='center', fontsize=8)
-
-# Cognitive modulation arrow from cloud
-ax.add_patch(FancyArrowPatch((4.25, 8.65), (4.45, pipe_y_top + bh),
-                              linestyle='dashed', **arrow_props))
-
-ax.text(1.5, 7.4, 'Heartbeat active (tool calls within 30s)',
-        fontsize=8, style='italic')
-
-# ── DIVIDING LINE ──
-div_y = 6.8
-ax.plot([left_margin, paper_width - right_margin], [div_y, div_y],
-        'k--', lw=line_width)
-ax.text(4.25, div_y + 0.15,
-        'DISCONNECTION EVENT (heartbeat timeout > 30s)',
-        ha='center', fontsize=font_small, weight='bold')
-ax.text(4.25, div_y - 0.15,
-        'Seamless transition — no interruption to SNN or Harvester',
-        ha='center', fontsize=8, style='italic')
-
-# ── BOTTOM HALF: Autonomous Mode ──
-ax.text(left_margin, 6.4, 'AUTONOMOUS MODE', fontsize=font_body, weight='bold')
-
-pipe_y_bot = 5.5
-
-# Autonomous pipeline — constrained within margins
-blocks_bot = [
-    (1.2, 'Autonomous\nInput Gen', 1.3),
-    (2.8, 'SNN', 1.0),
-    (4.1, 'Energy-Aware\nSelf-Modulation', 1.6),
-    (6.0, 'Motor\nActuator', 0.9),
-    (7.1, 'Energy\nHarvest', 0.6),
+# Connected pipeline blocks
+conn_y = 7.5
+blocks_conn = [
+    (1.5, 'Sensors'),
+    (2.9, 'SNN (108)'),
+    (4.3, 'Modulation'),
+    (5.7, 'Motor'),
+    (6.8, 'Harvester')
 ]
 
-for bx, label, bw in blocks_bot:
-    ax.add_patch(Rectangle((bx, pipe_y_bot), bw, bh, fill=False, lw=line_width))
-    ax.text(bx + bw / 2, pipe_y_bot + bh / 2, label,
-            ha='center', va='center', fontsize=8)
+for bx, label in blocks_conn:
+    ax.add_patch(Rectangle((bx, conn_y), bw, bh, fill=False, lw=LINE_WIDTH))
+    ax.text(bx + bw/2, conn_y + bh/2, label, ha='center', va='center', fontsize=FONT_SMALL)
 
 # Forward arrows
-ax.add_patch(FancyArrowPatch((2.5, pipe_y_bot + bh / 2),
-                              (2.8, pipe_y_bot + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((3.8, pipe_y_bot + bh / 2),
-                              (4.1, pipe_y_bot + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((5.7, pipe_y_bot + bh / 2),
-                              (6.0, pipe_y_bot + bh / 2), **arrow_props))
-ax.add_patch(FancyArrowPatch((6.9, pipe_y_bot + bh / 2),
-                              (7.1, pipe_y_bot + bh / 2), **arrow_props))
+for i in range(len(blocks_conn) - 1):
+    x1 = blocks_conn[i][0] + bw
+    x2 = blocks_conn[i+1][0]
+    ax.add_patch(FancyArrowPatch((x1, conn_y + bh/2), (x2, conn_y + bh/2), **ARROW_PROPS))
 
 # Energy feedback (bold dashed)
-ax.add_patch(FancyArrowPatch((7.4, pipe_y_bot),
-                              (3.3, pipe_y_bot),
-                              connectionstyle="arc3,rad=-0.3",
-                              linestyle='dashed', lw=line_width * 1.5,
-                              arrowstyle='->', color='black'))
-ax.text(5.2, pipe_y_bot - 0.35, 'Energy feedback',
-        ha='center', fontsize=8)
+ax.add_patch(FancyArrowPatch((6.8 + bw/2, conn_y), (2.9 + bw/2, conn_y - 0.3),
+                              connectionstyle="arc3,rad=-0.3", ls='dashed',
+                              lw=LINE_WIDTH * 1.5, arrowstyle='->', color='black'))
+ax.text(4.8, conn_y - 0.5, 'Energy feedback', ha='center', va='center', fontsize=FONT_SMALL)
 
 # Self-observation (dotted)
-ax.add_patch(FancyArrowPatch((3.3, pipe_y_bot + bh),
-                              (2.8, pipe_y_bot + bh),
-                              connectionstyle="arc3,rad=0.3",
-                              linestyle='dotted', lw=line_width * 1.5,
-                              arrowstyle='->', color='black'))
+ax.add_patch(FancyArrowPatch((2.9 + bw, conn_y + bh), (2.9 + 0.3, conn_y + bh + 0.3),
+                              connectionstyle="arc3,rad=0.3", ls='dotted',
+                              lw=LINE_WIDTH * 1.5, arrowstyle='->', color='black'))
+ax.text(3.2, conn_y + bh + 0.5, 'Self-obs.', ha='center', va='center', fontsize=FONT_SMALL)
+
+ax.text(1.2, conn_y - 0.6, 'Heartbeat active (tool calls within 30s)',
+        ha='left', va='center', fontsize=FONT_SMALL, style='italic')
+
+# ═══ DIVIDING LINE ═══
+div_y = 6.3
+ax.plot([1.1, 7.7], [div_y, div_y], 'k--', lw=LINE_WIDTH)
+ax.text(4.25, div_y + 0.15, 'DISCONNECTION EVENT (heartbeat timeout > 30s)',
+        ha='center', va='bottom', fontsize=FONT_SMALL, weight='bold')
+ax.text(4.25, div_y - 0.15, 'Seamless transition - core pipeline never stops',
+        ha='center', va='top', fontsize=FONT_SMALL, style='italic')
+
+# ═══ BOTTOM HALF: AUTONOMOUS MODE ═══
+ax.text(1.2, 5.8, 'AUTONOMOUS MODE', ha='left', va='center',
+        fontsize=FONT_BODY, weight='bold')
+
+# Autonomous pipeline blocks
+auto_y = 5.0
+blocks_auto = [
+    (1.3, 'Input Gen\n(118)'),
+    (2.7, 'SNN (108)'),
+    (4.1, 'Self-Mod\n(120)'),
+    (5.5, 'Motor'),
+    (6.7, 'Harvest')
+]
+
+for bx, label in blocks_auto:
+    ax.add_patch(Rectangle((bx, auto_y), bw, bh + 0.1, fill=False, lw=LINE_WIDTH))
+    ax.text(bx + bw/2, auto_y + (bh + 0.1)/2, label, ha='center', va='center', fontsize=FONT_SMALL)
+
+# Forward arrows
+for i in range(len(blocks_auto) - 1):
+    x1 = blocks_auto[i][0] + bw
+    x2 = blocks_auto[i+1][0]
+    ax.add_patch(FancyArrowPatch((x1, auto_y + bh/2), (x2, auto_y + bh/2), **ARROW_PROPS))
+
+# Energy feedback (bold dashed)
+ax.add_patch(FancyArrowPatch((6.7 + bw/2, auto_y), (2.7 + bw/2, auto_y - 0.3),
+                              connectionstyle="arc3,rad=-0.3", ls='dashed',
+                              lw=LINE_WIDTH * 1.5, arrowstyle='->', color='black'))
+ax.text(4.8, auto_y - 0.5, 'Energy feedback', ha='center', va='center', fontsize=FONT_SMALL)
+
+# Self-observation (dotted)
+ax.add_patch(FancyArrowPatch((2.7 + bw, auto_y + bh), (2.7 + 0.3, auto_y + bh + 0.3),
+                              connectionstyle="arc3,rad=0.3", ls='dotted',
+                              lw=LINE_WIDTH * 1.5, arrowstyle='->', color='black'))
 
 # Input generator details
-ax.text(1.75, pipe_y_bot - 0.2, 'Circadian base signal',
-        ha='center', fontsize=8)
-ax.text(1.75, pipe_y_bot - 0.4, '10% stochastic bursts',
-        ha='center', fontsize=8)
+ax.text(1.3 + bw/2, auto_y - 0.25, 'Circadian + bursts', ha='center', va='center', fontsize=FONT_SMALL)
 
-# Self-modulation detail
-ax.text(5.2, pipe_y_bot - 0.2,
-        '<15:−0.4 | <30:−0.1 | 30-80:0.0 | >80:+0.3',
-        ha='center', fontsize=8)
+# Self-modulation details
+ax.text(4.1 + bw/2, auto_y - 0.25, '<15:-0.4 | <30:-0.1', ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(4.1 + bw/2, auto_y - 0.45, '30-80:0.0 | >80:+0.3', ha='center', va='center', fontsize=FONT_SMALL)
 
-# State Buffer (cylinder)
-buf_x, buf_y = 1.0, 3.8
-ax.add_patch(Ellipse((buf_x + 0.5, buf_y + 0.6), 1.0, 0.3,
-                      fill=False, lw=line_width))
-ax.add_patch(Rectangle((buf_x, buf_y), 1.0, 0.6, fill=False, lw=line_width))
-ax.add_patch(Ellipse((buf_x + 0.5, buf_y), 1.0, 0.3,
-                      fill=False, lw=line_width))
-ax.text(buf_x + 0.5, buf_y + 0.3, 'State\nBuffer',
-        ha='center', va='center', fontsize=8)
-ax.add_patch(FancyArrowPatch((2.8, pipe_y_bot), (buf_x + 1.0, buf_y + 0.6),
-                              **arrow_props))
-ax.text(2.2, 4.6, 'Every step', fontsize=8)
+# State Buffer (114) - cylinder
+buf_cx, buf_cy = 1.8, 3.3
+ax.add_patch(Ellipse((buf_cx, buf_cy + 0.3), 0.8, 0.2, fill=False, lw=LINE_WIDTH))
+ax.add_patch(Rectangle((buf_cx - 0.4, buf_cy), 0.8, 0.3, fill=False, lw=LINE_WIDTH))
+ax.add_patch(Ellipse((buf_cx, buf_cy), 0.8, 0.2, fill=False, lw=LINE_WIDTH))
+ax.text(buf_cx, buf_cy + 0.15, 'Buffer', ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(buf_cx + 0.5, buf_cy + 0.15, '114', ha='left', va='center', fontsize=FONT_REF, weight='bold')
+ax.add_patch(FancyArrowPatch((2.7 + bw/2, auto_y), (buf_cx, buf_cy + 0.4), **ARROW_PROPS))
+ax.text(2.3, 4.1, 'Every step', ha='center', va='center', fontsize=FONT_SMALL)
 
-# Snapshot Writer (disk)
-snap_x, snap_y = 1.0, 2.5
-ax.add_patch(Rectangle((snap_x, snap_y), 1.0, 0.6, fill=False, lw=line_width))
-ax.text(snap_x + 0.5, snap_y + 0.3, 'Snapshots\nlatest.json',
-        ha='center', va='center', fontsize=8)
-ax.add_patch(FancyArrowPatch((buf_x + 0.5, buf_y), (snap_x + 0.5, snap_y + 0.6),
-                              **arrow_props))
-ax.text(0.5, 3.3, 'Every 50\nsteps', fontsize=8, ha='center')
+# Snapshot (116) - disk
+snap_cx, snap_cy = 1.8, 2.2
+ax.add_patch(Rectangle((snap_cx - 0.4, snap_cy), 0.8, 0.4, fill=False, lw=LINE_WIDTH))
+ax.text(snap_cx, snap_cy + 0.2, 'Snapshot', ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(snap_cx + 0.5, snap_cy + 0.2, '116', ha='left', va='center', fontsize=FONT_REF, weight='bold')
+ax.add_patch(FancyArrowPatch((buf_cx, buf_cy - 0.1), (snap_cx, snap_cy + 0.4), **ARROW_PROPS))
+ax.text(1.2, 2.75, 'Every 50', ha='center', va='center', fontsize=FONT_SMALL)
 
-# Right side — Reconnection — constrained within right margin
-recon_x, recon_y = 5.7, 3.5
-recon_w = 1.8
-ax.add_patch(Rectangle((recon_x, recon_y), recon_w, 1.2, fill=False, lw=line_width,
-                         ls='--'))
-ax.text(recon_x + recon_w / 2, recon_y + 0.9, 'Resync Payload',
-        ha='center', fontsize=font_small, weight='bold')
-ax.text(recon_x + recon_w / 2, recon_y + 0.55, 'steps, energy_delta',
-        ha='center', fontsize=8)
-ax.text(recon_x + recon_w / 2, recon_y + 0.3, 'Optional: full buffer',
-        ha='center', fontsize=8)
+# Resync Payload (122) on the right
+resync_x, resync_y, resync_w, resync_h = 5.8, 2.8, 1.6, 1.0
+ax.add_patch(Rectangle((resync_x, resync_y), resync_w, resync_h, fill=False, lw=LINE_WIDTH, ls='dashed'))
+ax.text(resync_x + resync_w/2, resync_y + resync_h - 0.2, 'Resync Payload',
+        ha='center', va='center', fontsize=FONT_SMALL, weight='bold')
+ax.text(resync_x + resync_w/2, resync_y + resync_h/2, '(122)',
+        ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(resync_x + resync_w/2, resync_y + 0.2, 'summary + buffer',
+        ha='center', va='center', fontsize=FONT_SMALL)
 
 # Arrow from buffer to resync
-ax.add_patch(FancyArrowPatch((buf_x + 1.0, buf_y + 0.3),
-                              (recon_x, recon_y + 0.6), **arrow_props))
+ax.add_patch(FancyArrowPatch((buf_cx + 0.4, buf_cy + 0.15), (resync_x, resync_y + resync_h/2),
+                              **ARROW_PROPS))
 
-# Arrow from resync up to connected mode
-ax.add_patch(FancyArrowPatch((recon_x + recon_w / 2, recon_y + 1.2),
-                              (recon_x + recon_w / 2, div_y),
-                              linestyle='dashed', **arrow_props))
-ax.text(recon_x + recon_w + 0.05, 5.0, 'resync() called',
-        fontsize=8, ha='left')
+# Arrow from resync up (124)
+ax.add_patch(FancyArrowPatch((resync_x + resync_w/2, resync_y + resync_h),
+                              (resync_x + resync_w/2, div_y - 0.1),
+                              ls='dashed', **ARROW_PROPS))
+ax.text(resync_x + resync_w + 0.1, 4.8, 'resync()', ha='left', va='center', fontsize=FONT_SMALL)
+ax.text(resync_x + resync_w + 0.1, 4.55, '(124)', ha='left', va='center', fontsize=FONT_SMALL)
 
 # Key annotations
-ax.text(4.25, 1.8,
-        'The fallback system changes the INPUT SOURCE and MODULATION SOURCE',
-        ha='center', fontsize=font_small, weight='bold')
-ax.text(4.25, 1.4,
-        'The core neural processing, motor actuation, and energy harvesting',
-        ha='center', fontsize=font_small)
-ax.text(4.25, 1.1,
-        'continue WITHOUT INTERRUPTION through the transition',
-        ha='center', fontsize=font_small, weight='bold')
+ax.text(4.25, 1.5, 'The fallback changes INPUT SOURCE and MODULATION SOURCE',
+        ha='center', va='center', fontsize=FONT_BODY, weight='bold')
+ax.text(4.25, 1.15, 'Core neural processing, motor actuation, and energy harvesting',
+        ha='center', va='center', fontsize=FONT_SMALL)
+ax.text(4.25, 0.85, 'continue WITHOUT INTERRUPTION through the transition',
+        ha='center', va='center', fontsize=FONT_SMALL, weight='bold')
 
 # Legend
-leg_y = 0.5
-ax.plot([1.0, 1.8], [leg_y, leg_y], 'k-', lw=line_width)
-ax.text(2.0, leg_y, 'Forward signal', va='center', fontsize=8)
-ax.plot([3.0, 3.8], [leg_y, leg_y], 'k--', lw=line_width * 1.5)
-ax.text(4.0, leg_y, 'Energy feedback', va='center', fontsize=8)
-ax.plot([5.0, 5.8], [leg_y, leg_y], 'k:', lw=line_width * 1.5)
-ax.text(6.0, leg_y, 'Self-observation', va='center', fontsize=8)
+ax.plot([1.2, 1.8], [0.5, 0.5], 'k-', lw=LINE_WIDTH)
+ax.text(2.0, 0.5, 'Forward', va='center', fontsize=FONT_SMALL)
+ax.plot([3.0, 3.6], [0.5, 0.5], 'k--', lw=LINE_WIDTH * 1.5)
+ax.text(3.8, 0.5, 'Energy', va='center', fontsize=FONT_SMALL)
+ax.plot([4.8, 5.4], [0.5, 0.5], 'k:', lw=LINE_WIDTH * 1.5)
+ax.text(5.6, 0.5, 'Self-obs.', va='center', fontsize=FONT_SMALL)
 
 plt.savefig(f'{OUT_DIR}/fig7.svg', format='svg')
 plt.close()
 
 
 print(f"All {TOTAL_SHEETS} Patent C figures generated in {OUT_DIR}/")
+print("Reference numerals used consistently across all figures:")
+print("  100 - External Cognitive Control Layer")
+print("  102 - Heartbeat Watchdog")
+print("  104 - Connected Mode Controller")
+print("  106 - Autonomous Fallback Controller")
+print("  108 - Spiking Neural Network + Energy Harvester")
+print("  110 - Heartbeat Signal Path")
+print("  112 - Modulation Command Path")
+print("  114 - Step Buffer")
+print("  116 - State Snapshots")
+print("  118 - Autonomous Input Generator")
+print("  120 - Energy-Aware Self-Modulation")
+print("  122 - Resynchronization Payload")
+print("  124 - Resync Signal Path")
