@@ -88,12 +88,13 @@ def setup_figure(fig_num):
 
 
 def add_ref_label(ax, x, y, ref_num, anchor='left', offset=(0.15, 0)):
-    """Add a reference numeral with leader line."""
+    """Add a reference numeral with simple leader line (no annotate)."""
     text_x = x + offset[0] if anchor == 'left' else x - offset[0]
     ax.text(text_x, y + offset[1], str(ref_num), ha=anchor, va='center',
             fontsize=FONT_REF, weight='bold')
-    ax.annotate('', xy=(x, y), xytext=(text_x - 0.05 if anchor == 'left' else text_x + 0.05, y + offset[1]),
-                arrowprops=LEADER_PROPS)
+    # Simple line instead of annotate arrow (more compatible with GitHub SVG renderer)
+    line_start_x = text_x - 0.03 if anchor == 'left' else text_x + 0.03
+    ax.plot([line_start_x, x], [y + offset[1], y], 'k-', lw=LINE_THIN)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -107,7 +108,7 @@ ax.text(4.25, 9.8, 'System Architecture with Cognitive Fallback',
 
 # ─── TOP: External Cognitive Control Layer (100) ───
 cloud_cx, cloud_cy = 4.25, 9.0
-ax.add_patch(Ellipse((cloud_cx, cloud_cy), 3.5, 0.9, fill=False, lw=LINE_WIDTH))
+# Single dashed ellipse for cloud shape (dashed indicates optional/may disconnect)
 ax.add_patch(Ellipse((cloud_cx, cloud_cy), 3.5, 0.9, fill=False, lw=LINE_WIDTH, ls='dashed'))
 ax.text(cloud_cx, cloud_cy + 0.15, 'External Cognitive Control Layer',
         ha='center', va='center', fontsize=FONT_BODY)
@@ -305,12 +306,14 @@ ax.add_patch(FancyArrowPatch((recov_cx - state_w/2, recov_cy + 0.2),
                               connectionstyle="arc3,rad=0.2", **ARROW_PROPS))
 ax.text(2.5, 5.3, 'Resync complete', ha='center', va='center', fontsize=FONT_SMALL)
 
-# AUTONOMOUS self-loop
-ax.add_patch(FancyArrowPatch((auto_cx + state_w/2 - 0.2, auto_cy + state_h/2),
-                              (auto_cx + state_w/2, auto_cy + state_h/2 - 0.2),
-                              connectionstyle="arc3,rad=-2.5", **ARROW_PROPS))
-ax.text(auto_cx + 1.5, auto_cy + 0.8, 'Each step', ha='left', va='center', fontsize=FONT_SMALL)
-ax.text(auto_cx + 1.5, auto_cy + 0.5, '(up to 10,000)', ha='left', va='center', fontsize=FONT_SMALL)
+# AUTONOMOUS self-loop (simplified - use arc instead of tight self-loop)
+# Draw a curved arrow that loops back to the same state
+loop_x = auto_cx + state_w/2 + 0.3
+ax.add_patch(FancyArrowPatch((auto_cx + state_w/2, auto_cy + 0.4),
+                              (auto_cx + state_w/2, auto_cy - 0.4),
+                              connectionstyle="arc3,rad=-0.8", **ARROW_PROPS))
+ax.text(auto_cx + 1.6, auto_cy + 0.8, 'Each step', ha='left', va='center', fontsize=FONT_SMALL)
+ax.text(auto_cx + 1.6, auto_cy + 0.5, '(up to 10,000)', ha='left', va='center', fontsize=FONT_SMALL)
 
 # Annotations
 ax.text(auto_cx, auto_cy - 1.3, 'Snapshot every 50 steps', ha='center', va='center',
