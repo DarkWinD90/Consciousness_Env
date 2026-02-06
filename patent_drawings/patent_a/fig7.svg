@@ -122,7 +122,7 @@
 <line x1="750" y1="395" x2="750" y2="427" stroke="black" stroke-width="1"/>
 <line x1="750" y1="427" x2="750" y2="459" stroke="black" stroke-width="1"/>
 <line x1="750" y1="459" x2="750" y2="555" stroke="black" stroke-width="1"/>
-<text x="100" y="60" font-family="Courier New, monospace" font-size="14" text-anchor="start">700</text>
+<text x="100" y="60" font-family="Arial, sans-serif" font-size="14" text-anchor="start">700</text>
 <text x="425.0" y="595" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">STDP Learning Efficacy (Claim F8.2)</text>
 <line x1="275.0" y1="610" x2="275.0" y2="810" stroke="black" stroke-width="2"/>
 <line x1="275.0" y1="810" x2="575.0" y2="810" stroke="black" stroke-width="2"/>
@@ -132,7 +132,7 @@
 <rect x="435.0" y="623.7142857142858" width="60" height="186.28571428571428" fill="url(#hatch)" stroke="black" stroke-width="2"/>
 <text x="465.0" y="615.7142857142858" font-family="Courier New, monospace" font-size="14" font-weight="bold" text-anchor="middle">6.52x</text>
 <text x="465.0" y="830" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Measured</text>
-<text x="245" y="800" font-family="Courier New, monospace" font-size="14" text-anchor="end">702</text>
+<text x="245" y="800" font-family="Arial, sans-serif" font-size="14" text-anchor="end">702</text>
 <text x="425.0" y="870" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">All claims validated. System is reproducible via git tags.</text>
 <text x="425.0" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 7</text>
   </g>

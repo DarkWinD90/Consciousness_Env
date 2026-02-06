@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
   <defs>
-    <marker id="ah" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+    <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="black" />
     </marker>
   </defs>
   <rect width="100%" height="100%" fill="white" />
@@ -11,20 +11,20 @@
 <rect x="315.0" y="320" width="220" height="100" fill="none" stroke="black" stroke-width="3"/>
 <text x="425.0" y="355" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Raspberry Pi Pico</text>
 <text x="425.0" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(RP2040)</text>
-<text x="300.0" y="370" font-family="Courier New, monospace" font-size="14" text-anchor="end">600</text>
+<text x="300.0" y="370" font-family="Arial, sans-serif" font-size="14" text-anchor="end">600</text>
 <text x="323.0" y="338" font-family="Courier New, monospace" font-size="14" text-anchor="start">GP0</text>
 <text x="527.0" y="338" font-family="Courier New, monospace" font-size="14" text-anchor="end">GP15</text>
 <circle cx="170" cy="150" r="45" fill="none" stroke="black" stroke-width="2"/>
 <text x="170" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Piezo Disc</text>
 <text x="170" y="165" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">27mm</text>
-<text x="205" y="115" font-family="Courier New, monospace" font-size="14">602</text>
+<text x="205" y="115" font-family="Arial, sans-serif" font-size="14">602</text>
 <polyline points="200,188 200,280 270,280 270,390 315,390" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
 <text x="220" y="240" font-family="Courier New, monospace" font-size="14">ADC0</text>
 <text x="323.0" y="398" font-family="Courier New, monospace" font-size="14" text-anchor="start">GP26</text>
 <rect x="600" y="120" width="120" height="60" fill="none" stroke="black" stroke-width="2"/>
 <text x="660.0" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">SG90 Micro</text>
 <text x="660.0" y="163" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Servo</text>
-<text x="730" y="145" font-family="Courier New, monospace" font-size="14">604</text>
+<text x="730" y="145" font-family="Arial, sans-serif" font-size="14">604</text>
 <path d="M215,150 L239.0625,142.0 L287.1875,158.0 L335.3125,142.0 L383.4375,158.0 L431.5625,142.0 L479.6875,158.0 L527.8125,142.0 L575.9375,158.0 L600,150.0" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="4,2"/>
 <text x="407.5" y="135" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Mechanical Coupling</text>
 <line x1="630" y1="180" x2="345.0" y2="320" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
@@ -32,15 +32,17 @@
 <rect x="110" y="350" width="120" height="50" fill="none" stroke="black" stroke-width="2"/>
 <text x="170.0" y="372" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Laird Ferrite</text>
 <text x="170.0" y="390" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Inductor</text>
-<text x="115" y="342" font-family="Courier New, monospace" font-size="14">612</text>
+<text x="115" y="342" font-family="Arial, sans-serif" font-size="14">612</text>
 <text x="170.0" y="418" font-family="Courier New, monospace" font-size="14" text-anchor="middle">LC resonance circuit</text>
 <line x1="170" y1="195" x2="170.0" y2="350" stroke="black" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#ah)"/>
 <polygon points="640,195 665,220 640,245 615,220" fill="none" stroke="black" stroke-width="2"/>
 <text x="640" y="225" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Rect</text>
+<text x="640" y="265" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">614</text>
 <line x1="695" y1="210" x2="695" y2="230" stroke="black" stroke-width="3"/>
 <line x1="701" y1="213" x2="701" y2="227" stroke="black" stroke-width="2"/>
 <line x1="665" y1="220" x2="695" y2="220" stroke="black" stroke-width="1.5"/>
 <text x="698" y="205" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Storage</text>
+<text x="720" y="220" font-family="Arial, sans-serif" font-size="14">616</text>
 <polyline points="230,375 260,375 260,220 615,220" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#ah)"/>
 <polyline points="698,230 698,370.0 535.0,370.0" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
 <text x="680" y="388" font-family="Courier New, monospace" font-size="14" text-anchor="end">Harvested energy</text>
@@ -48,20 +50,20 @@
 <rect x="120" y="520" width="120" height="50" fill="none" stroke="black" stroke-width="2"/>
 <text x="180.0" y="542" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">NTC 10K</text>
 <text x="180.0" y="560" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Thermistor</text>
-<text x="250" y="545" font-family="Courier New, monospace" font-size="14">606</text>
+<text x="250" y="545" font-family="Arial, sans-serif" font-size="14">606</text>
 <polyline points="180.0,520 180.0,455 355.0,455 355.0,420" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
 <text x="150.0" y="505" font-family="Courier New, monospace" font-size="14" text-anchor="end">ADC1</text>
 <rect x="355" y="520" width="140" height="55" fill="none" stroke="black" stroke-width="2"/>
 <text x="425.0" y="538" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">GL5528</text>
 <text x="425.0" y="556" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Photoresistor</text>
 <text x="425.0" y="572" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(LDR)</text>
-<text x="505" y="545" font-family="Courier New, monospace" font-size="14">610</text>
+<text x="505" y="545" font-family="Arial, sans-serif" font-size="14">610</text>
 <line x1="425.0" y1="520" x2="425.0" y2="420" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
 <text x="345" y="545" font-family="Courier New, monospace" font-size="14" text-anchor="end">ADC2</text>
 <rect x="590" y="520" width="120" height="50" fill="none" stroke="black" stroke-width="2"/>
 <text x="650.0" y="542" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">WS2812B</text>
 <text x="650.0" y="560" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">RGB LED</text>
-<text x="720" y="545" font-family="Courier New, monospace" font-size="14">608</text>
+<text x="720" y="545" font-family="Arial, sans-serif" font-size="14">608</text>
 <polyline points="650.0,520 650.0,470 505.0,470 505.0,420" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
 <text x="580" y="545" font-family="Courier New, monospace" font-size="14" text-anchor="end">GPIO</text>
 <rect x="150" y="620" width="550" height="210" rx="8" fill="none" stroke="black" stroke-width="2"/>

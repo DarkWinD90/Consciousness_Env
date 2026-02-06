@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
   <defs>
-    <marker id="ah" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+    <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="black" />
     </marker>
     <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
       <line x1="0" y1="0" x2="0" y2="8" stroke="black" stroke-width="1" />
@@ -44,21 +44,21 @@
 <polyline points="160.0,635.8 165.8,631.7 171.6,627.6 177.4,623.5 183.2,619.3 189.0,615.2 194.8,611.1 200.6,607.0 206.4,602.8 212.2,598.7 218.0,594.6 223.8,590.5 229.6,586.3 235.4,582.2 241.2,578.1 247.0,574.0 252.8,569.8 258.6,565.7 264.4,561.6 270.2,557.5 276.0,553.3 281.8,549.2 287.6,545.1 293.4,541.0 299.2,536.8 305.0,532.7 310.8,528.6 316.6,524.5 322.4,520.3 328.2,516.2 334.0,512.1 339.8,508.0 345.6,503.8 351.4,499.7 357.2,495.6 363.0,491.5 368.8,487.3 374.6,483.2 380.4,479.1 386.2,475.0 392.0,470.8 397.8,466.7 403.6,462.6 409.4,458.5 415.2,454.3 421.0,450.2 426.8,446.1 432.6,442.0 438.4,437.8 444.2,433.7 450.0,429.6 455.8,425.5 461.6,421.3 467.4,417.2 473.2,413.1 479.0,409.0 484.8,404.8 490.6,400.7 496.4,396.6 502.2,392.5 508.0,388.3 513.8,384.2 519.6,380.1 525.4,376.0 531.2,371.8 537.0,367.7 542.8,363.6 548.6,359.5 554.4,355.3 560.2,351.2 566.0,347.1 571.8,343.0 577.6,338.8 583.4,334.7 589.2,330.6 595.0,326.5 600.8,322.3 606.6,318.2 612.4,314.1 618.2,310.0 624.0,305.8 629.8,301.7 635.6,297.6 641.4,293.5 647.2,289.3 653.0,285.2 658.8,281.1 664.6,277.0 670.4,272.8 676.2,268.7 682.0,264.6 687.8,260.5 693.6,256.3 699.4,252.2 705.2,248.1 711.0,244.0 716.8,239.8 722.6,235.7 728.4,231.6 734.2,227.5 740.0,223.3" fill="none" stroke="black" stroke-width="3" stroke-dasharray="10,5"/>
 <polyline points="160.0,633.5 165.8,633.3 171.6,633.0 177.4,632.7 183.2,632.3 189.0,632.0 194.8,631.6 200.6,631.3 206.4,630.9 212.2,630.5 218.0,630.1 223.8,629.7 229.6,629.3 235.4,628.8 241.2,628.3 247.0,627.9 252.8,627.4 258.6,626.9 264.4,626.4 270.2,625.8 276.0,625.3 281.8,624.7 287.6,624.2 293.4,623.6 299.2,623.0 305.0,622.4 310.8,621.7 316.6,621.1 322.4,620.5 328.2,619.8 334.0,619.1 339.8,618.4 345.6,617.7 351.4,617.0 357.2,616.2 363.0,615.5 368.8,614.7 374.6,614.0 380.4,613.2 386.2,612.4 392.0,611.5 397.8,610.7 403.6,609.9 409.4,609.0 415.2,608.1 421.0,607.2 426.8,606.3 432.6,605.4 438.4,604.5 444.2,603.6 450.0,602.6 455.8,601.6 461.6,600.7 467.4,599.7 473.2,598.6 479.0,597.6 484.8,596.6 490.6,595.5 496.4,594.5 502.2,593.4 508.0,592.3 513.8,591.2 519.6,590.1 525.4,588.9 531.2,587.8 537.0,586.6 542.8,585.4 548.6,584.3 554.4,583.1 560.2,581.8 566.0,580.6 571.8,579.4 577.6,578.1 583.4,576.8 589.2,575.5 595.0,574.2 600.8,572.9 606.6,571.6 612.4,570.3 618.2,568.9 624.0,567.5 629.8,566.2 635.6,564.8 641.4,563.4 647.2,561.9 653.0,560.5 658.8,559.0 664.6,557.6 670.4,556.1 676.2,554.6 682.0,553.1 687.8,551.6 693.6,550.1 699.4,548.5 705.2,546.9 711.0,545.4 716.8,543.8 722.6,542.2 728.4,540.6 734.2,538.9 740.0,537.3" fill="none" stroke="black" stroke-width="3"/>
 <text x="672.0" y="234.58333333333337" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Harvest</text>
-<text x="682.0" y="234.58333333333337" font-family="Courier New, monospace" font-size="14" text-anchor="start">500</text>
+<text x="682.0" y="234.58333333333337" font-family="Arial, sans-serif" font-size="14" text-anchor="start">500</text>
 <text x="672.0" y="593.1041666666666" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Cost</text>
-<text x="682.0" y="593.1041666666666" font-family="Courier New, monospace" font-size="14" text-anchor="start">502</text>
+<text x="682.0" y="593.1041666666666" font-family="Arial, sans-serif" font-size="14" text-anchor="start">502</text>
 <text x="566.0" y="470.8333333333333" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">NET POSITIVE REGION</text>
 <text x="566.0" y="490.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Harvest >> Cost</text>
 <text x="566.0" y="510.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(Self-Sustaining)</text>
-<text x="666.0" y="470.8333333333333" font-family="Courier New, monospace" font-size="14" text-anchor="start">504</text>
+<text x="666.0" y="470.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="start">504</text>
 <circle cx="163.48" cy="633.3583333333333" r="6" fill="none" stroke="black" stroke-width="2"/>
 <line x1="169.48" y1="633.3583333333333" x2="203.48" y2="673.3583333333333" stroke="black" stroke-width="1"/>
-<text x="208.48" y="688.3583333333333" font-family="Courier New, monospace" font-size="14" text-anchor="start">506 Crossover (0.3 spikes)</text>
+<text x="208.48" y="688.3583333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="start">506</text><text x="235" y="688.3583333333333" font-family="Courier New, monospace" font-size="14" text-anchor="start">Crossover (0.3 spikes)</text>
 <rect x="150" y="780" width="550" height="100" rx="10" fill="none" stroke="black" stroke-width="2"/>
 <text x="170" y="810" font-family="Courier New, monospace" font-size="14">Harvest = 0.20 + (0.09 x spikes) mWh/step</text>
 <text x="170" y="835" font-family="Courier New, monospace" font-size="14">Cost = 0.225 + (0.006 x s) + (0.0003 x s^2) mWh/step</text>
 <text x="170" y="860" font-family="Courier New, monospace" font-size="14">Net = Harvest - Cost</text>
-<text x="680" y="810" font-family="Courier New, monospace" font-size="14" text-anchor="end">508</text>
+<text x="680" y="810" font-family="Arial, sans-serif" font-size="14" text-anchor="end">508</text>
 <text x="425.0" y="920" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Zone 1: Quiescent Drain</text>
 <text x="425.0" y="940" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">0 - 1 Spikes: Cost > Harvest</text>
 <text x="425.0" y="1000" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 5</text>
