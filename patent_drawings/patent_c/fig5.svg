@@ -4,62 +4,67 @@
     <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
       <polygon points="0 0, 6 2, 0 4" fill="black" />
     </marker>
-    <pattern id="hatch" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
-      <line x1="0" y1="0" x2="0" y2="8" stroke="black" stroke-width="1"/>
-    </pattern>
-    <pattern id="hatchLight" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">
-      <line x1="0" y1="0" x2="0" y2="12" stroke="black" stroke-width="0.5"/>
-    </pattern>
   </defs>
   <rect width="100%" height="100%" fill="white" />
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">5/7</text>
-  <g transform="translate(0, 50)">
-<text x="425" y="80" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RESYNCHRONIZATION PAYLOAD STRUCTURE</text>
-<rect x="120" y="120" width="610" height="600" rx="5" fill="none" stroke="black" stroke-width="3"/>
-<text x="425" y="150" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Resynchronization Payload</text>
-<text x="735" y="130" font-family="Arial, sans-serif" font-size="14" text-anchor="start">500</text>
-<line x1="733" y1="130" x2="730" y2="145" stroke="black" stroke-width="0.5"/>
-<rect x="150" y="180" width="550" height="200" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="425" y="205" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Summary Statistics (ALWAYS included)</text>
-<text x="425" y="225" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">~200 bytes</text>
-<text x="200" y="255" font-family="Courier New, monospace" font-size="14" text-anchor="start">steps_autonomous: [integer]</text>
-<text x="200" y="277" font-family="Courier New, monospace" font-size="14" text-anchor="start">energy_delta: [float] mWh</text>
-<text x="200" y="299" font-family="Courier New, monospace" font-size="14" text-anchor="start">min_energy: [float] mWh</text>
-<text x="200" y="321" font-family="Courier New, monospace" font-size="14" text-anchor="start">max_energy: [float] mWh</text>
-<text x="200" y="343" font-family="Courier New, monospace" font-size="14" text-anchor="start">mean_energy: [float] mWh</text>
-<text x="200" y="365" font-family="Courier New, monospace" font-size="14" text-anchor="start">total_spikes: [integer]</text>
-<text x="200" y="387" font-family="Courier New, monospace" font-size="14" text-anchor="start">mean_spikes_per_step: [float]</text>
-<text x="705" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="start">502</text>
-<line x1="703" y1="190" x2="700" y2="205" stroke="black" stroke-width="0.5"/>
-<rect x="150" y="400" width="250" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="275" y="425" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy Delta</text>
-<text x="275" y="455" font-family="Courier New, monospace" font-size="14" text-anchor="middle">energy_start: [float]</text>
-<text x="275" y="475" font-family="Courier New, monospace" font-size="14" text-anchor="middle">energy_end: [float]</text>
-<text x="275" y="495" font-family="Courier New, monospace" font-size="14" text-anchor="middle">energy_delta: [float]</text>
-<text x="405" y="410" font-family="Arial, sans-serif" font-size="14" text-anchor="start">504</text>
-<line x1="403" y1="413" x2="400" y2="425" stroke="black" stroke-width="0.5"/>
-<line x1="400" y1="475" x2="480" y2="475" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<text x="490" y="465" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Positive =</text>
-<text x="490" y="485" font-family="Arial, sans-serif" font-size="14" text-anchor="start">gained energy</text>
-<rect x="150" y="520" width="550" height="180" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="425" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Full Step Buffer (OPTIONAL)</text>
-<text x="425" y="565" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">~100 bytes x N steps</text>
-<text x="200" y="600" font-family="Courier New, monospace" font-size="14" text-anchor="start">Step 0: {input, mod, spikes, energy, temp, pattern}</text>
-<text x="200" y="620" font-family="Courier New, monospace" font-size="14" text-anchor="start">Step 1: {input, mod, spikes, energy, temp, pattern}</text>
-<text x="200" y="640" font-family="Arial, sans-serif" font-size="14" text-anchor="start">. . .</text>
-<text x="200" y="660" font-family="Courier New, monospace" font-size="14" text-anchor="start">Step N: {input, mod, spikes, energy, temp, pattern}</text>
-<text x="200" y="685" font-family="Courier New, monospace" font-size="14" text-anchor="start">Max N = 10,000</text>
-<text x="705" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="start">506</text>
-<line x1="703" y1="530" x2="700" y2="545" stroke="black" stroke-width="0.5"/>
-<polygon points="425,750 475,780 425,810 375,780" fill="none" stroke="black" stroke-width="2"/>
-<text x="425" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Full?</text>
-<text x="485" y="755" font-family="Arial, sans-serif" font-size="14" text-anchor="start">508</text>
-<line x1="483" y1="758" x2="475" y2="770" stroke="black" stroke-width="0.5"/>
-<line x1="375" y1="780" x2="250" y2="780" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<text x="250" y="770" font-family="Arial, sans-serif" font-size="14" text-anchor="end">No: Summary only</text>
-<line x1="475" y1="780" x2="600" y2="780" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<text x="600" y="770" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Yes: Summary + Buffer</text>
 
-<text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 5</text>
-  </g>
+  <!-- Title -->
+  <text x="425" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RESYNCHRONIZATION PAYLOAD STRUCTURE</text>
+
+  <!-- Main Payload Container (500) -->
+  <rect x="120" y="170" width="610" height="600" rx="5" fill="none" stroke="black" stroke-width="3"/>
+  <text x="720" y="187" font-family="Arial, sans-serif" font-size="14" text-anchor="end">500</text>
+  <text x="425" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Resynchronization Payload</text>
+
+  <!-- Summary Statistics Box (502) -->
+  <rect x="150" y="230" width="550" height="200" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="690" y="247" font-family="Arial, sans-serif" font-size="14" text-anchor="end">502</text>
+  <text x="425" y="260" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Summary Statistics (ALWAYS included)</text>
+  <text x="425" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">~200 bytes</text>
+
+  <text x="200" y="310" font-family="Courier New, monospace" font-size="14" text-anchor="start">steps_autonomous: [integer]</text>
+  <text x="200" y="332" font-family="Courier New, monospace" font-size="14" text-anchor="start">energy_delta: [float] mWh</text>
+  <text x="200" y="354" font-family="Courier New, monospace" font-size="14" text-anchor="start">min_energy: [float] mWh</text>
+  <text x="200" y="376" font-family="Courier New, monospace" font-size="14" text-anchor="start">max_energy: [float] mWh</text>
+  <text x="200" y="398" font-family="Courier New, monospace" font-size="14" text-anchor="start">mean_energy: [float] mWh</text>
+  <text x="200" y="420" font-family="Courier New, monospace" font-size="14" text-anchor="start">total_spikes: [integer]</text>
+
+  <!-- Energy Delta Box (504) -->
+  <rect x="150" y="450" width="250" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="390" y="467" font-family="Arial, sans-serif" font-size="14" text-anchor="end">504</text>
+  <text x="275" y="480" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy Delta</text>
+  <text x="275" y="505" font-family="Courier New, monospace" font-size="14" text-anchor="middle">energy_start: [float]</text>
+  <text x="275" y="530" font-family="Courier New, monospace" font-size="14" text-anchor="middle">energy_end: [float]</text>
+
+  <!-- Arrow and annotation -->
+  <line x1="400" y1="510" x2="480" y2="510" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="490" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Positive =</text>
+  <text x="490" y="520" font-family="Arial, sans-serif" font-size="14" text-anchor="start">gained energy</text>
+
+  <!-- Full Step Buffer Box (506) -->
+  <rect x="150" y="570" width="550" height="180" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="690" y="587" font-family="Arial, sans-serif" font-size="14" text-anchor="end">506</text>
+  <text x="425" y="600" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Full Step Buffer (OPTIONAL)</text>
+  <text x="425" y="620" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">~100 bytes x N steps</text>
+
+  <text x="200" y="655" font-family="Courier New, monospace" font-size="14" text-anchor="start">Step 0: {input, mod, spikes, energy, temp, pattern}</text>
+  <text x="200" y="677" font-family="Courier New, monospace" font-size="14" text-anchor="start">Step 1: {input, mod, spikes, energy, temp, pattern}</text>
+  <text x="200" y="699" font-family="Arial, sans-serif" font-size="14" text-anchor="start">. . .</text>
+  <text x="200" y="721" font-family="Courier New, monospace" font-size="14" text-anchor="start">Step N: {input, mod, spikes, energy, temp, pattern}</text>
+  <text x="200" y="745" font-family="Courier New, monospace" font-size="14" text-anchor="start">Max N = 10,000</text>
+
+  <!-- Decision Diamond (508) -->
+  <polygon points="425,800 475,830 425,860 375,830" fill="none" stroke="black" stroke-width="2"/>
+  <text x="425" y="827" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">508</text>
+  <text x="425" y="845" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Full?</text>
+
+  <!-- Decision branches -->
+  <line x1="375" y1="830" x2="250" y2="830" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="310" y="820" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">No: Summary only</text>
+
+  <line x1="475" y1="830" x2="600" y2="830" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="540" y="820" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Yes: Summary + Buffer</text>
+
+  <!-- Figure Label -->
+  <text x="425" y="1020" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 5</text>
 </svg>

@@ -4,73 +4,103 @@
     <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
       <polygon points="0 0, 6 2, 0 4" fill="black" />
     </marker>
-    <pattern id="hatch" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
-      <line x1="0" y1="0" x2="0" y2="8" stroke="black" stroke-width="1"/>
-    </pattern>
-    <pattern id="hatchLight" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">
-      <line x1="0" y1="0" x2="0" y2="12" stroke="black" stroke-width="0.5"/>
-    </pattern>
   </defs>
   <rect width="100%" height="100%" fill="white" />
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">4/7</text>
-  <g transform="translate(0, 50)">
-<text x="425" y="80" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">AUTONOMOUS INPUT GENERATOR OUTPUT</text>
-<line x1="150" y1="400" x2="150" y2="150" stroke="black" stroke-width="2"/>
-<line x1="150" y1="400" x2="700" y2="400" stroke="black" stroke-width="2"/>
-<text x="115" y="275" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 115 275)">Input Value</text>
-<text x="425" y="440" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous Step Number</text>
-<line x1="145" y1="400.0" x2="150" y2="400.0" stroke="black" stroke-width="2"/>
-<text x="135" y="405.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.0</text>
-<line x1="145" y1="275.0" x2="150" y2="275.0" stroke="black" stroke-width="2"/>
-<text x="135" y="280.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.5</text>
-<line x1="145" y1="150.0" x2="150" y2="150.0" stroke="black" stroke-width="2"/>
-<text x="135" y="155.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">1.0</text>
-<line x1="150.0" y1="400" x2="150.0" y2="405" stroke="black" stroke-width="2"/>
-<text x="150.0" y="425" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0</text>
-<line x1="260.0" y1="400" x2="260.0" y2="405" stroke="black" stroke-width="2"/>
-<text x="260.0" y="425" font-family="Courier New, monospace" font-size="14" text-anchor="middle">100</text>
-<line x1="370.0" y1="400" x2="370.0" y2="405" stroke="black" stroke-width="2"/>
-<text x="370.0" y="425" font-family="Courier New, monospace" font-size="14" text-anchor="middle">200</text>
-<line x1="480.0" y1="400" x2="480.0" y2="405" stroke="black" stroke-width="2"/>
-<text x="480.0" y="425" font-family="Courier New, monospace" font-size="14" text-anchor="middle">300</text>
-<line x1="590.0" y1="400" x2="590.0" y2="405" stroke="black" stroke-width="2"/>
-<text x="590.0" y="425" font-family="Courier New, monospace" font-size="14" text-anchor="middle">400</text>
-<line x1="700.0" y1="400" x2="700.0" y2="405" stroke="black" stroke-width="2"/>
-<text x="700.0" y="425" font-family="Courier New, monospace" font-size="14" text-anchor="middle">500</text>
-<polyline points="150.0,275.0 155.5,252.3 161.0,234.5 166.5,225.6 172.0,227.4 177.5,239.6 183.0,259.5 188.5,282.8 194.0,304.4 199.5,319.6 205.0,325.0 210.5,319.6 216.0,304.4 221.5,282.8 227.0,259.5 232.5,239.6 238.0,227.4 243.5,225.6 249.0,234.5 254.5,252.3 260.0,275.0 265.5,297.7 271.0,315.5 276.5,324.4 282.0,322.6 287.5,310.4 293.0,290.5 298.5,267.2 304.0,245.6 309.5,230.4 315.0,225.0 320.5,230.4 326.0,245.6 331.5,267.2 337.0,290.5 342.5,310.4 348.0,322.6 353.5,324.4 359.0,315.5 364.5,297.7 370.0,275.0 375.5,252.3 381.0,234.5 386.5,225.6 392.0,227.4 397.5,239.6 403.0,259.5 408.5,282.8 414.0,304.4 419.5,319.6 425.0,325.0 430.5,319.6 436.0,304.4 441.5,282.8 447.0,259.5 452.5,239.6 458.0,227.4 463.5,225.6 469.0,234.5 474.5,252.3 480.0,275.0 485.5,297.7 491.0,315.5 496.5,324.4 502.0,322.6 507.5,310.4 513.0,290.5 518.5,267.2 524.0,245.6 529.5,230.4 535.0,225.0 540.5,230.4 546.0,245.6 551.5,267.2 557.0,290.5 562.5,310.4 568.0,322.6 573.5,324.4 579.0,315.5 584.5,297.7 590.0,275.0 595.5,252.3 601.0,234.5 606.5,225.6 612.0,227.4 617.5,239.6 623.0,259.5 628.5,282.8 634.0,304.4 639.5,319.6 645.0,325.0 650.5,319.6 656.0,304.4 661.5,282.8 667.0,259.5 672.5,239.6 678.0,227.4 683.5,225.6 689.0,234.5 694.5,252.3 700.0,275.0" fill="none" stroke="black" stroke-width="2"/>
-<text x="710" y="275" font-family="Arial, sans-serif" font-size="14" text-anchor="start">400</text>
-<line x1="708" y1="275" x2="700" y2="275" stroke="black" stroke-width="0.5"/>
-<text x="500" y="180" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Burst (10% probability)</text>
-<line x1="350" y1="220" x2="350" y2="180" stroke="black" stroke-width="2"/>
-<text x="360" y="175" font-family="Courier New, monospace" font-size="14" text-anchor="start">+0.3</text>
-<text x="400" y="165" font-family="Arial, sans-serif" font-size="14" text-anchor="start">402</text>
-<line x1="398" y1="168" x2="370" y2="180" stroke="black" stroke-width="0.5"/>
-<rect x="150" y="470" width="550" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="425" y="495" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous Input Formula</text>
-<text x="425" y="520" font-family="Courier New, monospace" font-size="14" text-anchor="middle">circadian = 0.5 + 0.2 x sin(2pi x t x 3)</text>
-<text x="425" y="545" font-family="Courier New, monospace" font-size="14" text-anchor="middle">burst = 0.3 (with 10% probability per step)</text>
-<text x="705" y="480" font-family="Arial, sans-serif" font-size="14" text-anchor="start">404</text>
-<line x1="703" y1="480" x2="700" y2="495" stroke="black" stroke-width="0.5"/>
-<text x="425" y="610" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy Recovery During Autonomous Operation</text>
-<line x1="150" y1="820" x2="150" y2="650" stroke="black" stroke-width="2"/>
-<line x1="150" y1="820" x2="700" y2="820" stroke="black" stroke-width="2"/>
-<text x="115" y="735" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 115 735)">Energy (mWh)</text>
-<line x1="150" y1="794.5" x2="700" y2="794.5" stroke="black" stroke-width="0.5"/>
-<text x="135" y="799.5" font-family="Courier New, monospace" font-size="14" text-anchor="end">15</text>
-<line x1="150" y1="769.0" x2="700" y2="769.0" stroke="black" stroke-width="0.5"/>
-<text x="135" y="774.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">30</text>
-<line x1="150" y1="684.0" x2="700" y2="684.0" stroke="black" stroke-width="0.5"/>
-<text x="135" y="689.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">80</text>
-<line x1="150" y1="624.5" x2="700" y2="624.5" stroke="black" stroke-width="0.5"/>
-<text x="135" y="629.5" font-family="Courier New, monospace" font-size="14" text-anchor="end">100</text>
-<polyline points="150.0,803.0 161.0,798.8 172.0,794.5 183.0,790.2 194.0,786.0 205.0,781.8 216.0,777.5 227.0,773.2 238.0,769.0 249.0,764.8 260.0,760.5 271.0,756.2 282.0,752.0 293.0,747.8 304.0,743.5 315.0,739.2 326.0,735.0 337.0,730.8 348.0,726.5 359.0,722.2 370.0,718.0 381.0,713.8 392.0,709.5 403.0,705.2 414.0,701.0 425.0,696.8 436.0,692.5 447.0,688.2 458.0,684.0 469.0,679.8 480.0,675.5 491.0,671.2 502.0,667.0 513.0,662.8 524.0,658.5 535.0,654.2 546.0,650.0 557.0,645.8 568.0,641.5 579.0,637.2 590.0,633.0 601.0,628.8 612.0,624.5 623.0,624.5 634.0,624.5 645.0,624.5 656.0,624.5 667.0,624.5 678.0,624.5 689.0,624.5 700.0,624.5" fill="none" stroke="black" stroke-width="2"/>
-<text x="710" y="700" font-family="Arial, sans-serif" font-size="14" text-anchor="start">406</text>
-<line x1="708" y1="700" x2="700" y2="700" stroke="black" stroke-width="0.5"/>
-<text x="130" y="808.1" font-family="Arial, sans-serif" font-size="14" text-anchor="end">CRIT</text>
-<text x="130" y="782.6" font-family="Arial, sans-serif" font-size="14" text-anchor="end">LOW</text>
-<text x="130" y="726.5" font-family="Arial, sans-serif" font-size="14" text-anchor="end">NORM</text>
-<text x="130" y="667.0" font-family="Arial, sans-serif" font-size="14" text-anchor="end">SURP</text>
 
-<text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 4</text>
-  </g>
+  <!-- Title -->
+  <text x="425" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">AUTONOMOUS INPUT GENERATOR OUTPUT</text>
+
+  <!-- Input Signal Graph (400) -->
+  <!-- Y-axis -->
+  <line x1="150" y1="450" x2="150" y2="200" stroke="black" stroke-width="2"/>
+  <text x="115" y="325" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 115 325)">Input Value</text>
+
+  <!-- X-axis -->
+  <line x1="150" y1="450" x2="700" y2="450" stroke="black" stroke-width="2"/>
+  <text x="425" y="490" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous Step Number</text>
+
+  <!-- Reference numeral 400 -->
+  <text x="710" y="325" font-family="Arial, sans-serif" font-size="14" text-anchor="start">400</text>
+
+  <!-- Y-axis tick marks -->
+  <line x1="145" y1="450" x2="150" y2="450" stroke="black" stroke-width="2"/>
+  <text x="135" y="455" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.0</text>
+
+  <line x1="145" y1="325" x2="150" y2="325" stroke="black" stroke-width="2"/>
+  <text x="135" y="330" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.5</text>
+
+  <line x1="145" y1="200" x2="150" y2="200" stroke="black" stroke-width="2"/>
+  <text x="135" y="205" font-family="Courier New, monospace" font-size="14" text-anchor="end">1.0</text>
+
+  <!-- X-axis tick marks -->
+  <line x1="150" y1="450" x2="150" y2="455" stroke="black" stroke-width="2"/>
+  <text x="150" y="475" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0</text>
+
+  <line x1="260" y1="450" x2="260" y2="455" stroke="black" stroke-width="2"/>
+  <text x="260" y="475" font-family="Courier New, monospace" font-size="14" text-anchor="middle">100</text>
+
+  <line x1="370" y1="450" x2="370" y2="455" stroke="black" stroke-width="2"/>
+  <text x="370" y="475" font-family="Courier New, monospace" font-size="14" text-anchor="middle">200</text>
+
+  <line x1="480" y1="450" x2="480" y2="455" stroke="black" stroke-width="2"/>
+  <text x="480" y="475" font-family="Courier New, monospace" font-size="14" text-anchor="middle">300</text>
+
+  <line x1="590" y1="450" x2="590" y2="455" stroke="black" stroke-width="2"/>
+  <text x="590" y="475" font-family="Courier New, monospace" font-size="14" text-anchor="middle">400</text>
+
+  <line x1="700" y1="450" x2="700" y2="455" stroke="black" stroke-width="2"/>
+  <text x="700" y="475" font-family="Courier New, monospace" font-size="14" text-anchor="middle">500</text>
+
+  <!-- Sine wave (circadian input) -->
+  <polyline points="150.0,325.0 155.5,302.3 161.0,284.5 166.5,275.6 172.0,277.4 177.5,289.6 183.0,309.5 188.5,332.8 194.0,354.4 199.5,369.6 205.0,375.0 210.5,369.6 216.0,354.4 221.5,332.8 227.0,309.5 232.5,289.6 238.0,277.4 243.5,275.6 249.0,284.5 254.5,302.3 260.0,325.0 265.5,347.7 271.0,365.5 276.5,374.4 282.0,372.6 287.5,360.4 293.0,340.5 298.5,317.2 304.0,295.6 309.5,280.4 315.0,275.0 320.5,280.4 326.0,295.6 331.5,317.2 337.0,340.5 342.5,360.4 348.0,372.6 353.5,374.4 359.0,365.5 364.5,347.7 370.0,325.0 375.5,302.3 381.0,284.5 386.5,275.6 392.0,277.4 397.5,289.6 403.0,309.5 408.5,332.8 414.0,354.4 419.5,369.6 425.0,375.0 430.5,369.6 436.0,354.4 441.5,332.8 447.0,309.5 452.5,289.6 458.0,277.4 463.5,275.6 469.0,284.5 474.5,302.3 480.0,325.0 485.5,347.7 491.0,365.5 496.5,374.4 502.0,372.6 507.5,360.4 513.0,340.5 518.5,317.2 524.0,295.6 529.5,280.4 535.0,275.0 540.5,280.4 546.0,295.6 551.5,317.2 557.0,340.5 562.5,360.4 568.0,372.6 573.5,374.4 579.0,365.5 584.5,347.7 590.0,325.0 595.5,302.3 601.0,284.5 606.5,275.6 612.0,277.4 617.5,289.6 623.0,309.5 628.5,332.8 634.0,354.4 639.5,369.6 645.0,375.0 650.5,369.6 656.0,354.4 661.5,332.8 667.0,309.5 672.5,289.6 678.0,277.4 683.5,275.6 689.0,284.5 694.5,302.3 700.0,325.0" fill="none" stroke="black" stroke-width="2"/>
+
+  <!-- Burst spike annotation (402) -->
+  <line x1="350" y1="270" x2="350" y2="230" stroke="black" stroke-width="2"/>
+  <text x="360" y="225" font-family="Courier New, monospace" font-size="14" text-anchor="start">+0.3</text>
+  <text x="500" y="220" font-family="Arial, sans-serif" font-size="14" text-anchor="start">402</text>
+  <text x="500" y="240" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Burst (10% probability)</text>
+
+  <!-- Autonomous Input Formula Box (404) -->
+  <rect x="150" y="510" width="550" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="690" y="527" font-family="Arial, sans-serif" font-size="14" text-anchor="end">404</text>
+  <text x="425" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous Input Formula</text>
+  <text x="425" y="570" font-family="Courier New, monospace" font-size="14" text-anchor="middle">circadian = 0.5 + 0.2 x sin(2pi x t x 3)</text>
+  <text x="425" y="595" font-family="Courier New, monospace" font-size="14" text-anchor="middle">burst = 0.3 (with 10% probability per step)</text>
+
+  <!-- Energy Recovery Graph Section -->
+  <text x="425" y="650" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy Recovery During Autonomous Operation</text>
+
+  <!-- Energy graph Y-axis -->
+  <line x1="150" y1="870" x2="150" y2="700" stroke="black" stroke-width="2"/>
+  <text x="115" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 115 785)">Energy (mWh)</text>
+
+  <!-- Energy graph X-axis -->
+  <line x1="150" y1="870" x2="700" y2="870" stroke="black" stroke-width="2"/>
+
+  <!-- Reference numeral 406 -->
+  <text x="710" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="start">406</text>
+
+  <!-- Energy level gridlines with labels -->
+  <line x1="150" y1="844" x2="700" y2="844" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="135" y="849" font-family="Courier New, monospace" font-size="14" text-anchor="end">15</text>
+  <text x="130" y="860" font-family="Arial, sans-serif" font-size="14" text-anchor="end">CRIT</text>
+
+  <line x1="150" y1="819" x2="700" y2="819" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="135" y="824" font-family="Courier New, monospace" font-size="14" text-anchor="end">30</text>
+  <text x="130" y="810" font-family="Arial, sans-serif" font-size="14" text-anchor="end">LOW</text>
+
+  <line x1="150" y1="734" x2="700" y2="734" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="135" y="739" font-family="Courier New, monospace" font-size="14" text-anchor="end">80</text>
+  <text x="130" y="750" font-family="Arial, sans-serif" font-size="14" text-anchor="end">NORM</text>
+
+  <line x1="150" y1="700" x2="700" y2="700" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="135" y="705" font-family="Courier New, monospace" font-size="14" text-anchor="end">100</text>
+  <text x="130" y="716" font-family="Arial, sans-serif" font-size="14" text-anchor="end">SURP</text>
+
+  <!-- Energy recovery line (rising from CRITICAL to full) -->
+  <polyline points="150,855 200,840 250,825 300,810 350,795 400,780 450,765 500,750 550,735 600,720 650,705 700,700" fill="none" stroke="black" stroke-width="2"/>
+
+  <!-- Figure Label -->
+  <text x="425" y="1020" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 4</text>
 </svg>
