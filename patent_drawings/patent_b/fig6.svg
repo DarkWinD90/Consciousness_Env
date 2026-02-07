@@ -7,107 +7,95 @@
   </defs>
   <rect width="100%" height="100%" fill="white" />
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">6/6</text>
-  <g transform="translate(0, 50)">
-    <text x="425" y="70" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">END-TO-END SIGNAL FLOW</text>
-    <text x="425" y="90" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-Observation Integration</text>
 
-    <!-- Environmental Sensors (600) -->
-    <rect x="150" y="200" width="100" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="200" y="220" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Environmental</text>
-    <text x="200" y="238" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Sensors</text>
-    <text x="200" y="175" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">600</text>
-    <line x1="200" y1="178" x2="200" y2="200" stroke="black" stroke-width="0.5"/>
+  <!-- Title -->
+  <text x="425" y="110" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">END-TO-END SIGNAL FLOW</text>
+  <text x="425" y="130" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-Observation Integration in Complete System</text>
 
-    <!-- Arrow: Sensors to SNN -->
-    <line x1="250" y1="225" x2="300" y2="225" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- ENVIRONMENTAL INPUT (600) -->
+  <rect x="150" y="160" width="550" height="60" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="425" y="190" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">ENVIRONMENTAL INPUT</text>
+  <text x="425" y="210" font-family="Courier New, monospace" font-size="14" text-anchor="middle">(Light / Temperature / Pressure)</text>
+  <text x="690" y="177" font-family="Arial, sans-serif" font-size="14" text-anchor="end">600</text>
 
-    <!-- Spiking Neural Network (602) - Main Hub -->
-    <rect x="300" y="170" width="180" height="110" rx="5" fill="none" stroke="black" stroke-width="3"/>
-    <text x="390" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Spiking Neural Network</text>
-    <text x="390" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">V = V×leak + I</text>
-    <text x="390" y="240" font-family="Courier New, monospace" font-size="14" text-anchor="middle">+ I_refl + I_syn</text>
-    <text x="390" y="148" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">602</text>
-    <line x1="390" y1="151" x2="390" y2="170" stroke="black" stroke-width="0.5"/>
+  <!-- Arrow: Environmental to SNN -->
+  <line x1="425" y1="220" x2="425" y2="253" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-    <!-- Arrow: SNN to Cognitive Modulation -->
-    <line x1="480" y1="225" x2="530" y2="225" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- NEUROMORPHIC CORE (SNN) (602) - Bold border -->
+  <rect x="150" y="255" width="550" height="100" rx="5" fill="none" stroke="black" stroke-width="3"/>
+  <text x="425" y="285" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">NEUROMORPHIC CORE (SNN)</text>
+  <text x="425" y="315" font-family="Courier New, monospace" font-size="14" text-anchor="middle">V = V × leak + I_ext + I_refl + I_syn</text>
+  <text x="425" y="340" font-family="Courier New, monospace" font-size="14" text-anchor="middle">output = mean(V_1, V_2, ..., V_N)</text>
+  <text x="690" y="272" font-family="Arial, sans-serif" font-size="14" text-anchor="end">602</text>
 
-    <!-- Cognitive Modulation (604) -->
-    <rect x="530" y="190" width="100" height="70" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="580" y="215" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Cognitive</text>
-    <text x="580" y="233" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Modulation</text>
-    <text x="580" y="250" font-family="Courier New, monospace" font-size="14" text-anchor="middle">refl_coeff</text>
-    <text x="660" y="210" font-family="Arial, sans-serif" font-size="14" text-anchor="start">604</text>
-    <line x1="658" y1="210" x2="630" y2="220" stroke="black" stroke-width="0.5"/>
+  <!-- Arrows from SNN to row below -->
+  <line x1="275" y1="355" x2="275" y2="388" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="575" y1="355" x2="575" y2="388" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-    <!-- Arrow: Cognitive to Motor -->
-    <line x1="580" y1="260" x2="580" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- SELF-OBSERVATION (604) - Left side -->
+  <rect x="150" y="390" width="250" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="275" y="420" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SELF-OBSERVATION</text>
+  <text x="275" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(Patent B - This Patent)</text>
+  <text x="275" y="475" font-family="Courier New, monospace" font-size="14" text-anchor="middle">z^(-1) delay + refl_coeff</text>
+  <text x="390" y="407" font-family="Arial, sans-serif" font-size="14" text-anchor="end">604</text>
 
-    <!-- Motor Actuator (606) -->
-    <rect x="530" y="300" width="100" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="580" y="322" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Motor</text>
-    <text x="580" y="340" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Actuator</text>
-    <text x="660" y="320" font-family="Arial, sans-serif" font-size="14" text-anchor="start">606</text>
-    <line x1="658" y1="318" x2="630" y2="325" stroke="black" stroke-width="0.5"/>
+  <!-- COGNITIVE MODULATION (606) - Right side -->
+  <rect x="450" y="390" width="250" height="80" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="575" y="420" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">COGNITIVE MODULATION</text>
+  <text x="575" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">refl_coeff adjustment</text>
+  <text x="575" y="465" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Attention / Intention</text>
+  <text x="690" y="407" font-family="Arial, sans-serif" font-size="14" text-anchor="end">606</text>
 
-    <!-- Arrow: Motor to Energy Harvester -->
-    <line x1="580" y1="350" x2="580" y2="390" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- Bidirectional arrow between Self-Obs and Cognitive Mod -->
+  <line x1="400" y1="445" x2="448" y2="445" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="450" y1="430" x2="402" y2="430" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-    <!-- Energy Harvester (608) -->
-    <rect x="530" y="390" width="100" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="580" y="412" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy</text>
-    <text x="580" y="430" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Harvester</text>
-    <text x="660" y="410" font-family="Arial, sans-serif" font-size="14" text-anchor="start">608</text>
-    <line x1="658" y1="408" x2="630" y2="415" stroke="black" stroke-width="0.5"/>
+  <!-- Arrow: Cognitive to Motor -->
+  <line x1="575" y1="470" x2="575" y2="508" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-    <!-- ENERGY FEEDBACK PATH (610) - Exits LEFT of Harvester, straight up to SNN -->
-    <line x1="530" y1="415" x2="460" y2="415" stroke="black" stroke-width="2"/>
-    <line x1="460" y1="415" x2="460" y2="280" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-    <text x="455" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="end">ENERGY</text>
-    <text x="455" y="355" font-family="Arial, sans-serif" font-size="14" text-anchor="end">FEEDBACK</text>
-    <text x="455" y="370" font-family="Arial, sans-serif" font-size="14" text-anchor="end">(Patent A)</text>
-    <text x="455" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="end">610</text>
-    <line x1="457" y1="397" x2="480" y2="415" stroke="black" stroke-width="0.5"/>
+  <!-- MOTOR ACTUATION (608) - Right side -->
+  <rect x="450" y="510" width="250" height="65" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="575" y="540" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">MOTOR ACTUATION</text>
+  <text x="575" y="565" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Servo Control / Response</text>
+  <text x="690" y="527" font-family="Arial, sans-serif" font-size="14" text-anchor="end">608</text>
 
-    <!-- SELF-OBSERVATION PATH (612) - Outer loop on the left -->
-    <!-- Segment 1: From SNN bottom-left corner down -->
-    <line x1="320" y1="280" x2="320" y2="320" stroke="black" stroke-width="3"/>
+  <!-- Arrow: Motor to Energy Harvesting -->
+  <line x1="575" y1="575" x2="575" y2="608" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-    <!-- z^-1 delay box -->
-    <rect x="295" y="320" width="50" height="35" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="320" y="342" font-family="Courier New, monospace" font-size="14" text-anchor="middle">z⁻¹</text>
+  <!-- ENERGY HARVESTING (610) - Right side -->
+  <rect x="450" y="610" width="250" height="65" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="575" y="640" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">ENERGY HARVESTING</text>
+  <text x="575" y="665" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Piezo / Thermal Recovery</text>
+  <text x="690" y="627" font-family="Arial, sans-serif" font-size="14" text-anchor="end">610</text>
 
-    <!-- Segment 2: From z^-1 down, left, up, and back into SNN -->
-    <line x1="320" y1="355" x2="320" y2="480" stroke="black" stroke-width="3"/>
-    <line x1="320" y1="480" x2="120" y2="480" stroke="black" stroke-width="3"/>
-    <line x1="120" y1="480" x2="120" y2="140" stroke="black" stroke-width="3"/>
-    <line x1="120" y1="140" x2="320" y2="140" stroke="black" stroke-width="3"/>
-    <line x1="320" y1="140" x2="320" y2="170" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- SELF-OBSERVATION LOOP (Patent B) - SHORT DASHES (bold), left side -->
+  <line x1="150" y1="440" x2="125" y2="440" stroke="black" stroke-width="3" stroke-dasharray="3,3"/>
+  <line x1="125" y1="440" x2="125" y2="305" stroke="black" stroke-width="3" stroke-dasharray="3,3"/>
+  <line x1="125" y1="305" x2="148" y2="305" stroke="black" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#ah)"/>
+  <text x="113" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="end" transform="rotate(-90, 113, 340)">SELF-OBSERVATION</text>
 
-    <!-- 612 label - LEFT of z^-1 box -->
-    <text x="270" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="end">612</text>
-    <line x1="272" y1="337" x2="295" y2="337" stroke="black" stroke-width="0.5"/>
+  <!-- ENERGY LOOP (Patent A) - LONG DASHES, right side -->
+  <line x1="700" y1="642" x2="725" y2="642" stroke="black" stroke-width="2" stroke-dasharray="12,6"/>
+  <line x1="725" y1="642" x2="725" y2="305" stroke="black" stroke-width="2" stroke-dasharray="12,6"/>
+  <line x1="725" y1="305" x2="702" y2="305" stroke="black" stroke-width="2" stroke-dasharray="12,6" marker-end="url(#ah)"/>
+  <text x="737" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="start" transform="rotate(90, 737, 475)">ENERGY FEEDBACK</text>
 
-    <!-- SYNAPTIC label (614) - LEFT of self-obs vertical line -->
-    <text x="290" y="410" font-family="Arial, sans-serif" font-size="14" text-anchor="end">SYNAPTIC</text>
-    <text x="290" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="end">614</text>
-    <line x1="292" y1="415" x2="320" y2="415" stroke="black" stroke-width="0.5"/>
+  <!-- Signal Pathways Legend -->
+  <rect x="150" y="710" width="550" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="425" y="740" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Signal Pathways</text>
 
-    <!-- SELF-OBSERVATION label - on the bottom horizontal segment -->
-    <text x="220" y="500" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SELF-OBSERVATION (This patent)</text>
+  <!-- Short dashes sample -->
+  <line x1="180" y1="770" x2="280" y2="770" stroke="black" stroke-width="3" stroke-dasharray="3,3"/>
+  <text x="295" y="775" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Short dashes (bold): Self-Observation (this patent)</text>
 
-    <!-- Signal Pathways Legend -->
-    <rect x="150" y="560" width="550" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="425" y="585" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Signal Pathways</text>
-    <line x1="180" y1="610" x2="270" y2="610" stroke="black" stroke-width="3"/>
-    <text x="280" y="615" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Self-Observation (Patent B)</text>
-    <line x1="180" y1="635" x2="270" y2="635" stroke="black" stroke-width="2"/>
-    <text x="280" y="640" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Energy Feedback (Patent A)</text>
+  <!-- Long dashes sample -->
+  <line x1="180" y1="795" x2="280" y2="795" stroke="black" stroke-width="2" stroke-dasharray="12,6"/>
+  <text x="295" y="800" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Long dashes: Energy feedback (Patent A)</text>
 
-    <!-- Caption -->
-    <text x="425" y="710" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-observation pathway is architecturally</text>
-    <text x="425" y="730" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">distinct from energy feedback</text>
+  <!-- Caption -->
+  <text x="425" y="860" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">The self-observation pathway feeds the network's own aggregate state</text>
+  <text x="425" y="880" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">back as explicit input at configurable gain (0.0 to 1.0).</text>
 
-    <text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 6</text>
-  </g>
+  <!-- Figure Label -->
+  <text x="425" y="1020" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 6</text>
 </svg>
