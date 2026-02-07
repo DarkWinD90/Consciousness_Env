@@ -25,33 +25,35 @@
 <text x="590" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">80</text>
 <line x1="590" y1="150" x2="590" y2="200" stroke="black" stroke-width="2"/>
 <text x="700" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">100</text>
-<line x1="191" y1="225" x2="191" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="191" y1="200" x2="191" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 <text x="191" y="320" font-family="Courier New, monospace" font-size="14" text-anchor="middle">mod=-0.4</text>
-<line x1="273" y1="225" x2="273" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="273" y1="200" x2="273" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 <text x="273" y="320" font-family="Courier New, monospace" font-size="14" text-anchor="middle">mod=-0.1</text>
-<line x1="452" y1="225" x2="452" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="452" y1="200" x2="452" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 <text x="452" y="320" font-family="Courier New, monospace" font-size="14" text-anchor="middle">mod=0.0</text>
-<line x1="645" y1="225" x2="645" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="645" y1="200" x2="645" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 <text x="645" y="320" font-family="Courier New, monospace" font-size="14" text-anchor="middle">mod=+0.3</text>
-<text x="425" y="360" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Reflection Coefficient</text>
-<line x1="425" y1="340" x2="425" y2="380" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+<text x="425" y="370" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Reflection Coefficient Scale</text>
+<text x="580" y="370" font-family="Arial, sans-serif" font-size="14" text-anchor="start">510</text>
+<line x1="578" y1="373" x2="520" y2="420" stroke="black" stroke-width="0.5"/>
+
 <line x1="150" y1="420" x2="700" y2="420" stroke="black" stroke-width="2"/>
 <text x="140" y="425" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.1</text>
 <text x="710" y="425" font-family="Courier New, monospace" font-size="14" text-anchor="start">0.3</text>
-<text x="715" y="405" font-family="Arial, sans-serif" font-size="14" text-anchor="start">510</text>
-<line x1="713" y1="410" x2="700" y2="420" stroke="black" stroke-width="0.5"/>
-<line x1="315" y1="412" x2="315" y2="428" stroke="black" stroke-width="2"/>
-<text x="315" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.16</text>
-<text x="315" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">CRIT</text>
-<line x1="397" y1="412" x2="397" y2="428" stroke="black" stroke-width="2"/>
-<text x="397" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.19</text>
-<text x="397" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">LOW</text>
-<line x1="425" y1="412" x2="425" y2="428" stroke="black" stroke-width="2"/>
-<text x="425" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.20</text>
-<text x="425" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">NORM</text>
-<line x1="507" y1="412" x2="507" y2="428" stroke="black" stroke-width="2"/>
-<text x="507" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.23</text>
-<text x="507" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">SURP</text>
+
+
+<line x1="260" y1="412" x2="260" y2="428" stroke="black" stroke-width="2"/>
+<text x="260" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.16</text>
+<text x="260" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">CRIT</text>
+<line x1="360" y1="412" x2="360" y2="428" stroke="black" stroke-width="2"/>
+<text x="360" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.19</text>
+<text x="360" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">LOW</text>
+<line x1="460" y1="412" x2="460" y2="428" stroke="black" stroke-width="2"/>
+<text x="460" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.20</text>
+<text x="460" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">NORM</text>
+<line x1="560" y1="412" x2="560" y2="428" stroke="black" stroke-width="2"/>
+<text x="560" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.23</text>
+<text x="560" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">SURP</text>
 <rect x="150" y="500" width="550" height="140" rx="5" fill="none" stroke="black" stroke-width="2"/>
 <text x="425" y="525" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Behavioral Effects</text>
 <text x="705" y="510" font-family="Arial, sans-serif" font-size="14" text-anchor="start">512</text>
