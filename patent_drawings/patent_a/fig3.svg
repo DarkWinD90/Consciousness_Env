@@ -58,12 +58,12 @@
     <text x="130" y="565" font-family="Courier New, monospace" font-size="14" text-anchor="middle">adjusted_input</text>
     <line x1="602" y1="580" x2="695" y2="580" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
     <text x="620" y="565" font-family="Courier New, monospace" font-size="14">spike_vector</text>
-    <text x="705" y="580" font-family="Arial, sans-serif" font-size="14" >318</text>
+    <text x="690" y="560" font-family="Arial, sans-serif" font-size="14" text-anchor="end">318</text>
     <text x="425" y="660" font-family="Courier New, monospace" font-size="14" text-anchor="middle">W[i,i] = 0 (no self-connections)</text>
     <text x="425" y="682" font-family="Courier New, monospace" font-size="14" text-anchor="middle">N = 50 (operational), N = 20 (control)</text>
     <rect x="155" y="715" width="540" height="100" rx="8" fill="none" stroke="black" stroke-width="1.5"/>
     <text x="425" y="737" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">STDP Learning Rule</text>
-    <text x="705" y="737" font-family="Arial, sans-serif" font-size="14" >320</text>
+    <text x="685" y="755" font-family="Arial, sans-serif" font-size="14" text-anchor="end">320</text>
     <text x="170" y="761" font-family="Courier New, monospace" font-size="14">Post fires: W += A+ x pre_trace (LTP)</text>
     <text x="170" y="781" font-family="Courier New, monospace" font-size="14">Pre fires:  W -= A- x post_trace (LTD)</text>
     <text x="170" y="803" font-family="Courier New, monospace" font-size="14">A- &gt; A+ (stability bias)</text>
