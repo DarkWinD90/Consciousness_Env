@@ -42,7 +42,8 @@
 
   <!-- 206: CONNECTED -> AUTONOMOUS (top arrow) -->
   <line x1="270" y1="295" x2="480" y2="295" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="375" y="275" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">206: Heartbeat timeout (>30s)</text>
+  <text x="375" y="260" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">206</text>
+  <text x="375" y="278" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Heartbeat timeout (>30s)</text>
 
   <!-- 212: AUTONOMOUS -> CONNECTED (bottom arrow, dashed - direct reconnect) -->
   <line x1="479" y1="345" x2="270" y2="345" stroke="black" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ah)"/>

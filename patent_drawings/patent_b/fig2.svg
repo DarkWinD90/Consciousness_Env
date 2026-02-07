@@ -20,7 +20,7 @@
 
   <!-- Main Spectrum Bar (200) -->
   <rect x="150" y="205" width="550" height="45" rx="0" fill="none" stroke="black" stroke-width="3"/>
-  <text x="710" y="223" font-family="Arial, sans-serif" font-size="14" text-anchor="start">200</text>
+  <text x="690" y="223" font-family="Arial, sans-serif" font-size="14" text-anchor="end">200</text>
   <line x1="705" y1="220" x2="700" y2="228" stroke="black" stroke-width="0.5"/>
 
   <!-- Region dividers inside bar -->
@@ -43,7 +43,7 @@
   <!-- REGION 1 (202) -->
   <rect x="150" y="320" width="550" height="85" rx="5" fill="none" stroke="black" stroke-width="2"/>
   <text x="165" y="345" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 1 (0.0): No Self-Observation</text>
-  <text x="710" y="338" font-family="Arial, sans-serif" font-size="14" text-anchor="start">202</text>
+  <text x="690" y="338" font-family="Arial, sans-serif" font-size="14" text-anchor="end">202</text>
   <line x1="705" y1="335" x2="700" y2="345" stroke="black" stroke-width="0.5"/>
   <text x="165" y="368" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Pure feedforward processing</text>
   <text x="165" y="386" font-family="Courier New, monospace" font-size="14" text-anchor="start">Behavior: System responds only to external input</text>
@@ -51,7 +51,7 @@
   <!-- REGION 2 (204) -->
   <rect x="150" y="420" width="550" height="85" rx="5" fill="none" stroke="black" stroke-width="2"/>
   <text x="165" y="445" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 2 (0.0 - 0.2): Minimal Self-Awareness</text>
-  <text x="710" y="438" font-family="Arial, sans-serif" font-size="14" text-anchor="start">204</text>
+  <text x="690" y="438" font-family="Arial, sans-serif" font-size="14" text-anchor="end">204</text>
   <line x1="705" y1="435" x2="700" y2="445" stroke="black" stroke-width="0.5"/>
   <text x="165" y="468" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Slight influence of prior state</text>
   <text x="165" y="486" font-family="Courier New, monospace" font-size="14" text-anchor="start">Behavior: Primarily externally driven</text>
@@ -60,7 +60,7 @@
   <rect x="150" y="520" width="550" height="100" rx="5" fill="none" stroke="black" stroke-width="3"/>
   <text x="165" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 3 (0.2 - 0.4): Balanced Self-Observation</text>
   <text x="530" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">OPERATIONAL RANGE</text>
-  <text x="710" y="538" font-family="Arial, sans-serif" font-size="14" text-anchor="start">206</text>
+  <text x="690" y="538" font-family="Arial, sans-serif" font-size="14" text-anchor="end">206</text>
   <line x1="705" y1="535" x2="700" y2="545" stroke="black" stroke-width="0.5"/>
   <text x="165" y="568" font-family="Arial, sans-serif" font-size="14" text-anchor="start">External input + meaningful self-reference</text>
   <text x="165" y="591" font-family="Courier New, monospace" font-size="14" text-anchor="start">Default: refl_coeff = 0.2 + modulation x 0.1</text>
@@ -68,7 +68,7 @@
   <!-- REGION 4 (208) -->
   <rect x="150" y="635" width="550" height="85" rx="5" fill="none" stroke="black" stroke-width="2"/>
   <text x="165" y="660" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 4 (0.4 - 0.7): Self-Dominated Processing</text>
-  <text x="710" y="653" font-family="Arial, sans-serif" font-size="14" text-anchor="start">208</text>
+  <text x="690" y="653" font-family="Arial, sans-serif" font-size="14" text-anchor="end">208</text>
   <line x1="705" y1="650" x2="700" y2="660" stroke="black" stroke-width="0.5"/>
   <text x="165" y="683" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Internal state dominates</text>
   <text x="165" y="701" font-family="Courier New, monospace" font-size="14" text-anchor="start">Behavior: Risk of echo chamber dynamics</text>
@@ -76,7 +76,7 @@
   <!-- REGION 5 (210) -->
   <rect x="150" y="735" width="550" height="85" rx="5" fill="none" stroke="black" stroke-width="2"/>
   <text x="165" y="760" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 5 (0.7 - 1.0): Self-Absorption</text>
-  <text x="710" y="753" font-family="Arial, sans-serif" font-size="14" text-anchor="start">210</text>
+  <text x="690" y="753" font-family="Arial, sans-serif" font-size="14" text-anchor="end">210</text>
   <line x1="705" y1="750" x2="700" y2="760" stroke="black" stroke-width="0.5"/>
   <text x="165" y="783" font-family="Arial, sans-serif" font-size="14" text-anchor="start">External input overwhelmed</text>
   <text x="165" y="801" font-family="Courier New, monospace" font-size="14" text-anchor="start">Behavior: System locks onto its own prior state</text>
