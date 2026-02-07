@@ -60,7 +60,7 @@
 
   <!-- CRITICAL zone: 0-15 mWh, mod = -0.4 -->
   <line x1="125" y1="600" x2="203" y2="600" stroke="black" stroke-width="3"/>
-  <rect x="125" y="600" width="78" height="50" fill="url(#hatch)" stroke="none" opacity="0.5"/>
+  <rect x="125" y="600" width="78" height="50" fill="url(#hatch)" stroke="none"/>
   <text x="164" y="580" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CRITICAL</text>
 
   <!-- Step up at 15 mWh -->

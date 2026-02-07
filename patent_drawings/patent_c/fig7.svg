@@ -28,7 +28,7 @@
   <rect x="125" y="280" width="85" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
   <text x="167" y="270" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">702</text>
   <text x="167" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Sensors</text>
-  <text x="167" y="315" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">(external)</text>
+  <text x="167" y="315" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(external)</text>
 
   <!-- Arrow from Sensors to SNN -->
   <line x1="210" y1="305" x2="248" y2="305" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
@@ -61,8 +61,8 @@
 
   <!-- Energy Harvest -->
   <rect x="598" y="280" width="52" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="624" y="300" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Energy</text>
-  <text x="624" y="316" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Harvest</text>
+  <text x="624" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy</text>
+  <text x="624" y="316" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Harvest</text>
 
   <!-- Energy feedback loop (710) -->
   <line x1="624" y1="330" x2="624" y2="355" stroke="black" stroke-width="2"/>
@@ -83,7 +83,7 @@
   <text x="167" y="497" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">712</text>
   <text x="167" y="525" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous</text>
   <text x="167" y="540" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Input Gen</text>
-  <text x="167" y="557" font-family="Courier New, monospace" font-size="12" text-anchor="middle">Circadian+Bursts</text>
+  <text x="167" y="557" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Circadian+Bursts</text>
 
   <!-- Arrow from Input Gen to SNN -->
   <line x1="210" y1="537" x2="248" y2="537" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
@@ -101,7 +101,7 @@
   <text x="478" y="522" font-family="Arial, sans-serif" font-size="14" text-anchor="end">714</text>
   <text x="444" y="530" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy-Aware</text>
   <text x="444" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-Mod</text>
-  <text x="444" y="562" font-family="Courier New, monospace" font-size="12" text-anchor="middle">&lt;15:-0.4</text>
+  <text x="444" y="562" font-family="Courier New, monospace" font-size="14" text-anchor="middle">&lt;15:-0.4</text>
 
   <!-- Arrow from Self-Mod to Motor -->
   <line x1="488" y1="537" x2="526" y2="537" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
@@ -115,29 +115,29 @@
 
   <!-- Energy Harvest (Autonomous) -->
   <rect x="598" y="512" width="52" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="624" y="532" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Energy</text>
-  <text x="624" y="548" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Harvest</text>
+  <text x="624" y="532" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy</text>
+  <text x="624" y="548" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Harvest</text>
 
   <!-- Buffer (716) -->
   <ellipse cx="307" cy="630" rx="45" ry="22" fill="none" stroke="black" stroke-width="2"/>
   <text x="307" y="660" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">716</text>
   <text x="307" y="635" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Buffer</text>
   <line x1="302" y1="570" x2="302" y2="606" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="312" y="592" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Every step</text>
+  <text x="312" y="592" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Every step</text>
 
   <!-- Snapshot (718) -->
   <ellipse cx="411" cy="630" rx="45" ry="22" fill="none" stroke="black" stroke-width="2"/>
   <text x="411" y="660" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">718</text>
   <text x="411" y="635" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Snapshot</text>
   <line x1="352" y1="630" x2="364" y2="630" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="411" y="680" font-family="Courier New, monospace" font-size="12" text-anchor="middle">Every 50 steps</text>
+  <text x="411" y="680" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Every 50 steps</text>
 
   <!-- Resync path (720) -->
   <line x1="456" y1="630" x2="650" y2="630" stroke="black" stroke-width="2"/>
   <line x1="650" y1="630" x2="650" y2="200" stroke="black" stroke-width="2"/>
   <line x1="650" y1="200" x2="492" y2="200" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <text x="635" y="415" font-family="Courier New, monospace" font-size="14" text-anchor="end">720</text>
-  <text x="635" y="435" font-family="Courier New, monospace" font-size="12" text-anchor="end">resync()</text>
+  <text x="635" y="435" font-family="Courier New, monospace" font-size="14" text-anchor="end">resync()</text>
 
   <!-- Signal Pathways Legend -->
   <rect x="125" y="710" width="525" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
