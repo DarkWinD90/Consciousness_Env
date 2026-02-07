@@ -12,99 +12,99 @@
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">3/7</text>
 
   <!-- Title -->
-  <text x="425" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">ENERGY-AWARE MODULATION CURVE</text>
+  <text x="387" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">ENERGY-AWARE MODULATION CURVE</text>
 
   <!-- Y-axis -->
-  <line x1="150" y1="650" x2="150" y2="250" stroke="black" stroke-width="2"/>
-  <text x="115" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 115 450)">Autonomous Modulation Value</text>
+  <line x1="125" y1="650" x2="125" y2="250" stroke="black" stroke-width="2"/>
+  <text x="90" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 90 450)">Autonomous Modulation Value</text>
 
   <!-- X-axis -->
-  <line x1="150" y1="650" x2="700" y2="650" stroke="black" stroke-width="2"/>
-  <text x="425" y="700" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">System Energy Level (mWh)</text>
+  <line x1="125" y1="650" x2="650" y2="650" stroke="black" stroke-width="2"/>
+  <text x="387" y="700" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">System Energy Level (mWh)</text>
 
   <!-- Y-axis tick marks and labels -->
-  <line x1="145" y1="600" x2="150" y2="600" stroke="black" stroke-width="2"/>
-  <text x="135" y="605" font-family="Courier New, monospace" font-size="14" text-anchor="end">-0.4</text>
-  <line x1="150" y1="600" x2="700" y2="600" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <line x1="120" y1="600" x2="125" y2="600" stroke="black" stroke-width="2"/>
+  <text x="110" y="605" font-family="Courier New, monospace" font-size="14" text-anchor="end">-0.4</text>
+  <line x1="125" y1="600" x2="650" y2="600" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
 
-  <line x1="145" y1="500" x2="150" y2="500" stroke="black" stroke-width="2"/>
-  <text x="135" y="505" font-family="Courier New, monospace" font-size="14" text-anchor="end">-0.1</text>
-  <line x1="150" y1="500" x2="700" y2="500" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <line x1="120" y1="500" x2="125" y2="500" stroke="black" stroke-width="2"/>
+  <text x="110" y="505" font-family="Courier New, monospace" font-size="14" text-anchor="end">-0.1</text>
+  <line x1="125" y1="500" x2="650" y2="500" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
 
-  <line x1="145" y1="450" x2="150" y2="450" stroke="black" stroke-width="2"/>
-  <text x="135" y="455" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.0</text>
-  <line x1="150" y1="450" x2="700" y2="450" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <line x1="120" y1="450" x2="125" y2="450" stroke="black" stroke-width="2"/>
+  <text x="110" y="455" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.0</text>
+  <line x1="125" y1="450" x2="650" y2="450" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
 
-  <line x1="145" y1="350" x2="150" y2="350" stroke="black" stroke-width="2"/>
-  <text x="135" y="355" font-family="Courier New, monospace" font-size="14" text-anchor="end">+0.3</text>
-  <line x1="150" y1="350" x2="700" y2="350" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <line x1="120" y1="350" x2="125" y2="350" stroke="black" stroke-width="2"/>
+  <text x="110" y="355" font-family="Courier New, monospace" font-size="14" text-anchor="end">+0.3</text>
+  <line x1="125" y1="350" x2="650" y2="350" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
 
-  <!-- X-axis tick marks and labels -->
-  <line x1="150" y1="650" x2="150" y2="655" stroke="black" stroke-width="2"/>
-  <text x="150" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0</text>
+  <!-- X-axis tick marks and labels (scaled) -->
+  <line x1="125" y1="650" x2="125" y2="655" stroke="black" stroke-width="2"/>
+  <text x="125" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0</text>
 
-  <line x1="232" y1="650" x2="232" y2="655" stroke="black" stroke-width="2"/>
-  <text x="232" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">15</text>
+  <line x1="203" y1="650" x2="203" y2="655" stroke="black" stroke-width="2"/>
+  <text x="203" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">15</text>
 
-  <line x1="315" y1="650" x2="315" y2="655" stroke="black" stroke-width="2"/>
-  <text x="315" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">30</text>
+  <line x1="282" y1="650" x2="282" y2="655" stroke="black" stroke-width="2"/>
+  <text x="282" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">30</text>
 
-  <line x1="590" y1="650" x2="590" y2="655" stroke="black" stroke-width="2"/>
-  <text x="590" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">80</text>
+  <line x1="545" y1="650" x2="545" y2="655" stroke="black" stroke-width="2"/>
+  <text x="545" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">80</text>
 
-  <line x1="700" y1="650" x2="700" y2="655" stroke="black" stroke-width="2"/>
-  <text x="700" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">100</text>
+  <line x1="650" y1="650" x2="650" y2="655" stroke="black" stroke-width="2"/>
+  <text x="650" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">100</text>
 
-  <!-- Energy Modulation Curve (300) - Step function -->
-  <text x="710" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="start">300</text>
+  <!-- Energy Modulation Curve (300) - Reference numeral inside chart area -->
+  <text x="635" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="end">300</text>
 
   <!-- CRITICAL zone: 0-15 mWh, mod = -0.4 -->
-  <line x1="150" y1="600" x2="232" y2="600" stroke="black" stroke-width="3"/>
-  <rect x="150" y="600" width="82" height="50" fill="url(#hatch)" stroke="none" opacity="0.3"/>
-  <text x="191" y="580" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CRITICAL</text>
+  <line x1="125" y1="600" x2="203" y2="600" stroke="black" stroke-width="3"/>
+  <rect x="125" y="600" width="78" height="50" fill="url(#hatch)" stroke="none" opacity="0.5"/>
+  <text x="164" y="580" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CRITICAL</text>
 
   <!-- Step up at 15 mWh -->
-  <line x1="232" y1="600" x2="232" y2="500" stroke="black" stroke-width="3"/>
+  <line x1="203" y1="600" x2="203" y2="500" stroke="black" stroke-width="3"/>
 
   <!-- LOW zone: 15-30 mWh, mod = -0.1 -->
-  <line x1="232" y1="500" x2="315" y2="500" stroke="black" stroke-width="3"/>
-  <text x="274" y="480" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">LOW</text>
+  <line x1="203" y1="500" x2="282" y2="500" stroke="black" stroke-width="3"/>
+  <text x="243" y="480" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">LOW</text>
 
   <!-- Step up at 30 mWh -->
-  <line x1="315" y1="500" x2="315" y2="450" stroke="black" stroke-width="3"/>
+  <line x1="282" y1="500" x2="282" y2="450" stroke="black" stroke-width="3"/>
 
   <!-- NORMAL zone: 30-80 mWh, mod = 0.0 -->
-  <line x1="315" y1="450" x2="590" y2="450" stroke="black" stroke-width="3"/>
-  <text x="452" y="430" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">NORMAL</text>
+  <line x1="282" y1="450" x2="545" y2="450" stroke="black" stroke-width="3"/>
+  <text x="413" y="430" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">NORMAL</text>
 
   <!-- Step up at 80 mWh -->
-  <line x1="590" y1="450" x2="590" y2="350" stroke="black" stroke-width="3"/>
+  <line x1="545" y1="450" x2="545" y2="350" stroke="black" stroke-width="3"/>
 
   <!-- SURPLUS zone: 80-100 mWh, mod = +0.3 -->
-  <line x1="590" y1="350" x2="700" y2="350" stroke="black" stroke-width="3"/>
-  <text x="645" y="330" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SURPLUS</text>
+  <line x1="545" y1="350" x2="650" y2="350" stroke="black" stroke-width="3"/>
+  <text x="597" y="330" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SURPLUS</text>
 
   <!-- Behavioral Effects Box (302) -->
-  <rect x="150" y="730" width="550" height="130" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="690" y="747" font-family="Arial, sans-serif" font-size="14" text-anchor="end">302</text>
-  <text x="425" y="755" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Behavioral Effects</text>
+  <rect x="125" y="730" width="525" height="130" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="635" y="747" font-family="Arial, sans-serif" font-size="14" text-anchor="end">302</text>
+  <text x="387" y="755" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Behavioral Effects</text>
 
-  <text x="200" y="785" font-family="Courier New, monospace" font-size="14" text-anchor="start">&lt; 15 mWh</text>
-  <text x="350" y="785" font-family="Courier New, monospace" font-size="14" text-anchor="start">mod = -0.4</text>
-  <text x="500" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Maximum conservation</text>
+  <text x="173" y="785" font-family="Courier New, monospace" font-size="14" text-anchor="start">&lt; 15 mWh</text>
+  <text x="316" y="785" font-family="Courier New, monospace" font-size="14" text-anchor="start">mod = -0.4</text>
+  <text x="459" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Maximum conservation</text>
 
-  <text x="200" y="810" font-family="Courier New, monospace" font-size="14" text-anchor="start">15-30 mWh</text>
-  <text x="350" y="810" font-family="Courier New, monospace" font-size="14" text-anchor="start">mod = -0.1</text>
-  <text x="500" y="810" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Cautious operation</text>
+  <text x="173" y="810" font-family="Courier New, monospace" font-size="14" text-anchor="start">15-30 mWh</text>
+  <text x="316" y="810" font-family="Courier New, monospace" font-size="14" text-anchor="start">mod = -0.1</text>
+  <text x="459" y="810" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Cautious operation</text>
 
-  <text x="200" y="835" font-family="Courier New, monospace" font-size="14" text-anchor="start">30-80 mWh</text>
-  <text x="350" y="835" font-family="Courier New, monospace" font-size="14" text-anchor="start">mod = 0.0</text>
-  <text x="500" y="835" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Standard processing</text>
+  <text x="173" y="835" font-family="Courier New, monospace" font-size="14" text-anchor="start">30-80 mWh</text>
+  <text x="316" y="835" font-family="Courier New, monospace" font-size="14" text-anchor="start">mod = 0.0</text>
+  <text x="459" y="835" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Standard processing</text>
 
-  <text x="200" y="860" font-family="Courier New, monospace" font-size="14" text-anchor="start">&gt; 80 mWh</text>
-  <text x="350" y="860" font-family="Courier New, monospace" font-size="14" text-anchor="start">mod = +0.3</text>
-  <text x="500" y="860" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Exploration enabled</text>
+  <text x="173" y="860" font-family="Courier New, monospace" font-size="14" text-anchor="start">&gt; 80 mWh</text>
+  <text x="316" y="860" font-family="Courier New, monospace" font-size="14" text-anchor="start">mod = +0.3</text>
+  <text x="459" y="860" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Exploration enabled</text>
 
   <!-- Figure Label -->
-  <text x="425" y="1020" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 3</text>
+  <text x="387" y="950" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 3</text>
 </svg>
