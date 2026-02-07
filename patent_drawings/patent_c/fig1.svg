@@ -15,7 +15,7 @@
   <text x="425" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SYSTEM ARCHITECTURE WITH COGNITIVE FALLBACK</text>
 
   <!-- External Cognitive Control Layer (100) - Cloud Shape -->
-  <path d="M235,130 C205,130 185,150 185,175 C160,175 140,195 140,220 C140,245 160,265 185,265 C185,290 205,310 235,310 L565,310 C595,310 615,290 615,265 C640,265 660,245 660,220 C660,195 640,175 615,175 C615,150 595,130 565,130 Z"
+  <path d="M235,130 C205,130 185,150 185,175 C160,175 140,195 140,220 C140,245 160,265 185,265 C185,290 205,310 235,310 L565,310 C595,310 615,290 615,265 C635,265 650,245 650,220 C650,195 635,175 615,175 C615,150 595,130 565,130 Z"
         fill="none" stroke="black" stroke-width="2" stroke-dasharray="5,3"/>
   <text x="555" y="155" font-family="Arial, sans-serif" font-size="14" text-anchor="end">100</text>
   <text x="400" y="190" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">EXTERNAL COGNITIVE CONTROL LAYER</text>
