@@ -4,97 +4,127 @@
     <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
       <polygon points="0 0, 6 2, 0 4" fill="black" />
     </marker>
+    <marker id="ah-light" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="black" />
+    </marker>
   </defs>
   <rect width="100%" height="100%" fill="white" />
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">1/7</text>
 
   <!-- Title -->
-  <text x="425" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SYSTEM ARCHITECTURE WITH COGNITIVE FALLBACK</text>
+  <text x="425" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SYSTEM ARCHITECTURE WITH COGNITIVE FALLBACK</text>
 
-  <!-- External Cognitive Control Layer (100) -->
-  <ellipse cx="425" cy="210" rx="180" ry="50" fill="none" stroke="black" stroke-width="2" stroke-dasharray="5,3"/>
-  <text x="425" y="205" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">External Cognitive Control Layer</text>
-  <text x="425" y="225" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(e.g., Claude)</text>
-  <text x="550" y="195" font-family="Arial, sans-serif" font-size="14" text-anchor="end">100</text>
-  <text x="570" y="195" font-family="Arial, sans-serif" font-size="14" text-anchor="start">May disconnect</text>
+  <!-- External Cognitive Control Layer (100) - Cloud Shape -->
+  <path d="M235,130 C205,130 185,150 185,175 C160,175 140,195 140,220 C140,245 160,265 185,265 C185,290 205,310 235,310 L565,310 C595,310 615,290 615,265 C635,265 650,245 650,220 C650,195 635,175 615,175 C615,150 595,130 565,130 Z"
+        fill="none" stroke="black" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="555" y="155" font-family="Arial, sans-serif" font-size="14" text-anchor="end">100</text>
+  <text x="400" y="190" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">EXTERNAL COGNITIVE CONTROL LAYER</text>
+  <text x="400" y="210" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(e.g., Claude)</text>
+  <text x="400" y="235" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Provides intelligent cognitive decisions</text>
+  <text x="400" y="260" font-family="Arial, sans-serif" font-size="14" font-style="italic" text-anchor="middle">May become unavailable</text>
 
-  <!-- Arrows from Cognitive Layer to Watchdog -->
-  <line x1="350" y1="260" x2="350" y2="318" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="360" y="290" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Modulation</text>
-  <text x="360" y="305" font-family="Courier New, monospace" font-size="14" text-anchor="start">(-1.0 to +1.0)</text>
+  <!-- Arrow from Cognitive Layer to Watchdog - Modulation -->
+  <line x1="300" y1="310" x2="300" y2="379" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="245" y="342" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Modulation</text>
+  <text x="245" y="358" font-family="Courier New, monospace" font-size="14" text-anchor="end">(-1.0 to +1.0)</text>
 
-  <line x1="500" y1="260" x2="500" y2="318" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="510" y="290" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Heartbeat</text>
-  <text x="510" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="start">(tool calls)</text>
+  <!-- Arrow from Cognitive Layer to Watchdog - Heartbeat -->
+  <line x1="500" y1="310" x2="500" y2="379" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="555" y="342" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Heartbeat</text>
+  <text x="555" y="358" font-family="Arial, sans-serif" font-size="14" text-anchor="start">(tool calls)</text>
 
   <!-- Heartbeat Watchdog (102) -->
-  <rect x="300" y="320" width="250" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="540" y="337" font-family="Arial, sans-serif" font-size="14" text-anchor="end">102</text>
-  <text x="425" y="355" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Heartbeat Watchdog</text>
-  <text x="425" y="380" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Timeout: 30 seconds</text>
-  <text x="425" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Check interval: ~5 seconds</text>
+  <rect x="125" y="380" width="525" height="80" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="635" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="end">102</text>
+  <text x="387" y="415" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">HEARTBEAT WATCHDOG</text>
+  <text x="387" y="435" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Monitors time since last cognitive input</text>
+  <text x="387" y="453" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Timeout: 30s | Check interval: 5s</text>
 
-  <!-- Arrows from Watchdog to Modes -->
-  <line x1="350" y1="420" x2="220" y2="478" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="270" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Heartbeat</text>
-  <text x="270" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">active</text>
+  <!-- Arrow from Watchdog to 104 - solid (Connected) -->
+  <line x1="250" y1="460" x2="250" y2="519" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="195" y="482" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Connected</text>
+  <text x="195" y="498" font-family="Arial, sans-serif" font-size="14" text-anchor="end">(heartbeat OK)</text>
 
-  <line x1="500" y1="420" x2="630" y2="478" stroke="black" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ah)"/>
-  <text x="580" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Timeout</text>
-  <text x="580" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(>30s)</text>
+  <!-- Arrow from Watchdog to 106 - dashed (Autonomous) -->
+  <line x1="525" y1="460" x2="525" y2="519" stroke="black" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ah)"/>
+  <text x="580" y="482" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Autonomous</text>
+  <text x="580" y="498" font-family="Arial, sans-serif" font-size="14" text-anchor="start">(timeout >30s)</text>
 
-  <!-- Connected Mode (104) -->
-  <rect x="115" y="480" width="210" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="315" y="497" font-family="Arial, sans-serif" font-size="14" text-anchor="end">104</text>
-  <text x="220" y="515" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Connected Mode</text>
-  <text x="220" y="540" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Input: Claude-controlled</text>
-  <text x="220" y="565" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Mod: Claude-controlled</text>
+  <!-- Cognitive-Driven Operation (104) -->
+  <rect x="125" y="520" width="250" height="70" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="360" y="538" font-family="Arial, sans-serif" font-size="14" text-anchor="end">104</text>
+  <text x="250" y="548" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">COGNITIVE-DRIVEN</text>
+  <text x="250" y="566" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">OPERATION</text>
+  <text x="250" y="583" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Input: Claude (0-1)</text>
 
-  <!-- Autonomous Mode (106) -->
-  <rect x="540" y="480" width="210" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="740" y="497" font-family="Arial, sans-serif" font-size="14" text-anchor="end">106</text>
-  <text x="645" y="515" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous Mode</text>
-  <text x="645" y="540" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Input: Self-generated</text>
-  <text x="645" y="565" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Mod: Energy-aware</text>
+  <!-- Autonomous Fallback Controller (106) -->
+  <rect x="400" y="520" width="250" height="70" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="635" y="538" font-family="Arial, sans-serif" font-size="14" text-anchor="end">106</text>
+  <text x="525" y="548" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">AUTONOMOUS FALLBACK</text>
+  <text x="525" y="566" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONTROLLER</text>
+  <text x="525" y="583" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Mod: Energy-aware</text>
 
-  <!-- Arrow from Autonomous to Step Buffer -->
-  <line x1="645" y1="580" x2="645" y2="618" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- Arrow from 104 directly to SNN -->
+  <line x1="250" y1="590" x2="250" y2="634" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-  <!-- Step Buffer (108) -->
-  <rect x="560" y="620" width="90" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="640" y="637" font-family="Arial, sans-serif" font-size="14" text-anchor="end">108</text>
-  <text x="605" y="652" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Step</text>
-  <text x="605" y="667" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Buffer</text>
+  <!-- Arrow from 106 to SNN (adjusted for narrower SNN box) -->
+  <line x1="480" y1="590" x2="480" y2="634" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-  <!-- Arrow to Snapshot -->
-  <line x1="650" y1="645" x2="683" y2="645" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- Step Buffer (108) - positioned below 106, within margins -->
+  <rect x="555" y="600" width="80" height="35" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="625" y="613" font-family="Arial, sans-serif" font-size="14" text-anchor="end">108</text>
+  <text x="595" y="623" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Buffer</text>
 
-  <!-- Snapshot (110) -->
-  <ellipse cx="720" cy="645" rx="35" ry="22" fill="none" stroke="black" stroke-width="2"/>
-  <text x="720" y="640" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">110</text>
-  <text x="720" y="655" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Snapshot</text>
+  <!-- Arrow from 106 down to Buffer -->
+  <line x1="555" y1="590" x2="555" y2="598" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-  <!-- Arrows down to convergence line -->
-  <line x1="220" y1="580" x2="220" y2="720" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <line x1="605" y1="670" x2="605" y2="720" stroke="black" stroke-width="2"/>
+  <!-- Snapshot (110) - Cylinder to right of Buffer -->
+  <ellipse cx="595" cy="665" rx="25" ry="8" fill="none" stroke="black" stroke-width="2"/>
+  <line x1="570" y1="665" x2="570" y2="700" stroke="black" stroke-width="2"/>
+  <line x1="620" y1="665" x2="620" y2="700" stroke="black" stroke-width="2"/>
+  <ellipse cx="595" cy="700" rx="25" ry="8" fill="none" stroke="black" stroke-width="2"/>
+  <text x="595" y="687" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">110</text>
+  <text x="595" y="722" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Snapshot</text>
 
-  <!-- Convergence line -->
-  <line x1="220" y1="720" x2="605" y2="720" stroke="black" stroke-width="2"/>
+  <!-- Arrow from Buffer down to Snapshot -->
+  <line x1="595" y1="635" x2="595" y2="655" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-  <!-- Arrow down to SNN -->
-  <line x1="425" y1="720" x2="425" y2="758" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- SNN (112) - Main processing box -->
+  <rect x="125" y="635" width="400" height="60" rx="5" fill="none" stroke="black" stroke-width="3"/>
+  <text x="510" y="653" font-family="Arial, sans-serif" font-size="14" text-anchor="end">112</text>
+  <text x="325" y="660" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SPIKING NEURAL NETWORK</text>
+  <text x="325" y="678" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Processes input, drives motor output</text>
 
-  <!-- SNN + Energy Harvester (112) -->
-  <rect x="250" y="760" width="350" height="80" rx="5" fill="none" stroke="black" stroke-width="3"/>
-  <text x="590" y="777" font-family="Arial, sans-serif" font-size="14" text-anchor="end">112</text>
-  <text x="425" y="795" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Spiking Neural Network</text>
-  <text x="425" y="815" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">+ Energy Harvester</text>
-  <text x="425" y="835" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Continuous operation regardless of control source</text>
+  <!-- Motor Output arrow from SNN -->
+  <line x1="325" y1="695" x2="325" y2="724" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="380" y="715" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Motor</text>
+
+  <!-- Energy Harvester (114) - Separate box below SNN -->
+  <rect x="175" y="725" width="300" height="45" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="460" y="743" font-family="Arial, sans-serif" font-size="14" text-anchor="end">114</text>
+  <text x="325" y="745" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">ENERGY HARVESTER</text>
+  <text x="325" y="762" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Piezoelectric + Thermoelectric</text>
+
+  <!-- Energy feedback loop - from Harvester back up to SNN (bold dashed line, normal arrowhead) -->
+  <line x1="175" y1="747" x2="155" y2="747" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="155" y1="747" x2="155" y2="660" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="155" y1="660" x2="125" y2="660" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="170" y="720" font-family="Arial, sans-serif" font-size="14" text-anchor="start" transform="rotate(-90, 170, 720)">Energy feedback</text>
 
   <!-- Caption -->
-  <text x="425" y="890" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">THE SYSTEM NEVER STOPS</text>
-  <text x="425" y="910" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">The control source changes; the computation continues</text>
+  <text x="387" y="810" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">THE SYSTEM NEVER STOPS</text>
+  <text x="387" y="828" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Motor activity generates energy that sustains neural processing</text>
+
+  <!-- Legend -->
+  <rect x="125" y="850" width="525" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="387" y="868" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Signal Pathways</text>
+  <line x1="155" y1="885" x2="215" y2="885" stroke="black" stroke-width="2"/>
+  <text x="225" y="890" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Forward</text>
+  <line x1="310" y1="885" x2="370" y2="885" stroke="black" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="380" y="890" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Fallback</text>
+  <line x1="470" y1="885" x2="530" y2="885" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
+  <text x="540" y="890" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Energy</text>
 
   <!-- Figure Label -->
-  <text x="425" y="1020" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 1</text>
+  <text x="387" y="950" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 1</text>
 </svg>

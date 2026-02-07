@@ -9,102 +9,102 @@
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">6/7</text>
 
   <!-- Title -->
-  <text x="425" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RECOVERY SCENARIOS</text>
+  <text x="387" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RECOVERY SCENARIOS</text>
 
   <!-- Scenario A: Normal Reconnection (600) -->
-  <text x="425" y="170" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario A: Normal Reconnection</text>
-  <text x="740" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="start">600</text>
+  <text x="387" y="170" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario A: Normal Reconnection</text>
+  <text x="635" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="end">600</text>
 
-  <!-- Timeline A -->
-  <line x1="135" y1="220" x2="730" y2="220" stroke="black" stroke-width="2"/>
-  <line x1="120" y1="200" x2="120" y2="240" stroke="black" stroke-width="2"/>
+  <!-- Timeline A (compressed) -->
+  <line x1="125" y1="220" x2="650" y2="220" stroke="black" stroke-width="2"/>
+  <line x1="125" y1="200" x2="125" y2="240" stroke="black" stroke-width="2"/>
 
-  <text x="185" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
-  <text x="185" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Claude active</text>
-  <line x1="250" y1="200" x2="250" y2="240" stroke="black" stroke-width="2"/>
+  <text x="169" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
+  <text x="169" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Claude active</text>
+  <line x1="226" y1="200" x2="226" y2="240" stroke="black" stroke-width="2"/>
 
-  <text x="285" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">TIMEOUT</text>
-  <text x="285" y="255" font-family="Courier New, monospace" font-size="14" text-anchor="middle">30s</text>
-  <line x1="320" y1="200" x2="320" y2="240" stroke="black" stroke-width="2"/>
+  <text x="257" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">TIMEOUT</text>
+  <text x="257" y="255" font-family="Courier New, monospace" font-size="14" text-anchor="middle">30s</text>
+  <line x1="288" y1="200" x2="288" y2="240" stroke="black" stroke-width="2"/>
 
-  <text x="435" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">AUTONOMOUS</text>
-  <text x="435" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-regulation</text>
-  <line x1="550" y1="200" x2="550" y2="240" stroke="black" stroke-width="2"/>
+  <text x="389" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">AUTONOMOUS</text>
+  <text x="389" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-regulation</text>
+  <line x1="491" y1="200" x2="491" y2="240" stroke="black" stroke-width="2"/>
 
-  <text x="585" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RESYNC</text>
-  <text x="585" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Buffer tx</text>
-  <line x1="620" y1="200" x2="620" y2="240" stroke="black" stroke-width="2"/>
+  <text x="522" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RESYNC</text>
+  <text x="522" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Buffer tx</text>
+  <line x1="553" y1="200" x2="553" y2="240" stroke="black" stroke-width="2"/>
 
-  <text x="675" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
-  <text x="675" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Restored</text>
+  <text x="601" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
+  <text x="601" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Restored</text>
 
   <!-- Scenario B: Crash Recovery (602) -->
-  <text x="425" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario B: Crash Recovery</text>
-  <text x="740" y="330" font-family="Arial, sans-serif" font-size="14" text-anchor="start">602</text>
+  <text x="387" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario B: Crash Recovery</text>
+  <text x="635" y="330" font-family="Arial, sans-serif" font-size="14" text-anchor="end">602</text>
 
-  <!-- Timeline B -->
-  <line x1="135" y1="350" x2="730" y2="350" stroke="black" stroke-width="2"/>
-  <line x1="120" y1="330" x2="120" y2="370" stroke="black" stroke-width="2"/>
+  <!-- Timeline B (compressed) -->
+  <line x1="125" y1="350" x2="650" y2="350" stroke="black" stroke-width="2"/>
+  <line x1="125" y1="330" x2="125" y2="370" stroke="black" stroke-width="2"/>
 
-  <text x="200" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
-  <text x="200" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Normal</text>
-  <line x1="280" y1="330" x2="280" y2="370" stroke="black" stroke-width="2"/>
+  <text x="182" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
+  <text x="182" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Normal</text>
+  <line x1="253" y1="330" x2="253" y2="370" stroke="black" stroke-width="2"/>
 
-  <text x="315" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CRASH</text>
-  <text x="315" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Server dies</text>
-  <line x1="350" y1="330" x2="350" y2="370" stroke="black" stroke-width="2"/>
+  <text x="284" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CRASH</text>
+  <text x="284" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Server dies</text>
+  <line x1="315" y1="330" x2="315" y2="370" stroke="black" stroke-width="2"/>
 
-  <text x="415" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RESTART</text>
-  <text x="415" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Process relaunched</text>
-  <line x1="480" y1="330" x2="480" y2="370" stroke="black" stroke-width="2"/>
+  <text x="372" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RESTART</text>
+  <text x="372" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Process relaunched</text>
+  <line x1="430" y1="330" x2="430" y2="370" stroke="black" stroke-width="2"/>
 
-  <text x="540" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SNAPSHOT</text>
-  <text x="540" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Load latest.json</text>
-  <line x1="600" y1="330" x2="600" y2="370" stroke="black" stroke-width="2"/>
+  <text x="482" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SNAPSHOT</text>
+  <text x="482" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Load latest.json</text>
+  <line x1="535" y1="330" x2="535" y2="370" stroke="black" stroke-width="2"/>
 
-  <text x="665" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
-  <text x="665" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Restored</text>
+  <text x="592" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
+  <text x="592" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Restored</text>
 
-  <text x="540" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Max loss: 50 steps</text>
+  <text x="482" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Max loss: 50 steps</text>
 
   <!-- Scenario C: Clean Shutdown (604) -->
-  <text x="425" y="445" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario C: Clean Shutdown</text>
-  <text x="740" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="start">604</text>
+  <text x="387" y="445" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario C: Clean Shutdown</text>
+  <text x="635" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="end">604</text>
 
-  <!-- Timeline C -->
-  <line x1="135" y1="495" x2="730" y2="495" stroke="black" stroke-width="2"/>
-  <line x1="120" y1="475" x2="120" y2="515" stroke="black" stroke-width="2"/>
+  <!-- Timeline C (compressed) -->
+  <line x1="125" y1="495" x2="650" y2="495" stroke="black" stroke-width="2"/>
+  <line x1="125" y1="475" x2="125" y2="515" stroke="black" stroke-width="2"/>
 
-  <text x="210" y="470" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
-  <text x="210" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Normal operation</text>
-  <line x1="300" y1="475" x2="300" y2="515" stroke="black" stroke-width="2"/>
+  <text x="191" y="470" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
+  <text x="191" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Normal operation</text>
+  <line x1="270" y1="475" x2="270" y2="515" stroke="black" stroke-width="2"/>
 
-  <text x="390" y="470" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">AUTONOMOUS</text>
-  <text x="390" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Fallback active</text>
-  <line x1="480" y1="475" x2="480" y2="515" stroke="black" stroke-width="2"/>
+  <text x="350" y="470" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">AUTONOMOUS</text>
+  <text x="350" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Fallback active</text>
+  <line x1="430" y1="475" x2="430" y2="515" stroke="black" stroke-width="2"/>
 
-  <text x="530" y="470" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">EOF</text>
-  <text x="530" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">stdin closed</text>
-  <line x1="580" y1="475" x2="580" y2="515" stroke="black" stroke-width="2"/>
+  <text x="473" y="470" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">EOF</text>
+  <text x="473" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">stdin closed</text>
+  <line x1="518" y1="475" x2="518" y2="515" stroke="black" stroke-width="2"/>
 
-  <text x="655" y="470" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SHUTDOWN</text>
-  <text x="655" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Final snapshot</text>
-  <text x="655" y="550" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Zero data loss</text>
+  <text x="584" y="470" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SHUTDOWN</text>
+  <text x="584" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Final snapshot</text>
+  <text x="584" y="550" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Zero data loss</text>
 
   <!-- Recovery Guarantees Box (606) -->
-  <rect x="150" y="580" width="550" height="150" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="690" y="597" font-family="Arial, sans-serif" font-size="14" text-anchor="end">606</text>
-  <text x="425" y="610" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Recovery Guarantees</text>
+  <rect x="125" y="580" width="525" height="150" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="635" y="597" font-family="Arial, sans-serif" font-size="14" text-anchor="end">606</text>
+  <text x="387" y="610" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Recovery Guarantees</text>
 
-  <text x="180" y="645" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Normal reconnection: Full continuity, resync payload transmitted</text>
-  <text x="180" y="670" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Crash recovery: Max 50 steps lost (snapshot every 50 steps)</text>
-  <text x="180" y="695" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Clean shutdown: Zero data loss (final snapshot on EOF)</text>
-  <text x="180" y="720" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Max autonomous duration: 10,000 steps (~50 hours)</text>
+  <text x="155" y="645" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Normal reconnection: Full continuity, resync payload transmitted</text>
+  <text x="155" y="670" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Crash recovery: Max 50 steps lost (snapshot every 50 steps)</text>
+  <text x="155" y="695" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Clean shutdown: Zero data loss (final snapshot on EOF)</text>
+  <text x="155" y="720" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Max autonomous duration: 10,000 steps (~50 hours)</text>
 
   <!-- Legend -->
-  <line x1="150" y1="770" x2="250" y2="770" stroke="black" stroke-width="2"/>
-  <text x="260" y="775" font-family="Arial, sans-serif" font-size="14" text-anchor="start">System actively processing</text>
+  <line x1="125" y1="770" x2="225" y2="770" stroke="black" stroke-width="2"/>
+  <text x="235" y="775" font-family="Arial, sans-serif" font-size="14" text-anchor="start">System actively processing</text>
 
   <!-- Figure Label -->
-  <text x="425" y="1020" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 6</text>
+  <text x="387" y="950" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 6</text>
 </svg>
