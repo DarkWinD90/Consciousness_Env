@@ -55,8 +55,8 @@
 
   <!-- Decision Diamond (508) -->
   <polygon points="387,800 437,830 387,860 337,830" fill="none" stroke="black" stroke-width="2"/>
-  <text x="387" y="827" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">508</text>
-  <text x="387" y="845" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Full?</text>
+  <text x="387" y="835" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Full?</text>
+  <text x="387" y="880" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">508</text>
 
   <!-- Decision branches -->
   <line x1="337" y1="830" x2="200" y2="830" stroke="black" stroke-width="2" marker-end="url(#ah)"/>

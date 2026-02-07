@@ -26,9 +26,9 @@
 
   <!-- Sensors (702) -->
   <rect x="125" y="280" width="85" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="200" y="297" font-family="Arial, sans-serif" font-size="14" text-anchor="end">702</text>
-  <text x="167" y="305" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Sensors</text>
-  <text x="167" y="320" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">(external)</text>
+  <text x="167" y="270" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">702</text>
+  <text x="167" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Sensors</text>
+  <text x="167" y="315" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">(external)</text>
 
   <!-- Arrow from Sensors to SNN -->
   <line x1="210" y1="305" x2="248" y2="305" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
@@ -80,10 +80,10 @@
 
   <!-- Autonomous Input Gen (712) -->
   <rect x="125" y="505" width="85" height="65" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="200" y="522" font-family="Arial, sans-serif" font-size="14" text-anchor="end">712</text>
-  <text x="167" y="530" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous</text>
-  <text x="167" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Input Gen</text>
-  <text x="167" y="562" font-family="Courier New, monospace" font-size="12" text-anchor="middle">Circadian+Bursts</text>
+  <text x="167" y="497" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">712</text>
+  <text x="167" y="525" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous</text>
+  <text x="167" y="540" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Input Gen</text>
+  <text x="167" y="557" font-family="Courier New, monospace" font-size="12" text-anchor="middle">Circadian+Bursts</text>
 
   <!-- Arrow from Input Gen to SNN -->
   <line x1="210" y1="537" x2="248" y2="537" stroke="black" stroke-width="2" marker-end="url(#ah)"/>

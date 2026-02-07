@@ -67,50 +67,49 @@
   <!-- Arrow from 104 directly to SNN -->
   <line x1="250" y1="590" x2="250" y2="634" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-  <!-- Arrow from 106 directly to SNN -->
-  <line x1="525" y1="590" x2="525" y2="634" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- Arrow from 106 to SNN (adjusted for narrower SNN box) -->
+  <line x1="480" y1="590" x2="480" y2="634" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
-  <!-- Step Buffer (108) - positioned to right of 106 -->
-  <rect x="670" y="530" width="85" height="40" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="745" y="548" font-family="Arial, sans-serif" font-size="14" text-anchor="end">108</text>
-  <text x="712" y="558" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Buffer</text>
+  <!-- Step Buffer (108) - positioned below 106, within margins -->
+  <rect x="555" y="600" width="80" height="35" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="625" y="613" font-family="Arial, sans-serif" font-size="14" text-anchor="end">108</text>
+  <text x="595" y="623" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Buffer</text>
 
-  <!-- Arrow from 106 to Buffer -->
-  <line x1="650" y1="550" x2="669" y2="550" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- Arrow from 106 down to Buffer -->
+  <line x1="555" y1="590" x2="555" y2="598" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+
+  <!-- Snapshot (110) - Cylinder to right of Buffer -->
+  <ellipse cx="595" cy="665" rx="25" ry="8" fill="none" stroke="black" stroke-width="2"/>
+  <line x1="570" y1="665" x2="570" y2="700" stroke="black" stroke-width="2"/>
+  <line x1="620" y1="665" x2="620" y2="700" stroke="black" stroke-width="2"/>
+  <ellipse cx="595" cy="700" rx="25" ry="8" fill="none" stroke="black" stroke-width="2"/>
+  <text x="595" y="687" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">110</text>
+  <text x="595" y="722" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Snapshot</text>
 
   <!-- Arrow from Buffer down to Snapshot -->
-  <line x1="712" y1="570" x2="712" y2="589" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-
-  <!-- Snapshot (110) - Cylinder below Buffer -->
-  <ellipse cx="712" cy="600" rx="30" ry="10" fill="none" stroke="black" stroke-width="2"/>
-  <line x1="682" y1="600" x2="682" y2="645" stroke="black" stroke-width="2"/>
-  <line x1="742" y1="600" x2="742" y2="645" stroke="black" stroke-width="2"/>
-  <ellipse cx="712" cy="645" rx="30" ry="10" fill="none" stroke="black" stroke-width="2"/>
-  <text x="712" y="628" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">110</text>
-  <text x="712" y="670" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Snapshot</text>
+  <line x1="595" y1="635" x2="595" y2="655" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
   <!-- SNN (112) - Main processing box -->
-  <rect x="125" y="635" width="525" height="60" rx="5" fill="none" stroke="black" stroke-width="3"/>
-  <text x="635" y="653" font-family="Arial, sans-serif" font-size="14" text-anchor="end">112</text>
-  <text x="387" y="660" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SPIKING NEURAL NETWORK</text>
-  <text x="387" y="678" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Processes input, drives motor output</text>
+  <rect x="125" y="635" width="400" height="60" rx="5" fill="none" stroke="black" stroke-width="3"/>
+  <text x="510" y="653" font-family="Arial, sans-serif" font-size="14" text-anchor="end">112</text>
+  <text x="325" y="660" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SPIKING NEURAL NETWORK</text>
+  <text x="325" y="678" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Processes input, drives motor output</text>
 
   <!-- Motor Output arrow from SNN -->
-  <line x1="387" y1="695" x2="387" y2="724" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="442" y="715" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Motor</text>
+  <line x1="325" y1="695" x2="325" y2="724" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="380" y="715" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Motor</text>
 
   <!-- Energy Harvester (114) - Separate box below SNN -->
-  <rect x="225" y="725" width="325" height="45" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="535" y="743" font-family="Arial, sans-serif" font-size="14" text-anchor="end">114</text>
-  <text x="387" y="745" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">ENERGY HARVESTER</text>
-  <text x="387" y="762" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Piezoelectric + Thermoelectric</text>
+  <rect x="175" y="725" width="300" height="45" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="460" y="743" font-family="Arial, sans-serif" font-size="14" text-anchor="end">114</text>
+  <text x="325" y="745" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">ENERGY HARVESTER</text>
+  <text x="325" y="762" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Piezoelectric + Thermoelectric</text>
 
   <!-- Energy feedback loop - from Harvester back up to SNN (bold dashed line, normal arrowhead) -->
-  <line x1="225" y1="747" x2="105" y2="747" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
-  <line x1="105" y1="747" x2="105" y2="660" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
-  <line x1="105" y1="660" x2="119" y2="660" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
-  <line x1="119" y1="660" x2="124" y2="660" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="93" y="720" font-family="Arial, sans-serif" font-size="12" text-anchor="start" transform="rotate(-90, 93, 720)">Energy feedback</text>
+  <line x1="175" y1="747" x2="155" y2="747" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="155" y1="747" x2="155" y2="660" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="155" y1="660" x2="125" y2="660" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="170" y="720" font-family="Arial, sans-serif" font-size="12" text-anchor="start" transform="rotate(-90, 170, 720)">Energy feedback</text>
 
   <!-- Caption -->
   <text x="387" y="810" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">THE SYSTEM NEVER STOPS</text>
