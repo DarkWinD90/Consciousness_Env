@@ -37,8 +37,8 @@
   <!-- ==================== TRANSITIONS ==================== -->
 
   <!-- Start arrow pointing to CONNECTED -->
-  <line x1="85" y1="320" x2="130" y2="320" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="80" y="325" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Start</text>
+  <line x1="125" y1="320" x2="130" y2="320" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="128" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Start</text>
 
   <!-- 206: CONNECTED -> AUTONOMOUS (top arrow) -->
   <line x1="270" y1="295" x2="480" y2="295" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
@@ -59,11 +59,11 @@
   <text x="250" y="453" font-family="Arial, sans-serif" font-size="12" text-anchor="end">Resync complete</text>
 
   <!-- 214: Self-loop on AUTONOMOUS (step counter) -->
-  <path d="M 590 260 Q 620 200 650 260" fill="none" stroke="black" stroke-width="2"/>
-  <path d="M 650 260 Q 650 280 635 290" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="620" y="195" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">214</text>
-  <text x="620" y="212" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Each step</text>
-  <text x="620" y="227" font-family="Courier New, monospace" font-size="12" text-anchor="middle">(max 10,000)</text>
+  <path d="M 580 260 Q 600 200 620 260" fill="none" stroke="black" stroke-width="2"/>
+  <path d="M 620 260 Q 620 280 605 290" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="600" y="195" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">214</text>
+  <text x="600" y="212" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Each step</text>
+  <text x="600" y="227" font-family="Courier New, monospace" font-size="12" text-anchor="middle">(max 10,000)</text>
 
   <!-- ==================== ANNOTATIONS ==================== -->
 
