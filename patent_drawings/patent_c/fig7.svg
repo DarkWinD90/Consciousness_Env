@@ -68,7 +68,8 @@
   <line x1="624" y1="330" x2="624" y2="355" stroke="black" stroke-width="2"/>
   <line x1="624" y1="355" x2="302" y2="355" stroke="black" stroke-width="2"/>
   <line x1="302" y1="355" x2="302" y2="342" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="465" y="370" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">710 - Energy feedback (Patent A)</text>
+  <text x="550" y="370" font-family="Arial, sans-serif" font-size="14" text-anchor="end">710</text>
+  <text x="400" y="370" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Energy feedback (Patent A)</text>
 
   <!-- Disconnection Event -->
   <line x1="125" y1="405" x2="650" y2="405" stroke="black" stroke-width="2"/>
@@ -139,8 +140,13 @@
   <text x="635" y="415" font-family="Courier New, monospace" font-size="14" text-anchor="end">720</text>
   <text x="635" y="435" font-family="Courier New, monospace" font-size="14" text-anchor="end">resync()</text>
 
+  <!-- Self-Observation feedback (Patent B) -->
+  <path d="M 302 505 Q 302 485 260 485 Q 220 485 220 520 L 220 537" fill="none" stroke="black" stroke-width="2" stroke-dasharray="2,2"/>
+  <line x1="220" y1="537" x2="248" y2="537" stroke="black" stroke-width="2" stroke-dasharray="2,2" marker-end="url(#ah)"/>
+  <text x="230" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Self-Observation (Patent B)</text>
+
   <!-- Signal Pathways Legend -->
-  <rect x="125" y="710" width="525" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <rect x="125" y="710" width="525" height="120" rx="5" fill="none" stroke="black" stroke-width="2"/>
   <text x="387" y="735" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Signal Pathways</text>
 
   <line x1="155" y1="760" x2="255" y2="760" stroke="black" stroke-width="2"/>
@@ -148,6 +154,9 @@
 
   <line x1="155" y1="785" x2="255" y2="785" stroke="black" stroke-width="2" stroke-dasharray="5,3"/>
   <text x="265" y="790" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Energy/control feedback</text>
+
+  <line x1="155" y1="810" x2="255" y2="810" stroke="black" stroke-width="2" stroke-dasharray="2,2"/>
+  <text x="265" y="815" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Self-Observation feedback (Patent B)</text>
 
   <!-- Figure Label -->
   <text x="387" y="880" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 7</text>
