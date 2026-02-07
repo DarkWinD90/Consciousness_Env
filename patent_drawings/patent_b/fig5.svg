@@ -7,66 +7,111 @@
   </defs>
   <rect width="100%" height="100%" fill="white" />
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">5/6</text>
-  <g transform="translate(0, 50)">
-<text x="425" y="80" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">ENERGY-AWARE REGULATION</text>
-<text x="425" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">System Energy Level (mWh)</text>
-<rect x="150" y="150" width="550" height="50" rx="0" fill="none" stroke="black" stroke-width="2"/>
-<text x="710" y="165" font-family="Arial, sans-serif" font-size="14" text-anchor="start">500</text>
-<line x1="708" y1="165" x2="700" y2="175" stroke="black" stroke-width="0.5"/>
-<text x="190" y="182" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CRIT</text>
-<text x="270" y="182" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">LOW</text>
-<text x="450" y="182" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">NORMAL</text>
-<text x="650" y="182" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SURP</text>
-<text x="150" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0</text>
-<text x="232" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">15</text>
-<line x1="232" y1="150" x2="232" y2="200" stroke="black" stroke-width="2"/>
-<text x="315" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">30</text>
-<line x1="315" y1="150" x2="315" y2="200" stroke="black" stroke-width="2"/>
-<text x="590" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">80</text>
-<line x1="590" y1="150" x2="590" y2="200" stroke="black" stroke-width="2"/>
-<text x="700" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">100</text>
-<line x1="191" y1="225" x2="191" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<text x="191" y="320" font-family="Courier New, monospace" font-size="14" text-anchor="middle">mod=-0.4</text>
-<line x1="273" y1="225" x2="273" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<text x="273" y="320" font-family="Courier New, monospace" font-size="14" text-anchor="middle">mod=-0.1</text>
-<line x1="452" y1="225" x2="452" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<text x="452" y="320" font-family="Courier New, monospace" font-size="14" text-anchor="middle">mod=0.0</text>
-<line x1="645" y1="225" x2="645" y2="300" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<text x="645" y="320" font-family="Courier New, monospace" font-size="14" text-anchor="middle">mod=+0.3</text>
-<text x="425" y="360" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Reflection Coefficient</text>
-<line x1="425" y1="340" x2="425" y2="380" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<line x1="150" y1="420" x2="700" y2="420" stroke="black" stroke-width="2"/>
-<text x="140" y="425" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.1</text>
-<text x="710" y="425" font-family="Courier New, monospace" font-size="14" text-anchor="start">0.3</text>
-<text x="715" y="405" font-family="Arial, sans-serif" font-size="14" text-anchor="start">510</text>
-<line x1="713" y1="410" x2="700" y2="420" stroke="black" stroke-width="0.5"/>
-<line x1="315" y1="412" x2="315" y2="428" stroke="black" stroke-width="2"/>
-<text x="315" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.16</text>
-<text x="315" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">CRIT</text>
-<line x1="397" y1="412" x2="397" y2="428" stroke="black" stroke-width="2"/>
-<text x="397" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.19</text>
-<text x="397" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">LOW</text>
-<line x1="425" y1="412" x2="425" y2="428" stroke="black" stroke-width="2"/>
-<text x="425" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.20</text>
-<text x="425" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">NORM</text>
-<line x1="507" y1="412" x2="507" y2="428" stroke="black" stroke-width="2"/>
-<text x="507" y="445" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.23</text>
-<text x="507" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">SURP</text>
-<rect x="150" y="500" width="550" height="140" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="425" y="525" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Behavioral Effects</text>
-<text x="705" y="510" font-family="Arial, sans-serif" font-size="14" text-anchor="start">512</text>
-<line x1="703" y1="510" x2="700" y2="525" stroke="black" stroke-width="0.5"/>
-<text x="220" y="555" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.16</text>
-<text x="320" y="555" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Reduced - conserve resources</text>
-<text x="220" y="580" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.19</text>
-<text x="320" y="580" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Slightly reduced - cautious</text>
-<text x="220" y="605" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.20</text>
-<text x="320" y="605" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Baseline - normal operation</text>
-<text x="220" y="630" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.23</text>
-<text x="320" y="630" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Enhanced - explore</text>
-<text x="425" y="690" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Energy-aware regulation ensures efficient</text>
-<text x="425" y="710" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">cognitive resource management</text>
 
-<text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 5</text>
-  </g>
+  <!-- Title -->
+  <text x="425" y="110" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">ENERGY-AWARE SELF-OBSERVATION REGULATION</text>
+  <text x="425" y="130" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Reflection Coefficient Modulation Based on System Energy State</text>
+
+  <!-- ENERGY STATE BAR (500) -->
+  <text x="425" y="155" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SYSTEM ENERGY LEVEL (mWh)</text>
+  <rect x="150" y="165" width="550" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="690" y="180" font-family="Arial, sans-serif" font-size="14" text-anchor="end">500</text>
+
+  <!-- Region dividers inside bar -->
+  <line x1="232" y1="165" x2="232" y2="215" stroke="black" stroke-width="2"/>
+  <line x1="315" y1="165" x2="315" y2="215" stroke="black" stroke-width="2"/>
+  <line x1="590" y1="165" x2="590" y2="215" stroke="black" stroke-width="2"/>
+
+  <!-- Region labels inside bar -->
+  <text x="191" y="197" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CRITICAL</text>
+  <text x="273" y="197" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">LOW</text>
+  <text x="452" y="197" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">NORMAL</text>
+  <text x="645" y="197" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SURPLUS</text>
+
+  <!-- Scale markers below bar -->
+  <line x1="150" y1="215" x2="150" y2="227" stroke="black" stroke-width="1"/>
+  <text x="150" y="245" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0</text>
+  <line x1="232" y1="215" x2="232" y2="227" stroke="black" stroke-width="1"/>
+  <text x="232" y="245" font-family="Courier New, monospace" font-size="14" text-anchor="middle">15</text>
+  <line x1="315" y1="215" x2="315" y2="227" stroke="black" stroke-width="1"/>
+  <text x="315" y="245" font-family="Courier New, monospace" font-size="14" text-anchor="middle">30</text>
+  <line x1="590" y1="215" x2="590" y2="227" stroke="black" stroke-width="1"/>
+  <text x="590" y="245" font-family="Courier New, monospace" font-size="14" text-anchor="middle">80</text>
+  <line x1="700" y1="215" x2="700" y2="227" stroke="black" stroke-width="1"/>
+  <text x="700" y="245" font-family="Courier New, monospace" font-size="14" text-anchor="middle">100</text>
+
+  <!-- MODULATION MAPPING (502) -->
+  <rect x="150" y="275" width="550" height="140" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="425" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">MODULATION MAPPING</text>
+  <text x="690" y="290" font-family="Arial, sans-serif" font-size="14" text-anchor="end">502</text>
+
+  <!-- State labels above arrows -->
+  <text x="191" y="320" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">CRITICAL</text>
+  <text x="310" y="320" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">LOW</text>
+  <text x="452" y="320" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">NORMAL</text>
+  <text x="620" y="320" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">SURPLUS</text>
+
+  <!-- Modulation arrows and values -->
+  <line x1="191" y1="330" x2="191" y2="375" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="191" y="400" font-family="Courier New, monospace" font-size="14" text-anchor="middle">-0.4</text>
+
+  <line x1="310" y1="330" x2="310" y2="375" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="310" y="400" font-family="Courier New, monospace" font-size="14" text-anchor="middle">-0.1</text>
+
+  <line x1="452" y1="330" x2="452" y2="375" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="452" y="400" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.0</text>
+
+  <line x1="620" y1="330" x2="620" y2="375" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="620" y="400" font-family="Courier New, monospace" font-size="14" text-anchor="middle">+0.3</text>
+
+  <!-- REFLECTION COEFFICIENT SCALE (504) -->
+  <rect x="150" y="440" width="550" height="120" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="425" y="465" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">REFLECTION COEFFICIENT SCALE</text>
+  <text x="690" y="455" font-family="Arial, sans-serif" font-size="14" text-anchor="end">504</text>
+
+  <!-- Scale line - adjusted to fit within box -->
+  <line x1="200" y1="500" x2="650" y2="500" stroke="black" stroke-width="2"/>
+  <text x="190" y="505" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.1</text>
+  <text x="660" y="505" font-family="Courier New, monospace" font-size="14" text-anchor="start">0.3</text>
+
+  <!-- Markers on scale with state labels -->
+  <line x1="260" y1="492" x2="260" y2="508" stroke="black" stroke-width="2"/>
+  <text x="260" y="525" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.16</text>
+  <text x="260" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">CRIT</text>
+
+  <line x1="370" y1="492" x2="370" y2="508" stroke="black" stroke-width="2"/>
+  <text x="370" y="525" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.19</text>
+  <text x="370" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">LOW</text>
+
+  <line x1="480" y1="492" x2="480" y2="508" stroke="black" stroke-width="2"/>
+  <text x="480" y="525" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.20</text>
+  <text x="480" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">NORM</text>
+
+  <line x1="590" y1="492" x2="590" y2="508" stroke="black" stroke-width="2"/>
+  <text x="590" y="525" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.23</text>
+  <text x="590" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">SURP</text>
+
+  <!-- BEHAVIORAL EFFECTS (506) -->
+  <rect x="150" y="585" width="550" height="140" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="425" y="610" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">BEHAVIORAL EFFECTS</text>
+  <text x="690" y="600" font-family="Arial, sans-serif" font-size="14" text-anchor="end">506</text>
+
+  <text x="220" y="640" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.16</text>
+  <text x="320" y="640" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Reduced - conserve cognitive resources</text>
+
+  <text x="220" y="665" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.19</text>
+  <text x="320" y="665" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Slightly reduced - cautious operation</text>
+
+  <text x="220" y="690" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.20</text>
+  <text x="320" y="690" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Baseline - normal self-observation</text>
+
+  <text x="220" y="715" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.23</text>
+  <text x="320" y="715" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Enhanced - energy allows exploration</text>
+
+  <!-- Caption -->
+  <text x="425" y="770" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Energy-aware regulation ensures efficient cognitive resource management.</text>
+  <text x="425" y="790" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Low energy reduces self-observation; surplus energy enables exploration.</text>
+
+  <!-- Figure Label -->
+  <text x="425" y="1020" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 5</text>
 </svg>

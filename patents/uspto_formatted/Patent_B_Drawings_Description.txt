@@ -116,124 +116,134 @@ Below the spectrum:
 FIG. 3 — Dynamic Modulation Sources
 
 This figure shows two modulation pathways converging on the reflection
-coefficient computation.
+coefficient computation in a vertical stacked layout.
 
-Center element:
-- Rectangle labeled "Reflection Coefficient Computation"
+Reference numerals: 300, 302, 304, 306, 308, 310, 312
+
+Top element (302):
+- Cloud shape labeled "EXTERNAL COGNITIVE CONTROL LAYER"
+- Inside: "Claude or other cognitive agent provides modulation"
+- Arrow down to computation block labeled "modulation (-1.0 to +1.0)"
+
+Center element (300):
+- Rectangle with bold border labeled "REFLECTION COEFFICIENT COMPUTATION"
 - Inside: "reflection_coeff = base_coeff + modulation x sensitivity"
 - Default values: "base_coeff = 0.2, sensitivity = 0.1"
 
-Top pathway (External Modulation):
-- Cloud shape labeled "External Cognitive Control Layer"
-- Arrow down labeled "modulation value (-1.0 to +1.0)"
-- Decision examples in callout boxes:
-  - "modulation = -0.5: Reduce self-observation (focus outward)"
-  - "modulation = 0.0: Neutral (use base coefficient)"
-  - "modulation = +0.8: Increase self-observation (introspect)"
-
-Bottom pathway (Internal Modulation):
-- Rectangle labeled "Energy State Monitor"
-- Arrow up labeled "energy-aware modulation"
-- Decision rules in callout boxes:
-  - "energy < 15 mWh: modulation = -0.4 (conserve)"
-  - "energy < 30 mWh: modulation = -0.1 (cautious)"
-  - "energy > 80 mWh: modulation = +0.3 (explore)"
-  - "otherwise: modulation = 0.0 (neutral)"
-
-Right side output:
+Output (310):
 - Arrow from computation block going right
-- Label: "reflection_coeff (applied at next SNN step)"
-- Range annotation: "Resulting range: 0.1 to 0.3 (typical operation)"
+- Reference numeral 310 above arrow
 
-Selector switch symbol between the two pathways:
-- Label: "Source priority: External overrides Internal when cognitive layer active"
+Below computation (side by side):
+- Left box (312): "SOURCE PRIORITY" - "External overrides Internal when active"
+- Right box (306): "ENERGY STATE MONITOR" - "Reads energy_mwh from EnergyHarvester"
+  and "Applies energy-aware modulation rules"
+- Arrow up from Energy Monitor to Computation labeled "energy-aware modulation"
+
+Bottom callout boxes (side by side):
+- Left box (304): "External Modulation Examples"
+  - "-0.5: Reduce self-observation (focus outward)"
+  - "0.0: Neutral (use base coefficient)"
+  - "+0.8: Increase self-observation"
+
+- Right box (308): "Energy Rules"
+  - "<15 mWh: -0.4"
+  - "<30 mWh: -0.1"
+  - ">80 mWh: +0.3"
+  - "else: 0.0"
 
 
 FIG. 4 — Self-Referential Learning Loop (STDP + Self-Observation)
 
 This figure shows how STDP learning interacts with the self-observation signal.
 
-Main loop (clockwise):
+Reference numerals: 400, 402, 404, 406, 408, 410
 
-Top:
-- Rectangle labeled "SNN Processing Step t"
-- Outputs two arrows:
-  - Right: "Spike output S(t)"
-  - Down: "Weight update signal"
+Vertical flow (top to bottom):
 
-Right:
-- Rectangle labeled "STDP Weight Update"
+Top (400):
+- Full-width rectangle labeled "SNN PROCESSING STEP t" (bold border)
+- Inside: "Membrane dynamics + spikes"
+- Arrow down labeled "S(t)"
+
+Second row (402):
+- Full-width rectangle labeled "STDP WEIGHT UPDATE"
 - Inside:
-  - "If post fires: W[i,j] += A+ x pre_trace[i]"
-  - "If pre fires: W[i,j] -= A- x post_trace[j]"
-- Label: "Temporal correlation learning"
-- Output arrow down
+  - "Post fires: W += 0.01 × pre_trace"
+  - "Pre fires: W -= 0.012 × post_trace"
+  - "A-/A+ = 1.2 (stability ratio)"
+- Arrow down
+
+Third row (404):
+- Full-width rectangle labeled "UPDATED WEIGHT MATRIX"
+- Inside: "W(t+1) bounded to [0.0, 0.5]"
+- Arrow down to Self-Observation
+
+Fourth row (side by side):
+- Left (406): Rectangle labeled "SELF-OBSERVATION"
+  - Inside: "O(t) × refl_coeff"
+- Right (408): Rectangle labeled "KEY INSIGHT"
+  - Inside: "STDP strengthens causal connections. Self-observation adds correlated feedback."
+
+Feedback loop:
+- Bold line from Self-Observation (406) left side, up, and back to SNN Processing (400)
+- Vertical text: "FEEDBACK LOOP"
+
+Fifth row (410):
+- Full-width rectangle labeled "VALIDATION RESULTS (Phase 8)"
+- Inside:
+  - "F8.1: Entropy 2.95 to 2.02 bits (PASS)"
+  - "F8.2: STDP MI = 6.52x > 1.20x (PASS)"
 
 Bottom:
-- Rectangle labeled "Updated Weight Matrix W(t+1)"
-- Arrow left to SNN
-
-Left:
-- The self-observation feedback path from FIG. 1
-- Rectangle labeled "Self-Observation O(t)"
-- Arrow up to SNN
-
-Center annotation:
-- "The network learns which temporal spike patterns correlate with
-  its own self-observation signal"
-- "Self-referential learning: the network learns about itself"
-
-Key insight callout:
-- "STDP strengthens connections between neurons that fire in causal sequence"
-- "Self-observation provides an additional input that correlates with the
-  network's own aggregate behavior"
-- "Result: the network develops internal representations of its own
-  processing patterns"
-
-Timeline at bottom:
-- "Step t: Process input + self-observation"
-- "Step t: Fire spikes, update STDP traces"
-- "Step t: Compute new self-observation O(t)"
-- "Step t+1: Apply updated weights + new self-observation"
+- Signal Pathways legend box
+- Bold line sample with label: "Bold: Self-observation feedback loop"
 
 
 FIG. 5 — Energy-Aware Self-Observation Regulation
 
 This figure shows a control diagram for energy-based reflection modulation.
 
-Top — Energy State:
-- Horizontal bar labeled "Energy Level (mWh)"
-- Four colored/hatched regions:
-  - Region 1 (0-15 mWh): Hatched, labeled "CRITICAL"
-  - Region 2 (15-30 mWh): Light hatch, labeled "LOW"
-  - Region 3 (30-80 mWh): Clear, labeled "NORMAL"
-  - Region 4 (80+ mWh): Light hatch, labeled "SURPLUS"
+Reference numerals: 500, 502, 504, 506
 
-Middle — Modulation Mapping:
-- Four arrows from energy regions down to modulation values:
-  - CRITICAL -> modulation = -0.4
-  - LOW -> modulation = -0.1
-  - NORMAL -> modulation = 0.0
-  - SURPLUS -> modulation = +0.3
+Top — Energy State Bar (500):
+- Full-width horizontal bar labeled "SYSTEM ENERGY LEVEL (mWh)"
+- Four labeled regions with dividers:
+  - 0-15 mWh: CRITICAL
+  - 15-30 mWh: LOW
+  - 30-80 mWh: NORMAL
+  - 80-100 mWh: SURPLUS
+- Scale markers below: 0, 15, 30, 80, 100
 
-Bottom — Effect on Reflection Coefficient:
-- Number line from 0.0 to 0.5
-- Four markers showing resulting reflection_coeff:
-  - CRITICAL: 0.2 + (-0.4)(0.1) = 0.16
-  - LOW: 0.2 + (-0.1)(0.1) = 0.19
-  - NORMAL: 0.2 + (0.0)(0.1) = 0.20
-  - SURPLUS: 0.2 + (0.3)(0.1) = 0.23
+Second row — Modulation Mapping (502):
+- Full-width box labeled "MODULATION MAPPING"
+- State labels above each arrow: CRITICAL, LOW, NORMAL, SURPLUS
+- Four arrows pointing down to modulation values:
+  - CRITICAL -> -0.4
+  - LOW -> -0.1
+  - NORMAL -> 0.0
+  - SURPLUS -> +0.3
 
-Behavioral annotation for each:
-- 0.16: "Reduced self-observation — conserve cognitive resources"
-- 0.19: "Slightly reduced — cautious operation"
-- 0.20: "Baseline — normal self-observation"
-- 0.23: "Enhanced self-observation — energy allows exploration"
+Third row — Reflection Coefficient Scale (504):
+- Full-width box labeled "REFLECTION COEFFICIENT SCALE"
+- Number line from 0.1 to 0.3 (within box bounds)
+- Four markers with values and state labels:
+  - 0.16 / CRIT
+  - 0.19 / LOW
+  - 0.20 / NORM
+  - 0.23 / SURP
 
-Bottom note:
-- "Energy-aware regulation ensures the system reduces cognitive overhead
-  when energy is scarce and explores deeper self-reference when energy
-  is abundant"
+Fourth row — Behavioral Effects (506):
+- Full-width box labeled "BEHAVIORAL EFFECTS"
+- Four effect descriptions:
+  - 0.16: "Reduced - conserve cognitive resources"
+  - 0.19: "Slightly reduced - cautious operation"
+  - 0.20: "Baseline - normal self-observation"
+  - 0.23: "Enhanced - energy allows exploration"
+
+Caption:
+- "Energy-aware regulation ensures efficient cognitive resource management."
+- "Low energy reduces self-observation; surplus energy enables exploration."
 
 
 FIG. 6 — End-to-End Signal Flow with Self-Observation Integration
@@ -241,78 +251,59 @@ FIG. 6 — End-to-End Signal Flow with Self-Observation Integration
 This figure shows the complete signal flow of the self-sustaining cognitive
 loop with the self-observation pathway highlighted as architecturally distinct.
 
-Layout (left to right, with three feedback loops):
+Reference numerals: 600, 602, 604, 606, 608, 610
 
-Left — Input Stage:
-    [Environmental Sensors] — rectangle
-    Label: "Light, Temperature, Pressure"
-    Arrow right: "Sensor signals"
+Vertical flow layout:
 
-Center-left — Neural Processing (main focus of this patent):
-    [Spiking Neural Network] — large rectangle, bold border
-    Three distinct input arrows entering from left and bottom:
-        1. Solid arrow from Sensors: "External Input I_ext(t)"
-        2. Dotted arrow from bottom-left: "Self-Observation: previous_output x reflection_coeff"
-           (THIS IS THE PATENT B PATHWAY — drawn bold and labeled prominently)
-        3. Thin arrows between neurons: "Synaptic Computation w_ij x spike_j"
+Top (600):
+- Full-width box labeled "ENVIRONMENTAL INPUT"
+- Inside: "(Light / Temperature / Pressure)"
+- Arrow down to Neuromorphic Core
 
-    Inside the SNN rectangle, show:
-        - Small circles for neurons
-        - Label: "V_i(t) = V_i(t-1) x leak + I_ext + I_reflection + I_synaptic"
-        - Label: "output = mean(V_1, V_2, ..., V_N)"
+Second row (602):
+- Full-width box labeled "NEUROMORPHIC CORE (SNN)" (bold border)
+- Inside: "V = V × leak + I_ext + I_refl + I_syn"
+- Inside: "output = mean(V_1, V_2, ..., V_N)"
+- Two arrows down to Self-Observation and Cognitive Modulation
 
-    Output arrow right: "Spike Pattern + Aggregate Output"
+Third row (side by side):
+- Left (604): Box labeled "SELF-OBSERVATION"
+  - Inside: "(Patent B - This Patent)"
+  - Inside: "z^(-1) delay + refl_coeff"
+- Right (606): Box labeled "COGNITIVE MODULATION"
+  - Inside: "refl_coeff adjustment"
+  - Inside: "Attention / Intention"
+- Bidirectional arrows between 604 and 606
 
-Center — Cognitive Modulation:
-    [Cognitive Modulation] — rectangle above main flow
-    Two input arrows:
-        - "External cognitive commands" from above
-        - "Internal energy state" from below
-    Output arrow down to SNN:
-        - "reflection_coeff = base + modulation x sensitivity"
-    Label: "Dynamic reflection coefficient adjustment"
+Fourth row (right side):
+- (608): Box labeled "MOTOR ACTUATION"
+  - Inside: "Servo Control / Response"
+- Arrow down from Cognitive Modulation
 
-Center-right — Motor + Harvesting:
-    [Motor Actuator] — rectangle
-    Arrow from SNN: "Motor command"
-    [Energy Harvester] — rectangle below
-    Arrow from Motor: "Mechanical energy"
-    Arrow from Harvester back toward SNN (along bottom):
-        "Harvested energy powers SNN"
-    Label: "ENERGY FEEDBACK (Patent A pathway)"
+Fifth row (right side):
+- (610): Box labeled "ENERGY HARVESTING"
+  - Inside: "Piezo / Thermal Recovery"
+- Arrow down from Motor Actuation
 
-Bottom — Three Feedback Loops (visually distinguished):
+Two feedback loops (visually distinguished):
 
-    Loop 1 — Self-Observation (Patent B — THIS PATENT):
-        Dotted bold line from SNN output back to SNN input
-        Label: "SELF-OBSERVATION FEEDBACK"
-        Label: "previous_output(t) -> I_reflection(t+1)"
-        Label: "Scaled by reflection_coeff (0.0 to 1.0)"
-        Delay element z^-1 on path
-        THIS LOOP DRAWN MOST PROMINENTLY
+Loop 1 — Self-Observation (Patent B — THIS PATENT):
+- Short dashes (bold, stroke-width 3) from Self-Observation (604) back to SNN (602)
+- Left side of diagram
+- Label: "SELF-OBS LOOP" (rotated vertical text)
 
-    Loop 2 — Energy (Patent A):
-        Dashed line from Harvester back to SNN
-        Label: "ENERGY FEEDBACK"
-        Label: "Harvested energy sustains computation"
-        Drawn less prominently than Loop 1
-
-    Loop 3 — Synaptic (internal):
-        Thin line within SNN rectangle
-        Label: "SYNAPTIC COMPUTATION"
-        Label: "w_ij updated by STDP"
-        Internal to the SNN, not a system-level loop
+Loop 2 — Energy (Patent A):
+- Long dashes (stroke-width 2) from Energy Harvesting (610) back to SNN (602)
+- Right side of diagram
+- Label: "ENERGY LOOP" (rotated vertical text)
 
 Legend box:
-    "--- Dotted bold: Self-Observation pathway (this patent)"
-    "--- Dashed: Energy feedback pathway (co-pending Patent A)"
-    "--- Thin: Synaptic computation (internal to SNN)"
+- Short dashes (bold) line sample: "Short dashes (bold): Self-Observation (this patent)"
+- Long dashes line sample: "Long dashes: Energy feedback (Patent A)"
 
-Key callout:
-    "The self-observation pathway is architecturally distinct from both
-     the energy feedback and the synaptic computation. It is the only
-     pathway that feeds the network's own aggregate state back as
-     explicit input at configurable gain."
+Caption:
+- "The self-observation pathway feeds the network's own aggregate state"
+- "back as explicit input at configurable gain (0.0 to 1.0)."
 
 Sheet numbering: "6/6" at top center
 

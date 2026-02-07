@@ -8,74 +8,94 @@
   <rect width="100%" height="100%" fill="white" />
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">1/6</text>
   <g transform="translate(0, 50)">
-<text x="425" y="80" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">SELF-OBSERVATION FEEDBACK LOOP</text>
-<!-- Input signal box -->
-<rect x="100" y="185" width="70" height="30" rx="3" fill="none" stroke="black" stroke-width="1.5"/>
-<text x="135" y="205" font-family="Courier New, monospace" font-size="14" text-anchor="middle">I_ext(t)</text>
-<text x="110" y="170" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">100</text>
-<line x1="115" y1="173" x2="120" y2="185" stroke="black" stroke-width="0.5"/>
-<line x1="170" y1="200" x2="210" y2="200" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<circle cx="230" cy="200" r="20" fill="none" stroke="black" stroke-width="2"/>
-<text x="230" y="206" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold">+</text>
-<text x="230" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">102</text>
-<line x1="230" y1="165" x2="230" y2="180" stroke="black" stroke-width="0.5"/>
-<line x1="250" y1="200" x2="300" y2="200" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="300" y="150" width="250" height="100" rx="5" fill="none" stroke="black" stroke-width="3"/>
-<text x="425" y="180" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Spiking Neural Network</text>
-<text x="575" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="start">104</text>
-<line x1="570" y1="155" x2="550" y2="170" stroke="black" stroke-width="0.5"/>
-<!-- Visual equation: (V(t+1)) = (V(t)) × (0.1) + (I) -->
-<circle cx="345" cy="215" r="30" fill="none" stroke="black" stroke-width="1.5"/>
-<text x="345" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">V(t+1)</text>
-<text x="382" y="220" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">=</text>
-<circle cx="412" cy="215" r="20" fill="none" stroke="black" stroke-width="1.5"/>
-<text x="412" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">V(t)</text>
-<text x="442" y="220" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">×</text>
-<circle cx="472" cy="215" r="18" fill="none" stroke="black" stroke-width="1.5"/>
-<text x="472" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.1</text>
-<text x="500" y="220" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">+</text>
-<circle cx="525" cy="215" r="15" fill="none" stroke="black" stroke-width="1.5"/>
-<text x="525" y="220" font-family="Courier New, monospace" font-size="14" text-anchor="middle">I</text>
-<line x1="550" y1="200" x2="590" y2="200" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<!-- Output signal box -->
-<rect x="590" y="185" width="50" height="30" rx="3" fill="none" stroke="black" stroke-width="1.5"/>
-<text x="615" y="205" font-family="Courier New, monospace" font-size="14" text-anchor="middle">S(t)</text>
-<text x="645" y="195" font-family="Arial, sans-serif" font-size="14" text-anchor="start">106</text>
-<line x1="643" y1="195" x2="640" y2="200" stroke="black" stroke-width="0.5"/>
-<line x1="425" y1="250" x2="425" y2="310" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="325" y="310" width="200" height="70" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="425" y="335" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Aggregate Output</text>
-<text x="425" y="360" font-family="Courier New, monospace" font-size="14" text-anchor="middle">O(t) = mean(V)</text>
-<text x="540" y="320" font-family="Arial, sans-serif" font-size="14" text-anchor="start">108</text>
-<line x1="538" y1="317" x2="525" y2="320" stroke="black" stroke-width="0.5"/>
-<!-- Arrow from Aggregate Output to z^-1 box -->
-<line x1="325" y1="345" x2="270" y2="345" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<!-- z^-1 delay box -->
-<rect x="220" y="325" width="50" height="40" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="245" y="350" font-family="Courier New, monospace" font-size="14" text-anchor="middle">z⁻¹</text>
-<text x="170" y="350" font-family="Arial, sans-serif" font-size="14" text-anchor="start">110</text>
-<line x1="195" y1="347" x2="220" y2="345" stroke="black" stroke-width="0.5"/>
-<!-- Arrow from z^-1 down to Reflection Scaling -->
-<line x1="245" y1="365" x2="245" y2="420" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<!-- Reflection Scaling box -->
-<rect x="145" y="420" width="200" height="70" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="245" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Reflection Scaling</text>
-<text x="245" y="465" font-family="Courier New, monospace" font-size="14" text-anchor="middle">I_refl = O × rc</text>
-<text x="360" y="455" font-family="Arial, sans-serif" font-size="14" text-anchor="start">112</text>
-<line x1="358" y1="452" x2="345" y2="455" stroke="black" stroke-width="0.5"/>
-<!-- Feedback path: left side of Reflection Scaling, up to below + circle, then up into it -->
-<line x1="145" y1="455" x2="105" y2="455" stroke="black" stroke-width="2"/>
-<line x1="105" y1="455" x2="105" y2="280" stroke="black" stroke-width="2"/>
-<line x1="105" y1="280" x2="230" y2="280" stroke="black" stroke-width="2"/>
-<line x1="230" y1="280" x2="230" y2="220" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<text x="115" y="370" font-family="Arial, sans-serif" font-size="14" text-anchor="start">114</text>
-<line x1="113" y1="367" x2="105" y2="360" stroke="black" stroke-width="0.5"/>
-<rect x="150" y="550" width="550" height="120" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="425" y="575" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-observation: network observes own prior state</text>
-<text x="425" y="600" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Reflection coefficient: 0.19 to 0.23</text>
-<text x="200" y="630" font-family="Arial, sans-serif" font-size="14" text-anchor="start">100: I_ext(t) = External input signal</text>
-<text x="200" y="655" font-family="Arial, sans-serif" font-size="14" text-anchor="start">106: S(t) = Spike output signal</text>
+    <text x="425" y="70" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SELF-OBSERVATION FEEDBACK LOOP</text>
+    <text x="425" y="90" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Core Mechanism for Recursive Self-Observation</text>
 
-<text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 1</text>
+    <!-- EXTERNAL INPUT (100) - Full width -->
+    <rect x="150" y="120" width="550" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
+    <text x="425" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">EXTERNAL INPUT</text>
+    <text x="425" y="162" font-family="Courier New, monospace" font-size="14" text-anchor="middle">I_ext(t)</text>
+    <text x="690" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="end">100</text>
+
+    <!-- Arrow: External Input down to Summing Junction -->
+    <line x1="425" y1="170" x2="425" y2="195" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+
+    <!-- SUMMING JUNCTION (102) - Circle with + -->
+    <circle cx="425" cy="220" r="20" fill="none" stroke="black" stroke-width="2"/>
+    <text x="425" y="227" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold">+</text>
+    <line x1="445" y1="218" x2="453" y2="212" stroke="black" stroke-width="0.5"/>
+    <text x="455" y="216" font-family="Arial, sans-serif" font-size="14" text-anchor="start">102</text>
+    <text x="455" y="232" font-family="Courier New, monospace" font-size="14" text-anchor="start">I_adj = I_ext + I_refl</text>
+
+    <!-- Arrow: Summing Junction to SNN -->
+    <line x1="425" y1="240" x2="425" y2="265" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+
+    <!-- SPIKING NEURAL NETWORK (104) - Full width, bold border -->
+    <rect x="150" y="265" width="550" height="90" rx="5" fill="none" stroke="black" stroke-width="3"/>
+    <text x="425" y="290" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SPIKING NEURAL NETWORK (N LIF Neurons)</text>
+    <!-- Neuron circles - cluster arrangement (no connecting lines to avoid implying topology) -->
+    <circle cx="380" cy="306" r="8" fill="none" stroke="black" stroke-width="1.5"/>
+    <circle cx="460" cy="306" r="8" fill="none" stroke="black" stroke-width="1.5"/>
+    <circle cx="340" cy="320" r="8" fill="none" stroke="black" stroke-width="1.5"/>
+    <circle cx="420" cy="320" r="8" fill="none" stroke="black" stroke-width="1.5"/>
+    <circle cx="500" cy="320" r="8" fill="none" stroke="black" stroke-width="1.5"/>
+    <!-- Membrane equation -->
+    <text x="425" y="345" font-family="Courier New, monospace" font-size="14" text-anchor="middle">V(t+1) = V(t) × leak + I_adj × dt</text>
+    <text x="690" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="end">104</text>
+
+    <!-- Arrows from SNN to row below -->
+    <line x1="275" y1="355" x2="275" y2="385" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+    <line x1="575" y1="355" x2="575" y2="385" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+
+    <!-- SPIKE OUTPUT (106) - Left half -->
+    <rect x="150" y="385" width="250" height="55" rx="5" fill="none" stroke="black" stroke-width="2"/>
+    <text x="275" y="410" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SPIKE OUTPUT</text>
+    <text x="275" y="430" font-family="Courier New, monospace" font-size="14" text-anchor="middle">S(t)</text>
+    <text x="390" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="end">106</text>
+
+    <!-- AGGREGATE OUTPUT COMPUTATION (108) - Right half -->
+    <rect x="450" y="385" width="250" height="75" rx="5" fill="none" stroke="black" stroke-width="2"/>
+    <text x="575" y="408" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">AGGREGATE OUTPUT</text>
+    <text x="575" y="428" font-family="Courier New, monospace" font-size="14" text-anchor="middle">O(t) = mean(V_1...V_N)</text>
+    <text x="575" y="448" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Mean membrane potential</text>
+    <text x="690" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="end">108</text>
+
+    <!-- Arrow: Aggregate Output to z^-1 (stroke-width=2 like 104->108) -->
+    <line x1="575" y1="460" x2="575" y2="490" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+
+    <!-- z^-1 DELAY ELEMENT (110) - Right side, moved down for spacing -->
+    <rect x="450" y="490" width="250" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
+    <text x="575" y="515" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">DELAY ELEMENT</text>
+    <text x="575" y="533" font-family="Courier New, monospace" font-size="14" text-anchor="middle">z^(-1)</text>
+    <text x="690" y="505" font-family="Arial, sans-serif" font-size="14" text-anchor="end">110</text>
+
+    <!-- Arrow: z^-1 to Reflection Scaling (stroke-width=2 like 104->108) -->
+    <line x1="575" y1="540" x2="575" y2="570" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+
+    <!-- REFLECTION SCALING (112) - Right side, moved down for spacing -->
+    <rect x="430" y="570" width="270" height="65" rx="5" fill="none" stroke="black" stroke-width="2"/>
+    <text x="565" y="595" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">REFLECTION SCALING</text>
+    <text x="565" y="620" font-family="Courier New, monospace" font-size="14" text-anchor="middle">I_refl = O(t) × refl_coeff</text>
+    <text x="690" y="585" font-family="Arial, sans-serif" font-size="14" text-anchor="end">112</text>
+
+    <!-- SELF-OBSERVATION FEEDBACK LOOP (114) - Bold, left side going back up to Summing Junction -->
+    <line x1="430" y1="603" x2="130" y2="603" stroke="black" stroke-width="3"/>
+    <line x1="130" y1="603" x2="130" y2="220" stroke="black" stroke-width="3"/>
+    <line x1="130" y1="220" x2="403" y2="220" stroke="black" stroke-width="3" marker-end="url(#ah)"/>
+    <text x="118" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="end" transform="rotate(-90, 118, 380)">SELF-OBSERVATION FEEDBACK</text>
+    <text x="115" y="620" font-family="Arial, sans-serif" font-size="14" text-anchor="end">114</text>
+    <line x1="118" y1="617" x2="130" y2="603" stroke="black" stroke-width="0.5"/>
+
+    <!-- Signal Pathways Legend -->
+    <rect x="150" y="650" width="550" height="65" rx="5" fill="none" stroke="black" stroke-width="2"/>
+    <text x="425" y="675" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Signal Pathways</text>
+    <line x1="180" y1="700" x2="270" y2="700" stroke="black" stroke-width="3"/>
+    <text x="280" y="705" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Bold: Self-observation feedback</text>
+
+    <!-- Caption -->
+    <text x="425" y="775" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-observation: network observes its own prior state.</text>
+    <text x="425" y="795" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Reflection coefficient: 0.0-1.0. Operational: 0.1-0.3.</text>
+
+    <text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 1</text>
   </g>
 </svg>

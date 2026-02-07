@@ -7,56 +7,74 @@
   </defs>
   <rect width="100%" height="100%" fill="white" />
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">4/6</text>
-  <g transform="translate(0, 50)">
-<text x="425" y="80" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SELF-REFERENTIAL LEARNING LOOP</text>
-<text x="425" y="100" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(STDP + Self-Observation)</text>
-<rect x="275" y="150" width="300" height="70" rx="5" fill="none" stroke="black" stroke-width="3"/>
-<text x="425" y="175" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SNN Processing Step t</text>
-<text x="425" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Membrane dynamics + spikes</text>
-<text x="580" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="start">400</text>
-<line x1="578" y1="160" x2="575" y2="170" stroke="black" stroke-width="0.5"/>
-<line x1="575" y1="185" x2="650" y2="185" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<text x="612" y="170" font-family="Courier New, monospace" font-size="14" text-anchor="middle">S(t)</text>
-<line x1="425" y1="220" x2="425" y2="270" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="250" y="270" width="350" height="110" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="425" y="295" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">STDP Weight Update</text>
-<text x="425" y="320" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Post fires: W += 0.01 × pre</text>
-<text x="425" y="340" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Pre fires: W -= 0.012 × post</text>
-<text x="425" y="360" font-family="Courier New, monospace" font-size="14" text-anchor="middle">A-/A+ = 1.2 (stability)</text>
-<text x="605" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="start">402</text>
-<line x1="603" y1="280" x2="600" y2="295" stroke="black" stroke-width="0.5"/>
-<line x1="425" y1="380" x2="425" y2="430" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="275" y="430" width="300" height="55" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="425" y="455" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Updated Weight Matrix</text>
-<text x="425" y="475" font-family="Courier New, monospace" font-size="14" text-anchor="middle">W(t+1) ∈ [0.0, 0.5]</text>
-<text x="580" y="440" font-family="Arial, sans-serif" font-size="14" text-anchor="start">404</text>
-<line x1="578" y1="440" x2="575" y2="455" stroke="black" stroke-width="0.5"/>
-<line x1="275" y1="457" x2="160" y2="457" stroke="black" stroke-width="2"/>
-<line x1="160" y1="457" x2="160" y2="520" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="125" y="520" width="170" height="70" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="210" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Self-Observation</text>
-<text x="210" y="565" font-family="Courier New, monospace" font-size="14" text-anchor="middle">O(t) = mean(V)</text>
-<text x="210" y="580" font-family="Courier New, monospace" font-size="14" text-anchor="middle">× rc</text>
-<text x="300" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="start">406</text>
-<line x1="298" y1="530" x2="295" y2="545" stroke="black" stroke-width="0.5"/>
-<line x1="210" y1="520" x2="210" y2="185" stroke="black" stroke-width="2"/>
-<line x1="210" y1="185" x2="275" y2="185" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<rect x="470" y="520" width="260" height="120" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="600" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Key Insight</text>
-<text x="600" y="565" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">STDP strengthens</text>
-<text x="600" y="580" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">causal connections.</text>
-<text x="600" y="600" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-obs adds input</text>
-<text x="600" y="615" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">correlated with</text>
-<text x="600" y="630" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">network behavior.</text>
-<text x="735" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="start">408</text>
-<line x1="733" y1="530" x2="730" y2="545" stroke="black" stroke-width="0.5"/>
-<rect x="150" y="690" width="550" height="80" rx="5" fill="none" stroke="black" stroke-width="2"/>
-<text x="425" y="715" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Validation Results (Phase 8)</text>
-<text x="425" y="740" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Entropy: 2.95→2.02 bits (PASS)</text>
-<text x="425" y="760" font-family="Courier New, monospace" font-size="14" text-anchor="middle">STDP MI: 6.52× > 1.20× (PASS)</text>
-<text x="705" y="700" font-family="Arial, sans-serif" font-size="14" text-anchor="start">410</text>
-<line x1="703" y1="700" x2="700" y2="710" stroke="black" stroke-width="0.5"/>
 
-<text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 4</text>
-  </g>
+  <!-- Title -->
+  <text x="425" y="110" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SELF-REFERENTIAL LEARNING LOOP</text>
+  <text x="425" y="130" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(STDP + Self-Observation)</text>
+
+  <!-- SNN PROCESSING STEP t (400) -->
+  <rect x="150" y="160" width="550" height="70" rx="5" fill="none" stroke="black" stroke-width="3"/>
+  <text x="425" y="185" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SNN PROCESSING STEP t</text>
+  <text x="425" y="210" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Membrane dynamics + spikes</text>
+  <text x="690" y="175" font-family="Arial, sans-serif" font-size="14" text-anchor="end">400</text>
+
+  <!-- Arrow down from SNN to STDP -->
+  <line x1="425" y1="230" x2="425" y2="268" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="440" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Spike Output</text>
+
+  <!-- STDP WEIGHT UPDATE (402) -->
+  <rect x="150" y="270" width="550" height="110" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="425" y="295" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">STDP WEIGHT UPDATE</text>
+  <text x="425" y="320" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Post fires: W += 0.01 × pre_trace</text>
+  <text x="425" y="345" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Pre fires: W -= 0.012 × post_trace</text>
+  <text x="425" y="365" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">A-/A+ = 1.2 (stability ratio)</text>
+  <text x="690" y="285" font-family="Arial, sans-serif" font-size="14" text-anchor="end">402</text>
+
+  <!-- Arrow down from STDP to Updated Weights -->
+  <line x1="425" y1="380" x2="425" y2="418" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+
+  <!-- UPDATED WEIGHT MATRIX (404) -->
+  <rect x="150" y="420" width="550" height="55" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="425" y="445" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">UPDATED WEIGHT MATRIX</text>
+  <text x="425" y="465" font-family="Courier New, monospace" font-size="14" text-anchor="middle">W(t+1) bounded to [0.0, 0.5]</text>
+  <text x="690" y="435" font-family="Arial, sans-serif" font-size="14" text-anchor="end">404</text>
+
+  <!-- Arrow from Updated Weights to Self-Observation -->
+  <line x1="275" y1="475" x2="275" y2="523" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+
+  <!-- SELF-OBSERVATION (406) - Left side -->
+  <rect x="150" y="525" width="250" height="70" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="275" y="550" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SELF-OBSERVATION</text>
+  <text x="275" y="575" font-family="Courier New, monospace" font-size="14" text-anchor="middle">O(t) × refl_coeff</text>
+  <text x="390" y="540" font-family="Arial, sans-serif" font-size="14" text-anchor="end">406</text>
+
+  <!-- KEY INSIGHT (408) - Right side callout -->
+  <rect x="450" y="525" width="250" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="575" y="550" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">KEY INSIGHT</text>
+  <text x="575" y="575" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">STDP strengthens causal</text>
+  <text x="575" y="595" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">connections. Self-observation</text>
+  <text x="575" y="615" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">adds correlated feedback.</text>
+  <text x="690" y="540" font-family="Arial, sans-serif" font-size="14" text-anchor="end">408</text>
+
+  <!-- Self-observation feedback loop (back to SNN) - Bold line -->
+  <line x1="150" y1="560" x2="130" y2="560" stroke="black" stroke-width="3"/>
+  <line x1="130" y1="560" x2="130" y2="195" stroke="black" stroke-width="3"/>
+  <line x1="130" y1="195" x2="148" y2="195" stroke="black" stroke-width="3" marker-end="url(#ah)"/>
+  <text x="118" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="end" transform="rotate(-90, 118, 380)">FEEDBACK LOOP</text>
+
+  <!-- VALIDATION RESULTS (410) - Full width at bottom -->
+  <rect x="150" y="660" width="550" height="90" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="425" y="685" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">VALIDATION RESULTS (Phase 8)</text>
+  <text x="425" y="710" font-family="Courier New, monospace" font-size="14" text-anchor="middle">F8.1: Entropy 2.95 to 2.02 bits (PASS)</text>
+  <text x="425" y="735" font-family="Courier New, monospace" font-size="14" text-anchor="middle">F8.2: STDP MI = 6.52x > 1.20x (PASS)</text>
+  <text x="690" y="675" font-family="Arial, sans-serif" font-size="14" text-anchor="end">410</text>
+
+  <!-- Signal Pathways Legend -->
+  <rect x="150" y="770" width="550" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="425" y="795" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Signal Pathways</text>
+  <line x1="180" y1="810" x2="270" y2="810" stroke="black" stroke-width="3"/>
+  <text x="280" y="815" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Bold: Self-observation feedback loop</text>
+
+  <!-- Figure Label -->
+  <text x="425" y="1020" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 4</text>
 </svg>
