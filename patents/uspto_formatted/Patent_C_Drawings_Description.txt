@@ -35,372 +35,304 @@ energy harvesting.
 
 DETAILED DESCRIPTION OF THE DRAWINGS
 
+Reference Numeral Convention: Each figure in this patent uses a per-figure
+numbering series (FIG. 1 uses 100-series, FIG. 2 uses 200-series, through
+FIG. 7 uses 700-series), with even-numbered increments. Where the same
+physical component appears in multiple figures, it receives the numeral
+appropriate to that figure's series.
+
 
 FIG. 1 — System Architecture with Fallback
 
-This figure shows the complete system architecture including the fallback
-mechanism.
+FIG. 1 is a system architecture block diagram showing the complete system
+including the fallback mechanism. The diagram is arranged in three vertical
+sections.
 
-Top section — Cognitive Control Layer:
-- Cloud shape labeled "External Cognitive Control Layer (e.g., Claude)"
-- Two arrows exiting downward:
-  - "Modulation commands (-1.0 to +1.0)"
-  - "Heartbeat signal (implicit via tool calls)"
-- Label: "Provides intelligent cognitive decisions"
-- Dashed outline indicating "May become unavailable"
+The top section depicts an external cognitive control layer 100 drawn as a
+cloud shape and labeled "External Cognitive Control Layer (e.g., Claude)."
+The external cognitive control layer 100 provides intelligent cognitive
+decisions to the system. Two downward arrows exit the external cognitive
+control layer 100: a first arrow carrying modulation commands in the range
+-1.0 to +1.0, and a second arrow carrying a heartbeat signal implicit via
+tool calls. A dashed outline around the external cognitive control layer 100
+indicates that it may become unavailable.
 
-Middle section — Transition Controller:
-- Rectangle labeled "Heartbeat Watchdog"
-- Inside: "Monitors time since last cognitive input"
-- Inside: "Timeout threshold: 30 seconds"
-- Inside: "Check interval: 5 seconds"
-- Two output paths:
-  - Left arrow (solid): "Heartbeat active -> Connected Mode"
-  - Right arrow (dashed): "Heartbeat timeout -> Autonomous Mode"
+The middle section contains a heartbeat watchdog 102 depicted as a rectangle.
+The heartbeat watchdog 102 monitors the time elapsed since the last cognitive
+input, with a timeout threshold of 30 seconds and a check interval of 5
+seconds. Two output paths exit the heartbeat watchdog 102: a solid left arrow
+labeled "Heartbeat active" leading to connected mode, and a dashed right
+arrow labeled "Heartbeat timeout" leading to autonomous mode.
 
-Left path — Connected Mode:
-- Rectangle labeled "Cognitive-Driven Operation"
-- Inside: "Input: Claude-controlled (0-1)"
-- Inside: "Modulation: Claude-controlled (-1 to +1)"
-- Arrow down to SNN
+On the left path, a cognitive-driven operation block 104 is depicted as a
+rectangle. The cognitive-driven operation block 104 receives input controlled
+by Claude in the range 0 to 1, and modulation controlled by Claude in the
+range -1 to +1. An arrow from the cognitive-driven operation block 104
+proceeds downward to the neural processing section.
 
-Right path — Autonomous Mode:
-- Rectangle labeled "Autonomous Fallback Controller"
-- Inside: "Input: Self-generated (circadian + bursts)"
-- Inside: "Modulation: Energy-aware (-0.4 to +0.3)"
-- Arrow down to SNN
-- Additional outputs:
-  - Arrow to "Step Buffer" (rectangle)
-  - Arrow to "State Snapshots" (cylinder/disk shape)
+On the right path, an autonomous fallback controller 106 is depicted as a
+rectangle. The autonomous fallback controller 106 generates self-produced
+input comprising a circadian base signal plus stochastic attention bursts,
+and applies energy-aware modulation in the range -0.4 to +0.3. An arrow
+from the autonomous fallback controller 106 proceeds downward to the neural
+processing section. Additionally, the autonomous fallback controller 106
+outputs to a step buffer 108 depicted as a rectangle and to a state snapshot
+store 110 depicted as a cylinder or disk shape.
 
-Bottom section — Neural Processing:
-- Large rectangle labeled "Spiking Neural Network + Energy Harvester"
-- Inside: "Continuous operation regardless of control source"
-- Label: "THE SYSTEM NEVER STOPS"
-
-Key annotation:
-- "Seamless transition: SNN continues processing without interruption"
-- "The control source changes; the computation continues"
+The bottom section contains a spiking neural network 112 and an energy
+harvester 114, depicted together as a large rectangle labeled "Spiking
+Neural Network + Energy Harvester." The spiking neural network 112 and
+energy harvester 114 provide continuous operation regardless of whether the
+control source is the cognitive-driven operation block 104 or the autonomous
+fallback controller 106. A key annotation states: "Seamless transition: SNN
+continues processing without interruption. The control source changes; the
+computation continues."
 
 
 FIG. 2 — State Transition Diagram
 
-This figure shows a finite state machine with three states and labeled
-transitions.
+FIG. 2 is a finite state machine diagram with three states and labeled
+transitions between them.
 
-Three states (large circles or rounded rectangles):
+A connected state 200 is depicted on the left with a bold outline. The
+connected state 200 is labeled "CONNECTED" with sublabel "Cognitive layer
+active." Inside the connected state 200: "Input from cognitive layer" and
+"Modulation from cognitive layer." A start indicator points to the connected
+state 200 identifying it as the initial state.
 
-State 1 (left, bold outline):
-- Label: "CONNECTED"
-- Sublabel: "Cognitive layer active"
-- Inside: "Input from cognitive layer"
-- Inside: "Modulation from cognitive layer"
+An autonomous state 202 is depicted on the right. The autonomous state 202
+is labeled "AUTONOMOUS" with sublabel "Fallback active." Inside the
+autonomous state 202: "Self-generated input," "Energy-aware modulation," and
+"State buffering active." An annotation notes that snapshots are taken every
+50 steps.
 
-State 2 (right):
-- Label: "AUTONOMOUS"
-- Sublabel: "Fallback active"
-- Inside: "Self-generated input"
-- Inside: "Energy-aware modulation"
-- Inside: "State buffering active"
+A recovering state 204 is depicted at the bottom. The recovering state 204
+is labeled "RECOVERING" with sublabel "Resynchronization." Inside the
+recovering state 204: "Transmitting buffer" and "Restoring cognitive control."
 
-State 3 (bottom):
-- Label: "RECOVERING"
-- Sublabel: "Resynchronization"
-- Inside: "Transmitting buffer"
-- Inside: "Restoring cognitive control"
+A first transition arrow 206 from the connected state 200 to the autonomous
+state 202 is labeled "Heartbeat timeout (>30s no tool call)" with condition
+"last_tool_call_time > 30s."
 
-Transitions (labeled arrows between states):
+A second transition arrow 208 from the autonomous state 202 to the
+recovering state 204 is labeled "Cognitive layer reconnects (resync called)"
+with condition "resync() tool invoked."
 
-CONNECTED -> AUTONOMOUS:
-- Arrow labeled: "Heartbeat timeout (>30s no tool call)"
-- Condition: "last_tool_call_time > 30s"
+A third transition arrow 210 from the recovering state 204 to the connected
+state 200 is labeled "Resync complete, buffer transmitted" with condition
+"Cognitive layer acknowledges state."
 
-AUTONOMOUS -> RECOVERING:
-- Arrow labeled: "Cognitive layer reconnects (resync called)"
-- Condition: "resync() tool invoked"
+A fourth transition arrow 212 shown as a dashed line from the autonomous
+state 202 directly to the connected state 200 is labeled "Any tool call
+received (heartbeat reset)" with condition "Direct reconnection without
+explicit resync."
 
-RECOVERING -> CONNECTED:
-- Arrow labeled: "Resync complete, buffer transmitted"
-- Condition: "Cognitive layer acknowledges state"
-
-AUTONOMOUS -> AUTONOMOUS (self-loop):
-- Arrow labeled: "Each autonomous step (up to 10,000)"
-- Condition: "autonomous_steps < hard_cap"
-
-AUTONOMOUS -> CONNECTED (direct, dashed):
-- Arrow labeled: "Any tool call received (heartbeat reset)"
-- Condition: "Direct reconnection without explicit resync"
-
-Additional annotations:
-- Start indicator pointing to CONNECTED: "Initial state"
-- Note on AUTONOMOUS: "Snapshot every 50 steps"
-- Note on AUTONOMOUS self-loop: "Hard cap: 10,000 steps"
+A self-loop arrow 214 on the autonomous state 202 is labeled "Each
+autonomous step (up to 10,000)" with condition "autonomous_steps < hard_cap"
+and annotation "Hard cap: 10,000 steps."
 
 
 FIG. 3 — Energy-Aware Modulation Curve
 
-This figure shows the step function mapping energy level to modulation value.
+FIG. 3 is a graph showing the step function that maps energy level to
+autonomous modulation value.
 
-X-axis: "System Energy Level (mWh)" ranging from 0 to 100+
-Y-axis: "Autonomous Modulation Value" ranging from -0.55 to +0.45
-(tick marks at -0.4, -0.1, 0.0, +0.3 corresponding to actual modulation values)
+An energy modulation curve 300 is plotted with the x-axis labeled "System
+Energy Level (mWh)" ranging from 0 to 100+ and the y-axis labeled
+"Autonomous Modulation Value" ranging from -0.55 to +0.45 with tick marks
+at -0.4, -0.1, 0.0, and +0.3 corresponding to the actual modulation values.
 
-Step function with four plateaus:
+The energy modulation curve 300 comprises four plateaus. A first plateau
+from 0 to 15 mWh has modulation -0.4, is shaded with dense hatching, and
+labeled "CRITICAL — Maximum conservation" with behavioral note "Inhibit
+neural activity to preserve energy." A second plateau from 15 to 30 mWh has
+modulation -0.1, is shaded with light hatching, and labeled "LOW — Cautious
+operation" with behavioral note "Slightly reduce activity." A third plateau
+from 30 to 80 mWh has modulation 0.0, is unshaded, and labeled "NORMAL —
+Neutral operation" with behavioral note "Standard autonomous processing."
+A fourth plateau from 80+ mWh has modulation +0.3, is shaded with light
+hatching, and labeled "SURPLUS — Opportunistic exploration" with behavioral
+note "Increase activity to utilize excess energy." Vertical dashed lines
+appear at the energy thresholds of 15, 30, and 80 mWh.
 
-Plateau 1 (0 to 15 mWh):
-- Modulation = -0.4
-- Region shaded with dense hatching
-- Label: "CRITICAL — Maximum conservation"
-- Behavioral note: "Inhibit neural activity to preserve energy"
-
-Plateau 2 (15 to 30 mWh):
-- Modulation = -0.1
-- Region shaded with light hatching
-- Label: "LOW — Cautious operation"
-- Behavioral note: "Slightly reduce activity"
-
-Plateau 3 (30 to 80 mWh):
-- Modulation = 0.0
-- Region unshaded (clear)
-- Label: "NORMAL — Neutral operation"
-- Behavioral note: "Standard autonomous processing"
-
-Plateau 4 (80+ mWh):
-- Modulation = +0.3
-- Region shaded with light hatching
-- Label: "SURPLUS — Opportunistic exploration"
-- Behavioral note: "Increase activity to utilize excess energy"
-
-Vertical dashed lines at energy thresholds (15, 30, 80 mWh) with labels.
-
-Annotation at bottom:
-- "The system autonomously adjusts its processing intensity based on
-  available energy — mimicking biological metabolic regulation"
+A behavioral effects table 302 appears below the energy modulation curve 300
+and annotates: "The system autonomously adjusts its processing intensity
+based on available energy — mimicking biological metabolic regulation."
 
 
 FIG. 4 — Autonomous Input Generator Output
 
-This figure shows a time-series waveform of the self-generated input signal.
+FIG. 4 is a signal diagram showing the time-series waveform of the
+self-generated input signal.
 
-X-axis: "Autonomous Step Number" ranging from 0 to 500 (representative)
-Y-axis: "Input Value" ranging from 0.0 to 1.0
+An input signal graph 400 occupies the upper portion of the figure with
+x-axis "Autonomous Step Number" ranging from 0 to 500 and y-axis "Input
+Value" ranging from 0.0 to 1.0.
 
-Main waveform components:
+The input signal graph 400 contains three superimposed waveform components.
+A circadian base signal is shown as a smooth sinusoidal curve with equation
+"base = 0.5 + 0.3 x sin(2 x pi x step / period)" with period = 500 steps
+and amplitude range 0.2 to 0.8. Superimposed on the base signal are
+attention bursts 402 shown as sharp upward spikes occurring randomly at
+approximately 10% of steps, each burst 402 adding +0.2 above the base
+signal. Each burst 402 is labeled with a small arrow: "10% probability
+burst." The composite signal (base plus bursts) is shown as the final bold
+line labeled "Composite autonomous input."
 
-Component 1 — Circadian Base Signal:
-- Smooth sinusoidal curve
-- Equation annotation: "base = 0.5 + 0.3 x sin(2 x pi x step / period)"
-- Period labeled: "period = 500 steps"
-- Amplitude range: 0.2 to 0.8
+An autonomous input formula box 404 shows the equation governing the
+composite signal generation.
 
-Component 2 — Attention Bursts:
-- Sharp upward spikes superimposed on the base signal
-- Occurring randomly at approximately 10% of steps
-- Burst magnitude: +0.2 above base signal
-- Each burst labeled with a small arrow: "10% probability burst"
-
-Component 3 — Composite Signal:
-- The sum of base + bursts, shown as the final bold line
-- Label: "Composite autonomous input"
-
-Below the main graph, a smaller graph showing the corresponding energy
-level over the same time period:
-- Y-axis: "Energy (mWh)" ranging from 0 to 105
-- Shows a monotonic recovery trajectory starting at 10 mWh (CRITICAL zone)
-  and rising through all four modulation zones to capacity ceiling (100 mWh)
-- Recovery rate is zone-dependent: slow in CRITICAL (0.15 mWh/step), moderate
-  in LOW (0.25 mWh/step), steady in NORMAL (0.40 mWh/step), slow near
-  SURPLUS (0.10 mWh/step as self-discharge balances harvest)
-- Three horizontal dashed lines at 15, 30, and 80 mWh thresholds with labels
-- Zone labels in left margin: CRITICAL, LOW, NORMAL, SURPLUS
-- Label at bottom: "Energy-aware modulation adjusts intensity"
-
-Annotation:
-- "Circadian rhythm provides structured temporal variation"
-- "Random bursts prevent the system from settling into trivial attractors"
-- "Energy-aware modulation adjusts overall intensity"
+Below the input signal graph 400, an energy recovery graph 406 shows the
+corresponding energy level over the same time period. The energy recovery
+graph 406 has y-axis "Energy (mWh)" ranging from 0 to 105 and shows a
+monotonic recovery trajectory starting at 10 mWh in the CRITICAL zone and
+rising through all four modulation zones to the capacity ceiling of 100 mWh.
+Recovery rate in the energy recovery graph 406 is zone-dependent: slow in
+CRITICAL (0.15 mWh/step), moderate in LOW (0.25 mWh/step), steady in NORMAL
+(0.40 mWh/step), and slow near SURPLUS (0.10 mWh/step as self-discharge
+balances harvest). Three horizontal dashed lines appear at 15, 30, and 80
+mWh thresholds with zone labels in the left margin: CRITICAL, LOW, NORMAL,
+SURPLUS.
 
 
 FIG. 5 — Resynchronization Payload Structure
 
-This figure shows the hierarchical data structure of the resync payload.
+FIG. 5 is a structural diagram showing the hierarchical data structure of the
+resync payload.
 
-Top-level structure (large rectangle):
-- Label: "Resynchronization Payload"
+A resynchronization payload 500 is depicted as a large top-level rectangle
+containing three main sections.
 
-Three main sections within the payload:
+A summary statistics section 502 is depicted as a rectangle within the
+resynchronization payload 500. The summary statistics section 502 contains
+fields: "steps_autonomous: [integer]," "energy_delta: [float] mWh,"
+"min_energy: [float] mWh," "max_energy: [float] mWh," "mean_energy: [float]
+mWh," "total_spikes: [integer]," and "mean_spikes_per_step: [float]." The
+summary statistics section 502 is labeled "ALWAYS included (compact summary)"
+with size annotation "~200 bytes."
 
-Section 1 — Summary Statistics:
-- Rectangle with fields:
-  - "steps_autonomous: [integer]" — Number of steps run autonomously
-  - "energy_delta: [float] mWh" — Net energy change during fallback
-  - "min_energy: [float] mWh" — Minimum energy observed
-  - "max_energy: [float] mWh" — Maximum energy observed
-  - "mean_energy: [float] mWh" — Average energy level
-  - "total_spikes: [integer]" — Sum of all spikes during fallback
-  - "mean_spikes_per_step: [float]" — Average spike rate
-- Label: "ALWAYS included (compact summary)"
-- Size annotation: "~200 bytes"
+An energy delta detail section 504 is depicted as a rectangle within the
+resynchronization payload 500. The energy delta detail section 504 contains
+fields: "energy_start: [float] mWh," "energy_end: [float] mWh," and
+"energy_delta: [float] mWh." An arrow from the energy_delta field leads to
+annotation: "Positive = system gained energy during autonomy."
 
-Section 2 — Energy Delta Detail:
-- Rectangle with field:
-  - "energy_start: [float] mWh"
-  - "energy_end: [float] mWh"
-  - "energy_delta: [float] mWh"
-- Arrow from energy_delta to annotation: "Positive = system gained energy during autonomy"
+A full step buffer section 506 is depicted as a larger rectangle within the
+resynchronization payload 500 with a repeating row structure showing
+individual step records: "Step 0: {input, modulation, spikes, energy, temp,
+pattern}" through "Step N: {input, modulation, spikes, energy, temp,
+pattern}." The full step buffer section 506 is labeled "OPTIONAL — Full
+operational history" with size annotation "~100 bytes x N steps" and
+condition "Included when cognitive layer requests detailed history."
 
-Section 3 — Full Step Buffer (Optional):
-- Larger rectangle with repeating row structure:
-  - "Step 0: {input, modulation, spikes, energy, temp, pattern}"
-  - "Step 1: {input, modulation, spikes, energy, temp, pattern}"
-  - "..."
-  - "Step N: {input, modulation, spikes, energy, temp, pattern}"
-- Label: "OPTIONAL — Full operational history"
-- Size annotation: "~100 bytes x N steps"
-- Condition: "Included when cognitive layer requests detailed history"
+Two granularity levels are annotated: an arrow to the summary statistics
+section 502 labeled "Level 1: Summary only (fast resync)" and an arrow to the
+full step buffer section 506 labeled "Level 2: Full buffer (complete
+reconstruction)."
 
-Two granularity levels annotated:
-- Arrow to Section 1: "Level 1: Summary only (fast resync)"
-- Arrow to Section 3: "Level 2: Full buffer (complete reconstruction)"
-
-Decision flow at bottom:
-- Diamond: "Cognitive layer requests full buffer?"
-- Yes arrow: "Transmit Level 2 (summary + full buffer)"
-- No arrow: "Transmit Level 1 (summary only)"
+A decision diamond 508 at the bottom of the figure asks "Cognitive layer
+requests full buffer?" A yes arrow leads to "Transmit Level 2 (summary +
+full buffer)" and a no arrow leads to "Transmit Level 1 (summary only)."
 
 
 FIG. 6 — Recovery Timeline Diagrams
 
-This figure shows three horizontal timeline diagrams stacked vertically,
-each illustrating a different recovery scenario.
+FIG. 6 shows three horizontal timeline diagrams stacked vertically, each
+illustrating a different recovery scenario.
 
-Timeline A — Normal Reconnection:
+A normal reconnection timeline 600 depicts the first scenario. The normal
+reconnection timeline 600 progresses from left to right through five phases:
+Connected (Claude active), Timeout (watchdog counting for 30 seconds),
+Autonomous (self-generated input plus energy-aware modulation), Resync
+(buffer transmitted), and Connected again (cognitive control restored).
+Labels on the normal reconnection timeline 600 include: "Claude goes silent"
+at the transition to timeout, "Fallback engages" at the transition to
+autonomous mode, "resync() called" at the transition to resync, and "Seamless
+resumption" at the return to connected mode. A buffer icon indicates "N steps
+buffered."
 
-    Time -->
-    |-- Connected --|-- Timeout (30s) --|-- Autonomous --|-- Resync --|-- Connected -->
-         [Claude        [Watchdog           [Self-generated    [Buffer      [Cognitive
-          active]        counting]           input + energy     transmitted]  control
-                                            modulation]                     restored]
+A crash recovery timeline 602 depicts the second scenario. The crash
+recovery timeline 602 progresses through: Connected (normal operation), CRASH
+(MCP server terminates), Server Restart (process relaunched), Snapshot Load
+(reads latest.json), and Connected (state restored). Labels on the crash
+recovery timeline 602 include: "Server process dies" at the crash point,
+"Process relaunched" at restart, "initialize_consciousness loads snapshot" at
+snapshot load, and annotation "State restored from last snapshot (max 50
+steps lost)." A snapshot icon indicates "latest.json (serialized every 50
+steps)."
 
-Labels on timeline:
-- "Claude goes silent" (at transition to timeout)
-- "Fallback engages" (at transition to autonomous)
-- "resync() called" (at transition to resync)
-- "Seamless resumption" (at return to connected)
-- Buffer icon: "N steps buffered"
+A clean shutdown timeline 604 depicts the third scenario. The clean shutdown
+timeline 604 progresses through: Connected (normal operation), Autonomous
+(fallback operation), EOF Signal (stdin closed), and Shutdown (final snapshot
+written to disk). Labels on the clean shutdown timeline 604 include: "Claude
+disconnects," "Process receives EOF," "finally block writes snapshot," and
+annotation "State preserved for next session."
 
-Timeline B — Crash Recovery:
-
-    Time -->
-    |-- Connected --|-- CRASH --|-- Server Restart --|-- Snapshot Load --|-- Connected -->
-         [Normal         [MCP server    [Process            [Reads               [State
-          operation]      terminates]    restarts]           latest.json]          restored]
-
-Labels on timeline:
-- "Server process dies" (at crash)
-- "Process relaunched" (at restart)
-- "initialize_consciousness loads snapshot" (at snapshot load)
-- "State restored from last snapshot (max 50 steps lost)" (annotation)
-- Snapshot icon: "latest.json (serialized every 50 steps)"
-
-Timeline C — Clean Shutdown:
-
-    Time -->
-    |-- Connected --|-- Autonomous --|-- EOF Signal --|-- Shutdown -->
-         [Normal         [Fallback          [stdin closed]    [Final snapshot
-          operation]      operation]                           written to disk]
-
-Labels on timeline:
-- "Claude disconnects" (at transition to autonomous)
-- "Process receives EOF" (at EOF signal)
-- "finally block writes snapshot" (at shutdown)
-- "State preserved for next session" (annotation)
-
-Common annotations for all three timelines:
-- Solid line segments: "System actively processing"
-- Dashed line segments: "System in transition"
-- Bold marker at each state change: "No data loss at any transition"
+A recovery guarantees box 606 provides common annotations for all three
+timelines: solid line segments indicate "System actively processing," dashed
+line segments indicate "System in transition," and bold markers at each state
+change indicate "No data loss at any transition."
 
 
 FIG. 7 — End-to-End Signal Flow: Connected vs. Autonomous Operation
 
-This figure shows the complete system signal flow in a split-view format,
-with connected operation on top and autonomous operation on bottom, sharing
-the same core processing pipeline.
+FIG. 7 is an end-to-end signal flow diagram showing the complete system in a
+split-view format, with connected operation on top and autonomous operation
+on bottom, sharing the same core processing pipeline.
 
-Layout — Two parallel horizontal flows sharing a common center:
+In the top half labeled "CONNECTED MODE," a cognitive layer 700 is depicted
+as an ellipse or cloud shape at top. Dashed arrows from the cognitive layer
+700 carry cognitive modulation commands downward to the processing pipeline.
+The connected-mode processing pipeline flows left to right: sensors 702
+receive environmental input, feed into SNN processing 704, which feeds into
+cognitive modulation 706 (labeled "External AI sets reflection_coeff,
+modulation"), which feeds into motor actuation 708. An energy feedback loop
+710 returns from the motor actuation 708 back to the SNN processing 704 as
+bold dashed arrows, labeled "Patent A." A self-observation feedback path
+(dotted arrows) feeds SNN output back to the SNN processing 704. The label
+"Heartbeat active (tool calls within 30s)" indicates normal connected
+operation.
 
-TOP HALF — Connected Operation:
-Label in top-left corner: "CONNECTED MODE"
+A horizontal dashed dividing line across the full width is labeled
+"DISCONNECTION EVENT (heartbeat timeout > 30s)" with an arrow pointing down
+labeled "Seamless transition — no interruption to SNN or Harvester."
 
-    [External Cognitive Layer] — cloud shape at top
-        |
-        v (dashed arrow: "Cognitive modulation commands")
-    [Sensors] -> [SNN] -> [Cognitive Modulation] -> [Motor Actuator] -> [Energy Harvester]
-                   ^                                                          |
-                   |_________ Energy feedback (bold dashed) __________________|
-                   ^
-                   |_________ Self-observation feedback (dotted) ___ from SNN output
+In the bottom half labeled "AUTONOMOUS MODE," an autonomous input generator
+712 replaces the sensors 702, containing "Circadian base signal" and "10%
+stochastic attention bursts." The autonomous-mode processing pipeline flows:
+autonomous input generator 712 feeds into SNN processing 704, which feeds
+into energy-aware self-modulation 714 (labeled "Internal energy-aware
+regulation" with four modulation regions: "<15 mWh: -0.4, <30 mWh: -0.1,
+30-80 mWh: 0.0, >80 mWh: +0.3"), which feeds into motor actuation 708. The
+energy feedback loop 710 returns from motor actuation 708 back to SNN
+processing 704 as bold dashed arrows. A self-observation feedback path
+(dotted arrows) feeds SNN output back to SNN processing 704.
 
-    Label on Cognitive Modulation block: "External AI sets reflection_coeff, modulation"
-    Label: "Heartbeat active (tool calls within 30s)"
+Additional components in autonomous mode include a state buffer 716 depicted
+as a cylinder or database shape, receiving every step from SNN processing
+704 with label "Rolling buffer (max 10,000 entries)." A snapshot writer 718
+depicted as a disk shape receives data from the state buffer 716 every 50
+steps with label "latest.json (persistent storage)."
 
-DIVIDING LINE — Horizontal dashed line across full width
-    Label on line: "DISCONNECTION EVENT (heartbeat timeout > 30s)"
-    Arrow pointing down: "Seamless transition — no interruption to SNN or Harvester"
+On the right side of the figure, a resync path 720 shows an arrow from the
+bottom half back to the top half, labeled "resync() called." The resync path
+720 includes a rectangle labeled "Resync Payload" containing
+"steps_autonomous, energy_delta, summary" and "Optional: full step-by-step
+buffer," with an arrow upward to the cognitive layer 700 labeled "Cognitive
+layer catches up."
 
-BOTTOM HALF — Autonomous Operation:
-Label in bottom-left corner: "AUTONOMOUS MODE"
+The SNN processing 704, motor actuation 708, and energy feedback loop 710
+are shared components drawn once spanning both halves, with label "Core
+pipeline never stops."
 
-    [Autonomous Input Generator] — rectangle replacing Sensors
-        Label inside: "Circadian base signal"
-        Label inside: "10% stochastic attention bursts"
-        |
-        v
-    [SNN] -> [Energy-Aware Self-Modulation] -> [Motor Actuator] -> [Energy Harvester]
-       ^                                                                  |
-       |_________ Energy feedback (bold dashed) _________________________|
-       ^
-       |_________ Self-observation feedback (dotted) ___ from SNN output
+Key annotations state: "The fallback system changes the INPUT SOURCE and
+MODULATION SOURCE. The core neural processing, motor actuation, and energy
+harvesting continue WITHOUT INTERRUPTION through the transition."
 
-    Label on Self-Modulation block: "Internal energy-aware regulation"
-    Four modulation regions shown as small annotation:
-        "<15 mWh: -0.4 | <30 mWh: -0.1 | 30-80 mWh: 0.0 | >80 mWh: +0.3"
-
-    Additional components in autonomous mode:
-    [State Buffer] — cylinder/database shape
-        Arrow from SNN: "Every step buffered"
-        Label: "Rolling buffer (max 10,000 entries)"
-
-    [Snapshot Writer] — disk shape
-        Arrow from State Buffer: "Every 50 steps"
-        Label: "latest.json (persistent storage)"
-
-RIGHT SIDE — Reconnection:
-    Arrow from bottom half back to top half
-    Label: "resync() called"
-    [Resync Payload] — rectangle
-    Label inside: "steps_autonomous, energy_delta, summary"
-    Label inside: "Optional: full step-by-step buffer"
-    Arrow up to External Cognitive Layer: "Cognitive layer catches up"
-
-Shared components (drawn once, spanning both halves):
-    The SNN, Motor Actuator, and Energy Harvester are the SAME blocks
-    in both halves — drawn in the center spanning the dividing line
-    Label: "Core pipeline never stops"
-
-Key annotations:
-    "The fallback system changes the INPUT SOURCE and MODULATION SOURCE"
-    "The core neural processing, motor actuation, and energy harvesting"
-    "continue WITHOUT INTERRUPTION through the transition"
-
-Legend box:
-    "Solid arrows: Forward signal path"
-    "Bold dashed: Energy feedback loop"
-    "Dotted: Self-observation feedback loop"
-    "Thin dashed: Cognitive/modulation control path"
-    "The transition between modes changes only the control paths,"
-    "never the core processing paths"
+A legend box distinguishes: solid arrows for forward signal path, bold dashed
+for energy feedback loop, dotted for self-observation feedback loop, and thin
+dashed for cognitive/modulation control path. "The transition between modes
+changes only the control paths, never the core processing paths."
 
 Sheet numbering: "7/7" at top center
 
