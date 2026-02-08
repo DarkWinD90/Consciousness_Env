@@ -59,7 +59,7 @@
   <!-- REGION 3 (206) - OPERATIONAL -->
   <rect x="150" y="520" width="550" height="100" rx="5" fill="none" stroke="black" stroke-width="3"/>
   <text x="165" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 3 (0.2 - 0.4): Balanced Self-Observation</text>
-  <text x="530" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">OPERATIONAL RANGE</text>
+  <text x="560" y="565" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">OPERATIONAL RANGE</text>
   <text x="690" y="538" font-family="Arial, sans-serif" font-size="14" text-anchor="end">206</text>
   <line x1="705" y1="535" x2="700" y2="545" stroke="black" stroke-width="0.5"/>
   <text x="165" y="568" font-family="Arial, sans-serif" font-size="14" text-anchor="start">External input + meaningful self-reference</text>

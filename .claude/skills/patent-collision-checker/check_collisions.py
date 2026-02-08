@@ -471,8 +471,8 @@ def _should_skip_pair(a, b):
             # Check if they're stacked with small gap
             if 0 <= by_top - ay_bot <= 5 or 0 <= ay_top - by_bot <= 5:
                 return True
-        # Also skip if overlap is small — borderline text width estimation error
-        if a.overlap_ratio(b) < 0.25:
+        # Also skip if overlap is very small — borderline text width estimation error
+        if a.overlap_ratio(b) < 0.12:
             return True
     # Skip lines inside or at edge of rects (legend lines, internal dividers, connector arrows)
     if a.kind == 'rect' and b.kind == 'line':
@@ -493,14 +493,13 @@ def _should_skip_pair(a, b):
         if a.area < 5000 and _is_label_for_shape(b, a, max_dist=25):
             return True
     # Skip text-on-shape where the full text bbox is inside the rect
-    # Use generous margin (30px) to account for text width estimation error,
-    # but require the full bbox to be contained — not just the center point.
-    # This ensures text that overflows a narrow box is still flagged.
+    # Use 10px margin to account for text width estimation error.
+    # Tighter margin ensures text that overflows a narrow box is still flagged.
     if a.kind == 'text' and b.kind == 'rect':
-        if _text_is_inside(a, b, margin=30):
+        if _text_is_inside(a, b, margin=10):
             return True
     if b.kind == 'text' and a.kind == 'rect':
-        if _text_is_inside(b, a, margin=30):
+        if _text_is_inside(b, a, margin=10):
             return True
     # Skip circle-on-line overlaps where circle is at line endpoint (start/end marker)
     if a.kind == 'circle' and b.kind == 'line':

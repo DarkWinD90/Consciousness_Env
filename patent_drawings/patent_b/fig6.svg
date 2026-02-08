@@ -86,7 +86,7 @@
 
   <!-- Short dashes sample -->
   <line x1="180" y1="770" x2="280" y2="770" stroke="black" stroke-width="3" stroke-dasharray="3,3"/>
-  <text x="295" y="775" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Short dashes (bold): Self-Observation (this patent)</text>
+  <text x="295" y="775" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Short dashes (bold): Self-Observation</text>
 
   <!-- Long dashes sample -->
   <line x1="180" y1="795" x2="280" y2="795" stroke="black" stroke-width="2" stroke-dasharray="12,6"/>
