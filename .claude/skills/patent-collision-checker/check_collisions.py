@@ -492,17 +492,15 @@ def _should_skip_pair(a, b):
     if b.kind == 'text' and a.kind == 'rect':
         if a.area < 5000 and _is_label_for_shape(b, a, max_dist=25):
             return True
-    # Skip text-on-shape where text center is inside the shape (intentional label)
-    # with generous margin to account for text width estimation
+    # Skip text-on-shape where the full text bbox is inside the rect
+    # Use generous margin (30px) to account for text width estimation error,
+    # but require the full bbox to be contained — not just the center point.
+    # This ensures text that overflows a narrow box is still flagged.
     if a.kind == 'text' and b.kind == 'rect':
-        tx = (a.x1 + a.x2) / 2
-        ty = (a.y1 + a.y2) / 2
-        if b.x1 <= tx <= b.x2 and b.y1 <= ty <= b.y2:
+        if _text_is_inside(a, b, margin=30):
             return True
     if b.kind == 'text' and a.kind == 'rect':
-        tx = (b.x1 + b.x2) / 2
-        ty = (b.y1 + b.y2) / 2
-        if a.x1 <= tx <= a.x2 and a.y1 <= ty <= a.y2:
+        if _text_is_inside(b, a, margin=30):
             return True
     # Skip circle-on-line overlaps where circle is at line endpoint (start/end marker)
     if a.kind == 'circle' and b.kind == 'line':
