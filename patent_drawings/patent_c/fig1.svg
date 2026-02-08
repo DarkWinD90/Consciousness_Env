@@ -72,7 +72,7 @@
 
   <!-- Step Buffer (108) - positioned below 106, within margins -->
   <rect x="555" y="600" width="80" height="35" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="625" y="613" font-family="Arial, sans-serif" font-size="14" text-anchor="end">108</text>
+  <text x="595" y="593" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">108</text>
   <text x="595" y="623" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Buffer</text>
 
   <!-- Arrow from 106 down to Buffer -->
