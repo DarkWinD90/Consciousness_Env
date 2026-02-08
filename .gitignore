@@ -75,8 +75,9 @@ mcp/.snapshots/
 # Build system artifacts
 oryx-build-commands.txt
 
-# Claude Code session data
-.claude/
+# Claude Code session data (exclude skills which are project-tracked)
+.claude/*
+!.claude/skills/
 
 # Unrelated archive files
 Archive/
