@@ -12,7 +12,7 @@
   <text x="387" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RECOVERY SCENARIOS</text>
 
   <!-- Scenario A: Normal Reconnection (600) -->
-  <text x="660" y="170" font-family="Arial, sans-serif" font-size="14" text-anchor="start">600</text>
+  <text x="720" y="170" font-family="Arial, sans-serif" font-size="14" text-anchor="start">600</text>
   <text x="387" y="170" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario A: Normal Reconnection</text>
 
   <!-- Timeline A (compressed) -->
@@ -39,7 +39,7 @@
   <text x="601" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Restored</text>
 
   <!-- Scenario B: Crash Recovery (602) -->
-  <text x="660" y="300" font-family="Arial, sans-serif" font-size="14" text-anchor="start">602</text>
+  <text x="720" y="300" font-family="Arial, sans-serif" font-size="14" text-anchor="start">602</text>
   <text x="387" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario B: Crash Recovery</text>
 
   <!-- Timeline B (compressed) -->
@@ -68,7 +68,7 @@
   <text x="482" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Max loss: 50 steps</text>
 
   <!-- Scenario C: Clean Shutdown (604) -->
-  <text x="660" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="start">604</text>
+  <text x="720" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="start">604</text>
   <text x="387" y="445" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario C: Clean Shutdown</text>
 
   <!-- Timeline C (compressed) -->
@@ -102,8 +102,9 @@
   <text x="155" y="714" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Max autonomous duration: 10,000 steps (~50 hours)</text>
 
   <!-- Legend -->
-  <line x1="125" y1="770" x2="225" y2="770" stroke="black" stroke-width="2"/>
-  <text x="235" y="775" font-family="Arial, sans-serif" font-size="14" text-anchor="start">System actively processing</text>
+  <rect x="115" y="750" width="400" height="40" rx="3" fill="none" stroke="black" stroke-width="1"/>
+  <line x1="135" y1="770" x2="215" y2="770" stroke="black" stroke-width="2"/>
+  <text x="225" y="775" font-family="Arial, sans-serif" font-size="14" text-anchor="start">System actively processing</text>
 
   <!-- Figure Label -->
   <text x="387" y="950" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 6</text>
