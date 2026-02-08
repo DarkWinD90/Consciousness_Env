@@ -105,6 +105,40 @@ def get_pdf_page_count(filepath):
         return None
 
 
+def check_pdf_page_sizes(filepath):
+    """Extract MediaBox dimensions and validate against US Letter / A4.
+
+    Returns a list of (width, height) tuples found, or None on error.
+    """
+    try:
+        with open(filepath, 'rb') as f:
+            content = f.read()
+        # Match /MediaBox [x0 y0 x1 y1] — page dimensions in points
+        boxes = re.findall(
+            rb'/MediaBox\s*\[\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\]',
+            content
+        )
+        if not boxes:
+            return None
+        sizes = set()
+        for x0, y0, x1, y1 in boxes:
+            w = float(x1) - float(x0)
+            h = float(y1) - float(y0)
+            sizes.add((round(w, 2), round(h, 2)))
+        return list(sizes)
+    except (IOError, OSError, ValueError):
+        return None
+
+
+def _page_size_is_valid(width, height):
+    """Check if a page size matches any valid USPTO page size within tolerance."""
+    for valid_w, valid_h, _label in VALID_PAGE_SIZES:
+        if (abs(width - valid_w) <= PAGE_SIZE_TOLERANCE and
+                abs(height - valid_h) <= PAGE_SIZE_TOLERANCE):
+            return True, _label
+    return False, None
+
+
 def validate_pdf(filepath, base_dir):
     """Run all compliance checks on a single PDF file."""
     filepath = Path(filepath)
@@ -150,15 +184,12 @@ def validate_pdf(filepath, base_dir):
             ver_float = float(version)
             if 1.1 <= ver_float <= 1.6:
                 results.append(("version", "PASS", f"PDF version: {version}"))
-            elif ver_float <= 2.0:
-                results.append(("version", "WARN",
-                                f"PDF version {version} — recommended 1.1-1.6"))
             else:
                 results.append(("version", "FAIL",
                                 f"PDF version {version} — must be 1.1-1.6"))
         except ValueError:
-            results.append(("version", "WARN",
-                            f"Unusual PDF version: {version}"))
+            results.append(("version", "FAIL",
+                            f"Unrecognized PDF version: {version} — must be 1.1-1.6"))
 
     # 5. Encryption check
     is_encrypted = check_pdf_encryption(filepath)
@@ -176,6 +207,29 @@ def validate_pdf(filepath, base_dir):
         results.append(("pages", "PASS", f"Estimated pages: {pages}"))
     else:
         results.append(("pages", "WARN", "Could not determine page count"))
+
+    # 7. Page size (US Letter or A4 per 37 CFR 1.84(f))
+    page_sizes = check_pdf_page_sizes(filepath)
+    if page_sizes is None:
+        results.append(("page_size", "WARN",
+                        "Could not extract page dimensions from PDF"))
+    else:
+        all_valid = True
+        detected_labels = []
+        for w, h in page_sizes:
+            valid, label = _page_size_is_valid(w, h)
+            if valid:
+                detected_labels.append(f"{w}x{h} ({label})")
+            else:
+                all_valid = False
+                detected_labels.append(f"{w}x{h} (NON-COMPLIANT)")
+        if all_valid:
+            results.append(("page_size", "PASS",
+                            f"Page size: {', '.join(detected_labels)}"))
+        else:
+            results.append(("page_size", "FAIL",
+                            f"Non-compliant page size: {', '.join(detected_labels)} "
+                            f"— must be US Letter (612x792) or A4 (595x842)"))
 
     return results
 
