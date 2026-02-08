@@ -16,7 +16,7 @@
   <text x="387" y="170" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario A: Normal Reconnection</text>
 
   <!-- Timeline A (compressed) -->
-  <line x1="125" y1="220" x2="650" y2="220" stroke="black" stroke-width="2"/>
+  <line x1="125" y1="220" x2="650" y2="220" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <line x1="125" y1="200" x2="125" y2="240" stroke="black" stroke-width="2"/>
 
   <text x="169" y="195" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
@@ -43,7 +43,7 @@
   <text x="387" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario B: Crash Recovery</text>
 
   <!-- Timeline B (compressed) -->
-  <line x1="125" y1="350" x2="650" y2="350" stroke="black" stroke-width="2"/>
+  <line x1="125" y1="350" x2="650" y2="350" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <line x1="125" y1="330" x2="125" y2="370" stroke="black" stroke-width="2"/>
 
   <text x="170" y="325" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">CONNECTED</text>
@@ -72,7 +72,7 @@
   <text x="387" y="445" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario C: Clean Shutdown</text>
 
   <!-- Timeline C (compressed) -->
-  <line x1="125" y1="495" x2="650" y2="495" stroke="black" stroke-width="2"/>
+  <line x1="125" y1="495" x2="650" y2="495" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <line x1="125" y1="475" x2="125" y2="515" stroke="black" stroke-width="2"/>
 
   <text x="191" y="470" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
@@ -103,7 +103,7 @@
 
   <!-- Legend -->
   <rect x="115" y="750" width="400" height="40" rx="3" fill="none" stroke="black" stroke-width="1"/>
-  <line x1="135" y1="770" x2="215" y2="770" stroke="black" stroke-width="2"/>
+  <line x1="135" y1="770" x2="215" y2="770" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <text x="225" y="775" font-family="Arial, sans-serif" font-size="14" text-anchor="start">System actively processing</text>
 
   <!-- Figure Label -->
