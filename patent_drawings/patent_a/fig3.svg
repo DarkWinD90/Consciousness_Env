@@ -58,7 +58,7 @@
     <text x="130" y="565" font-family="Courier New, monospace" font-size="14" text-anchor="middle">adjusted_input</text>
     <line x1="602" y1="580" x2="695" y2="580" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
     <text x="620" y="565" font-family="Courier New, monospace" font-size="14">spike_vector</text>
-    <text x="690" y="560" font-family="Arial, sans-serif" font-size="14" text-anchor="end">318</text>
+    <text x="720" y="555" font-family="Arial, sans-serif" font-size="14" text-anchor="start">318</text>
     <text x="425" y="660" font-family="Courier New, monospace" font-size="14" text-anchor="middle">W[i,i] = 0 (no self-connections)</text>
     <text x="425" y="682" font-family="Courier New, monospace" font-size="14" text-anchor="middle">N = 50 (operational), N = 20 (control)</text>
     <rect x="155" y="715" width="540" height="100" rx="8" fill="none" stroke="black" stroke-width="1.5"/>

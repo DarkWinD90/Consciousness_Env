@@ -50,20 +50,20 @@
   <text x="175" y="655" font-family="Courier New, monospace" font-size="14" text-anchor="start">Step 0: {input, mod, spikes, energy, temp, pattern}</text>
   <text x="175" y="677" font-family="Courier New, monospace" font-size="14" text-anchor="start">Step 1: {input, mod, spikes, energy, temp, pattern}</text>
   <text x="175" y="699" font-family="Arial, sans-serif" font-size="14" text-anchor="start">. . .</text>
-  <text x="175" y="721" font-family="Courier New, monospace" font-size="14" text-anchor="start">Step N: {input, mod, spikes, energy, temp, pattern}</text>
-  <text x="175" y="745" font-family="Courier New, monospace" font-size="14" text-anchor="start">Max N = 10,000</text>
+  <text x="175" y="718" font-family="Courier New, monospace" font-size="14" text-anchor="start">Step N: {input, mod, spikes, energy, temp, pattern}</text>
+  <text x="175" y="738" font-family="Courier New, monospace" font-size="14" text-anchor="start">Max N = 10,000</text>
 
-  <!-- Decision Diamond (508) -->
-  <polygon points="387,800 437,830 387,860 337,830" fill="none" stroke="black" stroke-width="2"/>
-  <text x="387" y="835" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Full?</text>
-  <text x="387" y="880" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">508</text>
+  <!-- Decision Diamond (508) — enlarged for clear text -->
+  <polygon points="387,800 445,835 387,870 329,835" fill="none" stroke="black" stroke-width="2"/>
+  <text x="387" y="840" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Full?</text>
+  <text x="387" y="892" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">508</text>
 
   <!-- Decision branches -->
-  <line x1="337" y1="830" x2="200" y2="830" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="270" y="820" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">No: Summary only</text>
+  <line x1="329" y1="835" x2="200" y2="835" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="265" y="825" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">No: Summary only</text>
 
-  <line x1="437" y1="830" x2="550" y2="830" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="490" y="820" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Yes: Summary + Buffer</text>
+  <line x1="445" y1="835" x2="580" y2="835" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="515" y="825" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Yes: Summary + Buffer</text>
 
   <!-- Figure Label -->
   <text x="387" y="950" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 5</text>
