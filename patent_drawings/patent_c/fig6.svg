@@ -12,8 +12,8 @@
   <text x="387" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RECOVERY SCENARIOS</text>
 
   <!-- Scenario A: Normal Reconnection (600) -->
+  <text x="660" y="170" font-family="Arial, sans-serif" font-size="14" text-anchor="start">600</text>
   <text x="387" y="170" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario A: Normal Reconnection</text>
-  <text x="635" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="end">600</text>
 
   <!-- Timeline A (compressed) -->
   <line x1="125" y1="220" x2="650" y2="220" stroke="black" stroke-width="2"/>
@@ -39,8 +39,8 @@
   <text x="601" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Restored</text>
 
   <!-- Scenario B: Crash Recovery (602) -->
+  <text x="660" y="300" font-family="Arial, sans-serif" font-size="14" text-anchor="start">602</text>
   <text x="387" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario B: Crash Recovery</text>
-  <text x="635" y="330" font-family="Arial, sans-serif" font-size="14" text-anchor="end">602</text>
 
   <!-- Timeline B (compressed) -->
   <line x1="125" y1="350" x2="650" y2="350" stroke="black" stroke-width="2"/>
@@ -68,8 +68,8 @@
   <text x="482" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Max loss: 50 steps</text>
 
   <!-- Scenario C: Clean Shutdown (604) -->
+  <text x="660" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="start">604</text>
   <text x="387" y="445" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario C: Clean Shutdown</text>
-  <text x="635" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="end">604</text>
 
   <!-- Timeline C (compressed) -->
   <line x1="125" y1="495" x2="650" y2="495" stroke="black" stroke-width="2"/>

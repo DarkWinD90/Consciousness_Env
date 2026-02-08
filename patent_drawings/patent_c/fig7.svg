@@ -44,7 +44,7 @@
 
   <!-- Cognitive Mod (706) -->
   <rect x="400" y="280" width="88" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="478" y="297" font-family="Arial, sans-serif" font-size="14" text-anchor="end">706</text>
+  <text x="444" y="272" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">706</text>
   <text x="444" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Cognitive</text>
   <text x="444" y="315" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Mod</text>
 
@@ -99,9 +99,9 @@
 
   <!-- Energy-Aware Self-Mod (714) -->
   <rect x="400" y="505" width="88" height="65" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="478" y="522" font-family="Arial, sans-serif" font-size="14" text-anchor="end">714</text>
-  <text x="444" y="530" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy-Aware</text>
-  <text x="444" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-Mod</text>
+  <text x="444" y="497" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">714</text>
+  <text x="444" y="525" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy-Aware</text>
+  <text x="444" y="540" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-Mod</text>
   <text x="444" y="562" font-family="Courier New, monospace" font-size="14" text-anchor="middle">&lt;15:-0.4</text>
 
   <!-- Arrow from Self-Mod to Motor -->
