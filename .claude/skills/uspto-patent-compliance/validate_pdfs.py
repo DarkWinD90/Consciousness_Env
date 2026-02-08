@@ -139,6 +139,7 @@ def _page_size_is_valid(width, height):
     return False, None
 
 
+
 def validate_pdf(filepath, base_dir):
     """Run all compliance checks on a single PDF file."""
     filepath = Path(filepath)
@@ -230,6 +231,7 @@ def validate_pdf(filepath, base_dir):
             results.append(("page_size", "FAIL",
                             f"Non-compliant page size: {', '.join(detected_labels)} "
                             f"— must be US Letter (612x792) or A4 (595x842)"))
+
 
     return results
 
