@@ -14,6 +14,7 @@
 <rect x="120" y="60" width="605" height="52" rx="5" fill="none" stroke="black" stroke-width="3"/>
 <text x="425.0" y="85" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">PHYSICAL ENVIRONMENT</text>
 <text x="425.0" y="103" font-family="Courier New, monospace" font-size="14" text-anchor="middle">(Light/Temp/Force)</text>
+<text x="700" y="80" font-family="Arial, sans-serif" font-size="14" text-anchor="end">800</text>
 <line x1="265.0" y1="112" x2="265.0" y2="128" stroke="black" stroke-width="2"/>
 <polygon points="265,133 262,128 268,128" fill="black"/>
 <line x1="585.0" y1="112" x2="585.0" y2="128" stroke="black" stroke-width="2"/>
