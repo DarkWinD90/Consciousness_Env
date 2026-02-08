@@ -46,24 +46,24 @@
   <line x1="125" y1="350" x2="650" y2="350" stroke="black" stroke-width="2"/>
   <line x1="125" y1="330" x2="125" y2="370" stroke="black" stroke-width="2"/>
 
-  <text x="182" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
-  <text x="182" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Normal</text>
-  <line x1="253" y1="330" x2="253" y2="370" stroke="black" stroke-width="2"/>
+  <text x="170" y="325" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">CONNECTED</text>
+  <text x="170" y="385" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Normal</text>
+  <line x1="230" y1="330" x2="230" y2="370" stroke="black" stroke-width="2"/>
 
-  <text x="284" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CRASH</text>
-  <text x="284" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Server dies</text>
+  <text x="272" y="325" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">CRASH</text>
+  <text x="272" y="385" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Server dies</text>
   <line x1="315" y1="330" x2="315" y2="370" stroke="black" stroke-width="2"/>
 
-  <text x="372" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RESTART</text>
-  <text x="372" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Process relaunched</text>
-  <line x1="430" y1="330" x2="430" y2="370" stroke="black" stroke-width="2"/>
+  <text x="368" y="325" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">RESTART</text>
+  <text x="368" y="385" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Relaunched</text>
+  <line x1="420" y1="330" x2="420" y2="370" stroke="black" stroke-width="2"/>
 
-  <text x="482" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SNAPSHOT</text>
-  <text x="482" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Load latest.json</text>
-  <line x1="535" y1="330" x2="535" y2="370" stroke="black" stroke-width="2"/>
+  <text x="480" y="325" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">SNAPSHOT</text>
+  <text x="480" y="385" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Load .json</text>
+  <line x1="540" y1="330" x2="540" y2="370" stroke="black" stroke-width="2"/>
 
-  <text x="592" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
-  <text x="592" y="385" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Restored</text>
+  <text x="600" y="325" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">CONNECTED</text>
+  <text x="600" y="385" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Restored</text>
 
   <text x="482" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Max loss: 50 steps</text>
 
@@ -96,10 +96,10 @@
   <text x="635" y="597" font-family="Arial, sans-serif" font-size="14" text-anchor="end">606</text>
   <text x="387" y="610" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Recovery Guarantees</text>
 
-  <text x="155" y="645" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Normal reconnection: Full continuity, resync payload transmitted</text>
-  <text x="155" y="670" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Crash recovery: Max 50 steps lost (snapshot every 50 steps)</text>
-  <text x="155" y="695" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Clean shutdown: Zero data loss (final snapshot on EOF)</text>
-  <text x="155" y="720" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Max autonomous duration: 10,000 steps (~50 hours)</text>
+  <text x="155" y="645" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Normal reconnection: Full continuity, resync payload transmitted</text>
+  <text x="155" y="668" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Crash recovery: Max 50 steps lost (snapshot every 50 steps)</text>
+  <text x="155" y="691" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Clean shutdown: Zero data loss (final snapshot on EOF)</text>
+  <text x="155" y="714" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Max autonomous duration: 10,000 steps (~50 hours)</text>
 
   <!-- Legend -->
   <line x1="125" y1="770" x2="225" y2="770" stroke="black" stroke-width="2"/>

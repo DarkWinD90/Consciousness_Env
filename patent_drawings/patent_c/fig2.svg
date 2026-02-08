@@ -37,8 +37,8 @@
   <!-- ==================== TRANSITIONS ==================== -->
 
   <!-- Start arrow pointing to CONNECTED -->
-  <line x1="125" y1="320" x2="130" y2="320" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="128" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Start</text>
+  <line x1="100" y1="320" x2="128" y2="320" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="100" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Start</text>
 
   <!-- 206: CONNECTED -> AUTONOMOUS (top arrow) -->
   <line x1="270" y1="295" x2="480" y2="295" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
@@ -47,7 +47,7 @@
 
   <!-- 212: AUTONOMOUS -> CONNECTED (bottom arrow, dashed - direct reconnect) -->
   <line x1="479" y1="345" x2="270" y2="345" stroke="black" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ah)"/>
-  <text x="375" y="368" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">212: Any tool call (heartbeat reset)</text>
+  <text x="375" y="375" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">212: Any tool call (heartbeat reset)</text>
 
   <!-- 208: AUTONOMOUS -> RECOVERING -->
   <line x1="510" y1="380" x2="425" y2="490" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
@@ -59,17 +59,17 @@
   <text x="255" y="435" font-family="Arial, sans-serif" font-size="14" text-anchor="end">210</text>
   <text x="250" y="453" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Resync complete</text>
 
-  <!-- 214: Self-loop on AUTONOMOUS (step counter) -->
-  <path d="M 580 260 Q 600 200 620 260" fill="none" stroke="black" stroke-width="2"/>
-  <path d="M 620 260 Q 620 280 605 290" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="600" y="195" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">214</text>
-  <text x="600" y="212" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Each step</text>
-  <text x="600" y="227" font-family="Courier New, monospace" font-size="14" text-anchor="middle">(max 10,000)</text>
+  <!-- 214: Self-loop on AUTONOMOUS (step counter) — shifted right to clear circle -->
+  <path d="M 600 260 Q 640 210 670 260" fill="none" stroke="black" stroke-width="2"/>
+  <path d="M 670 260 Q 660 280 625 290" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="660" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">214</text>
+  <text x="660" y="218" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Each step</text>
+  <text x="660" y="236" font-family="Courier New, monospace" font-size="14" text-anchor="middle">(max 10,000)</text>
 
   <!-- ==================== ANNOTATIONS ==================== -->
 
-  <!-- Snapshot annotation near AUTONOMOUS -->
-  <text x="550" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Snapshot every 50 steps</text>
+  <!-- Snapshot annotation near AUTONOMOUS — positioned below transition area -->
+  <text x="580" y="460" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Snapshot every 50 steps</text>
 
   <!-- ==================== LEGEND ==================== -->
 

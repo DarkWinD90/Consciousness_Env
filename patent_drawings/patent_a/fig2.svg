@@ -14,7 +14,7 @@
     <polyline points="194,590.0 206,597.0 194,603.0 206,610.0" fill="none" stroke="black" stroke-width="1.5"/>
     <line x1="700" y1="588.0" x2="700" y2="612.0" stroke="white" stroke-width="5"/>
     <polyline points="694,590.0 706,597.0 694,603.0 706,610.0" fill="none" stroke="black" stroke-width="1.5"/>
-    <text x="450.0" y="890" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Operational Steps (t)</text>
+    <text x="450.0" y="905" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Operational Steps (t)</text>
     <text x="110" y="500" font-family="Arial, sans-serif" font-size="16" font-weight="bold" transform="rotate(-90, 110, 500)" text-anchor="middle">Energy Storage (mWh)</text>
     <line x1="200" y1="436.7" x2="700" y2="436.7" stroke="black" stroke-width="1.5" stroke-dasharray="6,4"/>
     <text x="190" y="441.7" font-family="Courier New, monospace" font-size="14" text-anchor="end">0</text>

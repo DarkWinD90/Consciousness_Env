@@ -24,7 +24,7 @@
 <rect x="600" y="120" width="120" height="60" fill="none" stroke="black" stroke-width="2"/>
 <text x="660.0" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">SG90 Micro</text>
 <text x="660.0" y="163" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Servo</text>
-<text x="690" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="end">604</text>
+<text x="730" y="118" font-family="Arial, sans-serif" font-size="14" text-anchor="start">604</text>
 <path d="M215,150 L239.0625,142.0 L287.1875,158.0 L335.3125,142.0 L383.4375,158.0 L431.5625,142.0 L479.6875,158.0 L527.8125,142.0 L575.9375,158.0 L600,150.0" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="4,2"/>
 <text x="407.5" y="135" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Mechanical Coupling</text>
 <line x1="630" y1="180" x2="345.0" y2="320" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
@@ -63,7 +63,7 @@
 <rect x="590" y="520" width="120" height="50" fill="none" stroke="black" stroke-width="2"/>
 <text x="650.0" y="542" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">WS2812B</text>
 <text x="650.0" y="560" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">RGB LED</text>
-<text x="690" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="end">608</text>
+<text x="720" y="518" font-family="Arial, sans-serif" font-size="14" text-anchor="start">608</text>
 <polyline points="650.0,520 650.0,470 505.0,470 505.0,420" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
 <text x="580" y="545" font-family="Courier New, monospace" font-size="14" text-anchor="end">GPIO</text>
 <rect x="150" y="620" width="550" height="210" rx="8" fill="none" stroke="black" stroke-width="2"/>
