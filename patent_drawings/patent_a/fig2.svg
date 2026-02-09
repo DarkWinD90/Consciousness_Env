@@ -18,11 +18,9 @@
     <text x="110" y="500" font-family="Arial, sans-serif" font-size="16" font-weight="bold" transform="rotate(-90, 110, 500)" text-anchor="middle">Energy Storage (mWh)</text>
     <line x1="200" y1="436.7" x2="700" y2="436.7" stroke="black" stroke-width="1.5" stroke-dasharray="6,4"/>
     <text x="190" y="441.7" font-family="Courier New, monospace" font-size="14" text-anchor="end">0</text>
-    <text x="690" y="455" font-family="Arial, sans-serif" font-size="14" text-anchor="end">204</text>
     <line x1="200" y1="293.3" x2="700" y2="293.3" stroke="black" stroke-width="1" stroke-dasharray="4,4"/>
     <text x="190" y="298.3" font-family="Courier New, monospace" font-size="14" text-anchor="end">100</text>
     <text x="690" y="285.3" font-family="Arial, sans-serif" font-size="14" font-style="italic" text-anchor="end">Capacity Limit</text>
-    <text x="690" y="310" font-family="Arial, sans-serif" font-size="14" text-anchor="end">206</text>
     <text x="190" y="370.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">50</text>
     <line x1="196" y1="365.0" x2="200" y2="365.0" stroke="black" stroke-width="1"/>
     <text x="190" y="850.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">-4,697</text>
@@ -32,8 +30,14 @@
     <line x1="200" y1="365.0" x2="215.8" y2="580.0" stroke="black" stroke-width="3"/>
     <line x1="215.8" y1="620.0" x2="700" y2="845.0" stroke="black" stroke-width="3"/>
     <path d="M200,365.0 L207.5,293.3 L700,293.3 L700,580.0 L215.8,580.0 Z" fill="url(#hatch)"/>
+    <!-- White backing + underlined numerals on hatched surface (37 CFR 1.84(p)(3)) -->
+    <rect x="663" y="297" width="30" height="18" fill="white"/>
+    <text x="690" y="310" font-family="Arial, sans-serif" font-size="14" text-anchor="end" text-decoration="underline">206</text>
     <text x="450" y="333.3" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Experimental (Homeostasis)</text>
-    <text x="600" y="348" font-family="Arial, sans-serif" font-size="14">200</text>
+    <rect x="597" y="335" width="30" height="18" fill="white"/>
+    <text x="600" y="348" font-family="Arial, sans-serif" font-size="14" text-decoration="underline">200</text>
+    <rect x="663" y="442" width="30" height="18" fill="white"/>
+    <text x="690" y="455" font-family="Arial, sans-serif" font-size="14" text-anchor="end" text-decoration="underline">204</text>
     <text x="690" y="732.5" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="end">Control (Depletion)</text>
     <text x="690" y="752.5" font-family="Courier New, monospace" font-size="14" text-anchor="end">base &gt; harvest</text>
     <text x="690" y="800.0" font-family="Courier New, monospace" font-size="14" font-weight="bold" text-anchor="end">-4,697 mWh</text>
