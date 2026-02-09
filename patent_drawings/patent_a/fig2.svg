@@ -31,7 +31,7 @@
     <line x1="215.8" y1="620.0" x2="700" y2="845.0" stroke="black" stroke-width="3"/>
     <path d="M200,365.0 L207.5,293.3 L700,293.3 L700,580.0 L215.8,580.0 Z" fill="url(#hatch)"/>
     <text x="450" y="333.3" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Experimental (Homeostasis)</text>
-    <text x="600" y="348" font-family="Arial, sans-serif" font-size="14" text-decoration="underline">200</text>
+    <text x="690" y="325" font-family="Arial, sans-serif" font-size="14" text-anchor="end" text-decoration="underline">200</text>
     <text x="690" y="732.5" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="end">Control (Depletion)</text>
     <text x="690" y="752.5" font-family="Courier New, monospace" font-size="14" text-anchor="end">base &gt; harvest</text>
     <text x="690" y="800.0" font-family="Courier New, monospace" font-size="14" font-weight="bold" text-anchor="end">-4,697 mWh</text>

@@ -47,7 +47,7 @@
 
   <!-- 212: AUTONOMOUS -> CONNECTED (bottom arrow, dashed - direct reconnect) -->
   <line x1="485" y1="345" x2="265" y2="345" stroke="black" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ah)"/>
-  <text x="375" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">212: Any tool call (heartbeat reset)</text>
+  <text x="375" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">212: Any tool call (heartbeat reset)</text>
 
   <!-- 208: AUTONOMOUS -> RECOVERING -->
   <line x1="508" y1="376" x2="417" y2="494" stroke="black" stroke-width="2" marker-end="url(#ah)"/>

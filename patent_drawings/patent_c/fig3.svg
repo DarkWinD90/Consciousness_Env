@@ -24,19 +24,19 @@
 
   <!-- Y-axis tick marks and labels -->
   <line x1="120" y1="600" x2="125" y2="600" stroke="black" stroke-width="2"/>
-  <text x="110" y="605" font-family="Courier New, monospace" font-size="14" text-anchor="end">-0.4</text>
+  <text x="122" y="605" font-family="Courier New, monospace" font-size="14" text-anchor="end">-0.4</text>
   <line x1="125" y1="600" x2="650" y2="600" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
 
   <line x1="120" y1="500" x2="125" y2="500" stroke="black" stroke-width="2"/>
-  <text x="110" y="505" font-family="Courier New, monospace" font-size="14" text-anchor="end">-0.1</text>
+  <text x="122" y="505" font-family="Courier New, monospace" font-size="14" text-anchor="end">-0.1</text>
   <line x1="125" y1="500" x2="650" y2="500" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
 
   <line x1="120" y1="450" x2="125" y2="450" stroke="black" stroke-width="2"/>
-  <text x="110" y="455" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.0</text>
+  <text x="122" y="455" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.0</text>
   <line x1="125" y1="450" x2="650" y2="450" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
 
   <line x1="120" y1="350" x2="125" y2="350" stroke="black" stroke-width="2"/>
-  <text x="110" y="355" font-family="Courier New, monospace" font-size="14" text-anchor="end">+0.3</text>
+  <text x="122" y="355" font-family="Courier New, monospace" font-size="14" text-anchor="end">+0.3</text>
   <line x1="125" y1="350" x2="650" y2="350" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
 
   <!-- X-axis tick marks and labels (scaled) -->
