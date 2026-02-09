@@ -37,7 +37,7 @@
   <!-- Output arrow (310) - exiting Computation box right side -->
   <line x1="700" y1="385" x2="750" y2="385" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <text x="720" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">310</text>
-  <text x="720" y="410" font-family="Courier New, monospace" font-size="12" text-anchor="middle">to SNN</text>
+  <text x="720" y="410" font-family="Courier New, monospace" font-size="14" text-anchor="middle">to SNN</text>
 
   <!-- ENERGY STATE MONITOR (306) -->
   <rect x="350" y="510" width="350" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
