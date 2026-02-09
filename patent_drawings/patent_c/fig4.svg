@@ -14,7 +14,7 @@
   <!-- Input Signal Graph (400) -->
   <!-- Y-axis -->
   <line x1="125" y1="450" x2="125" y2="200" stroke="black" stroke-width="2"/>
-  <text x="67" y="325" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 67 325)">Input Value</text>
+  <text x="100" y="325" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 100 325)">Input Value</text>
 
   <!-- X-axis -->
   <line x1="125" y1="450" x2="650" y2="450" stroke="black" stroke-width="2"/>
@@ -73,7 +73,7 @@
 
   <!-- Energy graph Y-axis -->
   <line x1="125" y1="870" x2="125" y2="700" stroke="black" stroke-width="2"/>
-  <text x="67" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 67 785)">Energy (mWh)</text>
+  <text x="100" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 100 785)">Energy (mWh)</text>
 
   <!-- Energy graph X-axis -->
   <line x1="125" y1="870" x2="650" y2="870" stroke="black" stroke-width="2"/>

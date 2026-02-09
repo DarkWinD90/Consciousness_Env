@@ -62,9 +62,9 @@
 <line x1="110" y1="349" x2="110" y2="241" stroke="black" stroke-width="2" stroke-dasharray="4,4"/>
 <line x1="110" y1="241" x2="112" y2="241" stroke="black" stroke-width="2" stroke-dasharray="4,4"/>
 <polygon points="120,241 112,236 112,246" fill="black"/>
-<line x1="725" y1="643" x2="765" y2="643" stroke="black" stroke-width="2" stroke-dasharray="10,5"/>
-<line x1="765" y1="643" x2="765" y2="80" stroke="black" stroke-width="2" stroke-dasharray="10,5"/>
-<line x1="765" y1="80" x2="735" y2="80" stroke="black" stroke-width="2" stroke-dasharray="10,5"/>
+<line x1="725" y1="643" x2="750" y2="643" stroke="black" stroke-width="2" stroke-dasharray="10,5"/>
+<line x1="750" y1="643" x2="750" y2="80" stroke="black" stroke-width="2" stroke-dasharray="10,5"/>
+<line x1="750" y1="80" x2="735" y2="80" stroke="black" stroke-width="2" stroke-dasharray="10,5"/>
 <polygon points="725,80 735,75 735,85" fill="black"/>
 <line x1="120" y1="733" x2="160" y2="733" stroke="black" stroke-width="3"/>
 <text x="170" y="738" font-family="Arial, sans-serif" font-size="14" text-anchor="start">ENERGY LOOP</text>
