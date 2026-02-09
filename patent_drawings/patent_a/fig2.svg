@@ -25,7 +25,7 @@
     <text x="690" y="310" font-family="Arial, sans-serif" font-size="14" text-anchor="end">206</text>
     <text x="190" y="370.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">50</text>
     <line x1="196" y1="365.0" x2="200" y2="365.0" stroke="black" stroke-width="1"/>
-    <text x="190" y="850.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">-4697</text>
+    <text x="190" y="850.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">-4,697</text>
     <line x1="196" y1="845.0" x2="200" y2="845.0" stroke="black" stroke-width="1"/>
     <circle cx="200" cy="365.0" r="4" fill="black"/>
     <polyline points="200,365.0 207.5,293.3 700,293.3" fill="none" stroke="black" stroke-width="3" stroke-dasharray="10,5"/>
@@ -33,7 +33,7 @@
     <line x1="215.8" y1="620.0" x2="700" y2="845.0" stroke="black" stroke-width="3"/>
     <path d="M200,365.0 L207.5,293.3 L700,293.3 L700,580.0 L215.8,580.0 Z" fill="url(#hatch)"/>
     <text x="450" y="333.3" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Experimental (Homeostasis)</text>
-    <text x="620" y="318" font-family="Arial, sans-serif" font-size="14">200</text>
+    <text x="600" y="348" font-family="Arial, sans-serif" font-size="14">200</text>
     <text x="690" y="732.5" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="end">Control (Depletion)</text>
     <text x="690" y="752.5" font-family="Courier New, monospace" font-size="14" text-anchor="end">base &gt; harvest</text>
     <text x="690" y="800.0" font-family="Courier New, monospace" font-size="14" font-weight="bold" text-anchor="end">-4,697 mWh</text>
