@@ -323,6 +323,62 @@ def _is_short_line(b, max_len=30):
     return b.kind == 'line' and max(b.width, b.height) < max_len
 
 
+def _perp_distance_to_line(text_bb, line_bb):
+    """Compute perpendicular distance from text center to the actual line segment.
+
+    Returns the distance, or None if the line label can't be parsed.
+    For diagonal lines, the axis-aligned bbox is much larger than the line's
+    visual footprint, so bbox overlap is misleading.  This function computes
+    the true geometric distance.
+    """
+    import math
+    m = re.match(r'^line\((-?[\d.]+),(-?[\d.]+)\)-\((-?[\d.]+),(-?[\d.]+)\)$', line_bb.label)
+    if not m:
+        return None
+    lx1, ly1, lx2, ly2 = float(m.group(1)), float(m.group(2)), float(m.group(3)), float(m.group(4))
+    tx = (text_bb.x1 + text_bb.x2) / 2
+    ty = (text_bb.y1 + text_bb.y2) / 2
+    dx, dy = lx2 - lx1, ly2 - ly1
+    line_len_sq = dx * dx + dy * dy
+    if line_len_sq == 0:
+        return math.hypot(tx - lx1, ty - ly1)
+    t = max(0, min(1, ((tx - lx1) * dx + (ty - ly1) * dy) / line_len_sq))
+    px, py = lx1 + t * dx, ly1 + t * dy
+    return math.hypot(tx - px, ty - py)
+
+
+def _text_is_line_label(text_bb, line_bb, tolerance=40):
+    """Check if text is a label for a line (positioned near an endpoint).
+
+    Patent drawings commonly place labels next to arrows and connectors.
+    This detects transition labels (e.g., "208" near a state arrow) and
+    graph threshold labels ("CRITICAL" at start of a grid line).
+
+    Checks the closest point of the text bbox to each line endpoint,
+    not just the text center, because text-anchor=start/end places the
+    anchor edge near the endpoint while the center is further away.
+    """
+    import math
+    m = re.match(r'^line\((-?[\d.]+),(-?[\d.]+)\)-\((-?[\d.]+),(-?[\d.]+)\)$', line_bb.label)
+    if not m:
+        return False
+    lx1, ly1, lx2, ly2 = float(m.group(1)), float(m.group(2)), float(m.group(3)), float(m.group(4))
+    # Check all 4 corners + center of text bbox against each endpoint
+    points = [
+        ((text_bb.x1 + text_bb.x2) / 2, (text_bb.y1 + text_bb.y2) / 2),  # center
+        (text_bb.x1, text_bb.y1),  # top-left
+        (text_bb.x2, text_bb.y1),  # top-right
+        (text_bb.x1, text_bb.y2),  # bottom-left
+        (text_bb.x2, text_bb.y2),  # bottom-right
+    ]
+    for px, py in points:
+        d1 = math.hypot(px - lx1, py - ly1)
+        d2 = math.hypot(px - lx2, py - ly2)
+        if min(d1, d2) <= tolerance:
+            return True
+    return False
+
+
 def _is_connector_line(line_bb, shape_bb, tolerance=20):
     """Check if a line connects to a shape (arrow endpoint near shape edge)."""
     if line_bb.kind != 'line':
@@ -392,7 +448,15 @@ def _text_center_in_circle(text_bb, circ_bb, margin=10):
     return False
 
 
-def _should_skip_pair(a, b):
+def _text_center_in_any_circle(text_bb, bboxes):
+    """Check if text center is inside any circle/ellipse in the element list."""
+    for bb in bboxes:
+        if bb.kind in ('circle', 'ellipse') and _text_center_in_circle(text_bb, bb):
+            return True
+    return False
+
+
+def _should_skip_pair(a, b, all_bboxes=None):
     """Skip known non-collision pairs (intentional overlaps in patent drawings)."""
     # Skip line-on-line (axes, gridlines, arrows commonly share endpoints)
     if a.kind == 'line' and b.kind == 'line':
@@ -448,16 +512,32 @@ def _should_skip_pair(a, b):
         if re.match(r'^\d{2,3}$', b.label):
             if _is_label_for_shape(b, a):
                 return True
-    # Skip lines that connect to labeled shapes (transition arrows)
-    if a.kind == 'line' and b.kind in ('text',):
-        # Lines connecting boxes often slightly overlap nearby text labels
-        line_len = max(a.width, a.height)
-        if line_len > 30:  # Skip any non-trivial line vs text overlap
+    # Skip text-on-line when the text is NOT visually near the line stroke.
+    # Diagonal lines have large axis-aligned bboxes that enclose text far from
+    # the actual stroke.  Use perpendicular distance to distinguish real visual
+    # overlap (text crossing/sitting on the line) from incidental bbox overlap.
+    # Also skip: labels near endpoints, reference numerals for lines, minor overlap,
+    # and single-char symbols inside circles (junction markers like "+").
+    if a.kind == 'line' and b.kind == 'text':
+        perp = _perp_distance_to_line(b, a)
+        if perp is not None and perp > 20:
+            return True  # text is far from actual stroke — bbox artifact
+        if a.overlap_ratio(b) < 0.25 or _text_is_line_label(b, a):
             return True
-    if b.kind == 'line' and a.kind in ('text',):
-        line_len = max(b.width, b.height)
-        if line_len > 30:
+        if re.match(r'^\d{2,3}$', b.label):
+            return True  # reference numeral labeling the line element
+        if len(b.label) <= 2 and _text_center_in_any_circle(b, all_bboxes):
+            return True  # symbol inside a circle/junction sitting on the line
+    if b.kind == 'line' and a.kind == 'text':
+        perp = _perp_distance_to_line(a, b)
+        if perp is not None and perp > 20:
+            return True  # text is far from actual stroke — bbox artifact
+        if b.overlap_ratio(a) < 0.25 or _text_is_line_label(a, b):
             return True
+        if re.match(r'^\d{2,3}$', a.label):
+            return True  # reference numeral labeling the line element
+        if len(a.label) <= 2 and _text_center_in_any_circle(a, all_bboxes):
+            return True  # symbol inside a circle/junction sitting on the line
     # Skip multi-line text labels (two text elements stacked vertically for one label)
     if a.kind == 'text' and b.kind == 'text':
         # If two text elements have similar x centers and y-diff <= 20, it's a multi-line label
@@ -543,7 +623,7 @@ def detect_collisions(bboxes, threshold=OVERLAP_THRESHOLD):
     for i in range(n):
         for j in range(i + 1, n):
             a, b = bboxes[i], bboxes[j]
-            if _should_skip_pair(a, b):
+            if _should_skip_pair(a, b, all_bboxes=bboxes):
                 continue
             ratio = a.overlap_ratio(b)
             if ratio >= threshold:
