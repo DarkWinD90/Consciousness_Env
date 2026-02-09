@@ -41,34 +41,34 @@
   <text x="100" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Start</text>
 
   <!-- 206: CONNECTED -> AUTONOMOUS (top arrow) -->
-  <line x1="270" y1="295" x2="480" y2="295" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="265" y1="295" x2="485" y2="295" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <text x="375" y="260" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">206</text>
   <text x="375" y="278" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Heartbeat timeout (>30s)</text>
 
   <!-- 212: AUTONOMOUS -> CONNECTED (bottom arrow, dashed - direct reconnect) -->
-  <line x1="479" y1="345" x2="270" y2="345" stroke="black" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ah)"/>
+  <line x1="485" y1="345" x2="265" y2="345" stroke="black" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ah)"/>
   <text x="375" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">212: Any tool call (heartbeat reset)</text>
 
   <!-- 208: AUTONOMOUS -> RECOVERING -->
-  <line x1="510" y1="380" x2="425" y2="490" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="508" y1="376" x2="417" y2="494" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <text x="490" y="420" font-family="Arial, sans-serif" font-size="14" text-anchor="start">208</text>
   <text x="485" y="438" font-family="Arial, sans-serif" font-size="14" text-anchor="start">resync() called</text>
 
   <!-- 210: RECOVERING -> CONNECTED -->
-  <line x1="315" y1="505" x2="235" y2="385" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="333" y1="494" x2="242" y2="376" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <text x="255" y="435" font-family="Arial, sans-serif" font-size="14" text-anchor="end">210</text>
   <text x="250" y="453" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Resync complete</text>
 
-  <!-- 214: Self-loop on AUTONOMOUS (step counter) — smooth oval to the right -->
-  <path d="M 616 296 C 730 255, 730 385, 616 344" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="740" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="start">214</text>
-  <text x="740" y="323" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Each step</text>
-  <text x="740" y="341" font-family="Courier New, monospace" font-size="14" text-anchor="start">(max 10,000)</text>
+  <!-- 214: Self-loop on AUTONOMOUS (step counter) — labels inside loop -->
+  <path d="M 616 296 C 755 245, 755 395, 616 344" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="668" y="308" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">214</text>
+  <text x="668" y="324" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Each step</text>
+  <text x="668" y="340" font-family="Courier New, monospace" font-size="14" text-anchor="middle">(max 10,000)</text>
 
   <!-- ==================== ANNOTATIONS ==================== -->
 
-  <!-- Snapshot annotation near AUTONOMOUS — positioned below transition area -->
-  <text x="580" y="460" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Snapshot every 50 steps</text>
+  <!-- Snapshot annotation — centered below 214 self-loop for visual grouping -->
+  <text x="668" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Snapshot every 50 steps</text>
 
   <!-- ==================== LEGEND ==================== -->
 

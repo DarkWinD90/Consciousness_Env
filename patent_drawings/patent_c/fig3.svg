@@ -55,8 +55,8 @@
   <line x1="650" y1="650" x2="650" y2="655" stroke="black" stroke-width="2"/>
   <text x="650" y="675" font-family="Courier New, monospace" font-size="14" text-anchor="middle">100</text>
 
-  <!-- Energy Modulation Curve (300) - Reference numeral inside chart area -->
-  <text x="635" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="end">300</text>
+  <!-- Energy Modulation Curve (300) - Reference numeral outside chart area -->
+  <text x="665" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="start">300</text>
 
   <!-- CRITICAL zone: 0-15 mWh, mod = -0.4 -->
   <line x1="125" y1="600" x2="203" y2="600" stroke="black" stroke-width="3"/>
