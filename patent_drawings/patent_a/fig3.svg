@@ -29,8 +29,8 @@
     <text x="515" y="255" font-family="Courier New, monospace" font-size="14">V_th = 0.5</text>
     <text x="615" y="258" font-family="Arial, sans-serif" font-size="14" text-anchor="start">310</text>
     <line x1="520" y1="300" x2="690" y2="300" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <text x="580" y="280" font-family="Courier New, monospace" font-size="14">spike</text>
-    <text x="580" y="325" font-family="Courier New, monospace" font-size="14">(0 or 1)</text>
+    <text x="545" y="280" font-family="Courier New, monospace" font-size="14">spike</text>
+    <text x="545" y="325" font-family="Courier New, monospace" font-size="14">(0 or 1)</text>
     <text x="700" y="288" font-family="Arial, sans-serif" font-size="14" text-anchor="start">312</text>
     <text x="430" y="418" font-family="Courier New, monospace" font-size="14" text-anchor="middle">If V &gt;= threshold: spike, V = 0</text>
     <text x="430" y="438" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Refractory period: 2 steps</text>
