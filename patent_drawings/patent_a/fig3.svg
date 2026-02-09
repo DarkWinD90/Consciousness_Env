@@ -51,8 +51,8 @@
     <path d="M210,558 Q310,485 410,558" fill="none" stroke="black" stroke-width="1"/>
     <path d="M310,558 Q445,470 580,558" fill="none" stroke="black" stroke-width="1"/>
     <path d="M410,558 Q495,520 580,558" fill="none" stroke="black" stroke-width="1"/>
-    <text x="260" y="478" font-family="Courier New, monospace" font-size="14" text-anchor="middle">W[i,j]</text>
-    <text x="300" y="478" font-family="Arial, sans-serif" font-size="14" text-anchor="start">316</text>
+    <text x="395" y="518" font-family="Courier New, monospace" font-size="14" text-anchor="middle">W[i,j]</text>
+    <text x="435" y="518" font-family="Arial, sans-serif" font-size="14" text-anchor="start">316</text>
     <path d="M302,602 C290,635 330,635 318,602" fill="none" stroke="black" stroke-width="1"/>
     <line x1="300" y1="610" x2="320" y2="630" stroke="black" stroke-width="2"/>
     <line x1="320" y1="610" x2="300" y2="630" stroke="black" stroke-width="2"/>
