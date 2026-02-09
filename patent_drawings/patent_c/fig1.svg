@@ -106,10 +106,10 @@
   <text x="325" y="762" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Piezoelectric + Thermoelectric</text>
 
   <!-- Energy feedback loop - from Harvester back up to SNN (bold dashed line, normal arrowhead) -->
-  <line x1="175" y1="747" x2="85" y2="747" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
-  <line x1="85" y1="747" x2="85" y2="660" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
-  <line x1="85" y1="660" x2="123" y2="660" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="70" y="720" font-family="Arial, sans-serif" font-size="12" text-anchor="start" transform="rotate(-90, 70, 720)">Energy feedback</text>
+  <line x1="175" y1="747" x2="105" y2="747" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="105" y1="747" x2="105" y2="660" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="105" y1="660" x2="123" y2="660" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="108" y="720" font-family="Arial, sans-serif" font-size="14" text-anchor="start" transform="rotate(-90, 108, 720)">Energy feedback</text>
 
   <!-- Caption -->
   <text x="387" y="810" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">THE SYSTEM NEVER STOPS</text>
