@@ -50,7 +50,8 @@
 <text x="566.0" y="470.8333333333333" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">NET POSITIVE REGION</text>
 <text x="566.0" y="490.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Harvest >> Cost</text>
 <text x="566.0" y="510.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(Self-Sustaining)</text>
-<text x="666.0" y="470.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="start">504</text>
+<rect x="663" y="458" width="30" height="18" fill="white"/>
+<text x="666.0" y="470.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="start" text-decoration="underline">504</text>
 <circle cx="166" cy="633" r="5" fill="none" stroke="black" stroke-width="2"/>
 <line x1="171" y1="633" x2="205" y2="673" stroke="black" stroke-width="1"/>
 <text x="210" y="688" font-family="Arial, sans-serif" font-size="14" text-anchor="start">506</text><text x="237" y="688" font-family="Courier New, monospace" font-size="14" text-anchor="start">Crossover (0.3 spikes)</text>
