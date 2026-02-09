@@ -59,11 +59,11 @@
   <text x="255" y="435" font-family="Arial, sans-serif" font-size="14" text-anchor="end">210</text>
   <text x="250" y="453" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Resync complete</text>
 
-  <!-- 214: Self-loop on AUTONOMOUS (step counter) — smooth oval to the right -->
-  <path d="M 616 296 C 690 260, 690 380, 616 344" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="665" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="start">214</text>
-  <text x="665" y="323" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Each step</text>
-  <text x="665" y="341" font-family="Courier New, monospace" font-size="14" text-anchor="start">(max 10,000)</text>
+  <!-- 214: Self-loop on AUTONOMOUS (step counter) — labels inside loop -->
+  <path d="M 616 296 C 755 245, 755 395, 616 344" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="668" y="308" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">214</text>
+  <text x="668" y="324" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Each step</text>
+  <text x="668" y="340" font-family="Courier New, monospace" font-size="14" text-anchor="middle">(max 10,000)</text>
 
   <!-- ==================== ANNOTATIONS ==================== -->
 
