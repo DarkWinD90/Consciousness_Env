@@ -67,8 +67,8 @@
 
   <!-- ==================== ANNOTATIONS ==================== -->
 
-  <!-- Snapshot annotation near AUTONOMOUS — positioned below transition area -->
-  <text x="580" y="460" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Snapshot every 50 steps</text>
+  <!-- Snapshot annotation — centered below 214 self-loop for visual grouping -->
+  <text x="668" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Snapshot every 50 steps</text>
 
   <!-- ==================== LEGEND ==================== -->
 
