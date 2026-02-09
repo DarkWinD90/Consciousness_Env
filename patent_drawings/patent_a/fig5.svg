@@ -51,9 +51,9 @@
 <text x="566.0" y="490.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Harvest >> Cost</text>
 <text x="566.0" y="510.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(Self-Sustaining)</text>
 <text x="666.0" y="470.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="start">504</text>
-<circle cx="163.48" cy="633.3583333333333" r="6" fill="none" stroke="black" stroke-width="2"/>
-<line x1="169.48" y1="633.3583333333333" x2="203.48" y2="673.3583333333333" stroke="black" stroke-width="1"/>
-<text x="208.48" y="688.3583333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="start">506</text><text x="235" y="688.3583333333333" font-family="Courier New, monospace" font-size="14" text-anchor="start">Crossover (0.3 spikes)</text>
+<circle cx="166" cy="633" r="5" fill="none" stroke="black" stroke-width="2"/>
+<line x1="171" y1="633" x2="205" y2="673" stroke="black" stroke-width="1"/>
+<text x="210" y="688" font-family="Arial, sans-serif" font-size="14" text-anchor="start">506</text><text x="237" y="688" font-family="Courier New, monospace" font-size="14" text-anchor="start">Crossover (0.3 spikes)</text>
 <rect x="150" y="780" width="550" height="100" rx="10" fill="none" stroke="black" stroke-width="2"/>
 <text x="170" y="810" font-family="Courier New, monospace" font-size="14">Harvest = 0.20 + (0.09 x spikes) mWh/step</text>
 <text x="170" y="835" font-family="Courier New, monospace" font-size="14">Cost = 0.225 + (0.006 x s) + (0.0003 x s^2) mWh/step</text>
