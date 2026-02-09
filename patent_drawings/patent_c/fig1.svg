@@ -12,7 +12,7 @@
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">1/7</text>
 
   <!-- Title -->
-  <text x="425" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SYSTEM ARCHITECTURE WITH COGNITIVE FALLBACK</text>
+  <text x="387" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SYSTEM ARCHITECTURE WITH COGNITIVE FALLBACK</text>
 
   <!-- External Cognitive Control Layer (100) - Cloud Shape -->
   <path d="M235,130 C205,130 185,150 185,175 C160,175 140,195 140,220 C140,245 160,265 185,265 C185,290 205,310 235,310 L565,310 C595,310 615,290 615,265 C635,265 650,245 650,220 C650,195 635,175 615,175 C615,150 595,130 565,130 Z"
@@ -72,7 +72,7 @@
 
   <!-- Step Buffer (108) - positioned below 106, clear of boundary -->
   <rect x="565" y="608" width="80" height="35" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="660" y="618" font-family="Arial, sans-serif" font-size="14" text-anchor="start">108</text>
+  <text x="640" y="620" font-family="Arial, sans-serif" font-size="14" text-anchor="end">108</text>
   <text x="605" y="631" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Buffer</text>
 
   <!-- Arrow from 106 down to Buffer -->
@@ -83,7 +83,7 @@
   <line x1="580" y1="668" x2="580" y2="703" stroke="black" stroke-width="2"/>
   <line x1="630" y1="668" x2="630" y2="703" stroke="black" stroke-width="2"/>
   <ellipse cx="605" cy="703" rx="25" ry="8" fill="none" stroke="black" stroke-width="2"/>
-  <text x="605" y="690" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">110</text>
+  <text x="660" y="680" font-family="Arial, sans-serif" font-size="14" text-anchor="start">110</text>
   <text x="605" y="725" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Snapshot</text>
 
   <!-- Arrow from Buffer down to Snapshot -->
@@ -106,10 +106,10 @@
   <text x="325" y="762" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Piezoelectric + Thermoelectric</text>
 
   <!-- Energy feedback loop - from Harvester back up to SNN (bold dashed line, normal arrowhead) -->
-  <line x1="175" y1="747" x2="120" y2="747" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
-  <line x1="120" y1="747" x2="120" y2="660" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
-  <line x1="120" y1="660" x2="125" y2="660" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="105" y="720" font-family="Arial, sans-serif" font-size="12" text-anchor="start" transform="rotate(-90, 105, 720)">Energy feedback</text>
+  <line x1="175" y1="747" x2="85" y2="747" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="85" y1="747" x2="85" y2="660" stroke="black" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="85" y1="660" x2="123" y2="660" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="70" y="720" font-family="Arial, sans-serif" font-size="12" text-anchor="start" transform="rotate(-90, 70, 720)">Energy feedback</text>
 
   <!-- Caption -->
   <text x="387" y="810" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">THE SYSTEM NEVER STOPS</text>
