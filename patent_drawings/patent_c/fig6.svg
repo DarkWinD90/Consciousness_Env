@@ -12,8 +12,9 @@
   <text x="387" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RECOVERY SCENARIOS</text>
 
   <!-- Scenario A: Normal Reconnection (600) -->
-  <text x="720" y="170" font-family="Arial, sans-serif" font-size="14" text-anchor="start">600</text>
   <text x="387" y="170" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario A: Normal Reconnection</text>
+  <text x="660" y="210" font-family="Arial, sans-serif" font-size="14" text-anchor="start">600</text>
+  <line x1="658" y1="214" x2="652" y2="220" stroke="black" stroke-width="0.75"/>
 
   <!-- Timeline A (compressed) -->
   <line x1="125" y1="220" x2="650" y2="220" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
@@ -39,8 +40,9 @@
   <text x="601" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Restored</text>
 
   <!-- Scenario B: Crash Recovery (602) -->
-  <text x="720" y="300" font-family="Arial, sans-serif" font-size="14" text-anchor="start">602</text>
   <text x="387" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario B: Crash Recovery</text>
+  <text x="660" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="start">602</text>
+  <line x1="658" y1="344" x2="652" y2="350" stroke="black" stroke-width="0.75"/>
 
   <!-- Timeline B (compressed) -->
   <line x1="125" y1="350" x2="650" y2="350" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
@@ -68,8 +70,9 @@
   <text x="482" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Max loss: 50 steps</text>
 
   <!-- Scenario C: Clean Shutdown (604) -->
-  <text x="720" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="start">604</text>
   <text x="387" y="445" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Scenario C: Clean Shutdown</text>
+  <text x="660" y="485" font-family="Arial, sans-serif" font-size="14" text-anchor="start">604</text>
+  <line x1="658" y1="489" x2="652" y2="495" stroke="black" stroke-width="0.75"/>
 
   <!-- Timeline C (compressed) -->
   <line x1="125" y1="495" x2="650" y2="495" stroke="black" stroke-width="2" marker-end="url(#ah)"/>

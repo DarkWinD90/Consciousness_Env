@@ -41,29 +41,35 @@
   <text x="100" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Start</text>
 
   <!-- 206: CONNECTED -> AUTONOMOUS (top arrow) -->
-  <line x1="270" y1="295" x2="480" y2="295" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="266" y1="295" x2="484" y2="295" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <text x="375" y="260" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">206</text>
   <text x="375" y="278" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Heartbeat timeout (>30s)</text>
 
   <!-- 212: AUTONOMOUS -> CONNECTED (bottom arrow, dashed - direct reconnect) -->
-  <line x1="479" y1="345" x2="270" y2="345" stroke="black" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ah)"/>
+  <line x1="485" y1="345" x2="266" y2="345" stroke="black" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ah)"/>
   <text x="375" y="375" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">212: Any tool call (heartbeat reset)</text>
 
   <!-- 208: AUTONOMOUS -> RECOVERING -->
-  <line x1="510" y1="380" x2="425" y2="490" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="508" y1="376" x2="418" y2="494" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <text x="490" y="420" font-family="Arial, sans-serif" font-size="14" text-anchor="start">208</text>
   <text x="485" y="438" font-family="Arial, sans-serif" font-size="14" text-anchor="start">resync() called</text>
 
   <!-- 210: RECOVERING -> CONNECTED -->
-  <line x1="315" y1="505" x2="235" y2="385" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="333" y1="494" x2="242" y2="376" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <text x="255" y="435" font-family="Arial, sans-serif" font-size="14" text-anchor="end">210</text>
   <text x="250" y="453" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Resync complete</text>
 
-  <!-- 214: Self-loop on AUTONOMOUS (step counter) — smooth oval to the right -->
-  <path d="M 616 296 C 730 255, 730 385, 616 344" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="740" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="start">214</text>
-  <text x="740" y="323" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Each step</text>
-  <text x="740" y="341" font-family="Courier New, monospace" font-size="14" text-anchor="start">(max 10,000)</text>
+  <!-- 214: Step Runner block with self-loop arrow -->
+  <rect x="648" y="298" width="62" height="44" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="679" y="317" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Step</text>
+  <text x="679" y="332" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Runner</text>
+  <!-- Arrow from AUTONOMOUS to Step Runner -->
+  <line x1="620" y1="320" x2="646" y2="320" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- Self-loop on Step Runner (feeds back to itself) -->
+  <path d="M 710 308 C 742 290, 742 350, 710 332" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="750" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="start">214</text>
+  <text x="750" y="322" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Each step</text>
+  <text x="750" y="338" font-family="Courier New, monospace" font-size="11" text-anchor="start">(max 10,000)</text>
 
   <!-- ==================== ANNOTATIONS ==================== -->
 
@@ -72,7 +78,7 @@
 
   <!-- ==================== LEGEND ==================== -->
 
-  <rect x="125" y="680" width="525" height="120" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <rect x="125" y="680" width="525" height="140" rx="5" fill="none" stroke="black" stroke-width="2"/>
   <text x="387" y="705" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Transition Summary</text>
 
   <!-- Left column -->
@@ -89,7 +95,9 @@
   <text x="210" y="790" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Initial state</text>
   <line x1="320" y1="785" x2="370" y2="785" stroke="black" stroke-width="2" stroke-dasharray="5,3"/>
   <text x="380" y="790" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Direct reconnect</text>
+  <line x1="150" y1="805" x2="200" y2="805" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="210" y="810" font-family="Arial, sans-serif" font-size="14" text-anchor="start">State transition</text>
 
   <!-- Figure Label -->
-  <text x="387" y="850" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 2</text>
+  <text x="387" y="870" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 2</text>
 </svg>

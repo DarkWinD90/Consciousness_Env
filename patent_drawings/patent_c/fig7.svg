@@ -44,7 +44,8 @@
 
   <!-- Cognitive Mod (706) -->
   <rect x="400" y="280" width="88" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="444" y="272" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">706</text>
+  <text x="498" y="270" font-family="Arial, sans-serif" font-size="14" text-anchor="start">706</text>
+  <line x1="496" y1="274" x2="489" y2="281" stroke="black" stroke-width="0.75"/>
   <text x="444" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Cognitive</text>
   <text x="444" y="315" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Mod</text>
 
@@ -52,12 +53,12 @@
   <line x1="488" y1="305" x2="526" y2="305" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
   <!-- Motor (708) -->
-  <rect x="528" y="280" width="55" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="573" y="297" font-family="Arial, sans-serif" font-size="14" text-anchor="end">708</text>
-  <text x="555" y="312" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Motor</text>
+  <rect x="528" y="280" width="50" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="553" y="270" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">708</text>
+  <text x="553" y="312" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Motor</text>
 
   <!-- Arrow from Motor to Energy -->
-  <line x1="583" y1="305" x2="586" y2="305" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="578" y1="305" x2="586" y2="305" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
   <!-- Energy Harvest -->
   <rect x="588" y="280" width="72" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
@@ -81,7 +82,8 @@
 
   <!-- Autonomous Input Gen (712) -->
   <rect x="125" y="520" width="85" height="65" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="200" y="515" font-family="Arial, sans-serif" font-size="14" text-anchor="start">712</text>
+  <text x="108" y="548" font-family="Arial, sans-serif" font-size="14" text-anchor="end">712</text>
+  <line x1="111" y1="545" x2="123" y2="545" stroke="black" stroke-width="0.75"/>
   <text x="167" y="540" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous</text>
   <text x="167" y="555" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Input Gen</text>
   <text x="167" y="572" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Circ.+Bursts</text>
@@ -108,11 +110,11 @@
   <line x1="488" y1="552" x2="526" y2="552" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
   <!-- Motor (Autonomous) -->
-  <rect x="528" y="527" width="55" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="555" y="557" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Motor</text>
+  <rect x="528" y="527" width="50" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="553" y="557" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Motor</text>
 
   <!-- Arrow from Motor to Energy -->
-  <line x1="583" y1="552" x2="586" y2="552" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="578" y1="552" x2="586" y2="552" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
 
   <!-- Energy Harvest (Autonomous) -->
   <rect x="588" y="527" width="72" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
@@ -120,30 +122,29 @@
   <text x="624" y="563" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Harvest</text>
 
   <!-- Buffer (716) -->
-  <ellipse cx="307" cy="645" rx="45" ry="22" fill="none" stroke="black" stroke-width="2"/>
-  <text x="307" y="678" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">716</text>
-  <text x="307" y="650" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Buffer</text>
-  <line x1="302" y1="585" x2="302" y2="621" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="312" y="607" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Every step</text>
+  <ellipse cx="265" cy="645" rx="45" ry="22" fill="none" stroke="black" stroke-width="2"/>
+  <text x="265" y="678" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">716</text>
+  <text x="265" y="650" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Buffer</text>
+  <line x1="302" y1="585" x2="275" y2="621" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="275" y="607" font-family="Arial, sans-serif" font-size="12" text-anchor="end">Every step</text>
 
   <!-- Snapshot (718) -->
-  <ellipse cx="411" cy="645" rx="45" ry="22" fill="none" stroke="black" stroke-width="2"/>
-  <text x="411" y="678" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">718</text>
-  <text x="411" y="650" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Snapshot</text>
-  <line x1="352" y1="645" x2="364" y2="645" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="411" y="698" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Every 50 steps</text>
+  <ellipse cx="455" cy="645" rx="50" ry="22" fill="none" stroke="black" stroke-width="2"/>
+  <text x="455" y="678" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">718</text>
+  <text x="455" y="650" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Snapshot</text>
+  <line x1="310" y1="645" x2="403" y2="645" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="455" y="700" font-family="Courier New, monospace" font-size="12" text-anchor="middle">Every 50 steps</text>
 
   <!-- Resync path (720) -->
-  <line x1="456" y1="645" x2="660" y2="645" stroke="black" stroke-width="2"/>
-  <line x1="660" y1="645" x2="660" y2="200" stroke="black" stroke-width="2"/>
-  <line x1="660" y1="200" x2="492" y2="200" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="645" y="415" font-family="Courier New, monospace" font-size="14" text-anchor="end">720</text>
-  <text x="645" y="435" font-family="Courier New, monospace" font-size="14" text-anchor="end">resync()</text>
+  <line x1="505" y1="645" x2="675" y2="645" stroke="black" stroke-width="2"/>
+  <line x1="675" y1="645" x2="675" y2="200" stroke="black" stroke-width="2"/>
+  <line x1="675" y1="200" x2="492" y2="200" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="688" y="415" font-family="Arial, sans-serif" font-size="14" text-anchor="start">720</text>
+  <text x="688" y="435" font-family="Courier New, monospace" font-size="12" text-anchor="start">resync()</text>
 
-  <!-- Self-Observation feedback (Patent B) -->
-  <path d="M 302 520 Q 302 500 260 500 Q 220 500 220 535 L 220 552" fill="none" stroke="black" stroke-width="2" stroke-dasharray="2,2"/>
-  <line x1="220" y1="552" x2="248" y2="552" stroke="black" stroke-width="2" stroke-dasharray="2,2" marker-end="url(#ah)"/>
-  <text x="270" y="478" font-family="Arial, sans-serif" font-size="11" text-anchor="start">Self-Observation (Patent B)</text>
+  <!-- Self-Observation feedback (Patent B) — arch over SNN box -->
+  <path d="M 340 520 C 340 486, 265 486, 265 520" fill="none" stroke="black" stroke-width="2" stroke-dasharray="2,2" marker-end="url(#ah)"/>
+  <text x="302" y="480" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Self-Observation (Patent B)</text>
 
   <!-- Signal Pathways Legend -->
   <rect x="125" y="725" width="525" height="120" rx="5" fill="none" stroke="black" stroke-width="2"/>
