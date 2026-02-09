@@ -14,7 +14,7 @@
   <!-- Input Signal Graph (400) -->
   <!-- Y-axis -->
   <line x1="125" y1="450" x2="125" y2="200" stroke="black" stroke-width="2"/>
-  <text x="100" y="325" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 100 325)">Input Value</text>
+  <text x="100" y="325" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 100 325)">Input</text>
 
   <!-- X-axis -->
   <line x1="125" y1="450" x2="650" y2="450" stroke="black" stroke-width="2"/>
@@ -25,13 +25,13 @@
 
   <!-- Y-axis tick marks -->
   <line x1="120" y1="450" x2="125" y2="450" stroke="black" stroke-width="2"/>
-  <text x="122" y="455" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.0</text>
+  <text x="130" y="455" font-family="Courier New, monospace" font-size="14" text-anchor="start">0.0</text>
 
   <line x1="120" y1="325" x2="125" y2="325" stroke="black" stroke-width="2"/>
-  <text x="122" y="330" font-family="Courier New, monospace" font-size="14" text-anchor="end">0.5</text>
+  <text x="130" y="330" font-family="Courier New, monospace" font-size="14" text-anchor="start">0.5</text>
 
   <line x1="120" y1="200" x2="125" y2="200" stroke="black" stroke-width="2"/>
-  <text x="122" y="205" font-family="Courier New, monospace" font-size="14" text-anchor="end">1.0</text>
+  <text x="130" y="205" font-family="Courier New, monospace" font-size="14" text-anchor="start">1.0</text>
 
   <!-- X-axis tick marks (scaled: 125 + (old-150)*0.9545) -->
   <line x1="125" y1="450" x2="125" y2="455" stroke="black" stroke-width="2"/>
@@ -73,7 +73,7 @@
 
   <!-- Energy graph Y-axis -->
   <line x1="125" y1="870" x2="125" y2="700" stroke="black" stroke-width="2"/>
-  <text x="100" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 100 785)">Energy (mWh)</text>
+  <text x="100" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 100 785)">Energy</text>
 
   <!-- Energy graph X-axis -->
   <line x1="125" y1="870" x2="650" y2="870" stroke="black" stroke-width="2"/>
@@ -83,19 +83,19 @@
 
   <!-- Energy level gridlines with labels (scaled) -->
   <line x1="125" y1="844" x2="650" y2="844" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
-  <text x="122" y="849" font-family="Courier New, monospace" font-size="14" text-anchor="end">15</text>
+  <text x="130" y="849" font-family="Courier New, monospace" font-size="14" text-anchor="start">15</text>
   <text x="640" y="849" font-family="Arial, sans-serif" font-size="14" text-anchor="end">CRITICAL</text>
 
   <line x1="125" y1="819" x2="650" y2="819" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
-  <text x="122" y="824" font-family="Courier New, monospace" font-size="14" text-anchor="end">30</text>
+  <text x="130" y="824" font-family="Courier New, monospace" font-size="14" text-anchor="start">30</text>
   <text x="640" y="824" font-family="Arial, sans-serif" font-size="14" text-anchor="end">LOW</text>
 
   <line x1="125" y1="734" x2="650" y2="734" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
-  <text x="122" y="739" font-family="Courier New, monospace" font-size="14" text-anchor="end">80</text>
+  <text x="130" y="739" font-family="Courier New, monospace" font-size="14" text-anchor="start">80</text>
   <text x="640" y="739" font-family="Arial, sans-serif" font-size="14" text-anchor="end">NORMAL</text>
 
   <line x1="125" y1="700" x2="650" y2="700" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
-  <text x="122" y="705" font-family="Courier New, monospace" font-size="14" text-anchor="end">100</text>
+  <text x="130" y="705" font-family="Courier New, monospace" font-size="14" text-anchor="start">100</text>
   <text x="640" y="705" font-family="Arial, sans-serif" font-size="14" text-anchor="end">SURPLUS</text>
 
   <!-- Energy recovery line (rising from CRITICAL to full) - scaled x-coords -->
