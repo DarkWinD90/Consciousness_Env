@@ -18,7 +18,7 @@
 
   <!-- X-axis -->
   <line x1="125" y1="450" x2="650" y2="450" stroke="black" stroke-width="2"/>
-  <text x="387" y="508" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous Step Number</text>
+  <text x="387" y="495" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous Step Number</text>
 
   <!-- Reference numeral 400 — positioned outside graph, right side, centered -->
   <text x="670" y="330" font-family="Arial, sans-serif" font-size="14" text-anchor="start">400</text>
