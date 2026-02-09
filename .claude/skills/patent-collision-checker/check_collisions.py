@@ -448,12 +448,12 @@ def _text_center_in_circle(text_bb, circ_bb, margin=10):
     return False
 
 
-def _text_center_in_any_circle(text_bb, bboxes):
-    """Check if text center is inside any circle/ellipse in the element list."""
+def _find_containing_circle(text_bb, bboxes):
+    """Return the circle/ellipse bbox that contains the text center, or None."""
     for bb in bboxes:
         if bb.kind in ('circle', 'ellipse') and _text_center_in_circle(text_bb, bb):
-            return True
-    return False
+            return bb
+    return None
 
 
 def _should_skip_pair(a, b, all_bboxes=None):
@@ -526,8 +526,10 @@ def _should_skip_pair(a, b, all_bboxes=None):
             return True
         if re.match(r'^\d{2,3}$', b.label):
             return True  # reference numeral labeling the line element
-        if len(b.label) <= 2 and _text_center_in_any_circle(b, all_bboxes):
-            return True  # symbol inside a circle/junction sitting on the line
+        if len(b.label) <= 2 and all_bboxes is not None:
+            circ = _find_containing_circle(b, all_bboxes)
+            if circ is not None and a.intersection(circ) is not None:
+                return True  # symbol inside a circle that the line intersects
     if b.kind == 'line' and a.kind == 'text':
         perp = _perp_distance_to_line(a, b)
         if perp is not None and perp > 20:
@@ -536,8 +538,10 @@ def _should_skip_pair(a, b, all_bboxes=None):
             return True
         if re.match(r'^\d{2,3}$', a.label):
             return True  # reference numeral labeling the line element
-        if len(a.label) <= 2 and _text_center_in_any_circle(a, all_bboxes):
-            return True  # symbol inside a circle/junction sitting on the line
+        if len(a.label) <= 2 and all_bboxes is not None:
+            circ = _find_containing_circle(a, all_bboxes)
+            if circ is not None and b.intersection(circ) is not None:
+                return True  # symbol inside a circle that the line intersects
     # Skip multi-line text labels (two text elements stacked vertically for one label)
     if a.kind == 'text' and b.kind == 'text':
         # If two text elements have similar x centers and y-diff <= 20, it's a multi-line label

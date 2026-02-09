@@ -25,8 +25,6 @@
     <text x="690" y="310" font-family="Arial, sans-serif" font-size="14" text-anchor="end">206</text>
     <text x="190" y="370.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">50</text>
     <line x1="196" y1="365.0" x2="200" y2="365.0" stroke="black" stroke-width="1"/>
-    <text x="190" y="850.0" font-family="Courier New, monospace" font-size="14" text-anchor="end">-4,697</text>
-    <line x1="196" y1="845.0" x2="200" y2="845.0" stroke="black" stroke-width="1"/>
     <circle cx="200" cy="365.0" r="4" fill="black"/>
     <polyline points="200,365.0 207.5,293.3 700,293.3" fill="none" stroke="black" stroke-width="3" stroke-dasharray="10,5"/>
     <line x1="200" y1="365.0" x2="215.8" y2="580.0" stroke="black" stroke-width="3"/>
