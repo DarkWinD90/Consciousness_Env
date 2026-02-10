@@ -663,6 +663,111 @@ For each generated PDF:
 
 ---
 
+## SECTION 6.4: SCHEMATIC/HARDWARE FIGURE VALIDATION (CRITICAL)
+
+**This section addresses semantic correctness — not just format compliance.**
+
+Hardware reference designs (like FIG. 6 in Patent A) require additional validation
+beyond standard 37 CFR 1.84 checks. These figures show electrical connections
+between components, and errors here can invalidate patent claims.
+
+### 6.4.1 Arrow Endpoint Validation
+
+For every arrow/polyline representing a signal connection:
+
+1. **Source must be labeled**: Arrow origin should be near a component with reference numeral
+2. **Destination must be labeled**: Arrow endpoint should land at a labeled pin/port
+3. **Labels must be adjacent**: Pin labels (GP0, ADC1, VSYS, etc.) must be positioned
+   within ~20px of where the arrow actually lands
+4. **No orphan arrows**: Every arrow must connect two identifiable elements
+
+**Common failure**: Arrow lands at edge of component box but no pin label exists there.
+
+### 6.4.2 Pin Assignment Cross-Reference
+
+For microcontroller/IC figures, verify EVERY connection matches the specification:
+
+| Check | Method |
+|-------|--------|
+| Read spec pin assignments | Parse "Connected to... via [PIN]" statements |
+| Read drawing pin labels | Extract all GPIO/ADC/PWM text elements |
+| Compare | Every spec pin must appear in drawing |
+| Verify positioning | Label must be near actual arrow endpoint |
+
+**Example validation for Patent A FIG. 6:**
+
+| Component | Spec Says | Drawing Must Show |
+|-----------|-----------|-------------------|
+| Piezo 602 | GP26/ADC0 | "GP26" label at arrow endpoint |
+| Thermistor 606 | GP27/ADC1 | "GP27" label at arrow endpoint |
+| Photoresistor 610 | GP28/ADC2 | "GP28" label at arrow endpoint |
+| LED 608 | GP15 | "GP15" label at arrow endpoint |
+| Servo 604 | GP0/PWM | "GP0" or "PWM" at arrow endpoint |
+| Energy feedback 616 | VSYS (power) | "VSYS" label at arrow endpoint |
+
+### 6.4.3 Electrical Logic Validation
+
+Signal types must match pin capabilities:
+
+| Signal Type | Valid Pins | Invalid Pins |
+|-------------|------------|--------------|
+| Analog input (sensors) | ADC-capable (GP26-28) | Digital-only GPIO |
+| Digital data (LED, etc.) | Any GPIO | ADC-only pins |
+| PWM output (servo) | PWM-capable GPIO | ADC pins |
+| Power input | VSYS, 3V3, VBUS | GPIO pins |
+| Ground | GND pins | Any signal pin |
+
+**Common failure**: Voltage monitoring arrow lands at digital GPIO instead of ADC or VSYS.
+
+### 6.4.4 Label Proximity Check
+
+For each pin label in the drawing:
+
+1. Find the nearest arrow endpoint
+2. Calculate distance: `sqrt((label_x - arrow_x)² + (label_y - arrow_y)²)`
+3. **FAIL if distance > 30px** — label is not visually associated with connection
+4. **WARN if distance > 15px** — label should be moved closer
+
+### 6.4.5 Reference Numeral Collision with Signal Paths
+
+Reference numerals must NOT overlap with:
+- Polyline paths (signal arrows)
+- Lead lines
+- Connection lines between components
+
+**Detection method**: For each reference numeral, check if its bounding box
+intersects any `<polyline>`, `<line>`, or `<path>` element.
+
+### 6.4.6 Hardware Figure Audit Checklist
+
+When auditing FIG. 6 (Patent A) or similar hardware diagrams:
+
+```
+□ Every arrow has a labeled source component
+□ Every arrow has a labeled destination pin
+□ All ADC connections go to ADC-capable pins (GP26-28)
+□ All digital connections go to GPIO pins
+□ Power connections (VSYS, 3V3, GND) are explicitly labeled
+□ Pin labels are positioned adjacent to arrow endpoints (<15px)
+□ Reference numerals don't overlap signal path lines
+□ Drawing matches specification pin assignments exactly
+□ Legend explains different line styles (solid vs dashed)
+```
+
+### 6.4.7 Specification Update Requirements
+
+If drawing corrections require pin reassignment:
+
+1. Update the drawing SVG
+2. Update `patents/uspto_formatted/Patent_X_Drawings_Description.txt`
+3. Update `patents/Patent_X_*.md` if pin assignments are mentioned
+4. Regenerate PDFs via `export_drawings_pdf.py`
+
+**CRITICAL**: Drawing and specification must ALWAYS match. A mismatch is grounds
+for patent rejection under 35 U.S.C. 112(a) (written description requirement).
+
+---
+
 ## SECTION 7: DRAWING GENERATION GUIDANCE
 
 ### 7.1 SVG Best Practices for Patent Drawings

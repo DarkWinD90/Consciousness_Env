@@ -74,7 +74,7 @@ Block layout (top to bottom, then looping back):
                     v
                 L8: Recursive Reflection 116 — labeled "previous_output"
                     |
-                    +-----> Recursive Feedback 120 (arrow loops back to
+                    +-----> Reflection Feedback 120 (arrow loops back to
                             Neuromorphic CPU 108)
 
 Three signal pathways should be distinguished by line style:
@@ -82,13 +82,18 @@ Three signal pathways should be distinguished by line style:
   Reflection 116 to Neuromorphic CPU 108)
 - Dashed line: Thermal Cross-Link 118 (Printed Membrane 102 membrane_temp
   directly to Energy Harvesting 112)
-- Dotted line: Recursive Feedback 120 (Recursive Reflection 116 to
+- Dotted line: Reflection Feedback 120 (Recursive Reflection 116 to
   Neuromorphic CPU 108)
 
 All blocks are rectangles with rounded corners. Environment 100 is shown as a
-cloud shape. The loop-back arrow (Recursive Feedback 120) from Recursive
+cloud shape. The loop-back arrow (Reflection Feedback 120) from Recursive
 Reflection 116 to Neuromorphic CPU 108 should be prominent and labeled
 "THE LOOP CLOSES HERE."
+
+A legend box at the bottom of the figure shows the three signal pathway styles:
+- Solid arrow: Main Spine
+- Long dashes: Thermal Cross-Link
+- Short dashes: Reflection Feedback
 
 
 FIG. 2 — Energy Balance Comparison
@@ -236,13 +241,13 @@ This figure shows a top-down component layout diagram.
 
 Central component:
 - Raspberry Pi Pico (RP2040) 600, shown as a rectangle with pin labels
-  on edges
+  on edges (GP0 on left, VSYS on right)
 
 Connected components (arranged around Raspberry Pi Pico 600):
 
 Top left:
 - Piezo Disc 27mm 602, shown as a circle
-- Connected to Raspberry Pi Pico 600 via ADC pin (GP26/ADC0)
+- Connected to Raspberry Pi Pico 600 via ADC pin GP26 (ADC0)
 - Mechanical coupling line to SG90 Micro Servo 604
 
 Top right:
@@ -252,11 +257,11 @@ Top right:
 
 Bottom left:
 - NTC 10K Thermistor 606, shown as a small component
-- Connected to Raspberry Pi Pico 600 via ADC pin (GP27/ADC1)
+- Connected to Raspberry Pi Pico 600 via ADC pin GP27 (ADC1)
 
 Bottom center:
 - GL5528 Photoresistor (LDR) 610, shown as a small component
-- Connected to Raspberry Pi Pico 600 via ADC pin (GP28/ADC2)
+- Connected to Raspberry Pi Pico 600 via ADC pin GP28 (ADC2)
 
 Bottom right:
 - WS2812B RGB LED 608, shown as a small square
@@ -270,7 +275,7 @@ Left side:
 Power section:
 - Rectifier bridge 614
 - Storage capacitor 616
-- Arrow labeled "Harvested energy feedback"
+- Arrow labeled "Harvested energy" connecting to Raspberry Pi Pico 600 VSYS pin
 
 BOM annotation box in corner:
 - "Raspberry Pi Pico (RP2040)"
