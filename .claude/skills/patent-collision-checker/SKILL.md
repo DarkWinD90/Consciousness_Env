@@ -1,3 +1,10 @@
+---
+name: patent-collision-checker
+description: Detects and fixes element collisions in USPTO patent SVG drawings. Identifies overlapping text, clipped elements, text-on-line collisions, and boundary violations that violate 37 CFR 1.84(p)(1) legibility requirements.
+allowed-tools: Bash(python *), Read, Write, Edit, Glob, Grep
+argument-hint: [check|fix] [--patent a|b|c] [--file <path>]
+---
+
 # Patent Drawing Collision Checker
 
 ## Description
