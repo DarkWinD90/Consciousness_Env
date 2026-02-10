@@ -85,3 +85,4 @@ Archive/
 # Temporary figure development files
 Fig*.svg
 gen_fig*.py
+.claude/settings.local.json
