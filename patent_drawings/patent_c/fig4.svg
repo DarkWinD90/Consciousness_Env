@@ -58,8 +58,8 @@
   <!-- Burst spike annotation (402) - arrow at sine peak (shifted +35) -->
   <line x1="318" y1="275" x2="318" y2="200" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
   <text x="332" y="245" font-family="Courier New, monospace" font-size="14" text-anchor="start">+0.3</text>
-  <text x="332" y="185" font-family="Arial, sans-serif" font-size="14" text-anchor="start">402</text>
-  <text x="375" y="185" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Burst (10% probability)</text>
+  <text x="325" y="205" font-family="Arial, sans-serif" font-size="14" text-anchor="start">402</text>
+  <text x="360" y="185" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Burst (10% probability)</text>
 
   <!-- Autonomous Input Formula Box (404) -->
   <rect x="160" y="510" width="525" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
