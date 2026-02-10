@@ -61,45 +61,45 @@
   <text x="325" y="205" font-family="Arial, sans-serif" font-size="14" text-anchor="start">402</text>
   <text x="360" y="185" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Burst (10% probability)</text>
 
-  <!-- Autonomous Input Formula Box (404) -->
-  <rect x="160" y="510" width="525" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="670" y="527" font-family="Arial, sans-serif" font-size="14" text-anchor="end">404</text>
-  <text x="422" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous Input Formula</text>
-  <text x="422" y="570" font-family="Courier New, monospace" font-size="14" text-anchor="middle">circadian = 0.5 + 0.2 x sin(2pi x t x 3)</text>
-  <text x="422" y="595" font-family="Courier New, monospace" font-size="14" text-anchor="middle">burst = 0.3 (with 10% probability per step)</text>
+  <!-- Autonomous Input Formula Box (404) - moved down for spacing -->
+  <rect x="160" y="530" width="525" height="100" rx="5" fill="none" stroke="black" stroke-width="2"/>
+  <text x="670" y="547" font-family="Arial, sans-serif" font-size="14" text-anchor="end">404</text>
+  <text x="422" y="565" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Autonomous Input Formula</text>
+  <text x="422" y="590" font-family="Courier New, monospace" font-size="14" text-anchor="middle">circadian = 0.5 + 0.2 x sin(2pi x t x 3)</text>
+  <text x="422" y="615" font-family="Courier New, monospace" font-size="14" text-anchor="middle">burst = 0.3 (with 10% probability per step)</text>
 
-  <!-- Energy Recovery Graph Section -->
-  <text x="422" y="650" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy Recovery During Autonomous Operation</text>
+  <!-- Energy Recovery Graph Section - moved down for spacing -->
+  <text x="422" y="680" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Energy Recovery During Autonomous Operation</text>
 
   <!-- Energy graph Y-axis -->
-  <line x1="160" y1="870" x2="160" y2="700" stroke="black" stroke-width="2"/>
-  <text x="100" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 100 785)">Energy</text>
+  <line x1="160" y1="900" x2="160" y2="730" stroke="black" stroke-width="2"/>
+  <text x="100" y="815" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" transform="rotate(-90 100 815)">Energy</text>
 
   <!-- Energy graph X-axis -->
-  <line x1="160" y1="870" x2="685" y2="870" stroke="black" stroke-width="2"/>
+  <line x1="160" y1="900" x2="685" y2="900" stroke="black" stroke-width="2"/>
 
   <!-- Reference numeral 406 -->
-  <text x="700" y="785" font-family="Arial, sans-serif" font-size="14" text-anchor="start">406</text>
+  <text x="700" y="815" font-family="Arial, sans-serif" font-size="14" text-anchor="start">406</text>
 
-  <!-- Energy level gridlines with labels (shifted +35) -->
-  <line x1="160" y1="844" x2="685" y2="844" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
-  <text x="150" y="849" font-family="Courier New, monospace" font-size="14" text-anchor="end">15</text>
-  <text x="680" y="849" font-family="Arial, sans-serif" font-size="14" text-anchor="end">CRITICAL</text>
+  <!-- Energy level gridlines with labels (shifted +35, moved down +30) -->
+  <line x1="160" y1="874" x2="685" y2="874" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="150" y="879" font-family="Courier New, monospace" font-size="14" text-anchor="end">15</text>
+  <text x="680" y="879" font-family="Arial, sans-serif" font-size="14" text-anchor="end">CRITICAL</text>
 
-  <line x1="160" y1="819" x2="685" y2="819" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
-  <text x="150" y="824" font-family="Courier New, monospace" font-size="14" text-anchor="end">30</text>
-  <text x="680" y="824" font-family="Arial, sans-serif" font-size="14" text-anchor="end">LOW</text>
+  <line x1="160" y1="849" x2="685" y2="849" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="150" y="854" font-family="Courier New, monospace" font-size="14" text-anchor="end">30</text>
+  <text x="680" y="854" font-family="Arial, sans-serif" font-size="14" text-anchor="end">LOW</text>
 
-  <line x1="160" y1="734" x2="685" y2="734" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
-  <text x="150" y="739" font-family="Courier New, monospace" font-size="14" text-anchor="end">80</text>
-  <text x="680" y="739" font-family="Arial, sans-serif" font-size="14" text-anchor="end">NORMAL</text>
+  <line x1="160" y1="764" x2="685" y2="764" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="150" y="769" font-family="Courier New, monospace" font-size="14" text-anchor="end">80</text>
+  <text x="680" y="769" font-family="Arial, sans-serif" font-size="14" text-anchor="end">NORMAL</text>
 
-  <line x1="160" y1="700" x2="685" y2="700" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
-  <text x="150" y="705" font-family="Courier New, monospace" font-size="14" text-anchor="end">100</text>
-  <text x="680" y="695" font-family="Arial, sans-serif" font-size="14" text-anchor="end">SURPLUS</text>
+  <line x1="160" y1="730" x2="685" y2="730" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="150" y="735" font-family="Courier New, monospace" font-size="14" text-anchor="end">100</text>
+  <text x="680" y="725" font-family="Arial, sans-serif" font-size="14" text-anchor="end">SURPLUS</text>
 
-  <!-- Energy recovery line (rising from CRITICAL to full) - shifted +35 -->
-  <polyline points="160,855 208,840 255,825 303,810 351,795 398,780 446,765 494,750 541,735 589,720 636,705 685,700" fill="none" stroke="black" stroke-width="2"/>
+  <!-- Energy recovery line (rising from CRITICAL to full) - moved down +30 -->
+  <polyline points="160,885 208,870 255,855 303,840 351,825 398,810 446,795 494,780 541,765 589,750 636,735 685,730" fill="none" stroke="black" stroke-width="2"/>
 
   <!-- Figure Label -->
   <text x="422" y="950" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 4</text>
