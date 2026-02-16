@@ -1,31 +1,31 @@
-<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
-  <ns0:rect width="100%" height="100%" fill="#fff" />
-  <ns0:text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 7 of 7</ns0:text>
-  <ns0:ellipse cx="306" cy="100" rx="72" ry="25" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
-  <ns0:text x="390" y="100" font-family="Arial" font-size="14" font-weight="normal" fill="#000">700</ns0:text>
-  <ns0:rect x="100" y="180" width="80" height="40" fill="none" stroke="#000" stroke-width="1.5" />
-  <ns0:text x="140" y="170" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">702</ns0:text>
-  <ns0:g transform="translate(230 170)"><ns0:rect width="150" height="60" rx="3" fill="none" stroke="#000" stroke-width="2" /><ns0:circle cx="20" cy="30" r="4" stroke="#000" /><ns0:circle cx="130" cy="30" r="4" stroke="#000" /><ns0:text x="75" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">704</ns0:text></ns0:g>
-  <ns0:rect x="420" y="180" width="80" height="40" fill="none" stroke="#000" stroke-width="1.5" />
-  <ns0:text x="460" y="170" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">706</ns0:text>
+<svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
+  <rect width="100%" height="100%" fill="#fff" />
+  <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 7 of 7</text>
+  <ellipse cx="306" cy="100" rx="72" ry="25" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
+  <text x="390" y="100" font-family="Arial" font-size="14" font-weight="normal" fill="#000">700</text>
+  <rect x="100" y="180" width="80" height="40" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="140" y="170" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">702</text>
+  <g transform="translate(230 170)"><rect width="150" height="60" rx="3" fill="none" stroke="#000" stroke-width="2" /><circle cx="20" cy="30" r="4" stroke="#000" /><circle cx="130" cy="30" r="4" stroke="#000" /><text x="75" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">704</text></g>
+  <rect x="420" y="180" width="80" height="40" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="460" y="170" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">706</text>
   <!-- 708: Motor actuation -->
-  <ns0:g transform="translate(500 220)"><ns0:circle cx="15" cy="15" r="12" fill="none" stroke="#000" stroke-width="1.5" /><ns0:path d="M15 3v12M9 15l12-8" stroke="#000" stroke-width="1" /></ns0:g>
-  <ns0:text x="535" y="230" font-family="Arial" font-size="14" font-weight="normal" fill="#000">708</ns0:text>
-  <ns0:path d="M500 200h15" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <ns0:path d="M50 280h512" stroke="#000" stroke-width="1.5" stroke-dasharray="10,5" />
-  <ns0:text x="565" y="275" font-family="Arial" font-size="14" font-weight="normal" fill="#000">710</ns0:text>
-  <ns0:rect x="100" y="340" width="80" height="50" fill="none" stroke="#000" stroke-width="1.5" />
-  <ns0:text x="140" y="330" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">712</ns0:text>
-  <ns0:rect x="420" y="340" width="80" height="50" fill="none" stroke="#000" stroke-width="1.5" />
-  <ns0:text x="460" y="330" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">714</ns0:text>
-  <ns0:path d="M250 440c0-10 15-10 15 0v30c0 10-15 10-15 0z" fill="none" stroke="#000" stroke-width="1.2" />
-  <ns0:text x="257" y="490" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">716</ns0:text>
-  <ns0:path d="M340 440c0-10 15-10 15 0v30c0 10-15 10-15 0z" fill="none" stroke="#000" stroke-width="1.5" />
-  <ns0:text x="347" y="490" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">718</ns0:text>
-  <ns0:path d="M355 470h200V100h-177" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
-  <ns0:text x="560" y="200" font-family="Arial" font-size="14" font-weight="normal" fill="#000">720</ns0:text>
-  <ns0:path d="M306 125v45M180 200h50M380 200h40M460 220v120" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <ns0:path d="M180 365h70M306 230v110" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <ns0:defs><ns0:marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><ns0:polygon points="0 0, 10 3.5, 0 7" fill="#000" /></ns0:marker></ns0:defs>
-  <ns0:text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 7</ns0:text>
-</ns0:svg>
+  <g transform="translate(500 220)"><circle cx="15" cy="15" r="12" fill="none" stroke="#000" stroke-width="1.5" /><path d="M15 3v12M9 15l12-8" stroke="#000" stroke-width="1" /></g>
+  <text x="535" y="230" font-family="Arial" font-size="14" font-weight="normal" fill="#000">708</text>
+  <path d="M500 200h15" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M50 280h512" stroke="#000" stroke-width="1.5" stroke-dasharray="10,5" />
+  <text x="565" y="275" font-family="Arial" font-size="14" font-weight="normal" fill="#000">710</text>
+  <rect x="100" y="340" width="80" height="50" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="140" y="330" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">712</text>
+  <rect x="420" y="340" width="80" height="50" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="460" y="330" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">714</text>
+  <path d="M250 440c0-10 15-10 15 0v30c0 10-15 10-15 0z" fill="none" stroke="#000" stroke-width="1.2" />
+  <text x="257" y="490" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">716</text>
+  <path d="M340 440c0-10 15-10 15 0v30c0 10-15 10-15 0z" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="347" y="490" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">718</text>
+  <path d="M355 470h200V100h-177" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
+  <text x="560" y="200" font-family="Arial" font-size="14" font-weight="normal" fill="#000">720</text>
+  <path d="M306 125v45M180 200h50M380 200h40M460 220v120" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M180 365h70M306 230v110" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
+  <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 7</text>
+</svg>

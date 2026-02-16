@@ -1,21 +1,21 @@
-<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
-  <ns0:rect width="100%" height="100%" fill="#fff" />
-  <ns0:text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 4 of 7</ns0:text>
-  <ns0:g transform="translate(100 120)">
-    <ns0:path d="M0 160V0M0 160h412" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
-    <ns0:path d="M0 80 Q 20 20, 40 80 T 80 80 T 120 80 T 160 80 T 200 80" fill="none" stroke="#000" stroke-width="2" />
-    <ns0:path d="M60 80v-40M140 80v-40M280 80v-50" stroke="#000" stroke-width="1.5" />
-    <ns0:text x="430" y="80" font-family="Arial" font-size="14" font-weight="normal" fill="#000">400</ns0:text>
-    <ns0:text x="310" y="40" font-family="Arial" font-size="14" font-weight="normal" fill="#000">402</ns0:text>
-  </ns0:g>
-  <ns0:rect x="100" y="320" width="412" height="60" rx="5" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
-  <ns0:text x="525" y="355" font-family="Arial" font-size="14" font-weight="normal" fill="#000">404</ns0:text>
-  <ns0:g transform="translate(100 450)">
-    <ns0:path d="M0 160V0M0 160h412" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
-    <ns0:path d="M0 150 L 50 140 L 100 125 L 150 115 L 200 100 L 250 80 L 300 60" fill="none" stroke="#000" stroke-width="2.5" />
-    <ns0:path d="M0 140h412M0 110h412M0 60h412" stroke="#000" stroke-width="0.8" stroke-dasharray="2,2" />
-    <ns0:text x="430" y="80" font-family="Arial" font-size="14" font-weight="normal" fill="#000">406</ns0:text>
-  </ns0:g>
-  <ns0:defs><ns0:marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><ns0:polygon points="0 0, 10 3.5, 0 7" fill="#000" /></ns0:marker></ns0:defs>
-  <ns0:text x="306" y="720" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 4</ns0:text>
-</ns0:svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
+  <rect width="100%" height="100%" fill="#fff" />
+  <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 4 of 7</text>
+  <g transform="translate(100 120)">
+    <path d="M0 160V0M0 160h412" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
+    <path d="M0 80 Q 20 20, 40 80 T 80 80 T 120 80 T 160 80 T 200 80" fill="none" stroke="#000" stroke-width="2" />
+    <path d="M60 80v-40M140 80v-40M280 80v-50" stroke="#000" stroke-width="1.5" />
+    <text x="430" y="80" font-family="Arial" font-size="14" font-weight="normal" fill="#000">400</text>
+    <text x="310" y="40" font-family="Arial" font-size="14" font-weight="normal" fill="#000">402</text>
+  </g>
+  <rect x="100" y="320" width="412" height="60" rx="5" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
+  <text x="525" y="355" font-family="Arial" font-size="14" font-weight="normal" fill="#000">404</text>
+  <g transform="translate(100 450)">
+    <path d="M0 160V0M0 160h412" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
+    <path d="M0 150 L 50 140 L 100 125 L 150 115 L 200 100 L 250 80 L 300 60" fill="none" stroke="#000" stroke-width="2.5" />
+    <path d="M0 140h412M0 110h412M0 60h412" stroke="#000" stroke-width="0.8" stroke-dasharray="2,2" />
+    <text x="430" y="80" font-family="Arial" font-size="14" font-weight="normal" fill="#000">406</text>
+  </g>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
+  <text x="306" y="720" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 4</text>
+</svg>

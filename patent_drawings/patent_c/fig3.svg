@@ -1,24 +1,24 @@
-<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
-  <ns0:rect width="100%" height="100%" fill="#fff" />
-  <ns0:text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 3 of 7</ns0:text>
-  <ns0:path d="M100 150v350" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
-  <ns0:text x="70" y="160" font-family="Arial" font-size="14" font-weight="normal" fill="#000">300</ns0:text>
-  <ns0:path d="M100 400h400" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
-  <ns0:text x="480" y="420" font-family="Arial" font-size="14" font-weight="normal" fill="#000">304</ns0:text>
-  <ns0:path d="M100 480h80" stroke="#000" stroke-width="2.5" />
-  <ns0:text x="140" y="470" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">308</ns0:text>
-  <ns0:path d="M180 480v-40h80" stroke="#000" stroke-width="2.5" fill="none" />
-  <ns0:text x="220" y="430" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">310</ns0:text>
-  <ns0:path d="M260 440v-40h160" stroke="#000" stroke-width="2.5" fill="none" />
-  <ns0:text x="340" y="390" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">312</ns0:text>
-  <ns0:path d="M420 400v-60h80" stroke="#000" stroke-width="2.5" fill="none" />
-  <ns0:text x="460" y="330" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">314</ns0:text>
-  <ns0:text x="140" y="520" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">308 (Critical)</ns0:text>
-  <ns0:text x="220" y="520" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">310 (Low)</ns0:text>
-  <ns0:text x="340" y="520" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">312 (Normal)</ns0:text>
-  <ns0:text x="460" y="520" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">314 (Surplus)</ns0:text>
-  <ns0:rect x="100" y="580" width="400" height="80" rx="5" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" />
-  <ns0:text x="520" y="600" font-family="Arial" font-size="14" font-weight="normal" fill="#000">302</ns0:text>
-  <ns0:defs><ns0:marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><ns0:polygon points="0 0, 10 3.5, 0 7" fill="#000" /></ns0:marker></ns0:defs>
-  <ns0:text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 3</ns0:text>
-</ns0:svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
+  <rect width="100%" height="100%" fill="#fff" />
+  <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 3 of 7</text>
+  <path d="M100 150v350" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
+  <text x="70" y="160" font-family="Arial" font-size="14" font-weight="normal" fill="#000">300</text>
+  <path d="M100 400h400" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
+  <text x="480" y="420" font-family="Arial" font-size="14" font-weight="normal" fill="#000">304</text>
+  <path d="M100 480h80" stroke="#000" stroke-width="2.5" />
+  <text x="140" y="470" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">308</text>
+  <path d="M180 480v-40h80" stroke="#000" stroke-width="2.5" fill="none" />
+  <text x="220" y="430" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">310</text>
+  <path d="M260 440v-40h160" stroke="#000" stroke-width="2.5" fill="none" />
+  <text x="340" y="390" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">312</text>
+  <path d="M420 400v-60h80" stroke="#000" stroke-width="2.5" fill="none" />
+  <text x="460" y="330" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">314</text>
+  <text x="140" y="520" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">308 (Critical)</text>
+  <text x="220" y="520" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">310 (Low)</text>
+  <text x="340" y="520" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">312 (Normal)</text>
+  <text x="460" y="520" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">314 (Surplus)</text>
+  <rect x="100" y="580" width="400" height="80" rx="5" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" />
+  <text x="520" y="600" font-family="Arial" font-size="14" font-weight="normal" fill="#000">302</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
+  <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 3</text>
+</svg>

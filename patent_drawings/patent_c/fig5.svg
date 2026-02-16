@@ -1,27 +1,27 @@
-<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
-  <ns0:rect width="100%" height="100%" fill="#fff" />
-  <ns0:text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 5 of 7</ns0:text>
-  <ns0:rect x="100" y="100" width="412" height="420" rx="5" fill="none" stroke="#000" stroke-width="2" />
-  <ns0:text x="520" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">500</ns0:text>
-  <ns0:rect x="120" y="140" width="372" height="100" rx="3" fill="none" stroke="#000" stroke-width="1.5" />
-  <ns0:text x="130" y="160" font-family="Arial" font-size="12" fill="#000">502</ns0:text>
-  <ns0:line x1="120" y1="170" x2="492" y2="170" stroke="#000" stroke-width="1" />
-  <ns0:line x1="120" y1="190" x2="492" y2="190" stroke="#000" stroke-width="0.5" />
-  <ns0:line x1="120" y1="210" x2="492" y2="210" stroke="#000" stroke-width="0.5" />
-  <ns0:rect x="120" y="260" width="160" height="60" rx="3" fill="none" stroke="#000" stroke-width="1.5" />
-  <ns0:text x="290" y="275" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</ns0:text>
-  <ns0:path d="M280 290h40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <ns0:rect x="120" y="340" width="372" height="150" rx="3" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
-  <ns0:text x="500" y="355" font-family="Arial" font-size="14" font-weight="normal" fill="#000">506</ns0:text>
-  <ns0:line x1="120" y1="375" x2="492" y2="375" stroke="#000" stroke-width="1" />
-  <ns0:line x1="120" y1="400" x2="492" y2="400" stroke="#000" stroke-width="0.5" />
-  <ns0:line x1="120" y1="425" x2="492" y2="425" stroke="#000" stroke-width="0.5" />
-  <ns0:line x1="120" y1="450" x2="492" y2="450" stroke="#000" stroke-width="0.5" />
-  <ns0:path d="M306 550l40 30-40 30-40-30z" fill="none" stroke="#000" stroke-width="1.5" />
-  <ns0:text x="306" y="630" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">508</ns0:text>
-  <ns0:path d="M306 520v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <ns0:path d="M266 580H150v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <ns0:path d="M346 580h116v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <ns0:defs><ns0:marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><ns0:polygon points="0 0, 10 3.5, 0 7" fill="#000" /></ns0:marker></ns0:defs>
-  <ns0:text x="306" y="720" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 5</ns0:text>
-</ns0:svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
+  <rect width="100%" height="100%" fill="#fff" />
+  <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 5 of 7</text>
+  <rect x="100" y="100" width="412" height="420" rx="5" fill="none" stroke="#000" stroke-width="2" />
+  <text x="520" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">500</text>
+  <rect x="120" y="140" width="372" height="100" rx="3" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="130" y="160" font-family="Arial" font-size="12" fill="#000">502</text>
+  <line x1="120" y1="170" x2="492" y2="170" stroke="#000" stroke-width="1" />
+  <line x1="120" y1="190" x2="492" y2="190" stroke="#000" stroke-width="0.5" />
+  <line x1="120" y1="210" x2="492" y2="210" stroke="#000" stroke-width="0.5" />
+  <rect x="120" y="260" width="160" height="60" rx="3" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="290" y="275" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</text>
+  <path d="M280 290h40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <rect x="120" y="340" width="372" height="150" rx="3" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
+  <text x="500" y="355" font-family="Arial" font-size="14" font-weight="normal" fill="#000">506</text>
+  <line x1="120" y1="375" x2="492" y2="375" stroke="#000" stroke-width="1" />
+  <line x1="120" y1="400" x2="492" y2="400" stroke="#000" stroke-width="0.5" />
+  <line x1="120" y1="425" x2="492" y2="425" stroke="#000" stroke-width="0.5" />
+  <line x1="120" y1="450" x2="492" y2="450" stroke="#000" stroke-width="0.5" />
+  <path d="M306 550l40 30-40 30-40-30z" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="306" y="630" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">508</text>
+  <path d="M306 520v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M266 580H150v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M346 580h116v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
+  <text x="306" y="720" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 5</text>
+</svg>
