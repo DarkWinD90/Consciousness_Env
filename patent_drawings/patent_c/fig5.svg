@@ -1,27 +1,75 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
   <rect width="100%" height="100%" fill="#fff" />
   <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 5 of 7</text>
+
+  <!-- 500: Resynchronization Payload (outer container) -->
   <rect x="100" y="100" width="412" height="420" rx="5" fill="none" stroke="#000" stroke-width="2" />
-  <text x="520" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">500</text>
+  <text x="306" y="125" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">RESYNCHRONIZATION PAYLOAD</text>
+  <text x="525" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">500</text>
+
+  <!-- 502: Summary Statistics Section -->
   <rect x="120" y="140" width="372" height="100" rx="3" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="130" y="160" font-family="Arial" font-size="12" fill="#000">502</text>
-  <line x1="120" y1="170" x2="492" y2="170" stroke="#000" stroke-width="1" />
-  <line x1="120" y1="190" x2="492" y2="190" stroke="#000" stroke-width="0.5" />
-  <line x1="120" y1="210" x2="492" y2="210" stroke="#000" stroke-width="0.5" />
-  <rect x="120" y="260" width="160" height="60" rx="3" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="290" y="275" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</text>
-  <path d="M280 290h40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <rect x="120" y="340" width="372" height="150" rx="3" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
-  <text x="500" y="355" font-family="Arial" font-size="14" font-weight="normal" fill="#000">506</text>
-  <line x1="120" y1="375" x2="492" y2="375" stroke="#000" stroke-width="1" />
-  <line x1="120" y1="400" x2="492" y2="400" stroke="#000" stroke-width="0.5" />
-  <line x1="120" y1="425" x2="492" y2="425" stroke="#000" stroke-width="0.5" />
-  <line x1="120" y1="450" x2="492" y2="450" stroke="#000" stroke-width="0.5" />
-  <path d="M306 550l40 30-40 30-40-30z" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="306" y="630" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">508</text>
-  <path d="M306 520v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M266 580H150v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <path d="M346 580h116v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
+  <text x="140" y="160" font-family="Arial" font-size="10" font-weight="bold" fill="#000">502: SUMMARY STATISTICS (always included)</text>
+  <line x1="120" y1="168" x2="492" y2="168" stroke="#000" stroke-width="1" />
+  <text x="140" y="185" font-family="Arial" font-size="9" fill="#000">steps_autonomous: [integer]</text>
+  <text x="140" y="200" font-family="Arial" font-size="9" fill="#000">energy_delta: [float] mWh</text>
+  <text x="140" y="215" font-family="Arial" font-size="9" fill="#000">min_energy / max_energy / mean_energy</text>
+  <text x="140" y="230" font-family="Arial" font-size="9" fill="#000">total_spikes / mean_spikes_per_step</text>
+  <text x="420" y="230" font-family="Arial" font-size="8" fill="#000">~200 bytes</text>
+
+  <!-- Arrow down -->
+  <path d="M306 240v20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+
+  <!-- 504: Energy Delta Detail -->
+  <rect x="120" y="270" width="160" height="70" rx="3" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="200" y="290" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#000">504: ENERGY DELTA</text>
+  <text x="140" y="310" font-family="Arial" font-size="9" fill="#000">energy_start: [float]</text>
+  <text x="140" y="325" font-family="Arial" font-size="9" fill="#000">energy_end: [float]</text>
+  <text x="290" y="310" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</text>
+
+  <!-- Annotation arrow from 504 -->
+  <path d="M280 310h60" stroke="#000" stroke-width="1" marker-end="url(#arrow)" />
+  <text x="350" y="315" font-family="Arial" font-size="8" fill="#000">Positive = gained</text>
+
+  <!-- 506: Full Step Buffer Section (dashed - optional) -->
+  <rect x="120" y="360" width="372" height="130" rx="3" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
+  <text x="140" y="380" font-family="Arial" font-size="10" font-weight="bold" fill="#000">506: FULL STEP BUFFER (optional)</text>
+  <line x1="120" y1="388" x2="492" y2="388" stroke="#000" stroke-width="0.5" />
+  <text x="140" y="405" font-family="Arial" font-size="9" fill="#000">Step 0: {input, modulation, spikes, energy, temp, pattern}</text>
+  <text x="140" y="420" font-family="Arial" font-size="9" fill="#000">Step 1: {input, modulation, spikes, energy, temp, pattern}</text>
+  <text x="140" y="435" font-family="Arial" font-size="9" fill="#000">...</text>
+  <text x="140" y="450" font-family="Arial" font-size="9" fill="#000">Step N: {input, modulation, spikes, energy, temp, pattern}</text>
+  <text x="140" y="475" font-family="Arial" font-size="8" fill="#000">~100 bytes x N steps (included when cognitive layer requests detailed history)</text>
+  <text x="500" y="375" font-family="Arial" font-size="14" font-weight="normal" fill="#000">506</text>
+
+  <!-- Granularity level annotations -->
+  <path d="M100 190h-30v-50h30" stroke="#000" stroke-width="1" marker-end="url(#arrow)" fill="none" />
+  <text x="50" y="150" font-family="Arial" font-size="8" fill="#000" transform="rotate(-90 50 150)">Level 1: Summary</text>
+
+  <path d="M100 420h-30v50h30" stroke="#000" stroke-width="1" marker-end="url(#arrow)" fill="none" />
+  <text x="50" y="450" font-family="Arial" font-size="8" fill="#000" transform="rotate(-90 50 450)">Level 2: Full</text>
+
+  <!-- 508: Decision Diamond -->
+  <path d="M306 530l50 35-50 35-50-35z" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="306" y="560" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">Full buffer</text>
+  <text x="306" y="572" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">requested?</text>
+  <text x="306" y="610" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">508</text>
+
+  <!-- Arrow from 506 to 508 -->
+  <path d="M306 490v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+
+  <!-- Decision outputs -->
+  <path d="M256 565H150v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <text x="150" y="615" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">NO: Level 1</text>
+
+  <path d="M356 565h106v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <text x="462" y="615" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">YES: Level 2</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+    </marker>
+  </defs>
+
   <text x="306" y="720" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 5</text>
 </svg>

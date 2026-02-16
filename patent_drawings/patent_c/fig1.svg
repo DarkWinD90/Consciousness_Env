@@ -1,32 +1,92 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
   <rect width="100%" height="100%" fill="#fff" />
   <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 1 of 7</text>
+
+  <!-- 100: External Cognitive Control Layer (cloud/ellipse at top, dashed) -->
   <path d="M150 120c0-20 40-40 156-40s156 20 156 40-40 40-156 40-156-20-156-40z" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="6,3" />
+  <text x="306" y="115" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">EXTERNAL COGNITIVE</text>
+  <text x="306" y="128" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">CONTROL (Claude)</text>
   <text x="480" y="100" font-family="Arial" font-size="14" font-weight="normal" fill="#000">100</text>
-  <rect x="180" y="180" width="252" height="60" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="445" y="215" font-family="Arial" font-size="14" font-weight="normal" fill="#000">102</text>
-  <circle cx="306" cy="300" r="15" fill="none" stroke="#000" stroke-width="1.5" />
-  <path d="M306 285v30M291 300h30" stroke="#000" stroke-width="1.5" />
-  <rect x="130" y="340" width="160" height="50" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="210" y="410" font-family="Arial" font-size="14" font-weight="normal" fill="#000">104</text>
-  <rect x="322" y="340" width="160" height="50" rx="5" fill="none" stroke="#000" stroke-width="2" />
-  <text x="402" y="410" font-family="Arial" font-size="14" font-weight="normal" fill="#000">106</text>
-  <g transform="translate(180 480)"><rect width="252" height="60" rx="5" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="30" cy="30" r="4" stroke="#000" /><circle cx="60" cy="30" r="4" stroke="#000" /><circle cx="220" cy="30" r="4" stroke="#000" /><path d="M90 30h110" stroke="#000" stroke-dasharray="2,2" /><text x="70" y="85" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">112</text>
-    <!-- 114: Energy harvester symbol inside SNN block -->
-    <path d="M170 15h40M170 45h40M180 15v30M200 15v30" stroke="#000" stroke-width="1" />
-    <text x="190" y="85" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">114</text></g>
-  <path d="M480 440c0-10 15-10 15 0v40c0 10-15 10-15 0z" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="510" y="465" font-family="Arial" font-size="14" font-weight="normal" fill="#000">110</text>
+
+  <!-- Arrow down from 100 -->
   <path d="M306 160v20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M306 240v45" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M291 300h-81v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <path d="M321 300h81v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <path d="M210 390v90" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M402 390v30" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)" />
-  <!-- 108: Step buffer -->
-  <rect x="372" y="420" width="60" height="25" rx="3" fill="none" stroke="#000" stroke-width="1" />
-  <text x="440" y="438" font-family="Arial" font-size="14" font-weight="normal" fill="#000">108</text>
-  <path d="M402 445v35" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" />
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
+
+  <!-- 102: Heartbeat Watchdog -->
+  <rect x="230" y="180" width="152" height="50" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="306" y="200" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">HEARTBEAT WATCHDOG</text>
+  <text x="306" y="215" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">Timeout: 30s | Check: 5s</text>
+  <text x="390" y="195" font-family="Arial" font-size="14" font-weight="normal" fill="#000">102</text>
+
+  <!-- Split paths from 102 -->
+  <!-- Left path: Heartbeat active -->
+  <path d="M260 230v30h-50v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <text x="180" y="275" font-family="Arial" font-size="8" fill="#000">active</text>
+
+  <!-- Right path: Heartbeat timeout (dashed) -->
+  <path d="M352 230v30h50v50" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
+  <text x="400" y="275" font-family="Arial" font-size="8" fill="#000">timeout</text>
+
+  <!-- 104: Cognitive-Driven Operation (left path) -->
+  <rect x="130" y="320" width="120" height="50" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="190" y="340" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">CONNECTED</text>
+  <text x="190" y="355" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">Claude input</text>
+  <text x="260" y="340" font-family="Arial" font-size="14" font-weight="normal" fill="#000">104</text>
+
+  <!-- 106: Autonomous Fallback Controller (right path, bold) -->
+  <rect x="362" y="320" width="120" height="50" rx="5" fill="none" stroke="#000" stroke-width="2" />
+  <text x="422" y="340" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">AUTONOMOUS</text>
+  <text x="422" y="355" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">Self-regulated</text>
+  <text x="490" y="340" font-family="Arial" font-size="14" font-weight="normal" fill="#000">106</text>
+
+  <!-- Arrows from 104 and 106 down -->
+  <path d="M190 370v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M422 370v15" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)" />
+
+  <!-- 108: Step Buffer (from 106) -->
+  <rect x="392" y="388" width="60" height="25" rx="3" fill="none" stroke="#000" stroke-width="1" />
+  <text x="422" y="405" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">BUFFER</text>
+  <text x="460" y="400" font-family="Arial" font-size="14" font-weight="normal" fill="#000">108</text>
+
+  <!-- Arrow from 108 down to 112 -->
+  <path d="M422 413v22" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" />
+
+  <!-- 110: Snapshot Store (cylinder, right side of 106) -->
+  <path d="M500 350c0-10 15-10 15 0v40c0 10-15 10-15 0z" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="507" y="375" font-family="Arial" font-size="7" fill="#000">snap</text>
+  <text x="530" y="375" font-family="Arial" font-size="14" font-weight="normal" fill="#000">110</text>
+
+  <!-- Arrow from 106 to 110 -->
+  <path d="M482 345h18" stroke="#000" stroke-width="1" marker-end="url(#arrow)" />
+
+  <!-- 112: SNN + Energy Harvester (large bottom box) -->
+  <g transform="translate(130,440)">
+    <rect width="352" height="80" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
+    <text x="176" y="25" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">SPIKING NEURAL NETWORK + ENERGY HARVESTER</text>
+    <text x="176" y="42" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">Continuous operation regardless of control source</text>
+    <!-- Neurons inside -->
+    <circle cx="40" cy="55" r="4" stroke="#000" />
+    <circle cx="70" cy="55" r="4" stroke="#000" />
+    <circle cx="310" cy="55" r="4" stroke="#000" />
+    <path d="M100 55h180" stroke="#000" stroke-dasharray="2,2" />
+    <text x="10" y="100" font-family="Arial" font-size="14" font-weight="normal" fill="#000">112</text>
+  </g>
+
+  <!-- 114: Energy Harvester symbol inside 112 -->
+  <g transform="translate(380,475)">
+    <path d="M0 0h40M0 30h40M10 0v30M30 0v30" stroke="#000" stroke-width="1" />
+    <text x="50" y="20" font-family="Arial" font-size="14" font-weight="normal" fill="#000">114</text>
+  </g>
+
+  <!-- Key annotation -->
+  <rect x="130" y="540" width="352" height="40" fill="none" stroke="#000" stroke-width="0.5" stroke-dasharray="2,2" />
+  <text x="306" y="560" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">Seamless transition: SNN continues processing without interruption.</text>
+  <text x="306" y="572" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">The control source changes; the computation continues.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+    </marker>
+  </defs>
+
   <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 1</text>
 </svg>

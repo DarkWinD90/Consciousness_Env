@@ -1,61 +1,89 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
-  <rect width="100%" height="100%" fill="#fff" />
-  <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 3 of 8</text>
-  
-  <!-- 300: SNN Architecture boundary -->
-  <rect x="80" y="145" width="470" height="380" rx="8" ry="8" fill="none" stroke="#000" stroke-width="2" />
-  <text x="535" y="165" font-family="Arial" font-size="14" font-weight="normal" fill="#000">300</text>
-  
-  <!-- 302: Input Layer -->
-  <g transform="translate(100 190)"><rect width="80" height="120" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="25" cy="45" r="8" fill="none" stroke="#000" /><circle cx="55" cy="45" r="8" fill="none" stroke="#000" /><circle cx="25" cy="75" r="8" fill="none" stroke="#000" /><circle cx="55" cy="75" r="8" fill="none" stroke="#000" /><text x="40" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">302</text></g>
-  
-  <!-- 304: Weight Matrix -->
-  <g transform="translate(200 190)"><rect width="90" height="120" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><path d="M10 35h70v70H10z" fill="none" stroke="#000" stroke-width="0.8" /><path stroke="#000" stroke-width="0.3" d="M10 52h70M10 70h70M10 88h70M27 35v70m18-70v70" /><text x="45" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">304</text></g>
-  
-  <!-- 306: Hidden Layer with 308 Neuron i -->
-  <g transform="translate(310 180)"><rect width="120" height="140" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="30" cy="50" r="12" stroke="#000" /><circle cx="65" cy="50" r="12" stroke="#000" /><circle cx="100" cy="50" r="12" stroke="#000" /><text x="65" y="55" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">i</text><text x="65" y="85" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">308</text><text x="60" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">306</text></g>
-  
-  <!-- 310: Output Aggregator -->
-  <g transform="translate(450 200)"><rect width="80" height="60" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><path d="M15 25l50 15-50 15z" fill="none" stroke="#000" stroke-width="1.2" /><text x="40" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">310</text></g>
-  
-  <!-- 312: Spike output arrow -->
-  <path d="M530 230h20" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
-  <text x="545" y="220" font-family="Arial" font-size="14" font-weight="normal" fill="#000">312</text>
-  
-  <!-- 314: Membrane Potential Graph -->
-  <g transform="translate(100 340)"><rect width="320" height="120" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3" />
-    <path d="M30 90h260M30 30v65" stroke="#000" stroke-width="1" />
-    <path d="M30 60 Q55 30, 80 60 T130 60 T180 60 T230 60 T280 60" fill="none" stroke="#000" stroke-width="2" />
-    <path d="M30 45 L280 80" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" />
-    <text x="145" y="110" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">time</text>
-    <text x="20" y="60" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">V</text>
-    <text x="160" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">314</text></g>
-  
-  <!-- Signal flow arrows -->
-  <path d="M180 250h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M290 250h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M430 250h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M370 320v30h-90" fill="none" stroke="#000" stroke-dasharray="3,2" marker-end="url(#arrow)" />
-  
-  <!-- 318: Output spike vector display -->
-  <rect x="80" y="545" width="470" height="75" rx="4" ry="4" fill="none" stroke="#000" />
-  <text x="545" y="565" font-family="Arial" font-size="14" font-weight="normal" fill="#000">318</text>
-  <!-- Spike vector visualization inside 318 -->
-  <rect x="100" y="560" width="15" height="40" fill="#000" />
-  <rect x="130" y="575" width="15" height="25" fill="#000" />
-  <rect x="160" y="565" width="15" height="35" fill="#000" />
-  <rect x="190" y="580" width="15" height="20" fill="#000" />
-  <rect x="220" y="555" width="15" height="45" fill="#000" />
-  <rect x="250" y="570" width="15" height="30" fill="#000" />
-  <rect x="280" y="560" width="15" height="40" fill="#000" />
-  <rect x="310" y="585" width="15" height="15" fill="#000" />
-  <rect x="340" y="565" width="15" height="35" fill="#000" />
-  <rect x="370" y="575" width="15" height="25" fill="#000" />
-  <text x="440" y="585" font-family="Arial" font-size="10" fill="#000">spike_vector[N]</text>
-  
-  <!-- Arrow from 310 to 318 -->
-  <path d="M490 260v295h-30" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
-  
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
-  <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 3</text>
+<rect width="100%%" height="100%%" fill="#fff" />
+<text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 3 of 8</text>
+<rect x="80" y="145" width="470" height="380" rx="8" ry="8" fill="none" stroke="#000" stroke-width="2" />
+<text x="535" y="165" font-family="Arial" font-size="14" fill="#000">300</text>
+<text x="305" y="135" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#000">SNN ARCHITECTURE (LIF Model)</text>
+<g transform="translate(100 190)">
+  <rect width="80" height="120" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="40" y="15" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">INPUT</text>
+  <text x="40" y="27" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">LAYER</text>
+  <circle cx="25" cy="55" r="8" fill="none" stroke="#000" />
+  <text x="25" y="58" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">ext</text>
+  <circle cx="55" cy="55" r="8" fill="none" stroke="#000" />
+  <text x="55" y="58" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">ref</text>
+  <circle cx="25" cy="85" r="8" fill="none" stroke="#000" />
+  <circle cx="55" cy="85" r="8" fill="none" stroke="#000" />
+  <text x="40" y="-10" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">302</text>
+</g>
+<g transform="translate(200 190)">
+  <rect width="90" height="120" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="45" y="15" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">WEIGHT</text>
+  <text x="45" y="27" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">MATRIX</text>
+  <path d="M10 40h70v65H10z" fill="none" stroke="#000" stroke-width="0.8" />
+  <path stroke="#000" stroke-width="0.3" d="M10 57h70M10 75h70M10 93h70M27 40v65m18-65v65m18-65v65" />
+  <text x="45" y="115" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">W[i,j]</text>
+  <text x="45" y="-10" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">304</text>
+</g>
+<g transform="translate(310 180)">
+  <rect width="120" height="140" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="60" y="18" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">HIDDEN LAYER</text>
+  <circle cx="30" cy="50" r="12" stroke="#000" />
+  <circle cx="60" cy="50" r="12" stroke="#000" />
+  <text x="60" y="54" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">i</text>
+  <circle cx="90" cy="50" r="12" stroke="#000" />
+  <text x="60" y="78" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">308</text>
+  <text x="60" y="95" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">V(t+1) = V(t) x leak + I</text>
+  <text x="60" y="105" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">If V &gt;= V_th: spike</text>
+  <text x="60" y="115" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">V_th = 0.5</text>
+  <text x="60" y="-10" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">306</text>
+</g>
+<g transform="translate(450 200)">
+  <rect width="80" height="60" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="40" y="18" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">OUTPUT</text>
+  <path d="M15 30l50 15-50 15z" fill="none" stroke="#000" stroke-width="1.2" />
+  <text x="40" y="-10" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">310</text>
+</g>
+<path d="M530 230h20" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
+<text x="545" y="220" font-family="Arial" font-size="14" fill="#000">312</text>
+<text x="555" y="235" font-family="Arial" font-size="7" fill="#000">spike</text>
+<g transform="translate(100 340)">
+  <rect width="320" height="120" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3" />
+  <text x="160" y="15" font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle" fill="#000">MEMBRANE POTENTIAL DYNAMICS</text>
+  <path d="M30 100h260M30 35v70" stroke="#000" stroke-width="1" />
+  <path d="M30 65 Q55 35, 80 65 T130 65 T180 65 T230 65 T280 65" fill="none" stroke="#000" stroke-width="2" />
+  <path d="M30 50h260" fill="none" stroke="#000" stroke-width="0.5" stroke-dasharray="2,2" />
+  <text x="295" y="53" font-family="Arial" font-size="6" fill="#000">V_th</text>
+  <text x="160" y="115" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">time (steps)</text>
+  <text x="15" y="65" font-family="Arial" font-size="8" fill="#000">V</text>
+  <text x="160" y="-10" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">314</text>
+</g>
+<path d="M180 315h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+<path d="M290 315h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+<path d="M430 260h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+<path d="M370 320v30h-90" fill="none" stroke="#000" stroke-dasharray="3,2" marker-end="url(#arrow)" />
+<rect x="80" y="485" width="190" height="75" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1" />
+<text x="175" y="500" font-family="Arial" font-size="9" font-weight="bold" text-anchor="middle" fill="#000">STDP LEARNING RULE</text>
+<text x="90" y="518" font-family="Arial" font-size="7" fill="#000">If post fires: W += A+ x pre_trace</text>
+<text x="90" y="530" font-family="Arial" font-size="7" fill="#000">If pre fires: W -= A- x post_trace</text>
+<text x="90" y="542" font-family="Arial" font-size="7" fill="#000">A- &gt; A+ (stability bias)</text>
+<text x="90" y="554" font-family="Arial" font-size="7" fill="#000">Weight bounds: [0.0, 0.5]</text>
+<text x="280" y="500" font-family="Arial" font-size="14" fill="#000">320</text>
+<rect x="80" y="575" width="470" height="65" rx="4" ry="4" fill="none" stroke="#000" />
+<text x="545" y="590" font-family="Arial" font-size="14" fill="#000">318</text>
+<text x="90" y="590" font-family="Arial" font-size="8" font-weight="bold" fill="#000">SPIKE VECTOR OUTPUT</text>
+<rect x="100" y="600" width="15" height="30" fill="#000" />
+<rect x="130" y="612" width="15" height="18" fill="#000" />
+<rect x="160" y="605" width="15" height="25" fill="#000" />
+<rect x="190" y="618" width="15" height="12" fill="#000" />
+<rect x="220" y="598" width="15" height="32" fill="#000" />
+<rect x="250" y="608" width="15" height="22" fill="#000" />
+<rect x="280" y="600" width="15" height="30" fill="#000" />
+<rect x="310" y="620" width="15" height="10" fill="#000" />
+<rect x="340" y="605" width="15" height="25" fill="#000" />
+<rect x="370" y="612" width="15" height="18" fill="#000" />
+<text x="460" y="618" font-family="Arial" font-size="8" fill="#000">spike_vector[N]</text>
+<path d="M490 260v310h-30" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+<defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
+<text x="306" y="700" font-family="Arial" font-size="18" text-anchor="middle" fill="#000">FIG. 3</text>
 </svg>

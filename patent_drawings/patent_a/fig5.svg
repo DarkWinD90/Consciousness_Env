@@ -1,9 +1,73 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
-  <rect width="100%" height="100%" fill="#fff" />
-  <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 5 of 8</text>
-  <g transform="translate(100 160)"><rect width="420" height="280" fill="none" stroke="#000" stroke-width="1.5" /><text x="440" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">500</text><path d="M0 0v280M0 140h420" stroke="#000" stroke-width="1.5" /><path d="M0 140q84-20 168-45 84-20 168-35 42-5 84-8" fill="none" stroke="#000" stroke-width="2" /><text x="425" y="60" font-family="Arial" font-size="14" font-weight="normal" fill="#000">502</text><path d="M0 115q84 20 168 45 84 30 168 65 42 20 84 35" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="8,4" /><text x="425" y="250" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</text><circle cx="168" cy="128" r="8" fill="none" stroke="#000" stroke-width="2" /><text x="180" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">506</text><text x="40" y="100" font-family="Arial" font-size="14" font-weight="normal" fill="#000">508</text><text x="336" y="200" font-family="Arial" font-size="14" font-weight="normal" fill="#000">510</text><rect x="126" y="0" width="84" height="280" fill="none" stroke="#000" stroke-dasharray="5,3" /><text x="215" y="20" font-family="Arial" font-size="14" font-weight="normal" fill="#000">512</text></g>
-  <g transform="translate(100 480)"><rect width="200" height="100" fill="none" stroke="#000" stroke-width="1.5" /><path d="M20 75h160M20 25v55" stroke="#000" stroke-width="1" /><path d="M20 70l40-10 40-15 40-10 40-20" fill="none" stroke="#000" stroke-width="1.5" /><text x="220" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">514</text></g>
-  <g transform="translate(340 480)"><rect width="200" height="100" fill="#fff" stroke="#000" stroke-width="1.5" /><rect x="15" y="40" width="45" height="25" stroke="#000" /><rect x="80" y="40" width="45" height="25" stroke="#000" /><rect x="145" y="40" width="45" height="25" stroke="#000" /><path d="M60 52h20M125 52h20" stroke="#000" marker-end="url(#arrow)" /><path d="M167 65v20H37V65" fill="none" stroke="#000" stroke-dasharray="4,2" /><text x="210" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">516</text></g>
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
-  <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 5</text>
+<rect width="100%%" height="100%%" fill="#fff" />
+<text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 5 of 8</text>
+<text x="306" y="80" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle" fill="#000">ACTIVITY-DEPENDENT ENERGY DYNAMICS</text>
+<g transform="translate(100 130)">
+  <rect width="420" height="280" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="440" y="15" font-family="Arial" font-size="14" fill="#000">500</text>
+  <path d="M0 0v280M0 140h420" stroke="#000" stroke-width="1.5" />
+  <text x="-40" y="145" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">Energy</text>
+  <text x="-40" y="157" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">(mWh)</text>
+  <text x="210" y="295" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">Neural Activity (Spikes/Step)</text>
+  <text x="0" y="-5" font-family="Arial" font-size="7" fill="#000">0</text>
+  <text x="84" y="-5" font-family="Arial" font-size="7" fill="#000">10</text>
+  <text x="168" y="-5" font-family="Arial" font-size="7" fill="#000">20</text>
+  <text x="252" y="-5" font-family="Arial" font-size="7" fill="#000">30</text>
+  <text x="336" y="-5" font-family="Arial" font-size="7" fill="#000">40</text>
+  <text x="410" y="-5" font-family="Arial" font-size="7" fill="#000">50</text>
+  <text x="-10" y="145" font-family="Arial" font-size="7" text-anchor="end" fill="#000">0</text>
+  <text x="-10" y="72" font-family="Arial" font-size="7" text-anchor="end" fill="#000">2</text>
+  <text x="-10" y="5" font-family="Arial" font-size="7" text-anchor="end" fill="#000">4</text>
+  <text x="-10" y="210" font-family="Arial" font-size="7" text-anchor="end" fill="#000">-2</text>
+  <path d="M0 130q84-15 168-35 84-15 168-25 42-5 84-8" fill="none" stroke="#000" stroke-width="2" />
+  <text x="425" y="55" font-family="Arial" font-size="14" fill="#000">502</text>
+  <text x="380" y="40" font-family="Arial" font-size="8" fill="#000">HARVEST</text>
+  <path d="M0 125q84 15 168 35 84 25 168 55 42 18 84 30" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="8,4" />
+  <text x="425" y="235" font-family="Arial" font-size="14" fill="#000">504</text>
+  <text x="380" y="250" font-family="Arial" font-size="8" fill="#000">COST</text>
+  <circle cx="14" cy="127" r="8" fill="none" stroke="#000" stroke-width="2" />
+  <text x="25" y="118" font-family="Arial" font-size="14" fill="#000">506</text>
+  <text x="35" y="130" font-family="Arial" font-size="6" fill="#000">Crossover</text>
+  <text x="35" y="140" font-family="Arial" font-size="6" fill="#000">(0.3 spikes)</text>
+  <rect x="100" y="5" width="250" height="120" fill="none" stroke="#000" stroke-width="0.5" stroke-dasharray="3,2" />
+  <text x="225" y="25" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">NET POSITIVE REGION</text>
+  <text x="225" y="40" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">Harvest &gt; Cost</text>
+  <text x="365" y="25" font-family="Arial" font-size="14" fill="#000">512</text>
+  <text x="40" y="95" font-family="Arial" font-size="14" fill="#000">508</text>
+  <text x="15" y="80" font-family="Arial" font-size="6" fill="#000">Quiescent</text>
+  <text x="15" y="90" font-family="Arial" font-size="6" fill="#000">Drain Zone</text>
+  <text x="336" y="180" font-family="Arial" font-size="14" fill="#000">510</text>
+  <text x="290" y="195" font-family="Arial" font-size="6" fill="#000">Sweet Spot</text>
+  <text x="290" y="205" font-family="Arial" font-size="6" fill="#000">Region</text>
+</g>
+<g transform="translate(100 450)">
+  <rect width="200" height="100" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="100" y="15" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">ENERGY TRAJECTORY</text>
+  <path d="M20 85h160M20 25v65" stroke="#000" stroke-width="1" />
+  <path d="M20 50l40-5 40-8 40-5 40-10" fill="none" stroke="#000" stroke-width="1.5" />
+  <text x="100" y="95" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">steps</text>
+  <text x="10" y="50" font-family="Arial" font-size="7" fill="#000">E</text>
+  <text x="220" y="15" font-family="Arial" font-size="14" fill="#000">514</text>
+</g>
+<g transform="translate(340 450)">
+  <rect width="200" height="100" fill="#fff" stroke="#000" stroke-width="1.5" />
+  <text x="100" y="15" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">ACTIVITY STATE PIPELINE</text>
+  <rect x="15" y="40" width="45" height="25" stroke="#000" />
+  <text x="37" y="57" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">MEASURE</text>
+  <rect x="80" y="40" width="45" height="25" stroke="#000" />
+  <text x="102" y="57" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">COMPUTE</text>
+  <rect x="145" y="40" width="45" height="25" stroke="#000" />
+  <text x="167" y="57" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">ADJUST</text>
+  <path d="M60 52h20M125 52h20" stroke="#000" marker-end="url(#arrow)" />
+  <path d="M167 65v20H37V65" fill="none" stroke="#000" stroke-dasharray="4,2" />
+  <text x="100" y="95" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">feedback loop</text>
+  <text x="210" y="15" font-family="Arial" font-size="14" fill="#000">516</text>
+</g>
+<rect x="100" y="570" width="420" height="80" fill="none" stroke="#000" stroke-width="1" />
+<text x="120" y="590" font-family="Arial" font-size="9" font-weight="bold" fill="#000">ENERGY FORMULAS:</text>
+<text x="120" y="608" font-family="Arial" font-size="8" fill="#000">Harvest = 0.20 + (0.09 x spikes) mWh/step</text>
+<text x="120" y="623" font-family="Arial" font-size="8" fill="#000">Cost = 0.225 + (0.006 x s) + (0.0003 x s^2) mWh/step</text>
+<text x="120" y="638" font-family="Arial" font-size="8" fill="#000">Net Energy = Harvest - Cost (positive above crossover)</text>
+<defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
+<text x="306" y="700" font-family="Arial" font-size="18" text-anchor="middle" fill="#000">FIG. 5</text>
 </svg>
