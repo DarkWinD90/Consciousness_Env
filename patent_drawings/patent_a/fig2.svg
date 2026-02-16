@@ -7,7 +7,7 @@
   <ns0:text x="480" y="330" font-family="Arial" font-size="14" font-weight="normal" fill="#000">202</ns0:text>
   <ns0:path d="M100 300h380" stroke="#000" stroke-width="0.8" stroke-dasharray="2,2" />
   <ns0:text x="80" y="305" font-family="Arial" font-size="12" fill="#000">0</ns0:text>
-  <ns0:text x="60" y="300" font-family="Arial" font-size="14" font-weight="normal" fill="#000">208</ns0:text>
+  <ns0:text x="75" y="300" font-family="Arial" font-size="14" font-weight="normal" fill="#000">208</ns0:text>
   <ns0:path d="M100 300 Q 200 280, 480 180" fill="none" stroke="#000" stroke-width="2.5" />
   <ns0:text x="440" y="160" font-family="Arial" font-size="14" font-weight="normal" fill="#000">204</ns0:text>
   <ns0:text x="500" y="180" font-family="Arial" font-size="12" fill="#000">210</ns0:text>

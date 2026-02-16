@@ -490,3 +490,13 @@ GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
 - No frames or borders around drawing area
 - All text in figures must be at least 1/8 inch (3.2 mm) high
 - Reference numerals must be used consistently across all figures
+
+---
+FIG. 5 Additional Reference Numerals
+---
+
+516 Activity State Pipeline. A visual representation of the activity-dependent
+    energy management process, showing three processing stages connected by
+    directional arrows. Each stage represents a discrete processing step in
+    the quadratic energy cost calculation, with a feedback loop (dashed line)
+    connecting the output back to the input for iterative refinement.

@@ -323,3 +323,25 @@ GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
 - No frames or borders around drawing area
 - All text in figures must be at least 1/8 inch (3.2 mm) high
 - Reference numerals must be used consistently across all figures
+
+---
+FIG. 2 Additional Reference Numerals
+---
+
+212 Current Processing Point. A vertical dashed line indicating the current
+    processing position along the reflection coefficient spectrum 200. This
+    marker shows the instantaneous position of the dynamic reflection
+    coefficient as it is modulated between 0.0 (no self-observation) and 1.0
+    (maximum self-observation). The dashed style indicates the dynamic,
+    time-varying nature of the marker position.
+
+---
+FIG. 5 Additional Reference Numerals
+---
+
+508 Optional Extension Zone. A dashed rectangular boundary indicating an
+    optional expansion area for the energy-aware self-observation regulation
+    system. This zone represents potential additional processing modules or
+    future enhancements that may be incorporated without modifying the core
+    self-observation architecture. The dashed style indicates the optional
+    or extensible nature of this zone.

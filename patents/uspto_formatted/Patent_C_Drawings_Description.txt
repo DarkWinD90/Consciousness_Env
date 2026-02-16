@@ -352,3 +352,14 @@ GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
 - No frames or borders around drawing area
 - All text in figures must be at least 1/8 inch (3.2 mm) high
 - Reference numerals must be used consistently across all figures
+
+---
+FIG. 2 Additional Reference Numerals
+---
+
+216 State Legend Box. A rectangular boundary containing state transition
+    annotations and legend information for the state transition diagram.
+    This box provides clarifying text that explains the meaning of the
+    various states (Connected 200, Fallback 202, Recovery 204) and the
+    conditions that trigger transitions between them (heartbeat timeout,
+    resync complete, crash recovery, etc.).

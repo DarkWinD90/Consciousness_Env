@@ -11,7 +11,10 @@
   <ns0:text x="210" y="410" font-family="Arial" font-size="14" font-weight="normal" fill="#000">104</ns0:text>
   <ns0:rect x="322" y="340" width="160" height="50" rx="5" fill="none" stroke="#000" stroke-width="2" />
   <ns0:text x="402" y="410" font-family="Arial" font-size="14" font-weight="normal" fill="#000">106</ns0:text>
-  <ns0:g transform="translate(180 480)"><ns0:rect width="252" height="60" rx="5" fill="none" stroke="#000" stroke-width="1.5" /><ns0:circle cx="30" cy="30" r="4" stroke="#000" /><ns0:circle cx="60" cy="30" r="4" stroke="#000" /><ns0:circle cx="220" cy="30" r="4" stroke="#000" /><ns0:path d="M90 30h110" stroke="#000" stroke-dasharray="2,2" /><ns0:text x="126" y="85" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">112</ns0:text></ns0:g>
+  <ns0:g transform="translate(180 480)"><ns0:rect width="252" height="60" rx="5" fill="none" stroke="#000" stroke-width="1.5" /><ns0:circle cx="30" cy="30" r="4" stroke="#000" /><ns0:circle cx="60" cy="30" r="4" stroke="#000" /><ns0:circle cx="220" cy="30" r="4" stroke="#000" /><ns0:path d="M90 30h110" stroke="#000" stroke-dasharray="2,2" /><ns0:text x="70" y="85" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">112</ns0:text>
+    <!-- 114: Energy harvester symbol inside SNN block -->
+    <ns0:path d="M170 15h40M170 45h40M180 15v30M200 15v30" stroke="#000" stroke-width="1" />
+    <ns0:text x="190" y="85" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">114</ns0:text></ns0:g>
   <ns0:path d="M480 440c0-10 15-10 15 0v40c0 10-15 10-15 0z" fill="none" stroke="#000" stroke-width="1.5" />
   <ns0:text x="510" y="465" font-family="Arial" font-size="14" font-weight="normal" fill="#000">110</ns0:text>
   <ns0:path d="M306 160v20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
@@ -19,7 +22,11 @@
   <ns0:path d="M291 300h-81v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <ns0:path d="M321 300h81v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <ns0:path d="M210 390v90" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <ns0:path d="M402 390v90" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)" />
+  <ns0:path d="M402 390v30" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)" />
+  <!-- 108: Step buffer -->
+  <ns0:rect x="372" y="420" width="60" height="25" rx="3" fill="none" stroke="#000" stroke-width="1" />
+  <ns0:text x="440" y="438" font-family="Arial" font-size="14" font-weight="normal" fill="#000">108</ns0:text>
+  <ns0:path d="M402 445v35" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" />
   <ns0:defs><ns0:marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><ns0:polygon points="0 0, 10 3.5, 0 7" fill="#000" /></ns0:marker></ns0:defs>
   <ns0:text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 1</ns0:text>
 </ns0:svg>
