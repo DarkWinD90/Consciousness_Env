@@ -20,7 +20,7 @@
     <circle cx="220" cy="30" r="4" stroke="#000" />
     <path d="M90 30h110" stroke="#000" stroke-dasharray="2,2" />
     <text x="126" y="50" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">N LIF neurons</text>
-    <text x="126" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">104</text>
+    <text x="260" y="-10" font-family="Arial" font-size="14" font-weight="normal" fill="#000">104</text>
   </g>
 
   <!-- 106: Spike Output S(t) -->

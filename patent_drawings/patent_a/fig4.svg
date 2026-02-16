@@ -13,7 +13,7 @@
   <g transform="translate(200 180)"><path d="M0 15q8-15 16 0t16 0 16 0 16 0" fill="none" stroke="#000" stroke-width="1.5" /><text x="70" y="10" font-family="Arial" font-size="14" font-weight="normal" fill="#000">404</text></g>
   
   <!-- 406: Inductor (LC resonance) -->
-  <g transform="translate(200 260)"><rect width="120" height="45" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><path d="M20 22 Q35 10, 50 22 Q65 34, 80 22 Q95 10, 100 22" fill="none" stroke="#000" stroke-width="1.5" /><text x="130" y="30" font-family="Arial" font-size="14" font-weight="normal" fill="#000">406</text></g>
+  <g transform="translate(200 260)"><rect width="120" height="45" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><path d="M20 22 Q35 10, 50 22 Q65 34, 80 22 Q95 10, 100 22" fill="none" stroke="#000" stroke-width="1.5" /><text x="130" y="60" font-family="Arial" font-size="14" font-weight="normal" fill="#000">406</text></g>
   
   <!-- 408: Rectifier (diamond) -->
   <g transform="translate(350 175)"><path fill="none" stroke="#000" stroke-width="1.5" d="m25 0 25 25-25 25-25-25z" /><text x="60" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">408</text></g>

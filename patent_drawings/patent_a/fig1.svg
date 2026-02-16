@@ -26,19 +26,19 @@
     <text x="40" y="20" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">MOTOR</text>
     <path d="M20 40c0-20 40-20 40 0" fill="none" stroke="#000" stroke-width="1.2" />
     <path d="M55 35l5 5-5 5" fill="none" stroke="#000" stroke-width="1.2" />
-    <text x="40" y="75" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">106</text>
+    <text x="85" y="30" font-family="Arial" font-size="14" fill="#000">106</text>
   </g>
   <g transform="translate(90 280)">
     <rect width="80" height="50" fill="none" stroke="#000" stroke-width="1.5" />
     <text x="40" y="20" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">POWER</text>
     <text x="40" y="32" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">MGT</text>
-    <text x="40" y="70" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">108</text>
+    <text x="90" y="25" font-family="Arial" font-size="14" fill="#000">108</text>
   </g>
   <g transform="translate(200 280)">
     <rect width="60" height="40" fill="none" stroke="#000" stroke-width="1.5" />
     <text x="30" y="15" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">THERMAL</text>
     <circle cx="30" cy="28" r="8" stroke="#000" />
-    <text x="30" y="60" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">110</text>
+    <text x="70" y="20" font-family="Arial" font-size="14" fill="#000">110</text>
   </g>
   <g transform="translate(320 280)">
     <circle cx="25" cy="25" r="22" fill="none" stroke="#000" stroke-width="1.5" />
@@ -82,8 +82,8 @@
   <path d="M260 430h65" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
   <path d="M420 305h-55" stroke="#000" stroke-width="1" stroke-dasharray="3,2" fill="none" marker-end="url(#arrow)" />
   <path d="M200 430h-60v-145h90" stroke="#000" stroke-width="1.5" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)" />
-  <text x="115" y="375" font-family="Arial" font-size="14" fill="#000">120</text>
-  <text x="100" y="390" font-family="Arial" font-size="6" fill="#000">reflection</text>
+  <text x="80" y="460" font-family="Arial" font-size="14" fill="#000">120</text>
+  <text x="80" y="475" font-family="Arial" font-size="6" fill="#000">reflection</text>
   <rect x="70" y="620" width="470" height="55" fill="none" stroke="#000" stroke-width="0.5" />
   <text x="85" y="635" font-family="Arial" font-size="8" font-weight="bold" fill="#000">SIGNAL PATHWAYS:</text>
   <path d="M85 648h40" stroke="#000" stroke-width="1.2" />

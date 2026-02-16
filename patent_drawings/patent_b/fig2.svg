@@ -46,7 +46,7 @@
   <!-- 212: Current processing point (vertical dashed line) -->
   <path d="M220 150v60" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
   <text x="220" y="115" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">Default: 0.2</text>
-  <text x="240" y="200" font-family="Arial" font-size="14" font-weight="normal" fill="#000">212</text>
+  <text x="275" y="240" font-family="Arial" font-size="14" font-weight="normal" fill="#000">212</text>
 
   <!-- Legend box -->
   <rect x="100" y="400" width="412" height="80" fill="none" stroke="#000" stroke-width="1" />

@@ -25,7 +25,7 @@
   <text x="200" y="290" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#000">504: ENERGY DELTA</text>
   <text x="140" y="310" font-family="Arial" font-size="9" fill="#000">energy_start: [float]</text>
   <text x="140" y="325" font-family="Arial" font-size="9" fill="#000">energy_end: [float]</text>
-  <text x="290" y="310" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</text>
+  <text x="290" y="350" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</text>
 
   <!-- Annotation arrow from 504 -->
   <path d="M280 310h60" stroke="#000" stroke-width="1" marker-end="url(#arrow)" />

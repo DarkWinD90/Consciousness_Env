@@ -24,7 +24,7 @@
   <g transform="translate(440 175)"><rect width="80" height="55" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><path d="M12 28h23a10 10 0 1 1 0-10H22" fill="none" stroke="#000" marker-end="url(#arrow)" /><text x="40" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">810</text></g>
   
   
-  <g transform="translate(100 270)"><rect width="90" height="50" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="30" cy="25" r="12" stroke="#000" /><text x="30" y="29" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">T</text><text x="40" y="-5" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">812</text></g>
+  <g transform="translate(100 270)"><rect width="90" height="50" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="30" cy="25" r="12" stroke="#000" /><text x="30" y="29" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">T</text><text x="95" y="65" font-family="Arial" font-size="14" font-weight="normal" fill="#000">812</text></g>
   
   
   <g transform="translate(250 270)"><rect width="45" height="30" rx="2" ry="2" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="12" cy="15" r="7" stroke="#000" /><text x="55" y="12" font-family="Arial" font-size="14" font-weight="normal" fill="#000">814</text></g>
@@ -33,7 +33,7 @@
   <g transform="translate(360 270)"><circle cx="22" cy="22" r="20" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="22" cy="22" r="10" stroke="#000" /><text x="48" y="10" font-family="Arial" font-size="14" font-weight="normal" fill="#000">816</text></g>
   
   
-  <g transform="translate(450 270)"><rect x="0" y="0" width="40" height="45" fill="none" stroke="#000" stroke-width="1.5" /><path d="M12 0v45M28 0v45" stroke="#000" stroke-width="1.5" /><text x="50" y="20" font-family="Arial" font-size="14" font-weight="normal" fill="#000">818</text></g>
+  <g transform="translate(450 270)"><rect x="0" y="0" width="40" height="45" fill="none" stroke="#000" stroke-width="1.5" /><path d="M12 0v45M28 0v45" stroke="#000" stroke-width="1.5" /><text x="50" y="60" font-family="Arial" font-size="14" font-weight="normal" fill="#000">818</text></g>
   
   
   <g transform="translate(100 420)"><rect width="120" height="50" rx="4" ry="4" fill="none" stroke="#000" stroke-dasharray="5,3" /><text x="20" y="25" font-family="Arial" font-size="9" fill="#000">Reflection</text><text x="20" y="38" font-family="Arial" font-size="9" fill="#000">r(t) = y(t-1)</text><text x="130" y="20" font-family="Arial" font-size="14" font-weight="normal" fill="#000">820</text></g>
