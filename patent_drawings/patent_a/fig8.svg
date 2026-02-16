@@ -1,34 +1,76 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
   <rect width="100%" height="100%" fill="#fff" />
   <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 8 of 8</text>
+  
+  <!-- 800: System boundary -->
   <rect x="80" y="140" width="470" height="475" rx="10" ry="10" fill="none" stroke="#000" stroke-width="2" stroke-dasharray="10,5" />
   <text x="535" y="155" font-family="Arial" font-size="14" font-weight="normal" fill="#000">800</text>
+  
+  <!-- 802: External input -->
   <g transform="translate(95 95)"><path stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" d="M50 5v40" /><text x="105" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">802</text></g>
+  
+  <!-- 804: Input processing -->
   <g transform="translate(100 175)"><rect width="90" height="55" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="25" cy="28" r="10" stroke="#000" /><circle cx="65" cy="28" r="10" stroke="#000" /><text x="95" y="12" font-family="Arial" font-size="14" font-weight="normal" fill="#000">804</text></g>
+  
+  <!-- 806: Cognitive modulation cloud -->
   <path d="M220 193c-7 0-10 7-7 14-3 3 0 10 7 10h65c7 0 10-7 7-10 3-7 0-14-7-14" fill="none" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" />
+  <text x="240" y="210" font-family="Arial" font-size="9" fill="#000">mod</text>
   <text x="210" y="185" font-family="Arial" font-size="14" font-weight="normal" fill="#000">806</text>
-  <g transform="translate(320 175)"><rect width="100%" height="55" rx="3" ry="3" fill="none" stroke="#000" stroke-width="2" /><circle cx="20" cy="20" r="4" stroke="#000" /><circle cx="50" cy="15" r="4" stroke="#000" /><circle cx="80" cy="22" r="4" stroke="#000" /><text x="105" y="12" font-family="Arial" font-size="14" font-weight="normal" fill="#000">808</text></g>
-  <g transform="translate(440 175)"><rect width="80" height="55" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><path d="M12 28h23a10 10 0 1 1 0-10H22" fill="none" stroke="#000" marker-end="url(#arrow)" /><text x="40" y="-17" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">810</text></g>
-  <g transform="translate(100 270)"><rect width="90" height="50" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="30" cy="25" r="12" stroke="#000" /><text x="40" y="-5" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">812</text></g>
-  <g transform="translate(250 270)"><rect width="45" height="30" rx="2" ry="2" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="12" cy="20" r="7" stroke="#000" /><text x="55" y="12" font-family="Arial" font-size="14" font-weight="normal" fill="#000">814</text></g>
-  <g transform="translate(360 270)"><circle cx="22" cy="22" r="20" fill="none" stroke="#000" stroke-width="1.5" /><text x="48" y="10" font-family="Arial" font-size="14" font-weight="normal" fill="#000">816</text></g>
-  <g transform="translate(450 270)"><rect x="0" y="0" width="40" height="45" fill="none" stroke="#000" stroke-width="1.5" /><path d="M12 0v45M28 0v45" stroke="#000" stroke-width="1.5" /><text x="42" y="10" font-family="Arial" font-size="14" font-weight="normal" fill="#000">818</text></g>
-  <g transform="translate(100 420)"><rect width="90" height="40" rx="4" ry="4" fill="none" stroke="#000" stroke-dasharray="5,3" /><text x="95" y="12" font-family="Arial" font-size="14" font-weight="normal" fill="#000">820</text></g>
-  <!-- Main signal flow: left to right -->
+  
+  <!-- 808: SNN core -->
+  <g transform="translate(320 175)"><rect width="100" height="55" rx="3" ry="3" fill="none" stroke="#000" stroke-width="2" /><circle cx="20" cy="20" r="4" stroke="#000" /><circle cx="50" cy="15" r="4" stroke="#000" /><circle cx="80" cy="22" r="4" stroke="#000" /><path d="M24 20l22-5M54 15l22 7" stroke="#000" stroke-width="0.8" /><text x="105" y="12" font-family="Arial" font-size="14" font-weight="normal" fill="#000">808</text></g>
+  
+  <!-- 810: Motor output -->
+  <g transform="translate(440 175)"><rect width="80" height="55" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><path d="M12 28h23a10 10 0 1 1 0-10H22" fill="none" stroke="#000" marker-end="url(#arrow)" /><text x="40" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">810</text></g>
+  
+  <!-- 812: Thermal component -->
+  <g transform="translate(100 270)"><rect width="90" height="50" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="30" cy="25" r="12" stroke="#000" /><text x="30" y="29" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">T</text><text x="40" y="-5" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">812</text></g>
+  
+  <!-- 814: Sensor -->
+  <g transform="translate(250 270)"><rect width="45" height="30" rx="2" ry="2" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="12" cy="15" r="7" stroke="#000" /><text x="55" y="12" font-family="Arial" font-size="14" font-weight="normal" fill="#000">814</text></g>
+  
+  <!-- 816: Harvester -->
+  <g transform="translate(360 270)"><circle cx="22" cy="22" r="20" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="22" cy="22" r="10" stroke="#000" /><text x="48" y="10" font-family="Arial" font-size="14" font-weight="normal" fill="#000">816</text></g>
+  
+  <!-- 818: Storage -->
+  <g transform="translate(450 270)"><rect x="0" y="0" width="40" height="45" fill="none" stroke="#000" stroke-width="1.5" /><path d="M12 0v45M28 0v45" stroke="#000" stroke-width="1.5" /><text x="50" y="20" font-family="Arial" font-size="14" font-weight="normal" fill="#000">818</text></g>
+  
+  <!-- 820: Reflection feedback with content -->
+  <g transform="translate(100 420)"><rect width="120" height="50" rx="4" ry="4" fill="none" stroke="#000" stroke-dasharray="5,3" /><text x="20" y="25" font-family="Arial" font-size="9" fill="#000">Reflection</text><text x="20" y="38" font-family="Arial" font-size="9" fill="#000">r(t) = y(t-1)</text><text x="130" y="20" font-family="Arial" font-size="14" font-weight="normal" fill="#000">820</text></g>
+  
+  <!-- Arrow marker -->
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
+  
+  <!-- SIGNAL FLOW ARROWS -->
+  <!-- Row 1 horizontal flow -->
   <path d="M190 203h30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M285 203h35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M285 210h35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <path d="M420 203h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- Vertical flow to second row -->
+  
+  <!-- 806 modulation into 808 -->
+  <path d="M255 217v-15h65" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
+  
+  <!-- Vertical flow to Row 2 -->
   <path d="M145 230v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <path d="M370 230v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- Second row horizontal flow -->
+  <path d="M480 230v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  
+  <!-- Row 2 horizontal flow -->
   <path d="M190 295h60" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M295 290h65" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M295 285h65" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <path d="M400 290h50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- Feedback loop (dashed) -->
-  <path d="M470 330h60v280H95v-80" stroke="#000" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)" fill="none" />
-  <!-- Upward feedback to 820 -->
-  <path d="M145 420v-40" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" />
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
+  
+  <!-- 818 → 804: Power sustaining loop (dashed) -->
+  <path d="M490 290h40v320H95v-120" stroke="#000" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)" fill="none" />
+  
+  <!-- 820 → 808: Reflection feedback to SNN -->
+  <path d="M160 420v-190h160" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
+  
+  <!-- 812 → 820: Thermal to reflection -->
+  <path d="M145 320v100" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  
+  <!-- 810 → 816: Motor to harvester -->
+  <path d="M480 230h50v80h-90" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
+  
   <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 8</text>
 </svg>
