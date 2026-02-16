@@ -1,72 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
-  <defs>
-    <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
-      <polygon points="0 0, 6 2, 0 4" fill="black" />
-    </marker>
-  </defs>
-  <rect width="100%" height="100%" fill="white" />
-  <text x="425.0" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">3/8</text>
-  <g transform="translate(0, 50)">
-    <text x="425" y="138" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Single LIF Neuron Detail</text>
-    <text x="135" y="255" font-family="Courier New, monospace" font-size="14">I_external</text>
-    <text x="100" y="255" font-family="Arial, sans-serif" font-size="14" >302</text>
-    <line x1="135" y1="272" x2="213" y2="295" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <text x="135" y="365" font-family="Courier New, monospace" font-size="14">I_reflection</text>
-    <text x="100" y="365" font-family="Arial, sans-serif" font-size="14" >304</text>
-    <line x1="135" y1="348" x2="214" y2="307" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <circle cx="228" cy="300" r="16" fill="none" stroke="black" stroke-width="1.5"/>
-    <text x="228" y="305" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">+</text>
-    <text x="228" y="335" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">306</text>
-    <line x1="244" y1="300" x2="340" y2="300" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <circle cx="430" cy="300" r="90" fill="none" stroke="black" stroke-width="2.5"/>
-    <text x="430" y="270" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Neuron i</text>
-    <text x="430" y="298" font-family="Courier New, monospace" font-size="14" text-anchor="middle">V(t+1) = V(t) x leak</text>
-    <text x="430" y="318" font-family="Courier New, monospace" font-size="14" text-anchor="middle">+ I x dt</text>
-    <text x="430" y="358" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">308</text>
-    <line x1="356" y1="250" x2="505" y2="250" stroke="black" stroke-width="1" stroke-dasharray="5,3"/>
-    <text x="515" y="255" font-family="Courier New, monospace" font-size="14">V_th = 0.5</text>
-    <text x="615" y="258" font-family="Arial, sans-serif" font-size="14" text-anchor="start">310</text>
-    <line x1="520" y1="300" x2="690" y2="300" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <text x="545" y="280" font-family="Courier New, monospace" font-size="14">spike</text>
-    <text x="545" y="325" font-family="Courier New, monospace" font-size="14">(0 or 1)</text>
-    <text x="700" y="288" font-family="Arial, sans-serif" font-size="14" text-anchor="start">312</text>
-    <text x="430" y="418" font-family="Courier New, monospace" font-size="14" text-anchor="middle">If V &gt;= threshold: spike, V = 0</text>
-    <text x="430" y="438" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Refractory period: 2 steps</text>
-    <line x1="200" y1="460" x2="700" y2="460" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
-    <text x="425" y="495" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Network Topology</text>
-    <text x="130" y="598" font-family="Arial, sans-serif" font-size="14" text-anchor="end">314</text>
-    <circle cx="210" cy="580" r="22" fill="none" stroke="black" stroke-width="2"/>
-    <text x="210" y="585" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">1</text>
-    <circle cx="310" cy="580" r="22" fill="none" stroke="black" stroke-width="2"/>
-    <text x="310" y="585" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">2</text>
-    <circle cx="410" cy="580" r="22" fill="none" stroke="black" stroke-width="2"/>
-    <text x="410" y="585" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">3</text>
-    <circle cx="580" cy="580" r="22" fill="none" stroke="black" stroke-width="2"/>
-    <text x="580" y="585" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">N</text>
-    <text x="495" y="585" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">. . .</text>
-    <path d="M210,558 Q260,520 310,558" fill="none" stroke="black" stroke-width="1"/>
-    <path d="M210,558 Q310,485 410,558" fill="none" stroke="black" stroke-width="1"/>
-    <path d="M310,558 Q445,470 580,558" fill="none" stroke="black" stroke-width="1"/>
-    <path d="M410,558 Q495,520 580,558" fill="none" stroke="black" stroke-width="1"/>
-    <text x="260" y="505" font-family="Courier New, monospace" font-size="14" text-anchor="middle">W[i,j]</text>
-    <text x="300" y="505" font-family="Arial, sans-serif" font-size="14" text-anchor="start">316</text>
-    <path d="M302,602 C290,635 330,635 318,602" fill="none" stroke="black" stroke-width="1"/>
-    <line x1="300" y1="610" x2="320" y2="630" stroke="black" stroke-width="2"/>
-    <line x1="320" y1="610" x2="300" y2="630" stroke="black" stroke-width="2"/>
-    <line x1="130" y1="580" x2="188" y2="580" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <text x="130" y="565" font-family="Courier New, monospace" font-size="14" text-anchor="middle">adjusted_input</text>
-    <line x1="602" y1="580" x2="695" y2="580" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <text x="620" y="565" font-family="Courier New, monospace" font-size="14">spike_vector</text>
-    <text x="700" y="598" font-family="Arial, sans-serif" font-size="14" text-anchor="start">318</text>
-    <text x="425" y="660" font-family="Courier New, monospace" font-size="14" text-anchor="middle">W[i,i] = 0 (no self-connections)</text>
-    <text x="425" y="682" font-family="Courier New, monospace" font-size="14" text-anchor="middle">N = 50 (operational), N = 20 (control)</text>
-    <rect x="155" y="715" width="540" height="100" rx="8" fill="none" stroke="black" stroke-width="1.5"/>
-    <text x="425" y="737" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">STDP Learning Rule</text>
-    <text x="685" y="755" font-family="Arial, sans-serif" font-size="14" text-anchor="end">320</text>
-    <text x="170" y="761" font-family="Courier New, monospace" font-size="14">Post fires: W += A+ x pre_trace (LTP)</text>
-    <text x="170" y="781" font-family="Courier New, monospace" font-size="14">Pre fires:  W -= A- x post_trace (LTD)</text>
-    <text x="170" y="803" font-family="Courier New, monospace" font-size="14">A- &gt; A+ (stability bias)</text>
-    <text x="425" y="910" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 3</text>
-  </g>
-</svg>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
+  <ns0:rect width="100%" height="100%" fill="#fff" />
+  <ns0:text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 3 of 8</ns0:text>
+  <ns0:rect x="80" y="145" width="470" height="380" rx="8" ry="8" fill="none" stroke="#000" stroke-width="2" />
+  <ns0:text x="535" y="165" font-family="Arial" font-size="14" font-weight="normal" fill="#000">300</ns0:text>
+  <ns0:g transform="translate(100 190)"><ns0:rect width="80" height="120" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><ns0:circle cx="25" cy="45" r="8" fill="none" stroke="#000" /><ns0:circle cx="55" cy="45" r="8" fill="none" stroke="#000" /><ns0:circle cx="25" cy="75" r="8" fill="none" stroke="#000" /><ns0:circle cx="55" cy="75" r="8" fill="none" stroke="#000" /><ns0:text x="40" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">302</ns0:text></ns0:g>
+  <ns0:g transform="translate(200 190)"><ns0:rect width="90" height="120" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><ns0:path d="M10 35h70v70H10z" fill="none" stroke="#000" stroke-width="0.8" /><ns0:path stroke="#000" stroke-width="0.3" d="M10 52h70M10 70h70M10 88h70M27 35v70m18-70v70" /><ns0:text x="45" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">304</ns0:text></ns0:g>
+  <ns0:g transform="translate(310 180)"><ns0:rect width="120" height="140" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><ns0:circle cx="30" cy="50" r="12" stroke="#000" /><ns0:circle cx="65" cy="50" r="12" stroke="#000" /><ns0:circle cx="100" cy="50" r="12" stroke="#000" /><ns0:text x="60" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">306</ns0:text></ns0:g>
+  <ns0:g transform="translate(450 200)"><ns0:rect width="80" height="60" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><ns0:path d="M15 25l50 15-50 15z" fill="none" stroke="#000" stroke-width="1.2" /><ns0:text x="40" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">310</ns0:text></ns0:g>
+  <ns0:g transform="translate(100 340)"><ns0:rect width="180" height="80" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3" /><ns0:path d="M20 55h60M50 35v40" stroke="#000" stroke-width="0.8" /><ns0:path d="M50 55q10-15 25-2m-25 2q-10 15-25 2" fill="none" stroke="#000" stroke-width="1" /><ns0:text x="90" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">314</ns0:text></ns0:g>
+  <ns0:path d="M180 235h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <ns0:path d="M290 250h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <ns0:path d="M430 250l20-20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <ns0:path d="M370 320v30h-90" fill="none" stroke="#000" stroke-dasharray="3,2" marker-end="url(#arrow)" />
+  <ns0:rect x="80" y="545" width="470" height="75" rx="4" ry="4" fill="none" stroke="#000" />
+  <ns0:text x="545" y="565" font-family="Arial" font-size="14" font-weight="normal" fill="#000">318</ns0:text>
+  <ns0:defs><ns0:marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><ns0:polygon points="0 0, 10 3.5, 0 7" fill="#000" /></ns0:marker></ns0:defs>
+  <ns0:text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 3</ns0:text>
+</ns0:svg>

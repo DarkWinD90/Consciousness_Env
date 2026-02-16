@@ -1,95 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
-  <defs>
-    <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
-      <polygon points="0 0, 6 2, 0 4" fill="black" />
-    </marker>
-  </defs>
-  <rect width="100%" height="100%" fill="white" />
-  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">2/7</text>
-
-  <!-- Title -->
-  <text x="387" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">STATE TRANSITION DIAGRAM</text>
-
-  <!-- ==================== STATES ==================== -->
-
-  <!-- CONNECTED State (200) - bold outline = initial state -->
-  <circle cx="200" cy="320" r="70" fill="none" stroke="black" stroke-width="3"/>
-  <text x="200" y="295" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">200</text>
-  <text x="200" y="315" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CONNECTED</text>
-  <text x="200" y="333" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Cognitive layer</text>
-  <text x="200" y="348" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">active</text>
-
-  <!-- AUTONOMOUS State (202) -->
-  <circle cx="550" cy="320" r="70" fill="none" stroke="black" stroke-width="2"/>
-  <text x="550" y="295" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">202</text>
-  <text x="550" y="315" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">AUTONOMOUS</text>
-  <text x="550" y="333" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Fallback active</text>
-  <text x="550" y="348" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-regulating</text>
-
-  <!-- RECOVERING State (204) -->
-  <circle cx="375" cy="550" r="70" fill="none" stroke="black" stroke-width="2"/>
-  <text x="375" y="525" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">204</text>
-  <text x="375" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">RECOVERING</text>
-  <text x="375" y="563" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Resync in</text>
-  <text x="375" y="578" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">progress</text>
-
-  <!-- ==================== TRANSITIONS ==================== -->
-
-  <!-- Start arrow pointing to CONNECTED -->
-  <line x1="100" y1="320" x2="128" y2="320" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="100" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Start</text>
-
-  <!-- 206: CONNECTED -> AUTONOMOUS (top arrow) -->
-  <line x1="265" y1="295" x2="485" y2="295" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="375" y="260" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">206</text>
-  <text x="375" y="278" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Heartbeat timeout (>30s)</text>
-
-  <!-- 212: AUTONOMOUS -> CONNECTED (bottom arrow, dashed - direct reconnect) -->
-  <line x1="485" y1="345" x2="265" y2="345" stroke="black" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ah)"/>
-  <text x="375" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">212: Any tool call (heartbeat reset)</text>
-
-  <!-- 208: AUTONOMOUS -> RECOVERING -->
-  <line x1="508" y1="376" x2="417" y2="494" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="490" y="420" font-family="Arial, sans-serif" font-size="14" text-anchor="start">208</text>
-  <text x="485" y="438" font-family="Arial, sans-serif" font-size="14" text-anchor="start">resync() called</text>
-
-  <!-- 210: RECOVERING -> CONNECTED -->
-  <line x1="333" y1="494" x2="242" y2="376" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="255" y="435" font-family="Arial, sans-serif" font-size="14" text-anchor="end">210</text>
-  <text x="250" y="453" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Resync complete</text>
-
-  <!-- 214: Self-loop on AUTONOMOUS (step counter) — labels inside loop -->
-  <path d="M 616 296 C 755 245, 755 395, 616 344" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="668" y="308" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">214</text>
-  <text x="668" y="324" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Each step</text>
-  <text x="668" y="340" font-family="Courier New, monospace" font-size="14" text-anchor="middle">(max 10,000)</text>
-
-  <!-- ==================== ANNOTATIONS ==================== -->
-
-  <!-- Snapshot annotation — centered below 214 self-loop for visual grouping -->
-  <text x="668" y="405" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Snapshot every 50 steps</text>
-
-  <!-- ==================== LEGEND ==================== -->
-
-  <rect x="125" y="680" width="525" height="120" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="387" y="705" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Transition Summary</text>
-
-  <!-- Left column -->
-  <text x="150" y="730" font-family="Arial, sans-serif" font-size="14" text-anchor="start">206: Timeout triggers fallback</text>
-  <text x="150" y="750" font-family="Arial, sans-serif" font-size="14" text-anchor="start">208: Explicit resync request</text>
-  <text x="150" y="770" font-family="Arial, sans-serif" font-size="14" text-anchor="start">210: Resync completes</text>
-
-  <!-- Right column -->
-  <text x="400" y="730" font-family="Arial, sans-serif" font-size="14" text-anchor="start">212: Direct reconnection</text>
-  <text x="400" y="750" font-family="Arial, sans-serif" font-size="14" text-anchor="start">214: Autonomous step loop</text>
-
-  <!-- Line style legend -->
-  <line x1="150" y1="785" x2="200" y2="785" stroke="black" stroke-width="3"/>
-  <text x="210" y="790" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Initial state</text>
-  <line x1="320" y1="785" x2="370" y2="785" stroke="black" stroke-width="2" stroke-dasharray="5,3"/>
-  <text x="380" y="790" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Direct reconnect</text>
-
-  <!-- Figure Label -->
-  <text x="387" y="850" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 2</text>
-</svg>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
+  <ns0:rect width="100%" height="100%" fill="#fff" />
+  <ns0:text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 2 of 7</ns0:text>
+  <ns0:circle cx="200" cy="250" r="45" fill="none" stroke="#000" stroke-width="2" />
+  <ns0:text x="200" y="255" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">200</ns0:text>
+  <ns0:circle cx="450" cy="250" r="45" fill="none" stroke="#000" stroke-width="1.5" />
+  <ns0:text x="450" y="255" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">202</ns0:text>
+  <ns0:circle cx="325" cy="400" r="45" fill="none" stroke="#000" stroke-width="1.5" />
+  <ns0:text x="325" y="405" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">204</ns0:text>
+  <ns0:path d="M245 250h160" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <ns0:text x="325" y="240" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">206</ns0:text>
+  <ns0:path d="M405 270H245" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" />
+  <ns0:text x="325" y="290" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">212</ns0:text>
+  <ns0:path d="M420 290l-50 70" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <ns0:text x="405" y="340" font-family="Arial" font-size="14" font-weight="normal" fill="#000">208</ns0:text>
+  <ns0:path d="M280 360l-50-70" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <ns0:text x="245" y="340" font-family="Arial" font-size="14" font-weight="normal" fill="#000">210</ns0:text>
+  <ns0:path d="M485 220c30-20 30 80 0 60" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <ns0:text x="525" y="255" font-family="Arial" font-size="14" font-weight="normal" fill="#000">214</ns0:text>
+  <ns0:path d="M120 250h35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <ns0:rect x="150" y="550" width="312" height="80" rx="5" fill="none" stroke="#000" stroke-width="1" />
+  <ns0:text x="480" y="565" font-family="Arial" font-size="14" font-weight="normal" fill="#000">216</ns0:text>
+  <ns0:defs><ns0:marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><ns0:polygon points="0 0, 10 3.5, 0 7" fill="#000" /></ns0:marker></ns0:defs>
+  <ns0:text x="306" y="720" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 2</ns0:text>
+</ns0:svg>
