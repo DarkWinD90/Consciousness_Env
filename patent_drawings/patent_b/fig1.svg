@@ -56,7 +56,7 @@
   </g>
 
   <!-- Arrow from 110 to 112 -->
-  <path d="M410 450v25" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M380 450v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 114: Self-Observation Feedback Path (bold return path) -->
   <path d="M340 500H150V180h141" fill="none" stroke="#000" stroke-width="2" marker-end="url(#arrow)" />

@@ -18,7 +18,7 @@
   <text x="420" y="230" font-family="Arial" font-size="8" fill="#000">~200 bytes</text>
 
   <!-- Arrow down -->
-  <path d="M306 240v20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M306 240v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 504: Energy Delta Detail -->
   <rect x="120" y="270" width="160" height="70" rx="3" fill="none" stroke="#000" stroke-width="1.5" />

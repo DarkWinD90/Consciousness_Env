@@ -39,7 +39,7 @@
   <text x="490" y="340" font-family="Arial" font-size="14" font-weight="normal" fill="#000">106</text>
 
   <!-- Arrows from 104 and 106 down -->
-  <path d="M190 370v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M190 370v70" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <path d="M422 370v15" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)" />
 
   <!-- 108: Step Buffer (from 106) -->
@@ -56,7 +56,7 @@
   <text x="530" y="375" font-family="Arial" font-size="14" font-weight="normal" fill="#000">110</text>
 
   <!-- Arrow from 106 to 110 -->
-  <path d="M482 345h18" stroke="#000" stroke-width="1" marker-end="url(#arrow)" />
+  <path d="M482 350h18" stroke="#000" stroke-width="1" marker-end="url(#arrow)" />
 
   <!-- 112: SNN + Energy Harvester (large bottom box) -->
   <g transform="translate(130,440)">

@@ -69,7 +69,7 @@
   <text x="182" y="163" font-family="Arial" font-size="6" fill="#000">input</text>
   <path d="M360 175h50" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
   <text x="378" y="168" font-family="Arial" font-size="6" fill="#000">spikes</text>
-  <path d="M450 205v50h-85" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+  <path d="M450 205v75h-105" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
   <text x="455" y="235" font-family="Arial" font-size="6" fill="#000">vibration</text>
   <path d="M260 210v70" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
   <text x="265" y="245" font-family="Arial" font-size="6" fill="#000">heat</text>

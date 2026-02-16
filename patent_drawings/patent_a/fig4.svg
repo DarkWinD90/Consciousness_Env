@@ -47,7 +47,7 @@
   <!-- 406 → 408 -->
   <path d="M320 280h30v-80" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 408 → 410 -->
-  <path d="M400 200h40" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M400 200h44" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 410 → 418 (down) -->
   <path d="M464 210v130" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 412 → 414 -->

@@ -17,8 +17,8 @@
   <text x="522" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">306</text>
 
   <!-- Arrows down to computation block -->
-  <path d="M180 160v60" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M432 160v60" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M180 160v70h26" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M432 160v70h-26" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <text x="150" y="195" font-family="Arial" font-size="9" fill="#000">modulation</text>
   <text x="445" y="195" font-family="Arial" font-size="9" fill="#000">energy-aware</text>
 

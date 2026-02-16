@@ -23,7 +23,7 @@
   </g>
 
   <!-- Arrows down to 604 and 606 -->
-  <path d="M306 240v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M306 240v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 604: Self-Observation (left) -->
   <rect x="180" y="290" width="120" height="50" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
@@ -53,7 +53,7 @@
   </g>
 
   <!-- Arrow down to 610 -->
-  <path d="M380 430v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M380 430v52" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 610: Energy Harvesting (concentric circles) -->
   <g transform="translate(354,480)">
