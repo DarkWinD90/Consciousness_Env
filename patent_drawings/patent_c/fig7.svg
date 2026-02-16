@@ -10,7 +10,7 @@
   <rect x="100" y="180" width="80" height="40" fill="none" stroke="#000" stroke-width="1.5" />
   <text x="140" y="197" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">INPUT</text>
   <text x="140" y="210" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">(Claude)</text>
-  <text x="140" y="170" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">702</text>
+  <text x="185" y="173" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">702</text>
   <g transform="translate(230 170)">
     <rect width="150" height="60" rx="3" fill="none" stroke="#000" stroke-width="2" />
     <text x="75" y="25" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">SNN CORE</text>

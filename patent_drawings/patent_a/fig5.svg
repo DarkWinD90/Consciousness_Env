@@ -33,7 +33,7 @@
   <text x="225" y="25" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">NET POSITIVE REGION</text>
   <text x="225" y="40" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">Harvest &gt; Cost</text>
   <text x="365" y="25" font-family="Arial" font-size="14" fill="#000">512</text>
-  <text x="40" y="95" font-family="Arial" font-size="14" fill="#000">508</text>
+  <text x="60" y="100" font-family="Arial" font-size="14" fill="#000">508</text>
   <text x="15" y="80" font-family="Arial" font-size="6" fill="#000">Quiescent</text>
   <text x="15" y="90" font-family="Arial" font-size="6" fill="#000">Drain Zone</text>
   <text x="336" y="180" font-family="Arial" font-size="14" fill="#000">510</text>

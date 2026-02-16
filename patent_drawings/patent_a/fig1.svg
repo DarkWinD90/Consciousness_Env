@@ -82,8 +82,8 @@
   <path d="M260 430h65" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
   <path d="M420 305h-55" stroke="#000" stroke-width="1" stroke-dasharray="3,2" fill="none" marker-end="url(#arrow)" />
   <path d="M200 430h-60v-145h90" stroke="#000" stroke-width="1.5" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)" />
-  <text x="115" y="350" font-family="Arial" font-size="14" fill="#000">120</text>
-  <text x="100" y="365" font-family="Arial" font-size="6" fill="#000">reflection</text>
+  <text x="115" y="375" font-family="Arial" font-size="14" fill="#000">120</text>
+  <text x="100" y="390" font-family="Arial" font-size="6" fill="#000">reflection</text>
   <rect x="70" y="620" width="470" height="55" fill="none" stroke="#000" stroke-width="0.5" />
   <text x="85" y="635" font-family="Arial" font-size="8" font-weight="bold" fill="#000">SIGNAL PATHWAYS:</text>
   <path d="M85 648h40" stroke="#000" stroke-width="1.2" />
