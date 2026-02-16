@@ -17,8 +17,8 @@
   <text x="522" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">306</text>
 
   <!-- Arrows down to computation block -->
-  <path d="M180 160v70h26" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M432 160v70h-26" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M180 160v70" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M432 160v70" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <text x="150" y="195" font-family="Arial" font-size="9" fill="#000">modulation</text>
   <text x="445" y="195" font-family="Arial" font-size="9" fill="#000">energy-aware</text>
 
@@ -64,8 +64,8 @@
   <text x="522" y="515" font-family="Arial" font-size="14" font-weight="normal" fill="#000">308</text>
 
   <!-- Arrows from detail boxes back up -->
-  <path d="M180 500v-200h26" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
-  <path d="M432 500v-200h-26" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
+  <path d="M180 500v-200" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
+  <path d="M432 500v-200" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
 
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
