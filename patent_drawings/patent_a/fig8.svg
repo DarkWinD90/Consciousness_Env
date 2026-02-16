@@ -14,10 +14,21 @@
   <ns0:g transform="translate(360 270)"><ns0:circle cx="22" cy="22" r="20" fill="none" stroke="#000" stroke-width="1.5" /><ns0:text x="48" y="10" font-family="Arial" font-size="14" font-weight="normal" fill="#000">816</ns0:text></ns0:g>
   <ns0:g transform="translate(450 270)"><ns0:rect x="0" y="0" width="40" height="45" fill="none" stroke="#000" stroke-width="1.5" /><ns0:path d="M12 0v45M28 0v45" stroke="#000" stroke-width="1.5" /><ns0:text x="42" y="10" font-family="Arial" font-size="14" font-weight="normal" fill="#000">818</ns0:text></ns0:g>
   <ns0:g transform="translate(100 420)"><ns0:rect width="90" height="40" rx="4" ry="4" fill="none" stroke="#000" stroke-dasharray="5,3" /><ns0:text x="95" y="12" font-family="Arial" font-size="14" font-weight="normal" fill="#000">820</ns0:text></ns0:g>
-  <ns0:path d="M190 203h130" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <!-- Main signal flow: left to right -->
+  <ns0:path d="M190 203h30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <ns0:path d="M285 203h35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <ns0:path d="M420 203h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <!-- Vertical flow to second row -->
+  <ns0:path d="M145 230v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <ns0:path d="M370 230v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <!-- Second row horizontal flow -->
+  <ns0:path d="M190 295h60" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <ns0:path d="M295 290h65" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <ns0:path d="M400 290h50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <!-- Feedback loop (dashed) -->
   <ns0:path d="M470 330h60v280H95v-80" stroke="#000" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)" fill="none" />
-  <ns0:path d="M295 290h65" stroke="#000" stroke-width="1.2" stroke-dasharray="2,2" />
+  <!-- Upward feedback to 820 -->
+  <ns0:path d="M145 420v-40" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" />
   <ns0:defs><ns0:marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><ns0:polygon points="0 0, 10 3.5, 0 7" fill="#000" /></ns0:marker></ns0:defs>
   <ns0:text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 8</ns0:text>
 </ns0:svg>

@@ -7,7 +7,17 @@
   <ns0:g transform="translate(200 190)"><ns0:rect width="90" height="120" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><ns0:path d="M10 35h70v70H10z" fill="none" stroke="#000" stroke-width="0.8" /><ns0:path stroke="#000" stroke-width="0.3" d="M10 52h70M10 70h70M10 88h70M27 35v70m18-70v70" /><ns0:text x="45" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">304</ns0:text></ns0:g>
   <ns0:g transform="translate(310 180)"><ns0:rect width="120" height="140" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><ns0:circle cx="30" cy="50" r="12" stroke="#000" /><ns0:circle cx="65" cy="50" r="12" stroke="#000" /><ns0:circle cx="100" cy="50" r="12" stroke="#000" /><ns0:text x="60" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">306</ns0:text></ns0:g>
   <ns0:g transform="translate(450 200)"><ns0:rect width="80" height="60" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><ns0:path d="M15 25l50 15-50 15z" fill="none" stroke="#000" stroke-width="1.2" /><ns0:text x="40" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">310</ns0:text></ns0:g>
-  <ns0:g transform="translate(100 340)"><ns0:rect width="180" height="80" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3" /><ns0:path d="M20 55h60M50 35v40" stroke="#000" stroke-width="0.8" /><ns0:path d="M50 55q10-15 25-2m-25 2q-10 15-25 2" fill="none" stroke="#000" stroke-width="1" /><ns0:text x="90" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">314</ns0:text></ns0:g>
+  <ns0:g transform="translate(100 340)"><ns0:rect width="320" height="120" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3" />
+    <!-- Axis -->
+    <ns0:path d="M30 90h260M30 30v65" stroke="#000" stroke-width="1" />
+    <!-- Sinusoidal waveform -->
+    <ns0:path d="M30 60 Q55 30, 80 60 T130 60 T180 60 T230 60 T280 60" fill="none" stroke="#000" stroke-width="2" />
+    <!-- Decay envelope (dashed) -->
+    <ns0:path d="M30 45 L280 80" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" />
+    <!-- Axis labels -->
+    <ns0:text x="145" y="110" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">time</ns0:text>
+    <ns0:text x="20" y="60" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">V</ns0:text>
+    <ns0:text x="160" y="-10" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">314</ns0:text></ns0:g>
   <ns0:path d="M180 235h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <ns0:path d="M290 250h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <ns0:path d="M430 250l20-20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
