@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <title>Servo Bus Architecture - Phase 11 Hardware</title>
+  <style>
+    .box { fill: #fff; stroke: #000; stroke-width: 1.5; }
+    .box-mcu { fill: #e3f2fd; }
+    .box-power { fill: #fff3e0; }
+    .box-servo { fill: #e8f5e9; }
+    .box-sense { fill: #fce4ec; }
+    .label { font-family: monospace; font-size: 10px; text-anchor: middle; }
+    .label-sm { font-family: monospace; font-size: 8px; text-anchor: middle; }
+    .label-left { font-family: monospace; font-size: 9px; text-anchor: start; }
+    .title { font-family: sans-serif; font-size: 14px; font-weight: bold; text-anchor: middle; }
+    .section { font-family: sans-serif; font-size: 11px; font-weight: bold; }
+    .wire { fill: none; stroke: #000; stroke-width: 1; }
+    .wire-bus { fill: none; stroke: #d32f2f; stroke-width: 2; }
+    .wire-power { fill: none; stroke: #ff6f00; stroke-width: 1.5; }
+    .wire-gnd { fill: none; stroke: #000; stroke-width: 1; stroke-dasharray: 4,2; }
+    .tp { fill: #ffeb3b; stroke: #000; stroke-width: 1; }
+    .component { font-family: monospace; font-size: 8px; text-anchor: middle; }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="25" class="title">SERVO BUS ARCHITECTURE (Serial Half-Duplex)</text>
+
+  <!-- ============== MCU SECTION ============== -->
+  <rect x="30" y="50" width="160" height="180" class="box box-mcu" rx="5"/>
+  <text x="110" y="70" class="section">U1: RP2040 / Pico</text>
+
+  <!-- GPIO labels -->
+  <text x="45" y="95" class="label-left">GP0 (UART0 TX)</text>
+  <text x="45" y="115" class="label-left">GP1 (DIR)</text>
+  <text x="45" y="140" class="label-left">GP4/GP5 (I2C0)</text>
+  <text x="45" y="165" class="label-left">GP26 (ADC0)</text>
+  <text x="45" y="185" class="label-left">GP28 (ADC2)</text>
+  <text x="45" y="205" class="label-left">GP15 (LED_DIN)</text>
+
+  <!-- GPIO connection points -->
+  <circle cx="175" cy="92" r="3" fill="#d32f2f"/>
+  <circle cx="175" cy="112" r="3" fill="#666"/>
+  <circle cx="175" cy="137" r="3" fill="#1976d2"/>
+  <circle cx="175" cy="162" r="3" fill="#7b1fa2"/>
+  <circle cx="175" cy="182" r="3" fill="#388e3c"/>
+  <circle cx="175" cy="202" r="3" fill="#f57c00"/>
+
+  <!-- ============== BUS BUFFER SECTION ============== -->
+  <rect x="220" y="60" width="120" height="100" class="box" rx="3"/>
+  <text x="280" y="80" class="section">Bus Interface</text>
+
+  <!-- Buffer IC -->
+  <rect x="235" y="95" width="90" height="30" class="box" rx="2"/>
+  <text x="280" y="115" class="component">U2: 74LVC1G125</text>
+
+  <!-- Protection -->
+  <text x="280" y="145" class="label-sm">D_PROT: TVS</text>
+  <text x="280" y="155" class="label-sm">R_TERM: 120R</text>
+
+  <!-- Connections MCU to Buffer -->
+  <path d="M175,92 L235,92 L235,105" class="wire-bus"/>
+  <path d="M175,112 L220,112 L220,110 L235,110" class="wire"/>
+
+  <!-- Bus output from buffer -->
+  <path d="M325,110 L370,110" class="wire-bus"/>
+  <text x="347" y="105" class="label-sm">SERVO_BUS</text>
+
+  <!-- ============== SERVO POWER BANKS ============== -->
+  <rect x="370" y="50" width="400" height="200" class="box box-servo" rx="5"/>
+  <text x="570" y="70" class="section">Servo Power Banks (6V Rail)</text>
+
+  <!-- Bank A -->
+  <rect x="385" y="85" width="85" height="70" class="box" rx="3"/>
+  <text x="427" y="100" class="label">BANK_A</text>
+  <text x="427" y="115" class="label-sm">Servo 1-4</text>
+  <rect x="395" y="120" width="65" height="25" class="box box-sense" rx="2"/>
+  <text x="427" y="137" class="component">INA219 (opt)</text>
+
+  <!-- Bank B -->
+  <rect x="480" y="85" width="85" height="70" class="box" rx="3"/>
+  <text x="522" y="100" class="label">BANK_B</text>
+  <text x="522" y="115" class="label-sm">Servo 5-8</text>
+  <rect x="490" y="120" width="65" height="25" class="box box-sense" rx="2"/>
+  <text x="522" y="137" class="component">INA219 (opt)</text>
+
+  <!-- Bank C -->
+  <rect x="575" y="85" width="85" height="70" class="box" rx="3"/>
+  <text x="617" y="100" class="label">BANK_C</text>
+  <text x="617" y="115" class="label-sm">Servo 9-12</text>
+  <rect x="585" y="120" width="65" height="25" class="box box-sense" rx="2"/>
+  <text x="617" y="137" class="component">INA219 (opt)</text>
+
+  <!-- Bank D -->
+  <rect x="670" y="85" width="85" height="70" class="box" rx="3"/>
+  <text x="712" y="100" class="label">BANK_D</text>
+  <text x="712" y="115" class="label-sm">Servo 13-16</text>
+  <rect x="680" y="120" width="65" height="25" class="box box-sense" rx="2"/>
+  <text x="712" y="137" class="component">INA219 (opt)</text>
+
+  <!-- Bus daisy chain -->
+  <path d="M370,110 L385,110 L385,90 L427,90" class="wire-bus"/>
+  <path d="M427,90 L522,90" class="wire-bus"/>
+  <path d="M522,90 L617,90" class="wire-bus"/>
+  <path d="M617,90 L712,90" class="wire-bus"/>
+  <circle cx="427" cy="90" r="2" fill="#d32f2f"/>
+  <circle cx="522" cy="90" r="2" fill="#d32f2f"/>
+  <circle cx="617" cy="90" r="2" fill="#d32f2f"/>
+  <circle cx="712" cy="90" r="2" fill="#d32f2f"/>
+
+  <!-- Servo symbols -->
+  <text x="427" y="175" class="label-sm">S1 S2 S3 S4</text>
+  <text x="522" y="175" class="label-sm">S5 S6 S7 S8</text>
+  <text x="617" y="175" class="label-sm">S9 S10 S11 S12</text>
+  <text x="712" y="175" class="label-sm">S13 S14 S15 S16</text>
+
+  <!-- I2C to current sensors -->
+  <path d="M175,137 L200,137 L200,230 L427,230 L427,145" class="wire" stroke="#1976d2"/>
+  <path d="M427,230 L522,230 L522,145" class="wire" stroke="#1976d2"/>
+  <path d="M522,230 L617,230 L617,145" class="wire" stroke="#1976d2"/>
+  <path d="M617,230 L712,230 L712,145" class="wire" stroke="#1976d2"/>
+  <text x="300" y="225" class="label-sm" fill="#1976d2">I2C (SDA/SCL)</text>
+
+  <!-- ============== POWER SECTION ============== -->
+  <rect x="30" y="280" width="200" height="130" class="box box-power" rx="5"/>
+  <text x="130" y="300" class="section">Power Distribution</text>
+
+  <rect x="45" y="315" width="80" height="35" class="box" rx="3"/>
+  <text x="85" y="337" class="label">LiFePO4</text>
+  <text x="85" y="347" class="label-sm">Battery</text>
+
+  <rect x="140" y="310" width="75" height="20" class="box" rx="2"/>
+  <text x="177" y="323" class="label-sm">6V Servo Rail</text>
+
+  <rect x="140" y="335" width="75" height="20" class="box" rx="2"/>
+  <text x="177" y="348" class="label-sm">5V LED Rail</text>
+
+  <rect x="140" y="360" width="75" height="20" class="box" rx="2"/>
+  <text x="177" y="373" class="label-sm">3.3V Logic</text>
+
+  <!-- Power connections -->
+  <path d="M125,330 L140,320" class="wire-power"/>
+  <path d="M125,340 L140,345" class="wire-power"/>
+  <path d="M125,350 L140,370" class="wire-power"/>
+
+  <!-- 6V to servo banks -->
+  <path d="M215,320 L250,320 L250,260 L570,260 L570,245" class="wire-power"/>
+  <text x="400" y="255" class="label-sm" fill="#ff6f00">VBAT_SERVO (6V)</text>
+
+  <!-- ============== SENSING SECTION ============== -->
+  <rect x="30" y="430" width="200" height="150" class="box box-sense" rx="5"/>
+  <text x="130" y="450" class="section">Sensing</text>
+
+  <!-- Piezo -->
+  <rect x="45" y="465" width="70" height="35" class="box" rx="3"/>
+  <text x="80" y="485" class="label">PZ1: 27mm</text>
+  <text x="80" y="497" class="label-sm">Piezo</text>
+
+  <!-- LDR -->
+  <rect x="130" y="465" width="70" height="35" class="box" rx="3"/>
+  <text x="165" y="485" class="label">LDR1</text>
+  <text x="165" y="497" class="label-sm">GL5528+10k</text>
+
+  <!-- NTC -->
+  <rect x="45" y="515" width="70" height="35" class="box" rx="3"/>
+  <text x="80" y="535" class="label">TH1: NTC</text>
+  <text x="80" y="547" class="label-sm">10k B3950</text>
+
+  <!-- Piezo to ADC -->
+  <path d="M115,480 L150,480 L150,430 L200,430 L200,400 L190,400 L190,250 L175,250 L175,162" class="wire" stroke="#7b1fa2"/>
+  <text x="150" y="420" class="label-sm" fill="#7b1fa2">ADC_PZ</text>
+
+  <!-- LDR to ADC -->
+  <path d="M200,480 L210,480 L210,420 L195,420 L195,245 L180,245 L180,182" class="wire" stroke="#388e3c"/>
+  <text x="205" y="410" class="label-sm" fill="#388e3c">ADC_LDR</text>
+
+  <!-- ============== ENERGY HARVEST SECTION ============== -->
+  <rect x="260" y="430" width="200" height="150" class="box" rx="5"/>
+  <text x="360" y="450" class="section">Energy Harvesting</text>
+
+  <rect x="275" y="465" width="60" height="30" class="box" rx="2"/>
+  <text x="305" y="483" class="label-sm">L1 Ferrite</text>
+
+  <rect x="345" y="465" width="50" height="30" class="box" rx="2"/>
+  <text x="370" y="483" class="label-sm">BR1</text>
+
+  <rect x="405" y="465" width="40" height="30" class="box" rx="2"/>
+  <text x="425" y="483" class="label-sm">C1</text>
+
+  <rect x="345" y="510" width="50" height="30" class="box" rx="2"/>
+  <text x="370" y="528" class="label-sm">BR2</text>
+
+  <rect x="405" y="510" width="40" height="30" class="box" rx="2"/>
+  <text x="425" y="528" class="label-sm">C2</text>
+
+  <!-- OR diodes and storage -->
+  <rect x="275" y="550" width="60" height="25" class="box" rx="2"/>
+  <text x="305" y="567" class="label-sm">D9/D10 OR</text>
+
+  <rect x="345" y="545" width="100" height="30" class="box box-power" rx="2"/>
+  <text x="395" y="565" class="label-sm">C3: Supercap</text>
+
+  <!-- Harvest flow -->
+  <path d="M115,500 L260,500 L260,480 L275,480" class="wire"/>
+  <path d="M335,480 L345,480" class="wire"/>
+  <path d="M395,480 L405,480" class="wire"/>
+  <path d="M445,480 L455,480 L455,560 L345,560" class="wire"/>
+
+  <path d="M115,535 L260,535 L260,525 L345,525" class="wire"/>
+  <path d="M395,525 L405,525" class="wire"/>
+  <path d="M445,525 L455,525 L455,560" class="wire"/>
+
+  <path d="M335,560 L305,560 L305,575" class="wire"/>
+
+  <!-- ============== LED SECTION ============== -->
+  <rect x="500" y="280" width="150" height="80" class="box" rx="5"/>
+  <text x="575" y="300" class="section">LED Output</text>
+
+  <rect x="515" y="315" width="55" height="30" class="box" rx="2"/>
+  <text x="542" y="333" class="label-sm">R4: 330R</text>
+
+  <rect x="580" y="315" width="55" height="30" class="box" rx="2"/>
+  <text x="607" y="328" class="label-sm">LED1</text>
+  <text x="607" y="340" class="label-sm">WS2812B</text>
+
+  <!-- LED connection -->
+  <path d="M175,202 L490,202 L490,330 L515,330" class="wire" stroke="#f57c00"/>
+  <path d="M570,330 L580,330" class="wire" stroke="#f57c00"/>
+  <text x="350" y="197" class="label-sm" fill="#f57c00">LED_DIN (GP15)</text>
+
+  <!-- ============== TEST POINTS ============== -->
+  <rect x="680" y="280" width="90" height="130" class="box" rx="5"/>
+  <text x="725" y="300" class="section">Test Points</text>
+
+  <circle cx="700" cy="325" r="6" class="tp"/>
+  <text x="740" y="328" class="label-left">TP1: GND</text>
+
+  <circle cx="700" cy="350" r="6" class="tp"/>
+  <text x="740" y="353" class="label-left">TP2: 3V3</text>
+
+  <circle cx="700" cy="375" r="6" class="tp"/>
+  <text x="740" y="378" class="label-left">TP3: VBAT</text>
+
+  <circle cx="700" cy="400" r="6" class="tp"/>
+  <text x="740" y="403" class="label-left">TP4: BUS</text>
+
+  <!-- ============== LEGEND ============== -->
+  <rect x="500" y="430" width="270" height="100" class="box" rx="5"/>
+  <text x="635" y="450" class="section">Legend</text>
+
+  <line x1="515" y1="470" x2="545" y2="470" class="wire-bus"/>
+  <text x="555" y="473" class="label-left">SERVO_BUS (half-duplex)</text>
+
+  <line x1="515" y1="490" x2="545" y2="490" class="wire-power"/>
+  <text x="555" y="493" class="label-left">Power rails</text>
+
+  <line x1="515" y1="510" x2="545" y2="510" class="wire" stroke="#1976d2"/>
+  <text x="555" y="513" class="label-left">I2C (current sense)</text>
+
+  <rect x="650" y="462" width="30" height="15" class="box box-sense" rx="2"/>
+  <text x="690" y="473" class="label-left">Optional</text>
+
+</svg>

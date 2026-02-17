@@ -1,0 +1,295 @@
+# Phase 11 Hardware Netlist
+# Format: KiCad-compatible net definitions
+# Generated: 2026-02-17
+
+#===============================================================================
+# POWER NETS
+#===============================================================================
+
+(net GND
+    (node U1 GND)          # RP2040 Pico ground pins
+    (node U2 GND)          # Bus buffer ground
+    (node BR1 -)           # Piezo bridge negative
+    (node BR2 -)           # Thermal bridge negative
+    (node C1 -)            # Smoothing cap 1 negative
+    (node C2 -)            # Smoothing cap 2 negative
+    (node C3 -)            # Supercap negative
+    (node C4 -)            # ADC filter cap negative
+    (node R3 1)            # LDR divider to ground
+    (node R_TERM 2)        # Bus termination to ground
+    (node J_SERVO_A 1)     # Servo bank A ground
+    (node J_SERVO_B 1)     # Servo bank B ground
+    (node J_SERVO_C 1)     # Servo bank C ground
+    (node J_SERVO_D 1)     # Servo bank D ground
+    (node J_LED 1)         # LED connector ground
+    (node TP1 1)           # Test point GND
+    (node INA219_A GND)    # Current sensor A ground
+    (node INA219_B GND)    # Current sensor B ground
+    (node INA219_C GND)    # Current sensor C ground
+    (node INA219_D GND)    # Current sensor D ground
+)
+
+(net 3V3
+    (node U1 3V3)          # RP2040 Pico 3.3V output
+    (node U2 VCC)          # Bus buffer logic supply
+    (node R_NTC 1)         # NTC divider pull-up
+    (node TP2 1)           # Test point 3V3
+    (node INA219_A VCC)    # Current sensor A supply
+    (node INA219_B VCC)    # Current sensor B supply
+    (node INA219_C VCC)    # Current sensor C supply
+    (node INA219_D VCC)    # Current sensor D supply
+)
+
+(net 5V
+    (node U1 VBUS)         # USB 5V (when connected)
+    (node J_LED 2)         # LED connector 5V
+    (node LED1 VDD)        # WS2812B power
+)
+
+(net VBAT_SERVO
+    (node BATT+ 1)         # LiFePO4 positive (via regulator)
+    (node TP3 1)           # Test point VBAT
+    (node R_SHUNT_A 1)     # Shunt resistor A input
+    (node R_SHUNT_B 1)     # Shunt resistor B input
+    (node R_SHUNT_C 1)     # Shunt resistor C input
+    (node R_SHUNT_D 1)     # Shunt resistor D input
+)
+
+(net BANK_A_6V
+    (node R_SHUNT_A 2)     # Shunt resistor A output
+    (node INA219_A VIN-)   # Current sensor A sense-
+    (node J_SERVO_A 2)     # Servo bank A power pin 1
+    (node J_SERVO_A 3)     # Servo bank A power pin 2
+)
+
+(net BANK_B_6V
+    (node R_SHUNT_B 2)
+    (node INA219_B VIN-)
+    (node J_SERVO_B 2)
+    (node J_SERVO_B 3)
+)
+
+(net BANK_C_6V
+    (node R_SHUNT_C 2)
+    (node INA219_C VIN-)
+    (node J_SERVO_C 2)
+    (node J_SERVO_C 3)
+)
+
+(net BANK_D_6V
+    (node R_SHUNT_D 2)
+    (node INA219_D VIN-)
+    (node J_SERVO_D 2)
+    (node J_SERVO_D 3)
+)
+
+#===============================================================================
+# SERVO BUS
+#===============================================================================
+
+(net SERVO_BUS_TX
+    (node U1 GP0)          # RP2040 UART0 TX
+    (node U2 A)            # Bus buffer input
+)
+
+(net SERVO_BUS_DIR
+    (node U1 GP1)          # RP2040 direction control
+    (node U2 OE)           # Bus buffer output enable (active low, directly controlled)
+)
+
+(net SERVO_BUS
+    (node U2 Y)            # Bus buffer output
+    (node R_TERM 1)        # Termination resistor
+    (node D_PROT 1)        # TVS protection
+    (node J_SERVO_A 4)     # Servo bank A bus
+    (node J_SERVO_B 4)     # Servo bank B bus
+    (node J_SERVO_C 4)     # Servo bank C bus
+    (node J_SERVO_D 4)     # Servo bank D bus
+    (node TP4 1)           # Test point BUS
+)
+
+#===============================================================================
+# I2C BUS (Current Sensors)
+#===============================================================================
+
+(net I2C0_SDA
+    (node U1 GP4)          # RP2040 I2C0 SDA
+    (node INA219_A SDA)    # Current sensor A data
+    (node INA219_B SDA)    # Current sensor B data
+    (node INA219_C SDA)    # Current sensor C data
+    (node INA219_D SDA)    # Current sensor D data
+    (node R_SDA 1)         # 4.7k pull-up
+)
+
+(net I2C0_SCL
+    (node U1 GP5)          # RP2040 I2C0 SCL
+    (node INA219_A SCL)    # Current sensor A clock
+    (node INA219_B SCL)    # Current sensor B clock
+    (node INA219_C SCL)    # Current sensor C clock
+    (node INA219_D SCL)    # Current sensor D clock
+    (node R_SCL 1)         # 4.7k pull-up
+)
+
+# I2C addresses (active low jumpers):
+# INA219_A: A0=GND, A1=GND → 0x40
+# INA219_B: A0=VCC, A1=GND → 0x41
+# INA219_C: A0=GND, A1=VCC → 0x44
+# INA219_D: A0=VCC, A1=VCC → 0x45
+
+#===============================================================================
+# SENSING
+#===============================================================================
+
+(net ADC_PZ
+    (node U1 GP26)         # RP2040 ADC0
+    (node C4 1)            # Filter cap positive
+    (node R_PZ 1)          # Input protection resistor (optional)
+)
+
+(net PIEZO_RAW
+    (node PZ1 +)           # Piezo positive
+    (node L1 1)            # Ferrite inductor input
+)
+
+(net PIEZO_RESONANT
+    (node L1 2)            # Ferrite inductor output
+    (node BR1 AC1)         # Bridge rectifier AC input 1
+)
+
+(net ADC_LDR
+    (node U1 GP28)         # RP2040 ADC2
+    (node LDR1 2)          # LDR output
+    (node R3 2)            # Divider junction
+)
+
+(net LDR_TOP
+    (node LDR1 1)          # LDR to 3V3
+    (node U1 3V3)          # 3V3 rail
+)
+
+(net ADC_TEMP
+    (node U1 GP27)         # RP2040 ADC1 (optional)
+    (node TH1 2)           # NTC thermistor output
+    (node R_NTC 2)         # Divider junction
+)
+
+#===============================================================================
+# ENERGY HARVESTING
+#===============================================================================
+
+(net HARVEST_PIEZO
+    (node BR1 +)           # Piezo bridge positive output
+    (node C1 +)            # Smoothing cap 1 positive
+    (node D9 A)            # OR diode 1 anode
+)
+
+(net HARVEST_THERMAL
+    (node BR2 +)           # Thermal bridge positive output
+    (node C2 +)            # Smoothing cap 2 positive
+    (node D10 A)           # OR diode 2 anode
+)
+
+(net ENERGY_STORE
+    (node D9 K)            # OR diode 1 cathode
+    (node D10 K)           # OR diode 2 cathode
+    (node C3 +)            # Supercap positive
+    (node TP5 1)           # Test point ENERGY_STORE
+    (node R_PZ 2)          # To ADC via filter
+)
+
+(net THERMAL_IN
+    (node J_THERMAL 1)     # Thermal connector positive
+    (node BR2 AC1)         # Thermal bridge AC input
+)
+
+(net PIEZO_NEG
+    (node PZ1 -)           # Piezo negative
+    (node J_PIEZO 2)       # Piezo connector
+    (node BR1 AC2)         # Bridge AC input 2
+)
+
+#===============================================================================
+# LED OUTPUT
+#===============================================================================
+
+(net LED_DIN
+    (node U1 GP15)         # RP2040 LED data output
+    (node R4 1)            # Series resistor input
+)
+
+(net LED_DATA
+    (node R4 2)            # Series resistor output
+    (node LED1 DIN)        # WS2812B data input
+)
+
+#===============================================================================
+# DEBUG (Optional UART1)
+#===============================================================================
+
+(net DEBUG_TX
+    (node U1 GP8)          # RP2040 UART1 TX
+    (node J_DEBUG 3)       # Debug connector TX
+)
+
+(net DEBUG_RX
+    (node U1 GP9)          # RP2040 UART1 RX
+    (node J_DEBUG 4)       # Debug connector RX
+)
+
+#===============================================================================
+# COMPONENT VALUES
+#===============================================================================
+
+# Resistors
+# R3      10k     LDR voltage divider
+# R4      330R    LED DIN series protection
+# R_NTC   10k     NTC voltage divider
+# R_TERM  120R    Bus termination (optional)
+# R_SDA   4.7k    I2C pull-up
+# R_SCL   4.7k    I2C pull-up
+# R_PZ    100k    ADC input protection (optional)
+# R_SHUNT_A-D  0.01R 1%  Current sense shunts
+
+# Capacitors
+# C1      100uF 16V   Piezo smoothing
+# C2      100uF 16V   Thermal smoothing
+# C3      TBD         Supercap energy storage
+# C4      0.1uF       ADC filter
+
+# Diodes
+# D9      BAT54       Schottky OR (piezo path)
+# D10     BAT54       Schottky OR (thermal path)
+# D_PROT  SMBJ5.0A    TVS bus protection
+# BR1     MB10S       Schottky bridge (or 4x BAT54)
+# BR2     MB10S       Schottky bridge (or 4x BAT54)
+
+# Inductors
+# L1      TBD         Ferrite-backed, tuned to piezo resonance
+
+# ICs
+# U1      RP2040 / Raspberry Pi Pico
+# U2      74LVC1G125  Tri-state buffer
+# INA219_A-D          I2C current sensors (optional)
+
+# Sensors
+# PZ1     27mm piezo disc
+# LDR1    GL5528 photoresistor
+# TH1     NTC 10k B3950 thermistor
+
+# Connectors
+# J_SERVO_A-D  4-pin  GND/6V/6V/BUS
+# J_LED        3-pin  GND/5V/DIN
+# J_PIEZO      2-pin  PZ+/PZ-
+# J_THERMAL    2-pin  TEG+/TEG-
+# J_DEBUG      4-pin  GND/3V3/TX/RX
+
+# Test Points
+# TP1     GND
+# TP2     3V3
+# TP3     VBAT_SERVO
+# TP4     SERVO_BUS
+# TP5     ENERGY_STORE
+
+#===============================================================================
+# END NETLIST
+#===============================================================================
