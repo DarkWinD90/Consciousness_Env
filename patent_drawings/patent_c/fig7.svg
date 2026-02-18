@@ -118,13 +118,13 @@
   <!-- DASHED CONTROL PATHS -->
 
   <!-- Dashed path from INPUT (702) down to INPUT SWITCH (716) -->
-  <path d="M140 220v212h117" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
+  <path d="M140 220v220h117" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
 
   <!-- Dashed path from COGNITIVE (700) to MOD SWITCH (718) -->
-  <path d="M378 120h67v312h-90" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
+  <path d="M378 120h67v320h-90" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
 
   <!-- 720: Resync feedback path from MOD SWITCH (718) back to COGNITIVE (700) -->
-  <path d="M355 470h185V135h-162" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
+  <path d="M355 470h185V120h-162" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
 
   <!-- MODE SELECTION LOGIC legend box -->
   <rect x="100" y="530" width="412" height="90" rx="5" fill="none" stroke="#000" stroke-width="1" />

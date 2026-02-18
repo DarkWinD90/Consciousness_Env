@@ -47,7 +47,7 @@
   <text x="130" y="430" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">308</text>
 
   <!-- Step up at 15 -->
-  <path d="M160 440v80" stroke="#000" stroke-width="2.5" />
+  <path d="M160 440v-80" stroke="#000" stroke-width="2.5" />
 
   <!-- 310: LOW plateau (15-30 mWh, -0.1) -->
   <path d="M160 360h60" stroke="#000" stroke-width="2.5" />
@@ -55,7 +55,7 @@
   <text x="190" y="350" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">310</text>
 
   <!-- Step up at 30 -->
-  <path d="M220 360v60" stroke="#000" stroke-width="2.5" />
+  <path d="M220 360v-60" stroke="#000" stroke-width="2.5" />
 
   <!-- 312: NORMAL plateau (30-80 mWh, 0.0) -->
   <path d="M220 300h160" stroke="#000" stroke-width="2.5" />
@@ -63,7 +63,7 @@
   <text x="300" y="320" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">312</text>
 
   <!-- Step up at 80 -->
-  <path d="M380 300v110" stroke="#000" stroke-width="2.5" />
+  <path d="M380 300v-110" stroke="#000" stroke-width="2.5" />
 
   <!-- 314: SURPLUS plateau (80+ mWh, +0.3) -->
   <path d="M380 190h100" stroke="#000" stroke-width="2.5" />

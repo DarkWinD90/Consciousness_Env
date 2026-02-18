@@ -19,11 +19,11 @@
 
   <!-- Split paths from 102 -->
   <!-- Left path: Heartbeat active -->
-  <path d="M260 230v30h-50v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M260 230v30h-50v60" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <text x="180" y="275" font-family="Arial" font-size="10" fill="#000">active</text>
 
   <!-- Right path: Heartbeat timeout (dashed) -->
-  <path d="M352 230v30h50v50" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
+  <path d="M352 230v30h50v60" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
   <text x="400" y="275" font-family="Arial" font-size="10" fill="#000">timeout</text>
 
   <!-- 104: Cognitive-Driven Operation (left path) -->
@@ -40,7 +40,7 @@
 
   <!-- Arrows from 104 and 106 down -->
   <path d="M190 370v70" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M422 370v15" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)" />
+  <path d="M422 370v18" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)" />
 
   <!-- 108: Step Buffer (from 106) -->
   <rect x="392" y="388" width="60" height="25" rx="3" fill="none" stroke="#000" stroke-width="1" />
