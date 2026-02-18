@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
+  <defs>
+    <marker id="ah" markerWidth="6.41" markerHeight="4.49" refX="6.41" refY="2.24" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="75.0,144.17 81.41,146.42 75.0,148.66" fill="black" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="white" />
+  <text x="347.36" y="182.63" font-family="Arial, sans-serif" font-size="10.25" text-anchor="middle">2/7</text>
+  <text x="323.01" y="227.49" font-family="Arial, sans-serif" font-size="8.97" font-weight="bold" text-anchor="middle">STATE TRANSITION DIAGRAM</text>
+  <circle cx="203.17" cy="349.25" r="44.86" fill="none" stroke="black" stroke-width="1.92" />
+  <text x="203.17" y="333.23" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">200</text>
+  <text x="203.17" y="346.04" font-family="Arial, sans-serif" font-size="8.97" font-weight="bold" text-anchor="middle">CONNECTED</text>
+  <text x="203.17" y="357.58" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">Cognitive layer</text>
+  <text x="203.17" y="367.19" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">active</text>
+  <circle cx="427.47" cy="349.25" r="44.86" fill="none" stroke="black" stroke-width="1.28" />
+  <text x="427.47" y="333.23" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">202</text>
+  <text x="427.47" y="346.04" font-family="Arial, sans-serif" font-size="8.97" font-weight="bold" text-anchor="middle">AUTONOMOUS</text>
+  <text x="427.47" y="357.58" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">Fallback active</text>
+  <text x="427.47" y="367.19" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">Self-regulating</text>
+  <circle cx="315.32" cy="496.65" r="44.86" fill="none" stroke="black" stroke-width="1.28" />
+  <text x="315.32" y="480.62" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">204</text>
+  <text x="315.32" y="493.44" font-family="Arial, sans-serif" font-size="8.97" font-weight="bold" text-anchor="middle">RECOVERING</text>
+  <text x="315.32" y="504.98" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">Resync in</text>
+  <text x="315.32" y="514.59" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">progress</text>
+  <line x1="139.09" y1="349.25" x2="157.03" y2="349.25" stroke="black" stroke-width="1.28" marker-end="url(#ah)" />
+  <text x="139.09" y="339.64" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">Start</text>
+  <line x1="244.83" y1="333.23" x2="385.82" y2="333.23" stroke="black" stroke-width="1.28" marker-end="url(#ah)" />
+  <text x="315.32" y="310.8" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">206</text>
+  <text x="315.32" y="322.33" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">Heartbeat timeout (&gt;30s)</text>
+  <line x1="385.82" y1="365.27" x2="244.83" y2="365.27" stroke="black" stroke-width="1.28" stroke-dasharray="3.2,1.92" marker-end="url(#ah)" />
+  <text x="315.32" y="378.09" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">212: Any tool call (heartbeat reset)</text>
+  <line x1="400.56" y1="385.14" x2="342.24" y2="460.76" stroke="black" stroke-width="1.28" marker-end="url(#ah)" />
+  <text x="389.02" y="413.33" font-family="Arial, sans-serif" font-size="8.97" text-anchor="start">208</text>
+  <text x="385.82" y="424.87" font-family="Arial, sans-serif" font-size="8.97" text-anchor="start">resync() called</text>
+  <line x1="288.41" y1="460.76" x2="230.09" y2="385.14" stroke="black" stroke-width="1.28" marker-end="url(#ah)" />
+  <text x="238.42" y="422.95" font-family="Arial, sans-serif" font-size="8.97" text-anchor="end">210</text>
+  <text x="235.21" y="434.48" font-family="Arial, sans-serif" font-size="8.97" text-anchor="end">Resync complete</text>
+  <path d="M 469.77 333.87 C 558.85 301.18 558.85 397.31 469.77 364.63" fill="none" stroke="black" stroke-width="1.28" marker-end="url(#ah)" />
+  <text x="503.09" y="341.56" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">214</text>
+  <text x="503.09" y="351.81" font-family="Arial, sans-serif" font-size="8.97" text-anchor="middle">Each step</text>
+  <text x="503.09" y="362.07" font-family="Courier New, monospace" font-size="8.97" text-anchor="middle">(max 10,000)</text>
+  <text x="503.09" y="403.72" font-family="Courier New, monospace" font-size="8.97" text-anchor="middle">Snapshot every 50 steps</text>
+  <rect x="155.11" y="579.96" width="336.45" height="76.9" rx="3.2" fill="none" stroke="black" stroke-width="1.28" />
+  <text x="323.01" y="595.98" font-family="Arial, sans-serif" font-size="8.97" font-weight="bold" text-anchor="middle">Transition Summary</text>
+  <text x="171.13" y="612.0" font-family="Arial, sans-serif" font-size="8.97" text-anchor="start">206: Timeout triggers fallback</text>
+  <text x="171.13" y="624.82" font-family="Arial, sans-serif" font-size="8.97" text-anchor="start">208: Explicit resync request</text>
+  <text x="171.13" y="637.63" font-family="Arial, sans-serif" font-size="8.97" text-anchor="start">210: Resync completes</text>
+  <text x="331.34" y="612.0" font-family="Arial, sans-serif" font-size="8.97" text-anchor="start">212: Direct reconnection</text>
+  <text x="331.34" y="624.82" font-family="Arial, sans-serif" font-size="8.97" text-anchor="start">214: Autonomous step loop</text>
+  <line x1="171.13" y1="647.25" x2="203.17" y2="647.25" stroke="black" stroke-width="1.92" />
+  <text x="209.58" y="651.9" font-family="Arial, sans-serif" font-size="8.97" text-anchor="start">Initial state</text>
+  <line x1="280.07" y1="647.25" x2="312.12" y2="647.25" stroke="black" stroke-width="1.28" stroke-dasharray="3.2,1.92" />
+  <text x="318.53" y="651.9" font-family="Arial, sans-serif" font-size="8.97" text-anchor="start">Direct reconnect</text>
+  <text x="323.01" y="688.9" font-family="Arial, sans-serif" font-size="12.82" font-weight="bold" text-anchor="middle">FIG. 2</text>
+</svg>

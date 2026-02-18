@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 8 3, 0 6" fill="black" />
+    </marker>
+    <marker id="arrowhead-sm" markerWidth="5" markerHeight="4" refX="5" refY="2" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 5 2, 0 4" fill="black" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="white" />
+  <text x="320" y="90" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">3/8</text>
+  <text x="320" y="112" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">SPIKING NEURAL NETWORK ARCHITECTURE</text>
+  <text x="320" y="125" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">Leaky Integrate-and-Fire Dynamics with STDP Learning</text>
+  <rect x="80" y="145" width="470" height="380" rx="8" ry="8" fill="none" stroke="black" stroke-width="2" />
+  <text x="535" y="160" font-family="Arial, sans-serif" font-size="11" font-weight="bold">300</text>
+  <text x="320" y="165" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle">NEUROMORPHIC PROCESSING CORE</text>
+  <g transform="translate(100, 190)">
+    <rect x="0" y="0" width="80" height="120" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="40" y="15" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">INPUT</text>
+    <text x="40" y="25" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">LAYER</text>
+    <circle cx="25" cy="45" r="8" fill="none" stroke="black" stroke-width="1.2" />
+    <text x="25" y="48" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">I₁</text>
+    <circle cx="55" cy="45" r="8" fill="none" stroke="black" stroke-width="1.2" />
+    <text x="55" y="48" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">I₂</text>
+    <circle cx="25" cy="75" r="8" fill="none" stroke="black" stroke-width="1.2" />
+    <text x="25" y="78" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">I₃</text>
+    <circle cx="55" cy="75" r="8" fill="none" stroke="black" stroke-width="1.2" />
+    <text x="55" y="78" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">I₄</text>
+    <circle cx="40" cy="100" r="8" fill="none" stroke="black" stroke-width="1.2" />
+    <text x="40" y="103" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">I_r</text>
+    <text x="85" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold">302</text>
+  </g>
+  <text x="95" y="230" font-family="Arial, sans-serif" font-size="6" text-anchor="end">I_ext</text>
+  <line x1="80" y1="235" x2="100" y2="235" stroke="black" stroke-width="1.2" marker-end="url(#arrowhead)" />
+  <text x="95" y="280" font-family="Arial, sans-serif" font-size="6" text-anchor="end">I_refl</text>
+  <line x1="80" y1="290" x2="100" y2="290" stroke="black" stroke-width="1.2" marker-end="url(#arrowhead)" />
+  <g transform="translate(200, 190)">
+    <rect x="0" y="0" width="90" height="120" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="45" y="15" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">SYNAPTIC</text>
+    <text x="45" y="25" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">WEIGHTS</text>
+    <rect x="10" y="35" width="70" height="70" fill="none" stroke="black" stroke-width="0.8" />
+    <line x1="10" y1="52" x2="80" y2="52" stroke="black" stroke-width="0.3" />
+    <line x1="10" y1="70" x2="80" y2="70" stroke="black" stroke-width="0.3" />
+    <line x1="10" y1="88" x2="80" y2="88" stroke="black" stroke-width="0.3" />
+    <line x1="27" y1="35" x2="27" y2="105" stroke="black" stroke-width="0.3" />
+    <line x1="45" y1="35" x2="45" y2="105" stroke="black" stroke-width="0.3" />
+    <line x1="63" y1="35" x2="63" y2="105" stroke="black" stroke-width="0.3" />
+    <text x="18" y="47" font-family="Courier New, monospace" font-size="5" text-anchor="middle">.15</text>
+    <text x="36" y="47" font-family="Courier New, monospace" font-size="5" text-anchor="middle">.08</text>
+    <text x="54" y="47" font-family="Courier New, monospace" font-size="5" text-anchor="middle">.12</text>
+    <text x="72" y="47" font-family="Courier New, monospace" font-size="5" text-anchor="middle">.05</text>
+    <text x="18" y="65" font-family="Courier New, monospace" font-size="5" text-anchor="middle">.11</text>
+    <text x="36" y="65" font-family="Courier New, monospace" font-size="5" text-anchor="middle">.14</text>
+    <text x="54" y="65" font-family="Courier New, monospace" font-size="5" text-anchor="middle">.09</text>
+    <text x="72" y="65" font-family="Courier New, monospace" font-size="5" text-anchor="middle">.13</text>
+    <text x="45" y="115" font-family="Courier New, monospace" font-size="5" text-anchor="middle">W[i,j] ∈ [0,1]</text>
+    <text x="95" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold">304</text>
+  </g>
+  <line x1="180" y1="235" x2="200" y2="250" stroke="black" stroke-width="1" />
+  <line x1="180" y1="265" x2="200" y2="250" stroke="black" stroke-width="1" />
+  <line x1="180" y1="290" x2="200" y2="280" stroke="black" stroke-width="1" />
+  <g transform="translate(310, 180)">
+    <rect x="0" y="0" width="120" height="140" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="60" y="15" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">LIF NEURON ARRAY</text>
+    <text x="60" y="25" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">(N = 50 neurons)</text>
+    <g transform="translate(15, 35)">
+      <circle cx="15" cy="15" r="12" fill="none" stroke="black" stroke-width="1.2" />
+      <rect x="8" y="20" width="14" height="4" fill="none" stroke="black" stroke-width="0.5" />
+      <rect x="8" y="20" width="10" height="4" fill="black" />
+      <text x="15" y="13" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">N₁</text>
+      <circle cx="50" cy="15" r="12" fill="none" stroke="black" stroke-width="1.2" />
+      <rect x="43" y="20" width="14" height="4" fill="none" stroke="black" stroke-width="0.5" />
+      <rect x="43" y="20" width="6" height="4" fill="black" />
+      <text x="50" y="13" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">N₂</text>
+      <circle cx="85" cy="15" r="12" fill="none" stroke="black" stroke-width="1.2" />
+      <rect x="78" y="20" width="14" height="4" fill="none" stroke="black" stroke-width="0.5" />
+      <rect x="78" y="20" width="14" height="4" fill="black" />
+      <text x="85" y="13" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">N₃</text>
+      <line x1="85" y1="0" x2="85" y2="-8" stroke="black" stroke-width="1.5" />
+      <text x="92" y="-3" font-family="Arial, sans-serif" font-size="5">SPIKE!</text>
+      <circle cx="15" cy="55" r="12" fill="none" stroke="black" stroke-width="1.2" />
+      <rect x="8" y="60" width="14" height="4" fill="none" stroke="black" stroke-width="0.5" />
+      <rect x="8" y="60" width="3" height="4" fill="black" />
+      <text x="15" y="53" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">N₄</text>
+      <circle cx="50" cy="55" r="12" fill="none" stroke="black" stroke-width="1.2" />
+      <rect x="43" y="60" width="14" height="4" fill="none" stroke="black" stroke-width="0.5" />
+      <rect x="43" y="60" width="8" height="4" fill="black" />
+      <text x="50" y="53" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">N₅</text>
+      <text x="85" y="58" font-family="Arial, sans-serif" font-size="8" text-anchor="middle">...</text>
+      <circle cx="85" cy="85" r="12" fill="none" stroke="black" stroke-width="1.2" />
+      <rect x="78" y="90" width="14" height="4" fill="none" stroke="black" stroke-width="0.5" />
+      <rect x="78" y="90" width="7" height="4" fill="black" />
+      <text x="85" y="83" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">N₅₀</text>
+    </g>
+    <text x="125" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold">306</text>
+  </g>
+  <line x1="290" y1="250" x2="310" y2="250" stroke="black" stroke-width="1.2" marker-end="url(#arrowhead)" />
+  <g transform="translate(310, 340)">
+    <rect x="0" y="0" width="220" height="55" rx="4" ry="4" fill="none" stroke="black" stroke-width="1" />
+    <text x="110" y="15" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">MEMBRANE POTENTIAL UPDATE</text>
+    <text x="110" y="32" font-family="Courier New, monospace" font-size="7" text-anchor="middle">V_i(t) = V_i(t-1)×(1-λ) + I_adj×dt</text>
+    <text x="110" y="47" font-family="Courier New, monospace" font-size="6" text-anchor="middle">λ=0.1 (leak), dt=0.005h, threshold=0.5</text>
+    <text x="225" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold">308</text>
+  </g>
+  <g transform="translate(450, 200)">
+    <rect x="0" y="0" width="80" height="60" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="40" y="15" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">THRESHOLD</text>
+    <polygon points="15,25 65,40 15,55" fill="none" stroke="black" stroke-width="1.2" />
+    <text x="35" y="43" font-family="Arial, sans-serif" font-size="8" text-anchor="middle">&gt;</text>
+    <text x="70" y="43" font-family="Courier New, monospace" font-size="6">0.5</text>
+    <text x="85" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold">310</text>
+  </g>
+  <line x1="430" y1="250" x2="450" y2="230" stroke="black" stroke-width="1.2" marker-end="url(#arrowhead)" />
+  <g transform="translate(450, 280)">
+    <rect x="0" y="0" width="80" height="50" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="40" y="15" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">AGGREGATE</text>
+    <text x="40" y="30" font-family="Courier New, monospace" font-size="6" text-anchor="middle">O(t) = mean(V)</text>
+    <text x="40" y="42" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">Spike count</text>
+    <text x="85" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold">312</text>
+  </g>
+  <line x1="530" y1="305" x2="555" y2="305" stroke="black" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="534.2" y="318" font-family="Arial, sans-serif" font-size="6" font-style="italic">to Motor</text>
+  <g transform="translate(100, 340)">
+    <rect x="0" y="0" width="180" height="80" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
+    <text x="90" y="15" font-family="Arial, sans-serif" font-size="7" font-weight="bold" text-anchor="middle">STDP LEARNING MODULE</text>
+    <text x="90" y="28" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">Spike-Timing Dependent Plasticity</text>
+    <g transform="translate(20, 35)">
+      <line x1="0" y1="20" x2="60" y2="20" stroke="black" stroke-width="0.8" />
+      <line x1="30" y1="0" x2="30" y2="40" stroke="black" stroke-width="0.8" />
+      <path d="M30,20 Q40,5 55,18" fill="none" stroke="black" stroke-width="1" />
+      <path d="M30,20 Q20,35 5,22" fill="none" stroke="black" stroke-width="1" />
+      <text x="45" y="10" font-family="Arial, sans-serif" font-size="4">LTP</text>
+      <text x="10" y="38" font-family="Arial, sans-serif" font-size="4">LTD</text>
+      <text x="30" y="48" font-family="Arial, sans-serif" font-size="4" text-anchor="middle">Δt</text>
+    </g>
+    <text x="120" y="50" font-family="Courier New, monospace" font-size="5">ΔW = A×exp(-|Δt|/τ)</text>
+    <text x="120" y="62" font-family="Courier New, monospace" font-size="5">τ = 20ms, A = ±0.01</text>
+    <text x="120" y="74" font-family="Courier New, monospace" font-size="5">W ∈ [0.01, 1.0]</text>
+    <text x="185" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold">314</text>
+  </g>
+  <path d="M190,420 L190,440 L245,440 L245,310" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+  <line x1="245" y1="310" x2="245" y2="295" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowhead)" />
+  <text x="200" y="455" font-family="Arial, sans-serif" font-size="11" font-weight="bold">316</text>
+  <text x="270" y="380" font-family="Arial, sans-serif" font-size="6" font-style="italic">weight</text>
+  <text x="270" y="390" font-family="Arial, sans-serif" font-size="6" font-style="italic">update</text>
+  <path d="M370,320 L370,350 L280,350" fill="none" stroke="black" stroke-width="1" stroke-dasharray="3,2" />
+  <line x1="280" y1="350" x2="280" y2="365" stroke="black" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrowhead-sm)" />
+  <rect x="80" y="545" width="470" height="75" rx="4" ry="4" fill="none" stroke="black" stroke-width="1" />
+  <text x="320" y="562" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle">CONFIGURABLE PARAMETERS</text>
+  <text x="545" y="560" font-family="Arial, sans-serif" font-size="11" font-weight="bold">318</text>
+  <text x="100" y="580" font-family="Courier New, monospace" font-size="6">num_neurons = 50 (range: 1-10,000)</text>
+  <text x="100" y="592" font-family="Courier New, monospace" font-size="6">threshold = 0.5 (range: 0.1-1.0)</text>
+  <text x="100" y="604" font-family="Courier New, monospace" font-size="6">leak_factor = 0.1 (range: 0.01-0.5)</text>
+  <text x="320" y="580" font-family="Courier New, monospace" font-size="6">refractory_period = 2 (range: 1-10)</text>
+  <text x="320" y="592" font-family="Courier New, monospace" font-size="6">weight_scale = 0.15 (range: 0.01-1.0)</text>
+  <text x="320" y="604" font-family="Courier New, monospace" font-size="6">input_scale = 0.8 (range: 0.1-2.0)</text>
+  <text x="320" y="670" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">FIG. 3</text>
+</svg>

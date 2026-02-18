@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 8 3, 0 6" fill="black" />
+    </marker>
+    <marker id="arrowhead-sm" markerWidth="5" markerHeight="4" refX="5" refY="2" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="0 0, 5 2, 0 4" fill="black" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="white" />
+  <text x="320" y="90" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">8/8</text>
+  <text x="320" y="112" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">COMPLETE REFERENCE ARCHITECTURE</text>
+  <text x="320" y="125" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">End-to-End Signal Flow with All Subsystems</text>
+  <rect x="80" y="140" width="470" height="475" rx="10" ry="10" fill="none" stroke="black" stroke-width="2" stroke-dasharray="10,5" />
+  <text x="535" y="155" font-family="Arial, sans-serif" font-size="11" font-weight="bold">800</text>
+  <text x="315" y="160" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle">SELF-SUSTAINING NEURAL-MOTOR ENERGY HARVESTING SYSTEM</text>
+  <g transform="translate(95, 95)">
+    <text x="50" y="0" font-family="Arial, sans-serif" font-size="7" font-style="italic" text-anchor="middle">Environment</text>
+    <line x1="50" y1="5" x2="50" y2="45" stroke="black" stroke-width="1.2" marker-end="url(#arrowhead)" />
+    <text x="65" y="30" font-family="Arial, sans-serif" font-size="5">Light</text>
+    <text x="65" y="40" font-family="Arial, sans-serif" font-size="5">Temp</text>
+    <text x="105" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold">802</text>
+  </g>
+  <g transform="translate(100, 175)">
+    <rect x="0" y="0" width="90" height="55" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" />
+    <ellipse cx="25" cy="28" rx="8" ry="10" fill="none" stroke="black" stroke-width="1" />
+    <text x="25" y="31" font-family="Arial, sans-serif" font-size="4" text-anchor="middle">NTC</text>
+    <circle cx="65" cy="28" r="10" fill="none" stroke="black" stroke-width="1" />
+    <path d="M58,25 Q62,22 65,25 T72,25" fill="none" stroke="black" stroke-width="0.5" />
+    <path d="M58,28 Q62,25 65,28 T72,28" fill="none" stroke="black" stroke-width="0.5" />
+    <path d="M58,31 Q62,28 65,31 T72,31" fill="none" stroke="black" stroke-width="0.5" />
+    <text x="45" y="50" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">SENSORS</text>
+    <text x="95" y="12" font-family="Arial, sans-serif" font-size="11" font-weight="bold">804</text>
+  </g>
+  <g transform="translate(210, 175)">
+    <path d="M10,18 C3,18 0,25 3,32 C0,35 3,42 10,42 L75,42 C82,42 85,35 82,32 C85,25 82,18 75,18 C75,12 68,8 60,12 C56,5 44,5 40,12 C34,8 26,12 26,18 Z" fill="none" stroke="black" stroke-width="1.2" stroke-dasharray="4,2" />
+    <text x="42" y="28" font-family="Arial, sans-serif" font-size="6" font-weight="bold" text-anchor="middle">COGNITIVE</text>
+    <text x="42" y="37" font-family="Arial, sans-serif" font-size="6" font-weight="bold" text-anchor="middle">LAYER</text>
+    <text x="90" y="15" font-family="Arial, sans-serif" font-size="11" font-weight="bold">806</text>
+  </g>
+  <g transform="translate(320, 175)">
+    <rect x="0" y="0" width="100" height="55" rx="3" ry="3" fill="none" stroke="black" stroke-width="2" />
+    <path d="M45,0 A3,3 0 0,0 55,0" fill="none" stroke="black" stroke-width="2" />
+    <circle cx="20" cy="20" r="4" fill="none" stroke="black" stroke-width="0.6" />
+    <circle cx="40" cy="15" r="4" fill="none" stroke="black" stroke-width="0.6" />
+    <circle cx="60" cy="22" r="4" fill="none" stroke="black" stroke-width="0.6" />
+    <circle cx="30" cy="38" r="4" fill="none" stroke="black" stroke-width="0.6" />
+    <circle cx="55" cy="35" r="4" fill="none" stroke="black" stroke-width="0.6" />
+    <circle cx="80" cy="28" r="4" fill="none" stroke="black" stroke-width="0.6" />
+    <line x1="24" y1="20" x2="36" y2="15" stroke="black" stroke-width="0.3" />
+    <line x1="44" y1="15" x2="56" y2="22" stroke="black" stroke-width="0.3" />
+    <line x1="34" y1="38" x2="51" y2="35" stroke="black" stroke-width="0.3" />
+    <line x1="59" y1="35" x2="76" y2="28" stroke="black" stroke-width="0.3" />
+    <line x1="-6" y1="20" x2="0" y2="20" stroke="black" stroke-width="1" />
+    <line x1="-6" y1="38" x2="0" y2="38" stroke="black" stroke-width="1" />
+    <line x1="100" y1="28" x2="106" y2="28" stroke="black" stroke-width="1" />
+    <text x="50" y="70" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">SNN (50 LIF)</text>
+    <text x="105" y="12" font-family="Arial, sans-serif" font-size="11" font-weight="bold">808</text>
+  </g>
+  <g transform="translate(440, 175)">
+    <rect x="0" y="0" width="80" height="55" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M12,28 L35,28 A10,10 0 1,1 35,18 L22,18" fill="none" stroke="black" stroke-width="1" marker-end="url(#arrowhead-sm)" />
+    <text x="55" y="45" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">z⁻¹</text>
+    <text x="40" y="55" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">REFLECTION</text>
+    <text x="40" y="-17.0" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">810</text>
+  </g>
+  <g transform="translate(100, 270)">
+    <rect x="0" y="0" width="90" height="50" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" />
+    <circle cx="30" cy="25" r="12" fill="none" stroke="black" stroke-width="1" />
+    <line x1="30" y1="16" x2="30" y2="34" stroke="black" stroke-width="0.5" />
+    <line x1="21" y1="25" x2="39" y2="25" stroke="black" stroke-width="0.5" />
+    <path d="M30,25 L38,18" fill="none" stroke="black" stroke-width="1" />
+    <text x="60" y="28" font-family="Arial, sans-serif" font-size="5">mWh</text>
+    <text x="45" y="45" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">GOVERNOR</text>
+    <text x="40" y="-5" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">812</text>
+  </g>
+  <g transform="translate(250, 270)">
+    <rect x="0" y="5" width="45" height="30" rx="2" ry="2" fill="none" stroke="black" stroke-width="1.5" />
+    <rect x="-5" y="22" width="5" height="5" fill="none" stroke="black" stroke-width="0.6" />
+    <rect x="45" y="22" width="5" height="5" fill="none" stroke="black" stroke-width="0.6" />
+    <circle cx="12" cy="20" r="7" fill="none" stroke="black" stroke-width="1.2" />
+    <circle cx="12" cy="20" r="3" fill="none" stroke="black" stroke-width="0.6" />
+    <rect x="8" y="0" width="8" height="7" rx="1" ry="1" fill="none" stroke="black" stroke-width="0.6" />
+    <circle cx="12" cy="2" r="1" fill="black" />
+    <path d="M35,35 L35,45 Q35,48 38,48 L55,48" fill="none" stroke="black" stroke-width="1.2" />
+    <text x="28" y="18" font-family="Arial, sans-serif" font-size="5" font-weight="bold">SG90</text>
+    <text x="22" y="58" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">MOTOR</text>
+    <text x="55" y="12" font-family="Arial, sans-serif" font-size="11" font-weight="bold">814</text>
+  </g>
+  <g transform="translate(360, 270)">
+    <circle cx="22" cy="22" r="20" fill="none" stroke="black" stroke-width="1.5" />
+    <circle cx="22" cy="22" r="12" fill="none" stroke="black" stroke-width="0.8" />
+    <text x="22" y="20" font-family="Arial, sans-serif" font-size="8" text-anchor="middle">+</text>
+    <text x="22" y="32" font-family="Arial, sans-serif" font-size="8" text-anchor="middle">−</text>
+    <line x1="22" y1="2" x2="22" y2="-5" stroke="black" stroke-width="1.2" />
+    <line x1="22" y1="42" x2="22" y2="50" stroke="black" stroke-width="1.2" />
+    <text x="22" y="60" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">PIEZO</text>
+    <text x="48" y="10" font-family="Arial, sans-serif" font-size="11" font-weight="bold">816</text>
+  </g>
+  <g transform="translate(450, 270)">
+    <ellipse cx="20" cy="5" rx="16" ry="5" fill="none" stroke="black" stroke-width="1.5" />
+    <line x1="4" y1="5" x2="4" y2="40" stroke="black" stroke-width="1.5" />
+    <line x1="36" y1="5" x2="36" y2="40" stroke="black" stroke-width="1.5" />
+    <ellipse cx="20" cy="40" rx="16" ry="5" fill="none" stroke="black" stroke-width="1.5" />
+    <rect x="4" y="10" width="6" height="25" fill="none" stroke="black" stroke-width="0.4" />
+    <text x="7" y="25" font-family="Arial, sans-serif" font-size="7" text-anchor="middle">−</text>
+    <text x="30" y="25" font-family="Arial, sans-serif" font-size="7" text-anchor="middle">+</text>
+    <text x="20" y="55" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">STORAGE</text>
+    <text x="42" y="10" font-family="Arial, sans-serif" font-size="11" font-weight="bold">818</text>
+  </g>
+  <line x1="190" y1="203" x2="190" y2="168" stroke="black" stroke-width="1.2" />
+  <line x1="190" y1="168" x2="314" y2="168" stroke="black" stroke-width="1.2" />
+  <line x1="314" y1="168" x2="314" y2="175" stroke="black" stroke-width="1.2" marker-end="url(#arrowhead)" />
+  <line x1="252" y1="220" x2="280" y2="220" stroke="black" stroke-width="1" stroke-dasharray="3,2" />
+  <line x1="280" y1="220" x2="314" y2="213" stroke="black" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrowhead)" />
+  <line x1="426" y1="203" x2="440" y2="203" stroke="black" stroke-width="1.2" marker-end="url(#arrowhead)" />
+  <line x1="480" y1="230" x2="480" y2="245" stroke="black" stroke-width="2" />
+  <line x1="480" y1="245" x2="527" y2="245" stroke="black" stroke-width="2" />
+  <line x1="527" y1="245" x2="527" y2="165" stroke="black" stroke-width="2" />
+  <line x1="527" y1="165" x2="370" y2="165" stroke="black" stroke-width="2" />
+  <line x1="370" y1="165" x2="370" y2="175" stroke="black" stroke-width="2" marker-end="url(#arrowhead)" />
+  <text x="445" y="255" font-family="Arial, sans-serif" font-size="5" font-weight="bold">REFLECTION LOOP</text>
+  <line x1="370" y1="230" x2="370" y2="250" stroke="black" stroke-width="1.2" />
+  <line x1="370" y1="250" x2="272" y2="250" stroke="black" stroke-width="1.2" />
+  <line x1="272" y1="250" x2="272" y2="270" stroke="black" stroke-width="1.2" marker-end="url(#arrowhead)" />
+  <path d="M295,290 Q330,280 360,290" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,2" />
+  <text x="330" y="275" font-family="Arial, sans-serif" font-size="5" font-style="italic">mechanical</text>
+  <line x1="382" y1="320" x2="382" y2="340" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+  <line x1="382" y1="340" x2="450" y2="340" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+  <line x1="450" y1="340" x2="450" y2="320" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowhead)" />
+  <line x1="470" y1="330" x2="530" y2="330" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+  <line x1="530" y1="330" x2="530" y2="400" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+  <line x1="530" y1="400" x2="95" y2="400" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+  <line x1="95" y1="400" x2="95" y2="320" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+  <line x1="95" y1="320" x2="100" y2="320" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+  <line x1="100" y1="320" x2="100" y2="295" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowhead)" />
+  <text x="90" y="365" font-family="Arial, sans-serif" font-size="6" font-weight="bold" transform="rotate(-90, 90, 365)">ENERGY LOOP</text>
+  <line x1="190" y1="295" x2="210" y2="295" stroke="black" stroke-width="1.2" />
+  <line x1="210" y1="295" x2="210" y2="240" stroke="black" stroke-width="1.2" />
+  <line x1="210" y1="240" x2="314" y2="220" stroke="black" stroke-width="1.2" marker-end="url(#arrowhead)" />
+  <text x="195" y="260" font-family="Arial, sans-serif" font-size="5" font-style="italic">mod</text>
+  <g transform="translate(100, 420)">
+    <rect x="0" y="0" width="90" height="40" rx="4" ry="4" fill="none" stroke="black" stroke-width="1" stroke-dasharray="5,3" />
+    <text x="45" y="18" font-family="Arial, sans-serif" font-size="6" font-weight="bold" text-anchor="middle">TELEMETRY</text>
+    <text x="45" y="30" font-family="Arial, sans-serif" font-size="5" text-anchor="middle">&amp; LOGGING</text>
+    <text x="95" y="12" font-family="Arial, sans-serif" font-size="11" font-weight="bold">820</text>
+  </g>
+  <line x1="145" y1="295" x2="145" y2="420" stroke="black" stroke-width="0.8" stroke-dasharray="3,2" />
+  <line x1="370" y1="335" x2="370" y2="445" stroke="black" stroke-width="0.8" stroke-dasharray="3,2" />
+  <line x1="190" y1="445" x2="370" y2="445" stroke="black" stroke-width="0.8" stroke-dasharray="3,2" />
+  <rect x="85" y="490" width="460" height="55" rx="4" ry="4" fill="none" stroke="black" stroke-width="1" />
+  <text x="315" y="506" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle">KEY</text>
+  <line x1="105" y1="522" x2="140" y2="522" stroke="black" stroke-width="1.2" />
+  <text x="148" y="525" font-family="Arial, sans-serif" font-size="6">Signal / Data</text>
+  <line x1="105" y1="537" x2="140" y2="537" stroke="black" stroke-width="2" />
+  <text x="148" y="540" font-family="Arial, sans-serif" font-size="6">Feedback (Bold)</text>
+  <line x1="230" y1="522" x2="265" y2="522" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+  <text x="273" y="525" font-family="Arial, sans-serif" font-size="6">Energy Flow</text>
+  <line x1="230" y1="537" x2="265" y2="537" stroke="black" stroke-width="1" stroke-dasharray="3,2" />
+  <text x="273" y="540" font-family="Arial, sans-serif" font-size="6">Cognitive / Monitor</text>
+  <rect x="380" y="515" width="25" height="12" rx="2" ry="2" fill="none" stroke="black" stroke-width="2" />
+  <text x="413" y="525" font-family="Arial, sans-serif" font-size="6">Primary Component</text>
+  <path d="M380,535 C376,535 374,538 376,541 C374,543 376,546 380,546 L400,546 C404,546 406,543 404,541 C406,538 404,535 400,535 Z" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="2,1" />
+  <text x="413" y="543" font-family="Arial, sans-serif" font-size="6">External System</text>
+  <rect x="85" y="555" width="460" height="55" rx="4" ry="4" fill="none" stroke="black" stroke-width="1" />
+  <text x="315" y="572" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle">SYSTEM SUMMARY</text>
+  <text x="100" y="590" font-family="Arial, sans-serif" font-size="6">• Closed-loop cognitive-motor-energy architecture with self-sustaining operation</text>
+  <text x="100" y="602" font-family="Arial, sans-serif" font-size="6">• Dual harvesting (piezoelectric + thermoelectric) with LC resonance amplification</text>
+  <text x="100" y="614" font-family="Arial, sans-serif" font-size="6">• Energy-aware modulation maintains optimal 30-50 spike/step operating point</text>
+  <text x="320" y="660" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">FIG. 8</text>
+</svg>

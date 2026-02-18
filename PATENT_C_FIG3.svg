@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
+  <defs>
+    <marker id="ah" markerWidth="6.76" markerHeight="4.73" refX="6.76" refY="2.36" orient="auto" markerUnits="userSpaceOnUse">
+      <polygon points="75.0,95.54 81.76,97.91 75.0,100.27" fill="black" />
+    </marker>
+    <pattern id="hatch" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+      <line x1="75.0" y1="95.54" x2="75.0" y2="100.95" stroke="black" stroke-width="0.68" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="white" />
+  <text x="362.16" y="136.08" font-family="Arial, sans-serif" font-size="10.81" text-anchor="middle">3/7</text>
+  <text x="360.14" y="183.38" font-family="Arial, sans-serif" font-size="9.46" font-weight="bold" text-anchor="middle">ENERGY-AWARE MODULATION CURVE</text>
+  <line x1="183.11" y1="534.73" x2="183.11" y2="264.46" stroke="black" stroke-width="1.35" />
+  <text x="142.57" y="399.59" font-family="Arial, sans-serif" font-size="9.46" text-anchor="middle" transform="rotate(-90 100 450)">Modulation</text>
+  <line x1="183.11" y1="534.73" x2="537.84" y2="534.73" stroke="black" stroke-width="1.35" />
+  <text x="360.14" y="568.51" font-family="Arial, sans-serif" font-size="9.46" font-weight="bold" text-anchor="middle">System Energy Level (mWh)</text>
+  <line x1="179.73" y1="500.95" x2="183.11" y2="500.95" stroke="black" stroke-width="1.35" />
+  <text x="176.35" y="504.32" font-family="Courier New, monospace" font-size="9.46" text-anchor="end">-0.4</text>
+  <line x1="183.11" y1="500.95" x2="537.84" y2="500.95" stroke="black" stroke-width="0.34" stroke-dasharray="2.03,2.03" />
+  <line x1="179.73" y1="433.38" x2="183.11" y2="433.38" stroke="black" stroke-width="1.35" />
+  <text x="176.35" y="436.76" font-family="Courier New, monospace" font-size="9.46" text-anchor="end">-0.1</text>
+  <line x1="183.11" y1="433.38" x2="537.84" y2="433.38" stroke="black" stroke-width="0.34" stroke-dasharray="2.03,2.03" />
+  <line x1="179.73" y1="399.59" x2="183.11" y2="399.59" stroke="black" stroke-width="1.35" />
+  <text x="176.35" y="402.97" font-family="Courier New, monospace" font-size="9.46" text-anchor="end">0.0</text>
+  <line x1="183.11" y1="399.59" x2="537.84" y2="399.59" stroke="black" stroke-width="0.34" stroke-dasharray="2.03,2.03" />
+  <line x1="179.73" y1="332.03" x2="183.11" y2="332.03" stroke="black" stroke-width="1.35" />
+  <text x="176.35" y="335.41" font-family="Courier New, monospace" font-size="9.46" text-anchor="end">+0.3</text>
+  <line x1="183.11" y1="332.03" x2="537.84" y2="332.03" stroke="black" stroke-width="0.34" stroke-dasharray="2.03,2.03" />
+  <line x1="183.11" y1="534.73" x2="183.11" y2="538.11" stroke="black" stroke-width="1.35" />
+  <text x="183.11" y="551.62" font-family="Courier New, monospace" font-size="9.46" text-anchor="middle">0</text>
+  <line x1="235.81" y1="534.73" x2="235.81" y2="538.11" stroke="black" stroke-width="1.35" />
+  <text x="235.81" y="551.62" font-family="Courier New, monospace" font-size="9.46" text-anchor="middle">15</text>
+  <line x1="289.86" y1="534.73" x2="289.86" y2="538.11" stroke="black" stroke-width="1.35" />
+  <text x="289.86" y="551.62" font-family="Courier New, monospace" font-size="9.46" text-anchor="middle">30</text>
+  <line x1="466.89" y1="534.73" x2="466.89" y2="538.11" stroke="black" stroke-width="1.35" />
+  <text x="466.89" y="551.62" font-family="Courier New, monospace" font-size="9.46" text-anchor="middle">80</text>
+  <line x1="537.84" y1="534.73" x2="537.84" y2="538.11" stroke="black" stroke-width="1.35" />
+  <text x="537.84" y="551.62" font-family="Courier New, monospace" font-size="9.46" text-anchor="middle">100</text>
+  <text x="547.97" y="325.27" font-family="Arial, sans-serif" font-size="9.46" text-anchor="start">300</text>
+  <line x1="183.11" y1="500.95" x2="235.81" y2="500.95" stroke="black" stroke-width="2.03" />
+  <rect x="183.11" y="500.95" width="52.7" height="33.78" fill="url(#hatch)" stroke="none" />
+  <text x="209.46" y="487.43" font-family="Arial, sans-serif" font-size="9.46" font-weight="bold" text-anchor="middle">CRITICAL</text>
+  <line x1="235.81" y1="500.95" x2="235.81" y2="433.38" stroke="black" stroke-width="2.03" />
+  <line x1="235.81" y1="433.38" x2="289.86" y2="433.38" stroke="black" stroke-width="2.03" />
+  <text x="262.84" y="419.86" font-family="Arial, sans-serif" font-size="9.46" font-weight="bold" text-anchor="middle">LOW</text>
+  <line x1="289.86" y1="433.38" x2="289.86" y2="399.59" stroke="black" stroke-width="2.03" />
+  <line x1="289.86" y1="399.59" x2="466.89" y2="399.59" stroke="black" stroke-width="2.03" />
+  <text x="378.38" y="386.08" font-family="Arial, sans-serif" font-size="9.46" font-weight="bold" text-anchor="middle">NORMAL</text>
+  <line x1="466.89" y1="399.59" x2="466.89" y2="332.03" stroke="black" stroke-width="2.03" />
+  <line x1="466.89" y1="332.03" x2="537.84" y2="332.03" stroke="black" stroke-width="2.03" />
+  <text x="502.03" y="318.51" font-family="Arial, sans-serif" font-size="9.46" font-weight="bold" text-anchor="middle">SURPLUS</text>
+  <rect x="183.11" y="588.78" width="354.73" height="101.35" rx="3.38" fill="none" stroke="black" stroke-width="1.35" />
+  <text x="527.7" y="601.2" font-family="Arial, sans-serif" font-size="9.46" text-anchor="end">302</text>
+  <text x="360.14" y="605.68" font-family="Arial, sans-serif" font-size="9.46" font-weight="bold" text-anchor="middle">Behavioral Effects</text>
+  <text x="215.54" y="624.59" font-family="Courier New, monospace" font-size="9.46" text-anchor="start">&lt; 15 mWh</text>
+  <text x="312.16" y="624.59" font-family="Courier New, monospace" font-size="9.46" text-anchor="start">mod = -0.4</text>
+  <text x="408.78" y="624.59" font-family="Arial, sans-serif" font-size="9.46" text-anchor="start">Maximum conservation</text>
+  <text x="215.54" y="643.51" font-family="Courier New, monospace" font-size="9.46" text-anchor="start">15-30 mWh</text>
+  <text x="312.16" y="643.51" font-family="Courier New, monospace" font-size="9.46" text-anchor="start">mod = -0.1</text>
+  <text x="408.78" y="643.51" font-family="Arial, sans-serif" font-size="9.46" text-anchor="start">Cautious operation</text>
+  <text x="215.54" y="662.43" font-family="Courier New, monospace" font-size="9.46" text-anchor="start">30-80 mWh</text>
+  <text x="312.16" y="662.43" font-family="Courier New, monospace" font-size="9.46" text-anchor="start">mod = 0.0</text>
+  <text x="408.78" y="662.43" font-family="Arial, sans-serif" font-size="9.46" text-anchor="start">Standard processing</text>
+  <text x="215.54" y="681.35" font-family="Courier New, monospace" font-size="9.46" text-anchor="start">&gt; 80 mWh</text>
+  <text x="312.16" y="681.35" font-family="Courier New, monospace" font-size="9.46" text-anchor="start">mod = +0.3</text>
+  <text x="408.78" y="681.35" font-family="Arial, sans-serif" font-size="9.46" text-anchor="start">Exploration enabled</text>
+  <text x="360.14" y="737.43" font-family="Arial, sans-serif" font-size="13.51" font-weight="bold" text-anchor="middle">FIG. 3</text>
+</svg>

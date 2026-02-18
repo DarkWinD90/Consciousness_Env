@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
+  <defs>
+    <marker id="arrowhead" markerWidth="3.92" markerHeight="2.61" refX="3.92" refY="1.31" orient="auto">
+      <polygon points="75.0,106.19 78.92,107.49 75.0,108.8" fill="black" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="white" />
+  <text x="352.67" y="181.32" font-family="Arial, sans-serif" font-size="10.45" text-anchor="middle">3/6</text>
+  <g transform="translate(0, 75)">
+    <text x="352.67" y="151.92" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">DYNAMIC MODULATION SOURCES</text>
+    <rect x="140.33" y="184.59" width="130.67" height="55.53" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="1.31" />
+    <text x="205.67" y="202.88" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">EXTERNAL COGNITIVE</text>
+    <text x="205.67" y="214.64" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">CONTROL LAYER</text>
+    <text x="266.43" y="196.7" font-family="Arial, sans-serif" font-size="9.15" text-anchor="end">302</text>
+    <text x="205.67" y="235.1" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">Range: [-1.0, +1.0]</text>
+    <line x1="205.67" y1="240.12" x2="205.67" y2="262.99" stroke="black" stroke-width="1.31" marker-end="url(#arrowhead)" />
+    <rect x="140.33" y="262.99" width="130.67" height="78.4" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="0.65" stroke-dasharray="3.27,1.96" />
+    <text x="266.43" y="275.1" font-family="Arial, sans-serif" font-size="9.15" text-anchor="end">304</text>
+    <text x="205.67" y="289.12" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">MODULATION EXAMPLES</text>
+    <text x="205.67" y="307.41" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">-0.5 = Focus outward</text>
+    <text x="205.67" y="321.79" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle"> 0.0 = Neutral</text>
+    <text x="205.67" y="336.4" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">+0.8 = Introspective</text>
+    <line x1="205.67" y1="341.39" x2="205.67" y2="374.05" stroke="black" stroke-width="1.31" />
+    <line x1="205.67" y1="374.05" x2="290.6" y2="419.79" stroke="black" stroke-width="1.31" marker-end="url(#arrowhead)" />
+    <rect x="434.33" y="184.59" width="130.67" height="55.53" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="1.31" />
+    <text x="499.67" y="202.88" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">ENERGY STATE</text>
+    <text x="499.67" y="214.64" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">MONITOR</text>
+    <text x="560.43" y="196.7" font-family="Arial, sans-serif" font-size="9.15" text-anchor="end">306</text>
+    <text x="499.67" y="235.1" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">Reads energy level</text>
+    <line x1="499.67" y1="240.12" x2="499.67" y2="262.99" stroke="black" stroke-width="1.31" marker-end="url(#arrowhead)" />
+    <rect x="434.33" y="262.99" width="130.67" height="91.47" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="0.65" stroke-dasharray="3.27,1.96" />
+    <text x="560.43" y="275.1" font-family="Arial, sans-serif" font-size="9.15" text-anchor="end">308</text>
+    <text x="499.67" y="289.12" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">ENERGY RULES</text>
+    <text x="499.67" y="307.41" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">&lt;15 mWh → -0.4</text>
+    <text x="499.67" y="321.79" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">&lt;30 mWh → -0.1</text>
+    <text x="499.67" y="336.16" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">&gt;80 mWh → +0.3</text>
+    <text x="499.67" y="349.5" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">else    →  0.0</text>
+    <line x1="499.67" y1="354.45" x2="499.67" y2="374.05" stroke="black" stroke-width="1.31" />
+    <line x1="499.67" y1="374.05" x2="414.73" y2="419.79" stroke="black" stroke-width="1.31" marker-end="url(#arrowhead)" />
+    <rect x="254.67" y="419.79" width="196.0" height="111.07" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="1.96" />
+    <text x="352.67" y="439.39" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">REFLECTION COEFFICIENT</text>
+    <text x="352.67" y="451.15" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">COMPUTATION</text>
+    <text x="446.09" y="431.9" font-family="Arial, sans-serif" font-size="9.15" text-anchor="end">300</text>
+    <text x="352.67" y="475.32" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">refl_coeff = base + mod × sens</text>
+    <text x="352.67" y="491.65" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">refl_coeff = 0.2 + mod × 0.1</text>
+    <rect x="271.0" y="504.72" width="163.33" height="22.87" rx="3.27" ry="3.27" fill="none" stroke="black" stroke-width="0.65" />
+    <text x="352.67" y="516.9" font-family="Arial, sans-serif" font-size="9.15" text-anchor="middle">External overrides Internal</text>
+    <text x="448.9" y="509.95" font-family="Arial, sans-serif" font-size="9.15" text-anchor="start">312</text>
+    <line x1="352.67" y1="530.85" x2="352.67" y2="583.12" stroke="black" stroke-width="1.31" marker-end="url(#arrowhead)" />
+    <rect x="287.33" y="583.12" width="130.67" height="32.67" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="1.31" />
+    <text x="352.67" y="602.72" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">OUTPUT TO SNN</text>
+    <text x="413.43" y="595.3" font-family="Arial, sans-serif" font-size="9.15" text-anchor="end">310</text>
+    <rect x="140.33" y="635.39" width="424.67" height="65.33" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="0.65" />
+    <text x="352.67" y="651.72" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">LEGEND</text>
+    <rect x="159.93" y="661.52" width="32.67" height="13.07" rx="3.27" ry="3.27" fill="none" stroke="black" stroke-width="1.96" />
+    <text x="199.13" y="671.32" font-family="Arial, sans-serif" font-size="9.15" text-anchor="start">Primary Component</text>
+    <rect x="159.93" y="681.12" width="32.67" height="13.07" rx="3.27" ry="3.27" fill="none" stroke="black" stroke-width="1.31" />
+    <text x="199.13" y="690.92" font-family="Arial, sans-serif" font-size="9.15" text-anchor="start">Functional Block</text>
+    <rect x="388.6" y="671.32" width="32.67" height="13.07" rx="3.27" ry="3.27" fill="none" stroke="black" stroke-width="0.65" stroke-dasharray="3.27,1.96" />
+    <text x="427.8" y="681.12" font-family="Arial, sans-serif" font-size="9.15" text-anchor="start">Annotation</text>
+    <text x="352.67" y="726.85" font-family="Arial, sans-serif" font-size="13.07" font-weight="bold" text-anchor="middle">FIG. 3</text>
+  </g>
+</svg>

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
+  <defs>
+    <marker id="arrowhead" markerWidth="3.92" markerHeight="2.61" refX="3.92" refY="1.31" orient="auto">
+      <polygon points="75.0,115.99 78.92,117.29 75.0,118.6" fill="black" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="white" />
+  <text x="352.67" y="191.4" font-family="Arial, sans-serif" font-size="10.45" text-anchor="middle">5/6</text>
+  <g transform="translate(0, 75)">
+    <text x="352.67" y="161.72" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">ENERGY-AWARE SELF-OBSERVATION REGULATION</text>
+    <text x="352.67" y="184.59" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">SYSTEM ENERGY LEVEL (mWh)</text>
+    <text x="560.43" y="184.59" font-family="Arial, sans-serif" font-size="9.15" text-anchor="end">500</text>
+    <rect x="140.33" y="194.39" width="424.67" height="39.2" rx="0.0" ry="0.0" fill="none" stroke="black" stroke-width="1.96" />
+    <rect x="140.33" y="194.39" width="63.37" height="39.2" fill="none" stroke="black" stroke-width="0.65" />
+    <text x="171.69" y="215.29" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">CRITICAL</text>
+    <text x="171.69" y="228.6" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">0-15</text>
+    <rect x="203.71" y="194.39" width="64.03" height="39.2" fill="none" stroke="black" stroke-width="0.65" />
+    <text x="235.72" y="215.29" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">LOW</text>
+    <text x="235.72" y="228.6" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">15-30</text>
+    <rect x="267.73" y="194.39" width="212.33" height="39.2" fill="none" stroke="black" stroke-width="1.96" />
+    <text x="373.57" y="215.29" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">NORMAL (OPERATIONAL)</text>
+    <text x="373.57" y="228.6" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">30-80</text>
+    <rect x="480.07" y="194.39" width="84.93" height="39.2" fill="none" stroke="black" stroke-width="0.65" />
+    <text x="522.53" y="215.29" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">SURPLUS</text>
+    <text x="522.53" y="228.6" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">80-100</text>
+    <rect x="140.33" y="253.19" width="202.53" height="91.47" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="1.31" />
+    <text x="241.6" y="271.48" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">MODULATION MAPPING</text>
+    <text x="338.29" y="265.3" font-family="Arial, sans-serif" font-size="9.15" text-anchor="end">502</text>
+    <text x="241.6" y="292.39" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">Critical → -0.4</text>
+    <text x="241.6" y="308.72" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">Low      → -0.1</text>
+    <text x="241.6" y="325.05" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">Normal   →  0.0</text>
+    <text x="241.6" y="339.7" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle" font-weight="bold">Surplus  → +0.3</text>
+    <line x1="241.6" y1="233.59" x2="241.6" y2="253.19" stroke="black" stroke-width="1.31" marker-end="url(#arrowhead)" />
+    <line x1="342.87" y1="298.92" x2="362.47" y2="298.92" stroke="black" stroke-width="1.31" marker-end="url(#arrowhead)" />
+    <rect x="362.47" y="253.19" width="202.53" height="91.47" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="1.31" />
+    <text x="463.73" y="271.48" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">REFLECTION COEFFICIENT</text>
+    <text x="560.43" y="265.3" font-family="Arial, sans-serif" font-size="9.15" text-anchor="end">504</text>
+    <text x="463.73" y="292.39" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">Critical → 0.16</text>
+    <text x="463.73" y="308.72" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">Low      → 0.19</text>
+    <text x="463.73" y="325.05" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">Normal   → 0.20</text>
+    <text x="463.73" y="339.7" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle" font-weight="bold">Surplus  → 0.23</text>
+    <line x1="463.73" y1="233.59" x2="463.73" y2="253.19" stroke="black" stroke-width="1.31" marker-end="url(#arrowhead)" />
+    <line x1="241.6" y1="344.65" x2="241.6" y2="377.32" stroke="black" stroke-width="1.31" marker-end="url(#arrowhead)" />
+    <line x1="463.73" y1="344.65" x2="463.73" y2="377.32" stroke="black" stroke-width="1.31" marker-end="url(#arrowhead)" />
+    <rect x="140.33" y="377.32" width="424.67" height="130.67" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="1.31" />
+    <text x="352.67" y="395.61" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">BEHAVIORAL EFFECTS</text>
+    <text x="560.43" y="389.5" font-family="Arial, sans-serif" font-size="9.15" text-anchor="end">506</text>
+    <line x1="140.33" y1="406.72" x2="565.0" y2="406.72" stroke="black" stroke-width="0.65" />
+    <text x="199.13" y="419.79" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">Coeff</text>
+    <text x="401.67" y="419.79" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">System Behavior</text>
+    <line x1="140.33" y1="426.32" x2="565.0" y2="426.32" stroke="black" stroke-width="0.65" />
+    <line x1="257.93" y1="406.72" x2="257.93" y2="507.99" stroke="black" stroke-width="0.65" />
+    <text x="199.13" y="442.65" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">0.16</text>
+    <text x="411.47" y="442.65" font-family="Arial, sans-serif" font-size="9.15" text-anchor="middle">Reduce self-observation; conserve resources</text>
+    <text x="199.13" y="462.25" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">0.19</text>
+    <text x="411.47" y="462.25" font-family="Arial, sans-serif" font-size="9.15" text-anchor="middle">Cautious operation; slightly reduced awareness</text>
+    <text x="199.13" y="481.85" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">0.20</text>
+    <text x="411.47" y="481.85" font-family="Arial, sans-serif" font-size="9.15" text-anchor="middle">Baseline normal self-observation</text>
+    <text x="199.13" y="503.0" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">0.23</text>
+    <text x="411.47" y="503.0" font-family="Arial, sans-serif" font-size="9.15" text-anchor="middle">Enhanced learning; surplus allows exploration</text>
+    <rect x="140.33" y="527.59" width="424.67" height="32.67" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="0.65" />
+    <text x="352.67" y="547.19" font-family="Courier New, monospace" font-size="9.15" text-anchor="middle">refl_coeff = 0.2 + modulation × 0.1</text>
+    <rect x="140.33" y="579.85" width="424.67" height="52.27" rx="6.53" ry="6.53" fill="none" stroke="black" stroke-width="0.65" />
+    <text x="352.67" y="596.19" font-family="Arial, sans-serif" font-size="9.15" font-weight="bold" text-anchor="middle">LEGEND</text>
+    <rect x="173.0" y="605.99" width="32.67" height="13.07" rx="0.0" ry="0.0" fill="none" stroke="black" stroke-width="1.96" />
+    <text x="212.2" y="615.79" font-family="Arial, sans-serif" font-size="9.15" text-anchor="start">Operational Range</text>
+    <rect x="401.67" y="605.99" width="32.67" height="13.07" rx="3.27" ry="3.27" fill="none" stroke="black" stroke-width="1.31" />
+    <text x="440.87" y="615.79" font-family="Arial, sans-serif" font-size="9.15" text-anchor="start">Functional Block</text>
+    <text x="352.67" y="717.05" font-family="Arial, sans-serif" font-size="13.07" font-weight="bold" text-anchor="middle">FIG. 5</text>
+  </g>
+</svg>
