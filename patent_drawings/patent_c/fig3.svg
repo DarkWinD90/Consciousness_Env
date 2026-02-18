@@ -10,13 +10,13 @@
 
   <!-- Y-axis tick marks and values -->
   <path d="M95 190h10" stroke="#000" stroke-width="1" />
-  <text x="90" y="195" font-family="Arial" font-size="9" text-anchor="end" fill="#000">+0.3</text>
+  <text x="90" y="195" font-family="Arial" font-size="10" text-anchor="end" fill="#000">+0.3</text>
   <path d="M95 300h10" stroke="#000" stroke-width="1" />
-  <text x="90" y="305" font-family="Arial" font-size="9" text-anchor="end" fill="#000">0.0</text>
+  <text x="90" y="305" font-family="Arial" font-size="10" text-anchor="end" fill="#000">0.0</text>
   <path d="M95 360h10" stroke="#000" stroke-width="1" />
-  <text x="90" y="365" font-family="Arial" font-size="9" text-anchor="end" fill="#000">-0.1</text>
+  <text x="90" y="365" font-family="Arial" font-size="10" text-anchor="end" fill="#000">-0.1</text>
   <path d="M95 440h10" stroke="#000" stroke-width="1" />
-  <text x="90" y="445" font-family="Arial" font-size="9" text-anchor="end" fill="#000">-0.4</text>
+  <text x="90" y="445" font-family="Arial" font-size="10" text-anchor="end" fill="#000">-0.4</text>
 
   <!-- 304: X-axis (Energy mWh) -->
   <path d="M100 500h400" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
@@ -25,15 +25,15 @@
 
   <!-- X-axis tick marks and values -->
   <path d="M100 495v10" stroke="#000" stroke-width="1" />
-  <text x="100" y="520" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">0</text>
+  <text x="100" y="520" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">0</text>
   <path d="M160 495v10" stroke="#000" stroke-width="1" />
-  <text x="160" y="520" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">15</text>
+  <text x="160" y="520" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">15</text>
   <path d="M220 495v10" stroke="#000" stroke-width="1" />
-  <text x="220" y="520" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">30</text>
+  <text x="220" y="520" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">30</text>
   <path d="M380 495v10" stroke="#000" stroke-width="1" />
-  <text x="380" y="520" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">80</text>
+  <text x="380" y="520" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">80</text>
   <path d="M480 495v10" stroke="#000" stroke-width="1" />
-  <text x="480" y="520" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">100</text>
+  <text x="480" y="520" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">100</text>
 
   <!-- Vertical threshold lines (dashed) -->
   <path d="M160 160v335" stroke="#000" stroke-width="0.8" stroke-dasharray="4,4" />
@@ -43,7 +43,7 @@
   <!-- Step function curve (energy modulation curve 300) -->
   <!-- 308: CRITICAL plateau (0-15 mWh, -0.4) -->
   <path d="M100 440h60" stroke="#000" stroke-width="2.5" />
-  <text x="130" y="460" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">CRITICAL</text>
+  <text x="130" y="460" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">CRITICAL</text>
   <text x="130" y="430" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">308</text>
 
   <!-- Step up at 15 -->
@@ -51,7 +51,7 @@
 
   <!-- 310: LOW plateau (15-30 mWh, -0.1) -->
   <path d="M160 360h60" stroke="#000" stroke-width="2.5" />
-  <text x="190" y="380" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">LOW</text>
+  <text x="190" y="380" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">LOW</text>
   <text x="190" y="350" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">310</text>
 
   <!-- Step up at 30 -->
@@ -59,7 +59,7 @@
 
   <!-- 312: NORMAL plateau (30-80 mWh, 0.0) -->
   <path d="M220 300h160" stroke="#000" stroke-width="2.5" />
-  <text x="300" y="290" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">NORMAL</text>
+  <text x="300" y="290" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">NORMAL</text>
   <text x="300" y="320" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">312</text>
 
   <!-- Step up at 80 -->
@@ -67,16 +67,16 @@
 
   <!-- 314: SURPLUS plateau (80+ mWh, +0.3) -->
   <path d="M380 190h100" stroke="#000" stroke-width="2.5" />
-  <text x="430" y="180" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">SURPLUS</text>
+  <text x="430" y="180" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">SURPLUS</text>
   <text x="430" y="210" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">314</text>
 
   <!-- 302: Behavioral Effects Table (bottom) -->
   <rect x="100" y="570" width="400" height="90" rx="5" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" />
   <text x="120" y="590" font-family="Arial" font-size="10" fill="#000">Behavioral Effects (302):</text>
-  <text x="120" y="608" font-family="Arial" font-size="9" fill="#000">CRITICAL (-0.4): Maximum conservation - inhibit neural activity</text>
-  <text x="120" y="623" font-family="Arial" font-size="9" fill="#000">LOW (-0.1): Cautious operation - slightly reduce activity</text>
-  <text x="120" y="638" font-family="Arial" font-size="9" fill="#000">NORMAL (0.0): Standard autonomous processing</text>
-  <text x="120" y="653" font-family="Arial" font-size="9" fill="#000">SURPLUS (+0.3): Opportunistic exploration - utilize excess</text>
+  <text x="120" y="608" font-family="Arial" font-size="10" fill="#000">CRITICAL (-0.4): Maximum conservation - inhibit neural activity</text>
+  <text x="120" y="623" font-family="Arial" font-size="10" fill="#000">LOW (-0.1): Cautious operation - slightly reduce activity</text>
+  <text x="120" y="638" font-family="Arial" font-size="10" fill="#000">NORMAL (0.0): Standard autonomous processing</text>
+  <text x="120" y="653" font-family="Arial" font-size="10" fill="#000">SURPLUS (+0.3): Opportunistic exploration - utilize excess</text>
   <text x="510" y="585" font-family="Arial" font-size="14" font-weight="normal" fill="#000">302</text>
 
   <defs>

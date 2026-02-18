@@ -5,24 +5,24 @@
 
   <!-- 700: COGNITIVE LAYER (Claude) - dashed ellipse at top -->
   <ellipse cx="306" cy="120" rx="72" ry="25" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
-  <text x="306" y="117" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">COGNITIVE</text>
-  <text x="306" y="128" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">LAYER (Claude)</text>
+  <text x="306" y="117" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">COGNITIVE</text>
+  <text x="306" y="128" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">LAYER (Claude)</text>
   <text x="390" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">700</text>
 
   <!-- CONNECTED MODE section label -->
-  <text x="85" y="165" font-family="Arial" font-size="9" font-weight="bold" fill="#000">CONNECTED MODE:</text>
+  <text x="85" y="165" font-family="Arial" font-size="10" font-weight="bold" fill="#000">CONNECTED MODE:</text>
 
   <!-- 702: INPUT (from Claude) -->
   <rect x="100" y="180" width="80" height="40" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="140" y="197" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">INPUT</text>
-  <text x="140" y="210" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">(Claude)</text>
+  <text x="140" y="197" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">INPUT</text>
+  <text x="140" y="210" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">(Claude)</text>
   <text x="140" y="240" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">702</text>
 
   <!-- 704: SNN CORE (Neuromorphic) -->
   <g transform="translate(230 170)">
     <rect width="150" height="60" rx="3" fill="none" stroke="#000" stroke-width="2" />
-    <text x="75" y="25" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">SNN CORE</text>
-    <text x="75" y="38" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">(Neuromorphic)</text>
+    <text x="75" y="25" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">SNN CORE</text>
+    <text x="75" y="38" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">(Neuromorphic)</text>
     <circle cx="20" cy="45" r="4" stroke="#000" />
     <circle cx="75" cy="45" r="4" stroke="#000" />
     <circle cx="130" cy="45" r="4" stroke="#000" />
@@ -31,8 +31,8 @@
 
   <!-- 706: MOTOR OUTPUT -->
   <rect x="420" y="180" width="80" height="40" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="460" y="197" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">MOTOR</text>
-  <text x="460" y="210" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">OUTPUT</text>
+  <text x="460" y="197" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">MOTOR</text>
+  <text x="460" y="210" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">OUTPUT</text>
   <text x="460" y="240" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">706</text>
 
   <!-- 708: Wheel/actuator symbol -->
@@ -45,40 +45,40 @@
   <!-- 710: MODE BOUNDARY - shortened dashed line at margins only -->
   <path d="M50 280h50" stroke="#000" stroke-width="1.5" stroke-dasharray="8,4" />
   <path d="M512 280h50" stroke="#000" stroke-width="1.5" stroke-dasharray="8,4" />
-  <text x="306" y="275" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">--- MODE BOUNDARY ---</text>
+  <text x="306" y="275" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">--- MODE BOUNDARY ---</text>
   <text x="575" y="275" font-family="Arial" font-size="14" font-weight="normal" fill="#000">710</text>
 
   <!-- AUTONOMOUS MODE section label -->
-  <text x="85" y="315" font-family="Arial" font-size="9" font-weight="bold" fill="#000">AUTONOMOUS MODE (Fallback):</text>
+  <text x="85" y="315" font-family="Arial" font-size="10" font-weight="bold" fill="#000">AUTONOMOUS MODE (Fallback):</text>
 
   <!-- 712: INPUT GENERATOR -->
   <rect x="100" y="340" width="80" height="50" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="140" y="357" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">INPUT GEN</text>
-  <text x="140" y="370" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">Circadian +</text>
-  <text x="140" y="380" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">Burst</text>
+  <text x="140" y="355" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">INPUT GEN</text>
+  <text x="140" y="368" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">Circadian +</text>
+  <text x="140" y="381" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">Burst</text>
   <text x="140" y="408" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">712</text>
 
   <!-- 714: ENERGY MODULATION -->
   <rect x="420" y="340" width="80" height="50" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="460" y="357" font-family="Arial" font-size="8" text-anchor="middle" fill="#000">ENERGY</text>
-  <text x="460" y="370" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">MODULATION</text>
-  <text x="460" y="383" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">(4-zone)</text>
+  <text x="460" y="357" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">ENERGY</text>
+  <text x="460" y="370" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">MODULATION</text>
+  <text x="460" y="383" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">(4-zone)</text>
   <text x="460" y="408" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">714</text>
 
   <!-- 716: INPUT SWITCH (peanut/capsule shape) -->
   <path d="M250 440c0-10 15-10 15 0v30c0 10-15 10-15 0z" fill="none" stroke="#000" stroke-width="1.2" />
-  <text x="257" y="432" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">INPUT</text>
+  <text x="257" y="432" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">INPUT</text>
   <text x="257" y="490" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">716</text>
 
   <!-- 718: MOD SWITCH (peanut/capsule shape) -->
   <path d="M340 440c0-10 15-10 15 0v30c0 10-15 10-15 0z" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="347" y="432" font-family="Arial" font-size="7" text-anchor="middle" fill="#000">MOD</text>
+  <text x="347" y="432" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">MOD</text>
   <text x="347" y="490" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">718</text>
 
   <!-- 720: Resync feedback path -->
   <text x="560" y="400" font-family="Arial" font-size="14" font-weight="normal" fill="#000">720</text>
-  <text x="555" y="300" font-family="Arial" font-size="7" fill="#000">resync()</text>
-  <text x="555" y="312" font-family="Arial" font-size="7" fill="#000">payload</text>
+  <text x="555" y="300" font-family="Arial" font-size="10" fill="#000">resync()</text>
+  <text x="555" y="312" font-family="Arial" font-size="10" fill="#000">payload</text>
 
   <!-- Arrow marker definition -->
   <defs>
@@ -129,10 +129,10 @@
   <!-- MODE SELECTION LOGIC legend box -->
   <rect x="100" y="530" width="412" height="90" rx="5" fill="none" stroke="#000" stroke-width="1" />
   <text x="120" y="550" font-family="Arial" font-size="10" font-weight="bold" fill="#000">MODE SELECTION LOGIC:</text>
-  <text x="120" y="568" font-family="Arial" font-size="9" fill="#000">CONNECTED: Input from Claude (702), modulation from Claude (700)</text>
-  <text x="120" y="583" font-family="Arial" font-size="9" fill="#000">AUTONOMOUS: Input from Generator (712), modulation from Energy (714)</text>
-  <text x="120" y="598" font-family="Arial" font-size="9" fill="#000">Switches (716, 718) select active source based on heartbeat status</text>
-  <text x="120" y="613" font-family="Arial" font-size="9" fill="#000">Feedback path (720) transmits resync payload on reconnection</text>
+  <text x="120" y="568" font-family="Arial" font-size="10" fill="#000">CONNECTED: Input from Claude (702), modulation from Claude (700)</text>
+  <text x="120" y="583" font-family="Arial" font-size="10" fill="#000">AUTONOMOUS: Input from Generator (712), modulation from Energy (714)</text>
+  <text x="120" y="598" font-family="Arial" font-size="10" fill="#000">Switches (716, 718) select active source based on heartbeat status</text>
+  <text x="120" y="613" font-family="Arial" font-size="10" fill="#000">Feedback path (720) transmits resync payload on reconnection</text>
 
   <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 7</text>
 </svg>
