@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
   <rect width="100%" height="100%" fill="#fff" />
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
   <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 6 of 8</text>
   
   <!-- 600: Microcontroller (Raspberry Pi Pico) -->
@@ -30,7 +31,6 @@
   <g transform="translate(460 280)"><rect x="4" y="5" width="40" height="45" fill="none" stroke="#000" stroke-width="1.5" /><path d="M12 5v45M32 5v45" stroke="#000" stroke-width="1.5" /><text x="24" y="70" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">616</text></g>
   
   <!-- Arrow marker -->
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
   
   <!-- SIGNAL FLOW ARROWS -->
   <!-- 602 → 600: Piezo ADC input (GP26) -->
@@ -68,7 +68,7 @@
   
   <!-- Energy feedback loop -->
   <path d="M500 330v105H288" stroke="#000" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)" fill="none" />
-  <text x="510" y="420" font-family="Arial" font-size="10" fill="#000">Energy</text>
+  <text x="499" y="420" font-family="Arial" font-size="10" fill="#000">Energy</text>
   <text x="510" y="432" font-family="Arial" font-size="10" fill="#000">Loop</text>
   
   <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 6</text>

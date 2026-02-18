@@ -5,31 +5,40 @@ Self-Sustaining Neural-Motor Energy Harvesting Loop for Autonomous Cognitive Sys
 
 BRIEF DESCRIPTION OF THE DRAWINGS
 
-FIG. 1 is a system architecture block diagram showing the eight-layer
-self-sustaining neural-motor energy harvesting loop.
+FIG. 1 is a system architecture block diagram showing the self-sustaining
+neural-motor energy harvesting loop with sensor, neural network, motor,
+energy harvesting, and control subsystems interconnected in a closed loop.
 
 FIG. 2 is a comparative energy balance chart showing control system energy
 depletion versus experimental system energy growth over 2000 operational steps.
 
 FIG. 3 is a schematic diagram of the spiking neural network architecture
-showing the leaky integrate-and-fire neuron model with synaptic connections.
+showing the input layer, weight matrix, hidden layer with leaky
+integrate-and-fire neurons, output stage, membrane potential dynamics, spike
+vector output, and STDP learning rule.
 
 FIG. 4 is a circuit schematic of the energy harvesting subsystem comprising
-piezoelectric and thermoelectric transducers with rectification and storage.
+a piezoelectric transducer path with inductor, rectifier, and capacitor, and
+a thermoelectric transducer path with heat sink, TEG module, and boost
+converter, both feeding through a regulator to the SNN.
 
-FIG. 5 is a graph showing the activity-dependent energy dynamics curve
-illustrating the quadratic cost model and optimal activity operating region.
+FIG. 5 is a graph showing the activity-dependent energy dynamics with harvest
+and cost curves, crossover point, net positive region, energy trajectory, and
+activity state pipeline.
 
-FIG. 6 is a hardware reference design layout diagram showing component
-placement and interconnections for the physical embodiment.
+FIG. 6 is a hardware reference design layout diagram showing the
+microcontroller, piezo disc, servo motor, thermistor, photoresistor, LED
+indicator, AC signal input, control logic, and energy storage components with
+their interconnections.
 
-FIG. 7 is a validation results summary table confirming all falsifiable
-claims pass the specified thresholds.
+FIG. 7 is a validation results summary comprising a claims validation table,
+an energy comparison table, an energy trajectory graph, a legend, and a
+summary statement.
 
 FIG. 8 is a reference architecture diagram of the energy-bounded recursive
-control system showing the canonical signal flow from sensor interface through
-neuromorphic core, recursive reflection, energy governor, cognitive modulation,
-neural router, and actuation, with energy harvesting feedback.
+control system showing the signal flow from environment through sensor
+interface, cognitive modulation, SNN core, motor output, thermal harvester,
+ADC, piezo disc, and energy store, with reflection feedback.
 
 
 DETAILED DESCRIPTION OF THE DRAWINGS
@@ -41,438 +50,391 @@ physical component appears in multiple figures, it receives the numeral
 appropriate to that figure's series.
 
 
-FIG. 1 — System Architecture Block Diagram (8-Layer Loop)
+FIG. 1 — System Architecture Block Diagram
 
-This figure shows eight labeled blocks arranged in a vertical flow with arrows
-indicating signal direction, forming a closed loop.
+FIG. 1 is a system architecture block diagram depicting the self-sustaining
+neural-motor energy harvesting loop. The entire system operates within an
+environment boundary 100, shown as a dashed rectangle.
 
-Block layout (top to bottom, then looping back):
+Reference numerals: 100, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120
 
-    ENVIRONMENT 100 (external, at top)
-        |
-        v
-    L1: Printed Membrane 102 — labeled "ThermochromicMixin"
-        |
-        v
-    L2: Sensing Pads 104 — labeled "light_intensity, membrane_temp"
-        |
-        v
-    L3: Optical Transmission 106 — labeled "signal_voltage = light / 1000 x 5.0"
-        |
-        v
-    L4: Neuromorphic CPU (SNN) 108 — labeled "BaseSNN (LIF neurons)"
-        |                           Arrow entering from L8: Recursive
-        |                           Reflection 116 labeled "reflection feedback"
-        v
-    L5: Servo Actuation 110 — labeled "target_angle = clip(output x 180)"
-        |
-        +-----> L6: Energy Harvesting 112 — labeled "piezo + thermal"
-                    |
-                    v
-                L7: Ground Reference 114 — labeled "noise floor / baseline"
-                    |
-                    v
-                L8: Recursive Reflection 116 — labeled "previous_output"
-                    |
-                    +-----> Reflection Feedback 120 (arrow loops back to
-                            Neuromorphic CPU 108)
+A sensor 102 is depicted as a circle with a crosshair symbol, positioned at
+the upper left of the diagram. The sensor 102 receives environmental input
+and converts it to an electrical signal. An arrow labeled "input" connects
+the sensor 102 to a spiking neural network 104.
 
-Three signal pathways should be distinguished by line style:
-- Solid line: Main spine (Printed Membrane 102 through Recursive
-  Reflection 116 to Neuromorphic CPU 108)
-- Dashed line: Thermal Cross-Link 118 (Printed Membrane 102 membrane_temp
-  directly to Energy Harvesting 112)
-- Dotted line: Reflection Feedback 120 (Recursive Reflection 116 to
-  Neuromorphic CPU 108)
+The spiking neural network 104 is depicted as a bold-bordered rectangle
+containing five interconnected neurons (small circles connected by lines),
+labeled "SNN (LIF Neurons)." The spiking neural network 104 processes the
+sensor input through a population of leaky integrate-and-fire neurons.
 
-All blocks are rectangles with rounded corners. Environment 100 is shown as a
-cloud shape. The loop-back arrow (Reflection Feedback 120) from Recursive
-Reflection 116 to Neuromorphic CPU 108 should be prominent and labeled
-"THE LOOP CLOSES HERE."
+An arrow labeled "spikes" connects the spiking neural network 104 to a motor
+106 depicted as a rectangle containing a motor arc symbol. The motor 106
+converts neural output into mechanical actuation.
 
-A legend box at the bottom of the figure shows the three signal pathway styles:
-- Solid arrow: Main Spine
-- Long dashes: Thermal Cross-Link
-- Short dashes: Reflection Feedback
+An arrow labeled "vibration" connects the motor 106 downward to a
+piezoelectric element 112, depicted as a double circle labeled "PIEZO 27mm."
+The piezoelectric element 112 converts mechanical vibration from the motor 106
+into electrical energy.
+
+An arrow labeled "heat" connects the spiking neural network 104 downward to a
+thermal harvester 110, depicted as a rectangle containing a circle, labeled
+"THERMAL." The thermal harvester 110 captures thermal energy generated during
+neural computation.
+
+Both the piezoelectric element 112 and the thermal harvester 110 connect via
+arrows labeled "energy" to a control logic block 116, depicted as a diamond
+shape labeled "CTRL LOGIC." The control logic block 116 manages the
+distribution and regulation of harvested energy.
+
+An energy store 118 is depicted as a rectangle labeled "ENERGY STORE,"
+positioned adjacent to the control logic block 116. An arrow connects the
+control logic block 116 to the energy store 118 for energy buffering.
+
+A power management block 108 is depicted as a rectangle labeled "POWER MGT,"
+positioned at the left. An arrow labeled "power" connects the power management
+block 108 upward to the spiking neural network 104, delivering harvested
+energy to sustain neural computation.
+
+A ground reference 114 is depicted as a ground symbol labeled "GND,"
+positioned at the right side of the diagram.
+
+A reflection feedback path 120, shown as a dashed line, connects from the
+control logic block 116 upward and back to the spiking neural network 104.
+The reflection feedback path 120 represents the recursive self-observation
+signal by which the system's prior computational output re-enters the neural
+network as input on the next processing step.
+
+A legend box at the bottom of the figure distinguishes three signal pathways:
+solid arrows for main signal flow, long-dashed arrows for reflection feedback
+(L8), and short-dashed arrows for ground reference. An annotation reads:
+"THE LOOP CLOSES: SNN output drives motor, motor generates energy, energy
+powers SNN."
 
 
 FIG. 2 — Energy Balance Comparison
 
-This figure shows a dual-panel line graph or single graph with two curves.
+FIG. 2 is a comparative graph showing the energy trajectories of the control
+and experimental system configurations over 2000 operational steps.
 
-X-axis: Operational Steps (0 to 2000)
-Y-axis: Cumulative Energy (mWh)
+Reference numerals: 200, 202, 204, 206, 208, 210, 212, 214, 216, 218
 
-Experimental curve 200 (dashed line, labeled "BalancedEnergyConfig (Experimental)"):
-- Starts at 50.0 mWh
-- Rises rapidly to 100.0 mWh (storage capacity) within approximately 30 steps
-- Plateaus at 100.0 mWh for remaining steps (homeostatic equilibrium)
-- Label: "base_consumption = 45 mW, capacity = 100 mWh, overflow → heat"
+The y-axis 200 represents cumulative energy in milliwatt-hours (mWh). The
+x-axis 202 represents operational steps from 0 to 2000.
 
-Control curve 202 (solid line, labeled "EnergyConfig (Control)"):
-- Starts at 50.0 mWh
-- Decreases linearly
-- Ends at approximately -4,697 mWh at step 2000
-- Label: "base_consumption = 470 mW"
+An experimental curve 204, drawn as a solid bold line, represents the
+BalancedEnergyConfig (MCP path). The experimental curve 204 starts at the
+origin and rises to the storage capacity ceiling, demonstrating that the
+system achieves homeostatic equilibrium. A label 210 identifies this curve
+near the upper right.
 
-A horizontal dashed line at y = 0 serves as the zero energy baseline 204,
-labeled "Self-Sustaining Threshold."
-A horizontal dashed line at y = 100 serves as the capacity limit 206, labeled
-"Storage Capacity (100 mWh)."
+A control curve 212, drawn as a dashed line, represents the EnergyConfig (CLI
+path). The control curve 212 starts at the origin and descends steadily,
+reaching -4,697 mWh at step 2000, demonstrating that the control system
+depletes all stored energy. A label 218 identifies this curve near the lower
+right.
 
-Annotations:
-- Arrow pointing to control curve 202: "System fails — energy depleted"
-- Arrow pointing to experimental curve 200 plateau: "System achieves homeostasis at capacity"
+An origin point 206 is marked at the intersection of the axes with a circle,
+representing the shared starting energy of both configurations.
 
-The area between experimental curve 200 and control curve 202 should be lightly
-shaded to emphasize the divergence.
+A zero energy baseline 208 is shown as a horizontal dashed line at y=0,
+serving as the self-sustaining threshold. Any trajectory above this line
+indicates positive energy balance.
+
+An experimental legend box 214 at the lower left shows the solid line style
+with the label "Experimental (MCP)" and the value "+100.0 mWh @ 2000."
+
+A control legend box 216 at the lower right shows the dashed line style with
+the label "Control (CLI)" and the value "-4697 mWh @ 2000."
 
 
 FIG. 3 — SNN Architecture (LIF Neuron Model)
 
-This figure shows the internal structure of the spiking neural network.
+FIG. 3 is a schematic diagram showing the internal structure of the spiking
+neural network. The entire architecture is enclosed within a boundary
+rectangle 300 labeled "SNN ARCHITECTURE (LIF Model)."
 
-Top section — Single LIF Neuron Detail:
-- Circle labeled Neuron i 308 (LIF model)
-- Input arrows entering from left: I_external input 302 and I_reflection
-  input 304
-- Both inputs converge at summing junction 306 before entering Neuron i 308
-- Inside the circle: equation written as "V(t+1) = V(t) x leak + I x dt"
-- V_th threshold 310: horizontal dashed line labeled "V_threshold = 0.5"
-- Spike output 312 arrow exiting right: "spike (0 or 1)"
-- Below Neuron i 308: "If V >= threshold: spike, V = V_reset"
+Reference numerals: 300, 302, 304, 306, 308, 310, 312, 314, 318, 320
 
-Bottom section — Network Topology:
-- Network neurons 314: N circles (labeled "1" through "N") arranged in a
-  single layer
-- All-to-all connections shown as lines between network neurons 314
-- W[i,j] weight matrix 316 notation on one representative connection
-- Input arrow from left entering all network neurons 314: "adjusted_input"
-- spike_vector output 318 arrows from all network neurons 314 going right
-- Self-connections shown as small loops, crossed out (zeroed)
-- Label: "N = 50 neurons (operational), N = 20 neurons (control)"
+An input layer 302 is depicted as a rectangle at the left containing four
+circles. Two upper circles are labeled "ext" (external input) and "ref"
+(reflection input), and two lower circles represent additional input channels.
+The input layer 302 receives both the external sensor signal and the recursive
+self-observation signal.
 
-Inset box showing STDP Learning Rule 320:
-- "If post fires: W += A+ x pre_trace (LTP)"
-- "If pre fires: W -= A- x post_trace (LTD)"
-- "A- > A+ (stability bias)"
+A weight matrix 304 is depicted as a rectangle containing a grid pattern
+labeled "W[i,j]." The weight matrix 304 represents the all-to-all synaptic
+connections between neurons, with each cell containing a trainable weight
+value bounded to [0.0, 0.5].
+
+A hidden layer 306 is depicted as a rectangle containing three neuron circles
+at the top, with the center neuron labeled "i." Below the neurons, a neuron
+detail section 308 displays the leaky integrate-and-fire equation:
+"V(t+1) = V(t) x leak + I," the firing condition "If V >= V_th: spike," and
+the threshold value "V_th = 0.5."
+
+An output stage 310 is depicted as a rectangle containing a triangle (gate
+symbol) labeled "OUTPUT." The output stage 310 generates discrete spike
+events. An arrow from the output stage 310 exits to the right as the spike
+output 312, representing the binary firing signal from each neuron.
+
+A membrane potential dynamics display 314 is depicted as a dashed-bordered
+rectangle below the main processing elements, containing a time-series
+waveform of membrane potential oscillations around the threshold line V_th.
+The display 314 shows the characteristic sub-threshold oscillation and
+spike-reset dynamics of the LIF model.
+
+A spike vector output 318 is depicted as a rectangle at the bottom of the
+figure containing a bar graph representation of spike counts across all N
+neurons. The label "spike_vector[N]" identifies the output format.
+
+An STDP learning rule box 320 is depicted as a rectangle containing the
+plasticity equations: "If post fires: W += A+ x pre_trace" (LTP),
+"If pre fires: W -= A- x post_trace" (LTD), "A- > A+ (stability bias),"
+and "Weight bounds: [0.0, 0.5]."
+
+Arrows connect the elements in processing order: input layer 302 feeds into
+weight matrix 304, which feeds into hidden layer 306, which feeds into output
+stage 310. The output stage 310 connects to the spike vector output 318.
 
 
 FIG. 4 — Energy Harvesting Circuit
 
-This figure shows an electrical circuit schematic.
+FIG. 4 is an electrical circuit schematic showing the energy harvesting
+subsystem. The entire circuit is enclosed within a dashed boundary rectangle
+400.
 
-Left side — Piezoelectric Harvester:
-- Piezoelectric disc 400 (capacitor with "PIEZO" label)
-- Connected to servo motor 416 shaft via mechanical coupling 406
-  (zigzag line)
-- Label: "27mm piezoelectric disc"
-- Output leads to full-bridge rectifier 402 (4 diodes in bridge configuration)
-- Full-bridge rectifier 402 output to smoothing capacitor 404
-- Label: "friction_factor = 18.0"
+Reference numerals: 400, 402, 404, 406, 408, 410, 412, 414, 416, 418, 420
 
-Center — LC Resonance Circuit:
-- Ferrite inductor 418 in series with piezoelectric disc 400 output
-- Label: "Laird ferrite-backed inductor"
-- Resonance annotation: "f_res = 1 / (2 x pi x sqrt(L x C))"
-- Label: "3-10x voltage amplification at resonance"
+The piezoelectric path occupies the upper portion of the circuit. A
+piezoelectric disc 402 is depicted as a double circle representing the 27mm
+piezo element. An AC signal 404 is depicted as a wavy line representing the
+alternating voltage output from the piezoelectric disc 402. An inductor 406
+is depicted as a rectangle containing a coil pattern, representing the LC
+resonance circuit that amplifies the piezoelectric voltage. The LC resonance
+provides 3-10x voltage amplification at the resonant frequency. A rectifier
+408 is depicted as a diamond shape, representing the full-bridge rectifier
+that converts AC to DC. A capacitor 410 is depicted as parallel plates,
+representing the smoothing capacitor that filters the rectified output.
 
-Right side — Thermoelectric Harvester:
-- NTC 10K 3950 thermistor 408
-- Connected to thermoelectric rectifier 410
-- Thermoelectric rectifier 410 output to thermoelectric smoothing
-  capacitor 412
-- Label: "thermal_factor = 8.0"
+The thermoelectric path occupies the lower portion of the circuit. A heat
+sink 412 is depicted as a finned rectangle. A thermoelectric module 414 is
+depicted as a rectangle labeled "TEG" (thermoelectric generator). A boost
+converter 416 is depicted as a rectangle containing a circle with a plus
+symbol, representing the voltage step-up circuit.
 
-Bottom — Energy Storage:
-- Both harvester outputs combine at power combiner 420
-- Arrow to energy storage 414 (battery/capacitor symbol)
-- Label: "energy_stored (mWh)"
-- Output arrow labeled "Power to SNN (L4)"
+Both paths converge at an output regulator 418 depicted as a rectangle
+labeled "REG," which stabilizes the combined harvested voltage.
 
-Power budget annotation box:
-- "Harvest = friction_harvest + thermal_harvest"
-- "Cost = base_consumption + activity_cost x spike_count^2"
-- "Net = Harvest - Cost"
+The regulated output feeds into a system output 420, depicted as a dashed
+rectangle labeled "To SNN (104)," representing the energy delivery path to
+the spiking neural network.
+
+Signal flow arrows connect: 402 to 404 to 406 to 408 to 410 to 418
+(piezoelectric path), 412 to 414 to 416 to 418 (thermoelectric path), and
+418 to 420 (output). A dashed feedback arrow from the rectifier 408 returns
+to the inductor 406.
 
 
 FIG. 5 — Activity-Dependent Energy Dynamics
 
-This figure shows a graph derived from BalancedEnergyConfig parameters
-(core/energy.py) illustrating the energy harvesting and consumption curves
-as functions of neural spike count.
+FIG. 5 is a graph showing the relationship between neural activity and energy
+balance, derived from BalancedEnergyConfig parameters.
 
-X-axis: "Neural Activity (Spikes / Step)" ranging from 0 to 50
-Y-axis: "Energy per Step (mWh)"
+Reference numerals: 500, 502, 504, 506, 508, 510, 512, 514, 516
 
-Two curves:
+A main graph 500 occupies the upper portion of the figure, with axes labeled
+"Energy (mWh)" on the y-axis and "Neural Activity (Spikes/Step)" on the
+x-axis ranging from 0 to 50.
 
-1. Harvest curve (ref 500, dashed line): Nearly linear, gently increasing
-   - Formula: Harvest = 0.20 + (0.09 x spikes) mWh/step
-   - Composed of thermal baseline (0.20 mWh at delta_T = 5 degrees C) plus
-     piezoelectric harvest proportional to spike-driven motor activity
-   - Rises from 0.20 mWh at 0 spikes to approximately 4.7 mWh at 50 spikes
+A harvest curve 502 is drawn as a solid bold line, gently increasing from
+left to right. The harvest curve 502 represents the energy generated per step
+as a function of neural activity, following the formula:
+Harvest = 0.20 + (0.09 x spikes) mWh/step.
 
-2. Cost curve (ref 502, solid line): Quadratic, starting near harvest level
-   - Formula: Cost = 0.225 + (0.006 x s) + (0.0003 x s squared) mWh/step
-   - Composed of base consumption (45 mW x 0.005 h = 0.225 mWh) plus
-     linear activity cost (1.2 mW x 0.005 h = 0.006 mWh/spike) plus
-     quadratic burst penalty (0.06 x 0.005 = 0.0003 mWh/spike squared)
-   - Rises from 0.225 mWh at 0 spikes to approximately 1.3 mWh at 50 spikes
+A cost curve 504 is drawn as a dashed line, rising more steeply than the
+harvest curve 502 due to the quadratic activity penalty. The cost curve 504
+represents the energy consumed per step, following the formula:
+Cost = 0.225 + (0.006 x s) + (0.0003 x s^2) mWh/step.
 
-Crossover point (ref 506): Harvest equals Cost at approximately 0.3 spikes.
-Below this point (0 to 0.3 spikes), cost exceeds harvest (quiescent drain).
-Above this point (0.3 to 50+ spikes), harvest exceeds cost (net positive).
+A crossover point 506 is marked with a circle at approximately 0.3 spikes,
+where the harvest curve 502 and cost curve 504 intersect. Below the crossover
+point 506 (0 to 0.3 spikes), cost exceeds harvest (quiescent drain). A
+quiescent drain zone label 508 identifies this region.
 
-Shaded region (ref 504, hatched): Area between curves where harvest exceeds
-cost, labeled "NET POSITIVE REGION" with sublabel "Harvest >> Cost
-(Self-Sustaining)."
+A sweet spot region 510 identifies the optimal activity range where the
+margin between harvest and cost is greatest.
 
-Formula annotation box (ref 508): Contains exact formulas for both curves.
+A net positive region 512 is depicted as a dashed rectangle enclosing the
+area between curves where harvest exceeds cost, labeled "NET POSITIVE REGION:
+Harvest > Cost."
 
-Zone annotation at bottom: "Zone 1: Quiescent Drain — 0-1 Spikes: Cost > Harvest"
+An energy trajectory sub-graph 514 occupies the lower left, showing two
+curves: a solid rising line (experimental) and a dashed falling line
+(control) plotted against steps on the x-axis and energy on the y-axis.
 
-Zero reference line: Horizontal dotted line at y = 0.
+An activity state pipeline 516 occupies the lower right, showing three
+processing stages (MEASURE, COMPUTE, ADJUST) connected by arrows, with a
+dashed feedback loop from ADJUST back to MEASURE.
+
+A formula box at the bottom contains the exact energy formulas for harvest,
+cost, and net energy.
 
 
 FIG. 6 — Hardware Reference Design
 
-This figure shows a top-down component layout diagram.
+FIG. 6 is a top-down component layout diagram showing the physical embodiment
+of the self-sustaining neural-motor energy harvesting system.
 
-Central component:
-- Raspberry Pi Pico (RP2040) 600, shown as a rectangle with pin labels
-  on edges (GP0 on left, VSYS on right)
+Reference numerals: 600, 602, 604, 606, 608, 610, 612, 614, 616
 
-Connected components (arranged around Raspberry Pi Pico 600):
+A microcontroller 600 is depicted as a central rectangle containing an inner
+rectangle labeled "MCU," representing the Raspberry Pi Pico (RP2040). The
+microcontroller 600 serves as the central processing hub.
 
-Top left:
-- Piezo Disc 27mm 602, shown as a circle
-- Connected to Raspberry Pi Pico 600 via ADC pin GP26 (ADC0)
-- Mechanical coupling line to SG90 Micro Servo 604
+A piezoelectric disc 602 is depicted as a double circle at the upper left,
+representing the 27mm piezo sensor. An arrow labeled "ADC0" connects the
+piezoelectric disc 602 to the microcontroller 600 via the GP26 analog input
+pin.
 
-Top right:
-- SG90 Micro Servo 604, shown as a rectangle
-- Connected to Raspberry Pi Pico 600 via PWM pin (GP0)
-- Mechanical coupling to Piezo Disc 602 (zigzag line)
+A servo motor 604 is depicted as a rectangle with an internal circle at the
+upper right. An arrow labeled "PWM" connects the microcontroller 600 to the
+servo motor 604 via a pulse-width modulation output pin. A dashed
+mechanical coupling line connects the servo motor 604 back to the
+piezoelectric disc 602, representing the physical shaft coupling that enables
+energy harvesting from motor vibration.
 
-Bottom left:
-- NTC 10K Thermistor 606, shown as a small component
-- Connected to Raspberry Pi Pico 600 via ADC pin GP27 (ADC1)
+A thermistor 606 is depicted as an ellipse with two leads at the lower left.
+An arrow labeled "ADC1" connects the thermistor 606 to the microcontroller
+600 via the GP27 analog input pin.
 
-Bottom center:
-- GL5528 Photoresistor (LDR) 610, shown as a small component
-- Connected to Raspberry Pi Pico 600 via ADC pin GP28 (ADC2)
+An LED indicator 608 is depicted as a small square with an internal circle at
+the lower right. An arrow labeled "GPIO" connects the microcontroller 600 to
+the LED indicator 608 for status visualization.
 
-Bottom right:
-- WS2812B RGB LED 608, shown as a small square
-- Connected to Raspberry Pi Pico 600 via digital pin (GP15)
+A photoresistor 610 is depicted as a circle with a wavy line and light
+arrows at the lower center, representing the GL5528 LDR light sensor. An
+arrow labeled "ADC2" connects the photoresistor 610 to the microcontroller
+600 via the GP28 analog input pin.
 
-Left side:
-- Laird Ferrite Inductor 612
-- Connected in series between Piezo Disc 602 and rectifier bridge 614
-- Label: "LC resonance circuit"
+An AC signal input 612 is depicted as a wavy line at the left, representing
+the alternating voltage from the piezoelectric harvesting circuit.
 
-Power section:
-- Rectifier bridge 614
-- Storage capacitor 616
-- Arrow labeled "Harvested energy" connecting to Raspberry Pi Pico 600 VSYS pin
+A control logic block 614 is depicted as a diamond shape at the bottom,
+representing the decision logic for energy management and system regulation.
+A dashed arrow connects the control logic block 614 back to the
+microcontroller 600.
 
-BOM annotation box in corner:
-- "Raspberry Pi Pico (RP2040)"
-- "SG90 Micro Servo"
-- "27mm Piezoelectric Disc"
-- "NTC 10K Thermistor"
-- "Photoresistor (LDR)"
-- "WS2812B RGB LED"
-- "Misc (wires, board, inductor)"
+An energy storage 616 is depicted as a rectangular capacitor bank with
+internal parallel plates at the right. An arrow labeled "VSYS" connects the
+energy storage 616 to the microcontroller 600 power supply pin. A dashed
+energy feedback loop connects from the energy storage 616 back through the
+system.
 
 
 FIG. 7 — Validation Results Summary
 
-This figure comprises a validation results summary table 700 and an STDP
-learning efficacy bar chart 702 summarizing all validated claims.
+FIG. 7 comprises five elements that together summarize all validated
+falsifiable claims.
 
-Validation results summary table 700 with columns: Claim | Criterion |
-Measured Value | Threshold | Result
+Reference numerals: 700, 702, 704, 706, 708
 
-Section header: "Phase 7 Control Baseline (EnergyConfig)"
-Row A: Closed-loop continuity | All channels 2000 points | 2000 | 2000 | PASS
-Row B: Boundedness | All state variables bounded | bounded | bounded | PASS
-Row C: Robustness under noise | Std(theta) <= 45 deg | [value] | 45 | PASS
-Row D: Input-output gain | corr(L,theta) >= 0.2 | [value] | 0.2 | PASS
-Row E: Saturation ratio | sat_theta <= 0.20 | [value] | 0.20 | PASS
+A claims validation table 700 occupies the upper portion of the figure. The
+table 700 has four columns (Claim, Criterion, Threshold, Result) and five
+data rows corresponding to the Phase 7 control baseline claims:
+Row A: Closed-loop continuity, 2000 pts, PASS.
+Row B: Boundedness, finite, PASS.
+Row C: Noise robustness, std <= 45, PASS.
+Row D: Input-output gain, corr >= 0.2, PASS.
+Row E: Saturation ratio, <= 0.20, PASS.
 
-Section header: "Phase 7 Full Integration (Control confirms energy depletion)"
-Row: Energy at 2000 steps | Energy depleted | -4,697 mWh | < 0 | CONFIRMED
+An energy comparison table 702 appears below the claims validation table 700.
+The energy comparison table 702 has three columns (Configuration, Energy @
+2000, Status) and two data rows: Control (CLI) at -4697 mWh with status
+"DEAD," and Experimental (MCP) at 100.0 mWh with status "ALIVE."
 
-Section header: "MCP Integration (BalancedEnergyConfig)"
-Row: Energy at 2000 steps | Homeostasis at capacity | 100.0 mWh (capped) | > 0 | CONFIRMED
+An energy trajectory graph 704 appears at the lower left, depicting two
+curves: a solid rising experimental trajectory and a dashed falling control
+trajectory.
 
-Section header: "Phase 8 STDP"
-Row F8.1: Weight entropy decrease | final < initial | 2.95 to 2.02 bits | decrease | PASS
-Row F8.2: STDP MI > 1.2x frozen | ratio | 6.52x | > 1.20 | PASS
-Row F8.3: Late weight delta < 10% early | ratio | 0.00% | < 10% | PASS
+A legend 706 appears at the lower right, identifying the solid line as
+"Experimental" and the dashed line as "Control."
 
-STDP learning efficacy bar chart 702 presents the Phase 8 STDP results
-graphically for visual comparison of STDP-enabled versus frozen-weight
-conditions.
-
-Footer: "All claims validated. System is reproducible via git tags."
+A summary box 708 appears at the bottom spanning the full width, containing
+the text: "All 5 falsifiable claims validated — System self-sustaining."
 
 
 FIG. 8 — Energy-Bounded Recursive Control Architecture
 
-This figure is the canonical embodiment and reference signal flow for the
-entire system. It shows the complete architecture as a vertically stacked
-block diagram with bidirectional control paths and energy feedback. This is
-the primary reference figure for patent examination.
+FIG. 8 is the canonical reference architecture diagram for the complete
+energy-bounded recursive control system. The entire system is enclosed within
+a dashed system boundary 800.
 
-System operation is constrained by real-time energy availability derived from
-physical interaction with the environment, thereby ensuring bounded,
-non-abstract execution.
+Reference numerals: 800, 802, 804, 806, 808, 810, 812, 814, 816, 818, 820
 
+An environment input arrow 802 enters from the top of the diagram, labeled
+"ENVIRONMENT," delivering environmental signals (light, temperature, force)
+into the system.
 
-Layout — Vertically stacked functional blocks with lateral connections:
+A sensor interface 804 is depicted as a rectangle containing two sensor
+circles, labeled "SENSOR INTERFACE." The sensor interface 804 receives the
+environmental input and converts physical signals to electrical measurements.
 
+A cognitive modulation block 806 is depicted as a cloud-like dashed shape
+labeled "COGNITIVE," with internal label "mod." The cognitive modulation
+block 806 represents the optional external cognitive control layer that
+provides attention weighting and intention bias to the system.
 
-TOP — Physical Environment:
-    The physical environment sits at the top of the diagram.
+A spiking neural network core 808 is depicted as a bold-bordered rectangle
+containing three interconnected neuron circles, labeled "SNN CORE." The SNN
+core 808 is the central processing element that executes leaky
+integrate-and-fire neural dynamics.
 
-    Two downward arrows from the physical environment:
-    Left arrow: "(Light / Temp / Force)" — to Sensor Interface 802
-    Right arrow: "(Mechanical Load)" — to Energy Harvesting 804
+A motor output 810 is depicted as a rectangle containing a feedback loop
+symbol, labeled "MOTOR OUTPUT." The motor output 810 converts neural spike
+patterns into mechanical actuation commands.
 
+A thermal harvester 812 is depicted as a rectangle containing a circle
+labeled "T," labeled "THERMAL HARVESTER." The thermal harvester 812 captures
+heat energy generated by system operation.
 
-TIER 1 — Dual Input (left and right, same level):
+An analog-to-digital converter 814 is depicted as a small rectangle
+containing a circle, labeled "ADC." The ADC 814 digitizes analog harvested
+signals for processing.
 
-    Left block:
-    Sensor Interface 802 receives environmental signals (light, temperature,
-    force) through specific sensor ICs: BH1750 for light, DS18B20 for
-    temperature, and piezo input for force.
-    Arrow down from Sensor Interface 802 to Neuromorphic Core 806.
+A piezoelectric disc 816 is depicted as a double circle, labeled "PIEZO
+DISC." The piezoelectric disc 816 converts mechanical vibration into
+electrical energy.
 
-    Right block:
-    Energy Harvesting 804 performs physical energy transduction: piezoelectric
-    element through full-bridge rectifier to supercapacitor storage.
-    Arrow down from Energy Harvesting 804 to Neuromorphic Core 806.
+An energy store 818 is depicted as a rectangular capacitor symbol with
+internal parallel plates, labeled "ENERGY STORE." The energy store 818
+buffers harvested energy for sustained operation.
 
+A reflection block 820 is depicted as a dashed-bordered rectangle containing
+the equation "r(t) = y(t-1)," labeled "Reflection." The reflection block 820
+implements recursive self-observation by feeding the prior neural output back
+as input on the next timestep.
 
-TIER 2 — Central Processing (full width):
-    Neuromorphic Core (SNN) 806 occupies the full width of the diagram. It
-    contains four labeled subsystems:
-    - "Spiking Neurons" — leaky integrate-and-fire neural population
-    - "Membrane Dynamics" — V(t) = V(t-1) x leak + I_adjusted
-    - "Optional STDP" — spike-timing dependent plasticity (opt-in)
-    - "Activity-Dependent Energy Cost" — quadratic: base + k x (spikes/N)^2
+Signal flow: The environment input 802 feeds into the sensor interface 804.
+The sensor interface 804 feeds rightward into the cognitive modulation
+block 806, which feeds into the SNN core 808, which feeds into the motor
+output 810. Below, the thermal harvester 812 feeds into the ADC 814, which
+feeds into the piezoelectric disc 816, which feeds into the energy store 818.
 
-    Two downward arrows from Neuromorphic Core 806:
-    Left arrow: to Recursive Reflection 808
-    Right arrow: to Energy Governor 810
+A bold dashed energy sustaining loop connects from the energy store 818 along
+the bottom and right side back to the thermal harvester 812, representing the
+energy recycling path. A dashed reflection feedback path connects from the
+reflection block 820 upward and rightward back to the SNN core 808.
 
+A dashed cognitive modulation path connects from the cognitive modulation
+block 806 to the SNN core 808.
 
-TIER 3 — Dual Processing (left and right, same level, BIDIRECTIONAL):
+The thermal harvester 812 connects downward to the reflection block 820.
 
-    Left block:
-    Recursive Reflection 808 implements the self-observation mechanism. It
-    feeds aggregate output at timestep t back as input at timestep t+1, scaled
-    by the reflection coefficient. Recursive Reflection 808 maintains prior
-    state memory, output feedback, and temporal context.
-
-    Right block:
-    Energy Governor 810 enforces energy constraints. It monitors storage
-    level, applies the activity-dependent cost function, and damps activity
-    when energy is low. Energy Governor 810 manages storage level, cost
-    function, and activity damping.
-
-    CRITICAL: Bidirectional arrow between Recursive Reflection 808 and
-    Energy Governor 810.
-    Label: "Energy state modulates reflection gain; reflection state
-    influences energy cost through activity level"
-
-    Both Recursive Reflection 808 and Energy Governor 810 have arrows
-    downward to Cognitive Modulation Layer 812.
-
-
-TIER 4 — Modulation (full width):
-    Cognitive Modulation Layer 812 occupies the full width of the diagram. It
-    contains four labeled functions:
-    - "Attention Weighting" — prioritizes input channels
-    - "Intention Bias" — goal-directed modulation
-    - "Contextual Suppression / Amplification" — state-dependent gating
-    - "(Optional) External Advisory Input" — external control layer when connected
-
-    Two downward arrows from Cognitive Modulation Layer 812:
-    Left arrow: to Neural Router 814
-    Right arrow: to Telemetry & Logging 816
-
-
-TIER 5 — Output (left and right, same level):
-
-    Left block:
-    Neural Router 814 performs signal arbitration. It routes neural output to
-    actuators based on priority, gates signals when energy is insufficient,
-    and prevents output saturation through congestion control.
-    Arrow down from Neural Router 814 to Actuation & Response 818.
-
-    Right block:
-    Telemetry & Logging 816 provides observability output. It records energy
-    level, system state, and reflection metrics for validation and monitoring.
-    No downward arrow from Telemetry & Logging 816 (terminal output).
-
-
-TIER 6 — Actuation (full width):
-    Actuation & Response 818 occupies the full width of the diagram. It
-    contains servo control, mechanical interaction, and environmental
-    perturbation subsystems. Actuation & Response 818 drives mechanical
-    interaction, which perturbs the environment (closing the loop back to
-    the physical environment at top) and generates mechanical load (feeding
-    Energy Harvesting 804 at Tier 1).
-
-    Two upward feedback arrows from Actuation & Response 818:
-    1. Arrow back to the physical environment (top): "Environmental Perturbation"
-    2. Arrow back to Energy Harvesting 804 (Tier 1 right): "Mechanical Load
-       generates piezoelectric energy"
-
-
-FEEDBACK LOOPS (mark each distinctly):
-
-    Loop A — Energy Harvesting Loop:
-    Actuation & Response 818 → Mechanical Load → Energy Harvesting 804 →
-    Neuromorphic Core 806
-    Style: Bold solid arrows
-    Label: "ENERGY LOOP — Motor activity generates power for neural computation"
-
-    Loop B — Recursive Reflection Loop:
-    Neuromorphic Core 806 → Recursive Reflection 808 → Neuromorphic Core 806
-    Style: Dotted arrows
-    Label: "REFLECTION LOOP — Prior state observation at configurable gain"
-
-    Loop C — Environmental Perturbation Loop:
-    Actuation & Response 818 → Environment → Sensor Interface 802 →
-    Neuromorphic Core 806
-    Style: Dashed arrows
-    Label: "SENSORY LOOP — Actions change environment, environment changes input"
-
-    Loop D — Energy Governor Feedback:
-    Energy Harvesting 804 → Energy Governor 810 ↔ Recursive Reflection 808 →
-    Cognitive Modulation Layer 812
-    Style: Thin solid arrows
-    Label: "REGULATION LOOP — Energy availability constrains all processing"
-
-
-Key annotations at bottom of figure:
-    "This architecture is physically grounded: all computation is constrained
-     by real-time energy availability derived from the system's own mechanical
-     interaction with its environment."
-
-    "No external power source is required for sustained operation under the
-     balanced energy configuration."
-
-FIG. 8 illustrates one exemplary embodiment; alternative embodiments may
-omit, combine, or substitute individual modules while preserving the
-energy-bounded recursive control loop.
-
-Sheet numbering: "8/8" at top center
+A legend box at the bottom of the figure distinguishes four signal pathway
+styles: solid arrows for main signal flow, long dashes for energy sustaining
+loop, medium dashes for reflection feedback, and short dashes for cognitive
+modulation.
 
 
 GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
@@ -490,13 +452,3 @@ GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
 - No frames or borders around drawing area
 - All text in figures must be at least 1/8 inch (3.2 mm) high
 - Reference numerals must be used consistently across all figures
-
----
-FIG. 5 Additional Reference Numerals
----
-
-516 Activity State Pipeline. A visual representation of the activity-dependent
-    energy management process, showing three processing stages connected by
-    directional arrows. Each stage represents a discrete processing step in
-    the quadratic energy cost calculation, with a feedback loop (dashed line)
-    connecting the output back to the input for iterative refinement.

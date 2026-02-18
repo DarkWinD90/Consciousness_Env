@@ -137,27 +137,37 @@ FIG. 3 — Energy-Aware Modulation Curve
 FIG. 3 is a graph showing the step function that maps energy level to
 autonomous modulation value.
 
-An energy modulation curve 300 is plotted with the x-axis labeled "System
-Energy Level (mWh)" ranging from 0 to 100+ and the y-axis labeled
-"Autonomous Modulation Value" ranging from -0.55 to +0.45 with tick marks
-at -0.4, -0.1, 0.0, and +0.3 corresponding to the actual modulation values.
+Reference numerals: 300, 302, 304, 308, 310, 312, 314
 
-The energy modulation curve 300 comprises four plateaus. A first plateau
-from 0 to 15 mWh has modulation -0.4, is shaded with dense hatching, and
-labeled "CRITICAL — Maximum conservation" with behavioral note "Inhibit
-neural activity to preserve energy." A second plateau from 15 to 30 mWh has
-modulation -0.1, is shaded with light hatching, and labeled "LOW — Cautious
-operation" with behavioral note "Slightly reduce activity." A third plateau
-from 30 to 80 mWh has modulation 0.0, is unshaded, and labeled "NORMAL —
-Neutral operation" with behavioral note "Standard autonomous processing."
-A fourth plateau from 80+ mWh has modulation +0.3, is shaded with light
-hatching, and labeled "SURPLUS — Opportunistic exploration" with behavioral
-note "Increase activity to utilize excess energy." Vertical dashed lines
-appear at the energy thresholds of 15, 30, and 80 mWh.
+The y-axis 300 is labeled "Modulation Value" with tick marks at -0.4, -0.1,
+0.0, and +0.3 corresponding to the actual modulation output values. The
+x-axis 304 is labeled "System Energy Level (mWh)" ranging from 0 to 100+
+with tick marks at 0, 15, 30, 80, and 100 mWh.
 
-A behavioral effects table 302 appears below the energy modulation curve 300
-and annotates: "The system autonomously adjusts its processing intensity
-based on available energy — mimicking biological metabolic regulation."
+The energy modulation curve plotted on axes 300 and 304 comprises four
+plateaus connected by vertical step transitions, with vertical dashed lines
+at the energy thresholds of 15, 30, and 80 mWh.
+
+A first plateau 308 spans from 0 to 15 mWh at modulation -0.4, labeled
+"CRITICAL." This region represents maximum conservation mode where neural
+activity is inhibited to preserve energy.
+
+A second plateau 310 spans from 15 to 30 mWh at modulation -0.1, labeled
+"LOW." This region represents cautious operation with slightly reduced
+activity.
+
+A third plateau 312 spans from 30 to 80 mWh at modulation 0.0, labeled
+"NORMAL." This region represents standard autonomous processing with
+neutral modulation.
+
+A fourth plateau 314 spans from 80+ mWh at modulation +0.3, labeled
+"SURPLUS." This region represents opportunistic exploration where excess
+energy enables increased activity.
+
+A behavioral effects table 302 appears below the graph and lists the
+modulation value and behavioral description for each energy region:
+CRITICAL (-0.4) maximum conservation, LOW (-0.1) cautious operation,
+NORMAL (0.0) standard processing, SURPLUS (+0.3) opportunistic exploration.
 
 
 FIG. 4 — Autonomous Input Generator Output

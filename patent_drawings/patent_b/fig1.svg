@@ -1,5 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
   <rect width="100%" height="100%" fill="#fff" />
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+    </marker>
+  </defs>
   <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 1 of 6</text>
 
   <!-- 100: External Input I_ext(t) -->
@@ -38,7 +43,7 @@
   <text x="490" y="370" font-family="Arial" font-size="14" font-weight="normal" fill="#000">108</text>
 
   <!-- Arrow from 106 to 108 -->
-  <path d="M410 335v5" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M410 335v15" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 110: Delay Element z^-1 -->
   <rect x="340" y="410" width="140" height="40" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
@@ -68,11 +73,6 @@
   <path d="M306 195v35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- Arrow marker definition -->
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
-    </marker>
-  </defs>
 
   <text x="306" y="650" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 1</text>
 </svg>
