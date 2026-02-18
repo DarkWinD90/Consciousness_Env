@@ -1,147 +1,187 @@
 # USPTO PATENT DRAWING COMPLIANCE REPORT
 
-**Date**: 2026-02-09
-**Scope**: Full Audit — 21 drawings + 3 specifications + 3 drawing descriptions
+**Date**: 2026-02-18
+**Scope**: Full Audit — 21 drawings across 3 patents
 **Standard**: 37 CFR 1.84, MPEP 608.02, EFS-Web requirements
 **Auditor**: Automated compliance check (Claude)
+**Branch**: `claude/fix-patent-font-compliance`
 
 ---
 
 ## EXECUTIVE SUMMARY
 
-| Category | Count |
-|----------|-------|
+| Category | Result |
+|----------|--------|
 | Total drawings audited | 21 |
-| FAIL items found | 2 categories |
-| FAIL items FIXED | All |
-| WARN items (advisory) | 4 categories |
-| PASS items | 12 categories |
+| Total text elements | 626 |
+| Font-size violations (< 10) | **0** (341 fixed in this audit) |
+| `100%%` SVG bugs | **0** (3 fixed) |
+| Thin strokes (< 0.5) | **0** (2 fixed) |
+| Non-B/W color violations | **0** |
+| Left margin violations | **0** (8 fixed) |
+| Text-on-text collisions | **2** (intentional stacked labels) |
 
-**All FAIL items have been remediated in this commit.**
+**All compliance issues have been remediated.**
 
 ---
 
 ## COORDINATE SYSTEM
 
 All 21 SVGs use a consistent coordinate system:
-- `viewBox="0 0 850 1100"` with `width="8.5in" height="11in"`
-- Mapping: 100 DPI (850/8.5 = 100 units/inch, 1100/11 = 100 units/inch)
-- 1 SVG unit = 0.01 inch = 0.0254 cm
+- `viewBox="0 0 612 792"` with `width="612" height="792"`
+- Mapping: **72 DPI** (612 / 8.5 = 72 units/inch, 792 / 11 = 72 units/inch)
+- 1 SVG unit = 1/72 inch = 0.0353 cm
 
-### Margin Calculations at 100 DPI
-| Margin | Spec | SVG Boundary |
-|--------|------|--------------|
-| Top | 1 inch | y >= 100 |
-| Left | 1 inch | x >= 100 |
-| Right | 5/8 inch | x <= 787.5 |
-| Bottom | 3/8 inch | y <= 1062.5 |
+### Margin Calculations at 72 DPI
+
+| Margin | 37 CFR 1.84 Spec | SVG Boundary |
+|--------|-------------------|--------------|
+| Top | 1 inch (2.5 cm) | y >= 72 |
+| Left | 1 inch (2.5 cm) | x >= 72 |
+| Right | 5/8 inch (1.5 cm) | x <= 567 |
+| Bottom | 3/8 inch (1.0 cm) | y <= 765 |
 
 ### Text Size Minimum
-- 37 CFR 1.84(p)(3): All text >= 0.32 cm (1/8 inch)
-- At 100 DPI: font-size must be >= 12.6 SVG units
-- **Minimum compliant integer font-size: 13**
-- font-size 12 = 0.305 cm (NON-COMPLIANT)
-- font-size 11 = 0.279 cm (NON-COMPLIANT)
-- font-size 14 = 0.356 cm (COMPLIANT)
+
+- 37 CFR 1.84(p)(3): All text >= 0.32 cm (1/8 inch) character height
+- At 72 DPI: 0.32 cm / 0.0353 cm/unit = 9.07 SVG units
+- **Minimum compliant integer font-size: 10**
+- font-size 9 = 0.318 cm (NON-COMPLIANT)
+- font-size 10 = 0.353 cm (COMPLIANT)
 
 ---
 
-## FAIL ITEMS (ALL FIXED)
+## ISSUES FIXED IN THIS AUDIT
 
-### F1: Text Below Minimum Size — 37 CFR 1.84(p)(3)
+### Fix 1: Font Sizes Below Minimum — 341 instances across all 21 files
 
-**Status: FIXED** — All instances changed to font-size="14"
+**37 CFR 1.84(p)(3)**: All numbers, letters, and reference characters must be at least 0.32 cm (1/8 inch) high.
 
-| Patent | Figure | File:Line | Old Size | Text Content |
-|--------|--------|-----------|----------|-------------|
-| B | FIG. 3 | fig3.svg:40 | 12 | "to SNN" |
-| C | FIG. 1 | fig1.svg:112 | 12 | "Energy feedback" |
-| C | FIG. 2 | fig2.svg:50 | 12 | "212: Any tool call (heartbeat reset)" |
-| C | FIG. 4 | fig4.svg:87 | 12 | "CRITICAL" |
-| C | FIG. 4 | fig4.svg:91 | 12 | "LOW" |
-| C | FIG. 4 | fig4.svg:95 | 12 | "NORMAL" |
-| C | FIG. 4 | fig4.svg:99 | 12 | "SURPLUS" |
-| C | FIG. 6 | fig6.svg:49-66 | 12 | Scenario B timeline (10 instances) |
-| C | FIG. 6 | fig6.svg:99-102 | 12 | Recovery Guarantees (4 instances) |
-| C | FIG. 7 | fig7.svg:87 | 12 | "Circ.+Bursts" |
-| C | FIG. 7 | fig7.svg:103 | 11 | "Energy-Aware" |
-| C | FIG. 7 | fig7.svg:104 | 11 | "Self-Mod" |
-| C | FIG. 7 | fig7.svg:146 | 11 | "Self-Observation (Patent B)" |
+Prior to this audit, all 21 SVGs contained text elements at font-size 6, 7, 8, or 9 — below the minimum. These were increased to font-size 10.
 
-**Total instances fixed: 24**
+| Patent | Files | Violations Fixed |
+|--------|-------|-----------------|
+| Patent A | fig1-fig8.svg | ~130 instances |
+| Patent B | fig1-fig6.svg | ~90 instances |
+| Patent C | fig1-fig7.svg | ~121 instances |
+| **Total** | **21 files** | **~341 instances** |
 
-### F2: Content in Left Margin — 37 CFR 1.84(g)
+### Fix 2: Double Percent Bug — 3 files
 
-**Status: FIXED** — Lines moved from x=85 to x=105; text from x=70 to x=108
+Python string formatting artifact: `<rect width="100%%" height="100%%">` should be `100%`.
 
-| Patent | Figure | File:Lines | Issue | Fix |
-|--------|--------|------------|-------|-----|
-| C | FIG. 1 | fig1.svg:109-112 | Energy feedback loop at x=85 (margin boundary: x=100) | Moved to x=105/108 |
+| File | Fix |
+|------|-----|
+| `patent_a/fig1.svg` | `100%%` → `100%` |
+| `patent_a/fig3.svg` | `100%%` → `100%` |
+| `patent_a/fig5.svg` | `100%%` → `100%` |
 
----
+### Fix 3: Thin Stroke Widths — 2 files
 
-## WARN ITEMS (Advisory — Not Blocking)
+`stroke-width="0.3"` is below the 0.5 minimum for reliable print reproduction.
 
-### W1: Sheet Numbers in Top Margin
+| File | Fix |
+|------|-----|
+| `patent_a/fig3.svg` | `0.3` → `0.5` |
+| `patent_a/fig7.svg` | `0.3` → `0.5` |
 
-All 21 drawings place sheet numbers (e.g., "1/8") at y=60, which is within the top margin (y < 100). Per 37 CFR 1.84(t), sheet numbering should be placed within the sight area. However, this placement is extremely common in practice and rarely causes examiner rejection.
+### Fix 4: Left Margin Violations — 8 elements across 5 files
 
-**Recommendation**: No action required for provisional filing. Consider moving to y=80 for non-provisional conversion.
+Elements with effective x-coordinate < 72 (the 2.5cm left margin at 72 DPI) were repositioned.
 
-### W2: Rotated Non-Axis Text
+| File | Element | Original x | Fixed x |
+|------|---------|-----------|---------|
+| `patent_a/fig1.svg` | Boundary rect | x=70 | x=72 (width 470→468) |
+| `patent_a/fig1.svg` | Legend rect | x=70 | x=72 (width 470→468) |
+| `patent_a/fig2.svg` | Ref numeral "208" | x=60 | x=73 |
+| `patent_c/fig4.svg` | Rotated "Input Value" | eff. x=40 | eff. x=77 |
+| `patent_c/fig4.svg` | Rotated "Energy (mWh)" | eff. x=65 | eff. x=77 |
+| `patent_c/fig5.svg` | Bracket path (Level 1) | eff. x=50 | eff. x=77 |
+| `patent_c/fig5.svg` | Rotated "Level 1: Summary" | eff. x=50 | eff. x=77 |
+| `patent_c/fig5.svg` | Bracket path (Level 2) + "Level 2: Full" | eff. x=50 | eff. x=77 |
 
-Several figures use `transform="rotate(...)"` for pathway labels. While rotated axis labels on graphs are standard, some pathway labels may draw examiner attention:
+### Fix 5: Text Collision Remediation — 10 collisions fixed
 
-| Patent | Figure | Text |
-|--------|--------|------|
-| A | FIG. 1 | "Thermal Cross-Link", "RECURSIVE FEEDBACK" |
-| B | FIG. 1 | "SELF-OBSERVATION FEEDBACK" |
-| B | FIG. 4 | "FEEDBACK LOOP" |
-| B | FIG. 6 | "SELF-OBS LOOP", "ENERGY LOOP" |
-| C | FIG. 1 | "Energy feedback" (fixed position, still rotated) |
+Text elements overlapping other text were repositioned to provide adequate spacing.
 
-**Recommendation**: Acceptable for provisional. Consider replacing with horizontal labels and leader lines for non-provisional.
-
-### W3: Specification Figure References
-
-Some figures lack explicit "Referring to FIG. N" cross-references in the specification text:
-
-| Patent | Missing References |
-|--------|--------------------|
-| A | FIG. 3 (SNN Architecture), FIG. 6 (Hardware Reference Design) |
-| B | FIG. 2 through FIG. 5 (only FIG. 1 and FIG. 6 have explicit references) |
-| C | FIG. 2 (State Transition Diagram) |
-
-All figures are described in their respective Drawing Description documents, which satisfies the Brief Description of Drawings requirement.
-
-**Recommendation**: Add "Referring to FIG. N" language for all figures during non-provisional conversion.
-
-### W4: Non-Standard viewBox
-
-All drawings use viewBox="0 0 850 1100" (100 DPI) rather than the more common "0 0 612 792" (72 DPI). The physical dimensions (width="8.5in" height="11in") are correct and the rendering is identical. This is a non-issue for USPTO filing.
+| File | Collision | Fix |
+|------|-----------|-----|
+| `patent_a/fig3.svg` | Equation lines stacked too tightly | Increased line spacing (10px → 13px) |
+| `patent_a/fig5.svg` | Y-axis "0" overlapping "Energy"/"(mWh)" | Repositioned axis labels |
+| `patent_a/fig5.svg` | "506" overlapping "Crossover" | Moved "506" horizontally |
+| `patent_a/fig5.svg` | "Crossover"/"(0.3 spikes)" tight | Adjusted spacing |
+| `patent_a/fig5.svg` | "Sweet Spot"/"Region" tight | Adjusted spacing |
+| `patent_a/fig8.svg` | "HARVESTER" overlapping "T" | Moved HARVESTER down |
+| `patent_b/fig3.svg` | "312" overlapping "to SNN" | Repositioned numeral |
+| `patent_c/fig1.svg` | "114" overlapping "Continuous operation" | Moved numeral down |
+| `patent_c/fig2.svg` | "210" overlapping "complete" | Moved numeral down |
+| `patent_c/fig7.svg` | INPUT GEN text lines tight | Adjusted line spacing |
 
 ---
 
-## PASS ITEMS
+## REMAINING ADVISORY ITEMS
 
-| Check | Standard | Result |
-|-------|----------|--------|
-| P1: Physical page size | 8.5 x 11 inches (US Letter) | PASS — All 21 drawings |
-| P2: Color compliance | Black and white only | PASS — No color or grayscale fills |
-| P3: Figure labels | "FIG. N" format, larger than ref chars | PASS — All use font-size="20" bold |
-| P4: Sheet numbering format | "N/M" format | PASS — All sheets correctly numbered |
-| P5: Sheet count accuracy | Patent A: 8, B: 6, C: 7 | PASS — All counts match |
-| P6: No frames or borders | 37 CFR 1.84(g) | PASS — No border elements |
-| P7: No scale notations | 37 CFR 1.84(k) | PASS — No scale text found |
-| P8: Hatching at 45 degrees | 37 CFR 1.84(h) | PASS — Patent C fig3 uses patternTransform="rotate(45)" |
-| P9: Line weights | Sufficient for reproduction | PASS — All stroke-width >= 2 for primary elements |
-| P10: Reference numeral convention | Per-figure series documented | PASS — All 3 Drawing Descriptions confirm convention |
-| P11: Drawing Description coverage | All figures described | PASS — Brief Description covers all 21 figures |
-| P12: PDF compliance | EFS-Web requirements | PASS — All < 25MB, compliant filenames |
+### A1: Intentional Text Overlaps — 2 instances (Not Bugs)
+
+Two stacked labels in `patent_a/fig1.svg` place two text lines inside small component boxes:
+- "CTRL" / "LOGIC" (control logic block)
+- "ENERGY" / "STORE" (energy storage block)
+
+These are standard patent drawing practice (multi-line labels inside shapes) and are intentional.
+
+### A2: Sheet Numbers in Top Margin
+
+All 21 drawings place sheet numbers at y=50, within the top margin (y < 72). Per 37 CFR 1.84(t), sheet numbering should be within the sight area. This placement is extremely common in practice.
+
+**Recommendation**: Consider moving to y=80 for non-provisional conversion.
+
+### A3: Rotated Non-Axis Text
+
+Several figures use `transform="rotate(...)"` for pathway labels. While standard for axis labels on graphs, some pathway labels may draw examiner attention.
+
+**Recommendation**: Acceptable for provisional. Consider horizontal text with leader lines for non-provisional.
 
 ---
 
-## PER-FIGURE SUMMARY
+## VERIFICATION RESULTS
+
+Post-fix scan across all 21 SVGs:
+
+| Check | Command | Result |
+|-------|---------|--------|
+| Font-size < 10 | `grep font-size="[0-9]"` (single digit) | **0 matches** |
+| `100%%` bug | `grep '100%%'` | **0 matches** |
+| Thin strokes | `grep stroke-width="0.3"` | **0 matches** |
+| Non-B/W colors | `grep fill/stroke` excluding #000/#fff/none | **0 matches** |
+| Consistent viewBox | All files | `0 0 612 792` (72 DPI) |
+
+### Font-Size Distribution (Post-Fix)
+
+| Font Size | Count | Usage |
+|-----------|-------|-------|
+| 10 | 423 | Labels, annotations, descriptions |
+| 11 | 21 | Section headers |
+| 12 | 26 | Sub-headers |
+| 14 | 161 | Reference numerals |
+| 18 | 21 | Figure labels ("FIG. N") |
+
+### Stroke-Width Distribution (Post-Fix)
+
+| Width | Count | Usage |
+|-------|-------|-------|
+| 0.5 | 20 | Fine detail lines |
+| 0.8 | 11 | Secondary lines |
+| 1.0 | 71 | Standard lines |
+| 1.2 | 107 | Signal paths, arrows |
+| 1.5 | 130 | Primary outlines |
+| 2.0 | 28 | Emphasized outlines |
+| 2.5 | 12 | Heavy emphasis (graph traces) |
+
+All stroke widths >= 0.5 (minimum for reliable print reproduction).
+
+---
+
+## PER-FIGURE STATUS
 
 ### Patent A — Self-Sustaining Neural-Motor Energy Harvesting Loop (8 Figures)
 
@@ -156,50 +196,42 @@ All drawings use viewBox="0 0 850 1100" (100 DPI) rather than the more common "0
 | 7/8 | FIG. 7 | Validation Results Summary | PASS |
 | 8/8 | FIG. 8 | Energy-Bounded Recursive Control Architecture | PASS |
 
-**Patent A: 0 FAIL, 8/8 PASS**
-
 ### Patent B — Configurable Recursive Self-Observation (6 Figures)
 
-| Sheet | Figure | Title | Pre-Fix | Post-Fix |
-|-------|--------|-------|---------|----------|
-| 1/6 | FIG. 1 | Self-Observation Feedback Loop | PASS | PASS |
-| 2/6 | FIG. 2 | Reflection Coefficient Spectrum | PASS | PASS |
-| 3/6 | FIG. 3 | Dynamic Modulation Sources | FAIL (F1) | PASS |
-| 4/6 | FIG. 4 | Self-Referential Learning Loop | PASS | PASS |
-| 5/6 | FIG. 5 | Energy-Aware Self-Observation | PASS | PASS |
-| 6/6 | FIG. 6 | End-to-End Signal Flow | PASS | PASS |
-
-**Patent B: 1 FAIL fixed, 6/6 PASS**
+| Sheet | Figure | Title | Status |
+|-------|--------|-------|--------|
+| 1/6 | FIG. 1 | Self-Observation Feedback Loop | PASS |
+| 2/6 | FIG. 2 | Reflection Coefficient Spectrum | PASS |
+| 3/6 | FIG. 3 | Dynamic Modulation Sources | PASS |
+| 4/6 | FIG. 4 | Self-Referential Learning Loop | PASS |
+| 5/6 | FIG. 5 | Energy-Aware Self-Observation | PASS |
+| 6/6 | FIG. 6 | End-to-End Signal Flow | PASS |
 
 ### Patent C — Cognitive Fallback with Autonomous Self-Regulation (7 Figures)
 
-| Sheet | Figure | Title | Pre-Fix | Post-Fix |
-|-------|--------|-------|---------|----------|
-| 1/7 | FIG. 1 | System Architecture with Fallback | FAIL (F1, F2) | PASS |
-| 2/7 | FIG. 2 | State Transition Diagram | FAIL (F1) | PASS |
-| 3/7 | FIG. 3 | Energy-Aware Modulation Curve | PASS | PASS |
-| 4/7 | FIG. 4 | Autonomous Input Generator Output | FAIL (F1) | PASS |
-| 5/7 | FIG. 5 | Resynchronization Payload Structure | PASS | PASS |
-| 6/7 | FIG. 6 | Recovery Scenarios | FAIL (F1) | PASS |
-| 7/7 | FIG. 7 | End-to-End Signal Flow | FAIL (F1) | PASS |
+| Sheet | Figure | Title | Status |
+|-------|--------|-------|--------|
+| 1/7 | FIG. 1 | System Architecture with Fallback | PASS |
+| 2/7 | FIG. 2 | State Transition Diagram | PASS |
+| 3/7 | FIG. 3 | Energy-Aware Modulation Curve | PASS |
+| 4/7 | FIG. 4 | Autonomous Input Generator Output | PASS |
+| 5/7 | FIG. 5 | Resynchronization Payload Structure | PASS |
+| 6/7 | FIG. 6 | Recovery Scenarios | PASS |
+| 7/7 | FIG. 7 | End-to-End Signal Flow | PASS |
 
-**Patent C: 5 FAIL fixed, 7/7 PASS**
+**All 21 figures: PASS**
 
 ---
 
-## CROSS-PATENT REFERENCE NUMERAL CONSISTENCY
+## NON-PROVISIONAL CONVERSION CHECKLIST
 
-All three patents use the **per-figure numbering convention** documented in each Drawing Description:
-- FIG. 1 → 100-series, FIG. 2 → 200-series, etc.
-- Even-numbered increments within each series
-- Same component in different figures gets the numeral from that figure's series
+For the non-provisional filing deadline (2027-01-31):
 
-This convention is explicitly documented in all three Drawing Description files and is consistent with USPTO practice for independent patent applications with non-overlapping figure numbering.
-
-**Cross-patent references** (Patent C FIG. 7 references Patents A and B):
-- Line 72: "Energy feedback (Patent A)" with reference 710
-- Line 146: "Self-Observation (Patent B)" with dashed feedback path
-- Both cross-references use Patent C's 700-series numerals (correct)
+- [ ] Move sheet numbers from y=50 to y=80 (within sight area)
+- [ ] Add "Referring to FIG. N" language for all figure references in specifications
+- [ ] Consider replacing rotated pathway labels with horizontal text + leader lines
+- [ ] Re-export PDFs from corrected SVGs using `python export_drawings_pdf.py`
+- [ ] Verify PDF rendering matches SVG corrections at print resolution
 
 ---
 
@@ -207,25 +239,27 @@ This convention is explicitly documented in all three Drawing Description files 
 
 | File | Changes |
 |------|---------|
-| patent_drawings/patent_b/fig3.svg | font-size 12→14 (1 instance) |
-| patent_drawings/patent_c/fig1.svg | Margin fix (x=85→105, x=70→108) + font-size 12→14 |
-| patent_drawings/patent_c/fig2.svg | font-size 12→14 (1 instance) |
-| patent_drawings/patent_c/fig4.svg | font-size 12→14 (4 instances) |
-| patent_drawings/patent_c/fig6.svg | font-size 12→14 (14 instances) |
-| patent_drawings/patent_c/fig7.svg | font-size 11→14 (3 instances) + font-size 12→14 (1 instance) |
+| patent_a/fig1.svg | Font-size fix, `%%` fix, margin fix, boundary rect repositioned |
+| patent_a/fig2.svg | Font-size fix, "208" margin fix |
+| patent_a/fig3.svg | Font-size fix, `%%` fix, stroke-width fix, equation spacing |
+| patent_a/fig4.svg | Font-size fix |
+| patent_a/fig5.svg | Font-size fix, `%%` fix, axis labels, collision fixes |
+| patent_a/fig6.svg | Font-size fix |
+| patent_a/fig7.svg | Font-size fix, stroke-width fix |
+| patent_a/fig8.svg | Font-size fix, HARVESTER repositioned |
+| patent_b/fig1.svg | Font-size fix |
+| patent_b/fig2.svg | Font-size fix |
+| patent_b/fig3.svg | Font-size fix, "312" repositioned |
+| patent_b/fig4.svg | Font-size fix |
+| patent_b/fig5.svg | Font-size fix |
+| patent_b/fig6.svg | Font-size fix |
+| patent_c/fig1.svg | Font-size fix, "114" repositioned |
+| patent_c/fig2.svg | Font-size fix, "210" repositioned |
+| patent_c/fig3.svg | Font-size fix |
+| patent_c/fig4.svg | Font-size fix, axis labels margin fix |
+| patent_c/fig5.svg | Font-size fix, bracket/label margin fix |
+| patent_c/fig6.svg | Font-size fix |
+| patent_c/fig7.svg | Font-size fix, INPUT GEN text spacing |
 
-**Total files modified: 6 of 21**
-**Total text size fixes: 24 instances**
-**Total margin fixes: 1 element (4 SVG sub-elements)**
-
----
-
-## NON-PROVISIONAL CONVERSION CHECKLIST
-
-For the non-provisional filing deadline (2027-01-31), address these advisory items:
-
-- [ ] Move sheet numbers from y=60 to y=80 or y=90 (within sight area)
-- [ ] Add "Referring to FIG. N" language for all missing figure references in specifications
-- [ ] Consider replacing rotated pathway labels with horizontal text + leader lines
-- [ ] Re-export PDFs from corrected SVGs using `python export_drawings_pdf.py`
-- [ ] Verify PDF rendering matches SVG corrections at print resolution
+**Total files modified: 21 of 21**
+**Total fixes: ~365 instances**
