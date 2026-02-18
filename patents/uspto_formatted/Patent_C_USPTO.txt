@@ -52,7 +52,7 @@ System Architecture
 
 Heartbeat Watchdog
 
-[0011] The heartbeat watchdog monitors the interval between incoming tool calls from the cognitive control layer. The heartbeat timeout is configured at 30 seconds and the check interval is 5 seconds for polling frequency. A background thread runs the heartbeat monitor. While the system is running, the thread computes the time since the last tool call as the current time minus the last tool call timestamp. If the time since the last call exceeds the heartbeat timeout and the system is not already in fallback mode, the autonomous fallback is engaged. The thread then sleeps for the check interval before repeating.
+[0011] Referring to FIG. 2, the system transitions between three operational states: connected, autonomous, and recovering. The heartbeat watchdog monitors the interval between incoming tool calls from the cognitive control layer. The heartbeat timeout is configured at 30 seconds and the check interval is 5 seconds for polling frequency. A background thread runs the heartbeat monitor. While the system is running, the thread computes the time since the last tool call as the current time minus the last tool call timestamp. If the time since the last call exceeds the heartbeat timeout and the system is not already in fallback mode, the autonomous fallback is engaged. The thread then sleeps for the check interval before repeating.
 
 [0012] The 30-second timeout balances between false positives from brief network delays and detection speed. The 5-second polling frequency provides responsive detection without excessive CPU use. The thread-based implementation allows monitoring without blocking the main server event loop.
 

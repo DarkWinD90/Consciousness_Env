@@ -118,7 +118,7 @@ FIG. 3 — Dynamic Modulation Sources
 This figure shows two modulation pathways converging on the reflection
 coefficient computation in a vertical stacked layout.
 
-Reference numerals: 300, 302, 304, 306, 308, 310, 312
+Reference numerals: 300, 302, 304, 306, 308, 310, 312, 314
 
 Top element (302):
 - Cloud shape labeled "EXTERNAL COGNITIVE CONTROL LAYER"
@@ -139,6 +139,12 @@ Below computation (side by side):
 - Right box (306): "ENERGY STATE MONITOR" - "Reads energy_mwh from EnergyHarvester"
   and "Applies energy-aware modulation rules"
 - Arrow up from Energy Monitor to Computation labeled "energy-aware modulation"
+
+Output to SNN (314):
+- Arrow from SOURCE PRIORITY (312) pointing downward
+- Label "to SNN"
+- Represents the final computed reflection coefficient signal delivered to the
+  spiking neural network for the next processing step
 
 Bottom callout boxes (side by side):
 - Left box (304): "External Modulation Examples"
