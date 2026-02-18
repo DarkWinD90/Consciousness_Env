@@ -1,10 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
   <rect width="100%" height="100%" fill="#fff" />
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+    </marker>
+  </defs>
   <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 2 of 6</text>
 
   <!-- 200: Main Spectrum Bar (0.0 to 1.0) -->
   <rect x="100" y="150" width="412" height="40" fill="none" stroke="#000" stroke-width="2" />
-  <text x="525" y="175" font-family="Arial" font-size="14" font-weight="normal" fill="#000">200</text>
+  <text x="510" y="175" font-family="Arial" font-size="14" font-weight="normal" fill="#000">200</text>
 
   <!-- Scale markings at bottom -->
   <path d="M100 190v20M180 190v20M260 190v20M380 190v20M512 190v20" stroke="#000" stroke-width="1.5" />
@@ -55,11 +60,6 @@
   <text x="120" y="455" font-family="Arial" font-size="10" fill="#000">Range: 0.1 to 0.3 (within OPERATIONAL zone)</text>
   <text x="120" y="475" font-family="Arial" font-size="10" fill="#000">The reflection coefficient is the system's "self-awareness dial"</text>
 
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
-    </marker>
-  </defs>
 
   <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 2</text>
 </svg>

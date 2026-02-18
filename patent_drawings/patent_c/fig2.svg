@@ -1,5 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
   <rect width="100%" height="100%" fill="#fff" />
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+    </marker>
+  </defs>
   <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 2 of 7</text>
 
   <!-- 200: CONNECTED state (left, bold outline) -->
@@ -11,7 +16,7 @@
 
   <!-- Start indicator pointing to 200 -->
   <path d="M80 220h35" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
-  <text x="75" y="215" font-family="Arial" font-size="10" text-anchor="end" fill="#000">START</text>
+  <text x="102" y="215" font-family="Arial" font-size="10" text-anchor="end" fill="#000">START</text>
 
   <!-- 202: AUTONOMOUS state (right) -->
   <circle cx="450" cy="220" r="55" fill="none" stroke="#000" stroke-width="1.5" />
@@ -52,9 +57,9 @@
 
   <!-- 214: Self-loop on 202 (autonomous steps) -->
   <path d="M495 185c40-25 40 70 0 45" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <text x="545" y="215" font-family="Arial" font-size="10" fill="#000">Each step</text>
-  <text x="545" y="228" font-family="Arial" font-size="10" fill="#000">(max 10K)</text>
-  <text x="545" y="200" font-family="Arial" font-size="14" font-weight="normal" fill="#000">214</text>
+  <text x="480" y="155" font-family="Arial" font-size="10" fill="#000">Each step</text>
+  <text x="480" y="167" font-family="Arial" font-size="10" fill="#000">(max 10K)</text>
+  <text x="510" y="143" font-family="Arial" font-size="14" font-weight="normal" fill="#000">214</text>
 
   <!-- 216: State Legend Box -->
   <rect x="130" y="530" width="350" height="90" rx="5" fill="none" stroke="#000" stroke-width="1" />
@@ -64,11 +69,6 @@
   <text x="150" y="600" font-family="Arial" font-size="10" fill="#000">204 RECOVERING: Buffer transmitted, restoring control</text>
   <text x="490" y="545" font-family="Arial" font-size="14" font-weight="normal" fill="#000">216</text>
 
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
-    </marker>
-  </defs>
 
   <text x="306" y="720" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 2</text>
 </svg>

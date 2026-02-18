@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
   <rect width="100%" height="100%" fill="#fff" />
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
   <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 8 of 8</text>
   
   
-  <text x="306" y="80" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle" fill="#000">ENERGY-BOUNDED RECURSIVE CONTROL ARCHITECTURE</text><rect x="80" y="140" width="470" height="475" rx="10" ry="10" fill="none" stroke="#000" stroke-width="2" stroke-dasharray="10,5" />
-  <text x="535" y="155" font-family="Arial" font-size="14" font-weight="normal" fill="#000">800</text>
+  <text x="306" y="80" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle" fill="#000">ENERGY-BOUNDED RECURSIVE CONTROL ARCHITECTURE</text><rect x="80" y="140" width="455" height="475" rx="10" ry="10" fill="none" stroke="#000" stroke-width="2" stroke-dasharray="10,5" />
+  <text x="510" y="155" font-family="Arial" font-size="14" font-weight="normal" fill="#000">800</text>
   
   
   <g transform="translate(95 95)"><path stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" d="M50 5v40" /><text x="105" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">802</text></g>
@@ -39,7 +40,6 @@
   <g transform="translate(100 420)"><rect width="120" height="50" rx="4" ry="4" fill="none" stroke="#000" stroke-dasharray="5,3" /><text x="20" y="25" font-family="Arial" font-size="10" fill="#000">Reflection</text><text x="20" y="38" font-family="Arial" font-size="10" fill="#000">r(t) = y(t-1)</text><text x="130" y="20" font-family="Arial" font-size="14" font-weight="normal" fill="#000">820</text></g>
   
   
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
   
   
   

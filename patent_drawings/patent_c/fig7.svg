@@ -1,5 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
   <rect width="100%" height="100%" fill="#fff" />
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+    </marker>
+  </defs>
   <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 7 of 7</text>
   <text x="306" y="80" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle" fill="#000">END-TO-END SIGNAL FLOW: CONNECTED vs AUTONOMOUS</text>
 
@@ -40,13 +45,13 @@
     <circle cx="0" cy="10" r="12" fill="none" stroke="#000" stroke-width="1.5" />
     <path d="M0 -2v12M-6 10l12-8" stroke="#000" stroke-width="1" />
   </g>
-  <text x="545" y="200" font-family="Arial" font-size="14" font-weight="normal" fill="#000">708</text>
+  <text x="510" y="200" font-family="Arial" font-size="14" font-weight="normal" fill="#000">708</text>
 
   <!-- 710: MODE BOUNDARY - shortened dashed line at margins only -->
-  <path d="M50 280h50" stroke="#000" stroke-width="1.5" stroke-dasharray="8,4" />
-  <path d="M512 280h50" stroke="#000" stroke-width="1.5" stroke-dasharray="8,4" />
+  <path d="M72 280h28" stroke="#000" stroke-width="1.5" stroke-dasharray="8,4" />
+  <path d="M512 280h28" stroke="#000" stroke-width="1.5" stroke-dasharray="8,4" />
   <text x="306" y="275" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">--- MODE BOUNDARY ---</text>
-  <text x="575" y="275" font-family="Arial" font-size="14" font-weight="normal" fill="#000">710</text>
+  <text x="510" y="275" font-family="Arial" font-size="14" font-weight="normal" fill="#000">710</text>
 
   <!-- AUTONOMOUS MODE section label -->
   <text x="85" y="315" font-family="Arial" font-size="10" font-weight="bold" fill="#000">AUTONOMOUS MODE (Fallback):</text>
@@ -76,16 +81,11 @@
   <text x="347" y="490" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">718</text>
 
   <!-- 720: Resync feedback path -->
-  <text x="560" y="400" font-family="Arial" font-size="14" font-weight="normal" fill="#000">720</text>
-  <text x="555" y="300" font-family="Arial" font-size="10" fill="#000">resync()</text>
-  <text x="555" y="312" font-family="Arial" font-size="10" fill="#000">payload</text>
+  <text x="510" y="400" font-family="Arial" font-size="14" font-weight="normal" fill="#000">720</text>
+  <text x="490" y="300" font-family="Arial" font-size="10" fill="#000">resync()</text>
+  <text x="490" y="312" font-family="Arial" font-size="10" fill="#000">payload</text>
 
   <!-- Arrow marker definition -->
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
-    </marker>
-  </defs>
 
   <!-- SIGNAL PATHS - CONNECTED MODE -->
 
@@ -99,7 +99,7 @@
   <path d="M380 200h40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
 
   <!-- Arrow from MOTOR OUTPUT (706) to wheel (708) -->
-  <path d="M500 200h3" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M500 200h15" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
 
   <!-- SIGNAL PATHS - AUTONOMOUS MODE -->
 
@@ -124,7 +124,7 @@
   <path d="M378 120h67v320h-90" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
 
   <!-- 720: Resync feedback path from MOD SWITCH (718) back to COGNITIVE (700) -->
-  <path d="M355 470h185V120h-162" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
+  <path d="M355 470h180V120h-157" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
 
   <!-- MODE SELECTION LOGIC legend box -->
   <rect x="100" y="530" width="412" height="90" rx="5" fill="none" stroke="#000" stroke-width="1" />
