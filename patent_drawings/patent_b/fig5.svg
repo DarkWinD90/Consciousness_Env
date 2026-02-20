@@ -30,10 +30,10 @@
   </g>
 
   <!-- Arrows down to modulation mapping -->
-  <path d="M131 175v45" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M193 175v45" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M327 175v45" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M471 175v45" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M131 175v25" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M193 175v25" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M327 175v25" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M471 175v25" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 502: Modulation Mapping -->
   <rect x="100" y="210" width="412" height="70" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
@@ -46,10 +46,10 @@
   <text x="510" y="235" font-family="Arial" font-size="14" font-weight="normal" fill="#000">502</text>
 
   <!-- Arrows down -->
-  <path d="M131 280v45" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M193 280v45" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M327 280v45" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M471 280v45" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M131 280v35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M193 280v35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M327 280v35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M471 280v35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 504: Reflection Coefficient Scale -->
   <rect x="100" y="315" width="412" height="60" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
@@ -63,7 +63,7 @@
   <text x="510" y="330" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</text>
 
   <!-- Arrow down -->
-  <path d="M306 375v55" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M306 375v35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 506: Behavioral Effects Table -->
   <rect x="100" y="420" width="412" height="130" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
