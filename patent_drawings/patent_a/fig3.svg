@@ -15,7 +15,7 @@
 <text x="424" y="235" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">SNN ARCHITECTURE (LIF Model)</text>
 <rect width="80" height="120" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" x="219" y="290" />
   <text x="259" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">INPUT</text>
-  <text x="259" y="317" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">LAYER</text>
+  <text x="259" y="322" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">LAYER</text>
   <circle cx="244" cy="345" r="8" fill="none" stroke="black" />
   <text x="244" y="348" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ext</text>
   <circle cx="274" cy="345" r="8" fill="none" stroke="black" />
@@ -25,7 +25,7 @@
   <text x="259" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">302</text>
 <rect width="90" height="120" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" x="319" y="290" />
   <text x="364" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">WEIGHT</text>
-  <text x="364" y="317" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MATRIX</text>
+  <text x="364" y="322" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MATRIX</text>
   <path d="M 329 330 h 70 v 65 H 329 z" fill="none" stroke="black" stroke-width="0.8" />
   <path stroke="black" stroke-width="0.8" d="M 329 347 h 70 M 329 365 h 70 M 329 383 h 70 M 346 330 v 65 m 18 -65 v 65 m 18 -65 v 65" />
   <text x="364" y="405" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">W[i,j]</text>
@@ -37,17 +37,17 @@
   <text x="489" y="334" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">i</text>
   <circle cx="519" cy="330" r="12" stroke="black" />
   <text x="489" y="358" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">308</text>
-  <text x="489" y="373" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">V(t+1) = V(t) x leak + I</text>
-  <text x="489" y="386" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">If V &gt;= V_th: spike</text>
-  <text x="489" y="399" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">V_th = 0.5</text>
+  <text x="489" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">V(t+1) = V(t) x leak + I</text>
+  <text x="489" y="392" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">If V &gt;= V_th: spike</text>
+  <text x="489" y="409" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">V_th = 0.5</text>
   <text x="489" y="270" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">306</text>
 <rect width="80" height="60" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" x="569" y="300" />
   <text x="609" y="318" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">OUTPUT</text>
   <path d="M 584 330 l 50 15 -50 15 z" fill="none" stroke="black" stroke-width="1.2" />
   <text x="609" y="290" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">310</text>
 <path d="M 649 330 h 10" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-<text x="629" y="320" font-family="Arial, sans-serif" font-size="14" fill="black">312</text>
-<text x="629" y="335" font-family="Arial, sans-serif" font-size="14" fill="black">spike</text>
+<text x="639" y="325" font-family="Arial, sans-serif" font-size="14" fill="black">312</text>
+<text x="629" y="342" font-family="Arial, sans-serif" font-size="14" fill="black">spike</text>
 <rect width="320" height="120" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" x="219" y="440" />
   <text x="379" y="455" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">MEMBRANE POTENTIAL DYNAMICS</text>
   <path d="M 249 540 h 260 M 249 475 v 70" stroke="black" stroke-width="1" />
@@ -61,28 +61,50 @@
 <path d="M 409 415 h 20" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
 <path d="M 549 360 h 20" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
 <path d="M 489 420 v 30 h -90" fill="none" stroke="black" stroke-dasharray="3,2" marker-end="url(#ah)" />
-<rect x="199" y="585" width="210" height="75" rx="4" ry="4" fill="none" stroke="black" stroke-width="1" />
+<rect x="199" y="585" width="210" height="85" rx="4" ry="4" fill="none" stroke="black" stroke-width="1" />
 <text x="294" y="600" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">STDP LEARNING RULE</text>
 <text x="209" y="618" font-family="Arial, sans-serif" font-size="14" fill="black">If post fires: W += A+ x pre_trace</text>
-<text x="209" y="630" font-family="Arial, sans-serif" font-size="14" fill="black">If pre fires: W -= A- x post_trace</text>
-<text x="209" y="642" font-family="Arial, sans-serif" font-size="14" fill="black">A- &gt; A+ (stability bias)</text>
-<text x="209" y="654" font-family="Arial, sans-serif" font-size="14" fill="black">Weight bounds: [0.0, 0.5]</text>
+<text x="209" y="634" font-family="Arial, sans-serif" font-size="14" fill="black">If pre fires: W -= A- x post_trace</text>
+<text x="209" y="650" font-family="Arial, sans-serif" font-size="14" fill="black">A- &gt; A+ (stability bias)</text>
+<text x="209" y="666" font-family="Arial, sans-serif" font-size="14" fill="black">Weight bounds: [0.0, 0.5]</text>
 <text x="399" y="600" font-family="Arial, sans-serif" font-size="14" fill="black">320</text>
-<rect x="199" y="675" width="455" height="65" rx="4" ry="4" fill="none" stroke="black" />
-<text x="629" y="690" font-family="Arial, sans-serif" font-size="14" fill="black">318</text>
-<text x="209" y="690" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="black">SPIKE VECTOR OUTPUT</text>
-<rect x="219" y="700" width="15" height="30" fill="black" />
-<rect x="249" y="712" width="15" height="18" fill="black" />
-<rect x="279" y="705" width="15" height="25" fill="black" />
-<rect x="309" y="718" width="15" height="12" fill="black" />
-<rect x="339" y="698" width="15" height="32" fill="black" />
-<rect x="369" y="708" width="15" height="22" fill="black" />
-<rect x="399" y="700" width="15" height="30" fill="black" />
-<rect x="429" y="720" width="15" height="10" fill="black" />
-<rect x="459" y="705" width="15" height="25" fill="black" />
-<rect x="489" y="712" width="15" height="18" fill="black" />
-<text x="564" y="718" font-family="Arial, sans-serif" font-size="14" fill="black">spike_vector[N]</text>
-<path d="M 609 360 v 310 h -30" stroke="black" stroke-width="1.2" fill="none" marker-end="url(#ah)" />
+<rect x="199" y="680" width="455" height="65" rx="4" ry="4" fill="none" stroke="black" />
+<text x="629" y="695" font-family="Arial, sans-serif" font-size="14" fill="black">318</text>
+<text x="209" y="695" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="black">SPIKE VECTOR OUTPUT</text>
+<rect x="219" y="705" width="15" height="30" fill="black" />
+<rect x="249" y="717" width="15" height="18" fill="black" />
+<rect x="279" y="710" width="15" height="25" fill="black" />
+<rect x="309" y="723" width="15" height="12" fill="black" />
+<rect x="339" y="703" width="15" height="32" fill="black" />
+<rect x="369" y="713" width="15" height="22" fill="black" />
+<rect x="399" y="705" width="15" height="30" fill="black" />
+<rect x="429" y="725" width="15" height="10" fill="black" />
+<rect x="459" y="710" width="15" height="25" fill="black" />
+<rect x="489" y="717" width="15" height="18" fill="black" />
+<text x="564" y="723" font-family="Arial, sans-serif" font-size="14" fill="black">spike_vector[N]</text>
+<path d="M 609 360 v 315 h -30" stroke="black" stroke-width="1.2" fill="none" marker-end="url(#ah)" />
+
+  <!-- Leader lines for reference numerals -->
+  <!-- 300: main SNN bounding rect -->
+  <line x1="627" y1="260" x2="654" y2="252" stroke="black" stroke-width="0.5" />
+  <!-- 302: input layer rect -->
+  <line x1="259" y1="282" x2="259" y2="290" stroke="black" stroke-width="0.5" />
+  <!-- 304: weight matrix rect -->
+  <line x1="364" y1="282" x2="364" y2="290" stroke="black" stroke-width="0.5" />
+  <!-- 306: hidden layer rect -->
+  <line x1="489" y1="272" x2="489" y2="280" stroke="black" stroke-width="0.5" />
+  <!-- 308: LIF neurons -->
+  <line x1="489" y1="348" x2="489" y2="342" stroke="black" stroke-width="0.5" />
+  <!-- 310: output rect -->
+  <line x1="609" y1="292" x2="609" y2="300" stroke="black" stroke-width="0.5" />
+  <!-- 312: spike output arrow -->
+  <line x1="641" y1="327" x2="649" y2="330" stroke="black" stroke-width="0.5" />
+  <!-- 314: membrane potential dynamics box -->
+  <line x1="379" y1="432" x2="379" y2="440" stroke="black" stroke-width="0.5" />
+  <!-- 318: spike vector output box -->
+  <line x1="627" y1="690" x2="654" y2="688" stroke="black" stroke-width="0.5" />
+  <!-- 320: STDP learning rule box -->
+  <line x1="399" y1="596" x2="409" y2="593" stroke="black" stroke-width="0.5" />
 
   <!-- Figure label -->
   <text x="425" y="1050" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 3</text>

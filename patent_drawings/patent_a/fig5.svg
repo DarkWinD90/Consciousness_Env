@@ -14,8 +14,8 @@
 <rect width="420" height="280" fill="none" stroke="black" stroke-width="1.5" x="219" y="230" />
   <text x="629" y="245" font-family="Arial, sans-serif" font-size="14" fill="black">500</text>
   <path d="M 219 230 v 280 M 219 370 h 420" stroke="black" stroke-width="1.5" />
-  <text x="209" y="350" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Energy</text>
-  <text x="209" y="363" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">(mWh)</text>
+  <text x="209" y="345" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Energy</text>
+  <text x="209" y="362" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">(mWh)</text>
   <text x="429" y="525" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Neural Activity (Spikes/Step)</text>
   <text x="219" y="225" font-family="Arial, sans-serif" font-size="14" fill="black">0</text>
   <text x="303" y="225" font-family="Arial, sans-serif" font-size="14" fill="black">10</text>
@@ -23,7 +23,7 @@
   <text x="471" y="225" font-family="Arial, sans-serif" font-size="14" fill="black">30</text>
   <text x="555" y="225" font-family="Arial, sans-serif" font-size="14" fill="black">40</text>
   <text x="629" y="225" font-family="Arial, sans-serif" font-size="14" fill="black">50</text>
-  <text x="204" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">0</text>
+  <text x="199" y="378" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">0</text>
   <text x="209" y="302" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">2</text>
   <text x="209" y="235" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">4</text>
   <text x="209" y="440" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">-2</text>
@@ -34,19 +34,19 @@
   <text x="629" y="465" font-family="Arial, sans-serif" font-size="14" fill="black">504</text>
   <text x="599" y="480" font-family="Arial, sans-serif" font-size="14" fill="black">COST</text>
   <circle cx="233" cy="357" r="8" fill="none" stroke="black" stroke-width="2" />
-  <text x="219" y="348" font-family="Arial, sans-serif" font-size="14" fill="black">506</text>
-  <text x="254" y="358" font-family="Arial, sans-serif" font-size="14" fill="black">Crossover</text>
-  <text x="254" y="371" font-family="Arial, sans-serif" font-size="14" fill="black">(0.3 spikes)</text>
+  <text x="233" y="382" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">506</text>
+  <text x="254" y="356" font-family="Arial, sans-serif" font-size="14" fill="black">Crossover</text>
+  <text x="254" y="372" font-family="Arial, sans-serif" font-size="14" fill="black">(0.3 spikes)</text>
   <rect x="319" y="235" width="250" height="120" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="3,2" />
   <text x="444" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">NET POSITIVE REGION</text>
   <text x="444" y="270" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Harvest &gt; Cost</text>
   <text x="584" y="255" font-family="Arial, sans-serif" font-size="14" fill="black">512</text>
-  <text x="279" y="302" font-family="Arial, sans-serif" font-size="14" fill="black">508</text>
-  <text x="234" y="316" font-family="Arial, sans-serif" font-size="14" fill="black">Quiescent</text>
-  <text x="234" y="328" font-family="Arial, sans-serif" font-size="14" fill="black">Drain Zone</text>
-  <text x="555" y="410" font-family="Arial, sans-serif" font-size="14" fill="black">510</text>
-  <text x="509" y="423" font-family="Arial, sans-serif" font-size="14" fill="black">Sweet Spot</text>
-  <text x="509" y="436" font-family="Arial, sans-serif" font-size="14" fill="black">Region</text>
+  <text x="279" y="298" font-family="Arial, sans-serif" font-size="14" fill="black">508</text>
+  <text x="234" y="314" font-family="Arial, sans-serif" font-size="14" fill="black">Quiescent</text>
+  <text x="234" y="330" font-family="Arial, sans-serif" font-size="14" fill="black">Drain Zone</text>
+  <text x="555" y="405" font-family="Arial, sans-serif" font-size="14" fill="black">510</text>
+  <text x="509" y="422" font-family="Arial, sans-serif" font-size="14" fill="black">Sweet Spot</text>
+  <text x="509" y="438" font-family="Arial, sans-serif" font-size="14" fill="black">Region</text>
 <rect width="200" height="100" fill="none" stroke="black" stroke-width="1.5" x="219" y="550" />
   <text x="319" y="565" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ENERGY TRAJECTORY</text>
   <path d="M 239 635 h 160 M 239 575 v 65" stroke="black" stroke-width="1" />
@@ -66,12 +66,23 @@
   <path d="M 584 602 h 20" stroke="black" marker-end="url(#ah)" />
   <path d="M 626 615 v 20 H 496 V 615" fill="none" stroke="black" stroke-dasharray="4,2" />
   <text x="559" y="645" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">feedback loop</text>
-  <text x="629" y="565" font-family="Arial, sans-serif" font-size="14" fill="black">516</text>
+  <text x="669" y="558" font-family="Arial, sans-serif" font-size="14" fill="black">516</text>
 <rect x="219" y="670" width="420" height="80" fill="none" stroke="black" stroke-width="1" />
 <text x="239" y="690" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="black">ENERGY FORMULAS:</text>
 <text x="239" y="708" font-family="Arial, sans-serif" font-size="14" fill="black">Harvest = 0.20 + (0.09 x spikes) mWh/step</text>
-<text x="239" y="723" font-family="Arial, sans-serif" font-size="14" fill="black">Cost = 0.225 + (0.006 x s) + (0.0003 x s^2) mWh/step</text>
-<text x="239" y="738" font-family="Arial, sans-serif" font-size="14" fill="black">Net Energy = Harvest - Cost (positive above crossover)</text>
+<text x="239" y="724" font-family="Arial, sans-serif" font-size="14" fill="black">Cost = 0.225 + (0.006 x s) + (0.0003 x s^2) mWh/step</text>
+<text x="239" y="740" font-family="Arial, sans-serif" font-size="14" fill="black">Net Energy = Harvest - Cost (positive above crossover)</text>
+
+  <!-- Leader lines for reference numerals -->
+  <line x1="627" y1="243" x2="639" y2="240" stroke="black" stroke-width="0.5" />
+  <line x1="627" y1="283" x2="621" y2="280" stroke="black" stroke-width="0.5" />
+  <line x1="627" y1="463" x2="621" y2="467" stroke="black" stroke-width="0.5" />
+  <line x1="233" y1="370" x2="233" y2="365" stroke="black" stroke-width="0.5" />
+  <line x1="279" y1="300" x2="270" y2="310" stroke="black" stroke-width="0.5" />
+  <line x1="555" y1="407" x2="545" y2="418" stroke="black" stroke-width="0.5" />
+  <line x1="582" y1="253" x2="571" y2="248" stroke="black" stroke-width="0.5" />
+  <line x1="437" y1="545" x2="421" y2="548" stroke="black" stroke-width="0.5" />
+  <line x1="667" y1="560" x2="661" y2="557" stroke="black" stroke-width="0.5" />
 
   <!-- Figure label -->
   <text x="425" y="1050" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 5</text>
