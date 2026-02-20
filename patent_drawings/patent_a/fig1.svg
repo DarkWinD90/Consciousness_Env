@@ -16,26 +16,16 @@
   <g transform="translate(0, 50)">
 
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- ENVIRONMENT (100) — cloud shape at top                -->
+    <!-- ENVIRONMENT (100) — ellipse at top                    -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <path d="M 330 108
-             Q 310 108, 315 90
-             Q 318 68, 350 68
-             Q 355 48, 385 55
-             Q 400 42, 425 52
-             Q 450 42, 465 55
-             Q 495 48, 500 68
-             Q 532 68, 535 90
-             Q 540 108, 520 108
-             Z"
-          fill="none" stroke="black" stroke-width="1.5" />
-    <text x="425" y="93" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">ENVIRONMENT</text>
+    <ellipse cx="425" cy="90" rx="110" ry="28" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="425" y="95" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">ENVIRONMENT</text>
     <!-- Ref numeral 100 with leader -->
     <text x="548" y="88" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">100</text>
     <line x1="546" y1="88" x2="537" y2="90" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Environment → L1 -->
-    <line x1="425" y1="108" x2="425" y2="140" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <line x1="425" y1="118" x2="425" y2="140" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- L1: PRINTED MEMBRANE (102)                            -->
@@ -80,15 +70,16 @@
     <!-- L4: NEUROMORPHIC CPU / SNN (108)                      -->
     <!-- ══════════════════════════════════════════════════════ -->
     <rect x="300" y="352" width="250" height="62" fill="none" stroke="black" stroke-width="2" />
-    <text x="425" y="368" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">L4: Neuromorphic CPU (SNN)</text>
-    <text x="425" y="384" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">+ L8 reflection input</text>
-    <text x="425" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">BaseSNN (LIF neurons)</text>
+    <text x="425" y="373" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">L4: Neuromorphic CPU (SNN)</text>
+    <text x="425" y="393" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">BaseSNN (LIF neurons)</text>
     <!-- Neuron circles inside L4 -->
-    <circle cx="360" cy="410" r="3" fill="black" stroke="black" stroke-width="1" />
-    <circle cx="385" cy="410" r="3" fill="black" stroke="black" stroke-width="1" />
-    <circle cx="410" cy="410" r="3" fill="black" stroke="black" stroke-width="1" />
-    <circle cx="435" cy="410" r="3" fill="black" stroke="black" stroke-width="1" />
-    <circle cx="460" cy="410" r="3" fill="black" stroke="black" stroke-width="1" />
+    <circle cx="360" cy="403" r="4" fill="black" stroke="black" stroke-width="1" />
+    <circle cx="385" cy="403" r="4" fill="black" stroke="black" stroke-width="1" />
+    <circle cx="410" cy="403" r="4" fill="black" stroke="black" stroke-width="1" />
+    <circle cx="435" cy="403" r="4" fill="black" stroke="black" stroke-width="1" />
+    <circle cx="460" cy="403" r="4" fill="black" stroke="black" stroke-width="1" />
+    <!-- + L8 reflection input annotation -->
+    <text x="425" y="361" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">+ L8 reflection input</text>
     <!-- Ref 108 -->
     <text x="560" y="383" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">108</text>
     <line x1="558" y1="383" x2="552" y2="383" stroke="black" stroke-width="0.5" />
