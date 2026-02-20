@@ -53,7 +53,8 @@
     <text x="534" y="408" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">&lt;= 0.20</text>
     <text x="624" y="408" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">PASS</text>
 
-    <text x="629" y="235" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">700</text>
+    <text x="680" y="218" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">700</text>
+    <line x1="678" y1="218" x2="656" y2="222" stroke="black" stroke-width="0.5" />
   <rect x="204" y="440" width="450" height="100" fill="none" stroke="black" stroke-width="1.5" />
     <line x1="204" y1="475" x2="654" y2="475" stroke="black" stroke-width="1" />
     <line x1="364" y1="440" x2="364" y2="540" stroke="black" stroke-width="0.8" />
@@ -70,6 +71,7 @@
     <text x="439" y="522" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">100.0 mWh</text>
     <text x="589" y="522" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ALIVE</text>
     <text x="629" y="455" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">702</text>
+    <line x1="627" y1="455" x2="656" y2="450" stroke="black" stroke-width="0.5" />
   <rect x="204" y="560" width="220" height="100" fill="none" stroke="black" stroke-width="1.5" />
     <g transform="translate(25 15)">
       <line x1="204" y1="630" x2="374" y2="630" stroke="black" stroke-width="1" />
@@ -80,15 +82,18 @@
       <path d="M 204 595 Q 246 585 289 580 T 374 570" fill="none" stroke="black" stroke-width="2" />
     </g>
     <text x="434" y="575" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">704</text>
+    <line x1="432" y1="575" x2="424" y2="560" stroke="black" stroke-width="0.5" />
   <rect x="444" y="560" width="210" height="100" fill="none" stroke="black" stroke-width="1.5" />
     <line x1="459" y1="595" x2="499" y2="595" stroke="black" stroke-width="2" />
     <text x="509" y="600" font-family="Arial, sans-serif" font-size="14" fill="black">Experimental</text>
     <line x1="459" y1="620" x2="499" y2="620" stroke="black" stroke-width="1" stroke-dasharray="4,2" />
     <text x="509" y="625" font-family="Arial, sans-serif" font-size="14" fill="black">Control</text>
     <text x="629" y="575" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">706</text>
+    <line x1="627" y1="575" x2="656" y2="568" stroke="black" stroke-width="0.5" />
   <rect x="204" y="680" width="450" height="50" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" />
   <text x="434" y="710" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">All 5 falsifiable claims validated — System self-sustaining</text>
   <text x="629" y="695" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">708</text>
+  <line x1="627" y1="695" x2="656" y2="695" stroke="black" stroke-width="0.5" />
 
   <!-- Figure label -->
   <text x="425" y="1050" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 7</text>
