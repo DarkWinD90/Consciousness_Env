@@ -34,40 +34,40 @@
   
   <!-- SIGNAL FLOW ARROWS -->
   <!-- 602 → 600: Piezo ADC input (GP26) -->
-  <path d="M152 178h78v82" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M152 178h78v92" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <text x="175" y="195" font-family="Arial" font-size="10" fill="#000">ADC0</text>
   
   <!-- 612 → 600: AC signal input -->
-  <path d="M164 275h66" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M164 275h76" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   
   <!-- 600 → 604: PWM to servo -->
-  <path d="M380 290h40v-100" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M380 290h40v-110" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <text x="400" y="230" font-family="Arial" font-size="10" fill="#000">PWM</text>
   
   <!-- 606 → 600: Thermistor ADC input (GP27) -->
-  <path d="M136 420h94v-60" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M136 420h94v-80" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <text x="145" y="390" font-family="Arial" font-size="10" fill="#000">ADC1</text>
   
   <!-- 610 → 600: LDR ADC input (GP28) -->
-  <path d="M288 400v-50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M288 400v-60" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <text x="295" y="385" font-family="Arial" font-size="10" fill="#000">ADC2</text>
   
   <!-- 600 → 608: LED GPIO output -->
-  <path d="M350 350h30v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M350 350h30v60" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <text x="355" y="380" font-family="Arial" font-size="10" fill="#000">GPIO</text>
   
   <!-- 616 → 600: Power supply (VSYS) -->
-  <path d="M460 305h-60" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M460 305h-90" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <text x="410" y="300" font-family="Arial" font-size="10" fill="#000">VSYS</text>
   
   <!-- 614 → 600: Control feedback -->
-  <path d="M232 525h-30v-175h28" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
+  <path d="M232 525h-30v-175h38" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />
   
   <!-- 604 → 602: Mechanical coupling (motor to piezo) -->
-  <path d="M420 182h-200v-10h-92" stroke="#000" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrow)" fill="none" />
+  <path d="M420 182h-200v-10h-79" stroke="#000" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrow)" fill="none" />
   
   <!-- Energy feedback loop -->
-  <path d="M500 330v105H288" stroke="#000" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)" fill="none" />
+  <path d="M500 330v105H278" stroke="#000" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)" fill="none" />
   <text x="499" y="420" font-family="Arial" font-size="10" fill="#000">Energy</text>
   <text x="510" y="432" font-family="Arial" font-size="10" fill="#000">Loop</text>
   
