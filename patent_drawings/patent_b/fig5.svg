@@ -20,6 +20,7 @@
     <text x="227" y="25" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">NORMAL</text>
     <text x="371" y="25" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">SURPLUS</text>
     <text x="420" y="-12" font-family="Arial" font-size="14" font-weight="normal" fill="#000">500</text>
+    <line x1="410" y1="-8" x2="412" y2="0" stroke="black" stroke-width="0.5" />
     <!-- Scale below -->
     <text x="0" y="55" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">0</text>
     <text x="62" y="55" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">15</text>
@@ -43,7 +44,8 @@
   <text x="193" y="260" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">-0.1</text>
   <text x="327" y="260" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">0.0</text>
   <text x="471" y="260" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">+0.3</text>
-  <text x="510" y="235" font-family="Arial" font-size="14" font-weight="normal" fill="#000">502</text>
+  <text x="520" y="235" font-family="Arial" font-size="14" font-weight="normal" fill="#000">502</text>
+  <line x1="518" y1="235" x2="512" y2="235" stroke="black" stroke-width="0.5" />
 
   <!-- Arrows down -->
   <path d="M131 280v35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
@@ -60,7 +62,8 @@
   <text x="193" y="370" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">0.19</text>
   <text x="327" y="370" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">0.20</text>
   <text x="471" y="370" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">0.23</text>
-  <text x="510" y="330" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</text>
+  <text x="520" y="330" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</text>
+  <line x1="518" y1="330" x2="512" y2="330" stroke="black" stroke-width="0.5" />
 
   <!-- Arrow down -->
   <path d="M306 375v35" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
@@ -86,12 +89,14 @@
   <!-- Row 3 -->
   <text x="150" y="542" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">0.20 (NORM)</text>
   <text x="356" y="542" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">Baseline - normal self-observation</text>
-  <text x="510" y="435" font-family="Arial" font-size="14" font-weight="normal" fill="#000">506</text>
+  <text x="520" y="435" font-family="Arial" font-size="14" font-weight="normal" fill="#000">506</text>
+  <line x1="518" y1="440" x2="512" y2="440" stroke="black" stroke-width="0.5" />
 
   <!-- 508: Optional Extension Zone (dashed at bottom) -->
   <rect x="100" y="570" width="412" height="32" rx="5" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" />
   <text x="306" y="590" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">Optional Extension Zone (future enhancements)</text>
-  <text x="510" y="590" font-family="Arial" font-size="14" font-weight="normal" fill="#000">508</text>
+  <text x="520" y="590" font-family="Arial" font-size="14" font-weight="normal" fill="#000">508</text>
+  <line x1="518" y1="590" x2="512" y2="590" stroke="black" stroke-width="0.5" />
 
 
   <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 5</text>
