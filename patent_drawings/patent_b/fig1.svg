@@ -34,7 +34,7 @@
   <text x="490" y="327" font-family="Arial" font-size="14" font-weight="normal" fill="#000">106</text>
 
   <!-- Arrow from SNN to spike output -->
-  <path d="M410 290v15" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M410 290v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 108: Aggregate Output O(t) = mean(V) -->
   <rect x="340" y="345" width="140" height="40" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
@@ -43,7 +43,7 @@
   <text x="490" y="370" font-family="Arial" font-size="14" font-weight="normal" fill="#000">108</text>
 
   <!-- Arrow from 106 to 108 -->
-  <path d="M410 335v15" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M410 335v20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 110: Delay Element z^-1 -->
   <rect x="340" y="410" width="140" height="40" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
