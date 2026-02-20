@@ -1,65 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
-  <rect width="100%" height="100%" fill="#fff" />
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#000" /></marker></defs>
-  <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 4 of 8</text>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
+  <defs>
+    <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="black" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="white" />
+
+  <!-- Sheet number -->
+  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">4/8</text>
+
+  <rect x="199" y="245" width="455" height="420" rx="8" ry="8" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+  <text x="629" y="265" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">400</text>
   
-  <!-- 400: Energy Harvesting Circuit boundary -->
-  <rect x="80" y="145" width="455" height="420" rx="8" ry="8" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="8,4" />
-  <text x="510" y="165" font-family="Arial" font-size="14" font-weight="normal" fill="#000">400</text>
   
-  <!-- 402: Piezo disc -->
-  <g transform="translate(110 170)"><circle cx="28" cy="28" r="24" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="28" cy="28" r="14" fill="none" stroke="#000" /><text x="58" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">402</text></g>
+  <circle cx="257" cy="298" r="24" fill="none" stroke="black" stroke-width="1.5" /><circle cx="257" cy="298" r="14" fill="none" stroke="black" /><text x="287" y="285" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">402</text><path d="M 319 295 q 8 -15 16 0 t 16 0 16 0 16 0" fill="none" stroke="black" stroke-width="1.5" /><text x="389" y="290" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">404</text><rect width="120" height="45" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" x="319" y="360" /><path d="M 339 382 Q 354 370 369 382 Q 384 394 399 382 Q 414 370 419 382" fill="none" stroke="black" stroke-width="1.5" /><text x="449" y="420" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">406</text><path fill="none" stroke="black" stroke-width="1.5" d="M 494 275 l 25 25 -25 25 -25 -25 z" /><text x="529" y="290" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">408</text><path stroke="black" stroke-width="1.5" d="M 563 270 v 40 M 603 270 v 40" /><path d="M 563 290 h 40" stroke="black" stroke-width="1" /><text x="614" y="280" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">410</text><rect width="56" height="40" fill="none" stroke="black" stroke-width="1.5" x="229" y="440" /><path d="M 243 440 v 40 M 257 440 v 40 M 271 440 v 40" stroke="black" stroke-width="1" /><text x="299" y="455" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">412</text><rect width="90" height="50" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" x="319" y="440" /><text x="349" y="470" font-family="Arial, sans-serif" font-size="14" fill="black">TEG</text><text x="419" y="455" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">414</text><rect width="80" height="60" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" x="449" y="440" /><circle cx="489" cy="470" r="10" stroke="black" /><path d="M 479 470 h 20 M 489 460 v 20" stroke="black" stroke-width="1" /><text x="534" y="455" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">416</text><rect width="80" height="60" rx="4" ry="4" fill="none" stroke="black" stroke-width="1.5" x="559" y="440" /><text x="579" y="475" font-family="Arial, sans-serif" font-size="14" fill="black">REG</text><text x="599" y="435" font-family="Arial, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="black">418</text><rect width="140" height="50" rx="4" ry="4" fill="none" stroke="black" stroke-dasharray="5,3" x="319" y="550" /><text x="339" y="580" font-family="Arial, sans-serif" font-size="14" fill="black">To SNN (104)</text><text x="469" y="575" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">420</text><path d="M 281 298 h 38" fill="none" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
   
-  <!-- 404: AC signal -->
-  <g transform="translate(200 180)"><path d="M0 15q8-15 16 0t16 0 16 0 16 0" fill="none" stroke="#000" stroke-width="1.5" /><text x="70" y="10" font-family="Arial" font-size="14" font-weight="normal" fill="#000">404</text></g>
+  <path d="M 379 305 v 55" fill="none" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
   
-  <!-- 406: Inductor (LC resonance) -->
-  <g transform="translate(200 260)"><rect width="120" height="45" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><path d="M20 22 Q35 10, 50 22 Q65 34, 80 22 Q95 10, 100 22" fill="none" stroke="#000" stroke-width="1.5" /><text x="130" y="60" font-family="Arial" font-size="14" font-weight="normal" fill="#000">406</text></g>
+  <path d="M 439 380 h 30 v -80" fill="none" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
   
-  <!-- 408: Rectifier (diamond) -->
-  <g transform="translate(350 175)"><path fill="none" stroke="#000" stroke-width="1.5" d="m25 0 25 25-25 25-25-25z" /><text x="60" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">408</text></g>
+  <path d="M 519 300 h 44" fill="none" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
   
-  <!-- 410: Capacitor -->
-  <g transform="translate(440 165)"><path stroke="#000" stroke-width="1.5" d="M4 5v40M44 5v40" /><path d="M4 25h40" stroke="#000" stroke-width="1" /><text x="55" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">410</text></g>
+  <path d="M 583 310 v 130" fill="none" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
   
-  <!-- 412: Heat sink -->
-  <g transform="translate(110 340)"><rect width="56" height="40" fill="none" stroke="#000" stroke-width="1.5" /><path d="M14 0v40M28 0v40M42 0v40" stroke="#000" stroke-width="1" /><text x="70" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">412</text></g>
+  <path d="M 285 460 h 34" fill="none" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
   
-  <!-- 414: Thermoelectric module -->
-  <g transform="translate(200 340)"><rect width="90" height="50" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><text x="30" y="30" font-family="Arial" font-size="10" fill="#000">TEG</text><text x="100" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">414</text></g>
+  <path d="M 409 465 h 40" fill="none" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
   
-  <!-- 416: Boost converter -->
-  <g transform="translate(330 340)"><rect width="80" height="60" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><circle cx="40" cy="30" r="10" stroke="#000" /><path d="M30 30h20M40 20v20" stroke="#000" stroke-width="1" /><text x="85" y="15" font-family="Arial" font-size="14" font-weight="normal" fill="#000">416</text></g>
+  <path d="M 529 470 h 30" fill="none" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
   
-  <!-- 418: Output regulator -->
-  <g transform="translate(440 340)"><rect width="80" height="60" rx="4" ry="4" fill="none" stroke="#000" stroke-width="1.5" /><text x="20" y="35" font-family="Arial" font-size="10" fill="#000">REG</text><text x="40" y="-5" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">418</text></g>
+  <path d="M 599 500 v 80 h -140" fill="none" stroke="black" stroke-width="1.2" marker-end="url(#ah)" />
   
-  <!-- 420: Energy output (to SNN) -->
-  <g transform="translate(200 450)"><rect width="140" height="50" rx="4" ry="4" fill="none" stroke="#000" stroke-dasharray="5,3" /><text x="20" y="30" font-family="Arial" font-size="10" fill="#000">To SNN (104)</text><text x="150" y="25" font-family="Arial" font-size="14" font-weight="normal" fill="#000">420</text></g>
-  
-  <!-- Arrow marker -->
-  
-  <!-- Signal flow arrows (individual paths) -->
-  <!-- 402 → 404 -->
-  <path d="M162 198h38" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- 404 → 406 -->
-  <path d="M260 205v55" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- 406 → 408 -->
-  <path d="M320 280h30v-80" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- 408 → 410 -->
-  <path d="M400 200h44" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- 410 → 418 (down) -->
-  <path d="M464 210v130" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- 412 → 414 -->
-  <path d="M166 360h34" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- 414 → 416 -->
-  <path d="M290 365h40" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- 416 → 418 -->
-  <path d="M410 370h30" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- 418 → 420 (output) -->
-  <path d="M480 400v80h-140" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <!-- Feedback from 408 to 406 -->
-  <path d="M375 225v55h-55" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow)" />
-  
-  <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 4</text>
+  <path d="M 494 325 v 55 h -55" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#ah)" />
+
+  <!-- Figure label -->
+  <text x="425" y="1050" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 4</text>
 </svg>
