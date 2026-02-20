@@ -78,8 +78,8 @@
     <circle cx="410" cy="403" r="4" fill="black" stroke="black" stroke-width="1" />
     <circle cx="435" cy="403" r="4" fill="black" stroke="black" stroke-width="1" />
     <circle cx="460" cy="403" r="4" fill="black" stroke="black" stroke-width="1" />
-    <!-- + L8 reflection input annotation -->
-    <text x="425" y="361" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">+ L8 reflection input</text>
+    <!-- + L8 reflection input annotation (above box to avoid overlap) -->
+    <text x="425" y="347" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">+ L8 reflection input</text>
     <!-- Ref 108 -->
     <text x="560" y="383" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">108</text>
     <line x1="558" y1="383" x2="552" y2="383" stroke="black" stroke-width="0.5" />
