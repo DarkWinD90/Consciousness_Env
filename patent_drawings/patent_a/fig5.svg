@@ -14,8 +14,7 @@
 <rect width="420" height="280" fill="none" stroke="black" stroke-width="1.5" x="219" y="230" />
   <text x="629" y="245" font-family="Arial, sans-serif" font-size="14" fill="black">500</text>
   <path d="M 219 230 v 280 M 219 370 h 420" stroke="black" stroke-width="1.5" />
-  <text x="209" y="345" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Energy</text>
-  <text x="209" y="362" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">(mWh)</text>
+  <text x="175" y="355" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black" transform="rotate(-90, 175, 355)">Energy (mWh)</text>
   <text x="429" y="525" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Neural Activity (Spikes/Step)</text>
   <text x="219" y="225" font-family="Arial, sans-serif" font-size="14" fill="black">0</text>
   <text x="303" y="225" font-family="Arial, sans-serif" font-size="14" fill="black">10</text>
@@ -34,16 +33,16 @@
   <text x="629" y="465" font-family="Arial, sans-serif" font-size="14" fill="black">504</text>
   <text x="599" y="480" font-family="Arial, sans-serif" font-size="14" fill="black">COST</text>
   <circle cx="233" cy="357" r="8" fill="none" stroke="black" stroke-width="2" />
-  <text x="233" y="382" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">506</text>
-  <text x="254" y="356" font-family="Arial, sans-serif" font-size="14" fill="black">Crossover</text>
-  <text x="254" y="372" font-family="Arial, sans-serif" font-size="14" fill="black">(0.3 spikes)</text>
+  <text x="233" y="395" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">506</text>
+  <text x="268" y="340" font-family="Arial, sans-serif" font-size="12" fill="black">Crossover</text>
+  <text x="268" y="354" font-family="Arial, sans-serif" font-size="12" fill="black">(0.3 spikes)</text>
   <rect x="319" y="235" width="250" height="120" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="3,2" />
   <text x="444" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">NET POSITIVE REGION</text>
   <text x="444" y="270" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Harvest &gt; Cost</text>
   <text x="584" y="255" font-family="Arial, sans-serif" font-size="14" fill="black">512</text>
-  <text x="279" y="298" font-family="Arial, sans-serif" font-size="14" fill="black">508</text>
-  <text x="234" y="314" font-family="Arial, sans-serif" font-size="14" fill="black">Quiescent</text>
-  <text x="234" y="330" font-family="Arial, sans-serif" font-size="14" fill="black">Drain Zone</text>
+  <text x="300" y="290" font-family="Arial, sans-serif" font-size="14" fill="black">508</text>
+  <text x="240" y="312" font-family="Arial, sans-serif" font-size="12" fill="black">Quiescent</text>
+  <text x="240" y="326" font-family="Arial, sans-serif" font-size="12" fill="black">Drain Zone</text>
   <text x="555" y="405" font-family="Arial, sans-serif" font-size="14" fill="black">510</text>
   <text x="509" y="422" font-family="Arial, sans-serif" font-size="14" fill="black">Sweet Spot</text>
   <text x="509" y="438" font-family="Arial, sans-serif" font-size="14" fill="black">Region</text>
@@ -54,18 +53,18 @@
   <text x="319" y="645" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">steps</text>
   <text x="229" y="600" font-family="Arial, sans-serif" font-size="14" fill="black">E</text>
   <text x="439" y="545" font-family="Arial, sans-serif" font-size="14" fill="black">514</text>
-<rect width="200" height="100" fill="white" stroke="black" stroke-width="1.5" x="459" y="550" />
-  <text x="559" y="565" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ACTIVITY STATE PIPELINE</text>
-  <rect x="474" y="590" width="45" height="25" stroke="black" />
-  <text x="496" y="607" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MEASURE</text>
-  <rect x="539" y="590" width="45" height="25" stroke="black" />
-  <text x="561" y="607" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">COMPUTE</text>
-  <rect x="604" y="590" width="45" height="25" stroke="black" />
-  <text x="626" y="607" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ADJUST</text>
-  <path d="M 519 602 h 20" stroke="black" marker-end="url(#ah)" />
-  <path d="M 584 602 h 20" stroke="black" marker-end="url(#ah)" />
-  <path d="M 626 615 v 20 H 496 V 615" fill="none" stroke="black" stroke-dasharray="4,2" />
-  <text x="559" y="645" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">feedback loop</text>
+<rect width="230" height="100" fill="white" stroke="black" stroke-width="1.5" x="459" y="550" />
+  <text x="574" y="565" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">ACTIVITY STATE PIPELINE</text>
+  <rect x="472" y="585" width="55" height="25" stroke="black" />
+  <text x="499" y="601" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">MEASURE</text>
+  <rect x="537" y="585" width="55" height="25" stroke="black" />
+  <text x="564" y="601" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">COMPUTE</text>
+  <rect x="602" y="585" width="55" height="25" stroke="black" />
+  <text x="629" y="601" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">ADJUST</text>
+  <path d="M 527 597 h 10" stroke="black" marker-end="url(#ah)" />
+  <path d="M 592 597 h 10" stroke="black" marker-end="url(#ah)" />
+  <path d="M 629 610 v 20 H 499 V 610" fill="none" stroke="black" stroke-dasharray="4,2" />
+  <text x="574" y="640" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">feedback loop</text>
   <text x="669" y="558" font-family="Arial, sans-serif" font-size="14" fill="black">516</text>
 <rect x="219" y="670" width="420" height="80" fill="none" stroke="black" stroke-width="1" />
 <text x="239" y="690" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="black">ENERGY FORMULAS:</text>
@@ -77,8 +76,8 @@
   <line x1="627" y1="243" x2="639" y2="240" stroke="black" stroke-width="0.5" />
   <line x1="627" y1="283" x2="621" y2="280" stroke="black" stroke-width="0.5" />
   <line x1="627" y1="463" x2="621" y2="467" stroke="black" stroke-width="0.5" />
-  <line x1="233" y1="370" x2="233" y2="365" stroke="black" stroke-width="0.5" />
-  <line x1="279" y1="300" x2="270" y2="310" stroke="black" stroke-width="0.5" />
+  <line x1="233" y1="383" x2="233" y2="365" stroke="black" stroke-width="0.5" />
+  <line x1="298" y1="292" x2="280" y2="305" stroke="black" stroke-width="0.5" />
   <line x1="555" y1="407" x2="545" y2="418" stroke="black" stroke-width="0.5" />
   <line x1="582" y1="253" x2="571" y2="248" stroke="black" stroke-width="0.5" />
   <line x1="437" y1="545" x2="421" y2="548" stroke="black" stroke-width="0.5" />
