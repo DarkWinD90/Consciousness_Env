@@ -13,7 +13,7 @@
   <!-- Zero baseline -->
   <path d="M100 300h400" stroke="#000" stroke-width="0.8" stroke-dasharray="2,2" />
   <text x="80" y="305" font-family="Arial" font-size="12" fill="#000">0</text>
-  <text x="60" y="255" font-family="Arial" font-size="14" font-weight="normal" fill="#000">208</text>
+  <text x="73" y="255" font-family="Arial" font-size="14" font-weight="normal" fill="#000">208</text>
   
   <!-- Experimental curve (solid, rising) - MCP path succeeds -->
   <path d="M100 300 Q 200 280, 300 200 Q 400 150, 480 140" fill="none" stroke="#000" stroke-width="2.5" />
@@ -23,11 +23,11 @@
   <!-- Control curve (dashed, falling) - CLI path fails -->
   <path d="M100 300 Q 200 350, 300 400 Q 400 430, 480 450" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="8,4" />
   <text x="490" y="445" font-family="Arial" font-size="14" font-weight="normal" fill="#000">212</text>
-  <text x="490" y="475" font-family="Arial" font-size="12" fill="#000">218</text>
+  <text x="510" y="480" font-family="Arial" font-size="12" fill="#000">218</text>
   
   <!-- Origin point -->
   <circle cx="100" cy="300" r="5" fill="none" stroke="#000" stroke-width="2" />
-  <text x="108" y="320" font-family="Arial" font-size="14" font-weight="normal" fill="#000">206</text>
+  <text x="115" y="345" font-family="Arial" font-size="14" font-weight="normal" fill="#000">206</text>
   
   <!-- Legend box 214: Experimental -->
   <rect x="100" y="520" width="180" height="50" fill="none" stroke="#000" stroke-width="1" />
