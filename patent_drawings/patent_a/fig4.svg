@@ -41,24 +41,25 @@
   
   <!-- Signal flow arrows (individual paths) -->
   <!-- 402 → 404 -->
-  <path d="M162 198h38" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M162 198h48" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 404 → 406 -->
-  <path d="M260 205v55" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M260 205v65" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 406 → 408 -->
-  <path d="M320 280h30v-80" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M320 280h30v-90" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 408 → 410 -->
-  <path d="M400 200h44" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M400 200h54" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 410 → 418 (down) -->
-  <path d="M464 210v130" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M464 210v140" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 412 → 414 -->
-  <path d="M166 360h34" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M166 360h44" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 414 → 416 -->
-  <path d="M290 365h40" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M290 365h50" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 416 → 418 -->
-  <path d="M410 370h30" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M410 370h40" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- 418 → 420 (output) -->
-  <path d="M480 400v80h-140" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M480 400v80h-150" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- Feedback from 408 to 406 -->
+  <path d="M375 225v55h-65" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow)" />
   <path d="M375 225v55h-45" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow)" />
   
   <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 4</text>

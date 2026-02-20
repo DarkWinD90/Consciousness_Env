@@ -22,8 +22,8 @@
   <text x="510" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">306</text>
 
   <!-- Arrows down to computation block -->
-  <path d="M180 160v40l26 30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <path d="M432 160v40l-26 30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M180 160v40l33 38" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
+  <path d="M432 160v40l-33 38" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <text x="135" y="190" font-family="Arial" font-size="10" fill="#000">modulation</text>
   <text x="445" y="190" font-family="Arial" font-size="10" fill="#000">energy-aware</text>
 
@@ -42,7 +42,7 @@
   <text x="340" y="438" font-family="Arial" font-size="14" font-weight="normal" fill="#000">312</text>
 
   <!-- 310: Output arrow -->
-  <path d="M306 310v75" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M306 310v85" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <text x="290" y="350" font-family="Arial" font-size="10" fill="#000">refl_coeff</text>
   <text x="270" y="365" font-family="Arial" font-size="14" font-weight="normal" fill="#000">310</text>
 
@@ -69,8 +69,8 @@
   <text x="510" y="515" font-family="Arial" font-size="14" font-weight="normal" fill="#000">308</text>
 
   <!-- Arrows from detail boxes back up -->
-  <path d="M180 500v-170l26-20" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
-  <path d="M432 500v-170l-26-20" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
+  <path d="M180 500v-170l34-26" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
+  <path d="M432 500v-170l-34-26" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />
 
 
   <text x="306" y="650" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 3</text>

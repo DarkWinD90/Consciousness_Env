@@ -45,6 +45,9 @@
   <path d="M15 30l50 15-50 15z" fill="none" stroke="#000" stroke-width="1.2" />
   <text x="40" y="-10" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">310</text>
 </g>
+<path d="M530 230h30" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
+<text x="545" y="220" font-family="Arial" font-size="14" fill="#000">312</text>
+<text x="545" y="235" font-family="Arial" font-size="10" fill="#000">spike</text>
 <path d="M530 230h25" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
 <text x="510" y="220" font-family="Arial" font-size="14" fill="#000">312</text>
 <text x="510" y="235" font-family="Arial" font-size="10" fill="#000">spike</text>
@@ -59,6 +62,10 @@
   <text x="15" y="65" font-family="Arial" font-size="10" fill="#000">V</text>
   <text x="160" y="-10" font-family="Arial" font-size="14" text-anchor="middle" fill="#000">314</text>
 </g>
+<path d="M180 315h30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+<path d="M290 315h30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+<path d="M430 260h30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+<path d="M370 320v30h-90" fill="none" stroke="#000" stroke-dasharray="3,2" marker-end="url(#arrow)" />
 <path d="M180 315h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 <path d="M290 315h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 <path d="M430 260h20" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
@@ -84,6 +91,7 @@
 <rect x="340" y="605" width="15" height="25" fill="#000" />
 <rect x="370" y="612" width="15" height="18" fill="#000" />
 <text x="445" y="618" font-family="Arial" font-size="10" fill="#000">spike_vector[N]</text>
+<path d="M490 260v325h-30" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
 <path d="M490 260v310h-80" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
 <text x="306" y="700" font-family="Arial" font-size="18" text-anchor="middle" fill="#000">FIG. 3</text>
 </svg>

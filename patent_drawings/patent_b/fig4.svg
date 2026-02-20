@@ -14,6 +14,7 @@
   <text x="480" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">400</text>
 
   <!-- Arrow down from 400 -->
+  <path d="M306 160v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <path d="M306 160v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <text x="320" y="180" font-family="Arial" font-size="10" fill="#000">S(t)</text>
 
@@ -33,11 +34,11 @@
   <text x="190" y="178" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">406</text>
 
   <!-- Arrows from 400 to 402 and 406 -->
-  <path d="M380 160v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <path d="M230 160v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M380 160v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M230 160v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- Arrow from 402 down to 404 -->
-  <path d="M420 290v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M420 290v50" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
 
   <!-- 404: Updated Weight Matrix -->
   <rect x="360" y="330" width="120" height="50" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
@@ -47,11 +48,11 @@
 
   <!-- Feedback loops back to 400 -->
   <!-- 406 feedback loop (left side) -->
-  <path d="M130 240h-30V130h50" stroke="#000" stroke-width="2" marker-end="url(#arrow)" fill="none" />
+  <path d="M130 240h-30V130h60" stroke="#000" stroke-width="2" marker-end="url(#arrow)" fill="none" />
   <text x="85" y="185" font-family="Arial" font-size="10" fill="#000" transform="rotate(-90 85 185)">SELF-OBS</text>
 
   <!-- 404/402 feedback loop (right side) -->
-  <path d="M480 355h30V130h-50" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" fill="none" />
+  <path d="M480 355h30V130h-58" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" fill="none" />
   <text x="505" y="240" font-family="Arial" font-size="10" fill="#000" transform="rotate(90 505 240)">STDP</text>
 
   <!-- 408: Key Insight (bottom left dashed) -->

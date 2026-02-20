@@ -95,6 +95,20 @@
   <!-- SIGNAL ARROWS -->
 
   <!-- 1. SENSOR → SNN : "input" -->
+  <path d="M148 175h72" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+  <text x="179" y="167" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">input</text>
+
+  <!-- 2. SNN → MOTOR : "spikes" -->
+  <path d="M365 175h50" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+  <text x="385" y="167" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">spikes</text>
+
+  <!-- 3. MOTOR → PIEZO : "vibration" -->
+  <path d="M453 205v55h-68v30" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+  <text x="463" y="240" font-family="Arial" font-size="9" fill="#000">vibration</text>
+
+  <!-- 4. SNN → THERMAL : "heat" -->
+  <path d="M267 210v80" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+  <text x="280" y="250" font-family="Arial" font-size="9" fill="#000">heat</text>
   <path d="M148 175h62" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
   <text x="179" y="167" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">input</text>
 
@@ -111,27 +125,31 @@
   <text x="280" y="250" font-family="Arial" font-size="10" fill="#000">heat</text>
 
   <!-- 5. THERMAL → CTRL LOGIC -->
-  <path d="M267 335v40h3v35" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+  <path d="M267 335v40h3v45" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
 
   <!-- 6. PIEZO → ENERGY STORE : "energy" -->
+  <path d="M385 340v50h3v35" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+  <text x="400" y="380" font-family="Arial" font-size="9" fill="#000">energy</text>
   <path d="M385 340v50h3v25" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
   <text x="400" y="380" font-family="Arial" font-size="10" fill="#000">energy</text>
 
   <!-- 7. ENERGY STORE → POWER MGT -->
-  <path d="M355 440h-50v35h-153v-130" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+  <path d="M355 440h-50v35h-153v-140" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
 
   <!-- 8. POWER MGT → SNN : "power" -->
+  <path d="M152 285v-90h68" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+  <text x="165" y="250" font-family="Arial" font-size="9" fill="#000">power</text>
   <path d="M152 285v-90h58" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
   <text x="165" y="250" font-family="Arial" font-size="10" fill="#000">power</text>
 
   <!-- 9. CTRL LOGIC → ENERGY STORE -->
-  <path d="M300 440h55" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
+  <path d="M300 440h65" stroke="#000" stroke-width="1.2" fill="none" marker-end="url(#arrow)" />
 
   <!-- 10. GND → PIEZO : ground ref (dashed) -->
-  <path d="M460 301h-46" stroke="#000" stroke-width="1" stroke-dasharray="3,2" fill="none" marker-end="url(#arrow)" />
+  <path d="M460 301h-55" stroke="#000" stroke-width="1" stroke-dasharray="3,2" fill="none" marker-end="url(#arrow)" />
 
   <!-- 11. Reflection: CTRL LOGIC → SNN (L8 dashed) -->
-  <path d="M240 440h-160v-325h150v25" stroke="#000" stroke-width="1.5" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)" />
+  <path d="M240 440h-160v-325h150v35" stroke="#000" stroke-width="1.5" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)" />
   <text x="87" y="395" font-family="Arial" font-size="12" fill="#000">120</text>
   <text x="87" y="408" font-family="Arial" font-size="10" fill="#000">reflection</text>
 
