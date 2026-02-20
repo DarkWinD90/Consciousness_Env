@@ -10,31 +10,32 @@
   <!-- Sheet number -->
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">6/8</text>
 
+  <text x="425" y="220" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">HARDWARE REFERENCE DESIGN</text>
   <rect width="150" height="90" rx="3" ry="3" fill="none" stroke="black" stroke-width="1.5" x="349" y="360" /><rect x="394" y="385" width="60" height="45" rx="2" ry="2" fill="none" stroke="black" /><text x="424" y="410" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MCU</text><text x="424" y="350" font-family="Arial, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="black">600</text><line x1="424" y1="352" x2="424" y2="360" stroke="black" stroke-width="0.5" /><circle cx="247" cy="278" r="24" fill="none" stroke="black" stroke-width="1.5" /><circle cx="247" cy="278" r="14" fill="none" stroke="black" /><text x="247" y="240" font-family="Arial, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="black">602</text><line x1="247" y1="242" x2="247" y2="254" stroke="black" stroke-width="0.5" /><rect y="258" width="50" height="32" rx="2" ry="2" fill="none" stroke="black" stroke-width="1.5" x="539" /><circle cx="551" cy="274" r="8" fill="none" stroke="black" stroke-width="1.5" /><text x="599" y="270" font-family="Arial, sans-serif" font-size="14" font-weight="normal" fill="black">604</text><line x1="597" y1="270" x2="589" y2="272" stroke="black" stroke-width="0.5" /><ellipse cx="237" cy="520" rx="12" ry="16" fill="none" stroke="black" stroke-width="1.5" /><path stroke="black" stroke-width="1.5" d="M 229 536 v 15 m 16 -19 v 19" /><text x="237" y="570" font-family="Arial, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="black">606</text><line x1="237" y1="558" x2="237" y2="536" stroke="black" stroke-width="0.5" /><rect width="30" height="30" fill="none" stroke="black" stroke-width="1.5" x="499" y="500" /><circle cx="514" cy="515" r="5" stroke="black" /><path d="M 514 520 v 8 M 509 528 h 10" stroke="black" stroke-width="1" /><text x="514" y="550" font-family="Arial, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="black">608</text><line x1="514" y1="538" x2="514" y2="530" stroke="black" stroke-width="0.5" /><circle cx="407" cy="520" r="15" fill="none" stroke="black" stroke-width="1.5" /><path d="M 397 515 q 5 -5 10 0 t 10 0" fill="none" stroke="black" stroke-width=".8" /><path d="M 392 505 l 10 10 M 397 503 l 10 10" stroke="black" stroke-width="0.8" /><text x="407" y="555" font-family="Arial, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="black">610</text><line x1="407" y1="543" x2="407" y2="535" stroke="black" stroke-width="0.5" /><path d="M 219 375 q 8 -15 16 0 t 16 0 16 0 16 0" fill="none" stroke="black" stroke-width="1.5" /><text x="251" y="405" font-family="Arial, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="black">612</text><line x1="251" y1="393" x2="251" y2="383" stroke="black" stroke-width="0.5" /><path fill="none" stroke="black" stroke-width="1.5" d="M 351 600 l 32 25 -32 25 -32 -25 z" /><text x="351" y="670" font-family="Arial, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="black">614</text><line x1="351" y1="658" x2="351" y2="650" stroke="black" stroke-width="0.5" /><rect x="583" y="385" width="40" height="45" fill="none" stroke="black" stroke-width="1.5" /><path d="M 591 385 v 45 M 611 385 v 45" stroke="black" stroke-width="1.5" /><text x="603" y="450" font-family="Arial, sans-serif" font-size="14" font-weight="normal" text-anchor="middle" fill="black">616</text><line x1="603" y1="438" x2="603" y2="430" stroke="black" stroke-width="0.5" /><path d="M 271 278 h 78 v 82" stroke="black" stroke-width="1.2" marker-end="url(#ah)" fill="none" />
-  <text x="294" y="295" font-family="Arial, sans-serif" font-size="14" fill="black">ADC0</text>
+  <text x="295" y="268" font-family="Arial, sans-serif" font-size="12" fill="black">ADC0</text>
   
   
   <path d="M 283 375 h 66" stroke="black" stroke-width="1.2" marker-end="url(#ah)" fill="none" />
   
   
   <path d="M 499 390 h 40 v -100" stroke="black" stroke-width="1.2" marker-end="url(#ah)" fill="none" />
-  <text x="519" y="330" font-family="Arial, sans-serif" font-size="14" fill="black">PWM</text>
+  <text x="505" y="310" font-family="Arial, sans-serif" font-size="12" fill="black">PWM</text>
   
   
   <path d="M 255 520 h 94 v -60" stroke="black" stroke-width="1.2" marker-end="url(#ah)" fill="none" />
-  <text x="264" y="490" font-family="Arial, sans-serif" font-size="14" fill="black">ADC1</text>
+  <text x="280" y="490" font-family="Arial, sans-serif" font-size="12" fill="black">ADC1</text>
   
   
   <path d="M 407 500 v -50" stroke="black" stroke-width="1.2" marker-end="url(#ah)" fill="none" />
-  <text x="414" y="485" font-family="Arial, sans-serif" font-size="14" fill="black">ADC2</text>
+  <text x="420" y="478" font-family="Arial, sans-serif" font-size="12" fill="black">ADC2</text>
   
   
   <path d="M 469 450 h 30 v 50" stroke="black" stroke-width="1.2" marker-end="url(#ah)" fill="none" />
-  <text x="474" y="480" font-family="Arial, sans-serif" font-size="14" fill="black">GPIO</text>
+  <text x="480" y="475" font-family="Arial, sans-serif" font-size="12" fill="black">GPIO</text>
   
   
   <path d="M 579 405 h -60" stroke="black" stroke-width="1.2" marker-end="url(#ah)" fill="none" />
-  <text x="529" y="400" font-family="Arial, sans-serif" font-size="14" fill="black">VSYS</text>
+  <text x="535" y="398" font-family="Arial, sans-serif" font-size="12" fill="black">VSYS</text>
   
   
   <path d="M 351 625 h -30 v -175 h 28" stroke="black" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#ah)" fill="none" />

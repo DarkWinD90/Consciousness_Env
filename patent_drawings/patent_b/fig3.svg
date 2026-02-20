@@ -26,7 +26,7 @@
   <!-- Arrows down to computation block -->
   <path d="M180 160v40l26 30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
   <path d="M432 160v40l-26 30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <text x="135" y="175" font-family="Arial" font-size="10" fill="#000">modulation</text>
+  <text x="115" y="175" font-family="Arial" font-size="10" fill="#000">modulation</text>
   <text x="445" y="175" font-family="Arial" font-size="10" fill="#000">energy-aware</text>
 
   <!-- 300: Reflection Coefficient Computation (center bold) -->
@@ -40,16 +40,16 @@
 
   <!-- 312: Source Priority (circle in center computation) -->
   <circle cx="306" cy="410" r="25" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="306" y="407" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">PRIORITY</text>
-  <text x="306" y="418" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">Ext &gt; Int</text>
-  <text x="340" y="438" font-family="Arial" font-size="14" font-weight="normal" fill="#000">312</text>
-  <line x1="335" y1="438" x2="331" y2="435" stroke="black" stroke-width="0.5" />
+  <text x="306" y="407" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">PRIORITY</text>
+  <text x="306" y="418" font-family="Arial" font-size="9" text-anchor="middle" fill="#000">Ext &gt; Int</text>
+  <text x="350" y="438" font-family="Arial" font-size="14" font-weight="normal" fill="#000">312</text>
+  <line x1="345" y1="435" x2="331" y2="430" stroke="black" stroke-width="0.5" />
 
   <!-- 310: Output arrow -->
   <path d="M306 310v75" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
-  <text x="290" y="350" font-family="Arial" font-size="10" fill="#000">refl_coeff</text>
-  <text x="270" y="365" font-family="Arial" font-size="14" font-weight="normal" fill="#000">310</text>
-  <line x1="288" y1="358" x2="296" y2="350" stroke="black" stroke-width="0.5" />
+  <text x="245" y="345" font-family="Arial" font-size="10" fill="#000">refl_coeff</text>
+  <text x="235" y="365" font-family="Arial" font-size="14" font-weight="normal" fill="#000">310</text>
+  <line x1="260" y1="358" x2="296" y2="340" stroke="black" stroke-width="0.5" />
 
   <!-- 314: Arrow to SNN (from priority) -->
   <path d="M306 435v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
@@ -73,8 +73,8 @@
   <text x="432" y="548" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">&lt;30 mWh: -0.1</text>
   <text x="432" y="561" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">&gt;80 mWh: +0.3</text>
   <text x="432" y="574" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">else: 0.0</text>
-  <text x="510" y="515" font-family="Arial" font-size="14" font-weight="normal" fill="#000">308</text>
-  <line x1="510" y1="518" x2="512" y2="525" stroke="black" stroke-width="0.5" />
+  <text x="520" y="510" font-family="Arial" font-size="14" font-weight="normal" fill="#000">308</text>
+  <line x1="518" y1="513" x2="514" y2="520" stroke="black" stroke-width="0.5" />
 
   <!-- Arrows from detail boxes back up -->
   <path d="M180 500v-170l26-20" stroke="#000" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)" fill="none" />

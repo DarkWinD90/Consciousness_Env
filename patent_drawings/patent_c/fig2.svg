@@ -51,10 +51,10 @@
 
   <!-- 210: Transition 204 -> 200 (diagonal up-left) -->
   <path d="M260 385l-64-117" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <text x="185" y="340" font-family="Arial" font-size="10" fill="#000">Resync</text>
-  <text x="185" y="352" font-family="Arial" font-size="10" fill="#000">complete</text>
-  <text x="175" y="370" font-family="Arial" font-size="14" font-weight="normal" fill="#000">210</text>
-  <line x1="186" y1="367" x2="194" y2="360" stroke="black" stroke-width="0.5" />
+  <text x="160" y="340" font-family="Arial" font-size="10" fill="#000">Resync</text>
+  <text x="160" y="352" font-family="Arial" font-size="10" fill="#000">complete</text>
+  <text x="150" y="370" font-family="Arial" font-size="14" font-weight="normal" fill="#000">210</text>
+  <line x1="172" y1="367" x2="200" y2="350" stroke="black" stroke-width="0.5" />
 
   <!-- 212: Direct transition 202 -> 200 (dashed, bottom path) -->
   <path d="M395 250H216" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" />
