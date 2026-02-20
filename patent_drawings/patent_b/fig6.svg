@@ -34,7 +34,7 @@
   <rect x="180" y="290" width="120" height="50" rx="5" fill="none" stroke="#000" stroke-width="1.5" />
   <text x="240" y="312" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">SELF-</text>
   <text x="240" y="325" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">OBSERVATION</text>
-  <text x="310" y="305" font-family="Arial" font-size="14" font-weight="normal" fill="#000">604</text>
+  <text x="240" y="280" font-family="Arial" font-size="14" font-weight="normal" fill="#000">604</text>
 
   <!-- 606: Cognitive Modulation (right) -->
   <rect x="320" y="290" width="120" height="50" rx="5" fill="none" stroke="#000" stroke-width="1.5" />

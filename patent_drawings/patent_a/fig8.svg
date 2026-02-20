@@ -62,6 +62,12 @@
   
   
   <path d="M490 290h40v320H100v-150" stroke="#000" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)" fill="none" />
+  <path d="M190 295h60" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M295 285h65" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M402 290h48" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  
+  
+  <path d="M490 290h40v320H100v-140" stroke="#000" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow)" fill="none" />
   
   
   <path d="M160 420v-190h170" stroke="#000" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrow)" fill="none" />

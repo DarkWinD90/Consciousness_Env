@@ -60,6 +60,7 @@
   <path d="M480 400v80h-150" fill="none" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <!-- Feedback from 408 to 406 -->
   <path d="M375 225v55h-65" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow)" />
+  <path d="M375 225v55h-45" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow)" />
   
   <text x="306" y="700" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 4</text>
 </svg>
