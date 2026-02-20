@@ -9,7 +9,7 @@
 
   <!-- 200: Main Spectrum Bar (0.0 to 1.0) -->
   <rect x="100" y="150" width="412" height="40" fill="none" stroke="#000" stroke-width="2" />
-  <text x="510" y="175" font-family="Arial" font-size="14" font-weight="normal" fill="#000">200</text>
+  <text x="520" y="175" font-family="Arial" font-size="14" font-weight="normal" fill="#000">200</text>
 
   <!-- Scale markings at bottom -->
   <path d="M100 190v20M180 190v20M260 190v20M380 190v20M512 190v20" stroke="#000" stroke-width="1.5" />

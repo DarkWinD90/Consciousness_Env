@@ -14,7 +14,7 @@
   <text x="480" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">400</text>
 
   <!-- Arrow down from 400 -->
-  <path d="M306 160v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <path d="M306 160v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
   <text x="320" y="180" font-family="Arial" font-size="10" fill="#000">S(t)</text>
 
   <!-- 402: STDP Weight Update -->
