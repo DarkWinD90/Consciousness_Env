@@ -55,15 +55,15 @@
   <text x="439" y="545" font-family="Arial, sans-serif" font-size="14" fill="black">514</text>
 <rect width="230" height="100" fill="white" stroke="black" stroke-width="1.5" x="459" y="550" />
   <text x="574" y="565" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">ACTIVITY STATE PIPELINE</text>
-  <rect x="472" y="585" width="55" height="25" stroke="black" />
-  <text x="499" y="601" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">MEASURE</text>
-  <rect x="537" y="585" width="55" height="25" stroke="black" />
-  <text x="564" y="601" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">COMPUTE</text>
-  <rect x="602" y="585" width="55" height="25" stroke="black" />
-  <text x="629" y="601" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">ADJUST</text>
+  <rect x="469" y="583" width="58" height="28" stroke="black" />
+  <text x="498" y="601" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="black">MEASURE</text>
+  <rect x="537" y="583" width="58" height="28" stroke="black" />
+  <text x="566" y="601" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="black">COMPUTE</text>
+  <rect x="605" y="583" width="55" height="28" stroke="black" />
+  <text x="632" y="601" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="black">ADJUST</text>
   <path d="M 527 597 h 10" stroke="black" marker-end="url(#ah)" />
-  <path d="M 592 597 h 10" stroke="black" marker-end="url(#ah)" />
-  <path d="M 629 610 v 20 H 499 V 610" fill="none" stroke="black" stroke-dasharray="4,2" />
+  <path d="M 595 597 h 10" stroke="black" marker-end="url(#ah)" />
+  <path d="M 632 611 v 19 H 498 V 611" fill="none" stroke="black" stroke-dasharray="4,2" />
   <text x="574" y="640" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">feedback loop</text>
   <text x="669" y="558" font-family="Arial, sans-serif" font-size="14" fill="black">516</text>
 <rect x="219" y="670" width="420" height="80" fill="none" stroke="black" stroke-width="1" />
