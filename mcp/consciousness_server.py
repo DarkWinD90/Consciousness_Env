@@ -11,8 +11,39 @@ Run with: python consciousness_server.py
 import sys
 import json
 import asyncio
+import subprocess
 from typing import Any, Dict, List
-import numpy as np
+from pathlib import Path
+
+# ---------------------------------------------------------------------------
+# Dependency bootstrap — install required packages if missing so the MCP
+# server can start in fresh environments (e.g. Claude Code web sandboxes).
+# ---------------------------------------------------------------------------
+_REQUIREMENTS_FILE = Path(__file__).resolve().parent.parent / "requirements.txt"
+
+
+def _ensure_dependencies() -> None:
+    """Install missing Python dependencies from requirements.txt."""
+    try:
+        import numpy  # noqa: F401
+    except ImportError:
+        print("[mcp-cognitive] numpy not found — installing dependencies…",
+              file=sys.stderr)
+        req_args = (
+            ["-r", str(_REQUIREMENTS_FILE)]
+            if _REQUIREMENTS_FILE.exists()
+            else ["numpy"]
+        )
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", "--quiet"] + req_args,
+            stdout=sys.stderr,
+            stderr=subprocess.STDOUT,
+        )
+
+
+_ensure_dependencies()
+
+import numpy as np  # noqa: E402
 
 
 class MCPServer:

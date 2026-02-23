@@ -2,15 +2,17 @@
   "mcpServers": {
     "consciousness": {
       "command": "python3",
-      "args": ["/home/user/Consciousness_Env/mcp/consciousness_mcp_server.py"],
+      "args": ["mcp/consciousness_mcp_server.py"],
       "env": {
-        "PYTHONPATH": "/home/user/Consciousness_Env"
+        "PYTHONPATH": "."
       }
     },
     "consciousness-cognitive": {
-      "command": "python",
-      "args": ["/home/user/Consciousness_Env/mcp/consciousness_server.py"],
-      "description": "Cognitive query interface for Enhanced Consciousness System"
+      "command": "python3",
+      "args": ["mcp/consciousness_server.py"],
+      "env": {
+        "PYTHONPATH": "."
+      }
     }
   }
 }
