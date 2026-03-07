@@ -1,0 +1,34 @@
+// Cognitive Fallback Architecture
+digraph PatentC_Fig1 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 1" labelloc=t nodesep=0.6 pad=0.5 rankdir=TB ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	claude [label="Cognitive
+Control Layer
+(10)" shape=ellipse]
+	heartbeat [label="Heartbeat
+Monitor
+(20)"]
+	snn [label="SNN +
+Physics Loop
+(30)"]
+	auto [label="Autonomous
+Runner
+(40)"]
+	buffer [label="State
+Buffer
+(50)" shape=cylinder]
+	snapshot [label="Persistent
+Snapshot
+(60)" shape=cylinder]
+	claude -> heartbeat [label="tool calls
+(every <30s)"]
+	heartbeat -> snn [label="active mode"]
+	heartbeat -> auto [label="timeout
+>30s" style=dashed]
+	auto -> snn [label="self-regulated
+input"]
+	snn -> buffer [label="step data"]
+	auto -> snapshot [label="every 50
+steps"]
+}

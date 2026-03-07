@@ -1,0 +1,31 @@
+// Recursive Self-Observation
+digraph PatentB_Fig1 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 1" labelloc=t nodesep=0.6 pad=0.5 rankdir=TB ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	input [label="External
+Input
+(10)" shape=parallelogram]
+	snn [label="Spiking Neural
+Network
+(20)"]
+	output [label="Aggregate
+Output
+(30)"]
+	record [label="Record Output
+at timestep t
+(40)"]
+	scale [label="Scale by
+Reflection Coeff
+(50)"]
+	modulate [label="Cognitive
+Modulation
+(60)" shape=ellipse]
+	input -> snn
+	snn -> output
+	output -> record
+	record -> scale [label="t → t+1"]
+	scale -> snn [label=feedback style=dashed]
+	modulate -> scale [label="adjust
+gain" style=dotted]
+}

@@ -1,0 +1,28 @@
+// STDP + Self-Observation
+digraph PatentB_Fig3 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 3" labelloc=t nodesep=0.6 pad=0.5 rankdir=TB ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	pre [label="Pre-synaptic
+Neuron i
+(80)"]
+	post [label="Post-synaptic
+Neuron j
+(82)"]
+	ltp [label="LTP:
+w += A+ × trace_i
+(84)"]
+	ltd [label="LTD:
+w -= A- × trace_j
+(86)"]
+	reflect [label="L8 Reflection
+Feedback
+(88)" shape=ellipse]
+	pre -> post [label="synapse w[i,j]"]
+	post -> ltp [label="post fires"]
+	pre -> ltd [label="pre fires"]
+	reflect -> pre [label="modulates
+firing" style=dashed]
+	reflect -> post [label="modulates
+firing" style=dashed]
+}

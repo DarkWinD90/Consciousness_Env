@@ -1,0 +1,35 @@
+// Self-Sustaining Method
+digraph PatentA_Fig3 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 3" labelloc=t nodesep=0.6 pad=0.5 rankdir=TB ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	s1 [label="S1: Receive
+Sensor Input
+(200)" shape=box]
+	s2 [label="S2: Process via
+SNN
+(210)" shape=box]
+	s3 [label="S3: Generate
+Motor Output
+(220)" shape=box]
+	s4 [label="S4: Harvest
+Energy
+(230)" shape=box]
+	d1 [label="Net-positive
+energy?
+(240)" shape=diamond]
+	s5 [label="S5: Continue
+Operation
+(250)" shape=box]
+	s6 [label="S6: Enter
+Conservation
+(260)" shape=box]
+	s1 -> s2
+	s2 -> s3
+	s3 -> s4
+	s4 -> d1
+	d1 -> s5 [label=Yes]
+	d1 -> s6 [label=No]
+	s5 -> s1 [label=loop style=dashed]
+	s6 -> s1 [label=loop style=dashed]
+}

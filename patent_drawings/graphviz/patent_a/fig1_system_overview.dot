@@ -1,0 +1,45 @@
+// 8-Layer Consciousness Loop
+digraph PatentA_Fig1 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 1" labelloc=t nodesep=0.6 pad=0.5 rankdir=TB ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	env [label="ENVIRONMENT
+(100)" shape=ellipse]
+	l1 [label="L1: Printed Membrane
+ThermochromicMixin
+(102)"]
+	l2 [label="L2: Sensing Pads
+light_intensity, temp
+(104)"]
+	l3 [label="L3: Optical Transmission
+signal_voltage
+(106)"]
+	l4 [label="L4: Neuromorphic CPU
+BaseSNN + L8 input
+(108)"]
+	l5 [label="L5: Servo Actuation
+target_angle
+(110)"]
+	l6 [label="L6: Energy Harvesting
+piezo + thermal
+(112)"]
+	l7 [label="L7: Ground Reference
+noise floor
+(114)"]
+	l8 [label="L8: Recursive Reflection
+previous_output
+(116)"]
+	env -> l1 [label="light, heat"]
+	l1 -> l2 [label="membrane signal"]
+	l2 -> l3 [label="light intensity"]
+	l3 -> l4 [label="signal voltage"]
+	l4 -> l5 [label="SNN output"]
+	l5 -> l6 [label="movement
+(friction)"]
+	l6 -> l7 [label="harvested energy"]
+	l7 -> l8 [label="baseline ref"]
+	l8 -> l4 [label="reflection
+coeff" style=dashed]
+	l1 -> l6 [label="thermal
+cross-link" constraint=false style=dotted]
+}

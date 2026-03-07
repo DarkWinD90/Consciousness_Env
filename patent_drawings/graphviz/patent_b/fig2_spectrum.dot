@@ -1,0 +1,21 @@
+// Self-Awareness Spectrum
+digraph PatentB_Fig2 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 2" labelloc=t nodesep=0.6 pad=0.5 rankdir=LR ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	zero [label="Coeff = 0.0
+No Self-Observation
+(70)"]
+	low [label="Coeff = 0.2
+Subtle Feedback
+(72)"]
+	mid [label="Coeff = 0.5
+Balanced
+(74)"]
+	high [label="Coeff = 1.0
+Self-Dominated
+(76)"]
+	zero -> low [label=increasing]
+	low -> mid [label="self-awareness"]
+	mid -> high [label=spectrum]
+}
