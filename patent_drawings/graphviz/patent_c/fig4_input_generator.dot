@@ -1,0 +1,24 @@
+// Input Generator & Energy Recovery
+digraph PatentC_Fig4 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 4" labelloc=t nodesep=0.6 pad=0.5 rankdir=LR ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	osc [label="Circadian
+Oscillator
+period=500
+(400)"]
+	burst [label="Attention Burst
+Injector
+p=10%, amp=0.2
+(402)"]
+	sum [label="Signal
+Summation" shape=circle width=0.6]
+	output [label="Autonomous
+Input Signal
+[0, 1]"]
+	osc -> sum [label="0.5 + 0.3*sin(2*pi*t/500)"]
+	burst -> sum [label="random burst"]
+	sum -> output
+	formula [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Input Formula (404)</B></TD></TR><TR><TD>input = 0.5 + 0.3 * sin(2*pi*step/period) + burst</TD></TR><TR><TD>burst: 10% chance, amplitude +0.2</TD></TR></TABLE>> shape=plaintext]
+	recovery [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Energy Recovery (406)</B></TD></TR><TR><TD>~10 mWh -> 100 mWh in ~500 steps</TD></TR><TR><TD>Traverses: CRITICAL -> LOW -> NORMAL -> SURPLUS</TD></TR></TABLE>> shape=plaintext]
+}

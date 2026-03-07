@@ -1,0 +1,40 @@
+// System Architecture - Mode Transition
+digraph PatentC_Fig1 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 1" labelloc=t nodesep=0.6 pad=0.5 rankdir=TB ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	cognitive [label="External Cognitive
+Control (Claude)
+(100)" shape=ellipse style=dashed]
+	watchdog [label="Heartbeat Watchdog
+Timeout: 30s | Check: 5s
+(102)"]
+	connected [label="CONNECTED
+Cognitive-Driven
+Operation
+(104)"]
+	autonomous [label="AUTONOMOUS
+Fallback Controller
+(106)" penwidth=2.5]
+	buffer [label="Step Buffer
+(108)" shape=cylinder]
+	snapshot [label="Snapshot Store
+(.snapshots/latest.json)
+(110)" shape=cylinder]
+	snn [label="SNN + Energy Harvester
+(112)"]
+	harvester [label="Energy Harvester
+(114)" shape=hexagon]
+	cognitive -> watchdog [label="tool calls"]
+	watchdog -> connected [label="active
+(heartbeat OK)"]
+	watchdog -> autonomous [label="timeout
+(>30s silent)" style=dashed]
+	connected -> snn [label="Claude input
++ modulation"]
+	autonomous -> snn [label="self-regulated
+input + modulation"]
+	snn -> buffer [label="step data"]
+	autonomous -> snapshot [label="every 50 steps"]
+	snn -> harvester [constraint=false]
+}

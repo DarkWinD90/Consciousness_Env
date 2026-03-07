@@ -1,0 +1,33 @@
+// Energy-Aware Modulation
+digraph PatentC_Fig3 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 3" labelloc=t nodesep=0.6 pad=0.5 rankdir=LR ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	yaxis [label="Modulation
+Value
+(300)" shape=plaintext]
+	critical [label="CRITICAL
+0-15 mWh
+Mod = -0.4
+(308)" color=black style="rounded,bold"]
+	low [label="LOW
+15-30 mWh
+Mod = -0.1
+(310)" style=rounded]
+	normal [label="NORMAL
+30-80 mWh
+Mod = 0.0
+(312)" style=rounded]
+	surplus [label="SURPLUS
+>80 mWh
+Mod = +0.3
+(314)" style=rounded]
+	xaxis [label="Energy (mWh)
+(304)" shape=plaintext]
+	yaxis -> critical [style=invis]
+	critical -> low [label="15 mWh"]
+	low -> normal [label="30 mWh"]
+	normal -> surplus [label="80 mWh"]
+	surplus -> xaxis [style=invis]
+	effects [label=<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0"><TR><TD COLSPAN="2"><B>Behavioral Effects (302)</B></TD></TR><TR><TD>-0.4</TD><TD>Max conservation, inhibit activity</TD></TR><TR><TD>-0.1</TD><TD>Cautious, slight reduction</TD></TR><TR><TD>0.0</TD><TD>Standard autonomous processing</TD></TR><TR><TD>+0.3</TD><TD>Opportunistic exploration</TD></TR></TABLE>> shape=plaintext]
+}

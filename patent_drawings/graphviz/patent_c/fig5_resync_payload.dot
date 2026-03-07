@@ -1,0 +1,25 @@
+// Resync Payload Structure
+digraph PatentC_Fig5 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 5" labelloc=t nodesep=0.6 pad=0.5 rankdir=TB ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	subgraph cluster_payload {
+		label="Resynchronization Payload (500)" penwidth=2 style=rounded
+		summary [label=<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0"><TR><TD COLSPAN="2"><B>Summary Statistics (502)</B></TD></TR><TR><TD>steps_autonomous</TD><TD>int</TD></TR><TR><TD>energy_delta</TD><TD>float mWh</TD></TR><TR><TD>min/max/mean energy</TD><TD>float mWh</TD></TR><TR><TD>total_spikes</TD><TD>int</TD></TR><TR><TD>mean_spikes_per_step</TD><TD>float</TD></TR></TABLE>> shape=plaintext]
+		delta [label="Energy Delta
+net change (mWh)
+(504)"]
+	}
+	decision [label="Full buffer
+requested?
+(508)" shape=diamond]
+	full_buffer [label=<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0"><TR><TD COLSPAN="2"><B>Full Step Buffer (506)</B></TD></TR><TR><TD>input</TD><TD>float per step</TD></TR><TR><TD>modulation</TD><TD>float per step</TD></TR><TR><TD>spikes</TD><TD>int per step</TD></TR><TR><TD>energy</TD><TD>float per step</TD></TR><TR><TD>temperature</TD><TD>float per step</TD></TR><TR><TD>pattern</TD><TD>str per step</TD></TR></TABLE>> shape=plaintext]
+	cognitive [label="Cognitive Layer
+(Claude)" shape=ellipse]
+	summary -> decision
+	decision -> full_buffer [label=Yes]
+	decision -> cognitive [label="No
+(summary only)"]
+	full_buffer -> cognitive [label=transmit]
+	delta -> decision
+}

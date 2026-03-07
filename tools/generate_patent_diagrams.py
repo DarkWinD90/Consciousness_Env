@@ -218,92 +218,338 @@ def patent_b_fig3_stdp():
 # Patent C: Cognitive Fallback with Autonomous Self-Regulation
 # ---------------------------------------------------------------------------
 
-def patent_c_fig1_fallback():
-    """FIG. 1 — Fallback System Architecture."""
+def patent_c_fig1_architecture():
+    """FIG. 1 — System Architecture: Seamless Mode Transition."""
     attrs = patent_style_attrs()
-    dot = graphviz.Digraph('PatentC_Fig1', comment='Cognitive Fallback Architecture')
+    dot = graphviz.Digraph('PatentC_Fig1', comment='System Architecture - Mode Transition')
     dot.attr(rankdir='TB', label='FIG. 1', labelloc='t', **attrs['graph'])
     dot.attr('node', **attrs['node'])
     dot.attr('edge', **attrs['edge'])
 
-    dot.node('claude', 'Cognitive\nControl Layer\n(10)', shape='ellipse')
-    dot.node('heartbeat', 'Heartbeat\nMonitor\n(20)')
-    dot.node('snn', 'SNN +\nPhysics Loop\n(30)')
-    dot.node('auto', 'Autonomous\nRunner\n(40)')
-    dot.node('buffer', 'State\nBuffer\n(50)', shape='cylinder')
-    dot.node('snapshot', 'Persistent\nSnapshot\n(60)', shape='cylinder')
+    # External cognitive control (Claude)
+    dot.node('cognitive', 'External Cognitive\nControl (Claude)\n(100)', shape='ellipse', style='dashed')
 
-    dot.edge('claude', 'heartbeat', label='tool calls\n(every <30s)')
-    dot.edge('heartbeat', 'snn', label='active mode')
-    dot.edge('heartbeat', 'auto', label='timeout\n>30s', style='dashed')
-    dot.edge('auto', 'snn', label='self-regulated\ninput')
+    # Heartbeat watchdog
+    dot.node('watchdog', 'Heartbeat Watchdog\nTimeout: 30s | Check: 5s\n(102)')
+
+    # Two operational modes
+    dot.node('connected', 'CONNECTED\nCognitive-Driven\nOperation\n(104)')
+    dot.node('autonomous', 'AUTONOMOUS\nFallback Controller\n(106)', penwidth='2.5')
+
+    # State persistence
+    dot.node('buffer', 'Step Buffer\n(108)', shape='cylinder')
+    dot.node('snapshot', 'Snapshot Store\n(.snapshots/latest.json)\n(110)', shape='cylinder')
+
+    # Core processing
+    dot.node('snn', 'SNN + Energy Harvester\n(112)')
+    dot.node('harvester', 'Energy Harvester\n(114)', shape='hexagon')
+
+    # Flows
+    dot.edge('cognitive', 'watchdog', label='tool calls')
+    dot.edge('watchdog', 'connected', label='active\n(heartbeat OK)')
+    dot.edge('watchdog', 'autonomous', label='timeout\n(>30s silent)', style='dashed')
+    dot.edge('connected', 'snn', label='Claude input\n+ modulation')
+    dot.edge('autonomous', 'snn', label='self-regulated\ninput + modulation')
     dot.edge('snn', 'buffer', label='step data')
-    dot.edge('auto', 'snapshot', label='every 50\nsteps')
+    dot.edge('autonomous', 'snapshot', label='every 50 steps')
+    dot.edge('snn', 'harvester', constraint='false')
 
     return dot
 
 
-def patent_c_fig2_method():
-    """FIG. 2 — Fallback Method Flowchart."""
+def patent_c_fig2_state_machine():
+    """FIG. 2 — State Machine: CONNECTED / AUTONOMOUS / RECOVERING."""
     attrs = patent_style_attrs()
-    dot = graphviz.Digraph('PatentC_Fig2', comment='Fallback Method')
-    dot.attr(rankdir='TB', label='FIG. 2', labelloc='t', **attrs['graph'])
+    dot = graphviz.Digraph('PatentC_Fig2', comment='State Machine')
+    dot.attr(rankdir='LR', label='FIG. 2', labelloc='t', **attrs['graph'])
     dot.attr('node', **attrs['node'])
     dot.attr('edge', **attrs['edge'])
 
-    dot.node('start', 'Start\n(300)', shape='ellipse')
-    dot.node('s1', 'S1: Monitor\nHeartbeat\n(310)')
-    dot.node('d1', 'Timeout\n>30s?\n(320)', shape='diamond')
-    dot.node('s2', 'S2: Engage\nAutonomous Runner\n(330)')
-    dot.node('s3', 'S3: Generate\nSelf-Regulating Input\n(340)')
-    dot.node('d2', 'Energy\nLevel?\n(350)', shape='diamond')
-    dot.node('s4a', 'Modulation\n-0.4 (conserve)\n(352)')
-    dot.node('s4b', 'Modulation\n0.0 (neutral)\n(354)')
-    dot.node('s4c', 'Modulation\n+0.3 (spend)\n(356)')
-    dot.node('s5', 'S5: Buffer\nStep Data\n(360)')
-    dot.node('d3', 'Reconnected?\n(370)', shape='diamond')
-    dot.node('s6', 'S6: Resync\nPayload\n(380)')
-    dot.node('end', 'Resume\nCognitive Control\n(390)', shape='ellipse')
+    # States (circles)
+    dot.node('connected', 'CONNECTED\n(200)', shape='doublecircle', width='1.3')
+    dot.node('autonomous', 'AUTONOMOUS\n(202)', shape='circle', width='1.3')
+    dot.node('recovering', 'RECOVERING\n(204)', shape='circle', width='1.3')
 
-    dot.edge('start', 's1')
-    dot.edge('s1', 'd1')
-    dot.edge('d1', 's1', label='No')
-    dot.edge('d1', 's2', label='Yes')
-    dot.edge('s2', 's3')
-    dot.edge('s3', 'd2')
-    dot.edge('d2', 's4a', label='<15 mWh')
-    dot.edge('d2', 's4b', label='15-80 mWh')
-    dot.edge('d2', 's4c', label='>80 mWh')
-    dot.edge('s4a', 's5')
-    dot.edge('s4b', 's5')
-    dot.edge('s4c', 's5')
-    dot.edge('s5', 'd3')
-    dot.edge('d3', 's3', label='No', style='dashed')
-    dot.edge('d3', 's6', label='Yes')
-    dot.edge('s6', 'end')
+    # Start arrow
+    dot.node('start', '', shape='point', width='0.1')
+    dot.edge('start', 'connected', label='START')
+
+    # Transitions
+    dot.edge('connected', 'autonomous', label='Heartbeat timeout\n>30s no tool call\n(206)')
+    dot.edge('autonomous', 'recovering', label='resync() called\n(208)')
+    dot.edge('recovering', 'connected', label='Resync complete\n(210)')
+
+    # Direct reconnection shortcut
+    dot.edge('autonomous', 'connected', label='Any tool call\n(direct reconnect)\n(212)',
+             style='dashed', constraint='false')
+
+    # Self-loop on autonomous
+    dot.edge('autonomous', 'autonomous', label='Each step\n(max 10K)\n(214)')
+
+    # Legend
+    dot.node('legend',
+             '<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0">'
+             '<TR><TD COLSPAN="2"><B>State Legend (216)</B></TD></TR>'
+             '<TR><TD>Double circle</TD><TD>Initial state</TD></TR>'
+             '<TR><TD>Solid arrow</TD><TD>Primary transition</TD></TR>'
+             '<TR><TD>Dashed arrow</TD><TD>Direct reconnect</TD></TR>'
+             '</TABLE>>',
+             shape='plaintext')
 
     return dot
 
 
-def patent_c_fig3_resync():
-    """FIG. 3 — Resynchronization Protocol."""
+def patent_c_fig3_energy_modulation():
+    """FIG. 3 — Energy-Aware Modulation Strategy (4-zone step function)."""
     attrs = patent_style_attrs()
-    dot = graphviz.Digraph('PatentC_Fig3', comment='Resync Protocol')
+    dot = graphviz.Digraph('PatentC_Fig3', comment='Energy-Aware Modulation')
     dot.attr(rankdir='LR', label='FIG. 3', labelloc='t', **attrs['graph'])
     dot.attr('node', **attrs['node'])
     dot.attr('edge', **attrs['edge'])
 
-    dot.node('buffer', 'Autonomy\nBuffer\n(50)', shape='cylinder')
-    dot.node('summary', 'Summary\nStatistics\n(52)')
-    dot.node('delta', 'Energy\nDelta\n(54)')
-    dot.node('payload', 'Resync\nPayload\n(56)')
-    dot.node('cognitive', 'Cognitive\nLayer\n(10)', shape='ellipse')
+    # Y-axis label
+    dot.node('yaxis', 'Modulation\nValue\n(300)', shape='plaintext')
 
-    dot.edge('buffer', 'summary', label='compute')
-    dot.edge('buffer', 'delta', label='compute')
-    dot.edge('summary', 'payload')
-    dot.edge('delta', 'payload')
-    dot.edge('payload', 'cognitive', label='transmit')
+    # Four energy zones as boxes
+    dot.node('critical', 'CRITICAL\n0-15 mWh\nMod = -0.4\n(308)',
+             style='rounded,bold', color='black')
+    dot.node('low', 'LOW\n15-30 mWh\nMod = -0.1\n(310)',
+             style='rounded')
+    dot.node('normal', 'NORMAL\n30-80 mWh\nMod = 0.0\n(312)',
+             style='rounded')
+    dot.node('surplus', 'SURPLUS\n>80 mWh\nMod = +0.3\n(314)',
+             style='rounded')
+
+    # X-axis label
+    dot.node('xaxis', 'Energy (mWh)\n(304)', shape='plaintext')
+
+    # Flow left to right (increasing energy)
+    dot.edge('yaxis', 'critical', style='invis')
+    dot.edge('critical', 'low', label='15 mWh')
+    dot.edge('low', 'normal', label='30 mWh')
+    dot.edge('normal', 'surplus', label='80 mWh')
+    dot.edge('surplus', 'xaxis', style='invis')
+
+    # Behavioral effects table
+    dot.node('effects',
+             '<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">'
+             '<TR><TD COLSPAN="2"><B>Behavioral Effects (302)</B></TD></TR>'
+             '<TR><TD>-0.4</TD><TD>Max conservation, inhibit activity</TD></TR>'
+             '<TR><TD>-0.1</TD><TD>Cautious, slight reduction</TD></TR>'
+             '<TR><TD>0.0</TD><TD>Standard autonomous processing</TD></TR>'
+             '<TR><TD>+0.3</TD><TD>Opportunistic exploration</TD></TR>'
+             '</TABLE>>',
+             shape='plaintext')
+
+    return dot
+
+
+def patent_c_fig4_input_generator():
+    """FIG. 4 — Autonomous Input Generator and Energy Recovery."""
+    attrs = patent_style_attrs()
+    dot = graphviz.Digraph('PatentC_Fig4', comment='Input Generator & Energy Recovery')
+    dot.attr(rankdir='LR', label='FIG. 4', labelloc='t', **attrs['graph'])
+    dot.attr('node', **attrs['node'])
+    dot.attr('edge', **attrs['edge'])
+
+    # Input signal pipeline
+    dot.node('osc', 'Circadian\nOscillator\nperiod=500\n(400)')
+    dot.node('burst', 'Attention Burst\nInjector\np=10%, amp=0.2\n(402)')
+    dot.node('sum', 'Signal\nSummation', shape='circle', width='0.6')
+    dot.node('output', 'Autonomous\nInput Signal\n[0, 1]')
+
+    dot.edge('osc', 'sum', label='0.5 + 0.3*sin(2*pi*t/500)')
+    dot.edge('burst', 'sum', label='random burst')
+    dot.edge('sum', 'output')
+
+    # Formula box
+    dot.node('formula',
+             '<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0">'
+             '<TR><TD><B>Input Formula (404)</B></TD></TR>'
+             '<TR><TD>input = 0.5 + 0.3 * sin(2*pi*step/period) + burst</TD></TR>'
+             '<TR><TD>burst: 10% chance, amplitude +0.2</TD></TR>'
+             '</TABLE>>',
+             shape='plaintext')
+
+    # Energy recovery annotation
+    dot.node('recovery',
+             '<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0">'
+             '<TR><TD><B>Energy Recovery (406)</B></TD></TR>'
+             '<TR><TD>~10 mWh -> 100 mWh in ~500 steps</TD></TR>'
+             '<TR><TD>Traverses: CRITICAL -> LOW -> NORMAL -> SURPLUS</TD></TR>'
+             '</TABLE>>',
+             shape='plaintext')
+
+    return dot
+
+
+def patent_c_fig5_resync_payload():
+    """FIG. 5 — Resynchronization Payload Structure."""
+    attrs = patent_style_attrs()
+    dot = graphviz.Digraph('PatentC_Fig5', comment='Resync Payload Structure')
+    dot.attr(rankdir='TB', label='FIG. 5', labelloc='t', **attrs['graph'])
+    dot.attr('node', **attrs['node'])
+    dot.attr('edge', **attrs['edge'])
+
+    # Outer payload container
+    with dot.subgraph(name='cluster_payload') as s:
+        s.attr(label='Resynchronization Payload (500)', style='rounded', penwidth='2')
+
+        # Summary statistics (always included)
+        s.node('summary',
+               '<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">'
+               '<TR><TD COLSPAN="2"><B>Summary Statistics (502)</B></TD></TR>'
+               '<TR><TD>steps_autonomous</TD><TD>int</TD></TR>'
+               '<TR><TD>energy_delta</TD><TD>float mWh</TD></TR>'
+               '<TR><TD>min/max/mean energy</TD><TD>float mWh</TD></TR>'
+               '<TR><TD>total_spikes</TD><TD>int</TD></TR>'
+               '<TR><TD>mean_spikes_per_step</TD><TD>float</TD></TR>'
+               '</TABLE>>',
+               shape='plaintext')
+
+        # Energy delta detail
+        s.node('delta', 'Energy Delta\nnet change (mWh)\n(504)')
+
+    # Decision: full buffer?
+    dot.node('decision', 'Full buffer\nrequested?\n(508)', shape='diamond')
+
+    # Full step buffer (optional)
+    dot.node('full_buffer',
+             '<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">'
+             '<TR><TD COLSPAN="2"><B>Full Step Buffer (506)</B></TD></TR>'
+             '<TR><TD>input</TD><TD>float per step</TD></TR>'
+             '<TR><TD>modulation</TD><TD>float per step</TD></TR>'
+             '<TR><TD>spikes</TD><TD>int per step</TD></TR>'
+             '<TR><TD>energy</TD><TD>float per step</TD></TR>'
+             '<TR><TD>temperature</TD><TD>float per step</TD></TR>'
+             '<TR><TD>pattern</TD><TD>str per step</TD></TR>'
+             '</TABLE>>',
+             shape='plaintext')
+
+    # Cognitive layer receives payload
+    dot.node('cognitive', 'Cognitive Layer\n(Claude)', shape='ellipse')
+
+    dot.edge('summary', 'decision')
+    dot.edge('decision', 'full_buffer', label='Yes')
+    dot.edge('decision', 'cognitive', label='No\n(summary only)')
+    dot.edge('full_buffer', 'cognitive', label='transmit')
+    dot.edge('delta', 'decision')
+
+    return dot
+
+
+def patent_c_fig6_recovery_timelines():
+    """FIG. 6 — Recovery Timelines: 3 Scenarios."""
+    attrs = patent_style_attrs()
+    dot = graphviz.Digraph('PatentC_Fig6', comment='Recovery Timelines')
+    graph_attrs = {**attrs['graph'], 'ranksep': '0.5', 'nodesep': '0.4'}
+    dot.attr(rankdir='LR', label='FIG. 6', labelloc='t', **graph_attrs)
+    dot.attr('node', **attrs['node'], width='1.2')
+    dot.attr('edge', **attrs['edge'])
+
+    # Scenario 1: Normal Reconnection (600)
+    with dot.subgraph(name='cluster_normal') as s:
+        s.attr(label='Normal Reconnection (600)', style='rounded')
+        s.node('n1', 'CONNECTED')
+        s.node('n2', 'Claude silent\n(30s timeout)')
+        s.node('n3', 'AUTONOMOUS\n(N steps)')
+        s.node('n4', 'resync()')
+        s.node('n5', 'CONNECTED')
+        s.edge('n1', 'n2')
+        s.edge('n2', 'n3')
+        s.edge('n3', 'n4')
+        s.edge('n4', 'n5')
+
+    # Scenario 2: Crash Recovery (602)
+    with dot.subgraph(name='cluster_crash') as s:
+        s.attr(label='Crash Recovery (602)', style='rounded')
+        s.node('c1', 'CONNECTED')
+        s.node('c2', 'CRASH', shape='box', style='bold')
+        s.node('c3', 'RESTART\n(process relaunch)')
+        s.node('c4', 'SNAPSHOT\n(load latest.json)')
+        s.node('c5', 'CONNECTED')
+        s.edge('c1', 'c2')
+        s.edge('c2', 'c3')
+        s.edge('c3', 'c4', label='max 50\nsteps lost')
+        s.edge('c4', 'c5')
+
+    # Scenario 3: Clean Shutdown (604)
+    with dot.subgraph(name='cluster_shutdown') as s:
+        s.attr(label='Clean Shutdown (604)', style='rounded')
+        s.node('s1', 'CONNECTED')
+        s.node('s2', 'AUTONOMOUS')
+        s.node('s3', 'EOF\n(stdin closed)')
+        s.node('s4', 'SHUTDOWN\n(final snapshot)')
+        s.node('s5', 'State\npreserved')
+        s.edge('s1', 's2')
+        s.edge('s2', 's3')
+        s.edge('s3', 's4')
+        s.edge('s4', 's5')
+
+    # Recovery guarantees legend
+    dot.node('legend',
+             '<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0">'
+             '<TR><TD COLSPAN="2"><B>Recovery Guarantees (606)</B></TD></TR>'
+             '<TR><TD>Solid line</TD><TD>System actively processing</TD></TR>'
+             '<TR><TD>Bold marker</TD><TD>No data loss at transition</TD></TR>'
+             '<TR><TD>Snapshots</TD><TD>Every 50 autonomous steps</TD></TR>'
+             '</TABLE>>',
+             shape='plaintext')
+
+    return dot
+
+
+def patent_c_fig7_signal_flow():
+    """FIG. 7 — End-to-End Signal Flow: Connected vs Autonomous Mode."""
+    attrs = patent_style_attrs()
+    dot = graphviz.Digraph('PatentC_Fig7', comment='End-to-End Signal Flow')
+    dot.attr(rankdir='LR', label='FIG. 7', labelloc='t', **attrs['graph'])
+    dot.attr('node', **attrs['node'])
+    dot.attr('edge', **attrs['edge'])
+
+    # Connected mode components
+    with dot.subgraph(name='cluster_connected') as s:
+        s.attr(label='CONNECTED MODE', style='rounded')
+        s.node('claude', 'Cognitive Layer\n(Claude)\n(700)', shape='ellipse', style='dashed')
+        s.node('claude_input', 'INPUT\n(from Claude)\n(702)')
+
+    # Core processing (shared)
+    dot.node('input_switch', 'Input\nSwitch\n(716)', shape='triangle')
+    dot.node('snn_core', 'SNN CORE\n(704)', penwidth='2.5')
+    dot.node('mod_switch', 'Modulation\nSwitch\n(718)', shape='triangle')
+    dot.node('motor', 'Motor Output\n(706)')
+    dot.node('actuator', 'Actuator\n(708)', shape='box', style='rounded,bold')
+
+    # Mode boundary
+    dot.node('boundary', 'MODE BOUNDARY (710)', shape='plaintext', fontsize='10')
+
+    # Autonomous mode components
+    with dot.subgraph(name='cluster_autonomous') as s:
+        s.attr(label='AUTONOMOUS MODE', style='rounded,dashed')
+        s.node('input_gen', 'Input\nGenerator\n(712)')
+        s.node('energy_mod', 'Energy\nModulation\n(4-zone)\n(714)')
+
+    # Resync feedback
+    dot.node('resync', 'Resync\nFeedback\n(720)', shape='parallelogram')
+
+    # Connected path
+    dot.edge('claude', 'claude_input')
+    dot.edge('claude_input', 'input_switch')
+    dot.edge('claude', 'mod_switch', style='dashed', label='cognitive\nmodulation')
+
+    # Autonomous path
+    dot.edge('input_gen', 'input_switch', style='dashed')
+    dot.edge('energy_mod', 'mod_switch', style='dashed')
+
+    # Core data path
+    dot.edge('input_switch', 'snn_core', label='selected\ninput')
+    dot.edge('mod_switch', 'snn_core', label='selected\nmodulation')
+    dot.edge('snn_core', 'motor', label='neural\noutput')
+    dot.edge('motor', 'actuator')
+
+    # Resync feedback
+    dot.edge('snn_core', 'resync', label='state data', style='dotted')
+    dot.edge('resync', 'claude', label='resync()\npayload', style='dotted', constraint='false')
 
     return dot
 
@@ -325,9 +571,13 @@ ALL_DIAGRAMS = {
         ('fig3_stdp', patent_b_fig3_stdp),
     ],
     'c': [
-        ('fig1_fallback', patent_c_fig1_fallback),
-        ('fig2_method', patent_c_fig2_method),
-        ('fig3_resync', patent_c_fig3_resync),
+        ('fig1_architecture', patent_c_fig1_architecture),
+        ('fig2_state_machine', patent_c_fig2_state_machine),
+        ('fig3_energy_modulation', patent_c_fig3_energy_modulation),
+        ('fig4_input_generator', patent_c_fig4_input_generator),
+        ('fig5_resync_payload', patent_c_fig5_resync_payload),
+        ('fig6_recovery_timelines', patent_c_fig6_recovery_timelines),
+        ('fig7_signal_flow', patent_c_fig7_signal_flow),
     ],
 }
 # Fix duplicate in patent_b
@@ -366,7 +616,8 @@ def generate(patents, fmt):
     print(f'\nReference Numbers:')
     print(f'  Patent A: 10-40 (energy loop), 100-116 (8-layer system), 200-260 (method)')
     print(f'  Patent B: 10-60 (reflection arch), 70-76 (spectrum), 80-88 (STDP)')
-    print(f'  Patent C: 10-60 (fallback arch), 300-390 (method), 50-56 (resync)')
+    print(f'  Patent C: 100-114 (architecture), 200-216 (state machine), 300-314 (energy mod),')
+    print(f'            400-406 (input gen), 500-508 (resync payload), 600-606 (recovery), 700-720 (signal flow)')
 
 
 def main():

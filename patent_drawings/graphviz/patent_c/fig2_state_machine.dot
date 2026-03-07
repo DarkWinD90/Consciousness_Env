@@ -1,0 +1,28 @@
+// State Machine
+digraph PatentC_Fig2 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 2" labelloc=t nodesep=0.6 pad=0.5 rankdir=LR ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	connected [label="CONNECTED
+(200)" shape=doublecircle width=1.3]
+	autonomous [label="AUTONOMOUS
+(202)" shape=circle width=1.3]
+	recovering [label="RECOVERING
+(204)" shape=circle width=1.3]
+	start [label="" shape=point width=0.1]
+	start -> connected [label=START]
+	connected -> autonomous [label="Heartbeat timeout
+>30s no tool call
+(206)"]
+	autonomous -> recovering [label="resync() called
+(208)"]
+	recovering -> connected [label="Resync complete
+(210)"]
+	autonomous -> connected [label="Any tool call
+(direct reconnect)
+(212)" constraint=false style=dashed]
+	autonomous -> autonomous [label="Each step
+(max 10K)
+(214)"]
+	legend [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD COLSPAN="2"><B>State Legend (216)</B></TD></TR><TR><TD>Double circle</TD><TD>Initial state</TD></TR><TR><TD>Solid arrow</TD><TD>Primary transition</TD></TR><TR><TD>Dashed arrow</TD><TD>Direct reconnect</TD></TR></TABLE>> shape=plaintext]
+}

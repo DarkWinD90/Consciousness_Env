@@ -1,0 +1,51 @@
+// Recovery Timelines
+digraph PatentC_Fig6 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 6" labelloc=t nodesep=0.4 pad=0.5 rankdir=LR ranksep=0.5
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded width=1.2]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	subgraph cluster_normal {
+		label="Normal Reconnection (600)" style=rounded
+		n1 [label=CONNECTED]
+		n2 [label="Claude silent
+(30s timeout)"]
+		n3 [label="AUTONOMOUS
+(N steps)"]
+		n4 [label="resync()"]
+		n5 [label=CONNECTED]
+		n1 -> n2
+		n2 -> n3
+		n3 -> n4
+		n4 -> n5
+	}
+	subgraph cluster_crash {
+		label="Crash Recovery (602)" style=rounded
+		c1 [label=CONNECTED]
+		c2 [label=CRASH shape=box style=bold]
+		c3 [label="RESTART
+(process relaunch)"]
+		c4 [label="SNAPSHOT
+(load latest.json)"]
+		c5 [label=CONNECTED]
+		c1 -> c2
+		c2 -> c3
+		c3 -> c4 [label="max 50
+steps lost"]
+		c4 -> c5
+	}
+	subgraph cluster_shutdown {
+		label="Clean Shutdown (604)" style=rounded
+		s1 [label=CONNECTED]
+		s2 [label=AUTONOMOUS]
+		s3 [label="EOF
+(stdin closed)"]
+		s4 [label="SHUTDOWN
+(final snapshot)"]
+		s5 [label="State
+preserved"]
+		s1 -> s2
+		s2 -> s3
+		s3 -> s4
+		s4 -> s5
+	}
+	legend [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0"><TR><TD COLSPAN="2"><B>Recovery Guarantees (606)</B></TD></TR><TR><TD>Solid line</TD><TD>System actively processing</TD></TR><TR><TD>Bold marker</TD><TD>No data loss at transition</TD></TR><TR><TD>Snapshots</TD><TD>Every 50 autonomous steps</TD></TR></TABLE>> shape=plaintext]
+}

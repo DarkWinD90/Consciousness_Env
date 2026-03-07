@@ -1,0 +1,57 @@
+// End-to-End Signal Flow
+digraph PatentC_Fig7 {
+	bgcolor=white fontname=Arial fontsize=14 label="FIG. 7" labelloc=t nodesep=0.6 pad=0.5 rankdir=LR ranksep=0.8
+	node [color=black fontcolor=black fontname=Arial fontsize=12 penwidth=1.5 shape=box style=rounded]
+	edge [color=black fontname=Arial fontsize=10 penwidth=1.2]
+	subgraph cluster_connected {
+		label="CONNECTED MODE" style=rounded
+		claude [label="Cognitive Layer
+(Claude)
+(700)" shape=ellipse style=dashed]
+		claude_input [label="INPUT
+(from Claude)
+(702)"]
+	}
+	input_switch [label="Input
+Switch
+(716)" shape=triangle]
+	snn_core [label="SNN CORE
+(704)" penwidth=2.5]
+	mod_switch [label="Modulation
+Switch
+(718)" shape=triangle]
+	motor [label="Motor Output
+(706)"]
+	actuator [label="Actuator
+(708)" shape=box style="rounded,bold"]
+	boundary [label="MODE BOUNDARY (710)" fontsize=10 shape=plaintext]
+	subgraph cluster_autonomous {
+		label="AUTONOMOUS MODE" style="rounded,dashed"
+		input_gen [label="Input
+Generator
+(712)"]
+		energy_mod [label="Energy
+Modulation
+(4-zone)
+(714)"]
+	}
+	resync [label="Resync
+Feedback
+(720)" shape=parallelogram]
+	claude -> claude_input
+	claude_input -> input_switch
+	claude -> mod_switch [label="cognitive
+modulation" style=dashed]
+	input_gen -> input_switch [style=dashed]
+	energy_mod -> mod_switch [style=dashed]
+	input_switch -> snn_core [label="selected
+input"]
+	mod_switch -> snn_core [label="selected
+modulation"]
+	snn_core -> motor [label="neural
+output"]
+	motor -> actuator
+	snn_core -> resync [label="state data" style=dotted]
+	resync -> claude [label="resync()
+payload" constraint=false style=dotted]
+}
