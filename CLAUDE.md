@@ -199,26 +199,107 @@ Consciousness_Env/
 │
 ├── tools/                   # Utilities (PACKAGE — has __init__.py)
 │   ├── __init__.py
-│   └── code_simplifier.py
+│   ├── code_simplifier.py
+│   ├── collision_checker.py          # SVG element collision detection
+│   ├── enhanced_collision_checker.py # Extended collision analysis
+│   ├── audit_arrow_endpoints.py      # Arrow endpoint audit for patent SVGs
+│   ├── fix_arrow_endpoints.py        # Arrow endpoint corrections
+│   ├── fix_arrow_endpoints_v2.py     # Arrow endpoint corrections v2
+│   ├── fix_numeral_collisions.py     # Reference numeral collision fixes
+│   ├── fix_remaining_collisions.py   # Final collision sweeps
+│   ├── fix_final_collisions.py       # Last-pass collision fixes
+│   ├── run_collision_check.py        # Collision check runner
+│   └── verify_signal_paths.py        # Signal path verification
 │
 ├── tests/                   # Test suite
 │   ├── __init__.py
-│   └── run_200_step_test.py
+│   ├── run_200_step_test.py
+│   ├── test_phase7_metrics.py        # Phase 7 metrics validation
+│   ├── run_soak_test.py              # Long-running soak tests
+│   └── run_stress_test.py            # Stress testing
+│
+├── patents/                 # Full patent filing materials
+│   ├── Patent_A_Energy_Loop.md       # Patent A specification + claims
+│   ├── Patent_B_Self_Observation.md  # Patent B specification + claims
+│   ├── Patent_C_Cognitive_Fallback.md # Patent C specification + claims
+│   ├── Energy_Bounded_Recursive_Control_System.txt
+│   ├── Filing_Package_Index.md       # Index of all filing materials
+│   ├── uspto_formatted/              # USPTO-ready plain text submissions
+│   │   ├── Patent_A_USPTO.txt
+│   │   ├── Patent_B_USPTO.txt
+│   │   ├── Patent_C_USPTO.txt
+│   │   ├── Patent_A_Drawings_Description.txt
+│   │   ├── Patent_B_Drawings_Description.txt
+│   │   ├── Patent_C_Drawings_Description.txt
+│   │   └── FILING_INSTRUCTIONS.md    # EFS-Web submission guide
+│   └── forms/                        # USPTO blank forms
+│       ├── sb0016.pdf                # Cover sheet (SB-16)
+│       └── sb0015a.pdf               # Micro Entity Status (SB-15A)
 │
 ├── patent_drawings/         # USPTO-compliant SVG drawings (37 CFR 1.84)
 │   ├── patent_a/            #   Patent A: 8 figures (fig1-fig8.svg)
 │   ├── patent_b/            #   Patent B: 6 figures (fig1-fig6.svg)
-│   └── patent_c/            #   Patent C: 7 figures (fig1-fig7.svg)
+│   ├── patent_c/            #   Patent C: 7 figures (fig1-fig7.svg)
+│   └── USPTO_Compliance_Report.md    # Validation report
+│
+├── docs/                    # Supplementary documentation
+│   ├── phase7_control_baseline.md    # Phase 7 detailed docs
+│   ├── reference_architecture.txt    # System architecture reference
+│   ├── brutal_reality_check.md       # Analysis document
+│   └── hardware/                     # Phase 11 hardware preparation
+│       ├── Phase11_Hardware_BOM.md    # Bill of Materials
+│       ├── Phase11_Shopping_List_$300.md
+│       └── Phase11_Shopping_Links_With_Laird.md
+│
+├── .github/workflows/       # CI/CD (see Section 15)
+│   ├── python-app.yml       #   Lint + unit tests + 4-phase validation
+│   ├── python-package-conda.yml  #   Conda build + test
+│   └── python-publish.yml   #   PyPI release automation
+│
+├── .claude/skills/          # Claude AI skills (see Section 16)
+│   ├── uspto-patent-compliance/  # USPTO compliance validation
+│   ├── patent-drawer/            # SVG drawing generation
+│   └── patent-collision-checker/ # Element collision detection
+│
+├── Formula/                 # Homebrew installation
+│   ├── consciousness-env.rb # Homebrew formula
+│   └── README.md
+│
+├── .mcp.json                # MCP server configuration (2 servers)
+├── environment.yml          # Conda environment spec (Python 3.10)
 │
 ├── export_drawings_pdf.py         # Exports SVGs to per-patent PDFs
+├── export_specifications_pdf.py   # Specification → PDF export
+├── generate_patent_a_drawings.py  # Patent A SVG generation
+├── generate_patent_b_drawings.py  # Patent B SVG generation
+├── generate_patent_c_drawings.py  # Patent C SVG generation
+├── fill_patent_forms.py           # USPTO form filling (SB-16, SB-15A)
+├── generate_dump_pdfs.py          # Complete filing package PDF generation
+│
 ├── Patent_Drawings_A.pdf          # EFS-Web ready (8 sheets)
 ├── Patent_Drawings_B.pdf          # EFS-Web ready (6 sheets)
 ├── Patent_Drawings_C.pdf          # EFS-Web ready (7 sheets)
+├── Patent_Drawings_All.pdf        # All 21 drawings combined
+├── Patent_A_CoverSheet_SB16.pdf   # Patent A cover sheet
+├── Patent_A_Specification.pdf     # Patent A specification
+├── Patent_A_Drawings_Description.pdf
+├── Patent_A_MicroEntity_SB15A.pdf
+├── Patent_B_CoverSheet_SB16.pdf   # Patent B cover sheet
+├── Patent_B_Specification.pdf     # Patent B specification
+├── Patent_B_Drawings_Description.pdf
+├── Patent_B_MicroEntity_SB15A.pdf
+├── Patent_C_CoverSheet_SB16.pdf   # Patent C cover sheet
+├── Patent_C_Specification.pdf     # Patent C specification
+├── Patent_C_Drawings_Description.pdf
+├── Patent_C_MicroEntity_SB15A.pdf
 │
+├── 2026-02-02_Patent_Filing_Summary.md  # Filing status + timeline
 ├── consciousness_cli.py     # CLI entry point: `consciousness run|appendix|version`
 ├── setup.py                 # Package config (find_packages + py_modules)
 ├── MANIFEST.in              # Source distribution includes
 ├── requirements.txt
+├── README.md                # Project README
+├── QUICK_START.md           # Homebrew installation guide
 └── CLAUDE.md                # THIS FILE
 ```
 
@@ -1039,6 +1120,129 @@ The model follows the ARM Holdings pattern:
 | `setup.py` | Packaging config | YES — __init__.py discovery |
 | `patent_drawings/` | Hand-tuned USPTO-compliant SVGs (21 figs) | YES — patent filing |
 | `export_drawings_pdf.py` | SVG → PDF export for EFS-Web | YES — patent filing |
+| `export_specifications_pdf.py` | Specification → PDF export | YES — patent filing |
+| `fill_patent_forms.py` | USPTO form generation (SB-16, SB-15A) | YES — patent filing |
+| `generate_patent_a_drawings.py` | Patent A SVG generation script | NO — regeneration utility |
+| `generate_patent_b_drawings.py` | Patent B SVG generation script | NO — regeneration utility |
+| `generate_patent_c_drawings.py` | Patent C SVG generation script | NO — regeneration utility |
+| `generate_dump_pdfs.py` | Complete filing package PDF builder | NO — regeneration utility |
+| `patents/` | Full patent specifications + USPTO formatted text | YES — patent filing |
+| `patents/uspto_formatted/` | USPTO-ready plain text for EFS-Web | YES — patent filing |
+| `docs/hardware/` | Phase 11 BOM + shopping lists | YES — hardware prototype prep |
+| `.github/workflows/python-app.yml` | CI: lint + test + 4-phase validation | YES — merge gate |
+| `.mcp.json` | MCP server configuration | YES — Claude desktop integration |
+| `tools/collision_checker.py` | SVG element collision detection | NO — patent drawing utility |
+| `tests/test_phase7_metrics.py` | Phase 7 metrics unit tests | NO — supplementary tests |
+
+---
+
+## 15. CI/CD — Automated Validation Gate
+
+### 15.1 GitHub Actions Workflows
+
+Three workflows enforce quality on every push/PR to `main`:
+
+| Workflow | File | Trigger | Purpose |
+|----------|------|---------|---------|
+| Python application | `.github/workflows/python-app.yml` | push/PR to `main` | Lint + pytest + **all 4 phase validations** |
+| Conda package | `.github/workflows/python-package-conda.yml` | push/PR to `main` | Conda build + test |
+| PyPI publish | `.github/workflows/python-publish.yml` | release created | Publish to PyPI |
+
+### 15.2 The Validation Gate (python-app.yml)
+
+This is the most important workflow.  It runs three jobs in sequence:
+
+1. **lint** — flake8 checks for syntax errors (E9, F63, F7, F82)
+2. **test** — pytest runs the unit test suite
+3. **validate-phases** (depends on lint + test passing) — runs ALL four phase
+   validation scripts sequentially:
+   ```
+   python phases/phase7_control_baseline.py        # Claims A-E
+   python phases/phase8_stdp.py                     # Claims F8.1-F8.3
+   python phases/phase9_predictive_processing.py    # Claims F9.1-F9.3
+   python phases/phase10_multimodal.py              # Claims F10.1-F10.3
+   ```
+   Each script's output is captured.  If any script prints `FAIL`, the job
+   fails and the PR cannot merge.
+
+**This is the automated enforcement of Section 7.4 (Regression Validation
+Rule).**  No PR can merge to `main` unless all prior phase claims still PASS.
+
+### 15.3 Adding New Phases to CI
+
+When a new phase (e.g., Phase 11) is added, a corresponding step must be
+added to the `validate-phases` job in `.github/workflows/python-app.yml`:
+```yaml
+    - name: Phase 11 — Hardware Validation (Claims F11.1-F11.3)
+      run: |
+        python phases/phase11_hardware.py 2>&1 | tee phase11.log
+        grep -q "FAIL" phase11.log && exit 1 || true
+```
+
+---
+
+## 16. Claude Skills — Patent Drawing Toolchain
+
+Three Claude AI skills are configured in `.claude/skills/` for patent drawing
+work.  These skills are automatically available to Claude Code sessions.
+
+### 16.1 uspto-patent-compliance
+
+**Location**: `.claude/skills/uspto-patent-compliance/`
+
+Enforces USPTO 37 CFR 1.84 and MPEP 608.02 requirements across all 21 patent
+drawings.  Includes:
+- `validate_drawings.py` — SVG compliance checker (margins, fonts, line weights)
+- `validate_pdfs.py` — PDF output validation
+- `cross_check_numerals.py` — Reference numeral consistency across figures
+- `advanced_validators/` — Extended checks: ambiguous numerals, arrow endpoints,
+  lead line audit, brief description cross-reference, scale simulation, style
+  consistency
+
+### 16.2 patent-drawer
+
+**Location**: `.claude/skills/patent-drawer/`
+
+Generates and validates new USPTO-compliant SVG figures.  Includes:
+- Base SVG template with correct margins/dimensions
+- Validators for arrowheads, fonts, margins, reference numerals, full compliance
+- Use this when creating new figures or fixing compliance issues
+
+### 16.3 patent-collision-checker
+
+**Location**: `.claude/skills/patent-collision-checker/`
+
+Detects and fixes element collisions in SVG drawings that violate 37 CFR 1.84
+legibility requirements:
+- Overlapping text elements
+- Text-on-line collisions
+- Clipped elements near margins
+- Reference numeral overlap
+
+---
+
+## 17. MCP Configuration
+
+The `.mcp.json` file at the repo root configures the two-server bridge pattern
+(Section 5) for Claude Desktop / Claude Code:
+
+```json
+{
+  "mcpServers": {
+    "consciousness": {
+      "command": "python",
+      "args": ["mcp/consciousness_mcp_server.py"]
+    },
+    "consciousness-cognitive": {
+      "command": "python",
+      "args": ["mcp/consciousness_server.py"]
+    }
+  }
+}
+```
+
+This file is checked into the repo so any Claude session with MCP support
+automatically discovers both servers.
 
 ---
 
