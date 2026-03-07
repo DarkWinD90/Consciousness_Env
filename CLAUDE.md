@@ -199,11 +199,25 @@ Consciousness_Env/
 │
 ├── tools/                   # Utilities (PACKAGE — has __init__.py)
 │   ├── __init__.py
-│   └── code_simplifier.py
+│   ├── code_simplifier.py
+│   ├── collision_checker.py         # SVG element collision detection
+│   ├── enhanced_collision_checker.py
+│   ├── fix_arrow_endpoints.py       # Arrow endpoint repair tools
+│   ├── fix_arrow_endpoints_v2.py
+│   ├── fix_numeral_collisions.py    # Reference numeral overlap fixing
+│   ├── fix_remaining_collisions.py
+│   ├── fix_final_collisions.py
+│   ├── run_collision_check.py       # Collision check orchestrator
+│   ├── audit_arrow_endpoints.py     # Arrow endpoint audit
+│   └── verify_signal_paths.py       # Signal path routing validator
 │
 ├── tests/                   # Test suite
 │   ├── __init__.py
-│   └── run_200_step_test.py
+│   ├── run_200_step_test.py         # 200-step integration test
+│   ├── run_soak_test.py             # Long-running soak test
+│   ├── run_stress_test.py           # High-intensity stress test
+│   ├── test_code_simplifier.py      # Unit tests for code simplifier
+│   └── test_phase7_metrics.py       # Phase 7 metric validation tests
 │
 ├── patent_drawings/         # USPTO-compliant SVG drawings (37 CFR 1.84)
 │   ├── USPTO_Compliance_Report.md  # Compliance audit report
