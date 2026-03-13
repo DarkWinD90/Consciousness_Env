@@ -147,15 +147,10 @@
     <text x="700" y="345" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">30</text>
     <line x1="698" y1="345" x2="692" y2="342" stroke="black" stroke-width="0.5" />
 
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- REFLECTION BLOCK (820) — equation r(t) = y(t-1)       -->
-    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Reflection equation annotation (no separate numeral — covered by ref 30) -->
     <rect x="620" y="358" width="140" height="45" fill="white" stroke="black" stroke-width="1.2" stroke-dasharray="4,3" />
-    <text x="690" y="376" font-family="Arial, sans-serif" font-size="13" font-style="italic" text-anchor="middle" fill="black">r(t) = y(t−1)</text>
-    <text x="690" y="396" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">Reflection</text>
-    <!-- Ref 820 -->
-    <text x="765" y="370" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">820</text>
-    <line x1="763" y1="370" x2="760" y2="373" stroke="black" stroke-width="0.5" />
+    <text x="690" y="376" font-family="Arial, sans-serif" font-size="14" font-style="italic" text-anchor="middle" fill="black">r(t) = y(t-1)</text>
+    <text x="690" y="396" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Reflection</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- LEGEND                                                 -->

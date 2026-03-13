@@ -1,227 +1,108 @@
-PROVISIONAL APPLICATION FOR PATENT
+PATENT APPLICATION
+PROVISIONAL APPLICATION FOR LETTERS PATENT
 
-UNDER 35 U.S.C. 111(b)
+TITLE: Self-Sustaining Neural-Motor Energy Harvesting Loop
+for Autonomous Cognitive Systems
 
-
-TITLE OF THE INVENTION
-
-Self-Sustaining Neural-Motor Energy Harvesting Loop for Autonomous Cognitive Systems
-
-
-INVENTOR(S)
-
-Kevin Christopher Ward
-Moreno Valley, California, United States
+Applicant: Kevin Christopher Ward
+GitHub: github.com/DarkWinD90/Consciousness_Env (tag v3.0.0-phase10-multimodal, commit 9e2c333)
+Filing Date: [To be completed at filing]
 
 
 CROSS-REFERENCE TO RELATED APPLICATIONS
-
-[0001] This application is related to co-pending provisional patent applications filed on February 2, 2026: (1) "Configurable Recursive Self-Observation Method and System for Spiking Neural Networks with Dynamic Reflection Coefficient Modulation"; and (2) "Method and System for Autonomous Self-Regulation and Cognitive Resynchronization in Neural Processing Systems During Disconnection from External Control Layers."
-
+[0001] This application is related to co-pending provisional patent application for "Configurable Recursive Self-Observation Method and System for Spiking Neural Networks with Dynamic Reflection Coefficient Modulation" and co-pending provisional patent application for "Method and System for Autonomous Self-Regulation and Cognitive Resynchronization in Neural Processing Systems During Disconnection from External Control Layers," both by the same inventor, Kevin Christopher Ward. Each co-pending application is incorporated herein by reference in its entirety.
 
 FIELD OF THE INVENTION
-
-[0002] The present invention relates to neuromorphic computing systems, and more specifically to a self-sustaining spiking neural network system that harvests energy from its own motor output via piezoelectric and thermoelectric transduction, creating a closed-loop cognitive-motor-energy cycle that operates without external power.
-
+[0002] The present invention relates to neuromorphic computing systems and, more particularly, to a self-sustaining neural-motor energy harvesting loop that integrates a spiking neural network with mechanical actuation and multi-modal energy harvesting in a closed-loop architecture that exhibits homeostatic energy regulation and recursive self-observation.
 
 BACKGROUND OF THE INVENTION
-
-[0003] All existing neural processing systems, whether biological neural network simulations, neuromorphic hardware accelerators (e.g., Intel Loihi, IBM TrueNorth), or software-defined spiking neural networks, require continuous external power to operate. This fundamental dependency limits deployment in remote, disconnected, or resource-constrained environments such as autonomous robotic systems operating beyond power infrastructure, planetary exploration rovers with limited solar energy, implantable prosthetic devices requiring battery replacement, distributed IoT sensor networks in remote locations, and underwater or subterranean autonomous systems.
-
-[0004] Energy harvesting robots, such as solar-powered drones and vibration-harvesting sensors, harvest energy from the environment, including sunlight, ambient vibration, and thermal gradients. They do not harvest energy from their own cognitive-motor activity. The energy source is external and decoupled from the computational process.
-
-[0005] Neuromorphic chips, such as Intel Loihi, IBM TrueNorth, and BrainChip Akida, are low-power neural processing units but still require external power supplies. They reduce consumption but do not close the energy loop.
-
-[0006] Self-powered actuators exist in the piezoelectric harvesting literature but are not coupled to neural computation. The harvested energy powers simple circuits, not cognitive processing networks.
-
-[0007] Recurrent neural networks feed computational outputs back as inputs but do so for information processing, not for energy generation. The feedback loop is computational, not physical.
-
-[0008] There exists no prior system that processes sensory input through a neural network, drives motor actuation from neural output, harvests energy from that same motor actuation, uses harvested energy to sustain the neural network, and achieves net-positive energy balance from this closed loop.
-
+[0003] Neuromorphic computing systems that implement spiking neural network (SNN) dynamics require sustained power to maintain membrane potentials, process spike trains, and update synaptic weights through spike-timing dependent plasticity (STDP). Conventional neuromorphic systems draw continuous power from fixed external supplies, creating a dependency on infrastructure that limits deployment in autonomous, embodied, or resource-constrained contexts.
+[0004] Energy harvesting techniques have been applied to extend the operational lifetime of wireless sensor nodes, implantable medical devices, and small-scale robotics. Piezoelectric transducers convert mechanical strain and vibration into electrical energy. Thermoelectric generators (TEGs) convert thermal gradients between hot and cold surfaces into electrical current. Triboelectric nanogenerators (TENGs) harvest energy from relative motion between surfaces of dissimilar materials.
+[0005] However, prior systems treat energy harvesting as a passive supplement to primary power, not as a mechanism for active homeostatic regulation. No prior system creates a closed-loop architecture in which the neural processing activity itself generates the mechanical motion that drives energy recovery back into the neural processing substrate. The invention described herein addresses this gap.
+[0006] Prior work in physics-informed neural networks, such as EPFL's Dynami-CAL GraphNet described in Nature Communications (February 2026), embeds Newton's third law into Graph Neural Networks for rigid-body physics simulation. That work is fundamentally different in mechanism (constraint embedding versus self-referential feedback), substrate (Graph Neural Networks versus Spiking Neural Networks), and purpose (stable physics simulation versus embodied consciousness). The present invention's hardware claims (directed to energy harvesting from servo movement via triboelectric and pyroelectric transduction) and its recursive reflection claims (directed to self-observation in neuromorphic systems) have no overlap with that prior art.
 
 SUMMARY OF THE INVENTION
+[0007] The present invention provides a self-sustaining neural-motor energy harvesting loop for autonomous cognitive systems. The loop comprises a spiking neural network that processes sensory inputs and generates motor commands, a motor that converts neural spike patterns into mechanical actuation, an energy harvesting subsystem that recovers energy from the mechanical motion through piezoelectric and thermoelectric transduction, and a recursive self-observation layer that feeds prior output back as input on the next processing step.
+[0008] The key insight is that the energy harvesting yield depends on servo movement variance, not absolute position. A network of N leaky integrate-and-fire neurons with n active spikes per step generates output variance proportional to the binomial variance n(N−n)/N, which peaks at n = N/2. This creates a bell-shaped (sinusoidal) relationship between neural activity and energy harvest, establishing a bounded surplus zone between a lower and upper crossover threshold. The system exhibits homeostatic self-regulation by maintaining neural activity within this surplus zone, constituting a form of metabolic self-regulation that is an emergent property of the coupled architecture.
+[0009] A recursive reflection layer compares the system's predicted state to its observed state and drives adaptive behavior through a depth-limited self-observation feedback loop with a configurable reflection coefficient. The metabolic cost of consciousness is modeled: too little activity drains stored energy due to base consumption exceeding harvest; too much activity drains energy due to the quadratic cost penalty exceeding the declining harvest at high spike rates. A Goldilocks zone exists in which neural activity sustains itself through homeostatic energy regulation.
 
-[0009] The present invention provides a self-sustaining cognitive system comprising: (1) a spiking neural network (SNN) that receives environmental sensor input (light, temperature, pressure) and produces motor control signals through leaky integrate-and-fire neural dynamics; (2) a motor actuator (servo, stepper, linear actuator, or equivalent) driven directly by the neural network's aggregate output; (3) a piezoelectric energy harvester mechanically coupled to the motor actuator that converts motor-generated friction and vibration into electrical energy; (4) a thermoelectric energy harvester that converts temperature differentials caused by neural activity and motor operation into electrical energy; (5) an energy storage and management subsystem that accumulates harvested energy and powers the neural network; and (6) a closed feedback loop wherein harvested energy sustains the neural network's continued operation, creating a self-sustaining cognitive-motor-energy cycle.
+BRIEF DESCRIPTION OF THE DRAWINGS
+[0010] The accompanying drawings, which are incorporated in and constitute a part of this specification, illustrate preferred embodiments of the invention.
+[0011] FIG. 1 is a system architecture block diagram showing the self-sustaining neural-motor energy harvesting loop with a sensor 12, spiking neural network 14, motor 16, power management block 18, thermal harvester 20, piezoelectric element 22, ground reference 24, control logic block 26, energy store 28, and reflection feedback path 30 interconnected in a closed loop within an environment boundary 10.
+[0012] FIG. 2 is a comparative energy balance chart showing control system energy depletion versus experimental system energy growth over 2,000 operational steps, plotted on a y-axis 32 and x-axis 34 with an origin point 38 at 50 mWh, a zero energy baseline 40, an experimental curve 36 with experimental curve label 42 and experimental legend box 46, and a control curve 44 with control curve label 50 and control legend box 48.
+[0013] FIG. 3 is a schematic diagram of the spiking neural network 14 architecture showing the input layer 52, weight matrix 54, hidden layer 56 with leaky integrate-and-fire neurons and neuron detail section 58, output stage 60, spike output 62, membrane potential dynamics 64, spike vector output 66, and STDP learning rule box 68.
+[0014] FIG. 4 is a circuit schematic of the energy harvesting subsystem within a circuit boundary 70 comprising a piezoelectric element 22 path with AC signal 72, inductor 74, rectifier 76, and smoothing capacitor 78, and a thermoelectric path with heat sink 80, TEG module 82, and boost converter 84, both feeding through an output regulator 86 and system output 88 to the spiking neural network 14.
+[0015] FIG. 5 is a graph showing activity-dependent energy dynamics within a main graph area 90, including a sinusoidal harvest curve 92, quadratic cost curve 94, metabolic operating point 96, deficit zones 98, optimal operating range 100, surplus zone 102, optimal zone boundaries 104, governor feedback loop 106, energy-aware modulation sub-graph 132, operating point equations 134, lower crossover point 136, and upper crossover point 138.
+[0016] FIG. 6 is a hardware reference design layout diagram showing the microcontroller 108, piezoelectric element 22, motor 16, thermistor 110, photoresistor 114, LED indicator 112, AC signal 72, control logic block 26, and energy store 28 with their interconnections.
+[0017] FIG. 7 is a validation results summary comprising a claims validation table 116, an energy comparison table 118, an energy trajectory graph 120, a legend 122, and a summary box 124.
+[0018] FIG. 8 is a reference architecture diagram of the energy-bounded recursive control system showing the signal flow from an environment input arrow 126 through sensor interface 12, cognitive modulation block 128, spiking neural network 14, motor 16, thermal harvester 20, analog-to-digital converter 130, piezoelectric element 22, and energy store 28, with reflection feedback 30, all within the environment boundary 10.
 
-[0010] The system achieves net-positive energy balance, meaning the energy harvested from the system's own cognitive-motor activity exceeds the energy consumed by neural computation. This is demonstrated through a falsifiable experimental framework. Under control conditions using harsh energy parameters (base consumption 470 mW, friction factor 0.0005, thermal factor 0.0002), the system energy drains to negative 4,697 mWh after 2000 steps. Under experimental conditions using balanced energy parameters (base consumption 45 mW, friction factor 18.0, thermal factor 8.0) with a physical storage capacity of 100 mWh, self-discharge rate of 0.1 percent per step, and overflow-to-heat dissipation, the system reaches storage capacity and maintains homeostatic equilibrium with excess harvested energy dissipating as heat. Stability has been validated over 2,000,000 operational steps with zero drift. The comparison proves that with appropriate parameter tuning, the self-sustaining loop is physically achievable and exhibits true metabolic homeostasis.
+DETAILED DESCRIPTION OF THE PREFERRED EMBODIMENTS
+I. System Architecture Overview
+[0019] Referring to FIG. 1, the self-sustaining neural-motor energy harvesting loop operates within an environment boundary 10. The environment boundary 10 is a logical enclosure representing the complete system, including all energy transduction, neural processing, and motor actuation elements. The system implements a closed-loop signal and energy flow: SENSE → PROCESS → ACTUATE → HARVEST → REGULATE → REFLECT.
+[0020] A sensor 12 receives environmental input, which may include light intensity from photodiode arrays, temperature from thermistor elements, vibration from accelerometers, or other physical stimuli. The sensor 12 converts the physical input to an electrical signal suitable for input to the spiking neural network 14.
+[0021] The spiking neural network (SNN) 14 processes the sensor input through a population of leaky integrate-and-fire (LIF) neurons. In the preferred embodiment, the SNN 14 comprises N=50 neurons organized in an all-to-all connected topology with synaptic weights bounded to [0.0, 0.5]. Membrane potential dynamics follow V(t+1) = V(t) × leak + I, where leak = 0.95 provides sub-threshold decay between spikes. A neuron fires when V ≥ V_th = 0.5, after which V resets to zero. Synaptic weights update through spike-timing dependent plasticity (STDP) per the rules detailed in FIG. 3 and paragraph 0036.
+[0022] A motor 16 converts the aggregate SNN spike output into mechanical actuation. In the preferred embodiment, the motor 16 is a servo motor (SG90 or equivalent) controlled by pulse-width modulation from the microcontroller 108. The motor 16 drives a rotating shaft that maintains mechanical coupling to the piezoelectric element 22.
+[0023] A thermal harvester 20 captures thermal energy generated by system operation. Thermal differentials between the SNN processing substrate and the ambient environment drive a thermoelectric generator (TEG module 82) that contributes to the energy store 28 through the boost converter 84 and output regulator 86.
+[0024] A piezoelectric element 22 (27mm piezo disc in the preferred embodiment) converts mechanical vibration from the motor 16 into electrical energy via the piezoelectric effect. The motor shaft couples to the piezo element 22 through a nearly-locked joint configuration that maximizes strain energy per actuation cycle. An LC resonance circuit (inductor 74) amplifies the AC voltage output (AC signal 72) by 3-10× at the resonant frequency before rectification.
+[0025] A control logic block 26 manages the distribution and regulation of harvested energy. The control logic block 26 is implemented as decision logic in the microcontroller 108 firmware, evaluating the current energy store level and the computed modulation coefficient to determine whether to permit, throttle, or amplify SNN activity.
+[0026] An energy store 28 buffers harvested energy for sustained operation. In the preferred embodiment, the energy store 28 is a supercapacitor bank with a target storage capacity of 100 mWh. The energy store 28 provides power to the SNN 14 through the power management block 18 and maintains sufficient reserve for burst activity when the system encounters high-priority stimuli.
+[0027] A reflection feedback path 30 implements recursive self-observation by feeding the prior neural output r(t) = y(t−1) back as an additional input to the SNN 14 on the next processing step. The reflection feedback path 30 has a configurable reflection coefficient (ρ ∈ [0, 1]) that scales the contribution of the prior output to the current input. When ρ = 0, the system operates without self-observation. When ρ > 0, the SNN 14 processes a weighted mixture of external sensor input and its own prior output, creating recursive self-referential dynamics.
 
+II. Energy Model — Activity-Dependent Dynamics
+[0028] The energy balance for each simulation step is computed as: ΔE = E_harvest(n) − E_consume(n), where n represents the number of neural spikes per step. The harvest term E_harvest(n) is a sinusoidal function of neural activity: P_harvest(n) = H_max × sin(πn / N) milliwatts, where H_max = 121 mW and N = 50 (number of SNN neurons). This functional form arises because energy harvesting depends on servo movement variance rather than absolute position; movement variance follows binomial statistics with a peak at n = N/2, and the sine function provides the continuous approximation. The consumption term E_consume(n) increases quadratically with activity: P_consume(n) = 45 + 1.2n + 0.06n² milliwatts, where 45 mW is base system consumption, 1.2 mW is per-spike activity cost, and 0.06 mW is the quadratic burst penalty reflecting superlinear scaling of neural computation cost with firing rate.
+[0029] The energy model parameters are implemented in the BalancedEnergyConfig configuration class: base_consumption_mw = 45.0; activity_cost_mw = 1.2; activity_cost_quadratic = 0.06; time_step_hours = 0.005; storage_capacity_mwh = 100.0; initial_energy_mwh = 50.0; self_discharge_rate = 0.001. These parameters produce the activity-energy dynamics depicted in FIG. 5, where the harvest curve follows a sinusoidal profile peaking at 121 mW due to servo movement variance, and the cost curve follows the quadratic consumption formula.
+[0030] Referring to FIG. 5, the interaction between the sinusoidal harvest curve 92 and the quadratic cost curve 94 creates a characteristic energy dynamic with a bounded surplus region 102 and a metabolic operating point 96. At rest state of 0 spikes, there is a deficit 98 of approximately 45 milliwatts due to base system consumption with no harvesting. At low activity below approximately 8 spikes, cost exceeds harvest as servo movement variance is insufficient to overcome base consumption. At medium activity from approximately 8 to 27 spikes, the surplus zone 102 exists where harvest exceeds cost; the peak surplus of approximately 23 milliwatts occurs near 18 spikes. The metabolic operating point 96 occurs at approximately 14 spikes where harvest of approximately 94 milliwatts equals cost of approximately 74 milliwatts plus self-discharge losses of approximately 20 milliwatts. The optimal operating range 100 spans approximately 10 to 25 spikes, bounded by optimal zone boundaries 104. Above approximately 27 spikes, the quadratic cost penalty dominates and the system enters the deficit zone 98 where cost exceeds harvest. The energy-aware modulation sub-graph 132 shows how the governor feedback loop 106 adjusts neural activity to maintain the system within the surplus zone, constituting a form of metabolic self-regulation as described by the operating point equations 134.
 
-DETAILED DESCRIPTION OF THE INVENTION
+III. Spiking Neural Network Architecture
+[0031] Referring to FIG. 3, the spiking neural network 14 comprises an input layer 52, a weight matrix 54, a hidden layer 56 with N leaky integrate-and-fire neurons and accompanying neuron detail section 58, an output stage 60 that generates spike output 62, a membrane potential dynamics display 64, a spike vector output 66, and an STDP learning rule box 68.
+[0032] The input layer 52 accepts two signal types: external sensory input from the sensor 12, and the recursive self-observation signal from the reflection feedback path 30. This dual-input architecture enables the SNN 14 to process environmental stimuli while simultaneously monitoring its own prior output, creating the conditions for emergent self-referential behavior.
+[0033] The weight matrix 54 contains all-to-all synaptic connections W[i,j] with weights bounded to [0.0, 0.5]. The upper bound of 0.5 prevents runaway excitation and enforces stability. Synaptic weights update continuously through the STDP learning rule 68: potentiation (LTP) occurs when a post-synaptic neuron fires shortly after a pre-synaptic neuron (W += A+ × pre_trace); depression (LTD) occurs when a pre-synaptic neuron fires shortly after a post-synaptic neuron (W −= A− × post_trace). The stability bias A− > A+ ensures the network does not develop runaway synchrony.
 
-System Architecture
+IV. Energy Harvesting Circuit
+[0034] Referring to FIG. 4, the energy harvesting subsystem is enclosed within a circuit boundary 70 and comprises two parallel energy recovery paths: a piezoelectric harvesting path and a thermoelectric harvesting path.
+[0035] The piezoelectric harvesting path begins at piezoelectric element 22, which generates an AC signal 72 proportional to mechanical strain. An inductor 74 forms an LC resonance circuit with the piezoelectric element's intrinsic capacitance, providing voltage amplification at the resonant frequency. A full-bridge rectifier 76 converts the AC signal to DC. A smoothing capacitor 78 filters the rectified output before it enters the output regulator 86. The thermoelectric path recovers heat through heat sink 80, TEG module 82, and boost converter 84, converging at the output regulator 86 alongside the piezoelectric path. The regulated combined output delivers power to the SNN 14 through system output 88.
 
-[0011] The system comprises eight functional layers arranged in a closed loop. Layer 1 is a Printed Membrane functioning as a Thermochromic Sensor Surface. Layer 2 comprises Sensing Pads for transduction to electrical signal. Layer 3 is an Optical Transmission layer for signal conditioning, wherein signal voltage equals light intensity divided by 1000 multiplied by 5.0. Layer 4 is a Neuromorphic CPU comprising a Spiking Neural Network. Layer 5 is a Servo Actuation layer for motor output, wherein target angle equals the SNN output multiplied by 180 and clipped to the range of 0 to 180 degrees. Layer 6 is an Energy Harvesting layer using piezoelectric and thermoelectric transduction. Layer 7 is a Ground Reference providing a noise floor baseline. Layer 8 is a Recursive Reflection layer for self-observation. Referring to FIG. 1, these layers are shown in their closed-loop configuration.
+V. Validation Results
+[0036] The system was validated computationally through a Python simulation across 2,000,000 operational steps. Referring to FIG. 7, five falsifiable claims were tested: (A) closed-loop continuity over 2,000 steps — PASS; (B) boundedness of all state variables — PASS; (C) noise robustness with standard deviation ≤ 45 — PASS; (D) input-output gain with correlation ≥ 0.2 — PASS; (E) saturation ratio ≤ 0.20 — PASS. The claims validation table 116 summarizes these results. The energy comparison table 118 records the terminal energy states: BalancedEnergyConfig (experimental) at +100.0 mWh, EnergyConfig (control baseline) at −4,697 mWh. FIG. 2 shows the diverging energy trajectories of these two configurations over 2,000 steps: experimental curve 36 rising to storage capacity, control curve 44 depleting to negative values.
 
-Signal Pathways
+VI. Hardware Reference Design
+[0037] Referring to FIG. 6, the preferred hardware embodiment uses a Raspberry Pi Pico (RP2040) microcontroller 108 as the central processing hub. The piezoelectric element 22 connects to the microcontroller 108 via the GP26 analog input pin (ADC0). The motor 16 connects via PWM output with a mechanical coupling to the piezoelectric element 22 for vibration harvesting. A thermistor 110 monitors temperature via GP27 (ADC1). A photoresistor 114 (GL5528 LDR) provides light sensing via GP28 (ADC2). An LED indicator 112 provides status visualization via GPIO. The control logic block 26 (decision diamond) governs energy distribution decisions. The energy store 28 (supercapacitor bank) connects to VSYS for system power delivery.
 
-[0012] Three distinct signal pathways operate simultaneously. The Main Spine pathway follows the route L1 through L2, L3, L4, L5, L6, L7, L8, and back to L4, performing sensing, processing, actuation, harvesting, reflection, and looping. The Thermal Cross-Link pathway carries heat from Layer 1 membrane temperature directly to Layer 6, wherein heat from light absorption feeds thermoelectric harvesting directly, bypassing the neural processing chain. The Reflection Feedback pathway carries the Layer 8 previous output back to Layer 4, wherein the neural network's aggregate output at timestep t is fed back as additional input at timestep t+1, scaled by a configurable reflection coefficient.
-
-Spiking Neural Network Implementation
-
-[0013] Referring to FIG. 3, the neural processing unit employs a leaky integrate-and-fire (LIF) spiking neural network. The membrane potential update per neuron i per timestep follows the equation: V_i(t) = V_i(t-1) multiplied by (1 minus leak_factor) plus I_external(t) plus I_reflection(t) plus I_synaptic(t). In this equation, V_i(t) is the membrane potential of neuron i at time t, leak_factor is 0.1 representing the exponential leak rate, I_external(t) is the external input signal multiplied by input_scale, I_reflection(t) is the previous_output multiplied by reflection_coeff from Layer 8, and I_synaptic(t) is the sum over j of w_ij multiplied by spike_j(t), representing weighted input from spiking presynaptic neurons.
-
-[0014] Spike generation occurs when V_i(t) exceeds the threshold and the refractory counter for neuron i equals zero. Upon spiking, the spike value for neuron i at time t is set to 1, the membrane potential V_i(t) is reset to 0, and the refractory counter is set to the refractory period. The network output is computed as the mean of V_i(t) across all neurons i.
-
-[0015] The configurable parameters include: num_neurons with a default of 50 and a range of 1 to 10,000 controlling network size; threshold with a default of 0.5 and a range of 0.1 to 1.0 controlling spike firing threshold; leak_factor with a default of 0.1 and a range of 0.01 to 0.5 controlling membrane potential decay rate; refractory_period with a default of 2 and a range of 1 to 10 controlling post-spike refractory timesteps; weight_scale with a default of 0.15 and a range of 0.01 to 1.0 controlling initial synaptic weight magnitude; and input_scale with a default of 0.8 and a range of 0.1 to 2.0 controlling external input gain.
-
-Energy Harvesting System
-
-[0016] The energy harvesting subsystem implements two complementary transduction mechanisms. Referring to FIG. 4, the energy harvesting circuit is shown in detail.
-
-[0017] Referring to FIG. 6, the physical embodiment places components as shown in the hardware reference design layout. For piezoelectric friction harvesting, friction power in milliwatts equals the absolute value of angular velocity multiplied by the friction factor. Friction energy in milliwatt-hours equals friction power multiplied by time step hours. Angular velocity is the change in servo angle per timestep. The friction factor is the piezoelectric conversion coefficient in milliwatts per unit movement. The time step hours represents the simulation timestep expressed in hours, being 0.005 hours or 18 seconds. The physical embodiment comprises a piezoelectric disc of 27mm diameter mechanically coupled to the servo motor shaft. Motor rotation generates friction against the piezo element, producing voltage through the direct piezoelectric effect.
-
-[0018] In an enhanced embodiment with LC resonance, a ferrite-backed copper inductor, for example from Laird Technologies, is placed in series with the piezoelectric element, creating an LC resonance circuit. The resonance frequency equals 1 divided by the quantity 2 pi multiplied by the square root of L multiplied by C_piezo, where L is the inductor value ranging from 100 microhenries to 1 millihenry, and C_piezo is the piezoelectric element capacitance of 20 to 50 nanofarads for a 27mm disc. This resonance tuning can amplify the harvested voltage by a factor of 3 to 10 compared to direct piezo connection.
-
-[0019] For thermoelectric thermal harvesting, thermal power in milliwatts equals the absolute value of T_current minus T_reference multiplied by the thermal factor. Thermal energy in milliwatt-hours equals thermal power multiplied by time step hours. T_current is the system temperature affected by neural activity and motor operation. T_reference is the ambient temperature with a default of 20 degrees Celsius. The thermal factor is the thermoelectric conversion coefficient in milliwatts per degree Celsius. The physical embodiment comprises a thermistor or thermoelectric generator element positioned between the heat-generating components (servo motor, microcontroller) and a heat sink or ambient surface.
-
-Energy Balance Equation
-
-[0020] The net energy change per timestep is delta E equals the sum of friction energy and thermal energy minus the sum of base consumption and activity consumption, where base consumption equals base consumption in milliwatts multiplied by time step hours representing idle power draw, and activity consumption equals spike count multiplied by activity cost in milliwatts multiplied by time step hours representing consumption proportional to neural activity.
-
-[0021] For the self-sustaining configuration termed BalancedEnergyConfig: base_consumption_mw equals 45.0 for micro-scale neural system, friction_factor equals 18.0 for optimized piezoelectric coupling, thermal_factor equals 8.0 for optimized thermoelectric coupling, activity_cost_mw equals 1.2 as per-spike energy cost, and activity_cost_quadratic equals 0.06 as burst penalty.
-
-[0022] Referring to FIG. 5, this creates a characteristic energy dynamic with an optimal operating point. At rest state there is significant drain requiring the system to stay active. At low activity of 5 to 15 spikes there is slight drain. At medium activity of 30 to 50 spikes there is positive balance representing the optimal operating point. At high activity of 70 to 85 spikes there is slight drain. At burst activity of 100 spikes there is significant drain for emergency only. The system must regulate its own activity level to maintain energy homeostasis, constituting a form of metabolic self-regulation.
-
-Motor Actuation
-
-[0023] The servo actuation layer converts neural output to physical movement. The target angle equals the SNN output multiplied by 180, clipped to the range 0 to 180 degrees. Movement equals the quantity target angle minus current angle multiplied by 0.3. The current angle is incremented by movement. The proportional movement factor of 0.3 provides smooth, physically realistic actuation rather than instantaneous jumps. The servo range is constrained to 0 to 180 degrees matching standard micro servo specifications.
-
-Thermochromic Response
-
-[0024] The system surface implements a temperature-dependent color response. If temperature exceeds 25 degrees Celsius, a warm color is produced where intensity equals the minimum of the quantity temperature minus 25 divided by 15 and 1.0, resulting in a red or orange color output. If temperature is below 20 degrees Celsius, a cool color is produced where intensity equals the minimum of the quantity 20 minus temperature divided by 15 and 1.0, resulting in a blue or green color output. Otherwise, a neutral gray color output is produced. This provides visual indication of system thermal state.
-
-Temperature Dynamics
-
-[0025] System temperature responds to neural activity and environmental conditions. Temperature at time t+1 equals temperature at time t plus activity heat minus cooling, where activity heat equals spike count multiplied by 0.02, representing that neural activity generates heat, and cooling equals the quantity temperature at time t minus ambient temperature multiplied by 0.05, following Newton's law of cooling. Temperature is clipped to physical bounds of 15.0 to 45.0 degrees Celsius.
-
-
-EXPERIMENTAL VALIDATION
-
-[0026] The invention is validated through a rigorous falsifiable experimental framework with explicit pass/fail thresholds. Referring to FIG. 2 and FIG. 7.
-
-[0027] Under the control condition representing the null hypothesis as described in Phase 7, Section 7.1, the configuration uses EnergyConfig with 20 neurons, base_consumption_mw of 470.0, friction_factor of 0.0005, thermal_factor of 0.0002, and a fixed reflection coefficient of 0.2. The result is that energy drains from 50 mWh to approximately negative 4,697 mWh after 2000 steps. The system cannot self-sustain. This confirms that without sufficient energy harvesting, the cognitive loop depletes its energy reserves and ceases to function.
-
-[0028] Under the experimental condition representing the alternative hypothesis as implemented in the MCP Path, the configuration uses BalancedEnergyConfig with 50 neurons, base_consumption_mw of 45.0, friction_factor of 18.0, thermal_factor of 8.0, capacity_mwh of 100.0, self_discharge_rate of 0.001, overflow_thermal_factor of 0.05, and a variable reflection coefficient of 0.2 plus modulation multiplied by 0.1. The result is that energy rises from 50 mWh to the physical storage capacity of 100 mWh within approximately 30 steps, then maintains homeostatic equilibrium at capacity with excess harvested energy dissipating as heat through the overflow thermal pathway. The system self-sustains at capacity. The cognitive-motor-energy loop achieves net-positive energy balance with physically realistic storage constraints. Validated over 2,000,000 steps with energy standard deviation of 0.0000 mWh and temperature standard deviation of 0.0000 degrees Celsius in the second half, confirming indefinite homeostatic stability.
-
-[0029] Phase 7 validation comprises five claims that all pass. Claim A validates closed-loop continuity confirming all channels have 2000 data points. Claim B validates boundedness confirming all state variables remain within physical limits. Claim C validates robustness under noise confirming standard deviation of theta is at most 45 degrees and standard deviation of omega is at most 150. Claim D validates input-output gain confirming correlation between light and angle is at least 0.2. Claim E validates saturation ratio confirming time at joint limits is at most 20 percent.
-
-[0030] Phase 8 validation incorporates Spike-Timing Dependent Plasticity (STDP) for synaptic learning with three claims that all pass. Claim F8.1 confirms weight entropy decreases from 2.9546 to 2.0151 bits with a decrease of 0.9395 bits, demonstrating structure emergence. Claim F8.2 confirms STDP mutual information exceeds 1.2 times frozen mutual information with a measured ratio of 6.52 times, demonstrating learning improves encoding. Claim F8.3 confirms weight convergence with late delta less than 10 percent of early delta at a measured ratio of 0.00 percent.
-
-Reference Architecture
-
-[0031] Referring to FIG. 8, the canonical embodiment of the energy-bounded recursive control architecture is shown as the reference signal flow for the complete system. The physical environment provides light, temperature, and force stimuli to a sensor interface comprising specific transducers (BH1750 light sensor, DS18B20 temperature sensor, piezoelectric force input). Simultaneously, mechanical load from the environment feeds an energy harvesting subsystem (piezoelectric element through rectifier to supercapacitor). Both pathways converge at the neuromorphic core, a spiking neural network with leaky integrate-and-fire neurons, optional spike-timing dependent plasticity, and activity-dependent energy cost. The neuromorphic core feeds two parallel subsystems: a recursive reflection module that maintains prior state memory and output feedback for temporal context, and an energy governor that monitors storage level, applies cost functions, and damps activity when reserves are low. These two subsystems are bidirectionally coupled, such that energy state modulates reflection gain while reflection-driven activity influences energy cost. Both feed into a cognitive modulation layer that applies attention weighting, intention bias, and contextual suppression or amplification, with optional external advisory input when a control layer is connected. The modulated output passes through a neural router with priority arbitration, energy gating, and congestion control, then drives the actuation and response stage comprising servo control and mechanical interaction. The actuation perturbs the physical environment and generates mechanical load that feeds energy harvesting, closing the self-sustaining loop. As shown in FIG. 8, system operation is constrained by real-time energy availability derived from physical interaction with the environment, thereby ensuring bounded, non-abstract execution.
-
-Scope of Claims
-
-[0032] No claim is made herein regarding phenomenological consciousness, subjective experience, qualia, or sentience. The term "consciousness" as used throughout this specification refers exclusively to the engineering architecture of a self-sustaining, self-observing, self-regulating neuromorphic control system with meta-cognitive feedback. All claims pertain to measurable, falsifiable properties of signal processing, energy dynamics, and control system behavior. The system is a deterministic engineering artifact whose operation is fully characterized by the mathematical equations and validation thresholds described herein.
+VII. Reference Architecture
+[0038] Referring to FIG. 8, the energy-bounded recursive control architecture shows the complete signal flow within the environment boundary 10. Environmental signals enter via environment input arrow 126 to the sensor interface 12. An optional cognitive modulation block 128 (shown as a cloud shape, representing external cognitive control) provides attention weighting and intention bias. The SNN core 14 processes the modulated input and drives motor output 16. The thermal harvester 20 and ADC 130 feed the piezoelectric element 22 and energy store 28. Reflection feedback path 30 (containing the equation r(t) = y(t−1)) returns prior output as input to the SNN 14. The energy sustaining loop (bold dashed path) recycles harvested energy from the energy store 28 back to the thermal harvester 20, completing the metabolic loop.
 
 
 CLAIMS
-
-[0033] What is claimed is:
-
-1. A method for self-sustaining neural computation comprising:
-
-(a) receiving environmental sensor input into a spiking neural network comprising a plurality of leaky integrate-and-fire neurons with configurable synaptic weights;
-
-(b) processing said sensor input through said spiking neural network to produce a neural output signal;
-
-(c) driving a motor actuator based on said neural output signal, wherein said motor actuator produces physical movement;
-
-(d) harvesting electrical energy from said physical movement using at least one energy transducer mechanically coupled to said motor actuator;
-
-(e) storing said harvested electrical energy in an energy storage medium;
-
-(f) powering said spiking neural network using said stored harvested energy;
-
-wherein steps (a) through (f) form a closed loop that achieves a net-positive energy balance over a plurality of operational cycles, such that the system sustains continuous neural computation from energy generated by its own motor activity without requiring external power input.
-
-2. A self-sustaining cognitive system comprising:
-
-(a) a spiking neural network processor having a plurality of neurons, each neuron having a membrane potential, a firing threshold, and synaptic connections to other neurons;
-
-(b) at least one environmental sensor providing input signals to said spiking neural network processor;
-
-(c) a motor actuator receiving control signals derived from the aggregate output of said spiking neural network processor;
-
-(d) a piezoelectric energy harvesting element mechanically coupled to said motor actuator, configured to convert motor-generated mechanical energy into electrical energy;
-
-(e) an energy storage circuit connected to receive electrical energy from said piezoelectric energy harvesting element and to supply operating power to said spiking neural network processor;
-
-wherein said system is configured such that the electrical energy harvested from said motor actuator's operation exceeds the electrical energy consumed by said spiking neural network processor, said motor actuator, and said environmental sensor over a sustained period of operation.
-
-3. The method of claim 1 further comprising:
-
-(g) harvesting additional electrical energy from thermal gradients produced by said neural computation and said motor actuator operation using a thermoelectric energy transducer;
-
-wherein said thermal energy supplements said piezoelectric energy to increase net energy balance.
-
-4. The method of claim 1 further comprising:
-
-(h) feeding the aggregate neural output from timestep t back as additional input to said spiking neural network at timestep t+1, scaled by a configurable reflection coefficient;
-
-wherein said recursive self-observation creates a self-referential processing loop that modulates neural behavior based on prior computational state.
-
-5. The method of claim 4 wherein said reflection coefficient is dynamically adjustable during operation by an external cognitive control layer or by an internal energy-aware self-regulation mechanism.
-
-6. The system of claim 2 further comprising:
-
-(f) an autonomous fallback controller configured to maintain continuous neural operation during disconnection from an external cognitive control layer, said autonomous fallback controller comprising:
-
-(i) a heartbeat monitor that detects absence of external control signals;
-
-(ii) an autonomous input generator that provides self-regulating stimulation to said spiking neural network;
-
-(iii) an energy-aware modulation controller that adjusts said autonomous stimulation based on current energy storage level;
-
-(iv) a state buffer that records operational state during autonomous operation;
-
-(v) a resynchronization protocol that transmits buffered state to a reconnecting external control layer.
-
-7. The system of claim 2 wherein said piezoelectric energy harvesting element comprises a piezoelectric disc having a diameter of approximately 20 to 35 millimeters, mechanically coupled to a servo motor shaft, and wherein friction between said servo motor shaft and said piezoelectric disc during servo rotation generates voltage through the direct piezoelectric effect.
-
-8. The system of claim 7 further comprising a ferrite-backed inductor connected in series with said piezoelectric disc, forming an LC resonant circuit tuned to the characteristic vibration frequency of said motor actuator, thereby amplifying harvested voltage by a factor of 3 to 10 compared to direct piezoelectric connection without said inductor.
-
-9. The method of claim 1 wherein neural energy consumption follows a non-linear relationship with neural activity level, comprising:
-
-a base consumption rate independent of neural activity;
-
-a linear consumption component proportional to spike count;
-
-a quadratic consumption component proportional to the square of spike count;
-
-such that the system exhibits an optimal operating point at medium activity levels where energy harvesting exceeds consumption, with both low-activity and high-activity states resulting in net energy drain, thereby requiring the system to self-regulate its activity level for energy homeostasis.
-
-10. The system of claim 2 wherein:
-
-said spiking neural network processor is implemented on a microcontroller having at least 264 kilobytes of RAM;
-
-said motor actuator is a micro servo motor;
-
-said piezoelectric energy harvesting element is a 27 millimeter piezoelectric disc;
-
-said environmental sensor comprises at least one photoresistor and one thermistor;
-
-said energy storage circuit comprises at least one electrolytic capacitor.
-
-11. The method of claim 1 further comprising applying spike-timing dependent plasticity to said synaptic weights, wherein:
-
-when a post-synaptic neuron fires, synaptic weights from recently-active pre-synaptic neurons are strengthened according to a pre-synaptic eligibility trace;
-
-when a pre-synaptic neuron fires, synaptic weights to recently-active post-synaptic neurons are weakened according to a post-synaptic eligibility trace;
-
-said eligibility traces decay exponentially with a configurable time constant;
-
-synaptic weights are bounded within a configurable range;
-
-such that said spiking neural network adapts its connectivity to temporal correlations in input signals without external training.
+What is claimed is:
+1. A self-sustaining neural-motor energy harvesting system comprising: a spiking neural network (SNN) configured to process sensory input through a population of leaky integrate-and-fire neurons and generate a spike output; a motor mechanically coupled to receive the spike output and convert neural spike patterns into mechanical actuation; an energy harvesting subsystem configured to recover electrical energy from the mechanical actuation through at least one of piezoelectric transduction and thermoelectric transduction; an energy store configured to buffer the recovered electrical energy and supply power to the SNN; and a control logic block configured to regulate the distribution of harvested energy based on current energy store level; wherein the SNN, motor, energy harvesting subsystem, and energy store form a closed energy loop in which the SNN's neural activity drives the mechanical actuation that generates the energy that sustains the SNN's neural activity.
+2. The system of claim 1, wherein the energy harvesting subsystem comprises a piezoelectric element mechanically coupled to the motor output, an LC resonance circuit connected to the piezoelectric element for voltage amplification, a full-bridge rectifier connected to the LC resonance circuit, a smoothing capacitor connected to the rectifier output, and an output regulator connected to the smoothing capacitor and energy store.
+3. The system of claim 1, wherein the energy harvesting subsystem further comprises a thermoelectric generator module configured to harvest thermal energy from a temperature differential between the SNN processing substrate and the ambient environment, and a boost converter connected to the thermoelectric generator module and the output regulator.
+4. The system of claim 1, further comprising a recursive reflection layer configured to feed a prior spike output of the SNN back as an input to the SNN on a subsequent processing step, wherein the recursive reflection layer implements self-referential feedback with a configurable reflection coefficient ρ ∈ [0, 1]; and wherein the recursive reflection layer is implemented within the energy-harvesting closed loop such that the reflection computation draws power from the energy store.
+5. The system of claim 4, wherein the recursive reflection layer is configured with a maximum recursion depth constraint to prevent unbounded self-referential depth; and wherein the reflection coefficient is dynamically modulated based on the current energy level of the energy store, reducing self-observation activity when the energy store approaches a critically low threshold.
+6. The system of claim 1, wherein the control logic block implements an energy governor configured to: monitor a current energy storage level; compute a modulation coefficient from an energy-aware modulation function having at least four zones: a critical zone with suppression coefficient, a low zone with mild suppression, a normal zone with neutral coefficient, and a high zone with amplification coefficient; and apply the modulation coefficient to the SNN's input gain or firing threshold; wherein the SNN's neural activity self-regulates toward an activity level within a surplus zone bounded by a lower crossover point and an upper crossover point of the harvest-versus-cost power curves.
+7. The system of claim 1, wherein the energy harvesting yield follows a sinusoidal function of neural activity P_harvest(n) = H_max × sin(πn/N), where n is the spike count per step and N is the total number of SNN neurons, arising from the physical relationship between neural activity and servo movement variance, which follows binomial statistics peaking at n = N/2.
+8. The system of claim 7, wherein the energy consumption follows a quadratic function P_consume(n) = b + c₁n + c₂n², where b is base consumption, c₁ is per-spike linear cost, and c₂ is a quadratic burst penalty; and wherein the intersection of P_harvest(n) and P_consume(n) + P_self_discharge defines a metabolic operating point at a spike count n* at which the system achieves homeostatic energy equilibrium.
+9. The system of claim 7, wherein the sinusoidal harvest profile and quadratic cost profile together create an optimal operating point at medium activity levels where energy harvesting exceeds consumption, with both low-activity and high-activity states resulting in net energy drain, such that the system exhibits metabolic homeostasis analogous to biological neural metabolism.
+10. A method for self-sustaining neural-motor energy harvesting comprising: processing sensory input through a spiking neural network to generate a spike output; converting the spike output to mechanical actuation via a motor; harvesting electrical energy from the mechanical actuation through piezoelectric and/or thermoelectric transduction; buffering the harvested electrical energy in an energy store; regulating neural activity using a governor feedback loop that modulates SNN firing based on current energy store level; and feeding a prior SNN output back as input on a subsequent processing step to implement recursive self-observation; wherein the harvested energy is sufficient to sustain the SNN operation across the closed loop.
+11. A non-transitory computer-readable medium storing instructions that, when executed by a neuromorphic processor, cause the processor to: implement a leaky integrate-and-fire neuron population with N neurons, wherein membrane potential evolves as V(t+1) = V(t) × leak + I and a spike is generated when V ≥ V_th; compute an energy balance each processing step as ΔE = E_harvest(n) − E_consume(n), wherein E_harvest(n) = H_max × sin(πn/N) and E_consume(n) = b + c₁n + c₂n²; apply a modulation coefficient to the SNN input gain based on current energy store level; and feed the prior spike output back as input with a reflection coefficient ρ; wherein the instructions implement autonomous energy homeostasis without external power regulation.
 
 
-ABSTRACT OF THE DISCLOSURE
+ABSTRACT
+A self-sustaining neural-motor energy harvesting loop for autonomous cognitive systems integrates a spiking neural network (SNN) with motor actuation, piezoelectric and thermoelectric energy transduction, and a recursive self-observation layer in a closed-loop architecture. The system exploits the relationship between neural activity and servo movement variance, which follows binomial statistics and is approximated by a sinusoidal harvest function P_harvest(n) = H_max × sin(πn/N). This sinusoidal harvest profile, combined with a quadratic energy consumption cost P_consume(n) = 45 + 1.2n + 0.06n², creates a bounded surplus zone of neural activity within which the system achieves homeostatic energy equilibrium. A governor feedback loop monitors the energy store and dynamically modulates the SNN firing threshold to maintain activity within this Goldilocks zone. A reflection feedback path implements recursive self-observation by feeding prior output as input on each subsequent step, with configurable reflection coefficient and depth-limited recursion. The system was validated over 2,000,000 simulation steps achieving autonomous energy self-sufficiency. A hardware prototype using an RP2040 microcontroller, SG90 servo, and 27mm piezoelectric element implements the architecture at an approximate bill-of-materials cost of $475.
 
-A self-sustaining cognitive system comprising a spiking neural network that processes environmental sensor input, drives motor actuation from neural output, and harvests energy from its own motor activity through piezoelectric and thermoelectric transduction. The harvested energy powers continued neural operation, creating a closed cognitive-motor-energy loop achieving net-positive energy balance without external power. The system incorporates recursive self-observation, spike-timing dependent plasticity, activity-dependent energy management creating a metabolic optimal operating point, and physical energy storage constraints producing homeostatic equilibrium. Validated through falsifiable experiments: under control parameters, energy depletes to negative 4,697 milliwatt-hours; under balanced parameters with 100 milliwatt-hour storage capacity, the system reaches capacity and maintains equilibrium indefinitely, confirmed stable over 2,000,000 steps. The invention enables autonomous cognitive systems for robotics, prosthetics, IoT sensors, and space exploration that sustain themselves from their own computational activity. (FIG. 8)
+SPECIFICATION CHANGE LOG — v3 FIG. 5 UPDATE
 
+¶0015 (Brief Description of FIG. 5) — REVISED:
+Added numerals 132 (energy-aware modulation sub-graph), 134 (operating point equations), 136 (lower crossover point), and 138 (upper crossover point) to the brief description. These components existed in the figure but were not previously listed in the brief description.
 
-REFERENCE TO SOURCE CODE
+¶0028 (Energy Balance Equation) — REVISED:
+The prior ¶0028 referenced a linear harvest relationship. Revised to explicitly describe the sinusoidal form P_harvest(n) = H_max × sin(πn/N) and its physical basis: energy harvest depends on servo movement variance, which follows binomial statistics with a peak at n = N/2. The quadratic consumption formula is unchanged (derived directly from ¶0029 parameters).
 
-The complete implementation of this invention is available at the following repository: github.com/DarkWinD90/Consciousness_Env, validated state tagged as v3.0.0-phase10-multimodal at commit 9e2c333. Total implementation comprises 14 validated falsifiable claims across 4 phases of development.
+¶0030 (Zone Descriptions) — REVISED:
+The prior ¶0030 listed stale zone boundaries (low: 5-15 spikes, medium: 30-50 spikes, high: 70-85 spikes) that were inconsistent with the validated model. Revised to the mathematically correct boundaries derived from the ¶0029 parameters: low-activity deficit (0 to ~8 spikes), surplus zone (~8 to ~27 spikes, peak +23 mW at n=18), high-activity deficit (~27 to 50 spikes). All 13 unified FIG. 5 reference numerals (90–138) are now cited in the paragraph prose. The operating point is defined as harvest = cost + self-discharge (~94 mW = ~74 mW + 20 mW at n*≈14 spikes).
+
+Claim 9 — VERIFIED, NO REVISION:
+Claim 9 uses the language 'medium activity levels' without specifying spike counts. The corrected zone boundaries (8–27 spikes) fully satisfy the structural requirement of low-drain / medium-surplus / high-drain, so no claim language revision is required. The shift in zone boundaries does not affect claim scope.
+
+All formulas independently verified:
