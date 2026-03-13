@@ -35,7 +35,7 @@
     <line x1="546" y1="88" x2="537" y2="90" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Environment → L1 -->
-    <line x1="425" y1="108" x2="425" y2="140" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <line x1="425" y1="108" x2="425" y2="142" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- L1: PRINTED MEMBRANE (102)                            -->
@@ -48,7 +48,7 @@
     <line x1="558" y1="163" x2="552" y2="168" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: L1 → L2 -->
-    <line x1="425" y1="194" x2="425" y2="210" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <line x1="425" y1="194" x2="425" y2="212" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- L2: SENSING PADS (104)                                -->
@@ -61,7 +61,7 @@
     <line x1="558" y1="233" x2="552" y2="238" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: L2 → L3 -->
-    <line x1="425" y1="264" x2="425" y2="280" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <line x1="425" y1="264" x2="425" y2="282" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- L3: OPTICAL TRANSMISSION (106)                        -->
@@ -74,7 +74,7 @@
     <line x1="558" y1="303" x2="552" y2="308" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: L3 → L4 -->
-    <line x1="425" y1="334" x2="425" y2="350" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <line x1="425" y1="334" x2="425" y2="352" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- L4: NEUROMORPHIC CPU / SNN (108)                      -->
@@ -94,7 +94,7 @@
     <line x1="558" y1="383" x2="552" y2="383" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: L4 → L5 -->
-    <line x1="425" y1="414" x2="425" y2="434" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <line x1="425" y1="414" x2="425" y2="436" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- L5: SERVO ACTUATION (110)                             -->
@@ -107,7 +107,7 @@
     <line x1="558" y1="457" x2="552" y2="462" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: L5 → L6 -->
-    <line x1="425" y1="488" x2="425" y2="508" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <line x1="425" y1="488" x2="425" y2="510" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
     <text x="438" y="502" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">movement</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
@@ -121,7 +121,7 @@
     <line x1="558" y1="531" x2="552" y2="536" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: L6 → L7 -->
-    <line x1="425" y1="562" x2="425" y2="582" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <line x1="425" y1="562" x2="425" y2="584" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- L7: GROUND REFERENCE (114)                            -->
@@ -134,7 +134,7 @@
     <line x1="558" y1="605" x2="552" y2="610" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: L7 → L8 -->
-    <line x1="425" y1="636" x2="425" y2="656" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <line x1="425" y1="636" x2="425" y2="658" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- L8: RECURSIVE REFLECTION (116)                        -->

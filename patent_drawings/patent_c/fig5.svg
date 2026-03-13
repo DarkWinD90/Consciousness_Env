@@ -1,80 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
-  <rect width="100%" height="100%" fill="#fff" />
+<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
+  <rect width="100%" height="100%" fill="white" />
   <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+    <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="black" />
     </marker>
   </defs>
-  <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 5 of 7</text>
+  <text x="425" y="60" font-family="Arial" font-size="14" text-anchor="middle" fill="black">5/7</text>
 
-  <!-- 500: Resynchronization Payload (outer container) -->
-  <rect x="100" y="100" width="412" height="420" rx="5" fill="none" stroke="#000" stroke-width="2" />
-  <text x="306" y="125" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#000">RESYNCHRONIZATION PAYLOAD</text>
-  <text x="510" y="115" font-family="Arial" font-size="14" font-weight="normal" fill="#000">500</text>
-  <line x1="508" y1="118" x2="512" y2="118" stroke="black" stroke-width="0.5" />
+  <!-- 66: Resynchronization Payload (outer container) -->
+  <rect x="140" y="120" width="570" height="540" rx="5" fill="none" stroke="black" stroke-width="2" />
+  <text x="425" y="155" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">RESYNCHRONIZATION PAYLOAD</text>
+  <text x="720" y="140" font-family="Arial" font-size="14" fill="black">66</text>
+  <line x1="718" y1="143" x2="710" y2="143" stroke="black" stroke-width="0.5" />
 
-  <!-- 502: Summary Statistics Section -->
-  <rect x="120" y="140" width="372" height="100" rx="3" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="140" y="160" font-family="Arial" font-size="10" font-weight="bold" fill="#000">502: SUMMARY STATISTICS (always included)</text>
-  <line x1="120" y1="168" x2="492" y2="168" stroke="#000" stroke-width="1" />
-  <text x="140" y="185" font-family="Arial" font-size="10" fill="#000">steps_autonomous: [integer]</text>
-  <text x="140" y="200" font-family="Arial" font-size="10" fill="#000">energy_delta: [float] mWh</text>
-  <text x="140" y="215" font-family="Arial" font-size="10" fill="#000">min_energy / max_energy / mean_energy</text>
-  <text x="140" y="230" font-family="Arial" font-size="10" fill="#000">total_spikes / mean_spikes_per_step</text>
-  <text x="420" y="230" font-family="Arial" font-size="10" fill="#000">~200 bytes</text>
+  <!-- 68: Summary Statistics Section -->
+  <rect x="170" y="175" width="500" height="135" rx="3" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="195" y="200" font-family="Arial" font-size="14" font-weight="bold" fill="black">SUMMARY STATISTICS (always included)</text>
+  <line x1="170" y1="210" x2="670" y2="210" stroke="black" stroke-width="1" />
+  <text x="195" y="235" font-family="Arial" font-size="14" fill="black">steps_autonomous: [integer]</text>
+  <text x="195" y="255" font-family="Arial" font-size="14" fill="black">energy_delta: [float] mWh</text>
+  <text x="195" y="275" font-family="Arial" font-size="14" fill="black">min_energy / max_energy / mean_energy</text>
+  <text x="195" y="295" font-family="Arial" font-size="14" fill="black">total_spikes / mean_spikes_per_step</text>
+  <text x="595" y="295" font-family="Arial" font-size="14" fill="black">~200 bytes</text>
+  <text x="680" y="200" font-family="Arial" font-size="14" fill="black">68</text>
+  <line x1="678" y1="203" x2="670" y2="205" stroke="black" stroke-width="0.5" />
 
-  <!-- Arrow down -->
-  <path d="M306 240v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <!-- Arrow down to 70 -->
+  <line x1="280" y1="310" x2="280" y2="350" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-  <!-- 504: Energy Delta Detail -->
-  <rect x="120" y="270" width="160" height="70" rx="3" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="200" y="290" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#000">504: ENERGY DELTA</text>
-  <text x="140" y="310" font-family="Arial" font-size="10" fill="#000">energy_start: [float]</text>
-  <text x="140" y="325" font-family="Arial" font-size="10" fill="#000">energy_end: [float]</text>
-  <text x="290" y="350" font-family="Arial" font-size="14" font-weight="normal" fill="#000">504</text>
-  <line x1="286" y1="346" x2="280" y2="340" stroke="black" stroke-width="0.5" />
+  <!-- 70: Energy Delta Detail -->
+  <rect x="170" y="350" width="220" height="95" rx="3" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="280" y="375" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">ENERGY DELTA</text>
+  <text x="195" y="400" font-family="Arial" font-size="14" fill="black">energy_start: [float]</text>
+  <text x="195" y="420" font-family="Arial" font-size="14" fill="black">energy_end: [float]</text>
+  <text x="400" y="460" font-family="Arial" font-size="14" fill="black">70</text>
+  <line x1="398" y1="457" x2="390" y2="445" stroke="black" stroke-width="0.5" />
 
-  <!-- Annotation arrow from 504 -->
-  <path d="M280 310h60" stroke="#000" stroke-width="1" marker-end="url(#arrow)" />
-  <text x="350" y="315" font-family="Arial" font-size="10" fill="#000">Positive = gained</text>
+  <!-- Annotation arrow from 70 -->
+  <line x1="390" y1="400" x2="440" y2="400" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+  <text x="450" y="405" font-family="Arial" font-size="14" fill="black">Positive = gained</text>
 
-  <!-- 506: Full Step Buffer Section (dashed - optional) -->
-  <rect x="120" y="360" width="372" height="130" rx="3" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="4,2" />
-  <text x="140" y="380" font-family="Arial" font-size="10" font-weight="bold" fill="#000">506: FULL STEP BUFFER (optional)</text>
-  <line x1="120" y1="388" x2="492" y2="388" stroke="#000" stroke-width="0.8" />
-  <text x="140" y="405" font-family="Arial" font-size="10" fill="#000">Step 0: {input, modulation, spikes, energy, temp, pattern}</text>
-  <text x="140" y="420" font-family="Arial" font-size="10" fill="#000">Step 1: {input, modulation, spikes, energy, temp, pattern}</text>
-  <text x="140" y="435" font-family="Arial" font-size="10" fill="#000">...</text>
-  <text x="140" y="450" font-family="Arial" font-size="10" fill="#000">Step N: {input, modulation, spikes, energy, temp, pattern}</text>
-  <text x="140" y="470" font-family="Arial" font-size="10" fill="#000">~100 bytes x N steps</text>
-  <text x="140" y="483" font-family="Arial" font-size="10" fill="#000">(included when cognitive layer requests history)</text>
-  <text x="500" y="350" font-family="Arial" font-size="14" font-weight="normal" fill="#000">506</text>
-  <line x1="498" y1="354" x2="492" y2="360" stroke="black" stroke-width="0.5" />
+  <!-- 72: Full Step Buffer Section (dashed - optional) -->
+  <rect x="170" y="470" width="500" height="165" rx="3" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="4,2" />
+  <text x="195" y="495" font-family="Arial" font-size="14" font-weight="bold" fill="black">FULL STEP BUFFER (optional)</text>
+  <line x1="170" y1="505" x2="670" y2="505" stroke="black" stroke-width="0.8" />
+  <text x="195" y="530" font-family="Arial" font-size="14" fill="black">Step 0: {input, modulation, spikes, energy, temp, pattern}</text>
+  <text x="195" y="550" font-family="Arial" font-size="14" fill="black">Step 1: {input, modulation, spikes, energy, temp, pattern}</text>
+  <text x="195" y="570" font-family="Arial" font-size="14" fill="black">...</text>
+  <text x="195" y="590" font-family="Arial" font-size="14" fill="black">Step N: {input, modulation, spikes, energy, temp, pattern}</text>
+  <text x="195" y="618" font-family="Arial" font-size="14" fill="black">~100 bytes x N steps</text>
+  <text x="195" y="635" font-family="Arial" font-size="14" fill="black">(included when cognitive layer requests history)</text>
+  <text x="680" y="490" font-family="Arial" font-size="14" fill="black">72</text>
+  <line x1="678" y1="493" x2="670" y2="495" stroke="black" stroke-width="0.5" />
 
   <!-- Granularity level annotations -->
-  <path d="M100 190h-23v-50h23" stroke="#000" stroke-width="1" marker-end="url(#arrow)" fill="none" />
-  <text x="65" y="150" font-family="Arial" font-size="10" fill="#000" transform="rotate(-90 65 150)">Level 1: Summary</text>
+  <line x1="140" y1="250" x2="120" y2="250" stroke="black" stroke-width="1" />
+  <line x1="120" y1="250" x2="120" y2="180" stroke="black" stroke-width="1" />
+  <line x1="120" y1="180" x2="140" y2="180" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+  <text x="110" y="220" font-family="Arial" font-size="14" fill="black" transform="rotate(-90 110 220)">Level 1: Summary</text>
 
-  <path d="M100 420h-23v50h23" stroke="#000" stroke-width="1" marker-end="url(#arrow)" fill="none" />
-  <text x="65" y="450" font-family="Arial" font-size="10" fill="#000" transform="rotate(-90 65 450)">Level 2: Full</text>
+  <line x1="140" y1="540" x2="120" y2="540" stroke="black" stroke-width="1" />
+  <line x1="120" y1="540" x2="120" y2="610" stroke="black" stroke-width="1" />
+  <line x1="120" y1="610" x2="140" y2="610" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+  <text x="110" y="580" font-family="Arial" font-size="14" fill="black" transform="rotate(-90 110 580)">Level 2: Full</text>
 
-  <!-- 508: Decision Diamond -->
-  <path d="M306 525l55 40-55 40-55-40z" fill="none" stroke="#000" stroke-width="1.5" />
-  <text x="306" y="560" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">Full buffer</text>
-  <text x="306" y="572" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">requested?</text>
-  <text x="306" y="610" font-family="Arial" font-size="14" font-weight="normal" text-anchor="middle" fill="#000">508</text>
-  <line x1="306" y1="604" x2="306" y2="605" stroke="black" stroke-width="0.5" />
+  <!-- 74: Decision Diamond -->
+  <path d="M425 700 L500 755 L425 810 L350 755 Z" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="425" y="750" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Full buffer</text>
+  <text x="425" y="770" font-family="Arial" font-size="14" text-anchor="middle" fill="black">requested?</text>
+  <text x="425" y="835" font-family="Arial" font-size="14" text-anchor="middle" fill="black">74</text>
+  <line x1="425" y1="828" x2="425" y2="812" stroke="black" stroke-width="0.5" />
 
-  <!-- Arrow from 506 to 508 -->
-  <path d="M306 490v40" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" />
+  <!-- Arrow from 72 to 74 -->
+  <line x1="425" y1="635" x2="425" y2="700" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
   <!-- Decision outputs -->
-  <path d="M256 565H150v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <text x="150" y="615" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">NO: Level 1</text>
+  <path d="M350 755 L230 755 L230 800" stroke="black" stroke-width="1.5" fill="none" marker-end="url(#ah)" />
+  <text x="230" y="825" font-family="Arial" font-size="14" text-anchor="middle" fill="black">NO: Level 1</text>
 
-  <path d="M356 565h106v30" stroke="#000" stroke-width="1.2" marker-end="url(#arrow)" fill="none" />
-  <text x="462" y="615" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">YES: Level 2</text>
+  <path d="M500 755 L620 755 L620 800" stroke="black" stroke-width="1.5" fill="none" marker-end="url(#ah)" />
+  <text x="620" y="825" font-family="Arial" font-size="14" text-anchor="middle" fill="black">YES: Level 2</text>
 
-
-  <text x="306" y="720" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 5</text>
+  <text x="425" y="980" font-family="Arial" font-size="18" text-anchor="middle" fill="black">FIG. 5</text>
 </svg>

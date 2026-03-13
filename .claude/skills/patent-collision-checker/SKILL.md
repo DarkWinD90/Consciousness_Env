@@ -87,7 +87,7 @@ When fixing collisions, the skill applies these strategies in priority order:
 All fixes preserve:
 - 37 CFR 1.84 compliance (line weights, margins, legibility)
 - Reference numeral associations (numeral stays near its element)
-- Per-figure 100-series numbering convention
+- Unified cross-figure even-number scheme (per NUMERAL_REGISTRY.md)
 - ViewBox dimensions (850x1100, US Letter at 100 DPI)
 
 ## Output Format

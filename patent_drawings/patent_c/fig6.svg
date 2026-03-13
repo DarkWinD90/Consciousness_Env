@@ -1,96 +1,136 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="612" height="792" viewBox="0 0 612 792">
-  <rect width="100%" height="100%" fill="#fff" />
+<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
+  <rect width="100%" height="100%" fill="white" />
   <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#000" />
+    <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="black" />
     </marker>
   </defs>
-  <text x="306" y="50" font-family="Arial" font-size="12" text-anchor="middle" fill="#000">Sheet 6 of 7</text>
+  <text x="425" y="60" font-family="Arial" font-size="14" text-anchor="middle" fill="black">6/7</text>
 
-  <!-- 600: Normal Reconnection Timeline (top) -->
-  <g transform="translate(100,100)">
-    <text x="0" y="-10" font-family="Arial" font-size="10" font-weight="bold" fill="#000">600: NORMAL RECONNECTION</text>
-    <!-- Timeline bar -->
-    <path d="M0 30h400" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
-    <!-- Phase boxes -->
-    <rect x="0" y="10" width="70" height="40" fill="none" stroke="#000" stroke-width="1.2" />
-    <text x="35" y="35" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">CONNECTED</text>
-    <rect x="80" y="10" width="60" height="40" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="2,2" />
-    <text x="110" y="30" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">TIMEOUT</text>
-    <text x="110" y="42" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">30s</text>
-    <rect x="150" y="10" width="100" height="40" fill="none" stroke="#000" stroke-width="1.5" />
-    <text x="200" y="30" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">AUTONOMOUS</text>
-    <text x="200" y="42" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">N steps</text>
-    <rect x="260" y="10" width="60" height="40" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" />
-    <text x="290" y="35" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">RESYNC</text>
-    <rect x="330" y="10" width="70" height="40" fill="none" stroke="#000" stroke-width="1.2" />
-    <text x="365" y="35" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">CONNECTED</text>
-    <!-- Annotations -->
-    <text x="75" y="65" font-family="Arial" font-size="10" fill="#000">Claude silent</text>
-    <text x="155" y="65" font-family="Arial" font-size="10" fill="#000">Fallback engages</text>
-    <text x="275" y="65" font-family="Arial" font-size="10" fill="#000">resync()</text>
-    <text x="408" y="20" font-family="Arial" font-size="14" font-weight="normal" fill="#000">600</text>
-  </g>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 76: Normal Reconnection Timeline                      -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="130" y="120" font-family="Arial" font-size="14" font-weight="bold" fill="black">NORMAL RECONNECTION</text>
+  <text x="420" y="120" font-family="Arial" font-size="14" fill="black">76</text>
+  <line x1="418" y1="123" x2="390" y2="123" stroke="black" stroke-width="0.5" />
+  <!-- Timeline bar -->
+  <line x1="130" y1="160" x2="700" y2="160" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <!-- Phase boxes -->
+  <rect x="130" y="140" width="95" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="177" y="165" font-family="Arial" font-size="14" text-anchor="middle" fill="black">CONNECTED</text>
+  <rect x="240" y="140" width="75" height="40" fill="none" stroke="black" stroke-width="1" stroke-dasharray="2,2" />
+  <text x="277" y="165" font-family="Arial" font-size="14" text-anchor="middle" fill="black">TIMEOUT</text>
+  <rect x="330" y="140" width="120" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="390" y="165" font-family="Arial" font-size="14" text-anchor="middle" fill="black">AUTONOMOUS</text>
+  <rect x="465" y="140" width="75" height="40" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,2" />
+  <text x="502" y="165" font-family="Arial" font-size="14" text-anchor="middle" fill="black">RESYNC</text>
+  <rect x="555" y="140" width="95" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="602" y="165" font-family="Arial" font-size="14" text-anchor="middle" fill="black">CONNECTED</text>
+  <!-- Annotations -->
+  <text x="235" y="200" font-family="Arial" font-size="14" fill="black">Claude silent</text>
+  <text x="340" y="200" font-family="Arial" font-size="14" fill="black">Fallback engages</text>
+  <text x="475" y="200" font-family="Arial" font-size="14" fill="black">resync()</text>
 
-  <!-- 602: Crash Recovery Timeline (middle) -->
-  <g transform="translate(100,220)">
-    <text x="0" y="-10" font-family="Arial" font-size="10" font-weight="bold" fill="#000">602: CRASH RECOVERY</text>
-    <!-- Timeline bar -->
-    <path d="M0 30h400" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
-    <!-- Phase boxes -->
-    <rect x="0" y="10" width="70" height="40" fill="none" stroke="#000" stroke-width="1.2" />
-    <text x="35" y="35" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">CONNECTED</text>
-    <!-- Crash indicator (bold X) -->
-    <path d="M85 15l20 30M85 45l20-30" stroke="#000" stroke-width="2" />
-    <text x="95" y="60" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">CRASH</text>
-    <rect x="120" y="10" width="80" height="40" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" />
-    <text x="160" y="30" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">RESTART</text>
-    <text x="160" y="42" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">Process relaunch</text>
-    <rect x="210" y="10" width="90" height="40" fill="none" stroke="#000" stroke-width="1.5" />
-    <text x="255" y="30" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">SNAPSHOT</text>
-    <text x="255" y="42" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">Load latest.json</text>
-    <rect x="310" y="10" width="90" height="40" fill="none" stroke="#000" stroke-width="1.2" />
-    <text x="355" y="35" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">CONNECTED</text>
-    <!-- Annotation -->
-    <text x="255" y="65" font-family="Arial" font-size="10" fill="#000">Max 50 steps lost</text>
-    <text x="408" y="20" font-family="Arial" font-size="14" font-weight="normal" fill="#000">602</text>
-  </g>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 78: Extended Disconnection Timeline                    -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="130" y="250" font-family="Arial" font-size="14" font-weight="bold" fill="black">EXTENDED DISCONNECTION</text>
+  <text x="430" y="250" font-family="Arial" font-size="14" fill="black">78</text>
+  <line x1="428" y1="253" x2="400" y2="253" stroke="black" stroke-width="0.5" />
+  <!-- Timeline bar -->
+  <line x1="130" y1="290" x2="700" y2="290" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <!-- Phase boxes -->
+  <rect x="130" y="270" width="70" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="165" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="black">CONN</text>
+  <rect x="215" y="270" width="55" height="40" fill="none" stroke="black" stroke-width="1" stroke-dasharray="2,2" />
+  <text x="242" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="black">T/O</text>
+  <rect x="285" y="270" width="220" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="395" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="black">AUTONOMOUS (many steps)</text>
+  <!-- 80: Snapshot icons on timeline 78 -->
+  <rect x="320" y="278" width="8" height="8" fill="black" />
+  <rect x="370" y="278" width="8" height="8" fill="black" />
+  <rect x="420" y="278" width="8" height="8" fill="black" />
+  <rect x="470" y="278" width="8" height="8" fill="black" />
+  <text x="320" y="330" font-family="Arial" font-size="14" fill="black">80</text>
+  <line x1="324" y1="323" x2="324" y2="288" stroke="black" stroke-width="0.5" />
+  <!-- 82: Energy level indicator -->
+  <rect x="395" y="300" width="50" height="14" fill="none" stroke="black" stroke-width="1" />
+  <line x1="395" y1="307" x2="420" y2="307" stroke="black" stroke-width="2" />
+  <text x="455" y="312" font-family="Arial" font-size="14" fill="black">82</text>
+  <line x1="453" y1="312" x2="445" y2="310" stroke="black" stroke-width="0.5" />
+  <!-- Continue timeline -->
+  <rect x="520" y="270" width="55" height="40" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,2" />
+  <text x="547" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="black">RESYNC</text>
+  <rect x="590" y="270" width="70" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="625" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="black">CONN</text>
+  <!-- Annotation -->
+  <text x="285" y="345" font-family="Arial" font-size="14" fill="black">Snapshots every 50 steps; energy indicator tracks state</text>
 
-  <!-- 604: Clean Shutdown Timeline (bottom) -->
-  <g transform="translate(100,340)">
-    <text x="0" y="-10" font-family="Arial" font-size="10" font-weight="bold" fill="#000">604: CLEAN SHUTDOWN</text>
-    <!-- Timeline bar -->
-    <path d="M0 30h400" stroke="#000" stroke-width="1.5" marker-end="url(#arrow)" />
-    <!-- Phase boxes -->
-    <rect x="0" y="10" width="80" height="40" fill="none" stroke="#000" stroke-width="1.2" />
-    <text x="40" y="35" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">CONNECTED</text>
-    <rect x="90" y="10" width="100" height="40" fill="none" stroke="#000" stroke-width="1.5" />
-    <text x="140" y="35" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">AUTONOMOUS</text>
-    <rect x="200" y="10" width="80" height="40" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="2,2" />
-    <text x="240" y="30" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">EOF</text>
-    <text x="240" y="42" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">stdin closed</text>
-    <rect x="290" y="10" width="110" height="40" fill="none" stroke="#000" stroke-width="1.5" />
-    <text x="345" y="30" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">SHUTDOWN</text>
-    <text x="345" y="42" font-family="Arial" font-size="10" text-anchor="middle" fill="#000">Final snapshot</text>
-    <!-- Annotation -->
-    <text x="290" y="65" font-family="Arial" font-size="10" fill="#000">State preserved</text>
-    <text x="290" y="77" font-family="Arial" font-size="10" fill="#000">for next session</text>
-    <text x="408" y="20" font-family="Arial" font-size="14" font-weight="normal" fill="#000">604</text>
-  </g>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 84: Crash Recovery Timeline                            -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="130" y="390" font-family="Arial" font-size="14" font-weight="bold" fill="black">CRASH RECOVERY</text>
+  <text x="370" y="390" font-family="Arial" font-size="14" fill="black">84</text>
+  <line x1="368" y1="393" x2="340" y2="393" stroke="black" stroke-width="0.5" />
+  <!-- Timeline bar -->
+  <line x1="130" y1="430" x2="700" y2="430" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <!-- Phase boxes -->
+  <rect x="130" y="410" width="95" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="177" y="435" font-family="Arial" font-size="14" text-anchor="middle" fill="black">CONNECTED</text>
+  <!-- Crash indicator (bold X) -->
+  <line x1="243" y1="415" x2="268" y2="445" stroke="black" stroke-width="2" />
+  <line x1="243" y1="445" x2="268" y2="415" stroke="black" stroke-width="2" />
+  <text x="255" y="465" font-family="Arial" font-size="14" text-anchor="middle" fill="black">CRASH</text>
+  <rect x="285" y="410" width="100" height="40" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,2" />
+  <text x="335" y="435" font-family="Arial" font-size="14" text-anchor="middle" fill="black">RESTART</text>
+  <rect x="400" y="410" width="120" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="460" y="428" font-family="Arial" font-size="14" text-anchor="middle" fill="black">SNAPSHOT</text>
+  <text x="460" y="445" font-family="Arial" font-size="14" text-anchor="middle" fill="black">LOAD</text>
+  <rect x="535" y="410" width="95" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="582" y="435" font-family="Arial" font-size="14" text-anchor="middle" fill="black">CONNECTED</text>
+  <!-- Annotation -->
+  <text x="400" y="475" font-family="Arial" font-size="14" fill="black">Max 50 steps lost</text>
 
-  <!-- 606: Recovery Guarantees Box -->
-  <rect x="100" y="460" width="412" height="100" rx="5" fill="none" stroke="#000" stroke-width="1" stroke-dasharray="4,2" />
-  <text x="120" y="480" font-family="Arial" font-size="10" font-weight="bold" fill="#000">606: RECOVERY GUARANTEES</text>
-  <line x1="100" y1="490" x2="512" y2="490" stroke="#000" stroke-width="0.8" />
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 86: Clean Shutdown Timeline                            -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="130" y="520" font-family="Arial" font-size="14" font-weight="bold" fill="black">CLEAN SHUTDOWN</text>
+  <text x="360" y="520" font-family="Arial" font-size="14" fill="black">86</text>
+  <line x1="358" y1="523" x2="330" y2="523" stroke="black" stroke-width="0.5" />
+  <!-- Timeline bar -->
+  <line x1="130" y1="560" x2="700" y2="560" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <!-- Phase boxes -->
+  <rect x="130" y="540" width="95" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="177" y="565" font-family="Arial" font-size="14" text-anchor="middle" fill="black">CONNECTED</text>
+  <rect x="240" y="540" width="120" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="300" y="565" font-family="Arial" font-size="14" text-anchor="middle" fill="black">AUTONOMOUS</text>
+  <rect x="375" y="540" width="85" height="40" fill="none" stroke="black" stroke-width="1" stroke-dasharray="2,2" />
+  <text x="417" y="558" font-family="Arial" font-size="14" text-anchor="middle" fill="black">EOF</text>
+  <text x="417" y="575" font-family="Arial" font-size="14" text-anchor="middle" fill="black">stdin</text>
+  <rect x="475" y="540" width="140" height="40" fill="none" stroke="black" stroke-width="1.5" />
+  <text x="545" y="558" font-family="Arial" font-size="14" text-anchor="middle" fill="black">SHUTDOWN</text>
+  <text x="545" y="575" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Final snapshot</text>
+  <!-- Annotation -->
+  <text x="475" y="600" font-family="Arial" font-size="14" fill="black">State preserved for next session</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 88: Recovery Guarantees Box                            -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <rect x="130" y="640" width="570" height="120" rx="5" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,2" />
+  <text x="155" y="665" font-family="Arial" font-size="14" font-weight="bold" fill="black">RECOVERY GUARANTEES</text>
+  <line x1="130" y1="675" x2="700" y2="675" stroke="black" stroke-width="0.8" />
   <!-- Legend items -->
-  <path d="M120 510h40" stroke="#000" stroke-width="1.5" />
-  <text x="170" y="513" font-family="Arial" font-size="10" fill="#000">Solid line: System actively processing</text>
-  <path d="M120 530h40" stroke="#000" stroke-width="1" stroke-dasharray="4,2" />
-  <text x="170" y="533" font-family="Arial" font-size="10" fill="#000">Dashed line: System in transition</text>
-  <circle cx="140" cy="548" r="5" fill="#000" />
-  <text x="170" y="553" font-family="Arial" font-size="10" fill="#000">Bold markers: No data loss at state change</text>
-  <text x="510" y="475" font-family="Arial" font-size="14" font-weight="normal" fill="#000">606</text>
+  <line x1="155" y1="700" x2="210" y2="700" stroke="black" stroke-width="1.5" />
+  <text x="220" y="705" font-family="Arial" font-size="14" fill="black">Solid line: System actively processing</text>
+  <line x1="155" y1="722" x2="210" y2="722" stroke="black" stroke-width="1" stroke-dasharray="4,2" />
+  <text x="220" y="727" font-family="Arial" font-size="14" fill="black">Dashed line: System in transition</text>
+  <circle cx="182" cy="745" r="5" fill="black" />
+  <text x="220" y="750" font-family="Arial" font-size="14" fill="black">Bold markers: No data loss at state change</text>
+  <text x="710" y="660" font-family="Arial" font-size="14" fill="black">88</text>
+  <line x1="708" y1="663" x2="700" y2="665" stroke="black" stroke-width="0.5" />
 
-
-  <text x="306" y="720" font-family="Arial" font-size="18" font-weight="normal" text-anchor="middle" fill="#000">FIG. 6</text>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- FIGURE LABEL                                           -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="425" y="950" font-family="Arial" font-size="18" text-anchor="middle" fill="black">FIG. 6</text>
 </svg>

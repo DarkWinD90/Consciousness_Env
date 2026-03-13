@@ -403,17 +403,24 @@ power, power sustains thinking.
 
 **Reference Numerals** (Patent A):
 
-| Numeral | Component |
-|---------|-----------|
-| 100 | Complete system |
-| 110 | Spiking neural network (SNN) |
-| 120 | Motor actuator (servo) |
-| 130 | Piezoelectric energy harvester |
-| 140 | Thermoelectric energy harvester |
-| 150 | Power management unit |
-| 160 | Sensor input module |
-| 170 | Reflection feedback path |
-| 180 | Energy storage (capacitor/battery) |
+**IMPORTANT**: Numerals use a unified cross-figure even-number scheme.
+The authoritative source is `patent_drawings/NUMERAL_REGISTRY.md`.
+
+| Numeral | Component | Figures |
+|---------|-----------|---------|
+| 10 | Environment boundary | 1, 8 |
+| 12 | Sensor | 1, 8 |
+| 14 | Spiking neural network (SNN) | 1, 3, 4, 8 |
+| 16 | Motor | 1, 6, 8 |
+| 18 | Power management block | 1 |
+| 20 | Thermal harvester | 1, 8 |
+| 22 | Piezoelectric element | 1, 4, 6, 8 |
+| 24 | Ground reference | 1 |
+| 26 | Control logic block | 1, 6 |
+| 28 | Energy store | 1, 6, 8 |
+| 30 | Reflection feedback path | 1, 8 |
+
+See `NUMERAL_REGISTRY.md` for the full table (numerals 10-138).
 
 ---
 
@@ -459,17 +466,21 @@ cognitive control or internal energy-aware regulation.
 
 **Reference Numerals** (Patent B):
 
-| Numeral | Component |
-|---------|-----------|
-| 200 | Complete self-observation system |
-| 210 | Spiking neural network |
-| 220 | Output recorder (mean membrane potential) |
-| 230 | Reflection feedback path |
-| 240 | Reflection coefficient controller |
-| 250 | External cognitive modulation input |
-| 260 | Internal energy-aware modulation |
-| 270 | STDP learning module |
-| 280 | Input injection point (neuron 0) |
+**IMPORTANT**: Uses unified cross-figure even-number scheme.
+See `patent_drawings/NUMERAL_REGISTRY.md` for authoritative source.
+
+| Numeral | Component | Figures |
+|---------|-----------|---------|
+| 10 | External input | 1 |
+| 12 | Summing junction | 1 |
+| 14 | Spiking neural network (SNN) | 1, 3, 4, 6 |
+| 16 | Spike output | 1 |
+| 18 | Aggregate output | 1 |
+| 20 | Delay element | 1 |
+| 22 | Reflection scaling block | 1 |
+| 24 | Self-observation feedback path | 1 |
+
+See `NUMERAL_REGISTRY.md` for the full table (numerals 10-80).
 
 ---
 
