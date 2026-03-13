@@ -25,14 +25,14 @@
     <!-- EXTERNAL INPUT — arrow entering SNN from left           -->
     <!-- ══════════════════════════════════════════════════════ -->
     <line x1="105" y1="205" x2="160" y2="205" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <text x="122" y="195" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">EXT.</text>
+    <text x="122" y="195" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">EXT.</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- REFLECTION INPUT — dashed arrow entering SNN from left  -->
     <!-- (L8 recursive self-observation feedback)                -->
     <!-- ══════════════════════════════════════════════════════ -->
     <line x1="105" y1="260" x2="160" y2="260" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
-    <text x="122" y="274" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">REFL.</text>
+    <text x="122" y="274" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">REFL.</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- INPUT LAYER (52)                                       -->
@@ -82,7 +82,7 @@
     <!-- Hidden neurons — three circles, center labeled "i" -->
     <circle cx="490" cy="220" r="12" fill="none" stroke="black" stroke-width="1.5" />
     <circle cx="520" cy="220" r="12" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="520" y="225" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="black">i</text>
+    <text x="520" y="225" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">i</text>
     <circle cx="550" cy="220" r="12" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Ref 56 -->
     <text x="595" y="132" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">56</text>
@@ -100,9 +100,9 @@
     <!-- Threshold bar inside neuron -->
     <line x1="198" y1="375" x2="222" y2="375" stroke="black" stroke-width="1" stroke-dasharray="2,2" />
     <!-- LIF equation text -->
-    <text x="240" y="365" font-family="Arial, sans-serif" font-size="10" text-anchor="start" fill="black">V(t+1) = V(t) x leak + I</text>
-    <text x="240" y="380" font-family="Arial, sans-serif" font-size="10" text-anchor="start" fill="black">If V &gt;= V_th: spike</text>
-    <text x="240" y="395" font-family="Arial, sans-serif" font-size="10" text-anchor="start" fill="black">V_th = 0.5</text>
+    <text x="240" y="365" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">V(t+1) = V(t) x leak + I</text>
+    <text x="240" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">If V &gt;= V_th: spike</text>
+    <text x="240" y="395" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">V_th = 0.5</text>
     <!-- Membrane trace mini-plot -->
     <path d="M 400 430 L 415 420 L 430 415 L 445 400 L 450 385 L 453 430 L 468 420 L 483 408 L 498 392 L 503 385 L 506 430 L 521 420"
           fill="none" stroke="black" stroke-width="1.5" />
@@ -173,9 +173,9 @@
 
     <!-- Arrow: Output Stage → exit SNN → route down to Spike Vector -->
     <!-- Single continuous path from Output Stage (680,240) through SNN exit to Spike Vector -->
-    <line x1="680" y1="240" x2="720" y2="240" stroke="black" stroke-width="1.5" />
-    <line x1="720" y1="240" x2="720" y2="730" stroke="black" stroke-width="1.5" />
-    <line x1="720" y1="730" x2="560" y2="730" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <line x1="680" y1="240" x2="740" y2="240" stroke="black" stroke-width="1.5" />
+    <line x1="740" y1="240" x2="740" y2="730" stroke="black" stroke-width="1.5" />
+    <line x1="740" y1="730" x2="560" y2="730" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
     <!-- Small arrowhead tick at SNN exit (x=700) to mark spike output -->
     <line x1="696" y1="237" x2="700" y2="240" stroke="black" stroke-width="1.5" />
     <line x1="696" y1="243" x2="700" y2="240" stroke="black" stroke-width="1.5" />
@@ -184,13 +184,13 @@
     <!-- STDP LEARNING RULE BOX (68)                            -->
     <!-- ══════════════════════════════════════════════════════ -->
     <rect x="530" y="520" width="190" height="130" rx="4" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="625" y="540" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="black">STDP LEARNING RULE</text>
-    <text x="625" y="558" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">If post fires:</text>
-    <text x="625" y="572" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">W += A+ x pre_trace (LTP)</text>
-    <text x="625" y="590" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">If pre fires:</text>
-    <text x="625" y="604" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">W -= A- x post_trace (LTD)</text>
-    <text x="625" y="622" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">A- &gt; A+ (stability bias)</text>
-    <text x="625" y="638" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">Weight bounds: [0.0, 0.5]</text>
+    <text x="625" y="540" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">STDP LEARNING RULE</text>
+    <text x="625" y="558" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">If post fires:</text>
+    <text x="625" y="572" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">W += A+ x pre_trace (LTP)</text>
+    <text x="625" y="590" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">If pre fires:</text>
+    <text x="625" y="604" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">W -= A- x post_trace (LTD)</text>
+    <text x="625" y="622" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">A- &gt; A+ (stability bias)</text>
+    <text x="625" y="638" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Weight bounds: [0.0, 0.5]</text>
     <!-- Ref 68 -->
     <text x="738" y="532" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">68</text>
     <line x1="736" y1="536" x2="722" y2="540" stroke="black" stroke-width="0.5" />

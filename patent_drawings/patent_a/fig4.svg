@@ -26,8 +26,8 @@
     <!-- Double circle for piezo disc per spec -->
     <circle cx="230" cy="175" r="35" fill="none" stroke="black" stroke-width="1.5" />
     <circle cx="230" cy="175" r="25" fill="none" stroke="black" stroke-width="1" />
-    <text x="230" y="172" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
-    <text x="230" y="184" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="black">27mm</text>
+    <text x="230" y="172" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
+    <text x="230" y="184" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">27mm</text>
     <!-- Ref 22 -->
     <text x="140" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">22</text>
     <line x1="143" y1="123" x2="160" y2="140" stroke="black" stroke-width="0.5" />
@@ -64,8 +64,8 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Diamond shape for rectifier per spec -->
     <polygon points="560 270, 640 305, 560 340, 480 305" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="560" y="302" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="black">FULL-BRIDGE</text>
-    <text x="560" y="316" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="black">RECTIFIER</text>
+    <text x="560" y="302" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">FULL-BRIDGE</text>
+    <text x="560" y="316" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">RECTIFIER</text>
     <!-- Ref 76 -->
     <text x="658" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">76</text>
     <line x1="656" y1="283" x2="642" y2="300" stroke="black" stroke-width="0.5" />
@@ -168,10 +168,10 @@
     <rect x="200" y="850" width="320" height="50" fill="none" stroke="black" stroke-width="1" />
     <!-- Solid line = circuit component -->
     <line x1="215" y1="868" x2="265" y2="868" stroke="black" stroke-width="1.5" />
-    <text x="275" y="873" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="black">Circuit Component</text>
+    <text x="275" y="873" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Circuit Component</text>
     <!-- Dashed line = boundary / destination -->
     <line x1="215" y1="890" x2="265" y2="890" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
-    <text x="275" y="895" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="black">Boundary / Destination</text>
+    <text x="275" y="895" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Boundary / Destination</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- FIGURE LABEL                                           -->

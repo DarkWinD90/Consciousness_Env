@@ -18,8 +18,8 @@
     <!-- Cloud shape for external cognitive control layer -->
     <path d="M 170 180 Q 150 180 150 165 Q 150 150 165 145 Q 160 130 175 122 Q 190 114 210 118 Q 220 108 240 108 Q 260 108 270 118 Q 285 112 300 118 Q 315 124 318 138 Q 330 140 335 150 Q 340 160 335 170 Q 340 180 330 180 Z"
           fill="none" stroke="black" stroke-width="1.5" />
-    <text x="250" y="148" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="black">COGNITIVE</text>
-    <text x="250" y="164" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">CONTROL</text>
+    <text x="250" y="148" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">COGNITIVE</text>
+    <text x="250" y="164" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">CONTROL</text>
     <!-- Ref 42 -->
     <text x="355" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">42</text>
     <line x1="353" y1="140" x2="350" y2="142" stroke="black" stroke-width="0.5" />
