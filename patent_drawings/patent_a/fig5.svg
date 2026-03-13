@@ -165,12 +165,12 @@
     <rect x="515" y="550" width="70" height="30" fill="none" stroke="black" stroke-width="1" />
     <text x="550" y="570" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MEASURE</text>
     <!-- Arrow MEASURE → COMPUTE -->
-    <line x1="585" y1="565" x2="610" y2="565" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+    <line x1="585" y1="565" x2="615" y2="565" stroke="black" stroke-width="1" marker-end="url(#ah)" />
     <!-- COMPUTE stage -->
     <rect x="615" y="550" width="70" height="30" fill="none" stroke="black" stroke-width="1" />
     <text x="650" y="570" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">COMPUTE</text>
     <!-- Arrow COMPUTE → ADJUST (down) -->
-    <line x1="650" y1="580" x2="650" y2="610" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+    <line x1="650" y1="580" x2="650" y2="615" stroke="black" stroke-width="1" marker-end="url(#ah)" />
     <!-- ADJUST stage -->
     <rect x="615" y="615" width="70" height="30" fill="none" stroke="black" stroke-width="1" />
     <text x="650" y="635" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ADJUST</text>
