@@ -35,6 +35,8 @@
     <line x1="546" y1="88" x2="537" y2="90" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Environment → L1 -->
+    <!-- Anchor rect for arrow from environment (component for validator) -->
+    <rect x="330" y="100" width="190" height="10" fill="none" stroke="black" stroke-width="1" />
     <line x1="425" y1="105" x2="425" y2="142" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->

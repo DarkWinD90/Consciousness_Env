@@ -60,9 +60,8 @@
   <path d="M570 555 L570 610" stroke="black" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ah)" />
 
   <!-- 20: Snapshot Store (cylinder, right side of 16) -->
-  <ellipse cx="700" cy="470" rx="15" ry="8" fill="none" stroke="black" stroke-width="1.5" />
-  <rect x="685" y="470" width="30" height="30" fill="none" stroke="black" stroke-width="1.5" />
-  <ellipse cx="700" cy="500" rx="15" ry="8" fill="none" stroke="black" stroke-width="1.5" />
+  <path d="M685 470 Q685 462, 700 462 Q715 462, 715 470 L715 500 Q715 508, 700 508 Q685 508, 685 500 Z" fill="none" stroke="black" stroke-width="1.5" />
+  <path d="M685 470 Q685 478, 700 478 Q715 478, 715 470" fill="none" stroke="black" stroke-width="1.5" />
   <text x="720" y="490" font-family="Arial" font-size="14" fill="black">20</text>
   <line x1="718" y1="493" x2="715" y2="495" stroke="black" stroke-width="0.5" />
 
@@ -83,8 +82,8 @@
 
   <!-- 24: Energy Harvester symbol inside 22 -->
   <path d="M570 630 L620 630 M570 650 L620 650 M585 630 L585 650 M605 630 L605 650" stroke="black" stroke-width="1" />
-  <text x="640" y="628" font-family="Arial" font-size="14" fill="black">24</text>
-  <line x1="638" y1="631" x2="622" y2="640" stroke="black" stroke-width="0.5" />
+  <text x="680" y="605" font-family="Arial" font-size="14" fill="black">24</text>
+  <line x1="678" y1="608" x2="622" y2="640" stroke="black" stroke-width="0.5" />
 
   <!-- Key annotation -->
   <rect x="170" y="730" width="500" height="55" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="2,2" />

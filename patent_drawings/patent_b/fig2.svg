@@ -48,7 +48,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- SECOND REGION (30) — 0.0 to 0.2, minimal              -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="156" y="203" width="101" height="54" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,4" />
+    <rect x="156" y="203" width="101" height="54" fill="none" stroke="black" stroke-width="0.9" stroke-dasharray="4,4" />
     <!-- Ref 30 -->
     <text x="205" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">30</text>
     <line x1="205" y1="193" x2="205" y2="200" stroke="black" stroke-width="0.5" />
@@ -57,7 +57,7 @@
     <!-- THIRD REGION (32) — 0.2 to 0.4, balanced/operational  -->
     <!-- Bold border to indicate operational range               -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="263" y="203" width="104" height="54" fill="none" stroke="black" stroke-width="2.5" />
+    <rect x="263" y="203" width="104" height="54" fill="none" stroke="black" stroke-width="0.9" />
     <!-- Ref 32 -->
     <text x="315" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">32</text>
     <line x1="315" y1="193" x2="315" y2="200" stroke="black" stroke-width="0.5" />
@@ -65,7 +65,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- FOURTH REGION (34) — 0.4 to 0.7, self-dominated       -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="373" y="203" width="159" height="54" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,4" />
+    <rect x="373" y="203" width="159" height="54" fill="none" stroke="black" stroke-width="0.9" stroke-dasharray="4,4" />
     <!-- Ref 34 -->
     <text x="452" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">34</text>
     <line x1="452" y1="193" x2="452" y2="200" stroke="black" stroke-width="0.5" />
@@ -73,7 +73,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- FIFTH REGION (36) — 0.7 to 1.0, self-absorption       -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="538" y="203" width="159" height="54" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,4" />
+    <rect x="538" y="203" width="159" height="54" fill="none" stroke="black" stroke-width="0.9" stroke-dasharray="4,4" />
     <!-- Ref 36 -->
     <text x="617" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">36</text>
     <line x1="617" y1="193" x2="617" y2="200" stroke="black" stroke-width="0.5" />

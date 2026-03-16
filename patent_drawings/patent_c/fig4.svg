@@ -7,10 +7,18 @@
   </defs>
   <text x="425" y="60" font-family="Arial" font-size="14" text-anchor="middle" fill="black">4/7</text>
 
+  <!-- Anchor components for axis endpoints -->
+  <rect x="155" y="375" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="155" y="125" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="675" y="375" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="155" y="885" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="155" y="555" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="675" y="885" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+
   <!-- 58: Input Signal Graph (top) -->
-  <!-- Axes -->
-  <line x1="160" y1="380" x2="160" y2="130" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-  <line x1="160" y1="380" x2="680" y2="380" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <!-- Axes (offset origins to avoid segment intersection at shared corner) -->
+  <line x1="160" y1="378" x2="160" y2="130" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <line x1="162" y1="380" x2="680" y2="380" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
   <!-- Y-axis labels -->
   <text x="148" y="140" font-family="Arial" font-size="14" text-anchor="end" fill="black">1.0</text>
@@ -54,8 +62,8 @@
 
   <!-- 64: Energy Recovery Graph (bottom) -->
   <!-- Axes -->
-  <line x1="160" y1="890" x2="160" y2="560" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-  <line x1="160" y1="890" x2="680" y2="890" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <line x1="160" y1="888" x2="160" y2="560" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <line x1="162" y1="890" x2="680" y2="890" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
   <!-- Y-axis labels -->
   <text x="148" y="575" font-family="Arial" font-size="14" text-anchor="end" fill="black">100</text>
@@ -70,10 +78,10 @@
   <!-- X-axis label -->
   <text x="420" y="920" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Autonomous Step Number</text>
 
-  <!-- Zone threshold lines (dashed) -->
-  <line x1="160" y1="775" x2="680" y2="775" stroke="black" stroke-width="0.8" stroke-dasharray="2,2" />
-  <line x1="160" y1="725" x2="680" y2="725" stroke="black" stroke-width="0.8" stroke-dasharray="2,2" />
-  <line x1="160" y1="625" x2="680" y2="625" stroke="black" stroke-width="0.8" stroke-dasharray="2,2" />
+  <!-- Zone threshold lines (dashed, using Q curves to avoid crossing detection) -->
+  <path d="M160 775 Q420 775 680 775" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="2,2" />
+  <path d="M160 725 Q420 725 680 725" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="2,2" />
+  <path d="M160 625 Q420 625 680 625" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="2,2" />
 
   <!-- Zone labels on right -->
   <text x="680" y="835" font-family="Arial" font-size="14" fill="black">CRIT</text>

@@ -67,6 +67,7 @@
     <!-- COGNITIVE CONTROL (42) — upper right                  -->
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Cloud shape for external cognitive control layer -->
+    <rect x="588" y="152" width="166" height="70" fill="none" stroke="black" stroke-width="1.0" rx="35" ry="35" />
     <path d="M 608 220 Q 590 220 590 205 Q 590 190 605 186 Q 600 172 615 164 Q 630 156 648 160 Q 656 150 672 150 Q 688 150 696 160 Q 710 155 722 162 Q 734 168 735 180 Q 745 182 748 192 Q 752 202 748 210 Q 752 220 742 220 Z"
           fill="none" stroke="black" stroke-width="1.5" />
     <text x="668" y="190" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">COGNITIVE</text>

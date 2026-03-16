@@ -56,7 +56,7 @@
   <!-- Granularity level annotations -->
   <line x1="155" y1="260" x2="135" y2="260" stroke="black" stroke-width="1" />
   <line x1="135" y1="260" x2="135" y2="195" stroke="black" stroke-width="1" />
-  <line x1="135" y1="195" x2="155" y2="195" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+  <line x1="135" y1="195" x2="155" y2="195" stroke="black" stroke-width="1" />
   <text x="125" y="232" font-family="Arial" font-size="12" fill="black" transform="rotate(-90 125 232)">Level 1: Summary</text>
 
   <line x1="155" y1="550" x2="135" y2="550" stroke="black" stroke-width="1" />
@@ -65,7 +65,7 @@
   <text x="125" y="590" font-family="Arial" font-size="12" fill="black" transform="rotate(-90 125 590)">Level 2: Full</text>
 
   <!-- 74: Decision Diamond -->
-  <path d="M425 700 L500 755 L425 810 L350 755 Z" fill="none" stroke="black" stroke-width="1.5" />
+  <polygon points="425 700, 500 755, 425 810, 350 755" fill="none" stroke="black" stroke-width="1.5" />
   <text x="425" y="750" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Full buffer</text>
   <text x="425" y="770" font-family="Arial" font-size="14" text-anchor="middle" fill="black">requested?</text>
   <text x="425" y="835" font-family="Arial" font-size="14" text-anchor="middle" fill="black">74</text>
