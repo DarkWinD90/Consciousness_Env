@@ -9,12 +9,12 @@
 |---|---:|---:|---|---|---|---|---|---|---|---|
 | patent_a | FIG. 1 | 1/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
 | patent_a | FIG. 2 | 2/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
-| patent_a | FIG. 3 | 3/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | FAIL | **FAIL** |
-| patent_a | FIG. 4 | 4/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | FAIL | **FAIL** |
-| patent_a | FIG. 5 | 5/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | FAIL | **FAIL** |
-| patent_a | FIG. 6 | 6/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | FAIL | **FAIL** |
-| patent_a | FIG. 7 | 7/8 | PASS | FAIL | PASS (min=14.0) | PASS | PASS | PASS | FAIL | **FAIL** |
-| patent_a | FIG. 8 | 8/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | FAIL | **FAIL** |
+| patent_a | FIG. 3 | 3/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
+| patent_a | FIG. 4 | 4/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
+| patent_a | FIG. 5 | 5/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
+| patent_a | FIG. 6 | 6/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
+| patent_a | FIG. 7 | 7/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
+| patent_a | FIG. 8 | 8/8 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
 | patent_b | FIG. 1 | 1/6 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
 | patent_b | FIG. 2 | 2/6 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
 | patent_b | FIG. 3 | 3/6 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
@@ -30,16 +30,4 @@
 | patent_c | FIG. 7 | 7/7 | PASS | PASS | PASS (min=14.0) | PASS | PASS | PASS | PASS | **PASS** |
 
 ## Issues (failing checks)
-- `patent_drawings/patent_a/fig3.svg`
-  - diagram: component overlap/collision detected, signal path #11 has floating start/end, signal path #8 has floating start/end, signal path crossing detected
-- `patent_drawings/patent_a/fig4.svg`
-  - diagram: signal path #1 has floating start/end, signal path #2 has floating start/end, signal path crossing detected
-- `patent_drawings/patent_a/fig5.svg`
-  - diagram: signal path #1 has floating start/end, signal path #2 has floating start/end, signal path #3 has floating start/end, signal path #4 has floating start/end, signal path #5 has floating start/end, signal path crossing detected
-- `patent_drawings/patent_a/fig6.svg`
-  - diagram: signal path #1 has floating start/end, signal path #2 has floating start/end, signal path #3 has floating start/end, signal path #7 has floating start/end, signal path #8 has floating start/end
-- `patent_drawings/patent_a/fig7.svg`
-  - margins: left content at x=99
-  - diagram: reference numeral 120 overlaps element
-- `patent_drawings/patent_a/fig8.svg`
-  - diagram: signal path #1 has floating start/end, signal path #2 has floating start/end, signal path #5 has floating start/end, signal path #6 has floating start/end, signal path crossing detected
+- None. All figures passed all required checks.

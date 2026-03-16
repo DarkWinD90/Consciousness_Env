@@ -53,18 +53,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected",
-        "signal path #11 has floating start/end",
-        "signal path #8 has floating start/end",
-        "signal path crossing detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -79,17 +74,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path crossing detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -104,20 +95,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end",
-        "signal path #4 has floating start/end",
-        "signal path #5 has floating start/end",
-        "signal path crossing detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -132,19 +116,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end",
-        "signal path #7 has floating start/end",
-        "signal path #8 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -153,23 +131,19 @@
     "sheet": "7/8",
     "file": "patent_drawings/patent_a/fig7.svg",
     "viewbox": true,
-    "margins": false,
+    "margins": true,
     "min_text": true,
     "min_font_seen": 14.0,
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
-      "margins": [
-        "left content at x=99"
-      ],
+      "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 120 overlaps element"
-      ]
+      "diagram": []
     }
   },
   {
@@ -184,19 +158,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #5 has floating start/end",
-        "signal path #6 has floating start/end",
-        "signal path crossing detected"
-      ]
+      "diagram": []
     }
   },
   {
