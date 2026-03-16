@@ -25,19 +25,29 @@
     <text x="279" y="156" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">LOW</text>
     <text x="451" y="156" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">NORMAL</text>
     <text x="637" y="156" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">SURPLUS</text>
-    <!-- Scale below -->
-    <line x1="160" y1="180" x2="160" y2="196" stroke="black" stroke-width="1.5" />
-    <text x="160" y="215" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0</text>
-    <line x1="239" y1="180" x2="239" y2="196" stroke="black" stroke-width="1.5" />
-    <text x="239" y="215" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">15</text>
-    <line x1="319" y1="180" x2="319" y2="196" stroke="black" stroke-width="1.5" />
-    <text x="319" y="215" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">30</text>
-    <line x1="584" y1="180" x2="584" y2="196" stroke="black" stroke-width="1.5" />
-    <text x="584" y="215" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">80</text>
-    <line x1="690" y1="180" x2="690" y2="196" stroke="black" stroke-width="1.5" />
-    <text x="690" y="215" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">100</text>
+    <!-- Scale below — axis tick labels (data labels, not reference numerals) -->
+    <g class="axis-label">
+      <line x1="160" y1="180" x2="160" y2="215" stroke="black" stroke-width="1.5" />
+      <text x="160" y="232" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0</text>
+    </g>
+    <g class="axis-label">
+      <line x1="239" y1="180" x2="239" y2="215" stroke="black" stroke-width="1.5" />
+      <text x="239" y="232" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">15</text>
+    </g>
+    <g class="axis-label">
+      <line x1="319" y1="180" x2="319" y2="215" stroke="black" stroke-width="1.5" />
+      <text x="319" y="232" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">30</text>
+    </g>
+    <g class="axis-label">
+      <line x1="584" y1="180" x2="584" y2="215" stroke="black" stroke-width="1.5" />
+      <text x="584" y="232" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">80</text>
+    </g>
+    <g class="axis-label">
+      <line x1="690" y1="180" x2="690" y2="215" stroke="black" stroke-width="1.5" />
+      <text x="690" y="232" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">100</text>
+    </g>
     <!-- Axis label -->
-    <text x="425" y="240" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Energy (mWh)</text>
+    <text x="425" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Energy (mWh)</text>
     <!-- Ref 66 -->
     <text x="700" y="138" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">66</text>
     <line x1="698" y1="138" x2="692" y2="135" stroke="black" stroke-width="0.5" />

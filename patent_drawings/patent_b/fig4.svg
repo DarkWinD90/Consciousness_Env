@@ -49,9 +49,7 @@
     <line x1="228" y1="398" x2="230" y2="400" stroke="black" stroke-width="0.5" />
 
     <!-- STDP feedback: Updated Weights → left side → back to SNN left -->
-    <line x1="230" y1="410" x2="160" y2="410" stroke="black" stroke-width="1.5" />
-    <line x1="160" y1="410" x2="160" y2="155" stroke="black" stroke-width="1.5" />
-    <line x1="160" y1="155" x2="230" y2="155" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <path d="M 230 410 L 160 410 L 160 155 L 230 155" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- SELF-OBSERVATION (60) — right side                     -->
@@ -64,9 +62,7 @@
     <line x1="623" y1="268" x2="620" y2="270" stroke="black" stroke-width="0.5" />
 
     <!-- Self-observation feedback: right side → back to SNN right -->
-    <line x1="620" y1="285" x2="700" y2="285" stroke="black" stroke-width="2" />
-    <line x1="700" y1="285" x2="700" y2="155" stroke="black" stroke-width="2" />
-    <line x1="700" y1="155" x2="620" y2="155" stroke="black" stroke-width="2" marker-end="url(#ah)" />
+    <path d="M 620 285 L 700 285 L 700 155 L 620 155" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- KEY INSIGHT BOX (62) — bottom left                     -->
