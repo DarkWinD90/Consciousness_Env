@@ -6,7 +6,7 @@
     </marker>
   </defs>
   <text x="425" y="60" font-family="Arial" font-size="14" text-anchor="middle" fill="black">7/7</text>
-  <text x="425" y="100" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">END-TO-END SIGNAL FLOW: CONNECTED vs AUTONOMOUS</text>
+  <text x="425" y="115" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">END-TO-END SIGNAL FLOW: CONNECTED vs AUTONOMOUS</text>
 
   <!-- 10: COGNITIVE LAYER (Claude) - dashed ellipse at top -->
   <ellipse cx="425" cy="155" rx="90" ry="30" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="4,2" />

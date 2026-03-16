@@ -84,15 +84,15 @@
     <!-- DEFICIT ZONE (98) — left region, cost > harvest        -->
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Ref 98 -->
-    <text x="248" y="440" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">98</text>
-    <line x1="248" y1="430" x2="248" y2="400" stroke="black" stroke-width="0.5" />
+    <text x="248" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">98</text>
+    <line x1="248" y1="415" x2="248" y2="395" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- OPTIMAL OPERATING RANGE (100) — middle region           -->
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Ref 100 -->
-    <text x="420" y="440" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">100</text>
-    <line x1="420" y1="430" x2="420" y2="400" stroke="black" stroke-width="0.5" />
+    <text x="420" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">100</text>
+    <line x1="420" y1="415" x2="420" y2="395" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- SURPLUS ZONE (102) — right region                      -->
@@ -113,8 +113,8 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <circle cx="400" cy="270" r="6" fill="black" stroke="black" stroke-width="1.5" />
     <!-- Ref 96 -->
-    <text x="425" y="250" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">96</text>
-    <line x1="423" y1="253" x2="407" y2="268" stroke="black" stroke-width="0.5" />
+    <text x="425" y="240" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">96</text>
+    <line x1="423" y1="243" x2="407" y2="265" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- OPERATING POINT (134) — reference to spec equations     -->
