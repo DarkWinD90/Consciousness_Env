@@ -25,10 +25,14 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- THERMISTOR (110) — top left, temperature sensing       -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Ellipse body with top and bottom leads -->
-    <line x1="205" y1="110" x2="205" y2="125" stroke="black" stroke-width="1.5" />
+    <!-- Ellipse body with leads (component leads, not signal paths) -->
+    <g class="component-lead">
+    <line x1="205" y1="115" x2="205" y2="125" stroke="black" stroke-width="1.5" />
+    </g>
     <ellipse cx="205" cy="150" rx="45" ry="25" fill="none" stroke="black" stroke-width="1.5" />
+    <g class="component-lead">
     <line x1="205" y1="175" x2="205" y2="190" stroke="black" stroke-width="1.5" />
+    </g>
     <text x="205" y="156" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">THERMISTOR</text>
     <!-- Ref 110 -->
     <text x="145" y="135" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">110</text>
@@ -47,9 +51,11 @@
     <circle cx="600" cy="150" r="30" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Wavy line inside circle -->
     <path d="M585,150 Q590,140 595,150 Q600,160 605,150 Q610,140 615,150" fill="none" stroke="black" stroke-width="1" />
-    <!-- Light arrows pointing at circle -->
+    <!-- Light arrows pointing at circle (annotation, not signal path) -->
+    <g class="annotation">
     <line x1="555" y1="125" x2="572" y2="138" stroke="black" stroke-width="1" marker-end="url(#ah)" />
     <line x1="555" y1="140" x2="572" y2="148" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+    </g>
     <text x="600" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PHOTO-</text>
     <text x="600" y="216" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">RESISTOR</text>
     <!-- Ref 114 -->
@@ -98,8 +104,8 @@
     <rect x="380" y="460" width="120" height="60" fill="none" stroke="black" stroke-width="1.5" />
     <text x="440" y="496" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">AC SIGNAL</text>
     <!-- Ref 72 -->
-    <text x="375" y="455" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">72</text>
-    <line x1="378" y1="455" x2="380" y2="462" stroke="black" stroke-width="0.5" />
+    <text x="370" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">72</text>
+    <line x1="373" y1="448" x2="380" y2="462" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Piezo → AC Signal -->
     <line x1="605" y1="490" x2="500" y2="490" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -121,11 +127,11 @@
     <line x1="440" y1="560" x2="295" y2="560" stroke="black" stroke-width="1.5" />
     <line x1="295" y1="560" x2="295" y2="580" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-    <!-- Arrow: Energy Store → MCU (VSYS power) — routed at x=130 to clear LED box -->
-    <line x1="220" y1="610" x2="130" y2="610" stroke="black" stroke-width="1.5" />
-    <line x1="130" y1="610" x2="130" y2="380" stroke="black" stroke-width="1.5" />
-    <line x1="130" y1="380" x2="300" y2="380" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <text x="118" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">VSYS</text>
+    <!-- Arrow: Energy Store → MCU (VSYS power) — routed at x=155 to clear LED box -->
+    <line x1="220" y1="610" x2="155" y2="610" stroke="black" stroke-width="1.5" />
+    <line x1="155" y1="610" x2="155" y2="380" stroke="black" stroke-width="1.5" />
+    <line x1="155" y1="380" x2="300" y2="380" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <text x="145" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">VSYS</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- CONTROL LOGIC (26) — inside MCU or as sub-block        -->
@@ -134,8 +140,8 @@
     <polygon points="400,305 475,330 400,355 325,330" fill="none" stroke="black" stroke-width="1" stroke-dasharray="5,3" />
     <text x="400" y="335" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">CONTROL LOGIC</text>
     <!-- Ref 26 -->
-    <text x="475" y="325" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">26</text>
-    <line x1="473" y1="325" x2="470" y2="328" stroke="black" stroke-width="0.5" />
+    <text x="490" y="318" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">26</text>
+    <line x1="488" y1="320" x2="478" y2="328" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- LED INDICATOR (112) — bottom left                      -->
