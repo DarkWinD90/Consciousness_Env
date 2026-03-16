@@ -1,0 +1,24 @@
+Wrote patent_drawings/compliance_runs/2026-03-16/USPTO_Compliance_Report.md
+Wrote patent_drawings/compliance_runs/2026-03-16/logs/uspto_compliance_results.json
+Summary: FAILURES DETECTED
+patent_a/fig1: FAIL
+patent_a/fig2: FAIL
+patent_a/fig3: FAIL
+patent_a/fig4: FAIL
+patent_a/fig5: FAIL
+patent_a/fig6: FAIL
+patent_a/fig7: FAIL
+patent_a/fig8: FAIL
+patent_b/fig1: FAIL
+patent_b/fig2: FAIL
+patent_b/fig3: FAIL
+patent_b/fig4: FAIL
+patent_b/fig5: FAIL
+patent_b/fig6: FAIL
+patent_c/fig1: FAIL
+patent_c/fig2: FAIL
+patent_c/fig3: FAIL
+patent_c/fig4: FAIL
+patent_c/fig5: FAIL
+patent_c/fig6: FAIL
+patent_c/fig7: FAIL
