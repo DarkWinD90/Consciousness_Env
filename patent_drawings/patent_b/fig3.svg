@@ -16,6 +16,7 @@
     <!-- EXTERNAL COGNITIVE CONTROL (42) — top left             -->
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Cloud shape for external cognitive control layer -->
+    <rect x="148" y="106" width="194" height="76" fill="none" stroke="black" stroke-width="1.0" rx="38" ry="38" />
     <path d="M 170 180 Q 150 180 150 165 Q 150 150 165 145 Q 160 130 175 122 Q 190 114 210 118 Q 220 108 240 108 Q 260 108 270 118 Q 285 112 300 118 Q 315 124 318 138 Q 330 140 335 150 Q 340 160 335 170 Q 340 180 330 180 Z"
           fill="none" stroke="black" stroke-width="1.5" />
     <text x="250" y="148" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">COGNITIVE</text>
@@ -34,15 +35,11 @@
     <text x="710" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">46</text>
     <line x1="708" y1="140" x2="702" y2="142" stroke="black" stroke-width="0.5" />
 
-    <!-- Arrows: Cognitive Control → Computation -->
-    <line x1="250" y1="180" x2="250" y2="220" stroke="black" stroke-width="1.5" />
-    <line x1="250" y1="220" x2="350" y2="220" stroke="black" stroke-width="1.5" />
-    <line x1="350" y1="220" x2="350" y2="260" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <!-- Arrow: Cognitive Control → Computation -->
+    <path d="M 250 180 L 250 220 L 350 220 L 350 260" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- Arrow: Energy Monitor → Computation -->
-    <line x1="600" y1="180" x2="600" y2="220" stroke="black" stroke-width="1.5" />
-    <line x1="600" y1="220" x2="500" y2="220" stroke="black" stroke-width="1.5" />
-    <line x1="500" y1="220" x2="500" y2="260" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <path d="M 600 180 L 600 220 L 500 220 L 500 260" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- REFLECTION COEFFICIENT COMPUTATION (40) — center       -->
@@ -105,8 +102,7 @@
     <line x1="353" y1="698" x2="350" y2="700" stroke="black" stroke-width="0.5" />
 
     <!-- Dashed arrow from Examples to Computation -->
-    <line x1="250" y1="680" x2="250" y2="295" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
-    <line x1="250" y1="295" x2="300" y2="295" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
+    <path d="M 250 680 L 250 295 L 300 295" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- ENERGY RULES (48) — bottom right                       -->
@@ -118,8 +114,7 @@
     <line x1="708" y1="698" x2="702" y2="700" stroke="black" stroke-width="0.5" />
 
     <!-- Dashed arrow from Rules to Computation -->
-    <line x1="600" y1="680" x2="600" y2="295" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
-    <line x1="600" y1="295" x2="550" y2="295" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
+    <path d="M 600 680 L 600 295 L 550 295" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- FIGURE LABEL                                           -->

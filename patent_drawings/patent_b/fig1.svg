@@ -99,9 +99,7 @@
     <!-- SELF-OBSERVATION FEEDBACK PATH (24) — bold return       -->
     <!-- Routed at x=200 to clear all left-side elements         -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <line x1="310" y1="665" x2="200" y2="665" stroke="black" stroke-width="2" />
-    <line x1="200" y1="665" x2="200" y2="195" stroke="black" stroke-width="2" />
-    <line x1="200" y1="195" x2="360" y2="195" stroke="black" stroke-width="2" marker-end="url(#ah)" />
+    <path d="M 310 665 L 200 665 L 200 195 L 360 195" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)" />
     <!-- Ref 24 -->
     <text x="188" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">24</text>
     <line x1="191" y1="430" x2="200" y2="430" stroke="black" stroke-width="0.5" />

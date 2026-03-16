@@ -16,8 +16,9 @@
     <!-- Y-AXIS (32)                                           -->
     <!-- ══════════════════════════════════════════════════════ -->
     <line x1="220" y1="120" x2="220" y2="750" stroke="black" stroke-width="1.5" />
-    <!-- Y-axis arrow at top -->
-    <line x1="220" y1="120" x2="220" y2="110" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <!-- Y-axis arrow at top (manual arrowhead, no marker-end) -->
+    <line x1="220" y1="120" x2="220" y2="112" stroke="black" stroke-width="1.5" />
+    <polygon points="214 118, 220 106, 226 118" fill="black" stroke="none" />
     <!-- Y-axis label (rotated) -->
     <text x="145" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black" transform="rotate(-90, 145, 430)">Energy (mWh)</text>
     <!-- Ref 32 -->
@@ -25,19 +26,23 @@
     <line x1="133" y1="138" x2="218" y2="125" stroke="black" stroke-width="0.5" />
 
     <!-- Y-axis tick marks and values -->
+    <g class="axis-label">
     <!-- 100 mWh -->
     <line x1="215" y1="200" x2="220" y2="200" stroke="black" stroke-width="1.5" />
     <text x="208" y="205" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">100</text>
+    <line x1="209" y1="198" x2="215" y2="200" stroke="black" stroke-width="0.5" />
     <!-- 50 mWh -->
     <line x1="215" y1="375" x2="220" y2="375" stroke="black" stroke-width="1.5" />
     <text x="208" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">50</text>
+    </g>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- X-AXIS (34)                                           -->
     <!-- ══════════════════════════════════════════════════════ -->
     <line x1="220" y1="550" x2="690" y2="550" stroke="black" stroke-width="1.5" />
-    <!-- X-axis arrow at right -->
-    <line x1="690" y1="550" x2="700" y2="550" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <!-- X-axis arrow at right (manual arrowhead, no marker-end) -->
+    <line x1="690" y1="550" x2="698" y2="550" stroke="black" stroke-width="1.5" />
+    <polygon points="692 544, 706 550, 692 556" fill="black" stroke="none" />
     <!-- X-axis label -->
     <text x="460" y="595" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Time Step</text>
     <!-- Ref 34 -->
@@ -45,21 +50,26 @@
     <line x1="716" y1="547" x2="702" y2="550" stroke="black" stroke-width="0.5" />
 
     <!-- X-axis tick marks -->
+    <g class="axis-label">
     <!-- 0 -->
     <line x1="220" y1="550" x2="220" y2="556" stroke="black" stroke-width="1.5" />
     <text x="220" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0</text>
     <!-- 500 -->
     <line x1="338" y1="550" x2="338" y2="556" stroke="black" stroke-width="1.5" />
     <text x="338" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">500</text>
+    <line x1="338" y1="556" x2="338" y2="560" stroke="black" stroke-width="0.5" />
     <!-- 1000 -->
     <line x1="455" y1="550" x2="455" y2="556" stroke="black" stroke-width="1.5" />
     <text x="455" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">1000</text>
+    <line x1="455" y1="556" x2="455" y2="560" stroke="black" stroke-width="0.5" />
     <!-- 1500 -->
     <line x1="573" y1="550" x2="573" y2="556" stroke="black" stroke-width="1.5" />
     <text x="573" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">1500</text>
+    <line x1="573" y1="556" x2="573" y2="560" stroke="black" stroke-width="0.5" />
     <!-- 2000 -->
     <line x1="690" y1="550" x2="690" y2="556" stroke="black" stroke-width="1.5" />
     <text x="690" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">2000</text>
+    </g>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- ZERO ENERGY BASELINE (40) — coincides with X-axis     -->
@@ -97,6 +107,8 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <path d="M 220 375 Q 340 430 420 510 Q 500 570 600 660 L 690 730"
           fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <!-- Endpoint marker for control curve -->
+    <circle cx="690" cy="730" r="4" fill="none" stroke="black" stroke-width="1" />
     <!-- Ref 44 -->
     <text x="710" y="730" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">44</text>
     <line x1="708" y1="728" x2="692" y2="728" stroke="black" stroke-width="0.5" />

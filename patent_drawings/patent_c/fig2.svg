@@ -16,7 +16,8 @@
   <line x1="250" y1="398" x2="250" y2="385" stroke="black" stroke-width="0.5" />
 
   <!-- Start indicator pointing to 26 -->
-  <line x1="120" y1="310" x2="175" y2="310" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <circle cx="120" cy="310" r="5" fill="black" stroke="black" stroke-width="1" />
+  <line x1="125" y1="310" x2="175" y2="310" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
   <text x="145" y="300" font-family="Arial" font-size="14" text-anchor="middle" fill="black">START</text>
 
   <!-- 28: AUTONOMOUS state (right) -->

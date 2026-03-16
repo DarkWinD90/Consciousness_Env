@@ -7,11 +7,11 @@
   </defs>
   <text x="425" y="60" font-family="Arial" font-size="14" text-anchor="middle" fill="black">5/7</text>
 
-  <!-- 66: Resynchronization Payload (outer container) -->
-  <rect x="140" y="120" width="570" height="540" rx="5" fill="none" stroke="black" stroke-width="2" />
-  <text x="425" y="155" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">RESYNCHRONIZATION PAYLOAD</text>
-  <text x="720" y="140" font-family="Arial" font-size="14" fill="black">66</text>
-  <line x1="718" y1="143" x2="710" y2="143" stroke="black" stroke-width="0.5" />
+  <!-- 66: Resynchronization Payload (outer container, path to avoid component overlap) -->
+  <path d="M150 130 L705 130 Q710 130 710 135 L710 665 Q710 670 705 670 L150 670 Q145 670 145 665 L145 135 Q145 130 150 130 Z" fill="none" stroke="black" stroke-width="2" />
+  <text x="425" y="165" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">RESYNCHRONIZATION PAYLOAD</text>
+  <text x="720" y="150" font-family="Arial" font-size="14" fill="black">66</text>
+  <line x1="718" y1="153" x2="712" y2="153" stroke="black" stroke-width="0.5" />
 
   <!-- 68: Summary Statistics Section -->
   <rect x="170" y="175" width="500" height="135" rx="3" fill="none" stroke="black" stroke-width="1.5" />
@@ -22,8 +22,8 @@
   <text x="195" y="275" font-family="Arial" font-size="14" fill="black">min_energy / max_energy / mean_energy</text>
   <text x="195" y="295" font-family="Arial" font-size="14" fill="black">total_spikes / mean_spikes_per_step</text>
   <text x="595" y="295" font-family="Arial" font-size="14" fill="black">~200 bytes</text>
-  <text x="680" y="200" font-family="Arial" font-size="14" fill="black">68</text>
-  <line x1="678" y1="203" x2="670" y2="205" stroke="black" stroke-width="0.5" />
+  <text x="695" y="200" font-family="Arial" font-size="14" fill="black">68</text>
+  <line x1="693" y1="203" x2="672" y2="210" stroke="black" stroke-width="0.5" />
 
   <!-- Arrow down to 70 -->
   <line x1="280" y1="310" x2="280" y2="350" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -33,12 +33,12 @@
   <text x="280" y="375" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">ENERGY DELTA</text>
   <text x="195" y="400" font-family="Arial" font-size="14" fill="black">energy_start: [float]</text>
   <text x="195" y="420" font-family="Arial" font-size="14" fill="black">energy_end: [float]</text>
-  <text x="400" y="460" font-family="Arial" font-size="14" fill="black">70</text>
-  <line x1="398" y1="457" x2="390" y2="445" stroke="black" stroke-width="0.5" />
+  <text x="410" y="470" font-family="Arial" font-size="14" fill="black">70</text>
+  <line x1="408" y1="463" x2="392" y2="447" stroke="black" stroke-width="0.5" />
 
   <!-- Annotation arrow from 70 -->
-  <line x1="390" y1="400" x2="440" y2="400" stroke="black" stroke-width="1" marker-end="url(#ah)" />
-  <text x="450" y="405" font-family="Arial" font-size="14" fill="black">Positive = gained</text>
+  <line x1="392" y1="400" x2="450" y2="400" stroke="black" stroke-width="1" />
+  <text x="455" y="405" font-family="Arial" font-size="14" fill="black">Positive = gained</text>
 
   <!-- 72: Full Step Buffer Section (dashed - optional) -->
   <rect x="170" y="470" width="500" height="165" rx="3" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="4,2" />
@@ -50,22 +50,22 @@
   <text x="195" y="590" font-family="Arial" font-size="14" fill="black">Step N: {input, modulation, spikes, energy, temp, pattern}</text>
   <text x="195" y="618" font-family="Arial" font-size="14" fill="black">~100 bytes x N steps</text>
   <text x="195" y="635" font-family="Arial" font-size="14" fill="black">(included when cognitive layer requests history)</text>
-  <text x="680" y="490" font-family="Arial" font-size="14" fill="black">72</text>
-  <line x1="678" y1="493" x2="670" y2="495" stroke="black" stroke-width="0.5" />
+  <text x="695" y="490" font-family="Arial" font-size="14" fill="black">72</text>
+  <line x1="693" y1="493" x2="672" y2="497" stroke="black" stroke-width="0.5" />
 
   <!-- Granularity level annotations -->
-  <line x1="140" y1="250" x2="120" y2="250" stroke="black" stroke-width="1" />
-  <line x1="120" y1="250" x2="120" y2="180" stroke="black" stroke-width="1" />
-  <line x1="120" y1="180" x2="140" y2="180" stroke="black" stroke-width="1" marker-end="url(#ah)" />
-  <text x="110" y="220" font-family="Arial" font-size="14" fill="black" transform="rotate(-90 110 220)">Level 1: Summary</text>
+  <line x1="155" y1="260" x2="135" y2="260" stroke="black" stroke-width="1" />
+  <line x1="135" y1="260" x2="135" y2="195" stroke="black" stroke-width="1" />
+  <line x1="135" y1="195" x2="155" y2="195" stroke="black" stroke-width="1" />
+  <text x="125" y="232" font-family="Arial" font-size="14" fill="black" transform="rotate(-90 125 232)">Level 1: Summary</text>
 
-  <line x1="140" y1="540" x2="120" y2="540" stroke="black" stroke-width="1" />
-  <line x1="120" y1="540" x2="120" y2="610" stroke="black" stroke-width="1" />
-  <line x1="120" y1="610" x2="140" y2="610" stroke="black" stroke-width="1" marker-end="url(#ah)" />
-  <text x="110" y="580" font-family="Arial" font-size="14" fill="black" transform="rotate(-90 110 580)">Level 2: Full</text>
+  <line x1="155" y1="550" x2="135" y2="550" stroke="black" stroke-width="1" />
+  <line x1="135" y1="550" x2="135" y2="620" stroke="black" stroke-width="1" />
+  <line x1="135" y1="620" x2="155" y2="620" stroke="black" stroke-width="1" />
+  <text x="125" y="590" font-family="Arial" font-size="14" fill="black" transform="rotate(-90 125 590)">Level 2: Full</text>
 
   <!-- 74: Decision Diamond -->
-  <path d="M425 700 L500 755 L425 810 L350 755 Z" fill="none" stroke="black" stroke-width="1.5" />
+  <polygon points="425 700, 500 755, 425 810, 350 755" fill="none" stroke="black" stroke-width="1.5" />
   <text x="425" y="750" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Full buffer</text>
   <text x="425" y="770" font-family="Arial" font-size="14" text-anchor="middle" fill="black">requested?</text>
   <text x="425" y="835" font-family="Arial" font-size="14" text-anchor="middle" fill="black">74</text>
@@ -76,10 +76,14 @@
 
   <!-- Decision outputs -->
   <path d="M350 755 L230 755 L230 800" stroke="black" stroke-width="1.5" fill="none" marker-end="url(#ah)" />
-  <text x="230" y="825" font-family="Arial" font-size="14" text-anchor="middle" fill="black">NO: Level 1</text>
+  <rect x="190" y="800" width="80" height="30" rx="3" fill="none" stroke="black" stroke-width="1" />
+  <text x="230" y="820" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Level 1</text>
+  <text x="290" y="745" font-family="Arial" font-size="14" text-anchor="middle" fill="black">NO</text>
 
   <path d="M500 755 L620 755 L620 800" stroke="black" stroke-width="1.5" fill="none" marker-end="url(#ah)" />
-  <text x="620" y="825" font-family="Arial" font-size="14" text-anchor="middle" fill="black">YES: Level 2</text>
+  <rect x="580" y="800" width="80" height="30" rx="3" fill="none" stroke="black" stroke-width="1" />
+  <text x="620" y="820" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Level 2</text>
+  <text x="560" y="745" font-family="Arial" font-size="14" text-anchor="middle" fill="black">YES</text>
 
   <text x="425" y="980" font-family="Arial" font-size="18" text-anchor="middle" fill="black">FIG. 5</text>
 </svg>

@@ -15,7 +15,9 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- ENVIRONMENT BOUNDARY (10) — dashed rectangle           -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="140" y="100" width="560" height="660" rx="8" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <rect x="140" y="100" width="560" height="660" rx="8" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="8,4" />
+    <!-- Anchor at environment input point -->
+    <rect x="414" y="96" width="12" height="8" fill="none" stroke="black" stroke-width="1" />
     <text x="155" y="120" font-family="Arial, sans-serif" font-size="14" fill="black">ENVIRONMENT</text>
     <!-- Ref 10 -->
     <text x="710" y="108" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">10</text>
@@ -26,8 +28,8 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <line x1="420" y1="100" x2="420" y2="150" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
     <!-- Ref 126 -->
-    <text x="435" y="115" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">126</text>
-    <line x1="433" y1="115" x2="422" y2="110" stroke="black" stroke-width="0.5" />
+    <text x="445" y="115" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">126</text>
+    <line x1="443" y1="118" x2="425" y2="120" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- SENSOR (12)                                            -->
@@ -35,8 +37,8 @@
     <rect x="330" y="150" width="180" height="60" fill="none" stroke="black" stroke-width="1.5" />
     <text x="420" y="186" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">SENSOR</text>
     <!-- Ref 12 -->
-    <text x="515" y="168" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">12</text>
-    <line x1="513" y1="168" x2="510" y2="170" stroke="black" stroke-width="0.5" />
+    <text x="525" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">12</text>
+    <line x1="523" y1="163" x2="512" y2="170" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Sensor → ADC -->
     <line x1="420" y1="210" x2="420" y2="240" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -47,8 +49,8 @@
     <rect x="370" y="240" width="100" height="40" fill="none" stroke="black" stroke-width="1.5" />
     <text x="420" y="266" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">ADC</text>
     <!-- Ref 130 -->
-    <text x="475" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">130</text>
-    <line x1="473" y1="255" x2="470" y2="258" stroke="black" stroke-width="0.5" />
+    <text x="485" y="248" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">130</text>
+    <line x1="483" y1="251" x2="472" y2="258" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: ADC → SNN -->
     <line x1="420" y1="280" x2="420" y2="310" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -56,13 +58,15 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- COGNITIVE MODULATION (128) — side block                -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <path d="M185,370 C160,370 155,355 170,345 C158,338 162,318 180,318 C185,308 200,305 215,310 C225,302 245,302 255,310 C268,305 285,310 288,322 C300,325 302,340 292,348 C305,358 298,372 280,370 Z" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
+    <path d="M185,370 C160,370 155,355 170,345 C158,338 162,318 180,318 C185,308 200,305 215,310 C225,302 245,302 255,310 C268,305 285,310 288,322 C300,325 302,340 292,348 C305,358 298,372 280,370 Z" fill="none" stroke="black" stroke-width="1.5" />
     <text x="230" y="336" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">COGNITIVE</text>
     <text x="230" y="354" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MODULATION</text>
     <!-- Ref 128 -->
-    <text x="155" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">128</text>
-    <line x1="158" y1="305" x2="160" y2="312" stroke="black" stroke-width="0.5" />
+    <text x="148" y="295" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">128</text>
+    <line x1="151" y1="298" x2="162" y2="312" stroke="black" stroke-width="0.5" />
 
+    <!-- Anchor at cognitive modulation output -->
+    <rect x="296" y="334" width="10" height="12" fill="none" stroke="black" stroke-width="1" />
     <!-- Arrow: Cognitive → SNN (modulation input) -->
     <line x1="302" y1="340" x2="330" y2="340" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
 
@@ -72,8 +76,8 @@
     <rect x="330" y="310" width="180" height="70" fill="none" stroke="black" stroke-width="2" />
     <text x="420" y="352" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">SNN</text>
     <!-- Ref 14 -->
-    <text x="515" y="328" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">14</text>
-    <line x1="513" y1="328" x2="510" y2="330" stroke="black" stroke-width="0.5" />
+    <text x="525" y="320" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">14</text>
+    <line x1="523" y1="323" x2="512" y2="330" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: SNN → Motor -->
     <line x1="420" y1="380" x2="420" y2="410" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -84,16 +88,12 @@
     <rect x="350" y="410" width="140" height="50" fill="none" stroke="black" stroke-width="1.5" />
     <text x="420" y="442" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">MOTOR</text>
     <!-- Ref 16 -->
-    <text x="495" y="428" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">16</text>
-    <line x1="493" y1="428" x2="490" y2="430" stroke="black" stroke-width="0.5" />
+    <text x="505" y="420" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">16</text>
+    <line x1="503" y1="423" x2="492" y2="430" stroke="black" stroke-width="0.5" />
 
     <!-- Arrows: Motor splits to Thermal and Piezo -->
-    <line x1="380" y1="460" x2="380" y2="485" stroke="black" stroke-width="1.5" />
-    <line x1="380" y1="485" x2="260" y2="485" stroke="black" stroke-width="1.5" />
-    <line x1="260" y1="485" x2="260" y2="510" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <line x1="460" y1="460" x2="460" y2="485" stroke="black" stroke-width="1.5" />
-    <line x1="460" y1="485" x2="580" y2="485" stroke="black" stroke-width="1.5" />
-    <line x1="580" y1="485" x2="580" y2="498" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <path d="M 380 460 L 380 485 L 260 485 L 260 510" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <path d="M 460 460 L 460 485 L 580 485 L 580 498" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- THERMAL HARVESTER (20)                                 -->
@@ -102,24 +102,24 @@
     <text x="260" y="530" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">THERMAL</text>
     <text x="260" y="548" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">HARVESTER</text>
     <!-- Ref 20 -->
-    <text x="185" y="525" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">20</text>
-    <line x1="188" y1="525" x2="190" y2="528" stroke="black" stroke-width="0.5" />
+    <text x="175" y="505" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">20</text>
+    <line x1="178" y1="508" x2="192" y2="518" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- PIEZOELECTRIC ELEMENT (22)                             -->
     <!-- ══════════════════════════════════════════════════════ -->
     <circle cx="580" cy="535" r="35" fill="none" stroke="black" stroke-width="1.5" />
-    <circle cx="580" cy="535" r="25" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 555 535 A 25 25 0 1 0 605 535 A 25 25 0 1 0 555 535 Z" fill="none" stroke="black" stroke-width="1.5" />
     <text x="580" y="540" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
     <!-- Ref 22 -->
-    <text x="620" y="525" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">22</text>
-    <line x1="618" y1="525" x2="615" y2="530" stroke="black" stroke-width="0.5" />
+    <text x="630" y="510" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">22</text>
+    <line x1="628" y1="513" x2="616" y2="525" stroke="black" stroke-width="0.5" />
 
     <!-- Both harvesters → Energy Store -->
-    <line x1="260" y1="560" x2="260" y2="585" stroke="black" stroke-width="1.5" />
-    <line x1="260" y1="585" x2="370" y2="585" stroke="black" stroke-width="1.5" />
-    <line x1="580" y1="570" x2="580" y2="585" stroke="black" stroke-width="1.5" />
-    <line x1="580" y1="585" x2="470" y2="585" stroke="black" stroke-width="1.5" />
+    <path d="M 260 560 L 260 585 L 420 585" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 580 570 L 580 585 L 420 585" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Junction point where both harvester outputs merge -->
+    <circle cx="420" cy="585" r="3" fill="black" stroke="black" stroke-width="1" />
     <line x1="420" y1="585" x2="420" y2="610" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
@@ -128,29 +128,25 @@
     <rect x="340" y="610" width="160" height="50" fill="none" stroke="black" stroke-width="1.5" />
     <text x="420" y="640" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">ENERGY STORE</text>
     <!-- Ref 28 -->
-    <text x="505" y="625" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">28</text>
-    <line x1="503" y1="625" x2="500" y2="628" stroke="black" stroke-width="0.5" />
+    <text x="515" y="618" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">28</text>
+    <line x1="513" y1="621" x2="502" y2="628" stroke="black" stroke-width="0.5" />
 
-    <!-- Arrow: Energy Store feeds back up to SNN — routed at x=150 to clear thermal box -->
-    <line x1="340" y1="635" x2="150" y2="635" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
-    <line x1="150" y1="635" x2="150" y2="345" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
-    <line x1="150" y1="345" x2="160" y2="345" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#ah)" />
+    <!-- Arrow: Energy Store feeds back up to SNN — routed at x=155 to clear thermal box -->
+    <path d="M 340 635 L 155 635 L 155 345 L 330 345" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- REFLECTION FEEDBACK PATH (30) — self-loop on SNN        -->
     <!-- Routed at x=690 to clear all right-side elements        -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <line x1="510" y1="355" x2="690" y2="355" stroke="black" stroke-width="1.5" stroke-dasharray="3,3" />
-    <line x1="690" y1="355" x2="690" y2="325" stroke="black" stroke-width="1.5" stroke-dasharray="3,3" />
-    <line x1="690" y1="325" x2="510" y2="325" stroke="black" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#ah)" />
+    <path d="M 510 355 L 690 355 L 690 325 L 510 325" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#ah)" />
     <!-- Ref 30 -->
     <text x="700" y="345" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">30</text>
     <line x1="698" y1="345" x2="692" y2="342" stroke="black" stroke-width="0.5" />
 
     <!-- Reflection equation annotation (no separate numeral — covered by ref 30) -->
-    <rect x="615" y="358" width="130" height="45" fill="white" stroke="black" stroke-width="1.2" stroke-dasharray="4,3" />
-    <text x="680" y="376" font-family="Arial, sans-serif" font-size="14" font-style="italic" text-anchor="middle" fill="black">r(t) = y(t-1)</text>
-    <text x="680" y="396" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Reflection</text>
+    <rect x="570" y="390" width="130" height="45" fill="white" stroke="black" stroke-width="1.2" stroke-dasharray="4,3" />
+    <text x="635" y="408" font-family="Arial, sans-serif" font-size="14" font-style="italic" text-anchor="middle" fill="black">r(t) = y(t-1)</text>
+    <text x="635" y="428" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Reflection</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- LEGEND                                                 -->

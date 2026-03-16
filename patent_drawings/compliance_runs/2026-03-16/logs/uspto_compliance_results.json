@@ -5,23 +5,19 @@
     "sheet": "1/8",
     "file": "patent_drawings/patent_a/fig1.svg",
     "viewbox": true,
-    "margins": false,
+    "margins": true,
     "min_text": true,
     "min_font_seen": 14.0,
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
-      "margins": [
-        "top content at y=96"
-      ],
+      "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -36,21 +32,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 100 missing nearby leader line",
-        "reference numeral 1000 missing nearby leader line",
-        "reference numeral 1500 missing nearby leader line",
-        "reference numeral 500 missing nearby leader line",
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -65,24 +53,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected",
-        "reference numeral 52 overlaps element",
-        "reference numeral 54 overlaps element",
-        "reference numeral 56 overlaps element",
-        "reference numeral 58 overlaps element",
-        "reference numeral 64 overlaps element",
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #9 has floating start/end",
-        "signal path crossing detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -97,24 +74,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected",
-        "reference numeral 22 overlaps element",
-        "reference numeral 72 overlaps element",
-        "reference numeral 74 overlaps element",
-        "reference numeral 76 overlaps element",
-        "reference numeral 78 overlaps element",
-        "reference numeral 80 overlaps element",
-        "reference numeral 82 overlaps element",
-        "reference numeral 84 overlaps element",
-        "reference numeral 86 overlaps element"
-      ]
+      "diagram": []
     }
   },
   {
@@ -129,25 +95,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected",
-        "reference numeral 100 overlaps element",
-        "reference numeral 102 overlaps element",
-        "reference numeral 104 overlaps element",
-        "reference numeral 132 overlaps element",
-        "reference numeral 134 overlaps element",
-        "reference numeral 136 overlaps element",
-        "reference numeral 138 overlaps element",
-        "reference numeral 96 overlaps element",
-        "reference numeral 98 overlaps element",
-        "signal path crossing detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -156,32 +110,19 @@
     "sheet": "6/8",
     "file": "patent_drawings/patent_a/fig6.svg",
     "viewbox": true,
-    "margins": false,
+    "margins": true,
     "min_text": true,
     "min_font_seen": 14.0,
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
-      "margins": [
-        "left content at x=80"
-      ],
+      "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected",
-        "reference numeral 26 overlaps element",
-        "reference numeral 72 overlaps element",
-        "signal path #1 has floating start/end",
-        "signal path #10 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end",
-        "signal path #4 has floating start/end",
-        "signal path #8 has floating start/end",
-        "signal path #9 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -190,28 +131,19 @@
     "sheet": "7/8",
     "file": "patent_drawings/patent_a/fig7.svg",
     "viewbox": true,
-    "margins": false,
+    "margins": true,
     "min_text": true,
     "min_font_seen": 14.0,
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
-      "margins": [
-        "left content at x=89"
-      ],
+      "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 0 missing nearby leader line",
-        "reference numeral 0 overlaps element",
-        "reference numeral 116 overlaps element",
-        "reference numeral 118 overlaps element",
-        "reference numeral 122 overlaps element",
-        "reference numeral 124 overlaps element"
-      ]
+      "diagram": []
     }
   },
   {
@@ -226,25 +158,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected",
-        "reference numeral 12 overlaps element",
-        "reference numeral 126 overlaps element",
-        "reference numeral 128 overlaps element",
-        "reference numeral 130 overlaps element",
-        "reference numeral 14 overlaps element",
-        "reference numeral 16 overlaps element",
-        "reference numeral 20 overlaps element",
-        "reference numeral 22 overlaps element",
-        "reference numeral 28 overlaps element",
-        "signal path crossing detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -259,15 +179,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #7 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -282,15 +200,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -305,21 +221,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #6 has floating start/end",
-        "signal path #7 has floating start/end",
-        "signal path #8 has floating start/end",
-        "signal path #9 has floating start/end",
-        "signal path crossing detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -334,16 +242,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #4 has floating start/end",
-        "signal path #5 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -358,19 +263,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 0 missing nearby leader line",
-        "reference numeral 100 missing nearby leader line",
-        "reference numeral 15 missing nearby leader line",
-        "reference numeral 30 missing nearby leader line",
-        "reference numeral 80 missing nearby leader line"
-      ]
+      "diagram": []
     }
   },
   {
@@ -385,20 +284,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #4 has floating start/end",
-        "signal path #5 has floating start/end",
-        "signal path #6 has floating start/end",
-        "signal path #8 has floating start/end",
-        "signal path #9 has floating start/end",
-        "signal path crossing detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -413,16 +305,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected",
-        "reference numeral 24 overlaps element"
-      ]
+      "diagram": []
     }
   },
   {
@@ -437,15 +326,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -460,20 +347,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 0 missing nearby leader line",
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end",
-        "signal path #4 has floating start/end",
-        "signal path #5 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -488,26 +368,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 0 missing nearby leader line",
-        "reference numeral 100 missing nearby leader line",
-        "reference numeral 250 missing nearby leader line",
-        "reference numeral 500 missing nearby leader line",
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end",
-        "signal path #4 has floating start/end",
-        "signal path #5 has floating start/end",
-        "signal path #6 has floating start/end",
-        "signal path #7 has floating start/end",
-        "signal path crossing detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -516,32 +383,19 @@
     "sheet": "5/7",
     "file": "patent_drawings/patent_c/fig5.svg",
     "viewbox": true,
-    "margins": false,
+    "margins": true,
     "min_text": true,
     "min_font_seen": 14.0,
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
-      "margins": [
-        "left content at x=98",
-        "top content at y=91"
-      ],
+      "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected",
-        "reference numeral 68 overlaps element",
-        "reference numeral 70 overlaps element",
-        "reference numeral 72 overlaps element",
-        "signal path #3 has floating start/end",
-        "signal path #4 has floating start/end",
-        "signal path #5 has floating start/end",
-        "signal path #6 has floating start/end",
-        "signal path #7 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -556,20 +410,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected",
-        "reference numeral 82 overlaps element",
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end",
-        "signal path #4 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -578,27 +425,19 @@
     "sheet": "7/7",
     "file": "patent_drawings/patent_c/fig7.svg",
     "viewbox": true,
-    "margins": false,
+    "margins": true,
     "min_text": true,
     "min_font_seen": 14.0,
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
-      "margins": [
-        "top content at y=90"
-      ],
+      "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #10 has floating start/end",
-        "signal path #11 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end",
-        "signal path #9 has floating start/end"
-      ]
+      "diagram": []
     }
   }
 ]

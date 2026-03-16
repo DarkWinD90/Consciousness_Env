@@ -15,7 +15,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- CIRCUIT BOUNDARY (70) — dashed enclosure               -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="130" y="100" width="590" height="530" rx="8" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <rect x="130" y="100" width="590" height="530" rx="8" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="8,4" />
     <!-- Ref 70 -->
     <text x="745" y="108" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">70</text>
     <line x1="743" y1="110" x2="722" y2="108" stroke="black" stroke-width="0.5" />
@@ -25,15 +25,15 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Double circle for piezo disc per spec -->
     <circle cx="230" cy="175" r="35" fill="none" stroke="black" stroke-width="1.5" />
-    <circle cx="230" cy="175" r="25" fill="none" stroke="black" stroke-width="1" />
+    <path d="M 205 175 A 25 25 0 1 0 255 175 A 25 25 0 1 0 205 175 Z" fill="none" stroke="black" stroke-width="1" />
     <text x="230" y="172" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
     <text x="230" y="184" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">27mm</text>
     <!-- Ref 22 -->
-    <text x="140" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">22</text>
-    <line x1="143" y1="123" x2="160" y2="140" stroke="black" stroke-width="0.5" />
+    <text x="200" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">22</text>
+    <line x1="200" y1="123" x2="210" y2="140" stroke="black" stroke-width="0.5" />
 
-    <!-- Arrow: Piezo → AC Signal -->
-    <line x1="300" y1="175" x2="340" y2="175" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <!-- Arrow: Piezo → AC Signal (start within piezo circle bbox) -->
+    <line x1="265" y1="175" x2="340" y2="175" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- AC SIGNAL (72)                                         -->
@@ -41,8 +41,8 @@
     <rect x="340" y="140" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
     <text x="400" y="182" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">AC SIGNAL</text>
     <!-- Ref 72 -->
-    <text x="478" y="142" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">72</text>
-    <line x1="476" y1="145" x2="460" y2="155" stroke="black" stroke-width="0.5" />
+    <text x="478" y="128" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">72</text>
+    <line x1="478" y1="131" x2="460" y2="145" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: AC Signal → Inductor -->
     <line x1="460" y1="175" x2="500" y2="175" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -53,8 +53,8 @@
     <rect x="500" y="140" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
     <text x="560" y="182" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">INDUCTOR</text>
     <!-- Ref 74 -->
-    <text x="638" y="142" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">74</text>
-    <line x1="636" y1="145" x2="620" y2="155" stroke="black" stroke-width="0.5" />
+    <text x="638" y="128" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">74</text>
+    <line x1="638" y1="131" x2="620" y2="145" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Inductor → Full-Bridge Rectifier (down) -->
     <line x1="560" y1="210" x2="560" y2="270" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -67,14 +67,14 @@
     <text x="560" y="302" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">FULL-BRIDGE</text>
     <text x="560" y="316" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">RECTIFIER</text>
     <!-- Ref 76 -->
-    <text x="658" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">76</text>
-    <line x1="656" y1="283" x2="642" y2="300" stroke="black" stroke-width="0.5" />
+    <text x="670" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">76</text>
+    <line x1="668" y1="283" x2="642" y2="300" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Rectifier → Smoothing Capacitor (down) -->
     <line x1="560" y1="340" x2="560" y2="400" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- Dashed feedback arrow: Rectifier → Inductor (per spec) -->
-    <path d="M 500 280 Q 470 260 490 230 Q 510 210 540 210"
+    <path d="M 490 280 Q 465 255 475 230 Q 485 215 500 210"
           fill="none" stroke="black" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
@@ -84,8 +84,8 @@
     <text x="560" y="432" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">SMOOTHING</text>
     <text x="560" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">CAPACITOR</text>
     <!-- Ref 78 -->
-    <text x="658" y="402" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">78</text>
-    <line x1="656" y1="405" x2="640" y2="415" stroke="black" stroke-width="0.5" />
+    <text x="660" y="390" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">78</text>
+    <line x1="658" y1="393" x2="642" y2="408" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Smoothing Capacitor → Boost Converter (left) -->
     <line x1="480" y1="435" x2="440" y2="435" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -96,8 +96,8 @@
     <rect x="160" y="270" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
     <text x="220" y="312" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">HEAT SINK</text>
     <!-- Ref 80 -->
-    <text x="140" y="270" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">80</text>
-    <line x1="143" y1="273" x2="160" y2="288" stroke="black" stroke-width="0.5" />
+    <text x="140" y="258" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">80</text>
+    <line x1="143" y1="261" x2="160" y2="278" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Heat Sink → TEG Module (down) -->
     <line x1="220" y1="340" x2="220" y2="400" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -109,8 +109,8 @@
     <text x="220" y="432" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">TEG</text>
     <text x="220" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MODULE</text>
     <!-- Ref 82 -->
-    <text x="140" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">82</text>
-    <line x1="143" y1="403" x2="160" y2="418" stroke="black" stroke-width="0.5" />
+    <text x="140" y="388" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">82</text>
+    <line x1="143" y1="391" x2="160" y2="408" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: TEG → Boost Converter (right) -->
     <line x1="280" y1="435" x2="320" y2="435" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -122,8 +122,8 @@
     <text x="380" y="432" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">BOOST</text>
     <text x="380" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">CONVERTER</text>
     <!-- Ref 84 -->
-    <text x="300" y="378" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">84</text>
-    <line x1="303" y1="381" x2="320" y2="400" stroke="black" stroke-width="0.5" />
+    <text x="300" y="388" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">84</text>
+    <line x1="303" y1="391" x2="320" y2="400" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Boost Converter → Output Regulator (down) -->
     <line x1="380" y1="470" x2="380" y2="540" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -135,8 +135,8 @@
     <text x="380" y="572" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">OUTPUT</text>
     <text x="380" y="590" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">REGULATOR</text>
     <!-- Ref 86 -->
-    <text x="458" y="542" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">86</text>
-    <line x1="456" y1="545" x2="440" y2="558" stroke="black" stroke-width="0.5" />
+    <text x="458" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">86</text>
+    <line x1="456" y1="533" x2="442" y2="548" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Output Regulator → System Output (down) -->
     <line x1="380" y1="610" x2="380" y2="680" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
