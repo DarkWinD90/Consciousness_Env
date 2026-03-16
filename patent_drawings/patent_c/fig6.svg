@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-01-31T22:46:22.153782</dc:date>
+    <dc:date>2026-03-16T19:10:53.838670</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -32,29 +32,29 @@ z
    <g id="patch_2">
     <path d="M 73.997795 180 
 Q 319.50027 180 563.325694 180 
-" clip-path="url(#p57afd65e21)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
+" clip-path="url(#p5a45a2fb2f)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
     <path d="M 562.925694 179.8 
 L 563.325694 180 
 L 562.925694 180.2 
-" clip-path="url(#p57afd65e21)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
+" clip-path="url(#p5a45a2fb2f)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="patch_3">
     <path d="M 73.997795 338.4 
 Q 319.50027 338.4 563.325694 338.4 
-" clip-path="url(#p57afd65e21)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
+" clip-path="url(#p5a45a2fb2f)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
     <path d="M 562.925694 338.2 
 L 563.325694 338.4 
 L 562.925694 338.6 
-" clip-path="url(#p57afd65e21)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
+" clip-path="url(#p5a45a2fb2f)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="patch_4">
     <path d="M 73.997658 518.4 
 Q 283.498293 518.4 491.321877 518.4 
-" clip-path="url(#p57afd65e21)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
+" clip-path="url(#p5a45a2fb2f)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
     <path d="M 490.921877 518.2 
 L 491.321877 518.4 
 L 490.921877 518.6 
-" clip-path="url(#p57afd65e21)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
+" clip-path="url(#p5a45a2fb2f)" style="fill: none; stroke: #000000; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="text_1">
     <!-- Timeline A — Normal Reconnection: -->
@@ -2697,7 +2697,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p57afd65e21">
+  <clipPath id="p5a45a2fb2f">
    <rect x="79.2" y="79.2" width="480.6" height="678.6"/>
   </clipPath>
  </defs>
