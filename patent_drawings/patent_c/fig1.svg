@@ -60,8 +60,8 @@
   <path d="M570 555 L570 610" stroke="black" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ah)" />
 
   <!-- 20: Snapshot Store (cylinder, right side of 16) -->
-  <path d="M685 470 Q685 462, 700 462 Q715 462, 715 470 L715 500 Q715 508, 700 508 Q685 508, 685 500 Z" fill="none" stroke="black" stroke-width="1.5" />
-  <path d="M685 470 Q685 478, 700 478 Q715 478, 715 470" fill="none" stroke="black" stroke-width="1.5" />
+  <rect x="685" y="465" width="30" height="40" rx="5" fill="none" stroke="black" stroke-width="1.5" />
+  <line x1="685" y1="478" x2="715" y2="478" stroke="black" stroke-width="1" />
   <text x="720" y="490" font-family="Arial" font-size="14" fill="black">20</text>
   <line x1="718" y1="493" x2="715" y2="495" stroke="black" stroke-width="0.5" />
 

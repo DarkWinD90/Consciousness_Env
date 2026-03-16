@@ -234,7 +234,8 @@
     <line x1="130" y1="775" x2="385" y2="775" stroke="black" stroke-width="1" />
     <!-- Zero line label -->
     <g class="axis-label">
-    <text x="125" y="779" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">0</text>
+    <text x="108" y="779" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">0</text>
+    <line x1="110" y1="775" x2="128" y2="775" stroke="black" stroke-width="0.5" />
     </g>
     <!-- Experimental curve (solid, rising to 100 mWh) -->
     <path d="M 130 775 Q 200 755 260 725 Q 320 712 385 706"
@@ -243,8 +244,8 @@
     <path d="M 130 775 Q 200 795 260 818 Q 320 830 385 836"
           fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
     <!-- Ref 120 -->
-    <text x="410" y="705" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">120</text>
-    <line x1="408" y1="705" x2="402" y2="698" stroke="black" stroke-width="0.5" />
+    <text x="415" y="705" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">120</text>
+    <line x1="413" y1="705" x2="404" y2="698" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- LEGEND (122)                                           -->

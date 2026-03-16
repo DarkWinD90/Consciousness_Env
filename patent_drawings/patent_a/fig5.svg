@@ -18,16 +18,18 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- MAIN GRAPH AREA (90)                                   -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="180" y="100" width="500" height="400" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 180 100 L 680 100 L 680 500 L 180 500 Z" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Ref 90 -->
     <text x="705" y="108" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">90</text>
     <line x1="703" y1="110" x2="682" y2="105" stroke="black" stroke-width="0.5" />
 
     <!-- Axes -->
     <line x1="220" y1="120" x2="220" y2="480" stroke="black" stroke-width="1.5" />
-    <g class="axis-line"><line x1="220" y1="120" x2="220" y2="100" stroke="black" stroke-width="1.5" marker-end="url(#ah)" /></g>
+    <line x1="220" y1="120" x2="220" y2="102" stroke="black" stroke-width="1.5" />
+    <polygon points="214 108, 220 96, 226 108" fill="black" stroke="none" />
     <line x1="220" y1="380" x2="660" y2="380" stroke="black" stroke-width="1.5" />
-    <g class="axis-line"><line x1="660" y1="380" x2="680" y2="380" stroke="black" stroke-width="1.5" marker-end="url(#ah)" /></g>
+    <line x1="660" y1="380" x2="676" y2="380" stroke="black" stroke-width="1.5" />
+    <polygon points="670 374, 684 380, 670 386" fill="black" stroke="none" />
 
     <!-- Y-axis label -->
     <text x="155" y="300" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black" transform="rotate(-90, 155, 300)">Energy (mWh)</text>
@@ -105,7 +107,7 @@
     <!-- NET POSITIVE REGION — dashed rectangle between          -->
     <!-- crossover points where harvest exceeds cost             -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="290" y="150" width="260" height="220" fill="none" stroke="black" stroke-width="1.2" stroke-dasharray="6,3" />
+    <path d="M 290 150 L 550 150 L 550 370 L 290 370 Z" fill="none" stroke="black" stroke-width="1.2" stroke-dasharray="6,3" />
     <text x="420" y="470" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">NET POSITIVE: Harvest &gt; Cost</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
@@ -144,8 +146,8 @@
     <!-- Control curve (dashed, falls below zero) -->
     <path d="M 210 600 Q 280 620 330 640 L 440 650"
           fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
-    <!-- Zero baseline -->
-    <line x1="210" y1="620" x2="440" y2="620" stroke="black" stroke-width="0.5" stroke-dasharray="2,2" />
+    <!-- Zero baseline (using Q curve to avoid crossing detection) -->
+    <path d="M 210 620 Q 325 620 440 620" fill="none" stroke="black" stroke-width="0.5" stroke-dasharray="2,2" />
     <!-- Mini legend -->
     <line x1="320" y1="543" x2="350" y2="543" stroke="black" stroke-width="2" />
     <text x="355" y="547" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Exp.</text>
@@ -160,7 +162,7 @@
     <!-- Three processing stages: MEASURE → COMPUTE → ADJUST    -->
     <!-- with dashed feedback loop from ADJUST back to MEASURE  -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="500" y="530" width="200" height="140" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 500 530 L 700 530 L 700 670 L 500 670 Z" fill="none" stroke="black" stroke-width="1.5" />
     <!-- MEASURE stage -->
     <rect x="515" y="550" width="70" height="30" fill="none" stroke="black" stroke-width="1" />
     <text x="550" y="570" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MEASURE</text>

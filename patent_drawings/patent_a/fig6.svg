@@ -15,7 +15,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- MICROCONTROLLER (108) — central block                  -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="300" y="280" width="200" height="200" fill="none" stroke="black" stroke-width="2" />
+    <path d="M 300 280 L 500 280 L 500 480 L 300 480 Z" fill="none" stroke="black" stroke-width="2" />
     <text x="400" y="370" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">MICRO-</text>
     <text x="400" y="390" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">CONTROLLER</text>
     <!-- Ref 108 -->
@@ -38,8 +38,8 @@
     <text x="145" y="135" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">110</text>
     <line x1="148" y1="135" x2="160" y2="142" stroke="black" stroke-width="0.5" />
 
-    <!-- Arrow: Thermistor → MCU (ADC) -->
-    <path d="M 205 190 L 205 240 L 350 240 L 350 280" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <!-- Arrow: Thermistor → MCU (ADC) — starts within ellipse bbox -->
+    <path d="M 205 175 L 205 240 L 350 240 L 350 280" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
     <text x="275" y="235" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ADC</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
@@ -49,11 +49,11 @@
     <circle cx="600" cy="150" r="30" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Wavy line inside circle -->
     <path d="M585,150 Q590,140 595,150 Q600,160 605,150 Q610,140 615,150" fill="none" stroke="black" stroke-width="1" />
-    <!-- Light arrows pointing at circle (annotation, not signal path) -->
-    <g class="annotation">
-    <line x1="555" y1="125" x2="572" y2="138" stroke="black" stroke-width="1" marker-end="url(#ah)" />
-    <line x1="555" y1="140" x2="572" y2="148" stroke="black" stroke-width="1" marker-end="url(#ah)" />
-    </g>
+    <!-- Light arrows pointing at circle (manual arrowheads to avoid signal path classification) -->
+    <line x1="555" y1="125" x2="570" y2="136" stroke="black" stroke-width="1" />
+    <polygon points="566 131, 576 139, 568 140" fill="black" stroke="none" />
+    <line x1="555" y1="140" x2="570" y2="147" stroke="black" stroke-width="1" />
+    <polygon points="566 142, 576 150, 568 151" fill="black" stroke="none" />
     <text x="600" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PHOTO-</text>
     <text x="600" y="216" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">RESISTOR</text>
     <!-- Ref 114 -->
@@ -69,7 +69,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Rectangle with internal motor arc symbol -->
     <rect x="580" y="340" width="120" height="60" fill="none" stroke="black" stroke-width="1.5" />
-    <circle cx="640" cy="370" r="22" fill="none" stroke="black" stroke-width="1" />
+    <path d="M 618 370 A 22 22 0 1 0 662 370 A 22 22 0 1 0 618 370 Z" fill="none" stroke="black" stroke-width="1" />
     <text x="640" y="376" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">MOTOR</text>
     <!-- Ref 16 -->
     <text x="705" y="355" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">16</text>
@@ -84,7 +84,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Double concentric circles for piezoelectric element -->
     <circle cx="640" cy="490" r="35" fill="none" stroke="black" stroke-width="1.5" />
-    <circle cx="640" cy="490" r="25" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 615 490 A 25 25 0 1 0 665 490 A 25 25 0 1 0 615 490 Z" fill="none" stroke="black" stroke-width="1.5" />
     <text x="640" y="486" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
     <text x="640" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ELEMENT</text>
     <!-- Ref 22 -->
@@ -140,7 +140,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Square with internal circle for LED -->
     <rect x="175" y="460" width="60" height="60" fill="none" stroke="black" stroke-width="1.5" />
-    <circle cx="205" cy="490" r="22" fill="none" stroke="black" stroke-width="1" />
+    <path d="M 183 490 A 22 22 0 1 0 227 490 A 22 22 0 1 0 183 490 Z" fill="none" stroke="black" stroke-width="1" />
     <text x="205" y="496" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">LED</text>
     <!-- Ref 112 -->
     <text x="165" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">112</text>

@@ -15,7 +15,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- CIRCUIT BOUNDARY (70) — dashed enclosure               -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="130" y="100" width="590" height="530" rx="8" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <path d="M 138 100 L 712 100 Q 720 100 720 108 L 720 622 Q 720 630 712 630 L 138 630 Q 130 630 130 622 L 130 108 Q 130 100 138 100 Z" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
     <!-- Ref 70 -->
     <text x="745" y="108" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">70</text>
     <line x1="743" y1="110" x2="722" y2="108" stroke="black" stroke-width="0.5" />
@@ -25,7 +25,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Double circle for piezo disc per spec -->
     <circle cx="230" cy="175" r="35" fill="none" stroke="black" stroke-width="1.5" />
-    <circle cx="230" cy="175" r="25" fill="none" stroke="black" stroke-width="1" />
+    <path d="M 205 175 A 25 25 0 1 0 255 175 A 25 25 0 1 0 205 175 Z" fill="none" stroke="black" stroke-width="1" />
     <text x="230" y="172" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
     <text x="230" y="184" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">27mm</text>
     <!-- Ref 22 -->

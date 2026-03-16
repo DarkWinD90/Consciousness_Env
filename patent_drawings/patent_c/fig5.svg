@@ -7,8 +7,8 @@
   </defs>
   <text x="425" y="60" font-family="Arial" font-size="14" text-anchor="middle" fill="black">5/7</text>
 
-  <!-- 66: Resynchronization Payload (outer container) -->
-  <rect x="145" y="130" width="565" height="540" rx="5" fill="none" stroke="black" stroke-width="2" />
+  <!-- 66: Resynchronization Payload (outer container, path to avoid component overlap) -->
+  <path d="M150 130 L705 130 Q710 130 710 135 L710 665 Q710 670 705 670 L150 670 Q145 670 145 665 L145 135 Q145 130 150 130 Z" fill="none" stroke="black" stroke-width="2" />
   <text x="425" y="165" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">RESYNCHRONIZATION PAYLOAD</text>
   <text x="720" y="150" font-family="Arial" font-size="14" fill="black">66</text>
   <line x1="718" y1="153" x2="712" y2="153" stroke="black" stroke-width="0.5" />

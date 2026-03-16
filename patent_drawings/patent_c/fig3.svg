@@ -12,8 +12,11 @@
   <rect x="155" y="145" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
   <rect x="705" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
   <rect x="235" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="235" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
   <rect x="315" y="385" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="315" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
   <rect x="535" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="535" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
 
   <!-- Graph axes -->
   <!-- 44: Y-axis (Modulation value) -->

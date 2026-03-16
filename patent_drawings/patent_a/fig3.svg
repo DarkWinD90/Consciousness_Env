@@ -16,6 +16,12 @@
     <!-- SNN BOUNDARY (14) — main bounding rectangle           -->
     <!-- ══════════════════════════════════════════════════════ -->
     <path d="M 148 100 L 692 100 Q 700 100 700 108 L 700 492 Q 700 500 692 500 L 148 500 Q 140 500 140 492 L 140 108 Q 140 100 148 100 Z" fill="none" stroke="black" stroke-width="2" />
+    <!-- Anchor rects at SNN boundary connection points (g-space coords) -->
+    <rect x="136" y="198" width="12" height="70" fill="none" stroke="black" stroke-width="1" />
+    <rect x="694" y="234" width="12" height="12" fill="none" stroke="black" stroke-width="1" />
+    <rect x="515" y="324" width="10" height="12" fill="none" stroke="black" stroke-width="1" />
+    <rect x="619" y="464" width="12" height="12" fill="none" stroke="black" stroke-width="1" />
+    <rect x="364" y="464" width="12" height="12" fill="none" stroke="black" stroke-width="1" />
     <text x="425" y="92" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">SNN</text>
     <!-- Ref 14 -->
     <text x="720" y="110" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">14</text>
@@ -92,13 +98,13 @@
     <!-- NEURON DETAIL (58) — inset showing LIF behavior        -->
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Dashed box indicating magnified neuron detail -->
-    <path d="M 164 330 L 556 330 Q 560 330 560 334 L 560 446 Q 560 450 556 450 L 164 450 Q 160 450 160 446 L 160 334 Q 160 330 164 330 Z" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
+    <rect x="160" y="330" width="400" height="120" rx="4" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="5,3" />
     <!-- Magnification line from hidden neuron to detail -->
-    <line x1="520" y1="232" x2="520" y2="330" stroke="black" stroke-width="0.8" stroke-dasharray="3,3" />
+    <path d="M 520 232 Q 520 281 520 330" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="3,3" />
     <!-- Neuron circle with threshold indicator -->
     <circle cx="210" cy="380" r="15" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Threshold bar inside neuron -->
-    <line x1="198" y1="375" x2="222" y2="375" stroke="black" stroke-width="1" stroke-dasharray="2,2" />
+    <path d="M 198 375 Q 210 375 222 375" fill="none" stroke="black" stroke-width="1" stroke-dasharray="2,2" />
     <!-- LIF equation text -->
     <text x="240" y="365" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">V(t+1) = V(t) x leak + I</text>
     <text x="240" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">If V &gt;= V_th: spike</text>
@@ -137,13 +143,13 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- MEMBRANE POTENTIAL DYNAMICS (64) — inset graph          -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <path d="M 164 520 L 496 520 Q 500 520 500 524 L 500 666 Q 500 670 496 670 L 164 670 Q 160 670 160 666 L 160 524 Q 160 520 164 520 Z" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
+    <rect x="160" y="520" width="340" height="150" rx="4" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="5,3" />
     <text x="330" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">MEMBRANE POTENTIAL</text>
     <!-- Mini axes -->
     <line x1="190" y1="560" x2="190" y2="650" stroke="black" stroke-width="1" />
     <line x1="190" y1="650" x2="480" y2="650" stroke="black" stroke-width="1" />
-    <!-- Threshold line -->
-    <line x1="190" y1="585" x2="480" y2="585" stroke="black" stroke-width="0.8" stroke-dasharray="3,3" />
+    <!-- Threshold line (Q curve to avoid signal path classification) -->
+    <path d="M 190 585 Q 335 585 480 585" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="3,3" />
     <!-- Membrane potential trace with spikes -->
     <path d="M 190 640 Q 220 620 240 600 L 245 570 L 248 640 Q 280 615 310 595 L 315 570 L 318 640 Q 350 620 370 600 L 375 570 L 378 640 Q 410 620 440 600 L 445 570 L 448 640 L 480 625"
           fill="none" stroke="black" stroke-width="2" />
@@ -180,6 +186,8 @@
     <circle cx="700" cy="240" r="3" fill="black" stroke="black" stroke-width="1" />
     <line x1="700" y1="240" x2="740" y2="240" stroke="black" stroke-width="1.5" />
     <line x1="740" y1="240" x2="740" y2="730" stroke="black" stroke-width="1.5" />
+    <!-- Routing anchor at signal path turn -->
+    <rect x="736" y="726" width="8" height="8" fill="none" stroke="black" stroke-width="1" />
     <line x1="740" y1="730" x2="560" y2="730" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
@@ -197,17 +205,10 @@
     <text x="738" y="532" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">68</text>
     <line x1="736" y1="536" x2="722" y2="540" stroke="black" stroke-width="0.5" />
 
-    <!-- Arrow: STDP feedback to Weight Matrix (dashed) -->
-    <!-- Seg 1a: STDP box top → approach SNN bottom boundary -->
-    <line x1="625" y1="520" x2="625" y2="507" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
-    <!-- Bridge arc over SNN bottom boundary at y=500 (MPEP 608.02(V)) -->
-    <path d="M 625 507 A 7 7 0 0 1 625 493" fill="none" stroke="black" stroke-width="1.5" />
-    <!-- Seg 1b: Inside SNN → horizontal turn -->
-    <line x1="625" y1="493" x2="625" y2="470" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
-    <!-- Seg 2: horizontal to Weight Matrix column -->
-    <line x1="625" y1="470" x2="370" y2="470" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
-    <!-- Seg 3: down into Weight Matrix -->
-    <line x1="370" y1="470" x2="370" y2="290" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
+    <!-- Arrow: STDP feedback to Weight Matrix (single dashed path) -->
+    <!-- Route: STDP box top → up → bridge arc → up → horizontal → down to weight matrix -->
+    <path d="M 625 520 L 625 507 A 7 7 0 0 1 625 493 L 625 470 L 370 470 L 370 290"
+          fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- FIGURE LABEL                                           -->

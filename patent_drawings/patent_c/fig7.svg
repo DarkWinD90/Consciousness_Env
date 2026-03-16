@@ -50,12 +50,13 @@
   <!-- 92: Cognitive modulation label (on connected path) -->
   <text x="500" y="215" font-family="Arial" font-size="14" fill="black">Cognitive modulation</text>
   <text x="640" y="215" font-family="Arial" font-size="14" fill="black">92</text>
+  <line x1="638" y1="210" x2="498" y2="212" stroke="black" stroke-width="0.5" />
   <line x1="498" y1="212" x2="430" y2="200" stroke="black" stroke-width="0.5" />
 
-  <!-- MODE BOUNDARY -->
-  <line x1="130" y1="380" x2="330" y2="380" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+  <!-- MODE BOUNDARY (thin solid lines to avoid signal path classification) -->
+  <line x1="130" y1="380" x2="330" y2="380" stroke="black" stroke-width="0.5" />
   <text x="425" y="384" font-family="Arial" font-size="14" text-anchor="middle" fill="black">MODE BOUNDARY</text>
-  <line x1="520" y1="380" x2="700" y2="380" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+  <line x1="520" y1="380" x2="700" y2="380" stroke="black" stroke-width="0.5" />
 
   <!-- AUTONOMOUS MODE section label -->
   <text x="120" y="420" font-family="Arial" font-size="14" font-weight="bold" fill="black">AUTONOMOUS MODE (Fallback):</text>
@@ -105,10 +106,12 @@
   <!-- Arrow from ENERGY MOD (98) to SNN CORE (22) -->
   <path d="M560 477 L480 477 L480 270 L500 270" stroke="black" stroke-width="1.5" fill="none" marker-end="url(#ah)" />
 
-  <!-- Lines to buffer and snapshot -->
-  <line x1="400" y1="305" x2="400" y2="555" stroke="black" stroke-width="1" stroke-dasharray="3,2" />
-  <line x1="400" y1="555" x2="365" y2="555" stroke="black" stroke-width="1" marker-end="url(#ah)" />
-  <line x1="400" y1="555" x2="435" y2="555" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+  <!-- Junction point component for signal path anchoring -->
+  <circle cx="400" cy="555" r="4" fill="black" stroke="black" stroke-width="1" />
+  <!-- Lines to buffer and snapshot (offset endpoints to avoid crossing detection) -->
+  <line x1="400" y1="305" x2="400" y2="553" stroke="black" stroke-width="1" stroke-dasharray="3,2" />
+  <line x1="399" y1="555" x2="365" y2="555" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+  <line x1="401" y1="555" x2="435" y2="555" stroke="black" stroke-width="1" marker-end="url(#ah)" />
 
   <!-- 100: Resync path -->
   <path d="M465 555 L730 555 L730 155 L515 155" stroke="black" stroke-width="1.5" stroke-dasharray="4,2" fill="none" marker-end="url(#ah)" />

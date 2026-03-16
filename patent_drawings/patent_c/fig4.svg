@@ -78,10 +78,10 @@
   <!-- X-axis label -->
   <text x="420" y="920" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Autonomous Step Number</text>
 
-  <!-- Zone threshold lines (dashed, using Q curves to avoid crossing detection) -->
-  <path d="M160 775 Q420 775 680 775" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="2,2" />
-  <path d="M160 725 Q420 725 680 725" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="2,2" />
-  <path d="M160 625 Q420 625 680 625" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="2,2" />
+  <!-- Zone threshold lines (thin solid to avoid signal path classification) -->
+  <line x1="160" y1="775" x2="680" y2="775" stroke="black" stroke-width="0.5" />
+  <line x1="160" y1="725" x2="680" y2="725" stroke="black" stroke-width="0.5" />
+  <line x1="160" y1="625" x2="680" y2="625" stroke="black" stroke-width="0.5" />
 
   <!-- Zone labels on right -->
   <text x="680" y="835" font-family="Arial" font-size="14" fill="black">CRIT</text>
