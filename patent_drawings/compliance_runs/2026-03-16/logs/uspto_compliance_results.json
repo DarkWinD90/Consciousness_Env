@@ -11,15 +11,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -34,21 +32,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 100 missing nearby leader line",
-        "reference numeral 1000 missing nearby leader line",
-        "reference numeral 1500 missing nearby leader line",
-        "reference numeral 500 missing nearby leader line",
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -71,9 +61,15 @@
       "color": [],
       "diagram": [
         "component overlap/collision detected",
-        "reference numeral 54 overlaps element",
-        "reference numeral 56 overlaps element",
-        "reference numeral 58 overlaps element",
+        "signal path #1 has floating start/end",
+        "signal path #10 has floating start/end",
+        "signal path #11 has floating start/end",
+        "signal path #13 has floating start/end",
+        "signal path #14 has floating start/end",
+        "signal path #15 has floating start/end",
+        "signal path #2 has floating start/end",
+        "signal path #5 has floating start/end",
+        "signal path #6 has floating start/end",
         "signal path #9 has floating start/end",
         "signal path crossing detected"
       ]
@@ -261,15 +257,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -284,15 +278,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -328,19 +320,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 0 missing nearby leader line",
-        "reference numeral 100 missing nearby leader line",
-        "reference numeral 15 missing nearby leader line",
-        "reference numeral 30 missing nearby leader line",
-        "reference numeral 80 missing nearby leader line"
-      ]
+      "diagram": []
     }
   },
   {
@@ -355,15 +341,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #5 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -385,8 +369,7 @@
       "text": [],
       "color": [],
       "diagram": [
-        "component overlap/collision detected",
-        "reference numeral 24 overlaps element"
+        "signal path #7 has floating start/end"
       ]
     }
   },
@@ -430,8 +413,6 @@
       "text": [],
       "color": [],
       "diagram": [
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
         "signal path #3 has floating start/end",
         "signal path #4 has floating start/end",
         "signal path #5 has floating start/end"
@@ -457,10 +438,6 @@
       "text": [],
       "color": [],
       "diagram": [
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end",
-        "signal path #4 has floating start/end",
         "signal path #5 has floating start/end",
         "signal path #6 has floating start/end",
         "signal path #7 has floating start/end",

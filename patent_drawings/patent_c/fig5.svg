@@ -57,12 +57,12 @@
   <line x1="155" y1="260" x2="135" y2="260" stroke="black" stroke-width="1" />
   <line x1="135" y1="260" x2="135" y2="195" stroke="black" stroke-width="1" />
   <line x1="135" y1="195" x2="155" y2="195" stroke="black" stroke-width="1" />
-  <text x="125" y="232" font-family="Arial" font-size="12" fill="black" transform="rotate(-90 125 232)">Level 1: Summary</text>
+  <text x="125" y="232" font-family="Arial" font-size="14" fill="black" transform="rotate(-90 125 232)">Level 1: Summary</text>
 
   <line x1="155" y1="550" x2="135" y2="550" stroke="black" stroke-width="1" />
   <line x1="135" y1="550" x2="135" y2="620" stroke="black" stroke-width="1" />
-  <line x1="135" y1="620" x2="155" y2="620" stroke="black" stroke-width="1" marker-end="url(#ah)" />
-  <text x="125" y="590" font-family="Arial" font-size="12" fill="black" transform="rotate(-90 125 590)">Level 2: Full</text>
+  <line x1="135" y1="620" x2="155" y2="620" stroke="black" stroke-width="1" />
+  <text x="125" y="590" font-family="Arial" font-size="14" fill="black" transform="rotate(-90 125 590)">Level 2: Full</text>
 
   <!-- 74: Decision Diamond -->
   <polygon points="425 700, 500 755, 425 810, 350 755" fill="none" stroke="black" stroke-width="1.5" />
