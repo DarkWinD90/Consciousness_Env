@@ -39,9 +39,7 @@
     <line x1="148" y1="135" x2="160" y2="142" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Thermistor → MCU (ADC) -->
-    <line x1="205" y1="190" x2="205" y2="240" stroke="black" stroke-width="1.5" />
-    <line x1="205" y1="240" x2="350" y2="240" stroke="black" stroke-width="1.5" />
-    <line x1="350" y1="240" x2="350" y2="280" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <path d="M 205 190 L 205 240 L 350 240 L 350 280" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
     <text x="275" y="235" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ADC</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
@@ -63,9 +61,7 @@
     <line x1="633" y1="135" x2="630" y2="140" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Photoresistor → MCU (ADC) -->
-    <line x1="600" y1="180" x2="600" y2="240" stroke="black" stroke-width="1.5" />
-    <line x1="600" y1="240" x2="450" y2="240" stroke="black" stroke-width="1.5" />
-    <line x1="450" y1="240" x2="450" y2="280" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <path d="M 600 180 L 600 240 L 450 240 L 450 280" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
     <text x="530" y="235" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ADC</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
@@ -123,9 +119,7 @@
     <line x1="373" y1="595" x2="370" y2="598" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: AC Signal → Energy Store -->
-    <line x1="440" y1="520" x2="440" y2="560" stroke="black" stroke-width="1.5" />
-    <line x1="440" y1="560" x2="295" y2="560" stroke="black" stroke-width="1.5" />
-    <line x1="295" y1="560" x2="295" y2="580" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <path d="M 440 520 L 440 560 L 295 560 L 295 580" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- Arrow: Energy Store → MCU (VSYS power) — routed at x=155 to clear LED box -->
     <line x1="220" y1="610" x2="155" y2="610" stroke="black" stroke-width="1.5" />
