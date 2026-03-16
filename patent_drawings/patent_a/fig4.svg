@@ -15,7 +15,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- CIRCUIT BOUNDARY (70) — dashed enclosure               -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <path d="M 138 100 L 712 100 Q 720 100 720 108 L 720 622 Q 720 630 712 630 L 138 630 Q 130 630 130 622 L 130 108 Q 130 100 138 100 Z" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <rect x="130" y="100" width="590" height="530" rx="8" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="8,4" />
     <!-- Ref 70 -->
     <text x="745" y="108" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">70</text>
     <line x1="743" y1="110" x2="722" y2="108" stroke="black" stroke-width="0.5" />
@@ -32,8 +32,8 @@
     <text x="200" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">22</text>
     <line x1="200" y1="123" x2="210" y2="140" stroke="black" stroke-width="0.5" />
 
-    <!-- Arrow: Piezo → AC Signal -->
-    <line x1="300" y1="175" x2="340" y2="175" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <!-- Arrow: Piezo → AC Signal (start within piezo circle bbox) -->
+    <line x1="265" y1="175" x2="340" y2="175" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- AC SIGNAL (72)                                         -->

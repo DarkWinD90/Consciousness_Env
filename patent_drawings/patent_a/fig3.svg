@@ -20,8 +20,6 @@
     <rect x="136" y="198" width="12" height="70" fill="none" stroke="black" stroke-width="1" />
     <rect x="694" y="234" width="12" height="12" fill="none" stroke="black" stroke-width="1" />
     <rect x="515" y="324" width="10" height="12" fill="none" stroke="black" stroke-width="1" />
-    <rect x="619" y="464" width="12" height="12" fill="none" stroke="black" stroke-width="1" />
-    <rect x="364" y="464" width="12" height="12" fill="none" stroke="black" stroke-width="1" />
     <text x="425" y="92" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">SNN</text>
     <!-- Ref 14 -->
     <text x="720" y="110" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">14</text>
@@ -47,10 +45,10 @@
     <text x="220" y="160" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">INPUT</text>
     <text x="220" y="178" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">LAYER</text>
     <!-- Input neurons -->
-    <circle cx="200" cy="210" r="10" fill="none" stroke="black" stroke-width="1.5" />
-    <circle cx="240" cy="210" r="10" fill="none" stroke="black" stroke-width="1.5" />
-    <circle cx="200" cy="250" r="10" fill="none" stroke="black" stroke-width="1.5" />
-    <circle cx="240" cy="250" r="10" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 190 210 A 10 10 0 1 0 210 210 A 10 10 0 1 0 190 210 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 230 210 A 10 10 0 1 0 250 210 A 10 10 0 1 0 230 210 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 190 250 A 10 10 0 1 0 210 250 A 10 10 0 1 0 190 250 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 230 250 A 10 10 0 1 0 250 250 A 10 10 0 1 0 230 250 Z" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Ref 52 -->
     <text x="130" y="115" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">52</text>
     <line x1="133" y1="118" x2="160" y2="140" stroke="black" stroke-width="0.5" />
@@ -86,10 +84,10 @@
     <text x="520" y="160" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">HIDDEN</text>
     <text x="520" y="178" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">LAYER</text>
     <!-- Hidden neurons — three circles, center labeled "i" -->
-    <circle cx="490" cy="220" r="12" fill="none" stroke="black" stroke-width="1.5" />
-    <circle cx="520" cy="220" r="12" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 478 220 A 12 12 0 1 0 502 220 A 12 12 0 1 0 478 220 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 508 220 A 12 12 0 1 0 532 220 A 12 12 0 1 0 508 220 Z" fill="none" stroke="black" stroke-width="1.5" />
     <text x="520" y="225" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">i</text>
-    <circle cx="550" cy="220" r="12" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 538 220 A 12 12 0 1 0 562 220 A 12 12 0 1 0 538 220 Z" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Ref 56 -->
     <text x="600" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">56</text>
     <line x1="598" y1="123" x2="580" y2="140" stroke="black" stroke-width="0.5" />
@@ -100,11 +98,11 @@
     <!-- Dashed box indicating magnified neuron detail -->
     <rect x="160" y="330" width="400" height="120" rx="4" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="5,3" />
     <!-- Magnification line from hidden neuron to detail -->
-    <path d="M 520 232 Q 520 281 520 330" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="3,3" />
+    <line x1="520" y1="232" x2="520" y2="330" stroke="black" stroke-width="0.5" />
     <!-- Neuron circle with threshold indicator -->
-    <circle cx="210" cy="380" r="15" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 195 380 A 15 15 0 1 0 225 380 A 15 15 0 1 0 195 380 Z" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Threshold bar inside neuron -->
-    <path d="M 198 375 Q 210 375 222 375" fill="none" stroke="black" stroke-width="1" stroke-dasharray="2,2" />
+    <line x1="198" y1="375" x2="222" y2="375" stroke="black" stroke-width="0.5" />
     <!-- LIF equation text -->
     <text x="240" y="365" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">V(t+1) = V(t) x leak + I</text>
     <text x="240" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">If V &gt;= V_th: spike</text>
@@ -149,7 +147,7 @@
     <line x1="190" y1="560" x2="190" y2="650" stroke="black" stroke-width="1" />
     <line x1="190" y1="650" x2="480" y2="650" stroke="black" stroke-width="1" />
     <!-- Threshold line (Q curve to avoid signal path classification) -->
-    <path d="M 190 585 Q 335 585 480 585" fill="none" stroke="black" stroke-width="0.8" stroke-dasharray="3,3" />
+    <line x1="190" y1="585" x2="480" y2="585" stroke="black" stroke-width="0.5" />
     <!-- Membrane potential trace with spikes -->
     <path d="M 190 640 Q 220 620 240 600 L 245 570 L 248 640 Q 280 615 310 595 L 315 570 L 318 640 Q 350 620 370 600 L 375 570 L 378 640 Q 410 620 440 600 L 445 570 L 448 640 L 480 625"
           fill="none" stroke="black" stroke-width="2" />
@@ -207,7 +205,7 @@
 
     <!-- Arrow: STDP feedback to Weight Matrix (single dashed path) -->
     <!-- Route: STDP box top → up → bridge arc → up → horizontal → down to weight matrix -->
-    <path d="M 625 520 L 625 507 A 7 7 0 0 1 625 493 L 625 470 L 370 470 L 370 290"
+    <path d="M 625 520 L 625 507 Q 618 500 625 493 L 625 470 L 370 470 L 370 290"
           fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->

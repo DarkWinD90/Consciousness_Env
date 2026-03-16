@@ -16,6 +16,12 @@
     <!-- MICROCONTROLLER (108) — central block                  -->
     <!-- ══════════════════════════════════════════════════════ -->
     <path d="M 300 280 L 500 280 L 500 480 L 300 480 Z" fill="none" stroke="black" stroke-width="2" />
+    <!-- Anchor rects at MCU connection points -->
+    <rect x="344" y="276" width="12" height="8" fill="none" stroke="black" stroke-width="1" />
+    <rect x="444" y="276" width="12" height="8" fill="none" stroke="black" stroke-width="1" />
+    <rect x="296" y="370" width="8" height="20" fill="none" stroke="black" stroke-width="1" />
+    <rect x="496" y="364" width="8" height="12" fill="none" stroke="black" stroke-width="1" />
+    <rect x="296" y="434" width="8" height="12" fill="none" stroke="black" stroke-width="1" />
     <text x="400" y="370" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">MICRO-</text>
     <text x="400" y="390" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">CONTROLLER</text>
     <!-- Ref 108 -->

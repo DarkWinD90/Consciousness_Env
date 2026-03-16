@@ -15,7 +15,9 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- ENVIRONMENT BOUNDARY (10) — dashed rectangle           -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <path d="M 148 100 L 692 100 Q 700 100 700 108 L 700 752 Q 700 760 692 760 L 148 760 Q 140 760 140 752 L 140 108 Q 140 100 148 100 Z" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <rect x="140" y="100" width="560" height="660" rx="8" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="8,4" />
+    <!-- Anchor at environment input point -->
+    <rect x="414" y="96" width="12" height="8" fill="none" stroke="black" stroke-width="1" />
     <text x="155" y="120" font-family="Arial, sans-serif" font-size="14" fill="black">ENVIRONMENT</text>
     <!-- Ref 10 -->
     <text x="710" y="108" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">10</text>
@@ -56,13 +58,15 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- COGNITIVE MODULATION (128) — side block                -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <path d="M185,370 C160,370 155,355 170,345 C158,338 162,318 180,318 C185,308 200,305 215,310 C225,302 245,302 255,310 C268,305 285,310 288,322 C300,325 302,340 292,348 C305,358 298,372 280,370 Z" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
+    <path d="M185,370 C160,370 155,355 170,345 C158,338 162,318 180,318 C185,308 200,305 215,310 C225,302 245,302 255,310 C268,305 285,310 288,322 C300,325 302,340 292,348 C305,358 298,372 280,370 Z" fill="none" stroke="black" stroke-width="1.5" />
     <text x="230" y="336" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">COGNITIVE</text>
     <text x="230" y="354" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MODULATION</text>
     <!-- Ref 128 -->
     <text x="148" y="295" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">128</text>
     <line x1="151" y1="298" x2="162" y2="312" stroke="black" stroke-width="0.5" />
 
+    <!-- Anchor at cognitive modulation output -->
+    <rect x="296" y="334" width="10" height="12" fill="none" stroke="black" stroke-width="1" />
     <!-- Arrow: Cognitive → SNN (modulation input) -->
     <line x1="302" y1="340" x2="330" y2="340" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
 
