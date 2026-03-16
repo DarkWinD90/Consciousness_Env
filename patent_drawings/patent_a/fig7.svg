@@ -27,7 +27,7 @@
     <!--   Phase 10 hdr:   y=438 to y=458                       -->
     <!--   Rows F10.1-10.3:y=458 to y=530  (3 x 24px)          -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="100" y="90" width="650" height="440" fill="none" stroke="black" stroke-width="1.5" />
+    <rect x="112" y="90" width="638" height="440" fill="none" stroke="black" stroke-width="1.5" />
 
     <!-- Column separators — segmented to skip phase header rows -->
     <!-- Columns at x=170, 340, 490, 630 -->
@@ -58,7 +58,7 @@
     <line x1="630" y1="458" x2="630" y2="530" stroke="black" stroke-width="0.8" />
 
     <!-- Column headers -->
-    <line x1="100" y1="114" x2="750" y2="114" stroke="black" stroke-width="1" />
+    <line x1="112" y1="114" x2="750" y2="114" stroke="black" stroke-width="1" />
     <text x="135" y="108" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Claim</text>
     <text x="255" y="108" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Criterion</text>
     <text x="415" y="108" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Measured</text>
@@ -66,11 +66,11 @@
     <text x="690" y="108" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Result</text>
 
     <!-- ─── Phase 7 Header (merged row, no column lines) ─── -->
-    <line x1="100" y1="134" x2="750" y2="134" stroke="black" stroke-width="0.8" />
+    <line x1="112" y1="134" x2="750" y2="134" stroke="black" stroke-width="0.8" />
     <text x="425" y="128" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Phase 7 : Control Baseline</text>
 
     <!-- Row A  y=134..158 -->
-    <line x1="100" y1="158" x2="750" y2="158" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="158" x2="750" y2="158" stroke="black" stroke-width="0.5" />
     <text x="135" y="150" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">A</text>
     <text x="255" y="150" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Continuity</text>
     <text x="415" y="150" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">2000 pts</text>
@@ -78,7 +78,7 @@
     <text x="690" y="150" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- Row B  y=158..182 -->
-    <line x1="100" y1="182" x2="750" y2="182" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="182" x2="750" y2="182" stroke="black" stroke-width="0.5" />
     <text x="135" y="174" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">B</text>
     <text x="255" y="174" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Boundedness</text>
     <text x="415" y="174" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">finite</text>
@@ -86,7 +86,7 @@
     <text x="690" y="174" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- Row C  y=182..206 -->
-    <line x1="100" y1="206" x2="750" y2="206" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="206" x2="750" y2="206" stroke="black" stroke-width="0.5" />
     <text x="135" y="198" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">C</text>
     <text x="255" y="198" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Robustness</text>
     <text x="415" y="198" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">std = 24.8</text>
@@ -94,7 +94,7 @@
     <text x="690" y="198" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- Row D  y=206..230 -->
-    <line x1="100" y1="230" x2="750" y2="230" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="230" x2="750" y2="230" stroke="black" stroke-width="0.5" />
     <text x="135" y="222" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">D</text>
     <text x="255" y="222" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">I/O gain</text>
     <text x="415" y="222" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">corr = 0.42</text>
@@ -102,7 +102,7 @@
     <text x="690" y="222" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- Row E  y=230..254 -->
-    <line x1="100" y1="254" x2="750" y2="254" stroke="black" stroke-width="0.8" />
+    <line x1="112" y1="254" x2="750" y2="254" stroke="black" stroke-width="0.8" />
     <text x="135" y="246" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">E</text>
     <text x="255" y="246" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Saturation</text>
     <text x="415" y="246" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.03</text>
@@ -110,11 +110,11 @@
     <text x="690" y="246" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- ─── Phase 8 Header (merged row) ─── -->
-    <line x1="100" y1="274" x2="750" y2="274" stroke="black" stroke-width="0.8" />
+    <line x1="112" y1="274" x2="750" y2="274" stroke="black" stroke-width="0.8" />
     <text x="425" y="268" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Phase 8 : Synaptic Plasticity (STDP)</text>
 
     <!-- Row F8.1  y=274..298 -->
-    <line x1="100" y1="298" x2="750" y2="298" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="298" x2="750" y2="298" stroke="black" stroke-width="0.5" />
     <text x="135" y="290" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">F8.1</text>
     <text x="255" y="290" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Weight entropy</text>
     <text x="415" y="290" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.94 bit drop</text>
@@ -122,7 +122,7 @@
     <text x="690" y="290" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- Row F8.2  y=298..322 -->
-    <line x1="100" y1="322" x2="750" y2="322" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="322" x2="750" y2="322" stroke="black" stroke-width="0.5" />
     <text x="135" y="314" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">F8.2</text>
     <text x="255" y="314" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">STDP MI ratio</text>
     <text x="415" y="314" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">6.52x</text>
@@ -130,7 +130,7 @@
     <text x="690" y="314" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- Row F8.3  y=322..346 -->
-    <line x1="100" y1="346" x2="750" y2="346" stroke="black" stroke-width="0.8" />
+    <line x1="112" y1="346" x2="750" y2="346" stroke="black" stroke-width="0.8" />
     <text x="135" y="338" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">F8.3</text>
     <text x="255" y="338" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Convergence</text>
     <text x="415" y="338" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.00%</text>
@@ -138,11 +138,11 @@
     <text x="690" y="338" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- ─── Phase 9 Header (merged row) ─── -->
-    <line x1="100" y1="366" x2="750" y2="366" stroke="black" stroke-width="0.8" />
+    <line x1="112" y1="366" x2="750" y2="366" stroke="black" stroke-width="0.8" />
     <text x="425" y="360" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Phase 9 : Predictive Processing</text>
 
     <!-- Row F9.1  y=366..390 -->
-    <line x1="100" y1="390" x2="750" y2="390" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="390" x2="750" y2="390" stroke="black" stroke-width="0.5" />
     <text x="135" y="382" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">F9.1</text>
     <text x="255" y="382" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Error reduction</text>
     <text x="415" y="382" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">63.9%</text>
@@ -150,7 +150,7 @@
     <text x="690" y="382" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- Row F9.2  y=390..414 -->
-    <line x1="100" y1="414" x2="750" y2="414" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="414" x2="750" y2="414" stroke="black" stroke-width="0.5" />
     <text x="135" y="406" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">F9.2</text>
     <text x="255" y="406" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Random trend</text>
     <text x="415" y="406" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">p = 0.69</text>
@@ -158,7 +158,7 @@
     <text x="690" y="406" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- Row F9.3  y=414..438 -->
-    <line x1="100" y1="438" x2="750" y2="438" stroke="black" stroke-width="0.8" />
+    <line x1="112" y1="438" x2="750" y2="438" stroke="black" stroke-width="0.8" />
     <text x="135" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">F9.3</text>
     <text x="255" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Adaptation</text>
     <text x="415" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">1.51x spike</text>
@@ -166,11 +166,11 @@
     <text x="690" y="430" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- ─── Phase 10 Header (merged row) ─── -->
-    <line x1="100" y1="458" x2="750" y2="458" stroke="black" stroke-width="0.8" />
+    <line x1="112" y1="458" x2="750" y2="458" stroke="black" stroke-width="0.8" />
     <text x="425" y="452" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Phase 10 : Multi-Modal Integration</text>
 
     <!-- Row F10.1  y=458..482 -->
-    <line x1="100" y1="482" x2="750" y2="482" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="482" x2="750" y2="482" stroke="black" stroke-width="0.5" />
     <text x="135" y="474" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">F10.1</text>
     <text x="255" y="474" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Sync difference</text>
     <text x="415" y="474" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.70</text>
@@ -178,7 +178,7 @@
     <text x="690" y="474" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- Row F10.2  y=482..506 -->
-    <line x1="100" y1="506" x2="750" y2="506" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="506" x2="750" y2="506" stroke="black" stroke-width="0.5" />
     <text x="135" y="498" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">F10.2</text>
     <text x="255" y="498" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Weight entropy</text>
     <text x="415" y="498" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">2.31 to 0.0</text>
@@ -193,14 +193,14 @@
     <text x="690" y="522" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PASS</text>
 
     <!-- Ref 116 -->
-    <text x="740" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">116</text>
-    <line x1="742" y1="105" x2="748" y2="98" stroke="black" stroke-width="0.5" />
+    <text x="738" y="80" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">116</text>
+    <line x1="740" y1="83" x2="748" y2="92" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- ENERGY COMPARISON TABLE (118)                          -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="100" y="560" width="650" height="100" fill="none" stroke="black" stroke-width="1.5" />
-    <line x1="100" y1="590" x2="750" y2="590" stroke="black" stroke-width="1" />
+    <rect x="112" y="560" width="638" height="100" fill="none" stroke="black" stroke-width="1.5" />
+    <line x1="112" y1="590" x2="750" y2="590" stroke="black" stroke-width="1" />
     <line x1="300" y1="560" x2="300" y2="660" stroke="black" stroke-width="0.8" />
     <line x1="480" y1="560" x2="480" y2="660" stroke="black" stroke-width="0.8" />
 
@@ -208,7 +208,7 @@
     <text x="390" y="582" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Energy at 2000 Steps</text>
     <text x="615" y="582" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Status</text>
 
-    <line x1="100" y1="624" x2="750" y2="624" stroke="black" stroke-width="0.5" />
+    <line x1="112" y1="624" x2="750" y2="624" stroke="black" stroke-width="0.5" />
     <text x="200" y="614" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Control (EnergyConfig)</text>
     <text x="390" y="614" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">-4,697 mWh</text>
     <text x="615" y="614" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Depleted</text>
@@ -218,13 +218,13 @@
     <text x="615" y="648" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Sustained</text>
 
     <!-- Ref 118 -->
-    <text x="740" y="575" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">118</text>
-    <line x1="742" y1="575" x2="748" y2="568" stroke="black" stroke-width="0.5" />
+    <text x="738" y="550" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">118</text>
+    <line x1="740" y1="553" x2="748" y2="562" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- ENERGY TRAJECTORY GRAPH (120)                          -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="100" y="690" width="300" height="160" fill="none" stroke="black" stroke-width="1.5" />
+    <rect x="112" y="690" width="300" height="160" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Y-axis label -->
     <text x="112" y="708" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">mWh</text>
     <!-- X-axis label -->
@@ -233,7 +233,9 @@
     <line x1="130" y1="706" x2="130" y2="836" stroke="black" stroke-width="1" />
     <line x1="130" y1="775" x2="385" y2="775" stroke="black" stroke-width="1" />
     <!-- Zero line label -->
-    <text x="122" y="779" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">0</text>
+    <g class="axis-label">
+    <text x="125" y="779" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">0</text>
+    </g>
     <!-- Experimental curve (solid, rising to 100 mWh) -->
     <path d="M 130 775 Q 200 755 260 725 Q 320 712 385 706"
           fill="none" stroke="black" stroke-width="2" />
@@ -253,17 +255,17 @@
     <line x1="455" y1="750" x2="520" y2="750" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
     <text x="530" y="755" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Control (depleted)</text>
     <!-- Ref 122 -->
-    <text x="740" y="705" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">122</text>
-    <line x1="742" y1="705" x2="748" y2="698" stroke="black" stroke-width="0.5" />
+    <text x="738" y="680" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">122</text>
+    <line x1="740" y1="683" x2="748" y2="692" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- SUMMARY BOX (124)                                      -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="100" y="880" width="650" height="40" rx="4" fill="none" stroke="black" stroke-width="1.5" />
+    <rect x="112" y="880" width="638" height="40" rx="4" fill="none" stroke="black" stroke-width="1.5" />
     <text x="425" y="906" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">14 / 14 CLAIMS PASS  :  Phases 7 - 10 Validated</text>
     <!-- Ref 124 -->
-    <text x="740" y="895" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">124</text>
-    <line x1="742" y1="895" x2="748" y2="898" stroke="black" stroke-width="0.5" />
+    <text x="738" y="870" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">124</text>
+    <line x1="740" y1="873" x2="748" y2="882" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- FIGURE LABEL                                           -->
