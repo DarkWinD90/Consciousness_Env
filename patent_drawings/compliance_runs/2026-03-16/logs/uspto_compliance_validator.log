@@ -15,10 +15,10 @@ patent_b/fig3: PASS
 patent_b/fig4: PASS
 patent_b/fig5: PASS
 patent_b/fig6: PASS
-patent_c/fig1: FAIL
+patent_c/fig1: PASS
 patent_c/fig2: PASS
-patent_c/fig3: FAIL
-patent_c/fig4: FAIL
-patent_c/fig5: FAIL
+patent_c/fig3: PASS
+patent_c/fig4: PASS
+patent_c/fig5: PASS
 patent_c/fig6: PASS
-patent_c/fig7: FAIL
+patent_c/fig7: PASS
