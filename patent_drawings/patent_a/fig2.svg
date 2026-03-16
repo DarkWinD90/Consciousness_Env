@@ -25,12 +25,14 @@
     <line x1="133" y1="138" x2="218" y2="125" stroke="black" stroke-width="0.5" />
 
     <!-- Y-axis tick marks and values -->
+    <g class="axis-label">
     <!-- 100 mWh -->
     <line x1="215" y1="200" x2="220" y2="200" stroke="black" stroke-width="1.5" />
     <text x="208" y="205" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">100</text>
     <!-- 50 mWh -->
     <line x1="215" y1="375" x2="220" y2="375" stroke="black" stroke-width="1.5" />
     <text x="208" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">50</text>
+    </g>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- X-AXIS (34)                                           -->
@@ -45,6 +47,7 @@
     <line x1="716" y1="547" x2="702" y2="550" stroke="black" stroke-width="0.5" />
 
     <!-- X-axis tick marks -->
+    <g class="axis-label">
     <!-- 0 -->
     <line x1="220" y1="550" x2="220" y2="556" stroke="black" stroke-width="1.5" />
     <text x="220" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0</text>
@@ -60,6 +63,7 @@
     <!-- 2000 -->
     <line x1="690" y1="550" x2="690" y2="556" stroke="black" stroke-width="1.5" />
     <text x="690" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">2000</text>
+    </g>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- ZERO ENERGY BASELINE (40) — coincides with X-axis     -->
