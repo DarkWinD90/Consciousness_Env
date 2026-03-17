@@ -15,6 +15,40 @@ import sys
 import re
 from pathlib import Path
 
+_AXIS_VALUES = frozenset(['100', '200', '300', '400', '500'])
+
+
+def _is_graph_axis_label(content, numeral, x, y, align_tol=10, min_axis_count=3):
+    """Return True only when a centered numeral is part of a graph axis.
+
+    A graph axis is identified by having *min_axis_count* or more round
+    values from {100, 200, 300, 400, 500} aligned on the same
+    y-coordinate (horizontal axis) or x-coordinate (vertical axis)
+    within *align_tol* pixels.  A lone centered "100" is NOT an axis
+    label and must be validated like any other reference numeral.
+    """
+    if numeral not in _AXIS_VALUES:
+        return False
+
+    # Gather all centered axis-candidate numerals in the file
+    candidates = []
+    for m in re.finditer(
+        r'<text[^>]*x="([\d.]+)"[^>]*y="([\d.]+)"[^>]*text-anchor="middle"[^>]*>(\d{2,3})</text>',
+        content,
+    ):
+        if m.group(3) in _AXIS_VALUES:
+            candidates.append((float(m.group(1)), float(m.group(2))))
+
+    # Horizontal axis: multiple axis values share the same y (±tolerance)
+    if sum(1 for _, cy in candidates if abs(cy - y) < align_tol) >= min_axis_count:
+        return True
+
+    # Vertical axis: multiple axis values share the same x (±tolerance)
+    if sum(1 for cx, _ in candidates if abs(cx - x) < align_tol) >= min_axis_count:
+        return True
+
+    return False
+
 
 def find_reference_numerals(content):
     """Find all reference numerals (standalone 2-3 digit numbers in text elements)."""
@@ -33,10 +67,9 @@ def find_reference_numerals(content):
             y = float(match.group(2))
             numeral = match.group(3)
 
-            # Skip if this looks like an axis label (x values like 100, 200, 300, 400, 500)
-            # These are typically at specific y positions on graphs
-            if numeral in ['100', '200', '300', '400', '500'] and 'text-anchor="middle"' in line:
-                # Check if it's in a graph context (y > 400 typically)
+            # Skip only when the numeral is genuinely part of a graph axis
+            # (multiple round values aligned on the same coordinate).
+            if 'text-anchor="middle"' in line and _is_graph_axis_label(content, numeral, x, y):
                 continue
 
             numerals.append({
