@@ -8,7 +8,8 @@ _REPO_ROOT = Path(__file__).resolve().parent.parent
 
 def test_fig3_snn_boundary_uses_rect_primitive() -> None:
     """Keep FIG. 3 SNN boundary as a validator-recognized component primitive."""
-    fig3_path = _REPO_ROOT / "patent_drawings" / "patent_a" / "fig3.svg"
+    repo_root = Path(__file__).resolve().parent.parent
+    fig3_path = repo_root / "patent_drawings" / "patent_a" / "fig3.svg"
     root = ET.parse(fig3_path).getroot()
     ns = {"svg": "http://www.w3.org/2000/svg"}
 
