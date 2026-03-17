@@ -57,7 +57,7 @@
   <!-- 82: Energy level indicator -->
   <rect x="395" y="315" width="50" height="14" fill="none" stroke="black" stroke-width="1" />
   <line x1="395" y1="322" x2="420" y2="322" stroke="black" stroke-width="2" />
-  <text x="460" y="330" font-family="Arial, sans-serif" font-size="14" fill="black">82</text>
+  <text x="460" y="330" font-family="Arial" font-size="14" fill="black">82</text>
   <line x1="458" y1="326" x2="447" y2="326" stroke="black" stroke-width="0.5" />
   <!-- Continue timeline -->
   <rect x="520" y="270" width="55" height="40" fill="none" stroke="black" stroke-width="1" stroke-dasharray="4,2" />

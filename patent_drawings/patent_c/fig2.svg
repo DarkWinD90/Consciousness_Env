@@ -19,7 +19,7 @@
   <!-- Start indicator pointing to 26 -->
   <circle cx="120" cy="310" r="5" fill="black" stroke="black" stroke-width="1" />
   <line x1="125" y1="310" x2="175" y2="310" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-  <text x="145" y="300" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">START</text>
+  <text x="145" y="300" font-family="Arial" font-size="14" text-anchor="middle" fill="black">START</text>
 
   <!-- 28: AUTONOMOUS state (right) -->
   <circle cx="620" cy="310" r="75" fill="none" stroke="black" stroke-width="1.5" />

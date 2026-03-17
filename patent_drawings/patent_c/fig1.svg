@@ -63,7 +63,7 @@
   <!-- 20: Snapshot Store (cylinder, right side of 16) -->
   <rect x="685" y="465" width="30" height="40" rx="5" fill="none" stroke="black" stroke-width="1.5" />
   <line x1="685" y1="478" x2="715" y2="478" stroke="black" stroke-width="1" />
-  <text x="720" y="490" font-family="Arial, sans-serif" font-size="14" fill="black">20</text>
+  <text x="720" y="490" font-family="Arial" font-size="14" fill="black">20</text>
   <line x1="718" y1="493" x2="715" y2="495" stroke="black" stroke-width="0.5" />
 
   <!-- Arrow from 16 to 20 -->
@@ -71,8 +71,8 @@
 
   <!-- 22: SNN + Energy Harvester (large bottom box) -->
   <rect x="170" y="610" width="500" height="100" rx="5" fill="none" stroke="black" stroke-width="1.5" />
-  <text x="370" y="635" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">SPIKING NEURAL NETWORK + ENERGY HARVESTER</text>
-  <text x="370" y="655" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Continuous operation regardless of control source</text>
+  <text x="370" y="635" font-family="Arial" font-size="14" text-anchor="middle" fill="black">SPIKING NEURAL NETWORK + ENERGY HARVESTER</text>
+  <text x="370" y="655" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Continuous operation regardless of control source</text>
   <!-- Neurons inside -->
   <circle cx="220" cy="690" r="5" fill="none" stroke="black" stroke-width="1" />
   <circle cx="260" cy="690" r="5" fill="none" stroke="black" stroke-width="1" />
@@ -83,7 +83,7 @@
 
   <!-- 24: Energy Harvester symbol inside 22 -->
   <path d="M570 630 L620 630 M570 650 L620 650 M585 630 L585 650 M605 630 L605 650" stroke="black" stroke-width="1" />
-  <text x="680" y="605" font-family="Arial, sans-serif" font-size="14" fill="black">24</text>
+  <text x="680" y="605" font-family="Arial" font-size="14" fill="black">24</text>
   <line x1="678" y1="608" x2="622" y2="640" stroke="black" stroke-width="0.5" />
 
   <!-- Key annotation -->

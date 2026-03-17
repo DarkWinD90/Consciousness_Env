@@ -49,14 +49,14 @@
   <line x1="600" y1="343" x2="600" y2="345" stroke="black" stroke-width="0.5" />
 
   <!-- 92: Cognitive modulation label (on connected path) -->
-  <text x="500" y="215" font-family="Arial, sans-serif" font-size="14" fill="black">Cognitive modulation</text>
-  <text x="640" y="215" font-family="Arial, sans-serif" font-size="14" fill="black">92</text>
+  <text x="500" y="215" font-family="Arial" font-size="14" fill="black">Cognitive modulation</text>
+  <text x="640" y="215" font-family="Arial" font-size="14" fill="black">92</text>
   <line x1="638" y1="210" x2="498" y2="212" stroke="black" stroke-width="0.5" />
   <line x1="498" y1="212" x2="430" y2="200" stroke="black" stroke-width="0.5" />
 
   <!-- MODE BOUNDARY (thin solid lines to avoid signal path classification) -->
   <line x1="130" y1="380" x2="330" y2="380" stroke="black" stroke-width="0.5" />
-  <text x="425" y="384" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MODE BOUNDARY</text>
+  <text x="425" y="384" font-family="Arial" font-size="14" text-anchor="middle" fill="black">MODE BOUNDARY</text>
   <line x1="520" y1="380" x2="700" y2="380" stroke="black" stroke-width="0.5" />
 
   <!-- AUTONOMOUS MODE section label -->
@@ -116,9 +116,9 @@
 
   <!-- 100: Resync path -->
   <path d="M465 555 L730 555 L730 155 L515 155" stroke="black" stroke-width="1.5" stroke-dasharray="4,2" fill="none" marker-end="url(#ah)" />
-  <text x="735" y="400" font-family="Arial, sans-serif" font-size="14" fill="black">100</text>
+  <text x="735" y="400" font-family="Arial" font-size="14" fill="black">100</text>
   <line x1="733" y1="403" x2="730" y2="405" stroke="black" stroke-width="0.5" />
-  <text x="715" y="140" font-family="Arial, sans-serif" font-size="14" fill="black">resync()</text>
+  <text x="715" y="140" font-family="Arial" font-size="14" fill="black">resync()</text>
 
   <!-- MODE SELECTION LOGIC legend box -->
   <rect x="130" y="660" width="570" height="120" rx="5" fill="none" stroke="black" stroke-width="1" />

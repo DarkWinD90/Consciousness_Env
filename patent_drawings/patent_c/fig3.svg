@@ -19,6 +19,17 @@
   <rect x="535" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
   <rect x="535" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
 
+  <!-- Anchor components for axis endpoints -->
+  <rect x="155" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="155" y="145" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="705" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="235" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="235" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="315" y="385" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="315" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="535" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="535" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+
   <!-- Graph axes -->
   <!-- 44: Y-axis (Modulation value) -->
   <line x1="160" y1="680" x2="160" y2="150" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -44,7 +55,7 @@
 
   <!-- X-axis tick marks and values -->
   <line x1="160" y1="675" x2="160" y2="690" stroke="black" stroke-width="1" />
-  <text x="160" y="710" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0</text>
+  <text x="160" y="710" font-family="Arial" font-size="14" text-anchor="middle" fill="black">0</text>
   <line x1="160" y1="703" x2="160" y2="690" stroke="black" stroke-width="0.5" />
   <line x1="240" y1="675" x2="240" y2="690" stroke="black" stroke-width="1" />
   <text x="240" y="710" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">15</text>
