@@ -67,6 +67,18 @@ def test_two_axis_values_not_enough() -> None:
     assert _is_graph_axis_label(content, "100", 200, 500) is False
 
 
+def test_mixed_scale_ticks_on_same_y_still_axis_label() -> None:
+    """Mixed numeric ticks (0-2000) should still be treated as an axis cluster."""
+    content = _svg(
+        '<text x="100" y="500" font-size="14" text-anchor="middle">0</text>\n'
+        '<text x="250" y="500" font-size="14" text-anchor="middle">500</text>\n'
+        '<text x="400" y="500" font-size="14" text-anchor="middle">1000</text>\n'
+        '<text x="550" y="500" font-size="14" text-anchor="middle">1500</text>\n'
+        '<text x="700" y="500" font-size="14" text-anchor="middle">2000</text>'
+    )
+    assert _is_graph_axis_label(content, "500", 250, 500) is True
+
+
 def test_non_axis_value_ignored() -> None:
     """A numeral outside {100,200,300,400,500} is never an axis label."""
     content = _svg(
@@ -99,6 +111,20 @@ def test_axis_cluster_excluded_from_results() -> None:
     assert "100" not in values
     assert "200" not in values
     assert "300" not in values
+
+
+def test_centered_500_in_mixed_scale_axis_excluded() -> None:
+    """A centered 500 on a mixed-scale axis should be excluded."""
+    content = _svg(
+        '<text x="100" y="500" font-size="14" text-anchor="middle">0</text>\n'
+        '<text x="250" y="500" font-size="14" text-anchor="middle">500</text>\n'
+        '<text x="400" y="500" font-size="14" text-anchor="middle">1000</text>\n'
+        '<text x="550" y="500" font-size="14" text-anchor="middle">1500</text>\n'
+        '<text x="700" y="500" font-size="14" text-anchor="middle">2000</text>'
+    )
+    nums = find_reference_numerals(content)
+    values = [n["value"] for n in nums]
+    assert "500" not in values
 
 
 def test_non_centered_100_always_included() -> None:
