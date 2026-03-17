@@ -3,6 +3,8 @@
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+
 
 def test_fig3_snn_boundary_uses_rect_primitive() -> None:
     """Keep FIG. 3 SNN boundary as a validator-recognized component primitive."""
