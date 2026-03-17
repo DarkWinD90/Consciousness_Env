@@ -403,17 +403,24 @@ power, power sustains thinking.
 
 **Reference Numerals** (Patent A):
 
-| Numeral | Component |
-|---------|-----------|
-| 100 | Complete system |
-| 110 | Spiking neural network (SNN) |
-| 120 | Motor actuator (servo) |
-| 130 | Piezoelectric energy harvester |
-| 140 | Thermoelectric energy harvester |
-| 150 | Power management unit |
-| 160 | Sensor input module |
-| 170 | Reflection feedback path |
-| 180 | Energy storage (capacitor/battery) |
+**IMPORTANT**: Numerals use a unified cross-figure even-number scheme.
+The authoritative source is `patent_drawings/NUMERAL_REGISTRY.md`.
+
+| Numeral | Component | Figures |
+|---------|-----------|---------|
+| 10 | Environment boundary | 1, 8 |
+| 12 | Sensor | 1, 8 |
+| 14 | Spiking neural network (SNN) | 1, 3, 4, 8 |
+| 16 | Motor | 1, 6, 8 |
+| 18 | Power management block | 1 |
+| 20 | Thermal harvester | 1, 8 |
+| 22 | Piezoelectric element | 1, 4, 6, 8 |
+| 24 | Ground reference | 1 |
+| 26 | Control logic block | 1, 6 |
+| 28 | Energy store | 1, 6, 8 |
+| 30 | Reflection feedback path | 1, 8 |
+
+See `NUMERAL_REGISTRY.md` for the full table (numerals 10-138).
 
 ---
 
@@ -459,17 +466,21 @@ cognitive control or internal energy-aware regulation.
 
 **Reference Numerals** (Patent B):
 
-| Numeral | Component |
-|---------|-----------|
-| 200 | Complete self-observation system |
-| 210 | Spiking neural network |
-| 220 | Output recorder (mean membrane potential) |
-| 230 | Reflection feedback path |
-| 240 | Reflection coefficient controller |
-| 250 | External cognitive modulation input |
-| 260 | Internal energy-aware modulation |
-| 270 | STDP learning module |
-| 280 | Input injection point (neuron 0) |
+**IMPORTANT**: Uses unified cross-figure even-number scheme.
+See `patent_drawings/NUMERAL_REGISTRY.md` for authoritative source.
+
+| Numeral | Component | Figures |
+|---------|-----------|---------|
+| 10 | External input | 1 |
+| 12 | Summing junction | 1 |
+| 14 | Spiking neural network (SNN) | 1, 3, 4, 6 |
+| 16 | Spike output | 1 |
+| 18 | Aggregate output | 1 |
+| 20 | Delay element | 1 |
+| 22 | Reflection scaling block | 1 |
+| 24 | Self-observation feedback path | 1 |
+
+See `NUMERAL_REGISTRY.md` for the full table (numerals 10-80).
 
 ---
 
@@ -660,6 +671,111 @@ For each generated PDF:
 8. **No multimedia content**
 9. **No external dependencies**
 10. **Image resolution**: >= 300 DPI for any rasterized content
+
+---
+
+## SECTION 6.4: SCHEMATIC/HARDWARE FIGURE VALIDATION (CRITICAL)
+
+**This section addresses semantic correctness — not just format compliance.**
+
+Hardware reference designs (like FIG. 6 in Patent A) require additional validation
+beyond standard 37 CFR 1.84 checks. These figures show electrical connections
+between components, and errors here can invalidate patent claims.
+
+### 6.4.1 Arrow Endpoint Validation
+
+For every arrow/polyline representing a signal connection:
+
+1. **Source must be labeled**: Arrow origin should be near a component with reference numeral
+2. **Destination must be labeled**: Arrow endpoint should land at a labeled pin/port
+3. **Labels must be adjacent**: Pin labels (GP0, ADC1, VSYS, etc.) must be positioned
+   within ~20px of where the arrow actually lands
+4. **No orphan arrows**: Every arrow must connect two identifiable elements
+
+**Common failure**: Arrow lands at edge of component box but no pin label exists there.
+
+### 6.4.2 Pin Assignment Cross-Reference
+
+For microcontroller/IC figures, verify EVERY connection matches the specification:
+
+| Check | Method |
+|-------|--------|
+| Read spec pin assignments | Parse "Connected to... via [PIN]" statements |
+| Read drawing pin labels | Extract all GPIO/ADC/PWM text elements |
+| Compare | Every spec pin must appear in drawing |
+| Verify positioning | Label must be near actual arrow endpoint |
+
+**Example validation for Patent A FIG. 6:**
+
+| Component | Spec Says | Drawing Must Show |
+|-----------|-----------|-------------------|
+| Piezo 602 | GP26/ADC0 | "GP26" label at arrow endpoint |
+| Thermistor 606 | GP27/ADC1 | "GP27" label at arrow endpoint |
+| Photoresistor 610 | GP28/ADC2 | "GP28" label at arrow endpoint |
+| LED 608 | GP15 | "GP15" label at arrow endpoint |
+| Servo 604 | GP0/PWM | "GP0" or "PWM" at arrow endpoint |
+| Energy feedback 616 | VSYS (power) | "VSYS" label at arrow endpoint |
+
+### 6.4.3 Electrical Logic Validation
+
+Signal types must match pin capabilities:
+
+| Signal Type | Valid Pins | Invalid Pins |
+|-------------|------------|--------------|
+| Analog input (sensors) | ADC-capable (GP26-28) | Digital-only GPIO |
+| Digital data (LED, etc.) | Any GPIO | ADC-only pins |
+| PWM output (servo) | PWM-capable GPIO | ADC pins |
+| Power input | VSYS, 3V3, VBUS | GPIO pins |
+| Ground | GND pins | Any signal pin |
+
+**Common failure**: Voltage monitoring arrow lands at digital GPIO instead of ADC or VSYS.
+
+### 6.4.4 Label Proximity Check
+
+For each pin label in the drawing:
+
+1. Find the nearest arrow endpoint
+2. Calculate distance: `sqrt((label_x - arrow_x)² + (label_y - arrow_y)²)`
+3. **FAIL if distance > 30px** — label is not visually associated with connection
+4. **WARN if distance > 15px** — label should be moved closer
+
+### 6.4.5 Reference Numeral Collision with Signal Paths
+
+Reference numerals must NOT overlap with:
+- Polyline paths (signal arrows)
+- Lead lines
+- Connection lines between components
+
+**Detection method**: For each reference numeral, check if its bounding box
+intersects any `<polyline>`, `<line>`, or `<path>` element.
+
+### 6.4.6 Hardware Figure Audit Checklist
+
+When auditing FIG. 6 (Patent A) or similar hardware diagrams:
+
+```
+□ Every arrow has a labeled source component
+□ Every arrow has a labeled destination pin
+□ All ADC connections go to ADC-capable pins (GP26-28)
+□ All digital connections go to GPIO pins
+□ Power connections (VSYS, 3V3, GND) are explicitly labeled
+□ Pin labels are positioned adjacent to arrow endpoints (<15px)
+□ Reference numerals don't overlap signal path lines
+□ Drawing matches specification pin assignments exactly
+□ Legend explains different line styles (solid vs dashed)
+```
+
+### 6.4.7 Specification Update Requirements
+
+If drawing corrections require pin reassignment:
+
+1. Update the drawing SVG
+2. Update `patents/uspto_formatted/Patent_X_Drawings_Description.txt`
+3. Update `patents/Patent_X_*.md` if pin assignments are mentioned
+4. Regenerate PDFs via `export_drawings_pdf.py`
+
+**CRITICAL**: Drawing and specification must ALWAYS match. A mismatch is grounds
+for patent rejection under 35 U.S.C. 112(a) (written description requirement).
 
 ---
 

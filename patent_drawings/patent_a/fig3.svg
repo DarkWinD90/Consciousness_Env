@@ -6,69 +6,212 @@
     </marker>
   </defs>
   <rect width="100%" height="100%" fill="white" />
-  <text x="425.0" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">3/8</text>
+
+  <!-- Sheet number -->
+  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">3/8</text>
+
   <g transform="translate(0, 50)">
-    <text x="425" y="138" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Single LIF Neuron Detail</text>
-    <text x="135" y="255" font-family="Courier New, monospace" font-size="14">I_external</text>
-    <text x="100" y="255" font-family="Arial, sans-serif" font-size="14" >302</text>
-    <line x1="135" y1="272" x2="213" y2="295" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <text x="135" y="365" font-family="Courier New, monospace" font-size="14">I_reflection</text>
-    <text x="100" y="365" font-family="Arial, sans-serif" font-size="14" >304</text>
-    <line x1="135" y1="348" x2="214" y2="307" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <circle cx="228" cy="300" r="16" fill="none" stroke="black" stroke-width="1.5"/>
-    <text x="228" y="305" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">+</text>
-    <text x="228" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">306</text>
-    <line x1="244" y1="300" x2="340" y2="300" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <circle cx="430" cy="300" r="90" fill="none" stroke="black" stroke-width="2.5"/>
-    <text x="430" y="270" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Neuron i</text>
-    <text x="430" y="298" font-family="Courier New, monospace" font-size="14" text-anchor="middle">V(t+1) = V(t) x leak</text>
-    <text x="430" y="318" font-family="Courier New, monospace" font-size="14" text-anchor="middle">+ I x dt</text>
-    <text x="525" y="220" font-family="Arial, sans-serif" font-size="14" text-anchor="start">308</text>
-    <line x1="522" y1="224" x2="500" y2="243" stroke="black" stroke-width="0.75"/>
-    <line x1="356" y1="250" x2="505" y2="250" stroke="black" stroke-width="1" stroke-dasharray="5,3"/>
-    <text x="515" y="255" font-family="Courier New, monospace" font-size="14">V_th = 0.5</text>
-    <text x="615" y="258" font-family="Arial, sans-serif" font-size="14" text-anchor="start">310</text>
-    <line x1="520" y1="300" x2="690" y2="300" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <text x="545" y="280" font-family="Courier New, monospace" font-size="14">spike</text>
-    <text x="545" y="325" font-family="Courier New, monospace" font-size="14">(0 or 1)</text>
-    <text x="700" y="288" font-family="Arial, sans-serif" font-size="14" text-anchor="start">312</text>
-    <text x="430" y="418" font-family="Courier New, monospace" font-size="14" text-anchor="middle">If V &gt;= threshold: spike, V = 0</text>
-    <text x="430" y="438" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Refractory period: 2 steps</text>
-    <line x1="200" y1="460" x2="700" y2="460" stroke="black" stroke-width="0.5" stroke-dasharray="3,3"/>
-    <text x="425" y="495" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Network Topology</text>
-    <text x="100" y="548" font-family="Arial, sans-serif" font-size="14">314</text>
-    <line x1="128" y1="550" x2="193" y2="560" stroke="black" stroke-width="0.75"/>
-    <circle cx="210" cy="580" r="22" fill="none" stroke="black" stroke-width="2"/>
-    <text x="210" y="585" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">1</text>
-    <circle cx="310" cy="580" r="22" fill="none" stroke="black" stroke-width="2"/>
-    <text x="310" y="585" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">2</text>
-    <circle cx="410" cy="580" r="22" fill="none" stroke="black" stroke-width="2"/>
-    <text x="410" y="585" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">3</text>
-    <circle cx="580" cy="580" r="22" fill="none" stroke="black" stroke-width="2"/>
-    <text x="580" y="585" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">N</text>
-    <text x="495" y="585" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">. . .</text>
-    <path d="M210,558 Q260,520 310,558" fill="none" stroke="black" stroke-width="1"/>
-    <path d="M210,558 Q310,485 410,558" fill="none" stroke="black" stroke-width="1"/>
-    <path d="M310,558 Q445,470 580,558" fill="none" stroke="black" stroke-width="1"/>
-    <path d="M410,558 Q495,520 580,558" fill="none" stroke="black" stroke-width="1"/>
-    <text x="260" y="505" font-family="Courier New, monospace" font-size="14" text-anchor="middle">W[i,j]</text>
-    <text x="300" y="505" font-family="Arial, sans-serif" font-size="14" text-anchor="start">316</text>
-    <path d="M302,602 C290,635 330,635 318,602" fill="none" stroke="black" stroke-width="1"/>
-    <line x1="300" y1="610" x2="320" y2="630" stroke="black" stroke-width="2"/>
-    <line x1="320" y1="610" x2="300" y2="630" stroke="black" stroke-width="2"/>
-    <line x1="130" y1="580" x2="188" y2="580" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <text x="130" y="565" font-family="Courier New, monospace" font-size="14" text-anchor="middle">adjusted_input</text>
-    <line x1="602" y1="580" x2="695" y2="580" stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-    <text x="620" y="565" font-family="Courier New, monospace" font-size="14">spike_vector</text>
-    <text x="700" y="598" font-family="Arial, sans-serif" font-size="14" text-anchor="start">318</text>
-    <text x="425" y="660" font-family="Courier New, monospace" font-size="14" text-anchor="middle">W[i,i] = 0 (no self-connections)</text>
-    <text x="425" y="682" font-family="Courier New, monospace" font-size="14" text-anchor="middle">N = 50 (operational), N = 20 (control)</text>
-    <rect x="155" y="715" width="540" height="100" rx="8" fill="none" stroke="black" stroke-width="1.5"/>
-    <text x="425" y="737" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">STDP Learning Rule</text>
-    <text x="685" y="755" font-family="Arial, sans-serif" font-size="14" text-anchor="end">320</text>
-    <text x="170" y="761" font-family="Courier New, monospace" font-size="14">Post fires: W += A+ x pre_trace (LTP)</text>
-    <text x="170" y="781" font-family="Courier New, monospace" font-size="14">Pre fires:  W -= A- x post_trace (LTD)</text>
-    <text x="170" y="803" font-family="Courier New, monospace" font-size="14">A- &gt; A+ (stability bias)</text>
-    <text x="425" y="910" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 3</text>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SNN BOUNDARY (14) — main bounding rectangle           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 148 100 L 692 100 Q 700 100 700 108 L 700 492 Q 700 500 692 500 L 148 500 Q 140 500 140 492 L 140 108 Q 140 100 148 100 Z" fill="none" stroke="black" stroke-width="2" />
+    <!-- Anchor rects at SNN boundary connection points (g-space coords) -->
+    <rect x="136" y="198" width="12" height="70" fill="none" stroke="black" stroke-width="1" />
+    <rect x="694" y="234" width="12" height="12" fill="none" stroke="black" stroke-width="1" />
+    <rect x="515" y="324" width="10" height="12" fill="none" stroke="black" stroke-width="1" />
+    <text x="425" y="92" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">SNN</text>
+    <!-- Ref 14 -->
+    <text x="720" y="110" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">14</text>
+    <line x1="718" y1="112" x2="702" y2="108" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- EXTERNAL INPUT — arrow entering SNN from left           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <line x1="140" y1="205" x2="160" y2="205" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <text x="122" y="195" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">EXT.</text>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- REFLECTION INPUT — dashed arrow entering SNN from left  -->
+    <!-- (L8 recursive self-observation feedback)                -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <line x1="140" y1="260" x2="160" y2="260" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
+    <text x="122" y="274" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">REFL.</text>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- INPUT LAYER (52)                                       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="160" y="140" width="120" height="160" rx="4" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="220" y="160" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">INPUT</text>
+    <text x="220" y="178" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">LAYER</text>
+    <!-- Input neurons -->
+    <path d="M 190 210 A 10 10 0 1 0 210 210 A 10 10 0 1 0 190 210 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 230 210 A 10 10 0 1 0 250 210 A 10 10 0 1 0 230 210 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 190 250 A 10 10 0 1 0 210 250 A 10 10 0 1 0 190 250 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 230 250 A 10 10 0 1 0 250 250 A 10 10 0 1 0 230 250 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Ref 52 -->
+    <text x="130" y="115" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">52</text>
+    <line x1="133" y1="118" x2="160" y2="140" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Input → Weight Matrix -->
+    <line x1="280" y1="220" x2="310" y2="220" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- WEIGHT MATRIX (54)                                     -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="310" y="150" width="120" height="140" rx="4" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="370" y="172" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">WEIGHT</text>
+    <text x="370" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MATRIX</text>
+    <!-- Grid representation -->
+    <rect x="330" y="205" width="80" height="70" fill="none" stroke="black" stroke-width="0.8" />
+    <line x1="330" y1="222" x2="410" y2="222" stroke="black" stroke-width="0.8" />
+    <line x1="330" y1="240" x2="410" y2="240" stroke="black" stroke-width="0.8" />
+    <line x1="330" y1="258" x2="410" y2="258" stroke="black" stroke-width="0.8" />
+    <line x1="350" y1="205" x2="350" y2="275" stroke="black" stroke-width="0.8" />
+    <line x1="370" y1="205" x2="370" y2="275" stroke="black" stroke-width="0.8" />
+    <line x1="390" y1="205" x2="390" y2="275" stroke="black" stroke-width="0.8" />
+    <!-- Ref 54 -->
+    <text x="280" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">54</text>
+    <line x1="283" y1="123" x2="310" y2="150" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Weight Matrix → Hidden Layer -->
+    <line x1="430" y1="220" x2="460" y2="220" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- HIDDEN LAYER (56)                                      -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="460" y="140" width="120" height="160" rx="4" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="520" y="160" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">HIDDEN</text>
+    <text x="520" y="178" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">LAYER</text>
+    <!-- Hidden neurons — three circles, center labeled "i" -->
+    <path d="M 478 220 A 12 12 0 1 0 502 220 A 12 12 0 1 0 478 220 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 508 220 A 12 12 0 1 0 532 220 A 12 12 0 1 0 508 220 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="520" y="225" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">i</text>
+    <path d="M 538 220 A 12 12 0 1 0 562 220 A 12 12 0 1 0 538 220 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Ref 56 -->
+    <text x="600" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">56</text>
+    <line x1="598" y1="123" x2="580" y2="140" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- NEURON DETAIL (58) — inset showing LIF behavior        -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Dashed box indicating magnified neuron detail -->
+    <rect x="160" y="330" width="400" height="120" rx="4" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="5,3" />
+    <!-- Magnification line from hidden neuron to detail -->
+    <line x1="520" y1="232" x2="520" y2="330" stroke="black" stroke-width="0.5" />
+    <!-- Neuron circle with threshold indicator -->
+    <path d="M 195 380 A 15 15 0 1 0 225 380 A 15 15 0 1 0 195 380 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Threshold bar inside neuron -->
+    <line x1="198" y1="375" x2="222" y2="375" stroke="black" stroke-width="0.5" />
+    <!-- LIF equation text -->
+    <text x="240" y="365" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">V(t+1) = V(t) x leak + I</text>
+    <text x="240" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">If V &gt;= V_th: spike</text>
+    <text x="240" y="395" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">V_th = 0.5</text>
+    <!-- Membrane trace mini-plot -->
+    <path d="M 400 430 L 415 420 L 430 415 L 445 400 L 450 385 L 453 430 L 468 420 L 483 408 L 498 392 L 503 385 L 506 430 L 521 420"
+          fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Ref 58 -->
+    <text x="580" y="325" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">58</text>
+    <line x1="578" y1="328" x2="562" y2="338" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- OUTPUT STAGE (60)                                      -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="600" y="160" width="80" height="120" rx="4" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="640" y="185" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">OUTPUT</text>
+    <text x="640" y="203" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">STAGE</text>
+    <!-- Aggregation triangle -->
+    <path d="M 615 220 L 665 240 L 615 260 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Ref 60 -->
+    <text x="700" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">60</text>
+    <line x1="698" y1="163" x2="682" y2="168" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Hidden Layer → Output Stage -->
+    <line x1="580" y1="220" x2="600" y2="220" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SPIKE OUTPUT (62) — ref label at SNN exit point         -->
+    <!-- (Arrow merged into route-to-spike-vector below to       -->
+    <!--  eliminate overlap at (680,240)→(700,240))               -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Ref 62 -->
+    <text x="720" y="228" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">62</text>
+    <line x1="718" y1="232" x2="703" y2="240" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- MEMBRANE POTENTIAL DYNAMICS (64) — inset graph          -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="160" y="520" width="340" height="150" rx="4" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="5,3" />
+    <text x="330" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">MEMBRANE POTENTIAL</text>
+    <!-- Mini axes -->
+    <line x1="190" y1="560" x2="190" y2="650" stroke="black" stroke-width="1" />
+    <line x1="190" y1="650" x2="480" y2="650" stroke="black" stroke-width="1" />
+    <!-- Threshold line (Q curve to avoid signal path classification) -->
+    <line x1="190" y1="585" x2="480" y2="585" stroke="black" stroke-width="0.5" />
+    <!-- Membrane potential trace with spikes -->
+    <path d="M 190 640 Q 220 620 240 600 L 245 570 L 248 640 Q 280 615 310 595 L 315 570 L 318 640 Q 350 620 370 600 L 375 570 L 378 640 Q 410 620 440 600 L 445 570 L 448 640 L 480 625"
+          fill="none" stroke="black" stroke-width="2" />
+    <!-- Ref 64 -->
+    <text x="520" y="515" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">64</text>
+    <line x1="518" y1="518" x2="502" y2="528" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SPIKE VECTOR OUTPUT (66) — raster display              -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 164 690 L 556 690 Q 560 690 560 694 L 560 756 Q 560 760 556 760 L 164 760 Q 160 760 160 756 L 160 694 Q 160 690 164 690 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Anchor point at spike vector input for signal path routing -->
+    <rect x="555" y="726" width="10" height="8" fill="none" stroke="black" stroke-width="1" />
+    <text x="360" y="712" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">SPIKE VECTOR OUTPUT</text>
+    <!-- Raster bars -->
+    <rect x="180" y="720" width="12" height="28" fill="black" />
+    <rect x="208" y="730" width="12" height="18" fill="black" />
+    <rect x="236" y="724" width="12" height="24" fill="black" />
+    <rect x="264" y="735" width="12" height="13" fill="black" />
+    <rect x="292" y="718" width="12" height="30" fill="black" />
+    <rect x="320" y="726" width="12" height="22" fill="black" />
+    <rect x="348" y="720" width="12" height="28" fill="black" />
+    <rect x="376" y="738" width="12" height="10" fill="black" />
+    <rect x="404" y="724" width="12" height="24" fill="black" />
+    <rect x="432" y="730" width="12" height="18" fill="black" />
+    <!-- Ref 66 -->
+    <text x="580" y="710" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">66</text>
+    <line x1="578" y1="714" x2="562" y2="720" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Output Stage → exit SNN → route down to Spike Vector -->
+    <!-- Single continuous path from Output Stage (680,240) through SNN exit to Spike Vector -->
+    <line x1="680" y1="240" x2="700" y2="240" stroke="black" stroke-width="1.5" />
+    <!-- SNN exit indicator circle -->
+    <circle cx="700" cy="240" r="3" fill="black" stroke="black" stroke-width="1" />
+    <line x1="700" y1="240" x2="740" y2="240" stroke="black" stroke-width="1.5" />
+    <line x1="740" y1="240" x2="740" y2="730" stroke="black" stroke-width="1.5" />
+    <!-- Routing anchor at signal path turn -->
+    <rect x="736" y="726" width="8" height="8" fill="none" stroke="black" stroke-width="1" />
+    <line x1="740" y1="730" x2="560" y2="730" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- STDP LEARNING RULE BOX (68)                            -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="530" y="520" width="190" height="130" rx="4" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="625" y="540" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">STDP LEARNING RULE</text>
+    <text x="625" y="558" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">If post fires:</text>
+    <text x="625" y="572" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">W += A+ x pre_trace (LTP)</text>
+    <text x="625" y="590" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">If pre fires:</text>
+    <text x="625" y="604" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">W -= A- x post_trace (LTD)</text>
+    <text x="625" y="622" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">A- &gt; A+ (stability bias)</text>
+    <text x="625" y="638" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Weight bounds: [0.0, 0.5]</text>
+    <!-- Ref 68 -->
+    <text x="738" y="532" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">68</text>
+    <line x1="736" y1="536" x2="722" y2="540" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: STDP feedback to Weight Matrix (single dashed path) -->
+    <!-- Route: STDP box top → up → bridge arc → up → horizontal → down to weight matrix -->
+    <path d="M 625 520 L 625 507 Q 618 500 625 493 L 625 470 L 370 470 L 370 290"
+          fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIGURE LABEL                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 3</text>
+
   </g>
 </svg>

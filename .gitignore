@@ -85,3 +85,8 @@ Archive/
 # Temporary figure development files
 Fig*.svg
 gen_fig*.py
+.claude/settings.local.json
+
+# Google API credentials (sensitive)
+tools/credentials.json
+tools/token.json

@@ -6,82 +6,99 @@
     </marker>
   </defs>
   <rect width="100%" height="100%" fill="white" />
-  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">2/6</text>
 
-  <!-- Title -->
-  <text x="425" y="110" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">REFLECTION COEFFICIENT SPECTRUM</text>
-  <text x="425" y="130" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Behavioral Effects Across Full Range (0.0 to 1.0)</text>
+  <!-- Sheet number -->
+  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">2/6</text>
 
-  <!-- Operational range bracket (0.1 to 0.3) above bar -->
-  <text x="260" y="175" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">0.1 to 0.3 (typical)</text>
-  <line x1="205" y1="188" x2="205" y2="203" stroke="black" stroke-width="2"/>
-  <line x1="205" y1="188" x2="315" y2="188" stroke="black" stroke-width="2"/>
-  <line x1="315" y1="188" x2="315" y2="203" stroke="black" stroke-width="2"/>
+  <g transform="translate(0, 50)">
 
-  <!-- Main Spectrum Bar (200) -->
-  <rect x="150" y="205" width="550" height="45" rx="0" fill="none" stroke="black" stroke-width="3"/>
-  <text x="690" y="223" font-family="Arial, sans-serif" font-size="14" text-anchor="end">200</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- MAIN SPECTRUM BAR (26) — horizontal bar 0.0 to 1.0    -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="150" y="200" width="550" height="60" fill="none" stroke="black" stroke-width="2" />
+    <!-- Ref 26 -->
+    <text x="710" y="225" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">26</text>
+    <line x1="708" y1="225" x2="702" y2="225" stroke="black" stroke-width="0.5" />
 
-  <!-- Region dividers inside bar -->
-  <line x1="260" y1="205" x2="260" y2="250" stroke="black" stroke-width="2"/>
-  <line x1="370" y1="205" x2="370" y2="250" stroke="black" stroke-width="2"/>
-  <line x1="535" y1="205" x2="535" y2="250" stroke="black" stroke-width="2"/>
+    <!-- Scale markings below bar -->
+    <line x1="150" y1="260" x2="150" y2="280" stroke="black" stroke-width="1.5" />
+    <text x="150" y="298" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.0</text>
+    <line x1="260" y1="260" x2="260" y2="280" stroke="black" stroke-width="1.5" />
+    <text x="260" y="298" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.2</text>
+    <line x1="370" y1="260" x2="370" y2="280" stroke="black" stroke-width="1.5" />
+    <text x="370" y="298" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.4</text>
+    <line x1="535" y1="260" x2="535" y2="280" stroke="black" stroke-width="1.5" />
+    <text x="535" y="298" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.7</text>
+    <line x1="700" y1="260" x2="700" y2="280" stroke="black" stroke-width="1.5" />
+    <text x="700" y="298" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">1.0</text>
 
-  <!-- Scale markers below bar -->
-  <line x1="150" y1="250" x2="150" y2="262" stroke="black" stroke-width="1"/>
-  <text x="150" y="280" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.0</text>
-  <line x1="260" y1="250" x2="260" y2="262" stroke="black" stroke-width="1"/>
-  <text x="260" y="280" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.2</text>
-  <line x1="370" y1="250" x2="370" y2="262" stroke="black" stroke-width="1"/>
-  <text x="370" y="280" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.4</text>
-  <line x1="535" y1="250" x2="535" y2="262" stroke="black" stroke-width="1"/>
-  <text x="535" y="280" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0.7</text>
-  <line x1="700" y1="250" x2="700" y2="262" stroke="black" stroke-width="1"/>
-  <text x="700" y="280" font-family="Courier New, monospace" font-size="14" text-anchor="middle">1.0</text>
+    <!-- Direction indicator — scale direction (no marker to avoid false positive) -->
+    <line x1="150" y1="340" x2="700" y2="340" stroke="black" stroke-width="1.5" />
+    <polygon points="700 336, 712 340, 700 344" fill="black" />
 
-  <!-- REGION 1 (202) -->
-  <rect x="150" y="320" width="550" height="85" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="165" y="345" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 1 (0.0): No Self-Observation</text>
-  <text x="690" y="338" font-family="Arial, sans-serif" font-size="14" text-anchor="end">202</text>
-  <text x="165" y="368" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Pure feedforward processing</text>
-  <text x="165" y="386" font-family="Courier New, monospace" font-size="14" text-anchor="start">Behavior: System responds only to external input</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIRST REGION (28) — point at 0.0, no self-observation  -->
+    <!-- Depicted as narrow marker at left edge of bar          -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <line x1="153" y1="200" x2="153" y2="260" stroke="black" stroke-width="3" />
+    <!-- Ref 28 -->
+    <text x="140" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">28</text>
+    <line x1="143" y1="192" x2="150" y2="200" stroke="black" stroke-width="0.5" />
 
-  <!-- REGION 2 (204) -->
-  <rect x="150" y="420" width="550" height="85" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="165" y="445" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 2 (0.0 - 0.2): Minimal Self-Awareness</text>
-  <text x="690" y="438" font-family="Arial, sans-serif" font-size="14" text-anchor="end">204</text>
-  <text x="165" y="468" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Slight influence of prior state</text>
-  <text x="165" y="486" font-family="Courier New, monospace" font-size="14" text-anchor="start">Behavior: Primarily externally driven</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECOND REGION (30) — 0.0 to 0.2, minimal              -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="156" y="203" width="101" height="54" fill="none" stroke="black" stroke-width="0.9" stroke-dasharray="4,4" />
+    <!-- Ref 30 -->
+    <text x="205" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">30</text>
+    <line x1="205" y1="193" x2="205" y2="200" stroke="black" stroke-width="0.5" />
 
-  <!-- REGION 3 (206) - OPERATIONAL -->
-  <rect x="150" y="520" width="550" height="100" rx="5" fill="none" stroke="black" stroke-width="3"/>
-  <text x="165" y="545" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 3 (0.2 - 0.4): Balanced Self-Observation</text>
-  <text x="520" y="565" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">OPERATIONAL RANGE</text>
-  <text x="690" y="538" font-family="Arial, sans-serif" font-size="14" text-anchor="end">206</text>
-  <text x="165" y="568" font-family="Arial, sans-serif" font-size="14" text-anchor="start">External input + meaningful self-reference</text>
-  <text x="165" y="591" font-family="Courier New, monospace" font-size="14" text-anchor="start">Default: refl_coeff = 0.2 + modulation x 0.1</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- THIRD REGION (32) — 0.2 to 0.4, balanced/operational  -->
+    <!-- Bold border to indicate operational range               -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="263" y="203" width="104" height="54" fill="none" stroke="black" stroke-width="0.9" />
+    <!-- Ref 32 -->
+    <text x="315" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">32</text>
+    <line x1="315" y1="193" x2="315" y2="200" stroke="black" stroke-width="0.5" />
 
-  <!-- REGION 4 (208) -->
-  <rect x="150" y="635" width="550" height="85" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="165" y="660" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 4 (0.4 - 0.7): Self-Dominated Processing</text>
-  <text x="690" y="653" font-family="Arial, sans-serif" font-size="14" text-anchor="end">208</text>
-  <text x="165" y="683" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Internal state dominates</text>
-  <text x="165" y="701" font-family="Courier New, monospace" font-size="14" text-anchor="start">Behavior: Risk of echo chamber dynamics</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FOURTH REGION (34) — 0.4 to 0.7, self-dominated       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="373" y="203" width="159" height="54" fill="none" stroke="black" stroke-width="0.9" stroke-dasharray="4,4" />
+    <!-- Ref 34 -->
+    <text x="452" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">34</text>
+    <line x1="452" y1="193" x2="452" y2="200" stroke="black" stroke-width="0.5" />
 
-  <!-- REGION 5 (210) -->
-  <rect x="150" y="735" width="550" height="85" rx="5" fill="none" stroke="black" stroke-width="2"/>
-  <text x="165" y="760" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Region 5 (0.7 - 1.0): Self-Absorption</text>
-  <text x="690" y="753" font-family="Arial, sans-serif" font-size="14" text-anchor="end">210</text>
-  <text x="165" y="783" font-family="Arial, sans-serif" font-size="14" text-anchor="start">External input overwhelmed</text>
-  <text x="165" y="801" font-family="Courier New, monospace" font-size="14" text-anchor="start">Behavior: System locks onto its own prior state</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIFTH REGION (36) — 0.7 to 1.0, self-absorption       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="538" y="203" width="159" height="54" fill="none" stroke="black" stroke-width="0.9" stroke-dasharray="4,4" />
+    <!-- Ref 36 -->
+    <text x="617" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">36</text>
+    <line x1="617" y1="193" x2="617" y2="200" stroke="black" stroke-width="0.5" />
 
-  <!-- Arrow indicating increasing self-referential processing -->
-  <line x1="180" y1="865" x2="670" y2="865" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <text x="425" y="890" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Increasing self-referential processing</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- CURRENT PROCESSING POINT (38) — vertical dashed line   -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <line x1="260" y1="195" x2="260" y2="265" stroke="black" stroke-width="2" stroke-dasharray="5,3" />
+    <!-- Ref 38 — default reflection_coeff = 0.2 (base_reflection per spec) -->
+    <text x="275" y="175" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">38</text>
+    <line x1="273" y1="177" x2="262" y2="195" stroke="black" stroke-width="0.5" />
 
-  <!-- Note -->
-  <text x="425" y="945" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">The reflection coefficient is the system's self-awareness dial</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- REGION LABELS — below direction arrow                  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <text x="150" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">None</text>
+    <text x="205" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Minimal</text>
+    <text x="315" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Balanced</text>
+    <text x="452" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Dominant</text>
+    <text x="617" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Saturated</text>
 
-  <!-- Figure Label -->
-  <text x="425" y="1020" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 2</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIGURE LABEL                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 2</text>
+
+  </g>
 </svg>

@@ -1,69 +1,182 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
-  <defs><marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+  <defs>
+    <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
       <polygon points="0 0, 6 2, 0 4" fill="black" />
-    </marker></defs>
+    </marker>
+  </defs>
   <rect width="100%" height="100%" fill="white" />
-  <text x="425.0" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">4/8</text>
+
+  <!-- Sheet number -->
+  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">4/8</text>
+
   <g transform="translate(0, 50)">
-<text x="250" y="100" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Piezoelectric Harvester</text>
-<rect x="200" y="130" width="100" height="50" fill="none" stroke="black" stroke-width="2"/>
-<text x="190" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="end">416</text>
-<text x="250" y="150" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Servo</text>
-<text x="250" y="170" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Motor</text>
-<path d="M250,180 L245.0,184.0 L255.0,188.0 L245.0,192.0 L255.0,196.0 L245.0,200.0 L255.0,204.0 L245.0,208.0 L255.0,212.0 L245.0,216.0 L255.0,220.0 L250,225" fill="none" stroke="black" stroke-width="2"/>
-<text x="230" y="205" font-family="Arial, sans-serif" font-size="14" text-anchor="end">406</text>
-<text x="310" y="200" font-family="Courier New, monospace" font-size="14" text-anchor="start">Mechanical</text>
-<text x="310" y="215" font-family="Courier New, monospace" font-size="14" text-anchor="start">Coupling</text>
-<line x1="250" y1="225" x2="250" y2="235" stroke="black" stroke-width="2"/>
-<line x1="220.0" y1="235" x2="280.0" y2="235" stroke="black" stroke-width="2"/><line x1="220.0" y1="245" x2="280.0" y2="245" stroke="black" stroke-width="2"/>
-<text x="210" y="240" font-family="Arial, sans-serif" font-size="14" text-anchor="end">400</text>
-<text x="310" y="248" font-family="Courier New, monospace" font-size="14" text-anchor="start">27mm piezoelectric disc</text>
-<line x1="250" y1="245" x2="250" y2="275" stroke="black" stroke-width="2"/>
-<path d="M225,275 Q231,260 237,275 Q243,260 249,275 Q255,260 261,275 Q267,260 273,275" fill="none" stroke="black" stroke-width="2"/>
-<text x="210" y="275" font-family="Arial, sans-serif" font-size="14" text-anchor="end">418</text>
-<line x1="250" y1="275" x2="250" y2="290" stroke="black" stroke-width="2"/>
-<text x="310" y="285" font-family="Courier New, monospace" font-size="14" text-anchor="start">Ferrite Inductor (LC)</text>
-<line x1="250" y1="290" x2="250" y2="380" stroke="black" stroke-width="2"/>
-<text x="310" y="325" font-family="Courier New, monospace" font-size="14" text-anchor="start">f_res = 1/(2pi sqrt(LC))</text>
-<text x="310" y="355" font-family="Courier New, monospace" font-size="14" text-anchor="start">3-10x gain at resonance</text>
-<polygon points="250,380 290,420 250,460 210,420" fill="none" stroke="black" stroke-width="1.5"/><g transform="rotate(-45, 235, 405)"><polygon points="225,395 225,415 245,405" fill="none" stroke="black" stroke-width="2"/><line x1="245" y1="395" x2="245" y2="415" stroke="black" stroke-width="2"/></g><g transform="rotate(45, 265, 405)"><polygon points="255,395 255,415 275,405" fill="none" stroke="black" stroke-width="2"/><line x1="275" y1="395" x2="275" y2="415" stroke="black" stroke-width="2"/></g><g transform="rotate(-135, 235, 435)"><polygon points="225,425 225,445 245,435" fill="none" stroke="black" stroke-width="2"/><line x1="245" y1="425" x2="245" y2="445" stroke="black" stroke-width="2"/></g><g transform="rotate(135, 265, 435)"><polygon points="255,425 255,445 275,435" fill="none" stroke="black" stroke-width="2"/><line x1="275" y1="425" x2="275" y2="445" stroke="black" stroke-width="2"/></g><circle cx="250" cy="380" r="3" fill="black"/><circle cx="250" cy="460" r="3" fill="black"/><circle cx="210" cy="420" r="3" fill="black"/><circle cx="290" cy="420" r="3" fill="black"/>
-<text x="200" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="end">402</text>
-<text x="310" y="410" font-family="Courier New, monospace" font-size="14" text-anchor="start">Full-Bridge</text>
-<text x="310" y="430" font-family="Courier New, monospace" font-size="14" text-anchor="start">Rectifier (4 diodes)</text>
-<line x1="250" y1="460" x2="250" y2="640" stroke="black" stroke-width="2"/>
-<line x1="230.0" y1="490" x2="270.0" y2="490" stroke="black" stroke-width="2"/><line x1="230.0" y1="500" x2="270.0" y2="500" stroke="black" stroke-width="2"/>
-<text x="220" y="495" font-family="Arial, sans-serif" font-size="14" text-anchor="end">404</text>
-<text x="280" y="495" font-family="Courier New, monospace" font-size="14" text-anchor="start">Smoothing Cap</text>
-<text x="280" y="515" font-family="Courier New, monospace" font-size="14" text-anchor="start">friction_factor = 18.0</text>
-<text x="580" y="100" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Thermoelectric Harvester</text>
-<path d="M580,150 L572,160.0 L588,170.0 L572,180.0 L588,190.0 L572,200.0 L580,210.0" fill="none" stroke="black" stroke-width="2"/><line x1="565" y1="210" x2="595" y2="150" stroke="black" stroke-width="1.5"/><line x1="565" y1="210" x2="555" y2="210" stroke="black" stroke-width="1.5"/>
-<text x="555" y="180" font-family="Arial, sans-serif" font-size="14" text-anchor="end">408</text>
-<text x="610" y="180" font-family="Courier New, monospace" font-size="14" text-anchor="start">NTC 10K</text>
-<text x="610" y="198" font-family="Courier New, monospace" font-size="14" text-anchor="start">3950</text>
-<line x1="580" y1="210" x2="580" y2="280" stroke="black" stroke-width="2"/>
-<g transform="rotate(90, 580, 280)"><polygon points="570,270 570,290 590,280" fill="none" stroke="black" stroke-width="2"/><line x1="590" y1="270" x2="590" y2="290" stroke="black" stroke-width="2"/></g>
-<text x="555" y="290" font-family="Arial, sans-serif" font-size="14" text-anchor="end">410</text>
-<text x="610" y="290" font-family="Courier New, monospace" font-size="14" text-anchor="start">Rectifier</text>
-<line x1="580" y1="290" x2="580" y2="640" stroke="black" stroke-width="2"/>
-<line x1="560.0" y1="330" x2="600.0" y2="330" stroke="black" stroke-width="2"/><line x1="560.0" y1="340" x2="600.0" y2="340" stroke="black" stroke-width="2"/>
-<text x="555" y="335" font-family="Arial, sans-serif" font-size="14" text-anchor="end">412</text>
-<text x="595" y="355" font-family="Courier New, monospace" font-size="14" text-anchor="start">thermal_factor = 8.0</text>
-<line x1="250" y1="640" x2="580" y2="640" stroke="black" stroke-width="3"/>
-<text x="425.0" y="598" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">420</text>
-<text x="425.0" y="615" font-family="Courier New, monospace" font-size="14" text-anchor="middle">Power Combiner</text>
-<circle cx="425.0" cy="640" r="15" fill="white" stroke="black" stroke-width="2"/>
-<text x="425.0" y="646" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">+</text>
-<line x1="425.0" y1="655" x2="425.0" y2="685" stroke="black" stroke-width="2"/>
-<line x1="385.0" y1="685" x2="465.0" y2="685" stroke="black" stroke-width="2"/><line x1="385.0" y1="695" x2="465.0" y2="695" stroke="black" stroke-width="2"/>
-<text x="375.0" y="690" font-family="Arial, sans-serif" font-size="14" text-anchor="end">414</text>
-<text x="475.0" y="698" font-family="Courier New, monospace" font-size="14" text-anchor="start">energy_stored (mWh)</text>
-<line x1="425.0" y1="700" x2="425.0" y2="745" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-<text x="440.0" y="730" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="start">Power to SNN (L4)</text>
-<rect x="150" y="800" width="550" height="120" rx="10" fill="none" stroke="black" stroke-width="2"/>
-<text x="425.0" y="830" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Power Budget</text>
-<text x="170" y="860" font-family="Courier New, monospace" font-size="14" text-anchor="start">Harvest = friction_harvest + thermal_harvest</text>
-<text x="170" y="880" font-family="Courier New, monospace" font-size="14" text-anchor="start">Cost = base_consumption + activity_cost x spike_count^2</text>
-<text x="170" y="900" font-family="Courier New, monospace" font-size="14" text-anchor="start">Net = Harvest - Cost</text>
-<text x="425.0" y="1000" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 4</text>
-  </g></svg>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- CIRCUIT BOUNDARY (70) — dashed enclosure               -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="130" y="100" width="590" height="530" rx="8" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="8,4" />
+    <!-- Ref 70 -->
+    <text x="745" y="108" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">70</text>
+    <line x1="743" y1="110" x2="722" y2="108" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- PIEZOELECTRIC ELEMENT (22) — top left                  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Double circle for piezo disc per spec -->
+    <circle cx="230" cy="175" r="35" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 205 175 A 25 25 0 1 0 255 175 A 25 25 0 1 0 205 175 Z" fill="none" stroke="black" stroke-width="1" />
+    <text x="230" y="172" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
+    <text x="230" y="184" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">27mm</text>
+    <!-- Ref 22 -->
+    <text x="200" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">22</text>
+    <line x1="200" y1="123" x2="210" y2="140" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Piezo → AC Signal (start within piezo circle bbox) -->
+    <line x1="265" y1="175" x2="340" y2="175" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- AC SIGNAL (72)                                         -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="340" y="140" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="400" y="182" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">AC SIGNAL</text>
+    <!-- Ref 72 -->
+    <text x="478" y="128" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">72</text>
+    <line x1="478" y1="131" x2="460" y2="145" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: AC Signal → Inductor -->
+    <line x1="460" y1="175" x2="500" y2="175" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- INDUCTOR (74)                                          -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="500" y="140" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="560" y="182" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">INDUCTOR</text>
+    <!-- Ref 74 -->
+    <text x="638" y="128" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">74</text>
+    <line x1="638" y1="131" x2="620" y2="145" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Inductor → Full-Bridge Rectifier (down) -->
+    <line x1="560" y1="210" x2="560" y2="270" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FULL-BRIDGE RECTIFIER (76)                             -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Diamond shape for rectifier per spec -->
+    <polygon points="560 270, 640 305, 560 340, 480 305" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="560" y="302" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">FULL-BRIDGE</text>
+    <text x="560" y="316" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">RECTIFIER</text>
+    <!-- Ref 76 -->
+    <text x="670" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">76</text>
+    <line x1="668" y1="283" x2="642" y2="300" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Rectifier → Smoothing Capacitor (down) -->
+    <line x1="560" y1="340" x2="560" y2="400" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- Dashed feedback arrow: Rectifier → Inductor (per spec) -->
+    <path d="M 490 280 Q 465 255 475 230 Q 485 215 500 210"
+          fill="none" stroke="black" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SMOOTHING CAPACITOR (78)                               -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="480" y="400" width="160" height="70" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="560" y="432" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">SMOOTHING</text>
+    <text x="560" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">CAPACITOR</text>
+    <!-- Ref 78 -->
+    <text x="660" y="390" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">78</text>
+    <line x1="658" y1="393" x2="642" y2="408" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Smoothing Capacitor → Boost Converter (left) -->
+    <line x1="480" y1="435" x2="440" y2="435" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- HEAT SINK (80) — left side, thermal path               -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="160" y="270" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="220" y="312" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">HEAT SINK</text>
+    <!-- Ref 80 -->
+    <text x="140" y="258" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">80</text>
+    <line x1="143" y1="261" x2="160" y2="278" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Heat Sink → TEG Module (down) -->
+    <line x1="220" y1="340" x2="220" y2="400" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- TEG MODULE (82)                                        -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="160" y="400" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="220" y="432" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">TEG</text>
+    <text x="220" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MODULE</text>
+    <!-- Ref 82 -->
+    <text x="140" y="388" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">82</text>
+    <line x1="143" y1="391" x2="160" y2="408" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: TEG → Boost Converter (right) -->
+    <line x1="280" y1="435" x2="320" y2="435" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- BOOST CONVERTER (84)                                   -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="320" y="400" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="380" y="432" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">BOOST</text>
+    <text x="380" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">CONVERTER</text>
+    <!-- Ref 84 -->
+    <text x="300" y="388" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">84</text>
+    <line x1="303" y1="391" x2="320" y2="400" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Boost Converter → Output Regulator (down) -->
+    <line x1="380" y1="470" x2="380" y2="540" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- OUTPUT REGULATOR (86)                                  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="320" y="540" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="380" y="572" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">OUTPUT</text>
+    <text x="380" y="590" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">REGULATOR</text>
+    <!-- Ref 86 -->
+    <text x="458" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">86</text>
+    <line x1="456" y1="533" x2="442" y2="548" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: Output Regulator → System Output (down) -->
+    <line x1="380" y1="610" x2="380" y2="680" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SYSTEM OUTPUT (88) — dashed box indicating SNN feed    -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="310" y="680" width="140" height="60" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
+    <text x="380" y="716" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">SYSTEM OUTPUT</text>
+    <!-- Ref 88 -->
+    <text x="468" y="682" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">88</text>
+    <line x1="466" y1="685" x2="450" y2="698" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SNN (14) — destination reference (dashed, outside)     -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="310" y="770" width="140" height="50" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <text x="380" y="800" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">SNN</text>
+    <!-- Ref 14 -->
+    <text x="468" y="772" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">14</text>
+    <line x1="466" y1="775" x2="450" y2="788" stroke="black" stroke-width="0.5" />
+
+    <!-- Arrow: System Output → SNN -->
+    <line x1="380" y1="740" x2="380" y2="770" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- LEGEND                                                 -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="200" y="850" width="320" height="50" fill="none" stroke="black" stroke-width="1" />
+    <!-- Solid line = circuit component -->
+    <line x1="215" y1="868" x2="265" y2="868" stroke="black" stroke-width="1.5" />
+    <text x="275" y="873" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Circuit Component</text>
+    <!-- Dashed line = boundary / destination -->
+    <line x1="215" y1="890" x2="265" y2="890" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <text x="275" y="895" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Boundary / Destination</text>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIGURE LABEL                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <text x="425" y="940" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 4</text>
+
+  </g>
+</svg>

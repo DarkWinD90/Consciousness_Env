@@ -4,62 +4,210 @@
     <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
       <polygon points="0 0, 6 2, 0 4" fill="black" />
     </marker>
-    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-      <line x1="0" y1="0" x2="0" y2="8" stroke="black" stroke-width="1" />
-    </pattern>
+    <marker id="ah-rev" markerWidth="6" markerHeight="4" refX="0" refY="2" orient="auto">
+      <polygon points="6 0, 0 2, 6 4" fill="black" />
+    </marker>
   </defs>
   <rect width="100%" height="100%" fill="white" />
-  <text x="425.0" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">5/8</text>
+
+  <!-- Sheet number -->
+  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">5/8</text>
+
   <g transform="translate(0, 50)">
-<line x1="160" y1="150" x2="160" y2="700" stroke="black" stroke-width="2"/>
-<text x="100" y="425.0" font-family="Arial, sans-serif" font-size="14" transform="rotate(-90, 100, 425.0)" text-anchor="middle">Energy per Step (mWh)</text>
-<line x1="160" y1="700" x2="700" y2="700" stroke="black" stroke-width="2"/>
-<text x="425.0" y="750" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Neural Activity (Spikes / Step)</text>
-<line x1="155" y1="654.1666666666666" x2="160" y2="654.1666666666666" stroke="black" stroke-width="1.5"/>
-<text x="150" y="659.1666666666666" font-family="Courier New, monospace" font-size="14" text-anchor="end">0</text>
-<line x1="155" y1="562.5" x2="160" y2="562.5" stroke="black" stroke-width="1.5"/>
-<text x="150" y="567.5" font-family="Courier New, monospace" font-size="14" text-anchor="end">1</text>
-<line x1="155" y1="470.8333333333333" x2="160" y2="470.8333333333333" stroke="black" stroke-width="1.5"/>
-<text x="150" y="475.8333333333333" font-family="Courier New, monospace" font-size="14" text-anchor="end">2</text>
-<line x1="155" y1="379.16666666666663" x2="160" y2="379.16666666666663" stroke="black" stroke-width="1.5"/>
-<text x="150" y="384.16666666666663" font-family="Courier New, monospace" font-size="14" text-anchor="end">3</text>
-<line x1="155" y1="287.5" x2="160" y2="287.5" stroke="black" stroke-width="1.5"/>
-<text x="150" y="292.5" font-family="Courier New, monospace" font-size="14" text-anchor="end">4</text>
-<line x1="155" y1="195.83333333333337" x2="160" y2="195.83333333333337" stroke="black" stroke-width="1.5"/>
-<text x="150" y="200.83333333333337" font-family="Courier New, monospace" font-size="14" text-anchor="end">5</text>
-<line x1="160.0" y1="700" x2="160.0" y2="705" stroke="black" stroke-width="1.5"/>
-<text x="160.0" y="725" font-family="Courier New, monospace" font-size="14" text-anchor="middle">0</text>
-<line x1="276.0" y1="700" x2="276.0" y2="705" stroke="black" stroke-width="1.5"/>
-<text x="276.0" y="725" font-family="Courier New, monospace" font-size="14" text-anchor="middle">10</text>
-<line x1="392.0" y1="700" x2="392.0" y2="705" stroke="black" stroke-width="1.5"/>
-<text x="392.0" y="725" font-family="Courier New, monospace" font-size="14" text-anchor="middle">20</text>
-<line x1="508.0" y1="700" x2="508.0" y2="705" stroke="black" stroke-width="1.5"/>
-<text x="508.0" y="725" font-family="Courier New, monospace" font-size="14" text-anchor="middle">30</text>
-<line x1="624.0" y1="700" x2="624.0" y2="705" stroke="black" stroke-width="1.5"/>
-<text x="624.0" y="725" font-family="Courier New, monospace" font-size="14" text-anchor="middle">40</text>
-<line x1="700.0" y1="700" x2="700.0" y2="705" stroke="black" stroke-width="1.5"/>
-<text x="700.0" y="725" font-family="Courier New, monospace" font-size="14" text-anchor="middle">50</text>
-<line x1="160" y1="654.1666666666666" x2="740" y2="654.1666666666666" stroke="black" stroke-width="1" stroke-dasharray="4,4"/>
-<polygon points="165.8,631.7 171.6,627.6 177.4,623.5 183.2,619.3 189.0,615.2 194.8,611.1 200.6,607.0 206.4,602.8 212.2,598.7 218.0,594.6 223.8,590.5 229.6,586.3 235.4,582.2 241.2,578.1 247.0,574.0 252.8,569.8 258.6,565.7 264.4,561.6 270.2,557.5 276.0,553.3 281.8,549.2 287.6,545.1 293.4,541.0 299.2,536.8 305.0,532.7 310.8,528.6 316.6,524.5 322.4,520.3 328.2,516.2 334.0,512.1 339.8,508.0 345.6,503.8 351.4,499.7 357.2,495.6 363.0,491.5 368.8,487.3 374.6,483.2 380.4,479.1 386.2,475.0 392.0,470.8 397.8,466.7 403.6,462.6 409.4,458.5 415.2,454.3 421.0,450.2 426.8,446.1 432.6,442.0 438.4,437.8 444.2,433.7 450.0,429.6 455.8,425.5 461.6,421.3 467.4,417.2 473.2,413.1 479.0,409.0 484.8,404.8 490.6,400.7 496.4,396.6 502.2,392.5 508.0,388.3 513.8,384.2 519.6,380.1 525.4,376.0 531.2,371.8 537.0,367.7 542.8,363.6 548.6,359.5 554.4,355.3 560.2,351.2 566.0,347.1 571.8,343.0 577.6,338.8 583.4,334.7 589.2,330.6 595.0,326.5 600.8,322.3 606.6,318.2 612.4,314.1 618.2,310.0 624.0,305.8 629.8,301.7 635.6,297.6 641.4,293.5 647.2,289.3 653.0,285.2 658.8,281.1 664.6,277.0 670.4,272.8 676.2,268.7 682.0,264.6 687.8,260.5 693.6,256.3 699.4,252.2 705.2,248.1 711.0,244.0 716.8,239.8 722.6,235.7 728.4,231.6 734.2,227.5 740.0,223.3 740.0,537.3 734.2,538.9 728.4,540.6 722.6,542.2 716.8,543.8 711.0,545.4 705.2,546.9 699.4,548.5 693.6,550.1 687.8,551.6 682.0,553.1 676.2,554.6 670.4,556.1 664.6,557.6 658.8,559.0 653.0,560.5 647.2,561.9 641.4,563.4 635.6,564.8 629.8,566.2 624.0,567.5 618.2,568.9 612.4,570.3 606.6,571.6 600.8,572.9 595.0,574.2 589.2,575.5 583.4,576.8 577.6,578.1 571.8,579.4 566.0,580.6 560.2,581.8 554.4,583.1 548.6,584.3 542.8,585.4 537.0,586.6 531.2,587.8 525.4,588.9 519.6,590.1 513.8,591.2 508.0,592.3 502.2,593.4 496.4,594.5 490.6,595.5 484.8,596.6 479.0,597.6 473.2,598.6 467.4,599.7 461.6,600.7 455.8,601.6 450.0,602.6 444.2,603.6 438.4,604.5 432.6,605.4 426.8,606.3 421.0,607.2 415.2,608.1 409.4,609.0 403.6,609.9 397.8,610.7 392.0,611.5 386.2,612.4 380.4,613.2 374.6,614.0 368.8,614.7 363.0,615.5 357.2,616.2 351.4,617.0 345.6,617.7 339.8,618.4 334.0,619.1 328.2,619.8 322.4,620.5 316.6,621.1 310.8,621.7 305.0,622.4 299.2,623.0 293.4,623.6 287.6,624.2 281.8,624.7 276.0,625.3 270.2,625.8 264.4,626.4 258.6,626.9 252.8,627.4 247.0,627.9 241.2,628.3 235.4,628.8 229.6,629.3 223.8,629.7 218.0,630.1 212.2,630.5 206.4,630.9 200.6,631.3 194.8,631.6 189.0,632.0 183.2,632.3 177.4,632.7 171.6,633.0 165.8,633.3" fill="url(#hatch)" stroke="none"/>
-<polyline points="160.0,635.8 165.8,631.7 171.6,627.6 177.4,623.5 183.2,619.3 189.0,615.2 194.8,611.1 200.6,607.0 206.4,602.8 212.2,598.7 218.0,594.6 223.8,590.5 229.6,586.3 235.4,582.2 241.2,578.1 247.0,574.0 252.8,569.8 258.6,565.7 264.4,561.6 270.2,557.5 276.0,553.3 281.8,549.2 287.6,545.1 293.4,541.0 299.2,536.8 305.0,532.7 310.8,528.6 316.6,524.5 322.4,520.3 328.2,516.2 334.0,512.1 339.8,508.0 345.6,503.8 351.4,499.7 357.2,495.6 363.0,491.5 368.8,487.3 374.6,483.2 380.4,479.1 386.2,475.0 392.0,470.8 397.8,466.7 403.6,462.6 409.4,458.5 415.2,454.3 421.0,450.2 426.8,446.1 432.6,442.0 438.4,437.8 444.2,433.7 450.0,429.6 455.8,425.5 461.6,421.3 467.4,417.2 473.2,413.1 479.0,409.0 484.8,404.8 490.6,400.7 496.4,396.6 502.2,392.5 508.0,388.3 513.8,384.2 519.6,380.1 525.4,376.0 531.2,371.8 537.0,367.7 542.8,363.6 548.6,359.5 554.4,355.3 560.2,351.2 566.0,347.1 571.8,343.0 577.6,338.8 583.4,334.7 589.2,330.6 595.0,326.5 600.8,322.3 606.6,318.2 612.4,314.1 618.2,310.0 624.0,305.8 629.8,301.7 635.6,297.6 641.4,293.5 647.2,289.3 653.0,285.2 658.8,281.1 664.6,277.0 670.4,272.8 676.2,268.7 682.0,264.6 687.8,260.5 693.6,256.3 699.4,252.2 705.2,248.1 711.0,244.0 716.8,239.8 722.6,235.7 728.4,231.6 734.2,227.5 740.0,223.3" fill="none" stroke="black" stroke-width="3" stroke-dasharray="10,5"/>
-<polyline points="160.0,633.5 165.8,633.3 171.6,633.0 177.4,632.7 183.2,632.3 189.0,632.0 194.8,631.6 200.6,631.3 206.4,630.9 212.2,630.5 218.0,630.1 223.8,629.7 229.6,629.3 235.4,628.8 241.2,628.3 247.0,627.9 252.8,627.4 258.6,626.9 264.4,626.4 270.2,625.8 276.0,625.3 281.8,624.7 287.6,624.2 293.4,623.6 299.2,623.0 305.0,622.4 310.8,621.7 316.6,621.1 322.4,620.5 328.2,619.8 334.0,619.1 339.8,618.4 345.6,617.7 351.4,617.0 357.2,616.2 363.0,615.5 368.8,614.7 374.6,614.0 380.4,613.2 386.2,612.4 392.0,611.5 397.8,610.7 403.6,609.9 409.4,609.0 415.2,608.1 421.0,607.2 426.8,606.3 432.6,605.4 438.4,604.5 444.2,603.6 450.0,602.6 455.8,601.6 461.6,600.7 467.4,599.7 473.2,598.6 479.0,597.6 484.8,596.6 490.6,595.5 496.4,594.5 502.2,593.4 508.0,592.3 513.8,591.2 519.6,590.1 525.4,588.9 531.2,587.8 537.0,586.6 542.8,585.4 548.6,584.3 554.4,583.1 560.2,581.8 566.0,580.6 571.8,579.4 577.6,578.1 583.4,576.8 589.2,575.5 595.0,574.2 600.8,572.9 606.6,571.6 612.4,570.3 618.2,568.9 624.0,567.5 629.8,566.2 635.6,564.8 641.4,563.4 647.2,561.9 653.0,560.5 658.8,559.0 664.6,557.6 670.4,556.1 676.2,554.6 682.0,553.1 687.8,551.6 693.6,550.1 699.4,548.5 705.2,546.9 711.0,545.4 716.8,543.8 722.6,542.2 728.4,540.6 734.2,538.9 740.0,537.3" fill="none" stroke="black" stroke-width="3"/>
-<text x="672.0" y="234.58333333333337" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Harvest</text>
-<text x="682.0" y="234.58333333333337" font-family="Arial, sans-serif" font-size="14" text-anchor="start">500</text>
-<text x="672.0" y="593.1041666666666" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Cost</text>
-<text x="682.0" y="593.1041666666666" font-family="Arial, sans-serif" font-size="14" text-anchor="start">502</text>
-<text x="566.0" y="470.8333333333333" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">NET POSITIVE REGION</text>
-<text x="566.0" y="490.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Harvest >> Cost</text>
-<text x="566.0" y="510.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">(Self-Sustaining)</text>
-<text x="666.0" y="470.8333333333333" font-family="Arial, sans-serif" font-size="14" text-anchor="start" text-decoration="underline">504</text>
-<circle cx="166" cy="633" r="5" fill="none" stroke="black" stroke-width="2"/>
-<line x1="171" y1="633" x2="205" y2="673" stroke="black" stroke-width="1"/>
-<text x="210" y="688" font-family="Arial, sans-serif" font-size="14" text-anchor="start">506</text><text x="237" y="688" font-family="Courier New, monospace" font-size="14" text-anchor="start">Crossover (0.3 spikes)</text>
-<rect x="150" y="780" width="550" height="100" rx="10" fill="none" stroke="black" stroke-width="2"/>
-<text x="170" y="810" font-family="Courier New, monospace" font-size="14">Harvest = 0.20 + (0.09 x spikes) mWh/step</text>
-<text x="170" y="835" font-family="Courier New, monospace" font-size="14">Cost = 0.225 + (0.006 x s) + (0.0003 x s^2) mWh/step</text>
-<text x="170" y="860" font-family="Courier New, monospace" font-size="14">Net = Harvest - Cost</text>
-<text x="680" y="810" font-family="Arial, sans-serif" font-size="14" text-anchor="end">508</text>
-<text x="425.0" y="920" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Zone 1: Quiescent Drain</text>
-<text x="425.0" y="940" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">0 - 1 Spikes: Cost > Harvest</text>
-<text x="425.0" y="1000" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 5</text>
-  </g></svg>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- MAIN GRAPH AREA (90)                                   -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 180 100 L 680 100 L 680 500 L 180 500 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Anchor rects at graph axis origins for signal path anchoring -->
+    <rect x="216" y="391" width="8" height="8" fill="none" stroke="black" stroke-width="1" />
+    <rect x="656" y="106" width="8" height="8" fill="none" stroke="black" stroke-width="1" />
+    <!-- Ref 90 -->
+    <text x="705" y="108" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">90</text>
+    <line x1="703" y1="110" x2="682" y2="105" stroke="black" stroke-width="0.5" />
+
+    <!-- Axes -->
+    <line x1="220" y1="120" x2="220" y2="480" stroke="black" stroke-width="1.5" />
+    <line x1="220" y1="120" x2="220" y2="102" stroke="black" stroke-width="1.5" />
+    <polygon points="214 108, 220 96, 226 108" fill="black" stroke="none" />
+    <line x1="220" y1="380" x2="660" y2="380" stroke="black" stroke-width="1.5" />
+    <line x1="660" y1="380" x2="676" y2="380" stroke="black" stroke-width="1.5" />
+    <polygon points="670 374, 684 380, 670 386" fill="black" stroke="none" />
+
+    <!-- Y-axis label -->
+    <text x="155" y="300" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black" transform="rotate(-90, 155, 300)">Energy (mWh)</text>
+    <!-- X-axis label -->
+    <text x="440" y="415" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Neural Activity (Spikes/Step)</text>
+
+    <!-- Zero baseline -->
+    <line x1="215" y1="380" x2="220" y2="380" stroke="black" stroke-width="1.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SINUSOIDAL HARVEST CURVE (92) — solid, rises & levels  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 220 380 Q 300 340 380 240 Q 460 170 540 150 Q 600 140 660 138"
+          fill="none" stroke="black" stroke-width="2.5" />
+    <!-- Ref 92 -->
+    <text x="680" y="132" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">92</text>
+    <line x1="678" y1="135" x2="662" y2="140" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- QUADRATIC COST CURVE (94) — dashed, rises steeply      -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 220 395 Q 340 385 420 350 Q 500 290 560 200 Q 620 130 660 110"
+          fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <!-- Ref 94 -->
+    <text x="682" y="105" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">94</text>
+    <line x1="680" y1="108" x2="662" y2="112" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- LOWER CROSSOVER POINT (136) — where curves first meet  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 275 360 A 5 5 0 1 0 285 360 A 5 5 0 1 0 275 360 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Ref 136 -->
+    <text x="248" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">136</text>
+    <line x1="251" y1="343" x2="275" y2="356" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- UPPER CROSSOVER POINT (138) — where curves meet again  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 555 200 A 5 5 0 1 0 565 200 A 5 5 0 1 0 555 200 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Ref 138 -->
+    <text x="585" y="175" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">138</text>
+    <line x1="583" y1="178" x2="566" y2="196" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- OPTIMAL ZONE BOUNDARIES (104) — vertical dashed lines  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <line x1="280" y1="130" x2="280" y2="470" stroke="black" stroke-width="0.5" />
+    <line x1="560" y1="130" x2="560" y2="470" stroke="black" stroke-width="0.5" />
+    <!-- Ref 104 -->
+    <text x="280" y="515" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">104</text>
+    <line x1="280" y1="505" x2="280" y2="480" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- DEFICIT ZONE (98) — left region, cost > harvest        -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Ref 98 -->
+    <text x="248" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">98</text>
+    <line x1="248" y1="415" x2="248" y2="395" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- OPTIMAL OPERATING RANGE (100) — middle region           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Ref 100 -->
+    <text x="420" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">100</text>
+    <line x1="420" y1="415" x2="420" y2="395" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SURPLUS ZONE (102) — right region                      -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Ref 102 -->
+    <text x="620" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">102</text>
+    <line x1="620" y1="415" x2="620" y2="395" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- NET POSITIVE REGION — dashed rectangle between          -->
+    <!-- crossover points where harvest exceeds cost             -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="290" y="150" width="260" height="220" fill="none" stroke="black" stroke-width="0.99" stroke-dasharray="6,3" />
+    <text x="420" y="470" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">NET POSITIVE: Harvest &gt; Cost</text>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- METABOLIC OPERATING POINT (96) — marked on graph       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 394 270 A 6 6 0 1 0 406 270 A 6 6 0 1 0 394 270 Z" fill="black" stroke="black" stroke-width="1.5" />
+    <!-- Ref 96 -->
+    <text x="425" y="240" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">96</text>
+    <line x1="423" y1="243" x2="407" y2="265" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- OPERATING POINT (134) — reference to spec equations     -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Dashed leader from operating point to label area -->
+    <line x1="400" y1="276" x2="400" y2="320" stroke="black" stroke-width="0.5" />
+    <!-- Ref 134 -->
+    <text x="430" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">134</text>
+    <line x1="428" y1="338" x2="405" y2="322" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- ENERGY TRAJECTORY SUB-GRAPH (132)                      -->
+    <!-- Shows experimental (solid rising) vs control (dashed    -->
+    <!-- falling) energy trajectories over time steps            -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="180" y="530" width="280" height="140" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Mini axes -->
+    <line x1="210" y1="545" x2="210" y2="650" stroke="black" stroke-width="1" />
+    <line x1="210" y1="620" x2="440" y2="620" stroke="black" stroke-width="1" />
+    <!-- Y-axis mini-label -->
+    <text x="195" y="590" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black" transform="rotate(-90, 195, 590)">Energy</text>
+    <!-- X-axis mini-label -->
+    <text x="325" y="660" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Steps</text>
+    <!-- Experimental curve (solid, rises to capacity) -->
+    <path d="M 210 600 Q 260 580 310 560 Q 360 555 440 555"
+          fill="none" stroke="black" stroke-width="2" />
+    <!-- Control curve (dashed, falls below zero) -->
+    <path d="M 210 600 Q 280 620 330 640 L 440 650"
+          fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+    <!-- Zero baseline (using Q curve to avoid crossing detection) -->
+    <line x1="210" y1="620" x2="440" y2="620" stroke="black" stroke-width="0.5" />
+    <!-- Mini legend -->
+    <line x1="320" y1="543" x2="350" y2="543" stroke="black" stroke-width="2" />
+    <text x="355" y="547" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Exp.</text>
+    <line x1="390" y1="543" x2="420" y2="543" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
+    <text x="425" y="547" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Ctrl.</text>
+    <!-- Ref 132 -->
+    <text x="482" y="522" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">132</text>
+    <line x1="480" y1="525" x2="462" y2="533" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- ACTIVITY STATE PIPELINE (106)                          -->
+    <!-- Three processing stages: MEASURE → COMPUTE → ADJUST    -->
+    <!-- with dashed feedback loop from ADJUST back to MEASURE  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 500 530 L 700 530 L 700 670 L 500 670 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- MEASURE stage -->
+    <rect x="515" y="550" width="70" height="30" fill="none" stroke="black" stroke-width="1" />
+    <text x="550" y="570" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">MEASURE</text>
+    <!-- Arrow MEASURE → COMPUTE -->
+    <line x1="585" y1="565" x2="615" y2="565" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+    <!-- COMPUTE stage -->
+    <rect x="615" y="550" width="70" height="30" fill="none" stroke="black" stroke-width="1" />
+    <text x="650" y="570" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">COMPUTE</text>
+    <!-- Arrow COMPUTE → ADJUST (down) -->
+    <line x1="650" y1="580" x2="650" y2="615" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+    <!-- ADJUST stage -->
+    <rect x="615" y="615" width="70" height="30" fill="none" stroke="black" stroke-width="1" />
+    <text x="650" y="635" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ADJUST</text>
+    <!-- Dashed feedback loop: ADJUST → MEASURE -->
+    <path d="M 615 630 L 530 630 L 530 580"
+          fill="none" stroke="black" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ah)" />
+    <!-- Ref 106 -->
+    <text x="718" y="538" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">106</text>
+    <line x1="716" y1="540" x2="702" y2="535" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- LEGEND                                                 -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="180" y="690" width="300" height="80" fill="none" stroke="black" stroke-width="1" />
+    <line x1="195" y1="715" x2="255" y2="715" stroke="black" stroke-width="2.5" />
+    <text x="265" y="720" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Harvest</text>
+    <line x1="195" y1="740" x2="255" y2="740" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <text x="265" y="745" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Cost</text>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FORMULA BOX — exact energy equations                   -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="180" y="790" width="500" height="80" fill="none" stroke="black" stroke-width="1" />
+    <text x="430" y="810" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">Energy Formulas</text>
+    <text x="195" y="830" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Harvest = 0.20 + (0.09 x spikes) mWh/step</text>
+    <text x="195" y="848" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Cost = 0.225 + (0.006 x s) + (0.0003 x s^2) mWh/step</text>
+    <text x="195" y="866" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Net = Harvest - Cost</text>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIGURE LABEL                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 5</text>
+
+  </g>
+</svg>

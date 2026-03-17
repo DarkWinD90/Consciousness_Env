@@ -1,3 +1,10 @@
+---
+name: patent-collision-checker
+description: Detects and fixes element collisions in USPTO patent SVG drawings. Identifies overlapping text, clipped elements, text-on-line collisions, and boundary violations that violate 37 CFR 1.84(p)(1) legibility requirements.
+allowed-tools: Bash(python *), Read, Write, Edit, Glob, Grep
+argument-hint: [check|fix] [--patent a|b|c] [--file <path>]
+---
+
 # Patent Drawing Collision Checker
 
 ## Description
@@ -38,6 +45,24 @@ Text overlapping connecting lines, arrows, or curves. Common causes:
 - Axis labels overlapping graph data lines
 - Reference numerals placed on signal pathways
 
+### 5. Arrow Endpoint Misalignment (SEMANTIC)
+Arrows that don't land at their intended destination. Common causes:
+- Arrow endpoint coordinates don't match label positions
+- Signal arrows landing at wrong pins on IC/microcontroller diagrams
+- Connection lines stopping short of or overshooting target elements
+
+### 6. Floating Labels (SEMANTIC)
+Labels (GPIO, ADC, etc.) positioned far from their connection points:
+- Pin labels floating near components instead of at IC entry points
+- ADC/GPIO labels not adjacent to where arrows actually land
+- Threshold: Label > 30px from nearest arrow endpoint = FAIL
+
+### 7. Arrow Origin Gaps (SEMANTIC)
+Arrows that don't start at component edges:
+- Arrow origin inside a shape (should touch edge)
+- Arrow origin floating near but not touching source element
+- Gap between component boundary and arrow start point
+
 ## How It Works
 
 The checker parses SVG XML and extracts bounding boxes for all elements:
@@ -62,7 +87,7 @@ When fixing collisions, the skill applies these strategies in priority order:
 All fixes preserve:
 - 37 CFR 1.84 compliance (line weights, margins, legibility)
 - Reference numeral associations (numeral stays near its element)
-- Per-figure 100-series numbering convention
+- Unified cross-figure even-number scheme (per NUMERAL_REGISTRY.md)
 - ViewBox dimensions (850x1100, US Letter at 100 DPI)
 
 ## Output Format
@@ -83,3 +108,59 @@ SUMMARY: 2 collisions found, 2 fixes proposed
 ## Dependencies
 - Python 3.x (standard library only — uses xml.etree.ElementTree)
 - No external packages required
+
+---
+
+## Hardware/Schematic Figure Validation
+
+For figures showing hardware layouts (like Patent A FIG. 6), additional semantic
+checks are required beyond visual collision detection:
+
+### Arrow-to-Label Alignment Check
+
+For each arrow (`<polyline>` or `<line>` with `marker-end`):
+1. Extract endpoint coordinates (last point in polyline, or x2/y2 for line)
+2. Find all pin labels (GP*, ADC*, VSYS, PWM, etc.) within 50px
+3. **FAIL** if no label within 30px of arrow endpoint
+4. **WARN** if label is 15-30px away (should be closer)
+
+### Arrow Origin Validation
+
+For each arrow originating from a component:
+1. Find the source component (circle, rect) nearest to arrow start
+2. Calculate distance from arrow start to component edge
+3. **FAIL** if arrow starts inside component (should touch edge)
+4. **WARN** if gap > 5px between component edge and arrow start
+
+### Pin Label Consistency
+
+For microcontroller diagrams:
+1. Extract all GPIO/ADC pin labels from SVG
+2. Compare against specification document
+3. **FAIL** if spec mentions a pin not shown in drawing
+4. **FAIL** if drawing shows pin not mentioned in spec
+
+### Signal Type Validation
+
+Verify connections make electrical sense:
+- Analog sensors → ADC pins (GP26-28 on Pico)
+- Digital signals → any GPIO
+- Power connections → VSYS, 3V3, or GND
+- **FAIL** if analog signal goes to digital-only pin
+
+### Example Output for Semantic Issues
+
+```
+=== PATENT A — FIG. 6 (fig6.svg) ===
+[!] SEMANTIC: Arrow endpoint (535, 370) has no adjacent pin label
+    Nearest label "GP15" is 45px away
+    Fix: Add "VSYS" label at (527, 378)
+
+[!] SEMANTIC: Arrow from Piezo (602) starts at y=188, inside disc (edge at y=195)
+    Fix: Change arrow start from (200, 188) to (200, 195)
+
+[!] SEMANTIC: ADC1 label at (150, 505) is 180px from arrow endpoint (355, 420)
+    Fix: Move ADC1 to (375, 412) near Pico entry point
+
+SUMMARY: 3 semantic issues found, 3 fixes proposed
+```

@@ -1,325 +1,83 @@
-DRAWING DESCRIPTIONS — PATENT B
+DRAWING DESCRIPTIONS
+PATENT APPLICATION
 
-Configurable Recursive Self-Observation Method and System for Spiking Neural
-Networks with Dynamic Reflection Coefficient Modulation
+Title: Configurable Recursive Self-Observation Method and System for Spiking Neural Networks with Dynamic Reflection Coefficient Modulation
+Applicant: Kevin Christopher Ward
+Filing Date: [To be completed at filing]
 
-
+Total Drawing Sheets: 6
+Total Figures: 6
+Reference Numeral Convention: This patent application uses unified reference numerals. Each unique physical or functional component receives one master numeral used consistently across all figures in which it appears. Numerals are assigned in sequential even-numbered increments (10, 12, 14, ...) in order of first appearance. Components appearing in multiple figures retain the numeral assigned at first introduction.
 BRIEF DESCRIPTION OF THE DRAWINGS
-
-FIG. 1 is a block diagram of the self-observation feedback loop showing how
-the aggregate output of the spiking neural network at timestep t is fed back
-as additional input at timestep t+1.
-
-FIG. 2 is a spectrum diagram showing the behavioral effects of the reflection
-coefficient across its full range from 0.0 to 1.0.
-
-FIG. 3 is a block diagram showing the dual modulation sources that
-dynamically control the reflection coefficient value.
-
-FIG. 4 is a flow diagram of the self-referential learning loop combining
-STDP synaptic plasticity with recursive self-observation.
-
-FIG. 5 is a control diagram showing energy-aware self-observation regulation
-where the reflection coefficient is modulated based on system energy state.
-
-FIG. 6 is an end-to-end signal flow diagram showing how the self-observation
-mechanism integrates within the complete self-sustaining cognitive loop,
-distinguishing the self-observation feedback pathway from the energy feedback
-pathway and the synaptic computation pathway.
-
-
+FIG. 1 is a block diagram of the self-observation feedback loop showing how the aggregate output 18 of the spiking neural network 14 at timestep t is fed back as additional input at timestep t+1 through a self-observation feedback path 24.
+FIG. 2 is a spectrum diagram showing the behavioral effects of the reflection coefficient across its full range from 0.0 (no self-observation) to 1.0 (maximum self-observation), depicted on a main spectrum bar 26.
+FIG. 3 is a block diagram showing the dual modulation sources that dynamically control the reflection coefficient value, including an external cognitive control layer 42 and an energy state monitor 46 converging on a reflection coefficient computation block 40.
+FIG. 4 is a flow diagram of the self-referential learning loop combining STDP synaptic plasticity with recursive self-observation, showing the interaction between the spiking neural network 14, an STDP weight update block 56, and a self-observation block 60.
+FIG. 5 is a control diagram showing energy-aware self-observation regulation where the reflection coefficient is modulated based on system energy state, depicted across an energy state bar 66 with corresponding modulation mapping 68, reflection coefficient scale 70, and behavioral effects 72.
+FIG. 6 is an end-to-end signal flow diagram showing how the self-observation mechanism integrates within the complete self-sustaining cognitive loop, with an environmental input block 76 feeding the spiking neural network 14, self-observation block 60 and cognitive control layer 42 providing modulation, motor actuation block 78 generating movement, and energy harvesting block 80 recovering power, distinguishing the self-observation feedback pathway from the energy feedback and synaptic computation pathways.
 DETAILED DESCRIPTION OF THE DRAWINGS
-
-Reference Numeral Convention: Each figure in this patent uses a per-figure
-numbering series (FIG. 1 uses 100-series, FIG. 2 uses 200-series, through
-FIG. 6 uses 600-series), with even-numbered increments. Where the same
-physical component appears in multiple figures, it receives the numeral
-appropriate to that figure's series.
-
-
 FIG. 1 — Self-Observation Feedback Loop
-
-FIG. 1 is a block diagram illustrating the core self-observation feedback
-loop of the present invention. An external input 100 carrying signal I_ext(t)
-enters the diagram from the left and is received by a summing junction 102.
-The summing junction 102 combines the external input 100 with a reflection
-signal to produce an adjusted input I_adj = I_ext + I_refl, which is then
-delivered to a spiking neural network 104 comprising N leaky integrate-and-fire
-(LIF) neurons. Within the spiking neural network 104, each neuron updates its
-membrane potential according to V_i(t+1) = V_i(t) x leak + I_adjusted x dt.
-
-The spiking neural network 104 produces a spike output 106 carrying signal
-S(t), which exits the diagram to the right and represents the discrete firing
-events of the network. Simultaneously, the spiking neural network 104 produces
-an aggregate output 108 defined as O(t) = mean(V_1, V_2, ..., V_N), which is
-the mean membrane potential across all N neurons. The aggregate output 108
-captures the collective internal state of the network at each timestep.
-
-The aggregate output 108 feeds into a self-observation feedback path 114, shown
-as a bold line returning along the bottom of the diagram. Along this
-self-observation feedback path 114, the signal first passes through a delay
-element 110, which imposes a one-timestep delay (z^-1) ensuring that the
-network observes its state from timestep t when processing timestep t+1. The
-delayed signal then enters a reflection scaling block 112, which computes the
-reflection input as I_refl = O(t) x reflection_coeff. The output of the
-reflection scaling block 112 is routed upward to the summing junction 102,
-closing the self-observation loop.
-
-The self-observation feedback path 114 is the central innovation depicted in
-FIG. 1: the network observes its own prior aggregate state and incorporates
-that observation as additional input on the next processing step.
-
-
+FIG. 1 is a block diagram illustrating the core self-observation feedback loop of the present invention. An external input 10 carrying signal I_ext(t) enters the diagram from the left and is received by a summing junction 12. The summing junction 12 combines the external input 10 with a reflection signal to produce an adjusted input I_adj = I_ext + I_refl, which is then delivered to a spiking neural network 14 comprising N leaky integrate-and-fire (LIF) neurons. Within the spiking neural network 14, each neuron updates its membrane potential according to V_i(t+1) = V_i(t) × leak + I_adjusted × dt.
+The spiking neural network 14 produces a spike output 16 carrying signal S(t), which exits the diagram to the right and represents the discrete firing events of the network. Simultaneously, the spiking neural network 14 produces an aggregate output 18 defined as O(t) = mean(V_1, V_2, …, V_N), which is the mean membrane potential across all N neurons. The aggregate output 18 captures the collective internal state of the network at each timestep.
+The aggregate output 18 feeds into a self-observation feedback path 24, shown as a bold line returning along the bottom of the diagram. Along this self-observation feedback path 24, the signal first passes through a delay element 20, which imposes a one-timestep delay (z⁻¹) ensuring that the network observes its state from timestep t when processing timestep t+1. The delayed signal then enters a reflection scaling block 22, which computes the reflection input as I_refl = O(t) × reflection_coeff. The output of the reflection scaling block 22 is routed upward to the summing junction 12, closing the self-observation loop.
+The self-observation feedback path 24 is the central innovation depicted in FIG. 1: the network observes its own prior aggregate state and incorporates that observation as additional input on the next processing step.
 FIG. 2 — Reflection Coefficient Spectrum
-
-FIG. 2 is a spectrum diagram showing the behavioral effects of the reflection
-coefficient across its full operating range. A main spectrum bar 200 spans the
-full width of the figure, with the left end labeled "0.0" and the right end
-labeled "1.0." The current operational range of 0.1 to 0.3 is marked on the
-main spectrum bar 200.
-
-The main spectrum bar 200 is divided into five distinct behavioral regions.
-
-A first region 202 occupies the leftmost position at 0.0 on the main spectrum
-bar 200. The first region 202 is labeled "No self-observation" and represents
-pure feedforward processing in which the system responds only to external
-input with no self-referential component.
-
-A second region 204 spans from 0.0 to 0.2 on the main spectrum bar 200. The
-second region 204 is labeled "Minimal self-awareness" and represents a mode in
-which the system exhibits slight influence of prior state but remains primarily
-externally driven.
-
-A third region 206 spans from 0.2 to 0.4 on the main spectrum bar 200 and is
-identified as the "OPERATIONAL RANGE." The third region 206 is labeled
-"Balanced self-observation" and represents the preferred operating regime in
-which external input and meaningful self-reference are combined. The default
-reflection coefficient of 0.2 + modulation x 0.1 falls within the third
-region 206.
-
-A fourth region 208 spans from 0.4 to 0.7 on the main spectrum bar 200. The
-fourth region 208 is labeled "Self-dominated processing" and represents a mode
-in which internal state dominates external input, creating risk of echo chamber
-dynamics.
-
-A fifth region 210 spans from 0.7 to 1.0 on the main spectrum bar 200. The
-fifth region 210 is labeled "Self-absorption" and represents a mode in which
-external input is overwhelmed by the system's own prior state, causing the
-system to lock onto its internal dynamics.
-
-Below the main spectrum bar 200, an arrow indicates the direction of increasing
-self-referential processing from left to right. A note identifies the
-reflection coefficient as the system's self-awareness dial, continuously
-adjustable across the full range depicted by the main spectrum bar 200.
-
-
+FIG. 2 is a spectrum diagram showing the behavioral effects of the reflection coefficient across its full operating range. A main spectrum bar 26 spans the full width of the figure, with the left end labeled “0.0” and the right end labeled “1.0.”
+The main spectrum bar 26 is divided into five distinct behavioral regions.
+A first region 28 occupies the leftmost position at 0.0 on the main spectrum bar 26. The first region 28 is labeled “No self-observation” and represents pure feedforward processing in which the system responds only to external input with no self-referential component.
+A second region 30 spans from 0.0 to 0.2 on the main spectrum bar 26. The second region 30 is labeled “Minimal self-awareness” and represents a mode in which the system exhibits slight influence of prior state but remains primarily externally driven.
+A third region 32 spans from 0.2 to 0.4 on the main spectrum bar 26 and is identified as the “OPERATIONAL RANGE.” The third region 32 is labeled “Balanced self-observation” and represents the preferred operating regime in which external input and meaningful self-reference are combined. The default reflection coefficient of 0.2 + modulation × 0.1 falls within the third region 32.
+A fourth region 34 spans from 0.4 to 0.7 on the main spectrum bar 26. The fourth region 34 is labeled “Self-dominated processing” and represents a mode in which internal state dominates external input, creating risk of echo chamber dynamics.
+A fifth region 36 spans from 0.7 to 1.0 on the main spectrum bar 26. The fifth region 36 is labeled “Self-absorption” and represents a mode in which external input is overwhelmed by the system’s own prior state, causing the system to lock onto its internal dynamics.
+A current processing point 38 is depicted as a vertical dashed line indicating the instantaneous position of the dynamic reflection coefficient as it is modulated between 0.0 and 1.0. The dashed style indicates the dynamic, time-varying nature of the marker position.
+Below the main spectrum bar 26, an arrow indicates the direction of increasing self-referential processing from left to right. A note identifies the reflection coefficient as the system’s self-awareness dial, continuously adjustable across the full range depicted by the main spectrum bar 26.
 FIG. 3 — Dynamic Modulation Sources
-
-This figure shows two modulation pathways converging on the reflection
-coefficient computation in a vertical stacked layout.
-
-Reference numerals: 300, 302, 304, 306, 308, 310, 312
-
-Top element (302):
-- Cloud shape labeled "EXTERNAL COGNITIVE CONTROL LAYER"
-- Inside: "Claude or other cognitive agent provides modulation"
-- Arrow down to computation block labeled "modulation (-1.0 to +1.0)"
-
-Center element (300):
-- Rectangle with bold border labeled "REFLECTION COEFFICIENT COMPUTATION"
-- Inside: "reflection_coeff = base_coeff + modulation x sensitivity"
-- Default values: "base_coeff = 0.2, sensitivity = 0.1"
-
-Output (310):
-- Arrow from computation block going right
-- Reference numeral 310 above arrow
-
-Below computation (side by side):
-- Left box (312): "SOURCE PRIORITY" - "External overrides Internal when active"
-- Right box (306): "ENERGY STATE MONITOR" - "Reads energy_mwh from EnergyHarvester"
-  and "Applies energy-aware modulation rules"
-- Arrow up from Energy Monitor to Computation labeled "energy-aware modulation"
-
-Bottom callout boxes (side by side):
-- Left box (304): "External Modulation Examples"
-  - "-0.5: Reduce self-observation (focus outward)"
-  - "0.0: Neutral (use base coefficient)"
-  - "+0.8: Increase self-observation"
-
-- Right box (308): "Energy Rules"
-  - "<15 mWh: -0.4"
-  - "<30 mWh: -0.1"
-  - ">80 mWh: +0.3"
-  - "else: 0.0"
-
-
+FIG. 3 shows two modulation pathways converging on the reflection coefficient computation in a vertical stacked layout.
+An external cognitive control layer 42 is depicted as a cloud shape at the top of the figure, labeled “EXTERNAL COGNITIVE CONTROL LAYER.” Inside the cloud: “Claude or other cognitive agent provides modulation.” An arrow extends downward from the external cognitive control layer 42 to the computation block, labeled “modulation (−1.0 to +1.0).”
+A reflection coefficient computation block 40 is depicted as a rectangle with bold border at the center of the figure, labeled “REFLECTION COEFFICIENT COMPUTATION.” Inside: “reflection_coeff = base_coeff + modulation × sensitivity,” with default values “base_coeff = 0.2, sensitivity = 0.1.”
+An external modulation examples box 44 appears adjacent to the external cognitive control layer 42, providing example values: “−0.5: Reduce self-observation (focus outward); 0.0: Neutral (use base coefficient); +0.8: Increase self-observation.”
+An energy state monitor 46 appears at the lower right, labeled “ENERGY STATE MONITOR.” The energy state monitor 46 reads energy_mwh from the EnergyHarvester and applies energy-aware modulation rules. An arrow extends upward from the energy state monitor 46 to the computation block 40, labeled “energy-aware modulation.”
+An energy rules box 48 provides the modulation mapping: “<15 mWh: −0.4; <30 mWh: −0.1; >80 mWh: +0.3; else: 0.0.”
+An output arrow 50 exits the computation block 40 to the right, carrying the computed reflection coefficient.
+A source priority box 52 appears below the computation block 40, labeled “SOURCE PRIORITY: External overrides Internal when active.” An output arrow 54 extends downward from the source priority box 52, labeled “to SNN,” representing the final computed reflection coefficient signal delivered to the spiking neural network 14.
 FIG. 4 — Self-Referential Learning Loop (STDP + Self-Observation)
-
-This figure shows how STDP learning interacts with the self-observation signal.
-
-Reference numerals: 400, 402, 404, 406, 408, 410
-
-Vertical flow (top to bottom):
-
-Top (400):
-- Full-width rectangle labeled "SNN PROCESSING STEP t" (bold border)
-- Inside: "Membrane dynamics + spikes"
-- Arrow down labeled "S(t)"
-
-Second row (402):
-- Full-width rectangle labeled "STDP WEIGHT UPDATE"
-- Inside:
-  - "Post fires: W += 0.01 × pre_trace"
-  - "Pre fires: W -= 0.012 × post_trace"
-  - "A-/A+ = 1.2 (stability ratio)"
-- Arrow down
-
-Third row (404):
-- Full-width rectangle labeled "UPDATED WEIGHT MATRIX"
-- Inside: "W(t+1) bounded to [0.0, 0.5]"
-- Arrow down to Self-Observation
-
-Fourth row (side by side):
-- Left (406): Rectangle labeled "SELF-OBSERVATION"
-  - Inside: "O(t) × refl_coeff"
-- Right (408): Rectangle labeled "KEY INSIGHT"
-  - Inside: "STDP strengthens causal connections. Self-observation adds correlated feedback."
-
-Feedback loop:
-- Bold line from Self-Observation (406) left side, up, and back to SNN Processing (400)
-- Vertical text: "FEEDBACK LOOP"
-
-Fifth row (410):
-- Full-width rectangle labeled "VALIDATION RESULTS (Phase 8)"
-- Inside:
-  - "F8.1: Entropy 2.95 to 2.02 bits (PASS)"
-  - "F8.2: STDP MI = 6.52x > 1.20x (PASS)"
-
-Bottom:
-- Signal Pathways legend box
-- Bold line sample with label: "Bold: Self-observation feedback loop"
-
-
+FIG. 4 shows how STDP learning interacts with the self-observation signal in a vertical flow layout.
+A spiking neural network processing step block, depicted using the spiking neural network 14, is shown as a full-width rectangle at the top with bold border, labeled “SNN PROCESSING STEP t.” Inside: “Membrane dynamics + spikes.” An arrow labeled “S(t)” exits downward.
+An STDP weight update block 56 is depicted as a full-width rectangle below, labeled “STDP WEIGHT UPDATE.” Inside: “Post fires: W += 0.01 × pre_trace; Pre fires: W −= 0.012 × post_trace; A−/A+ = 1.2 (stability ratio).” An arrow exits downward.
+An updated weight matrix block 58 is depicted as a full-width rectangle, labeled “UPDATED WEIGHT MATRIX.” Inside: “W(t+1) bounded to [0.0, 0.5].” An arrow exits downward to the self-observation block 60.
+A self-observation block 60 is depicted at the lower left, labeled “SELF-OBSERVATION.” Inside: “O(t) × refl_coeff.” Adjacent to it, a key insight box 62 appears at the lower right, labeled “KEY INSIGHT.” Inside: “STDP strengthens causal connections. Self-observation adds correlated feedback.”
+A bold feedback loop line connects from the self-observation block 60 upward and back to the spiking neural network 14. Vertical text along this line reads “FEEDBACK LOOP.”
+A validation results box 64 is depicted as a full-width rectangle at the bottom, labeled “VALIDATION RESULTS (Phase 8).” Inside: “F8.1: Entropy 2.95 to 2.02 bits (PASS); F8.2: STDP MI = 6.52× > 1.20× (PASS).”
+A signal pathways legend box at the bottom contains a bold line sample with label: “Bold: Self-observation feedback loop.”
 FIG. 5 — Energy-Aware Self-Observation Regulation
-
-This figure shows a control diagram for energy-based reflection modulation.
-
-Reference numerals: 500, 502, 504, 506
-
-Top — Energy State Bar (500):
-- Full-width horizontal bar labeled "SYSTEM ENERGY LEVEL (mWh)"
-- Four labeled regions with dividers:
-  - 0-15 mWh: CRITICAL
-  - 15-30 mWh: LOW
-  - 30-80 mWh: NORMAL
-  - 80-100 mWh: SURPLUS
-- Scale markers below: 0, 15, 30, 80, 100
-
-Second row — Modulation Mapping (502):
-- Full-width box labeled "MODULATION MAPPING"
-- State labels above each arrow: CRITICAL, LOW, NORMAL, SURPLUS
-- Four arrows pointing down to modulation values:
-  - CRITICAL -> -0.4
-  - LOW -> -0.1
-  - NORMAL -> 0.0
-  - SURPLUS -> +0.3
-
-Third row — Reflection Coefficient Scale (504):
-- Full-width box labeled "REFLECTION COEFFICIENT SCALE"
-- Number line from 0.1 to 0.3 (within box bounds)
-- Four markers with values and state labels:
-  - 0.16 / CRIT
-  - 0.19 / LOW
-  - 0.20 / NORM
-  - 0.23 / SURP
-
-Fourth row — Behavioral Effects (506):
-- Full-width box labeled "BEHAVIORAL EFFECTS"
-- Four effect descriptions:
-  - 0.16: "Reduced - conserve cognitive resources"
-  - 0.19: "Slightly reduced - cautious operation"
-  - 0.20: "Baseline - normal self-observation"
-  - 0.23: "Enhanced - energy allows exploration"
-
-Caption:
-- "Energy-aware regulation ensures efficient cognitive resource management."
-- "Low energy reduces self-observation; surplus energy enables exploration."
-
-
+FIG. 5 is a control diagram showing energy-based reflection modulation using a vertical column flow layout. The figure occupies the full usable width from x=130 to x=787, with the left margin (x=0 to x=130) reserved for vertical labels and the reflection coefficient scale.
+An energy state bar 66 spans the full width at the top, labeled “SYSTEM ENERGY LEVEL (mWh).” The energy state bar 66 is divided into four labeled regions with dividers: 0–15 mWh (CRITICAL), 15–30 mWh (LOW), 30–80 mWh (NORMAL), and 80–100 mWh (SURPLUS). Scale markers appear below at 0, 15, 30, 80, and 100.
+A modulation mapping section 68 appears below the energy state bar 66, identified by a vertical rotated label “MODULATION MAPPING” on the left margin with numeral 68 stacked above. Four arrows originate from the bottom edge of the energy state bar 66 at the center of each region and point downward to their corresponding modulation values: CRITICAL → −0.4, LOW → −0.1, NORMAL → 0.0, SURPLUS → +0.3. Each column is aligned with the center of its corresponding energy bar region.
+A reflection coefficient scale 70 appears next, identified by a vertical rotated label “REFLECTION COEFF” on the left margin with numeral 70 stacked above. A vertical scale line runs along the left side from 0.3 (top) to 0.1 (bottom). Four coefficient values are marked on the scale: 0.23, 0.20, 0.19, and 0.16. Dashed vertical connector lines extend downward from each modulation value to corresponding dots at the appropriate coefficient level. Dashed horizontal lines extend from the scale axis to each dot, creating a grid of intersections that maps each energy state to its reflection coefficient.
+A behavioral effects section 72 appears at the bottom, labeled “BEHAVIORAL EFFECTS.” Four effect descriptions are provided: 0.16: “Reduced; conserve cognitive resources;” 0.19: “Slightly reduced; cautious operation;” 0.20: “Baseline; normal self-observation;” 0.23: “Enhanced; energy allows exploration.” A caption reads: “Low energy reduces self-observation; surplus energy enables exploration.”
+An optional extension zone 74 is depicted as a dashed rectangular boundary at the bottom of the figure, indicating a potential expansion area for future enhancements that may be incorporated without modifying the core self-observation architecture.
 FIG. 6 — End-to-End Signal Flow with Self-Observation Integration
+FIG. 6 shows the complete signal flow of the self-sustaining cognitive loop with the self-observation pathway highlighted as architecturally distinct, in a vertical flow layout.
+An environmental input block 76 appears at the top, labeled “ENVIRONMENTAL INPUT.” Inside: “(Light / Temperature / Pressure).” An arrow extends downward to the neuromorphic core.
+A neuromorphic core block, depicted using the spiking neural network 14, is shown as a bold-bordered full-width rectangle, labeled “NEUROMORPHIC CORE (SNN).” Inside: “V = V × leak + I_ext + I_refl + I_syn” and “output = mean(V_1, V_2, …, V_N).” Three signal paths exit the spiking neural network 14 downward.
+The left branch connects to a self-observation block 60, labeled “SELF-OBSERVATION.” Inside: “(Patent B — This Patent)” and “z⁻¹ delay + refl_coeff.” The right branch connects to a cognitive modulation block, depicted using the external cognitive control layer 42, labeled “COGNITIVE MODULATION.” Inside: “refl_coeff adjustment” and “Attention / Intention.” Bidirectional arrows connect the self-observation block 60 and the cognitive control layer 42, representing the interaction between the self-observation signal and the cognitive modulation of the reflection coefficient. The center branch connects directly to a motor actuation block 78, labeled “MOTOR ACTUATION.” Inside: “Servo Control / Response.” The cognitive control layer 42 acts as a side-channel parameter modulator that adjusts the reflection coefficient fed to the self-observation block 60, rather than as an inline signal processor between the spiking neural network 14 and the motor actuation block 78.
+An arrow extends downward from the motor actuation block 78 to an energy harvesting block 80, labeled “ENERGY HARVESTING.” Inside: “Piezo / Thermal Recovery.”
+Two visually distinguished feedback loops are depicted. Loop 1 (Self-Observation, Patent B — THIS PATENT): Short dashes (bold, stroke-width 4.5) from the self-observation block 60 back to the spiking neural network 14, running along the left side of the diagram. Vertical text reads: “SELF-OBS LOOP.” Loop 2 (Energy, Patent A): Long dashes (stroke-width 2) from the energy harvesting block 80 back to the spiking neural network 14, running along the right side of the diagram. Vertical text reads: “ENERGY LOOP.”
+A legend box at the bottom distinguishes the two loop styles: short dashes (bold) for self-observation (this patent) and long dashes for energy feedback (Patent A).
+A caption reads: “The self-observation pathway feeds the network’s own aggregate state back as explicit input at configurable gain (0.0 to 1.0).”
+DRAWING SHEET INDEX
 
-This figure shows the complete signal flow of the self-sustaining cognitive
-loop with the self-observation pathway highlighted as architecturally distinct.
+REFERENCE NUMERAL INDEX
+Unified Reference Numerals (consistent across all figures):
 
-Reference numerals: 600, 602, 604, 606, 608, 610
-
-Vertical flow layout:
-
-Top (600):
-- Full-width box labeled "ENVIRONMENTAL INPUT"
-- Inside: "(Light / Temperature / Pressure)"
-- Arrow down to Neuromorphic Core
-
-Second row (602):
-- Full-width box labeled "NEUROMORPHIC CORE (SNN)" (bold border)
-- Inside: "V = V × leak + I_ext + I_refl + I_syn"
-- Inside: "output = mean(V_1, V_2, ..., V_N)"
-- Two arrows down to Self-Observation and Cognitive Modulation
-
-Third row (side by side):
-- Left (604): Box labeled "SELF-OBSERVATION"
-  - Inside: "(Patent B - This Patent)"
-  - Inside: "z^(-1) delay + refl_coeff"
-- Right (606): Box labeled "COGNITIVE MODULATION"
-  - Inside: "refl_coeff adjustment"
-  - Inside: "Attention / Intention"
-- Bidirectional arrows between 604 and 606
-
-Fourth row (right side):
-- (608): Box labeled "MOTOR ACTUATION"
-  - Inside: "Servo Control / Response"
-- Arrow down from Cognitive Modulation
-
-Fifth row (right side):
-- (610): Box labeled "ENERGY HARVESTING"
-  - Inside: "Piezo / Thermal Recovery"
-- Arrow down from Motor Actuation
-
-Two feedback loops (visually distinguished):
-
-Loop 1 — Self-Observation (Patent B — THIS PATENT):
-- Short dashes (bold, stroke-width 3) from Self-Observation (604) back to SNN (602)
-- Left side of diagram
-- Label: "SELF-OBS LOOP" (rotated vertical text)
-
-Loop 2 — Energy (Patent A):
-- Long dashes (stroke-width 2) from Energy Harvesting (610) back to SNN (602)
-- Right side of diagram
-- Label: "ENERGY LOOP" (rotated vertical text)
-
-Legend box:
-- Short dashes (bold) line sample: "Short dashes (bold): Self-Observation (this patent)"
-- Long dashes line sample: "Long dashes: Energy feedback (Patent A)"
-
-Caption:
-- "The self-observation pathway feeds the network's own aggregate state"
-- "back as explicit input at configurable gain (0.0 to 1.0)."
-
-Sheet numbering: "6/6" at top center
-
-
-GENERAL DRAWING REQUIREMENTS (per 37 CFR 1.84)
-
-- Paper size: 8.5 x 11 inches (US Letter)
-- Top margin: 1 inch
-- Left margin: 1 inch
-- Right margin: 5/8 inch
-- Bottom margin: 3/8 inch
-- Black lines on white background ONLY
-- No color, no grayscale shading (use hatching patterns instead)
-- Line weight: sufficiently heavy for adequate reproduction
-- Each figure labeled: "FIG. 1", "FIG. 2", etc.
-- Sheet numbers at top center: "1/6", "2/6", etc.
-- No frames or borders around drawing area
-- All text in figures must be at least 1/8 inch (3.2 mm) high
-- Reference numerals must be used consistently across all figures
+DRAWING REQUIREMENTS PER 37 CFR 1.84
+The following requirements apply to all drawing sheets accompanying this application:
+Paper size: 8.5 × 11 inches (U.S. Letter).
+Margins: Top: 1 inch; Left: 1 inch; Right: 5/8 inch; Bottom: 3/8 inch.
+Line quality: Black lines on white background only. No color. No grayscale shading. Cross-hatching patterns are used where shading distinctions are required.
+Line weight: Sufficiently heavy and dark to permit adequate reproduction at a smaller size.
+Figure labels: Each figure is labeled “FIG. 1” through “FIG. 6.”
+Sheet numbers: Centered at the top of each sheet in the format “1/6” through “6/6.”
+Borders: No frames or borders around the drawing area.
+Text size: All text appearing in figures is at least 1/8 inch (3.2 mm) in height.
+Reference numerals: Unified numbering system. Each unique component receives one master numeral used consistently across all figures in which it appears. Sequential even-numbered increments (10, 12, 14, ...).

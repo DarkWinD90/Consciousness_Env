@@ -1,170 +1,103 @@
 PROVISIONAL APPLICATION FOR PATENT
-
 UNDER 35 U.S.C. 111(b)
 
-
 TITLE OF THE INVENTION
-
 Method and System for Autonomous Self-Regulation and Cognitive Resynchronization in Neural Processing Systems During Disconnection from External Control Layers
 
-
 INVENTOR(S)
-
 Kevin Christopher Ward
 Moreno Valley, California, United States
 
-
 CROSS-REFERENCE TO RELATED APPLICATIONS
-
 [0001] This application is related to co-pending provisional patent applications filed on February 2, 2026: (1) "Self-Sustaining Neural-Motor Energy Harvesting Loop for Autonomous Cognitive Systems"; and (2) "Configurable Recursive Self-Observation Method and System for Spiking Neural Networks with Dynamic Reflection Coefficient Modulation."
 
-
 FIELD OF THE INVENTION
-
 [0002] The present invention relates to fault-tolerant neural processing systems, and more specifically to a method and system for maintaining continuous intelligent operation of a neural processing system during disconnection from an external cognitive control layer, comprising autonomous energy-aware self-regulation, operational state buffering, persistent state serialization, and a seamless resynchronization protocol for cognitive layer reconnection.
 
-
 BACKGROUND OF THE INVENTION
-
 [0003] Modern AI-coupled neural processing systems, including robotic controllers, prosthetic interfaces, autonomous vehicles, and IoT sensor networks, increasingly rely on cloud-based or edge-based AI reasoning layers for higher-level cognitive control. These external cognitive layers provide goal setting, attention allocation, modulation signals, and strategic decision-making.
-
 [0004] When the connection between the neural processing system and its cognitive control layer is interrupted due to network failure, cognitive layer timeout, power interruption, communication latency such as interplanetary distances, or intentional disconnection, the neural processing system faces a critical choice: stop operation entirely, which is unacceptable for life-critical systems; continue operating blindly without intelligent self-regulation, which is dangerous and wasteful; or continue operating intelligently with self-regulation and seamless recovery.
-
 [0005] Traditional checkpoint and restart systems save system state to disk and restore on failure. The system stops during failure and there is no continuous operation. Recovery involves restarting from a saved state, losing all intermediate processing.
-
 [0006] Watchdog timer systems detect failure and trigger a reset or fallback to a simple default behavior. They do not provide intelligent self-regulation or state buffering for recovery.
-
 [0007] Redundant controller systems maintain backup controllers that take over on failure. They require duplicate hardware and do not provide energy-aware self-regulation or cognitive resynchronization.
-
 [0008] There exists no prior system that detects cognitive layer disconnection through heartbeat monitoring, seamlessly transitions to autonomous operation without interruption, self-regulates based on internal energy state rather than fixed fallback behavior, buffers all operational state during autonomous operation, provides periodic state serialization to persistent storage for crash recovery, seamlessly resynchronizes with a reconnecting cognitive layer by transmitting a summary of autonomous operations, supports both summary-level and full-step-level resynchronization, and enforces hard limits on autonomous operation.
 
-
 SUMMARY OF THE INVENTION
-
 [0009] The present invention provides a method and system for maintaining continuous intelligent operation of a neural processing system during disconnection from an external cognitive control layer, comprising: (1) heartbeat monitoring through a watchdog thread that monitors incoming tool calls from the cognitive control layer and detects disconnection when the heartbeat interval exceeds a configurable timeout threshold; (2) an autonomous input generator that provides self-regulating stimulus to the neural processing system during disconnection using a circadian-like base signal with stochastic attention bursts; (3) energy-aware self-modulation that adjusts neural processing parameters based on current energy storage level; (4) an operational state buffer that records every step of autonomous operation; (5) persistent state serialization at configurable intervals; (6) a resynchronization protocol for transmitting autonomous operation history to a reconnecting cognitive layer; and (7) hard cap enforcement on maximum autonomous steps.
 
+BRIEF DESCRIPTION OF THE DRAWINGS
+[0010] FIG. 1 is a system architecture block diagram showing the neural processing system with the cognitive control layer, fallback controller, and the transition mechanism between connected and autonomous operation.
+[0011] FIG. 2 is a state transition diagram showing the three operational states and the conditions that trigger transitions between them.
+[0012] FIG. 3 is a graph showing the energy-aware modulation curve that governs autonomous self-regulation behavior across four energy regions.
+[0013] FIG. 4 is a signal diagram showing the output waveform of the autonomous input generator including circadian base signal and attention bursts.
+[0014] FIG. 5 is a structural diagram of the resynchronization payload transmitted to the cognitive control layer upon reconnection.
+[0015] FIG. 6 is a set of timeline diagrams showing four recovery scenarios: normal reconnection, extended disconnection, crash recovery, and clean shutdown.
+[0016] FIG. 7 is an end-to-end signal flow diagram showing the complete system during both connected and autonomous operation, illustrating how the fallback mechanism seamlessly replaces external cognitive modulation with internal energy-aware self-regulation.
 
 DETAILED DESCRIPTION OF THE INVENTION
-
 System Architecture
-
-[0010] The cognitive fallback system operates within a dual-layer architecture. The upper layer is a Cognitive Control Layer comprising an external AI reasoning system that provides goal setting, attention allocation, modulation signals, and strategic decision-making. The lower layer is the Neural Processing System comprising local hardware and software that includes a spiking neural network, energy harvester, sensor interface, and motor controller, all of which are always running. Embedded within the Neural Processing System is the Fallback System version 1.1.0 that engages on disconnection and comprises a heartbeat watchdog, an autonomous runner, a state buffer, a snapshot writer, and a resync handler. Referring to FIG. 1, this architecture is shown in detail.
-
+[0017] The cognitive fallback system operates within a dual-layer architecture. The upper layer is a Cognitive Control Layer comprising an external AI reasoning system that provides goal setting, attention allocation, modulation signals, and strategic decision-making. The lower layer is the Neural Processing System comprising local hardware and software that includes a spiking neural network, energy harvester, sensor interface, and motor controller, all of which are always running. Embedded within the Neural Processing System is the Fallback System version 1.1.0 that engages on disconnection and comprises a heartbeat watchdog, an autonomous runner, a state buffer, a snapshot writer, and a resync handler. Referring to FIG. 1, this architecture is shown in detail.
 Heartbeat Watchdog
-
-[0011] The heartbeat watchdog monitors the interval between incoming tool calls from the cognitive control layer. The heartbeat timeout is configured at 30 seconds and the check interval is 5 seconds for polling frequency. A background thread runs the heartbeat monitor. While the system is running, the thread computes the time since the last tool call as the current time minus the last tool call timestamp. If the time since the last call exceeds the heartbeat timeout and the system is not already in fallback mode, the autonomous fallback is engaged. The thread then sleeps for the check interval before repeating.
-
-[0012] The 30-second timeout balances between false positives from brief network delays and detection speed. The 5-second polling frequency provides responsive detection without excessive CPU use. The thread-based implementation allows monitoring without blocking the main server event loop.
-
+[0018] Referring to FIG. 2, the system transitions between three operational states: connected, autonomous, and recovering. The heartbeat watchdog monitors the interval between incoming tool calls from the cognitive control layer. The heartbeat timeout is configured at 30 seconds and the check interval is 5 seconds for polling frequency. A background thread runs the heartbeat monitor. While the system is running, the thread computes the time since the last tool call as the current time minus the last tool call timestamp. If the time since the last call exceeds the heartbeat timeout and the system is not already in fallback mode, the autonomous fallback is engaged. The thread then sleeps for the check interval before repeating.
+[0019] The 30-second timeout balances between false positives from brief network delays and detection speed. The 5-second polling frequency provides responsive detection without excessive CPU use. The thread-based implementation allows monitoring without blocking the main server event loop.
 Autonomous Input Generator
-
-[0013] When fallback mode engages, the autonomous input generator provides continuous stimulus to the neural processing system. The generator produces a circadian-like base signal computed as 0.5 plus 0.3 multiplied by the sine of 2 pi multiplied by the step number divided by 500. Additionally, stochastic attention bursts occur with 10 percent probability per step, where a burst replaces the base signal with a random uniform value between 0.3 and 0.8. Referring to FIG. 4, the autonomous input generator output is illustrated.
-
-[0014] The circadian base signal has a period of approximately 500 steps, which at 18 seconds per step corresponds to approximately 2.5 hours, mimicking natural day and night activity patterns. The 10 percent burst probability prevents the system from falling into static patterns. The burst amplitude range of 0.3 to 0.8 provides variety without extreme values.
-
+[0020] When fallback mode engages, the autonomous input generator provides continuous stimulus to the neural processing system. The generator produces a circadian-like base signal computed as 0.5 plus 0.3 multiplied by the sine of 2 pi multiplied by the step number divided by 500. Additionally, stochastic attention bursts occur with 10 percent probability per step, where a burst replaces the base signal with a random uniform value between 0.3 and 0.8. Referring to FIG. 4, the autonomous input generator output is illustrated.
+[0021] The circadian base signal has a period of approximately 500 steps, which at 18 seconds per step corresponds to approximately 2.5 hours, mimicking natural day and night activity patterns. The 10 percent burst probability prevents the system from falling into static patterns. The burst amplitude range of 0.3 to 0.8 provides variety without extreme values.
 Energy-Aware Self-Modulation
-
-[0015] The autonomous controller adjusts its own behavior based on the system's energy reserves according to four operating regions. Referring to FIG. 3, the energy-aware modulation curve is shown. When energy is below 15 milliwatt-hours the system is in the critical region and modulation is set to negative 0.4 for maximum conservation, reducing input strength, lowering the reflection coefficient, and minimizing spike activity. When energy is below 30 milliwatt-hours the system is in the low region and modulation is set to negative 0.1 for cautious operation, slightly reducing activity and preparing for potential energy crisis. When energy is between 30 and 80 milliwatt-hours the system is in the normal region and modulation is set to 0.0 for neutral operation with the circadian input pattern. When energy exceeds 80 milliwatt-hours the system is in the surplus region and modulation is set to positive 0.3 for surplus utilization, increasing activity, raising the reflection coefficient, and enabling more exploration and learning.
-
-[0016] This creates a homeostatic regulation mechanism wherein the system automatically adjusts its behavior to maintain energy within a viable range without requiring any external cognitive input. This mirrors metabolic regulation in biological organisms where when energy in the form of ATP is low, the organism reduces activity, and when energy is abundant, the organism engages in exploration, play, and learning.
-
+[0022] The autonomous controller adjusts its own behavior based on the system’s energy reserves according to four operating regions. Referring to FIG. 3, the energy-aware modulation curve is shown. When energy is below 15 milliwatt-hours the system is in the critical region and modulation is set to negative 0.4 for maximum conservation, reducing input strength, lowering the reflection coefficient, and minimizing spike activity. When energy is below 30 milliwatt-hours the system is in the low region and modulation is set to negative 0.1 for cautious operation, slightly reducing activity and preparing for potential energy crisis. When energy is between 30 and 80 milliwatt-hours the system is in the normal region and modulation is set to 0.0 for neutral operation with the circadian input pattern. When energy exceeds 80 milliwatt-hours the system is in the surplus region and modulation is set to positive 0.3 for surplus utilization, increasing activity, raising the reflection coefficient, and enabling more exploration and learning.
+[0023] This creates a homeostatic regulation mechanism wherein the system automatically adjusts its behavior to maintain energy within a viable range without requiring any external cognitive input. This mirrors metabolic regulation in biological organisms where when energy in the form of ATP is low, the organism reduces activity, and when energy is abundant, the organism engages in exploration, play, and learning.
 Operational State Buffer
-
-[0017] Every step of autonomous operation is recorded in a rolling buffer with a configurable maximum size of 10,000 entries. Each entry records the step number, input signal value, modulation value, spike count, energy level in milliwatt-hours, temperature in degrees Celsius, pattern type classification, and timestamp. When the buffer exceeds its maximum size, the oldest entries are discarded.
-
-[0018] The buffer provides two retrieval modes. The summary mode returns the total number of autonomous steps, the energy delta between first and last recorded steps, minimum energy, maximum energy, mean energy, total spikes, and mean spikes per step. The full buffer mode returns the complete step-by-step history for detailed analysis.
-
+[0024] Every step of autonomous operation is recorded in a rolling buffer with a configurable maximum size of 10,000 entries. Each entry records the step number, input signal value, modulation value, spike count, energy level in milliwatt-hours, temperature in degrees Celsius, pattern type classification, and timestamp. When the buffer exceeds its maximum size, the oldest entries are discarded.
+[0025] The buffer provides two retrieval modes. The summary mode returns the total number of autonomous steps, the energy delta between first and last recorded steps, minimum energy, maximum energy, mean energy, total spikes, and mean spikes per step. The full buffer mode returns the complete step-by-step history for detailed analysis.
 Persistent State Serialization
-
-[0019] Every 50 autonomous steps, the complete system state is serialized to persistent storage at a configurable snapshot path. The serialized state includes a timestamp, the complete system state comprising step number, energy in milliwatt-hours, temperature in degrees Celsius, spike count, pattern type, SNN output, and mean potential, the full SNN weight matrix, the SNN membrane potential vector, the energy storage level, the autonomous operation step count, and a buffer summary.
-
-[0020] Recovery from crash is supported such that if the system crashes and restarts, the initialization function checks for the latest snapshot file and restores from the snapshot instead of initializing fresh. This provides continuity across crashes with maximum state loss equal to the snapshot interval of 50 steps.
-
+[0026] Every 50 autonomous steps, the complete system state is serialized to persistent storage at a configurable snapshot path. The serialized state includes a timestamp, the complete system state comprising step number, energy in milliwatt-hours, temperature in degrees Celsius, spike count, pattern type, SNN output, and mean potential, the full SNN weight matrix, the SNN membrane potential vector, the energy storage level, the autonomous operation step count, and a buffer summary.
+[0027] Recovery from crash is supported such that if the system crashes and restarts, the initialization function checks for the latest snapshot file and restores from the snapshot instead of initializing fresh. This provides continuity across crashes with maximum state loss equal to the snapshot interval of 50 steps.
 Resynchronization Protocol
-
-[0021] When the cognitive control layer reconnects and calls the resync function, it receives a structured payload. Referring to FIG. 5, the resynchronization payload structure is shown. The payload includes the status of resync complete, a flag indicating autonomous mode was active, summary statistics including the number of autonomous steps and energy delta and duration in seconds, a summary section containing energy statistics of minimum, maximum, mean, and final values, spike statistics of total and mean per step, and pattern distribution showing counts of burst, tonic, sparse, and silent classifications. Optionally, if full buffer mode is requested, the complete step-by-step operational record is included.
-
-[0022] The summary-only mode is the default and is lightweight, suitable for bandwidth-constrained reconnections. The full buffer mode enables the cognitive layer to reconstruct exactly what happened during disconnection. Upon successful resynchronization, fallback mode is disengaged and cognitive control resumes seamlessly.
-
+[0028] When the cognitive control layer reconnects and calls the resync function, it receives a structured payload. Referring to FIG. 5, the resynchronization payload structure is shown. The payload includes the status of resync complete, a flag indicating autonomous mode was active, summary statistics including the number of autonomous steps and energy delta and duration in seconds, a summary section containing energy statistics of minimum, maximum, mean, and final values, spike statistics of total and mean per step, and pattern distribution showing counts of burst, tonic, sparse, and silent classifications. Optionally, if full buffer mode is requested, the complete step-by-step operational record is included.
+[0029] The summary-only mode is the default and is lightweight, suitable for bandwidth-constrained reconnections. The full buffer mode enables the cognitive layer to reconstruct exactly what happened during disconnection. Upon successful resynchronization, fallback mode is disengaged and cognitive control resumes seamlessly.
 Hard Cap Enforcement
-
-[0023] The maximum number of autonomous steps is set to 10,000. The autonomous runner executes steps in a loop while fallback is active and the step count remains below the hard cap. At each step, the input and modulation are generated, the system is stepped, and the state is recorded in the buffer. Every 50 steps, a snapshot is saved. If the hard cap is reached, a final snapshot is saved and the system enters a safe idle state awaiting reconnection. At 18 seconds per step, 10,000 steps corresponds to approximately 50 hours of autonomous operation, which is sufficient for most disconnection scenarios.
-
+[0030] The maximum number of autonomous steps is set to 10,000. The autonomous runner executes steps in a loop while fallback is active and the step count remains below the hard cap. At each step, the input and modulation are generated, the system is stepped, and the state is recorded in the buffer. Every 50 steps, a snapshot is saved. If the hard cap is reached, a final snapshot is saved and the system enters a safe idle state awaiting reconnection. At 18 seconds per step, 10,000 steps corresponds to approximately 50 hours of autonomous operation, which is sufficient for most disconnection scenarios.
 
 RECOVERY SCENARIOS
-
-[0024] Referring to FIG. 6, four recovery scenarios are illustrated. In Scenario 1 for brief cognitive disconnection lasting 30 seconds to 5 minutes, the cognitive layer sends its last tool call at time zero, the watchdog detects timeout at 30 seconds and engages fallback, the autonomous runner executes approximately 15 to 150 steps, the cognitive layer reconnects and calls resync, the system returns a summary, and the cognitive layer resumes normal control fully informed of what happened. There is no data loss, no operational interruption, and seamless transition.
-
-[0025] In Scenario 2 for extended disconnection lasting hours, the cognitive layer disconnects, the watchdog engages fallback at 30 seconds, the autonomous runner self-regulates for up to 10,000 steps with energy-aware modulation preventing depletion and snapshots saved every 50 steps, the hard cap is reached and the system enters safe idle, the cognitive layer eventually reconnects and receives resync with full buffer of 10,000 steps of history.
-
-[0026] In Scenario 3 for system crash and restart, the system crashes due to power failure or software error, the system restarts, the initialization function is called, the function detects the latest snapshot file, the state is restored from the snapshot to within 50 steps of the crash point, and the cognitive layer connects or fallback re-engages. State loss is limited to at most 50 steps.
-
-[0027] In Scenario 4 for clean shutdown, stdin EOF is detected indicating the session is ending, the finally block writes a shutdown snapshot, the system exits cleanly, upon restart the system restores from the shutdown snapshot, and full continuity is maintained with no data loss.
-
+[0031] Referring to FIG. 6, four recovery scenarios are illustrated. In Scenario 1 for brief cognitive disconnection lasting 30 seconds to 5 minutes, the cognitive layer sends its last tool call at time zero, the watchdog detects timeout at 30 seconds and engages fallback, the autonomous runner executes approximately 15 to 150 steps, the cognitive layer reconnects and calls resync, the system returns a summary, and the cognitive layer resumes normal control fully informed of what happened. There is no data loss, no operational interruption, and seamless transition.
+[0032] In Scenario 2 for extended disconnection lasting hours, the cognitive layer disconnects, the watchdog engages fallback at 30 seconds, the autonomous runner self-regulates for up to 10,000 steps with energy-aware modulation preventing depletion and snapshots saved every 50 steps, the hard cap is reached and the system enters safe idle, the cognitive layer eventually reconnects and receives resync with full buffer of 10,000 steps of history.
+[0033] In Scenario 3 for system crash and restart, the system crashes due to power failure or software error, the system restarts, the initialization function is called, the function detects the latest snapshot file, the state is restored from the snapshot to within 50 steps of the crash point, and the cognitive layer connects or fallback re-engages. State loss is limited to at most 50 steps.
+[0034] In Scenario 4 for clean shutdown, stdin EOF is detected indicating the session is ending, the finally block writes a shutdown snapshot, the system exits cleanly, upon restart the system restores from the shutdown snapshot, and full continuity is maintained with no data loss.
 
 APPLICATION DOMAINS
-
-[0028] For space exploration, Mars communication delays range from 4 to 24 minutes each way. A robotic system cannot receive real-time cognitive control. The cognitive fallback enables hours of autonomous operation between communication windows, full resynchronization when Earth-based AI reconnects, and energy-aware self-regulation to survive long dark periods.
-
-[0029] For prosthetic devices, a neural prosthetic interface that loses Bluetooth connection to its phone-based AI controller must continue functioning. The prosthetic continues responding to neural signals, energy-aware modulation prevents battery depletion, and when connection restores the AI catches up on what happened.
-
-[0030] For autonomous underwater vehicles, underwater communication is unreliable. A vehicle running this system continues mission execution during communication blackouts, self-regulates activity based on battery level, and resurfaces and resyncs with the command center.
-
-[0031] For industrial IoT, sensor nodes in remote locations that lose cellular connectivity continue collecting and processing data, buffer all readings for resync, and adjust sampling rate based on power reserves.
-
+[0035] For space exploration, Mars communication delays range from 4 to 24 minutes each way. A robotic system cannot receive real-time cognitive control. The cognitive fallback enables hours of autonomous operation between communication windows, full resynchronization when Earth-based AI reconnects, and energy-aware self-regulation to survive long dark periods.
+[0036] For prosthetic devices, a neural prosthetic interface that loses Bluetooth connection to its phone-based AI controller must continue functioning. The prosthetic continues responding to neural signals, energy-aware modulation prevents battery depletion, and when connection restores the AI catches up on what happened.
+[0037] For autonomous underwater vehicles, underwater communication is unreliable. A vehicle running this system continues mission execution during communication blackouts, self-regulates activity based on battery level, and resurfaces and resyncs with the command center.
+[0038] For industrial IoT, sensor nodes in remote locations that lose cellular connectivity continue collecting and processing data, buffer all readings for resync, and adjust sampling rate based on power reserves.
 End-to-End Signal Flow
-
-[0032] Referring to FIG. 7, the complete end-to-end signal flow is shown for a system incorporating the cognitive fallback mechanism. During connected operation, environmental sensors feed the spiking neural network, which produces spike patterns that are cognitively modulated by the external control layer, routed to the motor actuator, and harvested for energy in a self-sustaining loop. When the cognitive control layer disconnects, the fallback system seamlessly replaces the external cognitive modulation with internal energy-aware self-modulation. The autonomous input generator replaces external sensor-driven input with a self-generated circadian signal augmented by stochastic attention bursts. The energy gate continues to regulate the loop based on harvested energy. All operational state is buffered during autonomous operation. Upon reconnection, the resynchronization protocol transmits the buffered state to the cognitive layer, which resumes external modulation. The transition between connected and autonomous operation occurs without interruption to the neural processing, motor actuation, or energy harvesting pathways.
-
+[0039] Referring to FIG. 7, the complete end-to-end signal flow is shown for a system incorporating the cognitive fallback mechanism. During connected operation, environmental sensors feed the spiking neural network, which produces spike patterns that are cognitively modulated by the external control layer, routed to the motor actuator, and harvested for energy in a self-sustaining loop. When the cognitive control layer disconnects, the fallback system seamlessly replaces the external cognitive modulation with internal energy-aware self-modulation. The autonomous input generator replaces external sensor-driven input with a self-generated circadian signal augmented by stochastic attention bursts. The energy gate continues to regulate the loop based on harvested energy. All operational state is buffered during autonomous operation. Upon reconnection, the resynchronization protocol transmits the buffered state to the cognitive layer, which resumes external modulation. The transition between connected and autonomous operation occurs without interruption to the neural processing, motor actuation, or energy harvesting pathways.
 Scope of Claims
-
-[0033] No claim is made herein regarding phenomenological consciousness, subjective experience, qualia, or sentience. The term "cognitive" as used throughout this specification refers exclusively to computational decision-making processes performed by software systems, whether external AI reasoning layers or internal rule-based controllers. The term "autonomous" refers to operation without external control input, not to any form of agency or intentionality. All claims pertain to measurable, falsifiable properties of heartbeat monitoring, state buffering, energy-aware modulation, and resynchronization protocols. The system is a deterministic engineering artifact whose operation is fully characterized by the mathematical equations and validation thresholds described herein.
-
+[0040] No claim is made herein regarding phenomenological consciousness, subjective experience, qualia, or sentience. The term "cognitive" as used throughout this specification refers exclusively to computational decision-making processes performed by software systems, whether external AI reasoning layers or internal rule-based controllers. The term "autonomous" refers to operation without external control input, not to any form of agency or intentionality. All claims pertain to measurable, falsifiable properties of heartbeat monitoring, state buffering, energy-aware modulation, and resynchronization protocols. The system is a deterministic engineering artifact whose operation is fully characterized by the mathematical equations and validation thresholds described herein.
 
 CLAIMS
-
-[0034] What is claimed is:
+[0041] What is claimed is:
 
 1. A method for maintaining continuous intelligent operation of a neural processing system during disconnection from an external cognitive control layer, comprising:
-
 (a) monitoring a heartbeat signal from said external cognitive control layer, said heartbeat being defined by the occurrence of tool calls or communication events from said cognitive layer;
-
-(b) upon detecting that said heartbeat has exceeded a configurable timeout threshold, engaging an autonomous operation mode without interrupting the neural processing system's ongoing operation;
-
+(b) upon detecting that said heartbeat has exceeded a configurable timeout threshold, engaging an autonomous operation mode without interrupting the neural processing system’s ongoing operation;
 (c) during said autonomous operation mode, providing self-regulating input stimulation to said neural processing system using an autonomous input generator that produces:
-
 (i) a circadian-like base signal comprising a slow sinusoidal oscillation;
-
 (ii) stochastic attention bursts at a configurable probability per timestep;
-
-(d) simultaneously modulating said neural processing system's operational parameters based on the system's current energy storage level, according to a multi-threshold energy-aware regulation scheme that reduces activity when energy is low and increases activity when energy is surplus;
-
+(d) simultaneously modulating said neural processing system’s operational parameters based on the system’s current energy storage level, according to a multi-threshold energy-aware regulation scheme that reduces activity when energy is low and increases activity when energy is surplus;
 (e) buffering all operational state during said autonomous operation mode, recording at minimum the input signal, modulation value, neural spike activity, energy level, and temperature at each timestep;
-
 (f) upon reconnection of said external cognitive control layer, transmitting a resynchronization payload comprising summary statistics and optionally full step-by-step operational history;
-
 (g) seamlessly restoring cognitive control without operational interruption or state loss.
 
 2. A neural processing system with autonomous fallback capability comprising:
-
 (a) a neural processing unit comprising a spiking neural network;
-
 (b) a cognitive control interface for receiving commands from an external cognitive control layer;
-
 (c) a heartbeat watchdog that monitors said cognitive control interface and detects disconnection;
-
 (d) an autonomous input generator that provides self-regulating stimulus to said neural processing unit during disconnection;
-
 (e) an energy-aware modulation controller that adjusts operational parameters based on energy storage level;
-
 (f) an operational state buffer that records all steps during autonomous operation;
-
 (g) a persistent state serializer that periodically writes system state to non-volatile storage;
-
 (h) a resynchronization handler that generates a structured payload for a reconnecting cognitive control layer;
-
 (i) a hard cap controller that limits the maximum number of autonomous steps;
-
 wherein said system transitions seamlessly between cognitive-controlled operation and autonomous operation without operational interruption.
 
 3. The method of claim 1 wherein said configurable timeout threshold is 30 seconds, and said heartbeat monitoring is performed by a background thread polling at 5-second intervals.
@@ -177,7 +110,7 @@ wherein said system transitions seamlessly between cognitive-controlled operatio
 
 7. The method of claim 1 wherein said hard cap on autonomous operation is set to a maximum of 10,000 steps, after which the system enters a safe idle state that saves a final state snapshot, ceases active neural processing, maintains heartbeat monitoring for cognitive layer reconnection, and preserves all buffered state for eventual resynchronization.
 
-8. The method of claim 1 used in combination with a self-sustaining neural-motor energy harvesting loop, wherein the neural processing system's motor output generates electrical energy through piezoelectric and thermoelectric transduction, the autonomous fallback controller adjusts neural activity to maintain energy homeostasis, and the system can operate indefinitely without external power or cognitive control, limited only by the hard cap on autonomous steps.
+8. The method of claim 1 used in combination with a self-sustaining neural-motor energy harvesting loop, wherein the neural processing system’s motor output generates electrical energy through piezoelectric and thermoelectric transduction, the autonomous fallback controller adjusts neural activity to maintain energy homeostasis, and the system can operate indefinitely without external power or cognitive control, limited only by the hard cap on autonomous steps.
 
 9. The method of claim 1 used in combination with configurable recursive self-observation, wherein the neural processing system observes its own prior output through a reflection feedback pathway, the autonomous fallback controller adjusts the reflection coefficient based on energy level, reduced energy leads to reduced self-observation for conservation, and surplus energy leads to increased self-observation for exploration and learning.
 
@@ -187,12 +120,8 @@ wherein said system transitions seamlessly between cognitive-controlled operatio
 
 12. The system of claim 2 further comprising a clean shutdown mechanism wherein upon detection of process termination including stdin EOF or SIGTERM, the system executes a shutdown handler that serializes current state to persistent storage, enabling full state recovery on subsequent restart with zero data loss.
 
-
 ABSTRACT OF THE DISCLOSURE
-
 A method and system for maintaining continuous operation of a neural processing system during disconnection from an external cognitive control layer. A heartbeat watchdog detects disconnection when a configurable timeout threshold is exceeded. Upon disconnection, an autonomous mode engages seamlessly, providing self-regulating input through a circadian-like base signal with stochastic attention bursts. An energy-aware modulation controller adjusts operational parameters based on current energy storage, implementing multi-threshold regulation that conserves resources when energy is low and enables exploration when surplus. Operational state is buffered for resynchronization and periodically serialized for crash recovery. Upon reconnection, a resynchronization protocol transmits summary statistics and optionally full operational history, restoring cognitive control without state loss. A hard cap limits maximum autonomous operation. The system targets environments where continuous operation is critical, including space exploration, prosthetics, and remote IoT sensors. (FIG. 7)
 
-
 REFERENCE TO SOURCE CODE
-
 The complete implementation of this invention is available at the following repository: github.com/DarkWinD90/Consciousness_Env, validated state tagged as v3.0.0-phase10-multimodal at commit 9e2c333. Key implementation file is mcp/consciousness_mcp_server.py. Persistent state snapshots are stored in mcp/.snapshots/ directory.

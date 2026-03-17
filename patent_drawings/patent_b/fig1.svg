@@ -6,96 +6,108 @@
     </marker>
   </defs>
   <rect width="100%" height="100%" fill="white" />
-  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">1/6</text>
+
+  <!-- Sheet number -->
+  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">1/6</text>
+
   <g transform="translate(0, 50)">
-    <text x="425" y="70" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SELF-OBSERVATION FEEDBACK LOOP</text>
-    <text x="425" y="90" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Core Mechanism for Recursive Self-Observation</text>
 
-    <!-- EXTERNAL INPUT (100) - Full width -->
-    <rect x="150" y="120" width="550" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="425" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">EXTERNAL INPUT</text>
-    <text x="425" y="162" font-family="Courier New, monospace" font-size="14" text-anchor="middle">I_ext(t)</text>
-    <text x="690" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="end">100</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- EXTERNAL INPUT (10)                                    -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="310" y="100" width="180" height="50" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="400" y="130" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">EXTERNAL INPUT</text>
+    <!-- Ref 10 -->
+    <text x="500" y="118" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">10</text>
+    <line x1="498" y1="118" x2="492" y2="118" stroke="black" stroke-width="0.5" />
 
-    <!-- Arrow: External Input down to Summing Junction -->
-    <line x1="425" y1="170" x2="425" y2="195" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+    <!-- Arrow: External Input → Summing Junction -->
+    <line x1="400" y1="150" x2="400" y2="170" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-    <!-- SUMMING JUNCTION (102) - Circle with + -->
-    <circle cx="425" cy="220" r="20" fill="none" stroke="black" stroke-width="2"/>
-    <text x="425" y="227" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold">+</text>
-    <line x1="445" y1="218" x2="453" y2="212" stroke="black" stroke-width="0.5"/>
-    <text x="455" y="216" font-family="Arial, sans-serif" font-size="14" text-anchor="start">102</text>
-    <text x="455" y="232" font-family="Courier New, monospace" font-size="14" text-anchor="start">I_adj = I_ext + I_refl</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SUMMING JUNCTION (12) — rect with + symbol             -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="360" y="170" width="80" height="50" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="400" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">SUM</text>
+    <!-- Ref 12 -->
+    <text x="450" y="188" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">12</text>
+    <line x1="448" y1="188" x2="442" y2="190" stroke="black" stroke-width="0.5" />
 
-    <!-- Arrow: Summing Junction to SNN -->
-    <line x1="425" y1="240" x2="425" y2="265" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+    <!-- Arrow: Summing Junction → SNN -->
+    <line x1="400" y1="220" x2="400" y2="260" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-    <!-- SPIKING NEURAL NETWORK (104) - Full width, bold border -->
-    <rect x="150" y="265" width="550" height="90" rx="5" fill="none" stroke="black" stroke-width="3"/>
-    <text x="425" y="290" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SPIKING NEURAL NETWORK (N LIF Neurons)</text>
-    <!-- Neuron circles - cluster arrangement (no connecting lines to avoid implying topology) -->
-    <circle cx="380" cy="306" r="8" fill="none" stroke="black" stroke-width="1.5"/>
-    <circle cx="460" cy="306" r="8" fill="none" stroke="black" stroke-width="1.5"/>
-    <circle cx="340" cy="320" r="8" fill="none" stroke="black" stroke-width="1.5"/>
-    <circle cx="420" cy="320" r="8" fill="none" stroke="black" stroke-width="1.5"/>
-    <circle cx="500" cy="320" r="8" fill="none" stroke="black" stroke-width="1.5"/>
-    <!-- Membrane equation -->
-    <text x="425" y="345" font-family="Courier New, monospace" font-size="14" text-anchor="middle">V(t+1) = V(t) × leak + I_adj × dt</text>
-    <text x="690" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="end">104</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SPIKING NEURAL NETWORK (14)                            -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="280" y="260" width="240" height="70" fill="none" stroke="black" stroke-width="2" />
+    <text x="400" y="302" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">SNN</text>
+    <!-- Ref 14 -->
+    <text x="530" y="288" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">14</text>
+    <line x1="528" y1="288" x2="522" y2="288" stroke="black" stroke-width="0.5" />
 
-    <!-- Arrows from SNN to row below -->
-    <line x1="275" y1="355" x2="275" y2="385" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-    <line x1="575" y1="355" x2="575" y2="385" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+    <!-- Arrow: SNN → Spike Output -->
+    <line x1="400" y1="330" x2="400" y2="370" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-    <!-- SPIKE OUTPUT (106) - Left half -->
-    <rect x="150" y="385" width="250" height="55" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="275" y="410" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">SPIKE OUTPUT</text>
-    <text x="275" y="430" font-family="Courier New, monospace" font-size="14" text-anchor="middle">S(t)</text>
-    <text x="390" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="end">106</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SPIKE OUTPUT (16)                                      -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="310" y="370" width="180" height="50" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="400" y="400" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">SPIKE OUTPUT</text>
+    <!-- Ref 16 -->
+    <text x="500" y="388" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">16</text>
+    <line x1="498" y1="388" x2="492" y2="388" stroke="black" stroke-width="0.5" />
 
-    <!-- AGGREGATE OUTPUT COMPUTATION (108) - Right half -->
-    <rect x="450" y="385" width="250" height="75" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="575" y="408" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">AGGREGATE OUTPUT</text>
-    <text x="575" y="428" font-family="Courier New, monospace" font-size="14" text-anchor="middle">O(t) = mean(V_1...V_N)</text>
-    <text x="575" y="448" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Mean membrane potential</text>
-    <text x="690" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="end">108</text>
+    <!-- Arrow: Spike Output → Aggregate Output -->
+    <line x1="400" y1="420" x2="400" y2="460" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-    <!-- Arrow: Aggregate Output to z^-1 (stroke-width=2 like 104->108) -->
-    <line x1="575" y1="460" x2="575" y2="490" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- AGGREGATE OUTPUT (18)                                  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="310" y="460" width="180" height="50" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="400" y="482" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">AGGREGATE</text>
+    <text x="400" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">OUTPUT</text>
+    <!-- Ref 18 -->
+    <text x="500" y="478" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">18</text>
+    <line x1="498" y1="478" x2="492" y2="478" stroke="black" stroke-width="0.5" />
 
-    <!-- z^-1 DELAY ELEMENT (110) - Right side, moved down for spacing -->
-    <rect x="450" y="490" width="250" height="50" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="575" y="515" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">DELAY ELEMENT</text>
-    <text x="575" y="533" font-family="Courier New, monospace" font-size="14" text-anchor="middle">z^(-1)</text>
-    <text x="690" y="505" font-family="Arial, sans-serif" font-size="14" text-anchor="end">110</text>
+    <!-- Arrow: Aggregate Output → Delay Element -->
+    <line x1="400" y1="510" x2="400" y2="550" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-    <!-- Arrow: z^-1 to Reflection Scaling (stroke-width=2 like 104->108) -->
-    <line x1="575" y1="540" x2="575" y2="570" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- DELAY ELEMENT (20)                                     -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="340" y="550" width="120" height="50" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="400" y="580" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">DELAY</text>
+    <!-- Ref 20 -->
+    <text x="465" y="568" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">20</text>
+    <line x1="463" y1="568" x2="460" y2="570" stroke="black" stroke-width="0.5" />
 
-    <!-- REFLECTION SCALING (112) - Right side, moved down for spacing -->
-    <rect x="430" y="570" width="270" height="65" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="565" y="595" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">REFLECTION SCALING</text>
-    <text x="565" y="620" font-family="Courier New, monospace" font-size="14" text-anchor="middle">I_refl = O(t) × refl_coeff</text>
-    <text x="690" y="585" font-family="Arial, sans-serif" font-size="14" text-anchor="end">112</text>
+    <!-- Arrow: Delay → Reflection Scaling -->
+    <line x1="400" y1="600" x2="400" y2="640" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-    <!-- SELF-OBSERVATION FEEDBACK LOOP (114) - Bold, left side going back up to Summing Junction -->
-    <line x1="430" y1="603" x2="130" y2="603" stroke="black" stroke-width="3"/>
-    <line x1="130" y1="603" x2="130" y2="220" stroke="black" stroke-width="3"/>
-    <line x1="130" y1="220" x2="403" y2="220" stroke="black" stroke-width="3" marker-end="url(#ah)"/>
-    <text x="118" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="end" transform="rotate(-90, 118, 380)">SELF-OBSERVATION FEEDBACK</text>
-    <text x="115" y="620" font-family="Arial, sans-serif" font-size="14" text-anchor="end">114</text>
-    <line x1="118" y1="617" x2="130" y2="603" stroke="black" stroke-width="0.5"/>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- REFLECTION SCALING BLOCK (22)                          -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="310" y="640" width="180" height="50" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="400" y="662" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">REFLECTION</text>
+    <text x="400" y="680" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">SCALING</text>
+    <!-- Ref 22 -->
+    <text x="500" y="658" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">22</text>
+    <line x1="498" y1="658" x2="492" y2="658" stroke="black" stroke-width="0.5" />
 
-    <!-- Signal Pathways Legend -->
-    <rect x="150" y="650" width="550" height="65" rx="5" fill="none" stroke="black" stroke-width="2"/>
-    <text x="425" y="675" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Signal Pathways</text>
-    <line x1="180" y1="700" x2="270" y2="700" stroke="black" stroke-width="3"/>
-    <text x="280" y="705" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Bold: Self-observation feedback</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SELF-OBSERVATION FEEDBACK PATH (24) — bold return       -->
+    <!-- Routed at x=200 to clear all left-side elements         -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 310 665 L 200 665 L 200 195 L 360 195" fill="none" stroke="black" stroke-width="2" marker-end="url(#ah)" />
+    <!-- Ref 24 -->
+    <text x="188" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">24</text>
+    <line x1="191" y1="430" x2="200" y2="430" stroke="black" stroke-width="0.5" />
 
-    <!-- Caption -->
-    <text x="425" y="775" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Self-observation: network observes its own prior state.</text>
-    <text x="425" y="795" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Reflection coefficient: 0.0-1.0. Operational: 0.1-0.3.</text>
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIGURE LABEL                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 1</text>
 
-    <text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">FIG. 1</text>
   </g>
 </svg>
