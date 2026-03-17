@@ -346,6 +346,14 @@ def bbox_overlap(a: Tuple[float, float, float, float], b: Tuple[float, float, fl
     return (x1 - x0) * (y1 - y0)
 
 
+def bbox_area(b: Tuple[float, float, float, float]) -> float:
+    return max(0.0, b[2] - b[0]) * max(0.0, b[3] - b[1])
+
+
+def bbox_contains(outer: Tuple[float, float, float, float], inner: Tuple[float, float, float, float]) -> bool:
+    return outer[0] <= inner[0] and outer[1] <= inner[1] and outer[2] >= inner[2] and outer[3] >= inner[3]
+
+
 def point_to_bbox_distance(p: Tuple[float, float], b: Tuple[float, float, float, float]) -> float:
     x, y = p
     cx = min(max(x, b[0]), b[2])
@@ -365,13 +373,27 @@ def evaluate_diagram_hygiene(
 ) -> Tuple[bool, List[str]]:
     issues: List[str] = []
     components = [s for s in shapes if s.tag in {"rect", "ellipse", "circle", "polygon"} and s.stroke_width >= 1.0]
+    collision_components: List[Shape] = []
+    for c in components:
+        c_area = bbox_area(c.bbox)
+        is_container = False
+        for other in components:
+            if c is other:
+                continue
+            if bbox_contains(c.bbox, other.bbox):
+                overlap_ratio = bbox_overlap(c.bbox, other.bbox) / max(bbox_area(other.bbox), 1.0)
+                if overlap_ratio >= 0.98 and c_area >= bbox_area(other.bbox) * 1.5:
+                    is_container = True
+                    break
+        if not is_container:
+            collision_components.append(c)
     signal_paths = [s for s in shapes if s.tag in {"line", "polyline", "path"} and (s.has_marker or s.dashed)]
     leader_lines = [s for s in shapes if s.tag in {"line", "path"} and s.stroke_width <= 0.8]
 
     # Element collisions (ignore tiny overlaps due to stroke joins)
-    for i in range(len(components)):
-        for j in range(i + 1, len(components)):
-            if bbox_overlap(components[i].bbox, components[j].bbox) > 120:
+    for i in range(len(collision_components)):
+        for j in range(i + 1, len(collision_components)):
+            if bbox_overlap(collision_components[i].bbox, collision_components[j].bbox) > 120:
                 issues.append("component overlap/collision detected")
                 break
 
@@ -432,7 +454,7 @@ def evaluate_diagram_hygiene(
     leader_points = [p for l in leader_lines for p in (l.points[:1] + l.points[-1:])]
     for num, bb in numeric_text_nodes:
         center = ((bb[0] + bb[2]) / 2, (bb[1] + bb[3]) / 2)
-        if any(bbox_overlap(bb, c.bbox) > 0 for c in components):
+        if any(bbox_overlap(bb, c.bbox) > 0 for c in collision_components):
             issues.append(f"reference numeral {num} overlaps element")
         if leader_points and not any((((center[0] - p[0]) ** 2 + (center[1] - p[1]) ** 2) ** 0.5) <= 28 for p in leader_points):
             issues.append(f"reference numeral {num} missing nearby leader line")
