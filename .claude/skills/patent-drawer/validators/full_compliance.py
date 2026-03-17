@@ -75,10 +75,10 @@ def validate_line_thickness(svg_file):
         print("[PASS] Line Thickness: All lines >= minimum")
         return True
     else:
-        print(f"[WARN] Line Thickness: {len(issues)} thin line(s)")
+        print(f"[FAIL] Line Thickness: {len(issues)} thin line(s)")
         for issue in issues[:5]:
             print(f"       - {issue}")
-        return True  # Warning, not failure
+        return False
 
 
 def validate_figure_label(svg_file):
