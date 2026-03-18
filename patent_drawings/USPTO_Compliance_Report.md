@@ -165,5 +165,5 @@ For the non-provisional filing deadline (2027-01-31):
 - [ ] Regenerate Drawing Description documents with unified numerals
 - [ ] Move sheet numbers from y=50 to y=80 (within sight area)
 - [ ] Consider replacing rotated pathway labels with horizontal text + leader lines
-- [ ] Re-export PDFs from corrected SVGs using `python export_drawings_pdf.py`
+- [ ] Export corrected SVGs to PDF for filing
 - [ ] Verify PDF rendering matches SVG corrections at print resolution

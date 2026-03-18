@@ -338,21 +338,11 @@ approach with Python scripts that either:
 
 | Library | Purpose | File |
 |---------|---------|------|
-| `cairosvg` | SVG-to-PDF conversion | `export_drawings_pdf.py` |
 | `reportlab` | PDF generation from Python | `export_specifications_pdf.py` |
-| `PyPDF2` / `pypdf` | PDF manipulation/merging | `generate_dump_pdfs.py` |
 
-#### Export Pipeline
+#### Drawing Source
 
-```
-patent_drawings/patent_X/figN.svg
-        │
-        ▼  (export_drawings_pdf.py)
-Patent_Drawings_X.pdf  ← Per-patent PDF with all figures
-        │
-        ▼  (generate_dump_pdfs.py)
-Patent_Drawings_All.pdf  ← Combined PDF for all patents
-```
+All 21 patent figures are hand-illustrated SVGs in `patent_drawings/patent_{a,b,c}/`. Export to PDF ad-hoc at filing time using any SVG→PDF tool (e.g. Inkscape, CairoSVG, browser print).
 
 ---
 
@@ -772,7 +762,7 @@ If drawing corrections require pin reassignment:
 1. Update the drawing SVG
 2. Update `patents/uspto_formatted/Patent_X_Drawings_Description.txt`
 3. Update `patents/Patent_X_*.md` if pin assignments are mentioned
-4. Regenerate PDFs via `export_drawings_pdf.py`
+4. Export corrected SVGs to PDF for filing
 
 **CRITICAL**: Drawing and specification must ALWAYS match. A mismatch is grounds
 for patent rejection under 35 U.S.C. 112(a) (written description requirement).
@@ -970,11 +960,11 @@ check for ALL of these during any audit:
 
 ### Drawing Inventory
 
-| Patent | Figures | SVG Location | PDF Output |
-|--------|---------|-------------|------------|
-| A | 8 (fig1-fig8) | `patent_drawings/patent_a/` | `Patent_Drawings_A.pdf` |
-| B | 6 (fig1-fig6) | `patent_drawings/patent_b/` | `Patent_Drawings_B.pdf` |
-| C | 7 (fig1-fig7) | `patent_drawings/patent_c/` | `Patent_Drawings_C.pdf` |
+| Patent | Figures | SVG Location |
+|--------|---------|-------------|
+| A | 8 (fig1-fig8) | `patent_drawings/patent_a/` |
+| B | 6 (fig1-fig6) | `patent_drawings/patent_b/` |
+| C | 7 (fig1-fig7) | `patent_drawings/patent_c/` |
 
 ### Document Inventory
 
@@ -984,16 +974,7 @@ check for ALL of these during any audit:
 | Specification | `Patent_A_Specification.pdf` | `Patent_B_Specification.pdf` | `Patent_C_Specification.pdf` |
 | Drawings Description | `Patent_A_Drawings_Description.pdf` | `Patent_B_Drawings_Description.pdf` | `Patent_C_Drawings_Description.pdf` |
 | Micro Entity (SB15A) | `Patent_A_MicroEntity_SB15A.pdf` | `Patent_B_MicroEntity_SB15A.pdf` | `Patent_C_MicroEntity_SB15A.pdf` |
-| Drawing Sheets | `Patent_Drawings_A.pdf` | `Patent_Drawings_B.pdf` | `Patent_Drawings_C.pdf` |
-
-### Export Pipeline
-
-```
-patent_drawings/patent_X/figN.svg  →  export_drawings_pdf.py  →  Patent_Drawings_X.pdf
-patents/Patent_X_*.md              →  export_specifications_pdf.py  →  Patent_X_Specification.pdf
-patents/forms/sb00*.pdf            →  fill_patent_forms.py  →  Patent_X_CoverSheet_SB16.pdf
-                                   →  generate_dump_pdfs.py  →  Patent_Drawings_All.pdf
-```
+| Drawing Sheets | Export from `patent_drawings/patent_{a,b,c}/` SVGs at filing time |
 
 ---
 
