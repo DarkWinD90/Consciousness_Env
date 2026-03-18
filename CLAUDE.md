@@ -210,11 +210,6 @@ Consciousness_Env/
 │   ├── patent_b/            #   Patent B: 6 figures (fig1-fig6.svg)
 │   └── patent_c/            #   Patent C: 7 figures (fig1-fig7.svg)
 │
-├── export_drawings_pdf.py         # Exports SVGs to per-patent PDFs
-├── Patent_Drawings_A.pdf          # EFS-Web ready (8 sheets)
-├── Patent_Drawings_B.pdf          # EFS-Web ready (6 sheets)
-├── Patent_Drawings_C.pdf          # EFS-Web ready (7 sheets)
-│
 ├── consciousness_cli.py     # CLI entry point: `consciousness run|appendix|version`
 ├── setup.py                 # Package config (find_packages + py_modules)
 ├── MANIFEST.in              # Source distribution includes
@@ -1037,8 +1032,7 @@ The model follows the ARM Holdings pattern:
 | `mcp/consciousness_server.py` | Cognitive layer (stateless) | YES — reasoning interface |
 | `consciousness_cli.py` | CLI entry point | YES — package install path |
 | `setup.py` | Packaging config | YES — __init__.py discovery |
-| `patent_drawings/` | Hand-tuned USPTO-compliant SVGs (21 figs) | YES — patent filing |
-| `export_drawings_pdf.py` | SVG → PDF export for EFS-Web | YES — patent filing |
+| `patent_drawings/` | Hand-illustrated USPTO-compliant SVGs (21 figs) | YES — patent filing |
 
 ---
 

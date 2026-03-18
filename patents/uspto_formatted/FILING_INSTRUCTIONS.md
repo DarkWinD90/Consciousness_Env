@@ -163,12 +163,7 @@ Create simple black and white line drawings for each patent. You can use:
 - FIG. 6: Recovery Timeline Diagrams
 - FIG. 7: End-to-End Signal Flow (Connected vs. Autonomous)
 
-Save as:
-- `Patent_Drawings_A.pdf`
-- `Patent_Drawings_B.pdf`
-- `Patent_Drawings_C.pdf`
-
-> **Note**: All drawing PDFs are already generated and ready in the repository root. These were auto-generated from validated SVG source files using `export_drawings_pdf.py`.
+The hand-illustrated SVG source files are in `patent_drawings/patent_a/`, `patent_drawings/patent_b/`, and `patent_drawings/patent_c/`. Export to PDF before filing.
 
 ---
 

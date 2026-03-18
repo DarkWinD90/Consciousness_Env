@@ -38,10 +38,6 @@ PAGE_SIZE_TOLERANCE = 5  # points
 
 # Expected PDF files in the repository
 EXPECTED_PDFS = [
-    # Drawing PDFs
-    'Patent_Drawings_A.pdf',
-    'Patent_Drawings_B.pdf',
-    'Patent_Drawings_C.pdf',
     # Specification PDFs
     'Patent_A_Specification.pdf',
     'Patent_B_Specification.pdf',
