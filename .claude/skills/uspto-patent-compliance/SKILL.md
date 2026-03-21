@@ -325,24 +325,23 @@ When validating or creating SVG patent drawings, verify:
 13. **All text horizontal**: Left-to-right (except graph axis labels)
 14. **No frames/borders**: Around the drawing area
 
-### Python + SVG Hybrid Approach
+### Drawing Source and Validation Tools
 
-For generating patent drawings programmatically, this project uses a hybrid
-approach with Python scripts that either:
+All 21 patent figures are hand-illustrated SVGs in `patent_drawings/patent_{a,b,c}/`.
+No programmatic drawing generators exist in this repository — all figures were
+authored manually as SVG markup.
 
-1. **Generate SVGs directly** using string templates or XML libraries
-2. **Convert existing SVGs to PDF** using CairoSVG or similar
-3. **Use matplotlib/reportlab** for graph-type figures with SVG-like control
+**Validation utilities** (Python scripts in `.claude/skills/`) check compliance
+rules (margins, fonts, line weights, collisions) but do not generate drawings.
+
+**PDF export** is done ad-hoc at filing time using any SVG→PDF tool
+(e.g. Inkscape, CairoSVG, browser print).
 
 #### Key Python Libraries in This Project
 
 | Library | Purpose | File |
 |---------|---------|------|
-| `reportlab` | PDF generation from Python | `export_specifications_pdf.py` |
-
-#### Drawing Source
-
-All 21 patent figures are hand-illustrated SVGs in `patent_drawings/patent_{a,b,c}/`. Export to PDF ad-hoc at filing time using any SVG→PDF tool (e.g. Inkscape, CairoSVG, browser print).
+| `reportlab` | PDF generation for specification text | `export_specifications_pdf.py` |
 
 ---
 
