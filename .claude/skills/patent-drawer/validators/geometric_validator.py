@@ -183,14 +183,14 @@ def parse_paths(content: str, dx: float = 0, dy: float = 0) -> List[Segment]:
         else:
             group = f"path_{path_counter}"
 
-        # Parse M/L/C/A commands into point sequences
-        # C (cubic bezier) and A (arc) represent bridges/curves — they break
+        # Parse M/L/C/Q/T/S/A commands into point sequences
+        # Curves (C, Q, T, S) and arcs (A) represent bridges — they break
         # the straight-line chain. We extract segments between straight points
         # and treat curves as gaps (the bridge convention).
         points = []  # list of (x, y, is_bridge_end)
-        tokens = re.findall(r'([MLCAZ])\s*([^MLCAZ]*)', d, re.IGNORECASE)
+        tokens = re.findall(r'([MLCAQTSZ])\s*([^MLCAQTSZ]*)', d, re.IGNORECASE)
         for cmd_type, coords_str in tokens:
-            nums = re.findall(r'[\d.]+', coords_str)
+            nums = re.findall(r'-?[\d.]+', coords_str)
             cmd = cmd_type.upper()
             if cmd in ('M', 'L') and len(nums) >= 2:
                 points.append((float(nums[0]), float(nums[1]), False))
@@ -200,6 +200,21 @@ def parse_paths(content: str, dx: float = 0, dy: float = 0) -> List[Segment]:
                 if points:
                     points[-1] = (points[-1][0], points[-1][1], True)  # mark as bridge start
                 points.append((float(nums[4]), float(nums[5]), False))
+            elif cmd == 'Q' and len(nums) >= 4:
+                # Quadratic bezier: Q cx cy ex ey
+                if points:
+                    points[-1] = (points[-1][0], points[-1][1], True)
+                points.append((float(nums[2]), float(nums[3]), False))
+            elif cmd == 'T' and len(nums) >= 2:
+                # Smooth quadratic: T ex ey (control point reflected)
+                if points:
+                    points[-1] = (points[-1][0], points[-1][1], True)
+                points.append((float(nums[0]), float(nums[1]), False))
+            elif cmd == 'S' and len(nums) >= 4:
+                # Smooth cubic: S cx2 cy2 ex ey
+                if points:
+                    points[-1] = (points[-1][0], points[-1][1], True)
+                points.append((float(nums[2]), float(nums[3]), False))
             elif cmd == 'A' and len(nums) >= 7:
                 # Arc: A rx ry rotation large-arc sweep ex ey
                 if points:

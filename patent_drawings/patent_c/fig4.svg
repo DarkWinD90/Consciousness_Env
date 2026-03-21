@@ -38,10 +38,8 @@
   <!-- X-axis labels -->
   <text x="160" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0</text>
   <line x1="160" y1="393" x2="160" y2="383" stroke="black" stroke-width="0.5" />
-  <text x="420" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">250</text>
-  <line x1="420" y1="393" x2="420" y2="383" stroke="black" stroke-width="0.5" />
-  <text x="670" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">500</text>
-  <line x1="670" y1="393" x2="670" y2="383" stroke="black" stroke-width="0.5" />
+  <text x="420" y="415" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">250</text>
+  <text x="670" y="415" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">500</text>
   <text x="420" y="420" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Autonomous Step Number</text>
 
   <!-- Sinusoidal base signal (smooth curve) -->

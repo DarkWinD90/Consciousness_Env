@@ -149,8 +149,8 @@
     <path d="M 183 490 A 22 22 0 1 0 227 490 A 22 22 0 1 0 183 490 Z" fill="none" stroke="black" stroke-width="1" />
     <text x="205" y="496" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">LED</text>
     <!-- Ref 112 -->
-    <text x="165" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">112</text>
-    <line x1="168" y1="475" x2="175" y2="480" stroke="black" stroke-width="0.5" />
+    <text x="140" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">112</text>
+    <line x1="143" y1="475" x2="175" y2="480" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: MCU → LED (GPIO) -->
     <path d="M 300 440 L 205 440 L 205 460" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />

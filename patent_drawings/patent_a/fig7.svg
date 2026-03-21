@@ -247,8 +247,8 @@
     <path d="M 130 775 Q 200 795 260 818 Q 320 830 385 836"
           fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
     <!-- Ref 120 -->
-    <text x="413" y="705" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">120</text>
-    <line x1="411" y1="705" x2="404" y2="698" stroke="black" stroke-width="0.5" />
+    <text x="420" y="700" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">120</text>
+    <line x1="418" y1="700" x2="412" y2="694" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- LEGEND (122)                                           -->
