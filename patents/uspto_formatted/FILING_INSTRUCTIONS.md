@@ -163,7 +163,7 @@ Create simple black and white line drawings for each patent. You can use:
 - FIG. 6: Recovery Timeline Diagrams
 - FIG. 7: End-to-End Signal Flow (Connected vs. Autonomous)
 
-The hand-illustrated SVG source files are in `patent_drawings/patent_a/`, `patent_drawings/patent_b/`, and `patent_drawings/patent_c/`. Export to PDF before filing.
+The hand-illustrated SVG source files are in `patent_drawings/patent_a/`, `patent_drawings/patent_b/`, and `patent_drawings/patent_c/`. Before filing, export these SVGs to per-patent drawings PDFs (e.g. `Patent_A_Drawings.pdf`, `Patent_B_Drawings.pdf`, `Patent_C_Drawings.pdf`) using any SVG→PDF tool (Inkscape, CairoSVG, or browser print).
 
 ---
 
@@ -177,7 +177,7 @@ The hand-illustrated SVG source files are in `patent_drawings/patent_a/`, `paten
 4. Upload your **Cover Sheet PDF** (PTO/SB/16) — e.g. `Patent_A_CoverSheet_SB16.pdf`
 5. Upload your **Specification PDF** (the main patent document) — e.g. `Patent_A_Specification.pdf`
 6. Upload your **Drawings Description PDF** — e.g. `Patent_A_Drawings_Description.pdf`
-7. Upload your **Drawings PDF** — e.g. `Patent_Drawings_A.pdf`
+7. Upload your **Drawings PDF** — e.g. `Patent_A_Drawings.pdf` (exported from SVGs)
 8. Select your **Entity Status** (Micro or Small)
 9. If Micro Entity: you must also submit **Form PTO/SB/15A** — e.g. `Patent_A_MicroEntity_SB15A.pdf`
    - Pre-filled forms already exist in the repository root
@@ -251,7 +251,7 @@ The hand-illustrated SVG source files are in `patent_drawings/patent_a/`, `paten
 - [ ] PTO/SB/15A Micro Entity Certification (if micro entity) — `Patent_X_MicroEntity_SB15A.pdf`
 - [ ] Specification Document — `Patent_X_Specification.pdf`
 - [ ] Drawings Description — `Patent_X_Drawings_Description.pdf`
-- [ ] Drawing Sheets — `Patent_Drawings_X.pdf`
+- [ ] Drawing Sheets — `Patent_X_Drawings.pdf` (exported from SVGs in `patent_drawings/patent_x/`)
 
 ### Information You Need:
 - [ ] Your full legal name
