@@ -9,26 +9,15 @@
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">3/7</text>
 
   <!-- Anchor components for axis endpoints -->
-  <rect x="155" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="155" y="692" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
   <rect x="155" y="145" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="705" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="705" y="692" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
   <rect x="235" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="235" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="235" y="692" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
   <rect x="315" y="385" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="315" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="315" y="692" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
   <rect x="535" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="535" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-
-  <!-- Anchor components for axis endpoints -->
-  <rect x="155" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="155" y="145" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="705" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="235" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="235" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="315" y="385" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="315" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="535" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="535" y="675" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <rect x="535" y="692" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
 
   <!-- Graph axes -->
   <!-- 44: Y-axis (Modulation value) -->
