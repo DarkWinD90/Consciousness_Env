@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
+  <defs>
+    <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="black" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="white" />
+
+  <!-- Sheet number -->
+  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">2/6</text>
+
+  <g transform="translate(0, 50)">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- MAIN SPECTRUM BAR (26) — horizontal bar 0.0 to 1.0    -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="150" y="200" width="550" height="60" fill="none" stroke="black" stroke-width="2" />
+    <!-- Ref 26 -->
+    <text x="710" y="225" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">26</text>
+    <line x1="708" y1="225" x2="702" y2="225" stroke="black" stroke-width="0.5" />
+
+    <!-- Scale markings below bar -->
+    <line x1="150" y1="260" x2="150" y2="280" stroke="black" stroke-width="1.5" />
+    <text x="150" y="298" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.0</text>
+    <line x1="260" y1="260" x2="260" y2="280" stroke="black" stroke-width="1.5" />
+    <text x="260" y="298" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.2</text>
+    <line x1="370" y1="260" x2="370" y2="280" stroke="black" stroke-width="1.5" />
+    <text x="370" y="298" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.4</text>
+    <line x1="535" y1="260" x2="535" y2="280" stroke="black" stroke-width="1.5" />
+    <text x="535" y="298" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0.7</text>
+    <line x1="700" y1="260" x2="700" y2="280" stroke="black" stroke-width="1.5" />
+    <text x="700" y="298" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">1.0</text>
+
+    <!-- Direction indicator — scale direction (no marker to avoid false positive) -->
+    <line x1="150" y1="340" x2="700" y2="340" stroke="black" stroke-width="1.5" />
+    <polygon points="700 336, 712 340, 700 344" fill="black" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIRST REGION (28) — point at 0.0, no self-observation  -->
+    <!-- Depicted as narrow marker at left edge of bar          -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <line x1="153" y1="200" x2="153" y2="260" stroke="black" stroke-width="3" />
+    <!-- Ref 28 -->
+    <text x="140" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">28</text>
+    <line x1="143" y1="192" x2="150" y2="200" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- SECOND REGION (30) — 0.0 to 0.2, minimal              -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="156" y="203" width="101" height="54" fill="none" stroke="black" stroke-width="0.9" stroke-dasharray="4,4" />
+    <!-- Ref 30 -->
+    <text x="205" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">30</text>
+    <line x1="205" y1="193" x2="205" y2="200" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- THIRD REGION (32) — 0.2 to 0.4, balanced/operational  -->
+    <!-- Bold border to indicate operational range               -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="263" y="203" width="104" height="54" fill="none" stroke="black" stroke-width="0.9" />
+    <!-- Ref 32 -->
+    <text x="315" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">32</text>
+    <line x1="315" y1="193" x2="315" y2="200" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FOURTH REGION (34) — 0.4 to 0.7, self-dominated       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="373" y="203" width="159" height="54" fill="none" stroke="black" stroke-width="0.9" stroke-dasharray="4,4" />
+    <!-- Ref 34 -->
+    <text x="452" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">34</text>
+    <line x1="452" y1="193" x2="452" y2="200" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIFTH REGION (36) — 0.7 to 1.0, self-absorption       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <rect x="538" y="203" width="159" height="54" fill="none" stroke="black" stroke-width="0.9" stroke-dasharray="4,4" />
+    <!-- Ref 36 -->
+    <text x="617" y="190" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">36</text>
+    <line x1="617" y1="193" x2="617" y2="200" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- CURRENT PROCESSING POINT (38) — vertical dashed line   -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <line x1="260" y1="195" x2="260" y2="265" stroke="black" stroke-width="2" stroke-dasharray="5,3" />
+    <!-- Ref 38 — default reflection_coeff = 0.2 (base_reflection per spec) -->
+    <text x="275" y="175" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">38</text>
+    <line x1="273" y1="177" x2="262" y2="195" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- REGION LABELS — below direction arrow                  -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <text x="150" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">None</text>
+    <text x="205" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Minimal</text>
+    <text x="315" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Balanced</text>
+    <text x="452" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Dominant</text>
+    <text x="617" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Saturated</text>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIGURE LABEL                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 2</text>
+
+  </g>
+</svg>

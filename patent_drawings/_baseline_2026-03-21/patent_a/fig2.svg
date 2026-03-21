@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" height="11in" viewBox="0 0 850 1100">
+  <defs>
+    <marker id="ah" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="black" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="white" />
+
+  <!-- Sheet number -->
+  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">2/8</text>
+
+  <g transform="translate(0, 50)">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Y-AXIS (32)                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <line x1="220" y1="120" x2="220" y2="750" stroke="black" stroke-width="1.5" />
+    <!-- Y-axis arrow at top (manual arrowhead, no marker-end) -->
+    <line x1="220" y1="120" x2="220" y2="112" stroke="black" stroke-width="1.5" />
+    <polygon points="214 118, 220 106, 226 118" fill="black" stroke="none" />
+    <!-- Y-axis label (rotated) -->
+    <text x="145" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black" transform="rotate(-90, 145, 430)">Energy (mWh)</text>
+    <!-- Ref 32 -->
+    <text x="130" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">32</text>
+    <line x1="133" y1="138" x2="218" y2="125" stroke="black" stroke-width="0.5" />
+
+    <!-- Y-axis tick marks and values -->
+    <g class="axis-label">
+    <!-- 100 mWh -->
+    <line x1="215" y1="200" x2="220" y2="200" stroke="black" stroke-width="1.5" />
+    <text x="208" y="205" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">100</text>
+    <line x1="209" y1="198" x2="215" y2="200" stroke="black" stroke-width="0.5" />
+    <!-- 50 mWh -->
+    <line x1="215" y1="375" x2="220" y2="375" stroke="black" stroke-width="1.5" />
+    <text x="208" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">50</text>
+    </g>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- X-AXIS (34)                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <line x1="220" y1="550" x2="690" y2="550" stroke="black" stroke-width="1.5" />
+    <!-- X-axis arrow at right (manual arrowhead, no marker-end) -->
+    <line x1="690" y1="550" x2="698" y2="550" stroke="black" stroke-width="1.5" />
+    <polygon points="692 544, 706 550, 692 556" fill="black" stroke="none" />
+    <!-- X-axis label -->
+    <text x="460" y="595" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Time Step</text>
+    <!-- Ref 34 -->
+    <text x="718" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">34</text>
+    <line x1="716" y1="547" x2="702" y2="550" stroke="black" stroke-width="0.5" />
+
+    <!-- X-axis tick marks -->
+    <g class="axis-label">
+    <!-- 0 -->
+    <line x1="220" y1="550" x2="220" y2="556" stroke="black" stroke-width="1.5" />
+    <text x="220" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0</text>
+    <!-- 500 -->
+    <line x1="338" y1="550" x2="338" y2="556" stroke="black" stroke-width="1.5" />
+    <text x="338" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">500</text>
+    <line x1="338" y1="556" x2="338" y2="560" stroke="black" stroke-width="0.5" />
+    <!-- 1000 -->
+    <line x1="455" y1="550" x2="455" y2="556" stroke="black" stroke-width="1.5" />
+    <text x="455" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">1000</text>
+    <line x1="455" y1="556" x2="455" y2="560" stroke="black" stroke-width="0.5" />
+    <!-- 1500 -->
+    <line x1="573" y1="550" x2="573" y2="556" stroke="black" stroke-width="1.5" />
+    <text x="573" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">1500</text>
+    <line x1="573" y1="556" x2="573" y2="560" stroke="black" stroke-width="0.5" />
+    <!-- 2000 -->
+    <line x1="690" y1="550" x2="690" y2="556" stroke="black" stroke-width="1.5" />
+    <text x="690" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">2000</text>
+    </g>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- ZERO ENERGY BASELINE (40) — coincides with X-axis     -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- Y-axis zero tick -->
+    <line x1="215" y1="550" x2="220" y2="550" stroke="black" stroke-width="1.5" />
+    <!-- Ref 40 — positioned left of Y-axis to avoid crowding ref 34 -->
+    <text x="160" y="555" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">40</text>
+    <line x1="163" y1="552" x2="213" y2="550" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- ORIGIN POINT (38) — where both curves begin at 50 mWh -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <circle cx="220" cy="375" r="5" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Ref 38 -->
+    <text x="240" y="410" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">38</text>
+    <line x1="238" y1="405" x2="226" y2="380" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- EXPERIMENTAL CURVE (36) — solid, rises to 100 mWh    -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 220 375 Q 340 340 420 260 Q 500 210 600 200 L 690 200"
+          fill="none" stroke="black" stroke-width="2.5" />
+    <!-- Ref 36 -->
+    <text x="710" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">36</text>
+    <line x1="708" y1="200" x2="692" y2="200" stroke="black" stroke-width="0.5" />
+
+    <!-- EXPERIMENTAL CURVE LABEL (42) -->
+    <!-- Ref 42 -->
+    <text x="550" y="245" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">42</text>
+    <line x1="548" y1="243" x2="530" y2="225" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- CONTROL CURVE (44) — dashed, drops below zero         -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <path d="M 220 375 Q 340 430 420 510 Q 500 570 600 660 L 690 730"
+          fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <!-- Endpoint marker for control curve -->
+    <circle cx="690" cy="730" r="4" fill="none" stroke="black" stroke-width="1" />
+    <!-- Ref 44 -->
+    <text x="710" y="730" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">44</text>
+    <line x1="708" y1="728" x2="692" y2="728" stroke="black" stroke-width="0.5" />
+
+    <!-- CONTROL CURVE LABEL (50) -->
+    <!-- Ref 50 -->
+    <text x="550" y="620" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">50</text>
+    <line x1="548" y1="618" x2="530" y2="600" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- LEGEND                                                 -->
+    <!-- ══════════════════════════════════════════════════════ -->
+
+    <!-- EXPERIMENTAL LEGEND BOX (46) -->
+    <rect x="250" y="780" width="200" height="40" fill="none" stroke="black" stroke-width="1" />
+    <line x1="260" y1="800" x2="310" y2="800" stroke="black" stroke-width="2.5" />
+    <text x="320" y="805" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Experimental</text>
+    <!-- Ref 46 -->
+    <text x="468" y="795" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">46</text>
+    <line x1="466" y1="797" x2="452" y2="800" stroke="black" stroke-width="0.5" />
+
+    <!-- CONTROL LEGEND BOX (48) -->
+    <rect x="250" y="830" width="200" height="40" fill="none" stroke="black" stroke-width="1" />
+    <line x1="260" y1="850" x2="310" y2="850" stroke="black" stroke-width="1.5" stroke-dasharray="8,4" />
+    <text x="320" y="855" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Control</text>
+    <!-- Ref 48 -->
+    <text x="468" y="845" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">48</text>
+    <line x1="466" y1="847" x2="452" y2="850" stroke="black" stroke-width="0.5" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- FIGURE LABEL                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 2</text>
+
+  </g>
+</svg>
