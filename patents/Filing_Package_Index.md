@@ -1,8 +1,8 @@
 # PATENT FILING PACKAGE — CONSOLIDATED INDEX
 
-**Filing Date**: February 2, 2026
+**Target Filing Date**: TBD (drawings compliance in progress)
 **Inventor**: Kevin Christopher Ward
-**Three Provisional Applications Filed Simultaneously**
+**Three Provisional Applications in Preparation**
 
 ---
 
@@ -133,7 +133,7 @@ python phases/phase10_multimodal.py               # Claims F10.1-F10.3: ALL PASS
 - **Repository**: https://github.com/DarkWinD90/Consciousness_Env
 - **Current validated tag**: v3.0.0-phase10-multimodal (commit 9e2c333)
 - **Total validated claims**: 14 (5 + 3 + 3 + 3)
-- **License**: Patent pending (see patent filings)
+- **License**: Proprietary (patent applications in preparation)
 
 ---
 
@@ -166,13 +166,13 @@ python phases/phase10_multimodal.py               # Claims F10.1-F10.3: ALL PASS
 
 | Month | Milestone | Status |
 |-------|-----------|--------|
-| **0 (Feb 2, 2026)** | File all three provisionals | ⏳ READY |
+| **TBD** | File all three provisionals | ⏳ Not filed — drawings compliance in progress |
 | 1-3 | Software validation documented, tags created (14 claims across 4 phases) | ✅ COMPLETE |
 | 3-6 | Hardware prototype built and validated (Phase 11) | 🔄 PLANNED |
 | 6-9 | Hardware results documented (F11.1-F11.3) | ⏳ |
 | 9-11 | Non-provisional applications prepared | ⏳ |
 | 11-12 | PCT international application filed | ⏳ |
-| **12 (Feb 2, 2027)** | All three provisionals converted to non-provisional | ⏳ |
+| **12 months after filing** | All three provisionals converted to non-provisional | ⏳ |
 
 ---
 
@@ -193,7 +193,7 @@ python phases/phase10_multimodal.py               # Claims F10.1-F10.3: ALL PASS
 - [x] Source Code Reference
 - [ ] **Inventor declaration** (to be signed)
 - [ ] **Filing fee payment** (to be submitted)
-- [x] **Patent drawings** (21 figures across 3 patents, 37 CFR 1.84 compliant)
+- [ ] **Patent drawings** (21 figures across 3 patents — 37 CFR 1.84 compliance in progress)
 - [ ] **Information Disclosure Statement** (prior art references)
 
 ### Post-Filing
@@ -232,4 +232,4 @@ patents/
 
 ---
 
-*Filing Package Prepared — Target Filing Date: February 2, 2026*
+*Filing Package in Preparation — patent drawings compliance in progress*

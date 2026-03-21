@@ -1,10 +1,19 @@
 # USPTO PATENT DRAWING COMPLIANCE REPORT
 
+> **DISCLAIMER (2026-03-21)**: The automated validator results below do NOT
+> represent full USPTO compliance. The validator checks a limited set of
+> criteria (margins, font sizes, reference numerals, colors, line thickness).
+> Additional requirements (hand-illustration style, hatching, lead line
+> conventions, sheet numbering placement, etc.) are NOT fully validated by
+> this tool. The drawings are still being brought into compliance. Manual
+> review by a patent illustrator or attorney is required before filing.
+
 **Date**: 2026-03-13 (regenerated from current validator output)
 **Prior version**: 2026-02-18 (superseded — used incorrect coordinate system)
 **Scope**: Full Audit — 21 drawings across 3 patents
 **Standard**: 37 CFR 1.84, MPEP 608.02, EFS-Web requirements
 **Auditor**: Automated compliance validators + manual triage
+**Status**: Drawing compliance in progress — not ready for filing
 
 ---
 
@@ -17,7 +26,7 @@
 | Geometric validator | **Documented below** (mix of real issues and false positives) |
 | Numeral consistency | **21/21 unified scheme** (100-series migration complete) |
 
-**All 21 drawings pass the full compliance validator (margins, fonts, references, arrowheads, colors, line thickness, figure labels).**
+**All 21 drawings pass the automated compliance validator (margins, fonts, references, arrowheads, colors, line thickness, figure labels). This does NOT guarantee full USPTO compliance — see disclaimer above.**
 
 ---
 

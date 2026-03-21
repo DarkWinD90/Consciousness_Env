@@ -155,7 +155,7 @@ Examples:
     elif args.command == 'appendix':
         run_appendix(args.name)
     elif args.command == 'version':
-        print("Consciousness System Environment v1.0.0")
+        print("Consciousness System Environment v3.0.0")
         print("Multi-Layer Architecture for Synthetic Proto-Consciousness")
     else:
         parser.print_help()

@@ -831,20 +831,20 @@ systems where stopping is not an option (robotics, prosthetics, space).
 
 ### 10.2 Filing Strategy
 
-**STATUS: ALL THREE PROVISIONAL PATENTS FILED 2026-01-31**
+**STATUS: PATENT APPLICATIONS IN PREPARATION (NOT YET FILED)**
 
-| Patent | Filing Date | Status | Non-Provisional Deadline |
-|--------|-------------|--------|--------------------------|
-| Patent A (Energy Loop) | 2026-01-31 | Provisional Filed | 2027-01-31 |
-| Patent B (Self-Observation) | 2026-01-31 | Provisional Filed | 2027-01-31 |
-| Patent C (Cognitive Fallback) | 2026-01-31 | Provisional Filed | 2027-01-31 |
+| Patent | Status | Notes |
+|--------|--------|-------|
+| Patent A (Energy Loop) | Not Filed | Specifications drafted, drawings compliance in progress |
+| Patent B (Self-Observation) | Not Filed | Specifications drafted, drawings compliance in progress |
+| Patent C (Cognitive Fallback) | Not Filed | Specifications drafted, drawings compliance in progress |
 
-**12-Month Timeline**:
+**Timeline**:
 
 | Step | Timeline | Action |
 |------|----------|--------|
-| ✅ 1 | 2026-01-31 | **COMPLETE** — All three provisional patents filed |
-| ✅ 1b | 2026-01-31 | **COMPLETE** — All 21 patent drawings validated (37 CFR 1.84 compliant) |
+| ⏳ 1 | TBD | File all three provisional patent applications |
+| 🔄 1b | In progress | Achieve full 37 CFR 1.84 compliance for all 21 patent drawings |
 | 2 | Month 1-3 (by 2026-04-30) | Validate Phase 8 STDP claims, create git tag history |
 | 3 | Month 3-6 (by 2026-07-30) | Build hardware prototype (Phase 11) for physical reduction to practice |
 | 4 | Month 6-9 (by 2026-10-30) | Document hardware validation results (Claims F11.1-F11.3) |

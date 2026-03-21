@@ -26,7 +26,7 @@ loop a candidate for synthetic proto-consciousness.
 control condition, and a measured value. Every validated state is pinned by an
 annotated git tag and reproducible with `git checkout <tag>`.
 
-**3 provisional patents prepared** (target filing: 2026-02-02):
+**3 provisional patent applications in preparation** (not yet filed):
 - Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop
 - Patent B: Configurable Recursive Self-Observation in SNNs
 - Patent C: Cognitive Fallback with Autonomous Self-Regulation
@@ -89,7 +89,7 @@ Consciousness_Env/
 ├── tests/                   # Test suite
 ├── appendices/              # Supplementary simulations
 ├── patents/                 # Patent text and USPTO-formatted filings
-├── patent_drawings/         # 21 SVG figures (37 CFR 1.84 compliant)
+├── patent_drawings/         # 21 SVG figures (37 CFR 1.84 compliance in progress)
 └── CLAUDE.md                # System reference (read this first)
 ```
 
@@ -219,7 +219,7 @@ imply subjective experience, sentience, or moral status.
 
 ## License
 
-Patent pending. See `patents/` directory for filing details.
+Proprietary. Patent applications in preparation. See `patents/` directory.
 
 ---
 
