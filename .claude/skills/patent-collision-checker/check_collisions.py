@@ -461,11 +461,13 @@ def _should_skip_pair(a, b, all_bboxes=None):
     # Skip line-on-line (axes, gridlines, arrows commonly share endpoints)
     if a.kind == 'line' and b.kind == 'line':
         return True
-    # Skip all polyline overlaps (chart data lines span graph area intentionally)
-    if a.kind == 'polyline' or b.kind == 'polyline':
+    # Skip polyline-on-polyline (chart data lines overlap intentionally)
+    if a.kind == 'polyline' and b.kind == 'polyline':
         return True
-    # Skip path elements (cloud shapes, bezier curves span large areas)
-    if a.kind == 'path' or b.kind == 'path':
+    # Skip very large path elements (cloud shapes, decorative bezier curves)
+    if a.kind == 'path' and a.area > 50000:
+        return True
+    if b.kind == 'path' and b.area > 50000:
         return True
     # Skip very small elements (markers, arrowheads, tiny tick marks)
     if a.area < 50 or b.area < 50:
@@ -499,8 +501,10 @@ def _should_skip_pair(a, b, all_bboxes=None):
     if b.kind == 'rect' and a.kind == 'circle':
         if b.area > 5000 and a.area < 1000 and _text_is_inside(a, b, margin=10):
             return True
-    # Skip polygon elements overlapping adjacent shapes (diamond decision nodes)
-    if a.kind == 'polygon' or b.kind == 'polygon':
+    # Skip tiny polygon elements (arrowhead markers from <defs>)
+    if a.kind == 'polygon' and a.area < 50:
+        return True
+    if b.kind == 'polygon' and b.area < 50:
         return True
     # Skip reference numerals positioned just outside their labeled shape
     if a.kind == 'text' and b.kind in ('rect', 'circle', 'ellipse'):

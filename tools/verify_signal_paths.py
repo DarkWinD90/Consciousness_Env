@@ -251,7 +251,7 @@ def analyze_signal_endpoints(filepath):
 
         if tag in ['path', 'line']:
             marker = elem.get('marker-end', '')
-            if 'url(#arrow)' in marker:
+            if marker and 'url(#' in marker:
                 stats['with_marker'] += 1
             stroke = elem.get('stroke', '')
             if stroke and stroke != 'none':

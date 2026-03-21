@@ -215,7 +215,7 @@ def analyze_arrows(filepath):
                 ty = parent_ty + float(match.group(2))
 
         marker_end = elem.get('marker-end', '')
-        if 'url(#arrow)' in marker_end:
+        if marker_end and 'url(#' in marker_end:
             arrow_count += 1
 
             if tag == 'path':

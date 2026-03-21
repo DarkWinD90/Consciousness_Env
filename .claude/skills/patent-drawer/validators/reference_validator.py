@@ -162,16 +162,21 @@ def validate_references(svg_file):
         print(f"[PASS] Reference Numerals: All {len(numerals)} have leader lines")
         return True
     else:
-        # Only report as warning if some are missing, not failure
-        # since our detection might have false positives
-        print(f"[WARN] Reference Numerals: {len(missing_leaders)} may be missing leader lines")
-        for num in missing_leaders[:5]:
-            print(f"       - '{num['value']}' at line {num['line']}")
-        if len(missing_leaders) > 5:
-            print(f"       ... and {len(missing_leaders) - 5} more")
-        # Return True (pass) since this is just a warning
-        # The validator errs on the side of caution
-        return True
+        missing_ratio = len(missing_leaders) / len(numerals) if numerals else 0
+        if missing_ratio > 0.3:
+            print(f"[FAIL] Reference Numerals: {len(missing_leaders)}/{len(numerals)} missing leader lines")
+            for num in missing_leaders[:5]:
+                print(f"       - '{num['value']}' at line {num['line']}")
+            if len(missing_leaders) > 5:
+                print(f"       ... and {len(missing_leaders) - 5} more")
+            return False
+        else:
+            print(f"[WARN] Reference Numerals: {len(missing_leaders)} may be missing leader lines")
+            for num in missing_leaders[:5]:
+                print(f"       - '{num['value']}' at line {num['line']}")
+            if len(missing_leaders) > 5:
+                print(f"       ... and {len(missing_leaders) - 5} more")
+            return True
 
 
 if __name__ == '__main__':
