@@ -11,6 +11,7 @@ NOTE: Many reported "issues" are FALSE POSITIVES:
 
 import os
 import re
+from pathlib import Path
 
 
 def fix_file(filepath, fixes):
@@ -36,7 +37,7 @@ def fix_file(filepath, fixes):
 
 
 def main():
-    base = 'D:/Consciousness_Env/patent_drawings'
+    base = str(Path(__file__).resolve().parent.parent / 'patent_drawings')
 
     print("=" * 60)
     print("ARROW ENDPOINT FIX SCRIPT V2")

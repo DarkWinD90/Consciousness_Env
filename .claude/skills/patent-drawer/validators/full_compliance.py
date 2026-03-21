@@ -16,6 +16,7 @@ from margin_validator import validate_margins, extract_coordinates
 from font_validator import validate_fonts
 from reference_validator import validate_references
 from arrowhead_validator import validate_arrowheads
+from geometric_validator import validate_geometry
 
 
 def validate_colors(svg_file):
@@ -119,6 +120,7 @@ def full_compliance_check(svg_file):
         'colors': validate_colors(svg_file),
         'line_thickness': validate_line_thickness(svg_file),
         'figure_label': validate_figure_label(svg_file),
+        'geometry': validate_geometry(svg_file),
     }
 
     # Summary

@@ -67,29 +67,52 @@ This comparison IS the scientific proof. See CLAUDE.md Section 3.3.
 
 ```
 Consciousness_Env/
-├── core/                    # Shared physics modules
+├── core/                    # Shared physics + cognitive modules
 │   ├── base_snn.py          #   Leaky integrate-and-fire SNN with STDP
 │   ├── energy.py            #   EnergyConfig, BalancedEnergyConfig, EnergyHarvester
 │   ├── thermochromic.py     #   Temperature-to-color mapping
 │   ├── history.py           #   Time-series recorder
 │   ├── predictive.py        #   Predictive processing (Phase 9)
-│   └── multimodal.py        #   Multi-modal integration (Phase 10)
+│   ├── multimodal.py        #   Multi-modal integration (Phase 10)
+│   ├── claude_interface.py  #   ClaudeNeuralInterface (bidirectional SNN-Claude)
+│   ├── neural_router.py     #   ClaudeOptimizedRouter (neural packet routing)
+│   ├── consciousness_enhancer.py  # Higher-order cognitive features
+│   └── enhanced_consciousness.py  # EnhancedConsciousnessSystem (full hybrid)
 │
 ├── phases/                  # Phase validation scripts (frozen after merge)
-│   ├── phase7_control_baseline.py    # 2000-step falsifiable control (Claims A-E)
-│   ├── phase7_full_integration.py    # 8-layer loop, harsh energy
-│   ├── phase8_stdp.py               # STDP validation (F8.1-F8.3)
-│   ├── phase9_predictive_processing.py  # Predictive processing (F9.1-F9.3)
-│   └── phase10_multimodal.py        # Multi-modal integration (F10.1-F10.3)
+│   ├── phase1_optical_sensing.py       # L1-L2 optical sensing
+│   ├── phase2_neuromorphic_processing.py  # L4 SNN processing
+│   ├── phase3_closed_loop_feedback.py  # Closed-loop feedback
+│   ├── phase4_energy_harvesting.py     # L6 energy harvesting
+│   ├── phase5_adaptive_membrane.py     # L1 adaptive membrane
+│   ├── phase6_recursive_reflection.py  # L8 recursive reflection
+│   ├── phase7_control_baseline.py      # 2000-step falsifiable control (Claims A-E)
+│   ├── phase7_full_integration.py      # 8-layer loop, harsh energy
+│   ├── phase8_stdp.py                  # STDP validation (F8.1-F8.3)
+│   ├── phase9_predictive_processing.py # Predictive processing (F9.1-F9.3)
+│   └── phase10_multimodal.py           # Multi-modal integration (F10.1-F10.3)
 │
 ├── mcp/                     # MCP servers (physics + cognitive layer)
 │   ├── consciousness_mcp_server.py   # Physics + SNN + fallback (v1.1.0)
-│   └── consciousness_server.py       # Cognitive layer (stateless reasoning)
+│   ├── consciousness_server.py       # Cognitive layer (stateless reasoning)
+│   └── mcp-config.json               # MCP server configuration
 │
-├── tests/                   # Test suite
-├── appendices/              # Supplementary simulations
+├── tools/                   # Utilities (SVG audit, compliance, collision checking)
+├── tests/                   # Test suite (phase metrics, patent diagram regressions)
+├── appendices/              # Supplementary simulations (base, graph, reflection)
+├── docs/                    # Reference materials and hardware notes
 ├── patents/                 # Patent text and USPTO-formatted filings
 ├── patent_drawings/         # 21 SVG figures (37 CFR 1.84 compliance in progress)
+│   ├── patent_a/            #   Patent A: 8 figures
+│   ├── patent_b/            #   Patent B: 6 figures
+│   └── patent_c/            #   Patent C: 7 figures
+│
+├── .github/workflows/       # CI/CD (Python app, conda package, PyPI publish)
+├── consciousness_cli.py     # CLI entry point: consciousness run|appendix|version
+├── setup.py                 # Package config (v3.0.0)
+├── requirements.txt         # Dependencies (numpy, matplotlib, networkx, scipy)
+├── MANIFEST.in              # Source distribution includes
+├── environment.yml          # Conda environment specification
 └── CLAUDE.md                # System reference (read this first)
 ```
 

@@ -83,14 +83,42 @@ class TextBox:
     content: str
 
 
-def parse_rects(content: str) -> List[Rect]:
+def detect_transform_offset(content: str) -> Tuple[float, float]:
+    """Detect the top-level <g transform="translate(x, y)"> offset."""
+    m = re.search(r'<g\s+transform="translate\(([\d.]+)[,\s]+([\d.]+)\)"', content)
+    if m:
+        return float(m.group(1)), float(m.group(2))
+    return 0.0, 0.0
+
+
+def _attr(tag_str: str, name: str) -> Optional[str]:
+    """Extract a single attribute value from an SVG tag string."""
+    m = re.search(rf'{name}="([^"]*)"', tag_str)
+    return m.group(1) if m else None
+
+
+def _attr_f(tag_str: str, name: str, default: float = 0.0) -> float:
+    """Extract a float attribute value from an SVG tag string."""
+    val = _attr(tag_str, name)
+    if val is None:
+        return default
+    try:
+        return float(val)
+    except ValueError:
+        return default
+
+
+def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
     """Extract all rect elements (excluding background and legend)."""
     rects = []
-    for m in re.finditer(
-        r'<rect\s+x="([\d.]+)"\s+y="([\d.]+)"\s+width="([\d.]+)"\s+height="([\d.]+)"',
-        content
-    ):
-        x, y, w, h = float(m.group(1)), float(m.group(2)), float(m.group(3)), float(m.group(4))
+    for m in re.finditer(r'<rect\b([^>]*)/?>', content):
+        attrs = m.group(1)
+        x = _attr_f(attrs, 'x') + dx
+        y = _attr_f(attrs, 'y') + dy
+        w = _attr_f(attrs, 'width')
+        h = _attr_f(attrs, 'height')
+        if w == 0 or h == 0:
+            continue
         # Skip full-page background rect and very large rects
         if w > 800 or h > 800:
             continue
@@ -101,31 +129,27 @@ def parse_rects(content: str) -> List[Rect]:
     return rects
 
 
-def parse_lines(content: str) -> List[Segment]:
+def parse_lines(content: str, dx: float = 0, dy: float = 0) -> List[Segment]:
     """Extract all signal path line segments (stroke-width >= 1.0)."""
     segments = []
     path_counter = 0
 
-    # Parse <line> elements
-    for m in re.finditer(
-        r'<line\s+x1="([\d.]+)"\s+y1="([\d.]+)"\s+x2="([\d.]+)"\s+y2="([\d.]+)"'
-        r'\s+stroke="[^"]+"\s+stroke-width="([\d.]+)"([^/]*)/?>',
-        content
-    ):
-        sw = float(m.group(5))
+    for m in re.finditer(r'<line\b([^>]*)/?>', content):
+        attrs = m.group(1)
+        sw = _attr_f(attrs, 'stroke-width', 1.0)
         if sw < 1.0:  # Skip leader lines (0.5)
             continue
-        rest = m.group(6)
+
         # Skip legend lines (check surrounding context)
         line_pos = m.start()
         context_before = content[max(0, line_pos - 200):line_pos]
         if 'LEGEND' in context_before or 'SIGNAL PATHWAYS' in context_before:
             continue
 
-        has_arrow = 'marker-end' in rest
+        has_arrow = 'marker-end' in attrs
         seg = Segment(
-            float(m.group(1)), float(m.group(2)),
-            float(m.group(3)), float(m.group(4)),
+            _attr_f(attrs, 'x1') + dx, _attr_f(attrs, 'y1') + dy,
+            _attr_f(attrs, 'x2') + dx, _attr_f(attrs, 'y2') + dy,
             f"line_{path_counter}", has_arrow
         )
         segments.append(seg)
@@ -134,22 +158,22 @@ def parse_lines(content: str) -> List[Segment]:
     return segments
 
 
-def parse_paths(content: str) -> List[Segment]:
+def parse_paths(content: str, dx: float = 0, dy: float = 0) -> List[Segment]:
     """Extract segments from <path> elements with stroke-width >= 1.0."""
     segments = []
     path_counter = 0
 
-    for m in re.finditer(
-        r'<path\s+d="([^"]+)"[^>]*stroke-width="([\d.]+)"([^>]*)>',
-        content
-    ):
-        sw = float(m.group(2))
+    for m in re.finditer(r'<path\b([^>]*)/?>', content):
+        attrs = m.group(1)
+        sw = _attr_f(attrs, 'stroke-width', 0.0)
         if sw < 1.0:
             continue
 
-        d = m.group(1)
-        rest = m.group(3)
-        has_arrow = 'marker-end' in rest
+        d_match = re.search(r'd="([^"]+)"', attrs)
+        if not d_match:
+            continue
+        d = d_match.group(1)
+        has_arrow = 'marker-end' in attrs
 
         # Determine path group ID from dash pattern
         if 'dasharray="3,3"' in content[m.start():m.end() + 50]:
@@ -190,7 +214,7 @@ def parse_paths(content: str) -> List[Segment]:
             if is_bridge:
                 continue  # Skip the curve/bridge — not a straight segment
             is_last = (i == len(points) - 2)
-            seg = Segment(x1, y1, x2, y2, group, has_arrow and is_last)
+            seg = Segment(x1 + dx, y1 + dy, x2 + dx, y2 + dy, group, has_arrow and is_last)
             segments.append(seg)
 
         path_counter += 1
@@ -319,24 +343,23 @@ def check_path_through_box(segments: List[Segment], rects: List[Rect]) -> List[s
     return issues
 
 
-def parse_texts(content: str) -> List[TextBox]:
+def parse_texts(content: str, dx: float = 0, dy: float = 0) -> List[TextBox]:
     """Extract text elements with approximate bounding boxes."""
     texts = []
-    for m in re.finditer(
-        r'<text\s+x="([\d.]+)"\s+y="([\d.]+)"[^>]*font-size="(\d+)"[^>]*'
-        r'text-anchor="(\w+)"[^>]*>([^<]+)</text>',
-        content
-    ):
-        x, y = float(m.group(1)), float(m.group(2))
-        font_size = int(m.group(3))
-        anchor = m.group(4)
-        text = m.group(5)
-
-        # Skip if inside a transform (rotated text — different bbox)
-        line_start = content.rfind('<text', 0, m.start())
-        tag = content[line_start:m.end()]
-        if 'transform=' in tag:
+    for m in re.finditer(r'<text\b([^>]*)>([^<]+)</text>', content):
+        attrs = m.group(1)
+        text = m.group(2).strip()
+        if not text:
             continue
+
+        # Skip rotated text — different bbox calculation needed
+        if 'transform=' in attrs:
+            continue
+
+        x = _attr_f(attrs, 'x') + dx
+        y = _attr_f(attrs, 'y') + dy
+        font_size = _attr_f(attrs, 'font-size', 14)
+        anchor = _attr(attrs, 'text-anchor') or 'start'
 
         char_width = font_size * 0.6  # approximate
         text_width = len(text) * char_width
@@ -378,11 +401,12 @@ def validate_geometry(svg_file: str) -> bool:
     print(f"GEOMETRIC AUDIT: {filename}")
     print(f"{'='*60}\n")
 
-    rects = parse_rects(content)
-    line_segs = parse_lines(content)
-    path_segs = parse_paths(content)
+    dx, dy = detect_transform_offset(content)
+    rects = parse_rects(content, dx, dy)
+    line_segs = parse_lines(content, dx, dy)
+    path_segs = parse_paths(content, dx, dy)
     all_segs = line_segs + path_segs
-    texts = parse_texts(content)
+    texts = parse_texts(content, dx, dy)
 
     print(f"[INFO] Found {len(rects)} element boxes")
     print(f"[INFO] Found {len(all_segs)} signal path segments")
