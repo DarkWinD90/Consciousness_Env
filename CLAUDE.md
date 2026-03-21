@@ -195,25 +195,73 @@ Consciousness_Env/
 │   ├── consciousness_mcp_server.py   # ◄── Physics + SNN + fallback (v1.1.0)
 │   ├── consciousness_server.py       # ◄── Cognitive layer (stateless reasoning)
 │   ├── mcp-config.json
-│   └── .snapshots/                   # Fallback state snapshots (gitignored)
+│   └── .snapshots/                   # Fallback state snapshots (gitignored, created at runtime)
 │
 ├── tools/                   # Utilities (PACKAGE — has __init__.py)
 │   ├── __init__.py
-│   └── code_simplifier.py
+│   ├── code_simplifier.py           #   Code analysis / simplification
+│   ├── collision_checker.py          #   SVG element collision detection
+│   ├── enhanced_collision_checker.py #   Pixel-level collision validation
+│   ├── svg_audit.py                  #   SVG structure auditor
+│   ├── run_uspto_compliance_audit.py #   Full USPTO compliance runner
+│   ├── run_collision_check.py        #   Geometric collision auditor (text/line/numeral)
+│   ├── audit_arrow_endpoints.py      #   Arrow endpoint distance auditor
+│   ├── verify_signal_paths.py        #   Signal path + numeral-path collision checker
+│   ├── fix_numeral_collisions.py     #   Batch numeral position fixer
+│   ├── fix_arrow_endpoints_v2.py     #   Arrow endpoint adjuster
+│   └── google_drive.py              #   Google Drive API utility (optional)
 │
-├── tests/                   # Test suite
+├── tests/                   # Test suite (PACKAGE — has __init__.py)
 │   ├── __init__.py
-│   └── run_200_step_test.py
+│   ├── run_200_step_test.py          #   2000-step MCP integration test (standalone)
+│   ├── run_stress_test.py            #   10,000-step stability test (standalone)
+│   ├── run_soak_test.py              #   2,000,000-step endurance test (standalone)
+│   ├── test_code_simplifier.py       #   pytest: code analyzer tests
+│   ├── test_line_thickness_validator.py  #   pytest: SVG stroke width validation
+│   ├── test_patent_diagram_regressions.py  #  pytest: patent drawing structure
+│   ├── test_phase7_metrics.py        #   pytest: Phase 7 claim validation
+│   └── test_reference_validator.py   #   pytest: reference numeral validation
 │
 ├── patent_drawings/         # USPTO-compliant SVG drawings (37 CFR 1.84)
 │   ├── patent_a/            #   Patent A: 8 figures (fig1-fig8.svg)
 │   ├── patent_b/            #   Patent B: 6 figures (fig1-fig6.svg)
-│   └── patent_c/            #   Patent C: 7 figures (fig1-fig7.svg)
+│   ├── patent_c/            #   Patent C: 7 figures (fig1-fig7.svg)
+│   ├── compliance_runs/     #   Timestamped compliance audit logs
+│   ├── FINDINGS_REPORT.md
+│   ├── NUMERAL_REGISTRY.md
+│   ├── USPTO_COMPLIANCE_CROSS_REFERENCE.md
+│   └── USPTO_Compliance_Report.md
+│
+├── patents/                 # Patent specifications and filing materials
+│   ├── Patent_A_Energy_Loop.md
+│   ├── Patent_B_Self_Observation.md
+│   ├── Patent_C_Cognitive_Fallback.md
+│   ├── Filing_Package_Index.md
+│   ├── Energy_Bounded_Recursive_Control_System.txt
+│   ├── forms/               #   USPTO blank forms (SB15A, SB16)
+│   ├── pdfs/                #   Generated filing PDFs (12 files, 4 per patent)
+│   └── uspto_formatted/     #   USPTO-formatted text specs + filing instructions
+│
+├── docs/                    # Documentation
+│   ├── brutal_reality_check.md
+│   ├── phase7_control_baseline.md
+│   ├── reference_architecture.txt
+│   └── hardware/            #   Phase 11 hardware specs and BOM
+│
+├── .github/workflows/       # CI/CD pipelines
+│   ├── python-app.yml       #   Primary CI: lint + pytest + phase validations
+│   ├── python-package-conda.yml  #   Conda: lint + pytest only
+│   └── python-publish.yml   #   PyPI publishing
 │
 ├── consciousness_cli.py     # CLI entry point: `consciousness run|appendix|version`
+├── export_specifications_pdf.py  # Patent spec → PDF (37 CFR 1.52 compliant)
+├── fill_patent_forms.py     # USPTO form filler (SB16, SB15A)
 ├── setup.py                 # Package config (find_packages + py_modules)
 ├── MANIFEST.in              # Source distribution includes
 ├── requirements.txt
+├── environment.yml          # Conda environment config
+├── .mcp.json                # MCP server configuration
+├── 2026-02-02_Patent_Filing_Summary.md
 └── CLAUDE.md                # THIS FILE
 ```
 
@@ -835,16 +883,20 @@ systems where stopping is not an option (robotics, prosthetics, space).
 
 | Patent | Status | Notes |
 |--------|--------|-------|
-| Patent A (Energy Loop) | Not Filed | Specifications drafted, drawings compliance in progress |
-| Patent B (Self-Observation) | Not Filed | Specifications drafted, drawings compliance in progress |
-| Patent C (Cognitive Fallback) | Not Filed | Specifications drafted, drawings compliance in progress |
+| Patent A (Energy Loop) | Not Filed | Specifications drafted, drawings compliance complete (2026-03-16) |
+| Patent B (Self-Observation) | Not Filed | Specifications drafted, drawings compliance complete (2026-03-16) |
+| Patent C (Cognitive Fallback) | Not Filed | Specifications drafted, drawings compliance complete (2026-03-16) |
+
+**Remaining blockers**: Inventor signature on declarations + USPTO filing fees.
+All 21 drawings passed full 37 CFR 1.84 compliance audit on 2026-03-16.
+Filing PDFs generated in `patents/pdfs/` (12 files, 4 per patent).
 
 **Timeline**:
 
 | Step | Timeline | Action |
 |------|----------|--------|
 | ⏳ 1 | TBD | File all three provisional patent applications |
-| 🔄 1b | In progress | Achieve full 37 CFR 1.84 compliance for all 21 patent drawings |
+| ✅ 1b | Complete (2026-03-16) | All 21 patent drawings pass full 37 CFR 1.84 compliance |
 | 2 | Month 1-3 (by 2026-04-30) | Validate Phase 8 STDP claims, create git tag history |
 | 3 | Month 3-6 (by 2026-07-30) | Build hardware prototype (Phase 11) for physical reduction to practice |
 | 4 | Month 6-9 (by 2026-10-30) | Document hardware validation results (Claims F11.1-F11.3) |
@@ -1033,6 +1085,10 @@ The model follows the ARM Holdings pattern:
 | `consciousness_cli.py` | CLI entry point | YES — package install path |
 | `setup.py` | Packaging config | YES — __init__.py discovery |
 | `patent_drawings/` | Hand-illustrated USPTO-compliant SVGs (21 figs) | YES — patent filing |
+| `patents/` | Patent specifications, forms, and filing PDFs | YES — patent filing |
+| `export_specifications_pdf.py` | Patent spec PDF generation (37 CFR 1.52) | YES — patent filing |
+| `fill_patent_forms.py` | USPTO form filler (SB16, SB15A) | YES — patent filing |
+| `.github/workflows/python-app.yml` | Primary CI pipeline (lint + pytest + phase validations) | YES — gates all PRs |
 
 ---
 

@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 import os
 import re
 import math
+from pathlib import Path
 
 def get_text_bbox(elem, transform=None):
     """Estimate bounding box for text element"""
@@ -240,7 +241,7 @@ def main():
         results[patent] = {'pass': 0, 'warn': 0, 'fail': 0}
 
         for fig_num in range(1, num_figs + 1):
-            filepath = f'D:/Consciousness_Env/patent_drawings/{patent}/fig{fig_num}.svg'
+            filepath = str(Path(__file__).resolve().parent.parent / 'patent_drawings' / patent / f'fig{fig_num}.svg')
             if os.path.exists(filepath):
                 collisions, warnings = analyze_svg(filepath)
 

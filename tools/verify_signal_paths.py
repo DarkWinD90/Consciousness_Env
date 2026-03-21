@@ -8,6 +8,7 @@ import xml.etree.ElementTree as ET
 import os
 import re
 import math
+from pathlib import Path
 
 def safe_float(val, default=0):
     """Safely convert to float, handling percentages and invalid values"""
@@ -284,7 +285,7 @@ def main():
         print(f'=== {patent_name} ===')
 
         for fig_num in range(1, num_figs + 1):
-            filepath = f'D:/Consciousness_Env/patent_drawings/{patent}/fig{fig_num}.svg'
+            filepath = str(Path(__file__).resolve().parent.parent / 'patent_drawings' / patent / f'fig{fig_num}.svg')
             if os.path.exists(filepath):
                 collisions, num_numerals, num_paths = analyze_numeral_path_collisions(filepath)
                 _, stats = analyze_signal_endpoints(filepath)

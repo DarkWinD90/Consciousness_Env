@@ -5,10 +5,13 @@ Moves reference numerals away from signal paths to comply with 37 CFR 1.84(p).
 """
 
 import os
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parent.parent / 'patent_drawings'
 
 def fix_patent_a_fig1():
     """Fix collisions: 106, 108, 110, 120"""
-    filepath = 'D:/Consciousness_Env/patent_drawings/patent_a/fig1.svg'
+    filepath = str(BASE / 'patent_a/fig1.svg')
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -47,7 +50,7 @@ def fix_patent_a_fig1():
 
 def fix_patent_a_fig2():
     """Fix collisions: 206, 208, 218"""
-    filepath = 'D:/Consciousness_Env/patent_drawings/patent_a/fig2.svg'
+    filepath = str(BASE / 'patent_a/fig2.svg')
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -76,7 +79,7 @@ def fix_patent_a_fig2():
 
 def fix_patent_a_fig4():
     """Fix collision: 406"""
-    filepath = 'D:/Consciousness_Env/patent_drawings/patent_a/fig4.svg'
+    filepath = str(BASE / 'patent_a/fig4.svg')
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -93,7 +96,7 @@ def fix_patent_a_fig4():
 
 def fix_patent_a_fig8():
     """Fix collisions: 812, 818"""
-    filepath = 'D:/Consciousness_Env/patent_drawings/patent_a/fig8.svg'
+    filepath = str(BASE / 'patent_a/fig8.svg')
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -116,7 +119,7 @@ def fix_patent_a_fig8():
 
 def fix_patent_b_fig1():
     """Fix collision: 104"""
-    filepath = 'D:/Consciousness_Env/patent_drawings/patent_b/fig1.svg'
+    filepath = str(BASE / 'patent_b/fig1.svg')
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -133,7 +136,7 @@ def fix_patent_b_fig1():
 
 def fix_patent_b_fig2():
     """Fix collision: 212"""
-    filepath = 'D:/Consciousness_Env/patent_drawings/patent_b/fig2.svg'
+    filepath = str(BASE / 'patent_b/fig2.svg')
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -150,7 +153,7 @@ def fix_patent_b_fig2():
 
 def fix_patent_b_fig6():
     """Fix collisions: 602, 606, 610"""
-    filepath = 'D:/Consciousness_Env/patent_drawings/patent_b/fig6.svg'
+    filepath = str(BASE / 'patent_b/fig6.svg')
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -179,7 +182,7 @@ def fix_patent_b_fig6():
 
 def fix_patent_c_fig5():
     """Fix collision: 504"""
-    filepath = 'D:/Consciousness_Env/patent_drawings/patent_c/fig5.svg'
+    filepath = str(BASE / 'patent_c/fig5.svg')
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -196,7 +199,7 @@ def fix_patent_c_fig5():
 
 def fix_patent_c_fig7():
     """Fix collisions: 702, 704, 706, 708, 712"""
-    filepath = 'D:/Consciousness_Env/patent_drawings/patent_c/fig7.svg'
+    filepath = str(BASE / 'patent_c/fig7.svg')
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
