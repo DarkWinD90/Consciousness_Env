@@ -14,7 +14,7 @@ with open('requirements.txt', 'r', encoding='utf-8') as f:
 
 setup(
     name='consciousness-env',
-    version='1.0.0',
+    version='3.0.0',
     description='Multi-Layer Architecture for Synthetic Proto-Consciousness',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -25,7 +25,7 @@ setup(
         'mcp': ['*.json'],
     },
     include_package_data=True,
-    py_modules=['consciousness_cli', 'repo_dump', 'repo_snapshot_for_review', 'phase7_report'],
+    py_modules=['consciousness_cli'],
     install_requires=requirements,
     entry_points={
         'console_scripts': [

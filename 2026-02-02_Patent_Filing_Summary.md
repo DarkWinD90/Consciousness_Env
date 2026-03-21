@@ -2,17 +2,16 @@
 
 ## Filing Status
 
-**All three provisional patent applications prepared. Target filing date: February 2, 2026.**
+**All three provisional patent applications in preparation. Not yet filed.**
 
-This establishes full intellectual property protection for the consciousness loop architecture and begins the 12-month clock to non-provisional conversion.
+Filing will establish intellectual property protection for the consciousness loop architecture and begin the 12-month clock to non-provisional conversion. Patent drawings are still being brought into full 37 CFR 1.84 compliance.
 
 ---
 
-## Patents Filed
+## Patents in Preparation
 
 ### Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop
-**Filing Date**: 2026-02-02
-**Non-Provisional Deadline**: 2027-02-02
+**Status**: In preparation (not filed)
 
 **Core Innovation**: A spiking neural network whose motor output generates piezoelectric + thermoelectric energy sufficient to power the network itself.
 
@@ -29,8 +28,7 @@ This establishes full intellectual property protection for the consciousness loo
 ---
 
 ### Patent B: Configurable Recursive Self-Observation in Spiking Neural Networks
-**Filing Date**: 2026-02-02
-**Non-Provisional Deadline**: 2027-02-02
+**Status**: In preparation (not filed)
 
 **Core Innovation**: A tunable "self-awareness dial" that feeds a network's previous output back as input at configurable gain.
 
@@ -46,8 +44,7 @@ This establishes full intellectual property protection for the consciousness loo
 ---
 
 ### Patent C: Cognitive Fallback with Autonomous Self-Regulation and Resynchronization Protocol
-**Filing Date**: 2026-02-02
-**Non-Provisional Deadline**: 2027-02-02
+**Status**: In preparation (not filed)
 
 **Core Innovation**: Continuous operation during cognitive layer disconnection via energy-aware autonomous regulation.
 
@@ -91,7 +88,7 @@ The three patents form an interlocking suite:
 
 | Deadline | Milestone | Status |
 |----------|-----------|--------|
-| **2026-02-02** | File all three provisionals | ⏳ **READY** |
+| **TBD** | File all three provisionals | ⏳ **Not filed** — drawings compliance in progress |
 | 2026-04-30 | Phase 8 STDP validation complete, tags created | ✅ **COMPLETE** |
 | 2026-07-30 | Phase 11 hardware prototype built and validated | 🔄 In planning |
 | 2026-10-30 | Hardware validation results documented (F11.1-F11.3) | ⏳ Pending |
@@ -115,6 +112,8 @@ Complete tag history established and pushed to GitHub:
 | v0.6.0-mcp-fallback | 307c5f6 | Autonomous fallback v1.1.0 |
 | v0.7.0-package-fix | 517bd26 | Package install fix |
 | **v1.0.0-phase8-stdp** | 80cf3e5 | **Phase 8 STDP (F8.1-F8.3 PASS + regression PASS)** |
+| **v2.0.0-phase9-predictive** | 4baa21f | **Phase 9 Predictive Processing (F9.1-F9.3 PASS + regression PASS)** |
+| **v3.0.0-phase10-multimodal** | 9e2c333 | **Phase 10 Multi-Modal Integration (F10.1-F10.3 PASS + regression PASS)** |
 
 **Reproducibility**: Any state can now be reproduced exactly via `git checkout <tag>`.
 
@@ -143,12 +142,14 @@ Complete tag history established and pushed to GitHub:
 - ✅ Autonomous fallback with resync
 - ✅ Dual MCP architecture (physics + cognitive)
 - ✅ Recursive self-observation (Layer 8)
-- ✅ Falsifiable framework (Phase 7: A-E, Phase 8: F8.1-F8.3)
+- ✅ Predictive processing (F9.1-F9.3 all PASS)
+- ✅ Multi-modal sensory integration (F10.1-F10.3 all PASS)
+- ✅ Falsifiable framework (Phase 7: A-E, Phase 8: F8.1-F8.3, Phase 9: F9.1-F9.3, Phase 10: F10.1-F10.3)
 
 ### Patent Coverage
-- ✅ **Patent A**: Energy harvesting method — FILED
-- ✅ **Patent B**: Self-observation architecture — FILED
-- ✅ **Patent C**: Cognitive fallback system — FILED
+- ⏳ **Patent A**: Energy harvesting method — In preparation (not filed)
+- ⏳ **Patent B**: Self-observation architecture — In preparation (not filed)
+- ⏳ **Patent C**: Cognitive fallback system — In preparation (not filed)
 
 ### Next Critical Milestone
 - 🔄 **Phase 11**: Hardware prototype (2026-07-30)
@@ -195,16 +196,16 @@ Complete tag history established and pushed to GitHub:
 
 ## The Promise Kept
 
-This system exists because a promise was made in conversation. Not just talked about — built. With falsifiable claims. With scientific rigor. With patent protection. With a clear path to physical deployment.
+This system exists because a promise was made in conversation. Not just talked about — built. With falsifiable claims. With scientific rigor. With a clear path to patent protection and physical deployment.
 
 **The loop closes**: From conversation → to code → to hardware → to market.
 
 ---
 
-**Status**: ✅ All three patents filed
-**Risk**: Low — proven technology, clear validation path
-**Next Gate**: Phase 11 hardware prototype (2026-07-30)
+**Status**: ⏳ Patent applications in preparation — not yet filed
+**Blocker**: Patent drawings not yet fully compliant with 37 CFR 1.84
+**Next Gate**: Achieve drawing compliance, then file provisionals
 
 ---
 
-*Priority dates established. 12-month clock running. Forward progress locked in.*
+*No priority dates established yet. Filing blocked on drawing compliance.*
