@@ -20,7 +20,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <path d="M 180 100 L 680 100 L 680 500 L 180 500 Z" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Anchor rects at graph axis origins for signal path anchoring -->
-    <rect x="216" y="391" width="8" height="8" fill="none" stroke="black" stroke-width="1" />
+    <rect x="208" y="391" width="8" height="8" fill="none" stroke="black" stroke-width="1" />
     <rect x="656" y="106" width="8" height="8" fill="none" stroke="black" stroke-width="1" />
     <!-- Ref 90 -->
     <text x="705" y="108" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">90</text>
