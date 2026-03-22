@@ -62,9 +62,9 @@
     <polygon points="566 142, 576 150, 568 151" fill="black" stroke="none" />
     <text x="600" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PHOTO-</text>
     <text x="600" y="216" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">RESISTOR</text>
-    <!-- Ref 114 -->
-    <text x="635" y="135" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">114</text>
-    <line x1="633" y1="135" x2="630" y2="140" stroke="black" stroke-width="0.5" />
+    <!-- Ref 114 — moved right and up for clear separation from label -->
+    <text x="660" y="118" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">114</text>
+    <line x1="658" y1="122" x2="630" y2="140" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Photoresistor → MCU (ADC) -->
     <path d="M 600 180 L 600 240 L 450 240 L 450 280" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -89,13 +89,13 @@
     <!-- PIEZOELECTRIC ELEMENT (22) — below motor               -->
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Double concentric circles for piezoelectric element -->
-    <circle cx="640" cy="490" r="35" fill="none" stroke="black" stroke-width="1.5" />
-    <path d="M 615 490 A 25 25 0 1 0 665 490 A 25 25 0 1 0 615 490 Z" fill="none" stroke="black" stroke-width="1.5" />
+    <circle cx="640" cy="490" r="40" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 610 490 A 30 30 0 1 0 670 490 A 30 30 0 1 0 610 490 Z" fill="none" stroke="black" stroke-width="1.5" />
     <text x="640" y="486" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
-    <text x="640" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ELEMENT</text>
+    <text x="640" y="502" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ELEMENT</text>
     <!-- Ref 22 -->
-    <text x="680" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">22</text>
-    <line x1="678" y1="475" x2="675" y2="480" stroke="black" stroke-width="0.5" />
+    <text x="695" y="465" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">22</text>
+    <line x1="693" y1="468" x2="680" y2="478" stroke="black" stroke-width="0.5" />
 
     <!-- Arrow: Motor → Piezo (mechanical coupling) -->
     <line x1="640" y1="400" x2="640" y2="455" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -129,7 +129,7 @@
 
     <!-- Arrow: Energy Store → MCU (VSYS power) — routed at x=155 to clear LED box -->
     <path d="M 220 610 L 155 610 L 155 380 L 300 380" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <text x="145" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">VSYS</text>
+    <text x="130" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">VSYS</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- CONTROL LOGIC (26) — inside MCU or as sub-block        -->

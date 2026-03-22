@@ -28,15 +28,15 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- EXTERNAL INPUT — arrow entering SNN from left           -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <line x1="140" y1="205" x2="160" y2="205" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <text x="122" y="195" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">EXT.</text>
+    <line x1="100" y1="205" x2="160" y2="205" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <text x="75" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">EXT.</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- REFLECTION INPUT — dashed arrow entering SNN from left  -->
     <!-- (L8 recursive self-observation feedback)                -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <line x1="140" y1="260" x2="160" y2="260" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
-    <text x="122" y="274" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">REFL.</text>
+    <line x1="100" y1="260" x2="160" y2="260" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)" />
+    <text x="75" y="265" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">REFL.</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- INPUT LAYER (52)                                       -->
