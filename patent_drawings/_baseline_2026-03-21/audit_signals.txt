@@ -1,0 +1,71 @@
+======================================================================
+USPTO PATENT SIGNAL PATH & NUMERAL COLLISION CHECK
+37 CFR 1.84(p) - Reference characters must NOT cross drawing lines
+======================================================================
+
+=== PATENT A ===
+FIG. 1: PASS (0 numerals, 25 paths, 10 arrows)
+FIG. 2: COLLISION (3 numeral-path overlaps)
+  [!] Numeral "100" at (183, 238) crosses signal path
+  [!] Numeral "500" at (325, 607) crosses signal path
+  [!] Numeral "500" at (325, 607) crosses signal path
+FIG. 3: PASS (0 numerals, 43 paths, 7 arrows)
+FIG. 4: PASS (0 numerals, 26 paths, 11 arrows)
+FIG. 5: COLLISION (7 numeral-path overlaps)
+  [!] Numeral "138" at (585, 208) crosses signal path
+  [!] Numeral "104" at (267, 548) crosses signal path
+  [!] Numeral "104" at (267, 548) crosses signal path
+  [!] Numeral "100" at (407, 458) crosses signal path
+  [!] Numeral "102" at (607, 458) crosses signal path
+  ... and 2 more
+FIG. 6: COLLISION (1 numeral-path overlaps)
+  [!] Numeral "112" at (140, 508) crosses signal path
+FIG. 7: COLLISION (2 numeral-path overlaps)
+  [!] Numeral "120" at (413, 738) crosses signal path
+  [!] Numeral "120" at (413, 738) crosses signal path
+FIG. 8: PASS (3 numerals, 29 paths, 10 arrows)
+
+=== PATENT B ===
+FIG. 1: PASS (0 numerals, 17 paths, 7 arrows)
+FIG. 2: PASS (0 numerals, 15 paths, 0 arrows)
+FIG. 3: PASS (0 numerals, 17 paths, 7 arrows)
+FIG. 4: PASS (0 numerals, 11 paths, 5 arrows)
+FIG. 5: COLLISION (2 numeral-path overlaps)
+  [!] Numeral "100" at (677, 265) crosses signal path
+  [!] Numeral "100" at (677, 265) crosses signal path
+FIG. 6: PASS (0 numerals, 16 paths, 7 arrows)
+
+=== PATENT C ===
+FIG. 1: PASS (0 numerals, 17 paths, 7 arrows)
+FIG. 2: PASS (0 numerals, 15 paths, 6 arrows)
+FIG. 3: PASS (1 numerals, 29 paths, 2 arrows)
+FIG. 4: COLLISION (2 numeral-path overlaps)
+  [!] Numeral "250" at (407, 383) crosses signal path
+  [!] Numeral "500" at (657, 383) crosses signal path
+FIG. 5: PASS (0 numerals, 19 paths, 4 arrows)
+FIG. 6: PASS (0 numerals, 17 paths, 4 arrows)
+FIG. 7: PASS (1 numerals, 24 paths, 9 arrows)
+
+======================================================================
+SIGNAL PATH VERIFICATION SUMMARY
+======================================================================
+Total numeral-path collisions: 17
+
+STATUS: 17 collisions need fixing
+
+Collisions to fix:
+  - PATENT_A FIG. 2: numeral 100 at (183, 238)
+  - PATENT_A FIG. 2: numeral 500 at (325, 607)
+  - PATENT_A FIG. 2: numeral 500 at (325, 607)
+  - PATENT_A FIG. 5: numeral 138 at (585, 208)
+  - PATENT_A FIG. 5: numeral 104 at (267, 548)
+  - PATENT_A FIG. 5: numeral 104 at (267, 548)
+  - PATENT_A FIG. 5: numeral 100 at (407, 458)
+  - PATENT_A FIG. 5: numeral 102 at (607, 458)
+  - PATENT_A FIG. 6: numeral 112 at (140, 508)
+  - PATENT_A FIG. 7: numeral 120 at (413, 738)
+  - PATENT_A FIG. 7: numeral 120 at (413, 738)
+  - PATENT_B FIG. 5: numeral 100 at (677, 265)
+  - PATENT_B FIG. 5: numeral 100 at (677, 265)
+  - PATENT_C FIG. 4: numeral 250 at (407, 383)
+  - PATENT_C FIG. 4: numeral 500 at (657, 383)

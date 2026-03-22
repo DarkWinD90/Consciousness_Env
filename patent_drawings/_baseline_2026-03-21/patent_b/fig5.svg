@@ -40,7 +40,7 @@
     <text x="584" y="232" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">80</text>
     <line x1="690" y1="180" x2="690" y2="215" stroke="black" stroke-width="1.5" />
     <line x1="690" y1="215" x2="690" y2="220" stroke="black" stroke-width="0.5" />
-    <text x="690" y="245" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">100</text>
+    <text x="690" y="232" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">100</text>
     <!-- Axis label -->
     <text x="425" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Energy (mWh)</text>
     <!-- Ref 66 -->

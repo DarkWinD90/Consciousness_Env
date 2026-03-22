@@ -20,7 +20,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <path d="M 180 100 L 680 100 L 680 500 L 180 500 Z" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Anchor rects at graph axis origins for signal path anchoring -->
-    <rect x="208" y="391" width="8" height="8" fill="none" stroke="black" stroke-width="1" />
+    <rect x="216" y="391" width="8" height="8" fill="none" stroke="black" stroke-width="1" />
     <rect x="656" y="106" width="8" height="8" fill="none" stroke="black" stroke-width="1" />
     <!-- Ref 90 -->
     <text x="705" y="108" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">90</text>
@@ -73,8 +73,8 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <path d="M 555 200 A 5 5 0 1 0 565 200 A 5 5 0 1 0 555 200 Z" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Ref 138 -->
-    <text x="585" y="132" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">138</text>
-    <line x1="583" y1="142" x2="566" y2="196" stroke="black" stroke-width="0.5" />
+    <text x="585" y="175" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">138</text>
+    <line x1="583" y1="178" x2="566" y2="196" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- OPTIMAL ZONE BOUNDARIES (104) — vertical dashed lines  -->
@@ -82,8 +82,8 @@
     <line x1="280" y1="130" x2="280" y2="470" stroke="black" stroke-width="0.5" />
     <line x1="560" y1="130" x2="560" y2="470" stroke="black" stroke-width="0.5" />
     <!-- Ref 104 -->
-    <text x="265" y="525" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">104</text>
-    <line x1="268" y1="520" x2="280" y2="480" stroke="black" stroke-width="0.5" />
+    <text x="280" y="515" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">104</text>
+    <line x1="280" y1="505" x2="280" y2="480" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- DEFICIT ZONE (98) — left region, cost > harvest        -->
@@ -96,15 +96,15 @@
     <!-- OPTIMAL OPERATING RANGE (100) — middle region           -->
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Ref 100 -->
-    <text x="420" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">100</text>
-    <line x1="420" y1="420" x2="420" y2="395" stroke="black" stroke-width="0.5" />
+    <text x="420" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">100</text>
+    <line x1="420" y1="415" x2="420" y2="395" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- SURPLUS ZONE (102) — right region                      -->
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- Ref 102 -->
-    <text x="620" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">102</text>
-    <line x1="620" y1="420" x2="620" y2="395" stroke="black" stroke-width="0.5" />
+    <text x="620" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">102</text>
+    <line x1="620" y1="415" x2="620" y2="395" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- NET POSITIVE REGION — dashed rectangle between          -->
@@ -127,8 +127,8 @@
     <!-- Dashed leader from operating point to label area -->
     <line x1="400" y1="276" x2="400" y2="320" stroke="black" stroke-width="0.5" />
     <!-- Ref 134 -->
-    <text x="460" y="350" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">134</text>
-    <line x1="458" y1="345" x2="405" y2="322" stroke="black" stroke-width="0.5" />
+    <text x="430" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">134</text>
+    <line x1="428" y1="338" x2="405" y2="322" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- ENERGY TRAJECTORY SUB-GRAPH (132)                      -->
@@ -183,8 +183,8 @@
     <path d="M 615 630 L 530 630 L 530 580"
           fill="none" stroke="black" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ah)" />
     <!-- Ref 106 -->
-    <text x="735" y="520" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">106</text>
-    <line x1="733" y1="525" x2="702" y2="535" stroke="black" stroke-width="0.5" />
+    <text x="718" y="538" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">106</text>
+    <line x1="716" y1="540" x2="702" y2="535" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- LEGEND                                                 -->

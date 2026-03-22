@@ -160,7 +160,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <path d="M 164 690 L 556 690 Q 560 690 560 694 L 560 756 Q 560 760 556 760 L 164 760 Q 160 760 160 756 L 160 694 Q 160 690 164 690 Z" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Anchor point at spike vector input for signal path routing -->
-    <rect x="562" y="735" width="10" height="8" fill="none" stroke="black" stroke-width="1" />
+    <rect x="555" y="726" width="10" height="8" fill="none" stroke="black" stroke-width="1" />
     <text x="360" y="712" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">SPIKE VECTOR OUTPUT</text>
     <!-- Raster bars -->
     <rect x="180" y="720" width="12" height="28" fill="black" />

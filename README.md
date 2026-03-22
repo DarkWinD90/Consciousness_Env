@@ -102,7 +102,7 @@ Consciousness_Env/
 ├── appendices/              # Supplementary simulations (base, graph, reflection)
 ├── docs/                    # Reference materials and hardware notes
 ├── patents/                 # Patent text and USPTO-formatted filings
-├── patent_drawings/         # 21 SVG figures (37 CFR 1.84 compliance in progress)
+├── patent_drawings/         # 21 SVG figures (37 CFR 1.84 compliance — remediation in progress)
 │   ├── patent_a/            #   Patent A: 8 figures
 │   ├── patent_b/            #   Patent B: 6 figures
 │   └── patent_c/            #   Patent C: 7 figures
@@ -110,7 +110,7 @@ Consciousness_Env/
 ├── .github/workflows/       # CI/CD (Python app, conda package, PyPI publish)
 ├── consciousness_cli.py     # CLI entry point: consciousness run|appendix|version
 ├── setup.py                 # Package config (v3.0.0)
-├── requirements.txt         # Dependencies (numpy, matplotlib, networkx, scipy)
+├── requirements.txt         # Dependencies (numpy, matplotlib, networkx, scipy, pytest, reportlab, pypdf)
 ├── MANIFEST.in              # Source distribution includes
 ├── environment.yml          # Conda environment specification
 └── CLAUDE.md                # System reference (read this first)
