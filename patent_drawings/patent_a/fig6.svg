@@ -7,169 +7,165 @@
   </defs>
   <rect width="100%" height="100%" fill="white" />
 
-  <!-- Sheet number -->
-  <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">6/8</text>
+  <!-- Sheet number — top center within margin -->
+  <text x="425" y="40" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">6/8</text>
 
-  <g transform="translate(0, 50)">
+  <!-- All content inside safe margins: L≥75 T≥75 R≤775 B≤1025 -->
+  <g transform="translate(30, 70)">
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- MICROCONTROLLER (108) — central block                  -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <path d="M 300 280 L 500 280 L 500 480 L 300 480 Z" fill="none" stroke="black" stroke-width="2" />
-    <!-- Anchor rects at MCU connection points -->
-    <rect x="336" y="268" width="12" height="8" fill="none" stroke="black" stroke-width="1" />
-    <rect x="436" y="268" width="12" height="8" fill="none" stroke="black" stroke-width="1" />
-    <rect x="296" y="370" width="8" height="20" fill="none" stroke="black" stroke-width="1" />
-    <rect x="504" y="376" width="8" height="12" fill="none" stroke="black" stroke-width="1" />
-    <rect x="296" y="434" width="8" height="12" fill="none" stroke="black" stroke-width="1" />
-    <text x="400" y="370" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">MICRO-</text>
-    <text x="400" y="390" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="black">CONTROLLER</text>
+    <rect x="300" y="280" width="200" height="200" fill="none" stroke="black" stroke-width="2" />
+    <!-- Anchor rects at MCU connection points — moved fully outside box -->
+    <rect x="344" y="270" width="12" height="10" fill="none" stroke="black" stroke-width="1" />
+    <rect x="444" y="270" width="12" height="10" fill="none" stroke="black" stroke-width="1" />
+    <rect x="290" y="370" width="10" height="20" fill="none" stroke="black" stroke-width="1" />
+    <rect x="500" y="376" width="10" height="12" fill="none" stroke="black" stroke-width="1" />
+    <rect x="290" y="434" width="10" height="12" fill="none" stroke="black" stroke-width="1" />
+    <!-- Label text — centered, clear of diamond -->
+    <text x="400" y="400" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">MICRO-</text>
+    <text x="400" y="418" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">CONTROLLER</text>
     <!-- Ref 108 -->
-    <text x="510" y="295" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">108</text>
-    <line x1="508" y1="295" x2="502" y2="288" stroke="black" stroke-width="0.5" />
+    <text x="515" y="295" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="black">108</text>
+    <line x1="512" y1="293" x2="502" y2="285" stroke="black" stroke-width="0.8" />
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!-- CONTROL LOGIC (26) — inside MCU, top zone (no overlap) -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <polygon points="400,295 460,318 400,341 340,318" fill="none" stroke="black" stroke-width="1" stroke-dasharray="5,3" />
+    <text x="400" y="322" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="black">CONTROL</text>
+    <text x="400" y="336" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="black">LOGIC</text>
+    <!-- Ref 26 -->
+    <text x="472" y="308" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="black">26</text>
+    <line x1="469" y1="310" x2="462" y2="316" stroke="black" stroke-width="0.8" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- THERMISTOR (110) — top left, temperature sensing       -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Ellipse body with leads (component leads, not signal paths) -->
-    <g class="component-lead">
-    <line x1="205" y1="115" x2="205" y2="125" stroke="black" stroke-width="1.5" />
-    </g>
-    <ellipse cx="205" cy="150" rx="45" ry="25" fill="none" stroke="black" stroke-width="1.5" />
-    <g class="component-lead">
-    <line x1="205" y1="175" x2="205" y2="190" stroke="black" stroke-width="1.5" />
-    </g>
-    <text x="205" y="156" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">THERMISTOR</text>
+    <line x1="230" y1="115" x2="230" y2="125" stroke="black" stroke-width="1.5" />
+    <ellipse cx="230" cy="150" rx="45" ry="25" fill="none" stroke="black" stroke-width="1.5" />
+    <line x1="230" y1="175" x2="230" y2="192" stroke="black" stroke-width="1.5" />
+    <text x="230" y="155" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="black">THERMISTOR</text>
     <!-- Ref 110 -->
-    <text x="145" y="135" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">110</text>
-    <line x1="148" y1="135" x2="160" y2="142" stroke="black" stroke-width="0.5" />
+    <text x="168" y="135" font-family="Arial, sans-serif" font-size="12" text-anchor="end" fill="black">110</text>
+    <line x1="171" y1="135" x2="185" y2="142" stroke="black" stroke-width="0.8" />
 
-    <!-- Arrow: Thermistor → MCU (ADC) — starts within ellipse bbox -->
-    <path d="M 205 175 L 205 240 L 350 240 L 350 280" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <text x="275" y="235" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ADC</text>
+    <!-- Arrow: Thermistor → MCU (ADC) — starts outside ellipse -->
+    <path d="M 230 192 L 230 240 L 350 240 L 350 280" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <text x="288" y="235" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">ADC</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- PHOTORESISTOR (114) — top right, light sensing         -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Circle body with wavy line inside and light arrows -->
-    <circle cx="600" cy="150" r="30" fill="none" stroke="black" stroke-width="1.5" />
+    <circle cx="580" cy="150" r="30" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Wavy line inside circle -->
-    <path d="M585,150 Q590,140 595,150 Q600,160 605,150 Q610,140 615,150" fill="none" stroke="black" stroke-width="1" />
-    <!-- Light arrows pointing at circle (manual arrowheads to avoid signal path classification) -->
-    <line x1="555" y1="125" x2="570" y2="136" stroke="black" stroke-width="1" />
-    <polygon points="566 131, 576 139, 568 140" fill="black" stroke="none" />
-    <line x1="555" y1="140" x2="570" y2="147" stroke="black" stroke-width="1" />
-    <polygon points="566 142, 576 150, 568 151" fill="black" stroke="none" />
-    <text x="600" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PHOTO-</text>
-    <text x="600" y="216" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">RESISTOR</text>
-    <!-- Ref 114 — moved right and up for clear separation from label -->
-    <text x="660" y="118" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">114</text>
-    <line x1="658" y1="122" x2="630" y2="140" stroke="black" stroke-width="0.5" />
+    <path d="M565,150 Q570,140 575,150 Q580,160 585,150 Q590,140 595,150" fill="none" stroke="black" stroke-width="1" />
+    <!-- Light arrows — manual arrowheads -->
+    <line x1="535" y1="125" x2="548" y2="136" stroke="black" stroke-width="1" />
+    <polygon points="545 131, 553 139, 546 140" fill="black" stroke="none" />
+    <line x1="535" y1="142" x2="548" y2="148" stroke="black" stroke-width="1" />
+    <polygon points="545 144, 553 151, 546 152" fill="black" stroke="none" />
+    <text x="580" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PHOTO-</text>
+    <text x="580" y="214" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">RESISTOR</text>
+    <!-- Ref 114 -->
+    <text x="625" y="118" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="black">114</text>
+    <line x1="622" y1="122" x2="610" y2="135" stroke="black" stroke-width="0.8" />
 
-    <!-- Arrow: Photoresistor → MCU (ADC) -->
-    <path d="M 600 180 L 600 240 L 450 240 L 450 280" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <text x="530" y="235" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ADC</text>
+    <!-- Arrow: Photoresistor → MCU (ADC) — starts outside circle (r=30, bottom=180) -->
+    <path d="M 580 182 L 580 240 L 450 240 L 450 280" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <text x="518" y="235" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">ADC</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- MOTOR (16) — right side, driven by PWM                 -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Rectangle with internal motor arc symbol -->
-    <rect x="580" y="340" width="120" height="60" fill="none" stroke="black" stroke-width="1.5" />
-    <path d="M 618 370 A 22 22 0 1 0 662 370 A 22 22 0 1 0 618 370 Z" fill="none" stroke="black" stroke-width="1" />
-    <text x="640" y="376" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">MOTOR</text>
+    <rect x="560" y="350" width="120" height="60" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Motor arc symbol — centered vertically at y=373, clear of text -->
+    <circle cx="620" cy="373" r="18" fill="none" stroke="black" stroke-width="1" />
+    <text x="620" y="395" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="black">MOTOR</text>
     <!-- Ref 16 -->
-    <text x="705" y="355" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">16</text>
-    <line x1="703" y1="355" x2="700" y2="358" stroke="black" stroke-width="0.5" />
+    <text x="690" y="358" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="black">16</text>
+    <line x1="687" y1="358" x2="680" y2="362" stroke="black" stroke-width="0.8" />
 
-    <!-- Arrow: MCU → Motor (PWM) -->
-    <line x1="500" y1="370" x2="580" y2="370" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <text x="540" y="365" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">PWM</text>
+    <!-- Arrow: MCU → Motor (PWM) — from MCU right edge to Motor left edge -->
+    <line x1="510" y1="380" x2="560" y2="380" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <text x="535" y="374" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">PWM</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- PIEZOELECTRIC ELEMENT (22) — below motor               -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Double concentric circles for piezoelectric element -->
-    <circle cx="640" cy="490" r="40" fill="none" stroke="black" stroke-width="1.5" />
-    <path d="M 610 490 A 30 30 0 1 0 670 490 A 30 30 0 1 0 610 490 Z" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="640" y="486" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
-    <text x="640" y="502" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">ELEMENT</text>
+    <!-- Outer circle -->
+    <circle cx="620" cy="490" r="40" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Inner circle -->
+    <circle cx="620" cy="490" r="28" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="620" y="486" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
+    <text x="620" y="500" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="black">ELEMENT</text>
     <!-- Ref 22 -->
-    <text x="695" y="465" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">22</text>
-    <line x1="693" y1="468" x2="680" y2="478" stroke="black" stroke-width="0.5" />
+    <text x="675" y="465" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="black">22</text>
+    <line x1="672" y1="468" x2="660" y2="478" stroke="black" stroke-width="0.8" />
 
-    <!-- Arrow: Motor → Piezo (mechanical coupling) -->
-    <line x1="640" y1="400" x2="640" y2="455" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <!-- Arrow: Motor → Piezo (mechanical coupling) — from Motor bottom to Piezo top -->
+    <line x1="620" y1="410" x2="620" y2="450" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- AC SIGNAL (72) — from piezo to energy path             -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="380" y="460" width="120" height="60" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="440" y="496" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">AC SIGNAL</text>
+    <rect x="370" y="550" width="120" height="50" fill="none" stroke="black" stroke-width="1.5" />
+    <text x="430" y="580" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="black">AC SIGNAL</text>
     <!-- Ref 72 -->
-    <text x="370" y="445" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">72</text>
-    <line x1="373" y1="448" x2="380" y2="462" stroke="black" stroke-width="0.5" />
+    <text x="360" y="548" font-family="Arial, sans-serif" font-size="12" text-anchor="end" fill="black">72</text>
+    <line x1="363" y1="550" x2="370" y2="555" stroke="black" stroke-width="0.8" />
 
-    <!-- Arrow: Piezo → AC Signal -->
-    <line x1="605" y1="490" x2="500" y2="490" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <!-- Arrow: Piezo → AC Signal — starts outside outer circle (cx=620, r=40 → left=580) -->
+    <path d="M 580 490 L 530 490 L 530 575 L 490 575" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- ENERGY STORE (28) — bottom center                      -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Rectangle with internal parallel plate lines (capacitor bank) -->
-    <rect x="220" y="580" width="150" height="60" fill="none" stroke="black" stroke-width="1.5" />
-    <line x1="280" y1="590" x2="280" y2="630" stroke="black" stroke-width="2" />
-    <line x1="310" y1="590" x2="310" y2="630" stroke="black" stroke-width="2" />
-    <text x="295" y="616" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">ENERGY STORE</text>
+    <rect x="220" y="650" width="160" height="60" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Capacitor plate lines — to the left of text, no overlap -->
+    <line x1="240" y1="662" x2="240" y2="698" stroke="black" stroke-width="2" />
+    <line x1="255" y1="662" x2="255" y2="698" stroke="black" stroke-width="2" />
+    <text x="325" y="685" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="black">ENERGY</text>
+    <text x="325" y="700" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="black">STORE</text>
     <!-- Ref 28 -->
-    <text x="375" y="595" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">28</text>
-    <line x1="373" y1="595" x2="370" y2="598" stroke="black" stroke-width="0.5" />
+    <text x="390" y="660" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="black">28</text>
+    <line x1="387" y1="662" x2="382" y2="656" stroke="black" stroke-width="0.8" />
 
     <!-- Arrow: AC Signal → Energy Store -->
-    <path d="M 440 520 L 440 560 L 295 560 L 295 580" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <path d="M 430 600 L 430 630 L 300 630 L 300 650" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-    <!-- Arrow: Energy Store → MCU (VSYS power) — routed at x=155 to clear LED box -->
-    <path d="M 220 610 L 155 610 L 155 380 L 300 380" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <text x="130" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">VSYS</text>
-
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- CONTROL LOGIC (26) — inside MCU or as sub-block        -->
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Diamond shape (dashed) for control logic -->
-    <polygon points="400,305 475,330 400,355 325,330" fill="none" stroke="black" stroke-width="1" stroke-dasharray="5,3" />
-    <text x="400" y="335" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">CONTROL LOGIC</text>
-    <!-- Ref 26 -->
-    <text x="490" y="318" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">26</text>
-    <line x1="488" y1="320" x2="478" y2="328" stroke="black" stroke-width="0.5" />
+    <!-- Arrow: Energy Store → MCU (VSYS power) — routed left, clear of LED -->
+    <path d="M 220 680 L 170 680 L 170 390 L 290 390" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <text x="155" y="540" font-family="Arial, sans-serif" font-size="12" text-anchor="end" fill="black">VSYS</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- LED INDICATOR (112) — bottom left                      -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Square with internal circle for LED -->
-    <rect x="175" y="460" width="60" height="60" fill="none" stroke="black" stroke-width="1.5" />
-    <path d="M 183 490 A 22 22 0 1 0 227 490 A 22 22 0 1 0 183 490 Z" fill="none" stroke="black" stroke-width="1" />
-    <text x="205" y="496" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">LED</text>
+    <rect x="185" y="510" width="60" height="60" fill="none" stroke="black" stroke-width="1.5" />
+    <circle cx="215" cy="535" r="18" fill="none" stroke="black" stroke-width="1" />
+    <text x="215" y="560" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="black">LED</text>
     <!-- Ref 112 -->
-    <text x="140" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">112</text>
-    <line x1="143" y1="475" x2="175" y2="480" stroke="black" stroke-width="0.5" />
+    <text x="170" y="515" font-family="Arial, sans-serif" font-size="12" text-anchor="end" fill="black">112</text>
+    <line x1="173" y1="517" x2="185" y2="522" stroke="black" stroke-width="0.8" />
 
     <!-- Arrow: MCU → LED (GPIO) -->
-    <path d="M 300 440 L 205 440 L 205 460" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <text x="255" y="435" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">GPIO</text>
+    <path d="M 300 445 L 215 445 L 215 510" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <text x="260" y="440" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">GPIO</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- LEGEND                                                 -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="200" y="700" width="400" height="80" fill="none" stroke="black" stroke-width="1" />
-    <text x="215" y="725" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="black">CONNECTIONS:</text>
-    <line x1="215" y1="745" x2="275" y2="745" stroke="black" stroke-width="1.5" />
-    <text x="285" y="750" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Signal/power</text>
-    <line x1="400" y1="745" x2="460" y2="745" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
-    <text x="470" y="750" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Internal</text>
-
-    <!-- ══════════════════════════════════════════════════════ -->
-    <!-- FIGURE LABEL                                           -->
-    <!-- ══════════════════════════════════════════════════════ -->
-    <text x="425" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 6</text>
+    <rect x="200" y="770" width="400" height="65" fill="none" stroke="black" stroke-width="1" />
+    <text x="215" y="792" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="black">CONNECTIONS:</text>
+    <line x1="215" y1="810" x2="275" y2="810" stroke="black" stroke-width="1.5" />
+    <text x="285" y="815" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="black">Signal / power</text>
+    <line x1="420" y1="810" x2="480" y2="810" stroke="black" stroke-width="1.5" stroke-dasharray="5,3" />
+    <text x="490" y="815" font-family="Arial, sans-serif" font-size="12" text-anchor="start" fill="black">Internal</text>
 
   </g>
+
+  <!-- FIGURE LABEL — below content, centered -->
+  <text x="425" y="980" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="black">FIG. 6</text>
+
 </svg>
