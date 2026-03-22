@@ -113,9 +113,9 @@
     <line x1="708" y1="728" x2="692" y2="728" stroke="black" stroke-width="0.5" />
 
     <!-- CONTROL CURVE LABEL (50) -->
-    <!-- Ref 50 -->
-    <text x="550" y="620" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">50</text>
-    <line x1="548" y1="618" x2="530" y2="600" stroke="black" stroke-width="0.5" />
+    <!-- Ref 50 — positioned beside the descending control curve midpoint -->
+    <text x="470" y="490" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">50</text>
+    <line x1="468" y1="492" x2="448" y2="500" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- LEGEND                                                 -->
