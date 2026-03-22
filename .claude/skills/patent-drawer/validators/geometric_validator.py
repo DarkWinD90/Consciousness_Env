@@ -190,7 +190,10 @@ def parse_paths(content: str, dx: float = 0, dy: float = 0) -> List[Segment]:
         points = []  # list of (x, y, is_bridge_end)
         tokens = re.findall(r'([MLCAQTSZ])\s*([^MLCAQTSZ]*)', d, re.IGNORECASE)
         for cmd_type, coords_str in tokens:
-            nums = re.findall(r'-?[\d.]+', coords_str)
+            # SVG numbers can include optional sign, decimal point, and
+            # exponent (e.g., 1e-3, +2.5). Avoid matching multi-dot
+            # sequences like "1.2.3" as a single token.
+            nums = re.findall(r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?', coords_str)
             cmd = cmd_type.upper()
             if cmd in ('M', 'L') and len(nums) >= 2:
                 points.append((float(nums[0]), float(nums[1]), False))
