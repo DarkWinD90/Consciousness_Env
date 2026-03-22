@@ -50,8 +50,8 @@
 
   <!-- 92: Cognitive modulation label (on connected path) -->
   <text x="500" y="215" font-family="Arial" font-size="14" fill="black">Cognitive modulation</text>
-  <text x="640" y="215" font-family="Arial" font-size="14" fill="black">92</text>
-  <line x1="638" y1="210" x2="498" y2="212" stroke="black" stroke-width="0.5" />
+  <text x="670" y="215" font-family="Arial" font-size="14" fill="black">92</text>
+  <line x1="668" y1="210" x2="498" y2="212" stroke="black" stroke-width="0.5" />
   <line x1="498" y1="212" x2="430" y2="200" stroke="black" stroke-width="0.5" />
 
   <!-- MODE BOUNDARY (thin solid lines to avoid signal path classification) -->

@@ -26,8 +26,8 @@
     <!-- Double circle for piezo disc per spec -->
     <circle cx="230" cy="175" r="35" fill="none" stroke="black" stroke-width="1.5" />
     <path d="M 205 175 A 25 25 0 1 0 255 175 A 25 25 0 1 0 205 175 Z" fill="none" stroke="black" stroke-width="1" />
-    <text x="230" y="172" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
-    <text x="230" y="184" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">27mm</text>
+    <text x="230" y="170" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
+    <text x="230" y="188" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">27mm</text>
     <!-- Ref 22 -->
     <text x="200" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">22</text>
     <line x1="200" y1="123" x2="210" y2="140" stroke="black" stroke-width="0.5" />

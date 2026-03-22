@@ -33,7 +33,7 @@
     <line x1="203" y1="200" x2="215" y2="200" stroke="black" stroke-width="0.5" />
     <!-- 50 mWh -->
     <line x1="215" y1="375" x2="220" y2="375" stroke="black" stroke-width="1.5" />
-    <text x="208" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">50</text>
+    <text x="195" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">50</text>
     </g>
 
     <!-- ══════════════════════════════════════════════════════ -->
