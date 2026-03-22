@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # run_all_tools.sh — Execute all tools in the Consciousness_Env tools/ directory
 # Runs audit tools first (read-only), then analysis, then fix tools.
-# Skips tools with missing dependencies (CairoSVG, Pillow, google-auth).
+# Skips google_drive (requires OAuth credentials).
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_ROOT"
@@ -63,8 +63,6 @@ echo "────────────────────────�
 echo "  SECTION 2: ANALYSIS TOOLS"
 echo "────────────────────────────────────────────────────────────────────────"
 
-run_tool "code_simplifier (core/)" tools/code_simplifier.py core/
-
 echo ""
 echo "--- svg_audit: scanning all 21 patent drawings ---"
 svg_audit_ok=0
@@ -93,15 +91,23 @@ echo "────────────────────────�
 run_tool "fix_arrow_endpoints_v2"  tools/fix_arrow_endpoints_v2.py
 run_tool "fix_numeral_collisions"  tools/fix_numeral_collisions.py
 
-# --- Category 4: Skipped tools (missing dependencies) ---
+# --- Category 4: Compliance tools (require CairoSVG + Pillow) ---
 echo ""
 echo "────────────────────────────────────────────────────────────────────────"
-echo "  SECTION 4: SKIPPED TOOLS (missing dependencies)"
+echo "  SECTION 4: COMPLIANCE TOOLS"
 echo "────────────────────────────────────────────────────────────────────────"
 
-skip_tool "run_uspto_compliance_audit" "requires cairosvg + Pillow (not installed)"
-skip_tool "enhanced_collision_checker" "requires Pillow (not installed)"
-skip_tool "google_drive"              "requires google-auth + OAuth credentials (not available)"
+run_tool "run_uspto_compliance_audit" tools/run_uspto_compliance_audit.py
+run_tool "enhanced_collision_checker" tools/enhanced_collision_checker.py
+
+# --- Skipped tools ---
+echo ""
+echo "────────────────────────────────────────────────────────────────────────"
+echo "  SECTION 5: SKIPPED TOOLS"
+echo "────────────────────────────────────────────────────────────────────────"
+
+skip_tool "google_drive"    "requires OAuth credentials file (not available)"
+skip_tool "code_simplifier" "excluded per user request"
 
 # --- Summary ---
 echo ""
