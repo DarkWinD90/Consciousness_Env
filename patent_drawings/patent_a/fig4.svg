@@ -23,10 +23,12 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- PIEZOELECTRIC ELEMENT (22) — top left                  -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Double circle for piezo disc per spec -->
-    <circle cx="230" cy="175" r="35" fill="none" stroke="black" stroke-width="1.5" />
-    <path d="M 205 175 A 25 25 0 1 0 255 175 A 25 25 0 1 0 205 175 Z" fill="none" stroke="black" stroke-width="1" />
-    <text x="230" y="170" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">PIEZO</text>
+    <!-- Standard piezoelectric crystal symbol: top electrode, crystal body, bottom electrode -->
+    <line x1="210" y1="155" x2="250" y2="155" stroke="black" stroke-width="1.5" />
+    <rect x="215" y="160" width="30" height="30" fill="none" stroke="black" stroke-width="1.5" />
+    <line x1="210" y1="195" x2="250" y2="195" stroke="black" stroke-width="1.5" />
+    <!-- Lead wire from crystal right edge to arrow connection point -->
+    <line x1="245" y1="175" x2="265" y2="175" stroke="black" stroke-width="1.5" />
     <!-- Ref 22 -->
     <text x="200" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">22</text>
     <line x1="200" y1="123" x2="210" y2="140" stroke="black" stroke-width="1" />
@@ -49,8 +51,12 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- INDUCTOR (74)                                          -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="500" y="140" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="560" y="182" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">INDUCTOR</text>
+    <!-- Standard inductor coil symbol: 4 semicircular arcs -->
+    <!-- Lead wire from AC Signal arrow to coil start -->
+    <line x1="500" y1="175" x2="510" y2="175" stroke="black" stroke-width="1.5" />
+    <path d="M 510 175 A 12.5 12.5 0 0 1 535 175 A 12.5 12.5 0 0 1 560 175 A 12.5 12.5 0 0 1 585 175 A 12.5 12.5 0 0 1 610 175" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Vertical lead from coil center bottom to downward arrow -->
+    <line x1="560" y1="175" x2="560" y2="210" stroke="black" stroke-width="1.5" />
     <!-- Ref 74 -->
     <text x="638" y="128" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">74</text>
     <line x1="638" y1="131" x2="620" y2="145" stroke="black" stroke-width="1" />
@@ -61,10 +67,29 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- FULL-BRIDGE RECTIFIER (76)                             -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Diamond shape for rectifier per spec -->
-    <polygon points="560 270, 640 305, 560 340, 480 305" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="560" y="302" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">FULL-BRIDGE</text>
-    <text x="560" y="316" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">RECTIFIER</text>
+    <!-- Outer diamond -->
+    <polygon points="560 270, 630 305, 560 340, 490 305" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Four diode symbols inside the diamond (triangle + cathode bar, base diode points right) -->
+    <!-- D1: top-right side — anode at top, cathode at right (angle ≈ +26.6°) -->
+    <g transform="translate(595,287.5) rotate(26.6)">
+      <polygon points="-6,-4 -6,4 2,0" fill="black" />
+      <line x1="2" y1="-5" x2="2" y2="5" stroke="black" stroke-width="1.5" />
+    </g>
+    <!-- D2: bottom-right side — anode at bottom, cathode at right (angle ≈ −26.6°) -->
+    <g transform="translate(595,322.5) rotate(-26.6)">
+      <polygon points="-6,-4 -6,4 2,0" fill="black" />
+      <line x1="2" y1="-5" x2="2" y2="5" stroke="black" stroke-width="1.5" />
+    </g>
+    <!-- D3: top-left side — anode at left, cathode at top (angle ≈ −26.6°) -->
+    <g transform="translate(525,287.5) rotate(-26.6)">
+      <polygon points="-6,-4 -6,4 2,0" fill="black" />
+      <line x1="2" y1="-5" x2="2" y2="5" stroke="black" stroke-width="1.5" />
+    </g>
+    <!-- D4: bottom-left side — anode at bottom, cathode at left (angle ≈ +26.6°) -->
+    <g transform="translate(525,322.5) rotate(206.6)">
+      <polygon points="-6,-4 -6,4 2,0" fill="black" />
+      <line x1="2" y1="-5" x2="2" y2="5" stroke="black" stroke-width="1.5" />
+    </g>
     <!-- Ref 76 -->
     <text x="670" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">76</text>
     <line x1="668" y1="283" x2="642" y2="300" stroke="black" stroke-width="1" />
@@ -79,9 +104,18 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- SMOOTHING CAPACITOR (78)                               -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="480" y="400" width="160" height="70" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="560" y="432" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">SMOOTHING</text>
-    <text x="560" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">CAPACITOR</text>
+    <!-- Standard electrolytic capacitor symbol: straight positive plate + curved negative plate -->
+    <!-- Top lead wire: from rectifier arrow endpoint down to positive plate junction -->
+    <line x1="560" y1="400" x2="560" y2="415" stroke="black" stroke-width="1.5" />
+    <line x1="555" y1="415" x2="560" y2="415" stroke="black" stroke-width="1.5" />
+    <!-- Positive plate (straight vertical line) -->
+    <line x1="555" y1="415" x2="555" y2="455" stroke="black" stroke-width="1.5" />
+    <!-- Negative plate (curved arc) -->
+    <path d="M 565 415 Q 573 435 565 455" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- "+" marker near positive plate -->
+    <text x="543" y="422" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="black">+</text>
+    <!-- Left connection wire: from positive plate midpoint to boost converter arrow start -->
+    <line x1="480" y1="435" x2="555" y2="435" stroke="black" stroke-width="1.5" />
     <!-- Ref 78 -->
     <text x="660" y="390" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">78</text>
     <line x1="658" y1="393" x2="642" y2="408" stroke="black" stroke-width="1" />
