@@ -55,8 +55,8 @@
     <text x="638" y="128" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">74</text>
     <line x1="638" y1="131" x2="620" y2="145" stroke="black" stroke-width="1" />
 
-    <!-- Arrow: Inductor → Full-Bridge Rectifier (down) -->
-    <line x1="560" y1="210" x2="560" y2="270" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <!-- Arrow: Inductor → Full-Bridge Rectifier (to left AC terminal) -->
+    <line x1="560" y1="210" x2="480" y2="305" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- FULL-BRIDGE RECTIFIER (76)                             -->
@@ -72,8 +72,8 @@
     <!-- Arrow: Rectifier → Smoothing Capacitor (down) -->
     <line x1="560" y1="340" x2="560" y2="400" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-    <!-- Dashed feedback arrow: Rectifier → Inductor (per spec) -->
-    <path d="M 490 280 Q 465 255 475 230 Q 485 215 500 210"
+    <!-- Dashed feedback arrow: Rectifier DC+ → Inductor (LC resonance) -->
+    <path d="M 560 270 Q 600 240 620 210"
           fill="none" stroke="black" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
