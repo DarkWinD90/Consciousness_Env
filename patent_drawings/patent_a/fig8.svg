@@ -93,7 +93,7 @@
 
     <!-- Arrows: Motor splits to Thermal and Piezo -->
     <path d="M 380 460 L 380 485 L 260 485 L 260 510" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <path d="M 460 460 L 460 485 L 580 485 L 580 498" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <path d="M 460 460 L 460 485 L 580 485 L 580 500" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- THERMAL HARVESTER (20)                                 -->
