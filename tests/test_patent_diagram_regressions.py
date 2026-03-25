@@ -13,7 +13,9 @@ def test_fig3_snn_boundary_uses_rect_primitive() -> None:
     root = ET.parse(fig3_path).getroot()
     ns = {"svg": "http://www.w3.org/2000/svg"}
 
-    boundary_rect = root.find(".//svg:g/svg:rect[@x='140'][@y='100'][@width='560'][@height='400']", ns)
+    # fig3.svg uses a 300 DPI canvas (viewBox 2550×3300) with translate(300,300) margin.
+    # The SNN boundary rect sits at (320,200) with size 1560×1100 in drawing-space coords.
+    boundary_rect = root.find(".//svg:g/svg:rect[@x='320'][@y='200'][@width='1560'][@height='1100']", ns)
     assert boundary_rect is not None, "Expected SNN boundary to be a <rect> primitive"
 
     boundary_path = root.find(
