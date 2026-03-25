@@ -23,13 +23,16 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- PIEZOELECTRIC ELEMENT (22) — top left                  -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Double circle for piezo disc per spec -->
-    <circle cx="230" cy="175" r="35" fill="none" stroke="black" stroke-width="1.5" />
-    <path d="M 205 175 A 25 25 0 1 0 255 175 A 25 25 0 1 0 205 175 Z" fill="none" stroke="black" stroke-width="1" />
-    <text x="230" y="170" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">PIEZO</text>
+    <!-- Piezoelectric crystal symbol: left electrode | crystal body | right electrode -->
+    <line x1="202" y1="162" x2="202" y2="188" stroke="black" stroke-width="2" />
+    <rect x="208" y="162" width="44" height="26" fill="none" stroke="black" stroke-width="1.5" />
+    <line x1="258" y1="162" x2="258" y2="188" stroke="black" stroke-width="2" />
+    <!-- Short connection wire: right electrode to outgoing arrow -->
+    <line x1="258" y1="175" x2="265" y2="175" stroke="black" stroke-width="1.5" />
+    <text x="230" y="202" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">PIEZO</text>
     <!-- Ref 22 -->
     <text x="200" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">22</text>
-    <line x1="200" y1="123" x2="210" y2="140" stroke="black" stroke-width="1" />
+    <line x1="200" y1="123" x2="212" y2="163" stroke="black" stroke-width="1" />
 
     <!-- Arrow: Piezo → AC Signal (start within piezo circle bbox) -->
     <line x1="265" y1="175" x2="340" y2="175" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -49,11 +52,18 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- INDUCTOR (74)                                          -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="500" y="140" width="120" height="70" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="560" y="182" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">INDUCTOR</text>
+    <!-- Inductor coil: 4 semicircular arcs, baseline y=175, from x=500 to x=620 -->
+    <path d="M 500 175 A 15 15 0 0 0 530 175 A 15 15 0 0 0 560 175 A 15 15 0 0 0 590 175 A 15 15 0 0 0 620 175"
+          fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Routing: coil right end down → horizontal left to downward arrow start (560,210) -->
+    <line x1="620" y1="175" x2="620" y2="210" stroke="black" stroke-width="1.5" />
+    <line x1="560" y1="210" x2="620" y2="210" stroke="black" stroke-width="1.5" />
+    <!-- Junction dot at (560,210) where routing wire meets downward arrow -->
+    <circle cx="560" cy="210" r="3" fill="black" />
+    <text x="560" y="193" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">INDUCTOR</text>
     <!-- Ref 74 -->
     <text x="638" y="128" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">74</text>
-    <line x1="638" y1="131" x2="620" y2="145" stroke="black" stroke-width="1" />
+    <line x1="638" y1="131" x2="618" y2="162" stroke="black" stroke-width="1" />
 
     <!-- Arrow: Inductor → Full-Bridge Rectifier (down) -->
     <line x1="560" y1="210" x2="560" y2="270" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -61,30 +71,66 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- FULL-BRIDGE RECTIFIER (76)                             -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- Diamond shape for rectifier per spec -->
-    <polygon points="560 270, 640 305, 560 340, 480 305" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="560" y="302" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">FULL-BRIDGE</text>
-    <text x="560" y="316" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">RECTIFIER</text>
+    <!-- Full-bridge rectifier: 4-diode bridge, nodes top=(560,270) bottom=(560,340) left=(505,305) right=(615,305) -->
+    <!-- Bridge arm lines -->
+    <line x1="560" y1="270" x2="505" y2="305" stroke="black" stroke-width="1.5" />
+    <line x1="560" y1="270" x2="615" y2="305" stroke="black" stroke-width="1.5" />
+    <line x1="505" y1="305" x2="560" y2="340" stroke="black" stroke-width="1.5" />
+    <line x1="615" y1="305" x2="560" y2="340" stroke="black" stroke-width="1.5" />
+    <!-- D1: anode=left(505,305) cathode=top(560,270), current upper-right -->
+    <g transform="translate(532,288) rotate(-32.5)">
+      <polygon points="-5,-6 -5,6 6,0" fill="white" stroke="black" stroke-width="1" />
+      <line x1="7" y1="-7" x2="7" y2="7" stroke="black" stroke-width="1.5" />
+    </g>
+    <!-- D2: anode=bottom(560,340) cathode=left(505,305), current upper-left -->
+    <g transform="translate(532,323) rotate(-147.5)">
+      <polygon points="-5,-6 -5,6 6,0" fill="white" stroke="black" stroke-width="1" />
+      <line x1="7" y1="-7" x2="7" y2="7" stroke="black" stroke-width="1.5" />
+    </g>
+    <!-- D3: anode=right(615,305) cathode=top(560,270), current upper-left -->
+    <g transform="translate(588,288) rotate(-147.5)">
+      <polygon points="-5,-6 -5,6 6,0" fill="white" stroke="black" stroke-width="1" />
+      <line x1="7" y1="-7" x2="7" y2="7" stroke="black" stroke-width="1.5" />
+    </g>
+    <!-- D4: anode=bottom(560,340) cathode=right(615,305), current upper-right -->
+    <g transform="translate(588,323) rotate(-32.5)">
+      <polygon points="-5,-6 -5,6 6,0" fill="white" stroke="black" stroke-width="1" />
+      <line x1="7" y1="-7" x2="7" y2="7" stroke="black" stroke-width="1.5" />
+    </g>
+    <text x="457" y="299" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">FULL-BRIDGE</text>
+    <text x="457" y="315" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">RECTIFIER</text>
     <!-- Ref 76 -->
     <text x="670" y="280" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">76</text>
-    <line x1="668" y1="283" x2="642" y2="300" stroke="black" stroke-width="1" />
+    <line x1="668" y1="283" x2="620" y2="292" stroke="black" stroke-width="1" />
 
-    <!-- Arrow: Rectifier → Smoothing Capacitor (down) -->
-    <line x1="560" y1="340" x2="560" y2="400" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <!-- Arrow: Rectifier → Smoothing Capacitor T-junction (down) -->
+    <line x1="560" y1="340" x2="560" y2="435" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- Dashed feedback arrow: Rectifier → Inductor (per spec) -->
-    <path d="M 490 280 Q 465 255 475 230 Q 485 215 500 210"
+    <path d="M 510 302 Q 482 265 480 230 Q 478 205 500 178"
           fill="none" stroke="black" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- SMOOTHING CAPACITOR (78)                               -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="480" y="400" width="160" height="70" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="560" y="432" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">SMOOTHING</text>
-    <text x="560" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">CAPACITOR</text>
+    <!-- Smoothing capacitor symbol: shunt at T-junction (560,435) -->
+    <!-- Junction dot at T-node -->
+    <circle cx="560" cy="435" r="3" fill="black" />
+    <!-- Junction wire: left from T-node to outgoing arrow start (480,435) -->
+    <line x1="480" y1="435" x2="560" y2="435" stroke="black" stroke-width="1.5" />
+    <!-- Capacitor shunt: wire down from T-node to positive plate -->
+    <line x1="560" y1="435" x2="560" y2="450" stroke="black" stroke-width="1.5" />
+    <!-- Positive plate (straight) -->
+    <line x1="535" y1="450" x2="585" y2="450" stroke="black" stroke-width="2" />
+    <!-- Negative plate (curved arc for electrolytic) -->
+    <path d="M 535 462 Q 560 470 585 462" fill="none" stroke="black" stroke-width="2" />
+    <!-- Bottom wire (negative terminal) -->
+    <line x1="560" y1="462" x2="560" y2="472" stroke="black" stroke-width="1.5" />
+    <text x="592" y="452" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">SMOOTHING</text>
+    <text x="592" y="468" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">CAPACITOR</text>
     <!-- Ref 78 -->
-    <text x="660" y="390" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">78</text>
-    <line x1="658" y1="393" x2="642" y2="408" stroke="black" stroke-width="1" />
+    <text x="592" y="438" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">78</text>
+    <line x1="590" y1="441" x2="575" y2="451" stroke="black" stroke-width="1" />
 
     <!-- Arrow: Smoothing Capacitor → Boost Converter (left) -->
     <line x1="480" y1="435" x2="440" y2="435" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
