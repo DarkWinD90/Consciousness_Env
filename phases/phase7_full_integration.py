@@ -22,6 +22,14 @@ Success Criteria:
 - All data logged to history for analysis
 
 REFACTORED: Now uses shared core modules (BaseSNN, ThermochromicMixin, EnergyHarvester, HistoryTracker).
+
+NOTE: This file uses EnergyConfig (470 mW base consumption), which is the
+NULL-HYPOTHESIS control configuration. The system will deplete energy over
+time. This is intentional — it serves as the control condition for Patent A
+validation (¶0036). For the self-sustaining EXPERIMENTAL configuration
+using BalancedEnergyConfig (45 mW base, quadratic cost, capacity ceiling),
+see: mcp/consciousness_mcp_server.py → ConsciousnessSystem.
+FIG. 8 in the patent drawings depicts the experimental architecture.
 """
 
 import numpy as np

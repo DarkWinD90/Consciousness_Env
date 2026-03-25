@@ -22,12 +22,13 @@ class BalancedEnergyConfig(EnergyConfig):
     """
     Balanced configuration for self-sustaining micro-scale neural systems.
 
-    Tuned so that:
-    - Rest state: significant energy drain (must stay active)
-    - Low activity (5-15 spikes): slight drain
-    - Medium activity (30-50 spikes): positive balance (sweet spot)
-    - High activity (70-85 spikes): slight drain
-    - Burst activity (100 spikes): significant drain (emergency only)
+    Tuned so that (validated zone boundaries per Patent A ¶0030):
+    - Rest state (0 spikes): significant energy drain (must stay active)
+    - Low activity (1-7 spikes): slight drain (below lower crossover)
+    - Medium activity (8-27 spikes): positive balance / surplus zone
+      (peak surplus ~+23 mW at ~18 spikes)
+    - High activity (28-50 spikes): slight drain (above upper crossover)
+    - Burst activity (>50 spikes): significant drain (emergency only)
 
     This creates interesting energy management dynamics where the system
     must regulate its activity level to maintain energy homeostasis.
