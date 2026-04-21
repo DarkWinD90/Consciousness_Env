@@ -420,35 +420,37 @@ def build_pdf(txt_path, pdf_path):
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+PDF_OUTPUT_DIR = os.path.join("patents", "pdfs")
+
 SPECIFICATIONS = [
     {
         "txt": "patents/uspto_formatted/Patent_A_USPTO.txt",
-        "pdf": "Patent_A_Specification.pdf",
+        "pdf": os.path.join(PDF_OUTPUT_DIR, "Patent_A_Specification.pdf"),
         "label": "Patent A Specification",
     },
     {
         "txt": "patents/uspto_formatted/Patent_B_USPTO.txt",
-        "pdf": "Patent_B_Specification.pdf",
+        "pdf": os.path.join(PDF_OUTPUT_DIR, "Patent_B_Specification.pdf"),
         "label": "Patent B Specification",
     },
     {
         "txt": "patents/uspto_formatted/Patent_C_USPTO.txt",
-        "pdf": "Patent_C_Specification.pdf",
+        "pdf": os.path.join(PDF_OUTPUT_DIR, "Patent_C_Specification.pdf"),
         "label": "Patent C Specification",
     },
     {
         "txt": "patents/uspto_formatted/Patent_A_Drawings_Description.txt",
-        "pdf": "Patent_A_Drawings_Description.pdf",
+        "pdf": os.path.join(PDF_OUTPUT_DIR, "Patent_A_Drawings_Description.pdf"),
         "label": "Patent A Drawing Descriptions",
     },
     {
         "txt": "patents/uspto_formatted/Patent_B_Drawings_Description.txt",
-        "pdf": "Patent_B_Drawings_Description.pdf",
+        "pdf": os.path.join(PDF_OUTPUT_DIR, "Patent_B_Drawings_Description.pdf"),
         "label": "Patent B Drawing Descriptions",
     },
     {
         "txt": "patents/uspto_formatted/Patent_C_Drawings_Description.txt",
-        "pdf": "Patent_C_Drawings_Description.pdf",
+        "pdf": os.path.join(PDF_OUTPUT_DIR, "Patent_C_Drawings_Description.pdf"),
         "label": "Patent C Drawing Descriptions",
     },
 ]
@@ -469,6 +471,7 @@ def main():
     print("  Abstract:   Page break before")
     print()
 
+    os.makedirs(PDF_OUTPUT_DIR, exist_ok=True)
     total_pages = 0
 
     for spec in SPECIFICATIONS:
