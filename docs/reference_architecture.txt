@@ -157,9 +157,15 @@ output at timestep t back as additional input at timestep t+1:
 
 Where:
     previous_output(t) = mean(V_1(t), V_2(t), ..., V_N(t))
-    reflection_coeff   = base_coeff + modulation x sensitivity
+    reflection_coeff   = base_coeff + modulation x sensitivity   [MCP path]
+    reflection_coeff   = 0.2                                      [CLI path]
     base_coeff         = 0.2 (default)
     sensitivity        = 0.1 (modulation gain)
+
+The MCP path (mcp/consciousness_mcp_server.py) uses the modulated formula
+above; the CLI path (phases/phase7_full_integration.py) uses a fixed 0.2
+without external modulation. Both implementations are intentional (see
+CLAUDE.md Section 3.3).
 
 This creates a one-step-delayed self-referential input channel. The
 network receives, at each timestep, both the current external stimulus

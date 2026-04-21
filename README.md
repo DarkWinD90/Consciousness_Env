@@ -50,12 +50,16 @@ annotated git tag and reproducible with `git checkout <tag>`.
         |               |
    movement          movement
         |               |
-  L6: Energy Harvesting        (piezoelectric + thermoelectric)
-  L7: Ground Reference         (noise floor baseline)
-  L8: Recursive Reflection     (self-observation at configurable gain)
+  L6: Energy Harvesting        (harvest piezo + thermal; consume per spike)
+  L7: Ground Reference         (conceptual baseline; not a runtime stage)
+  L8: Recursive Reflection     (mean membrane potential, self-observation)
         |
-        +---> feeds back into L4 (THE LOOP CLOSES)
+        +---> feeds back into L4 (THE LOOP CLOSES AT L4)
 ```
+
+Reflection coefficient differs per execution path: CLI uses fixed `0.2`,
+MCP uses `0.2 + modulation * 0.1`. See CLAUDE.md Sections 2 and 3 for the
+full architecture and per-path parameters.
 
 **Two execution paths** (intentionally different physics):
 - **CLI path** (harsh energy): System depletes to -4,697 mWh — the **null hypothesis**

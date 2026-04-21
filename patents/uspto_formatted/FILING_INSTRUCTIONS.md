@@ -137,7 +137,7 @@ Create simple black and white line drawings for each patent. You can use:
 - NO frames or borders around drawing area
 
 ### Patent A Drawings (8 figures):
-- FIG. 1: System Architecture Block Diagram (8-layer loop)
+- FIG. 1: System Architecture Block Diagram (Sensor 12, SNN 14, Motor 16, Power Mgmt 18, Thermal 20, Piezo 22, GND 24, Control 26, Energy Store 28, Reflection 30 within Environment 10)
 - FIG. 2: Energy Balance Comparison (control vs. experimental)
 - FIG. 3: SNN Architecture (LIF neuron model)
 - FIG. 4: Energy Harvesting Circuit (piezo + inductor + rectifier)
