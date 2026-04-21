@@ -34,57 +34,78 @@ not only processes information but observes its own processing.
 ## 2. Architecture — The 8-Layer Consciousness Loop
 
 ```
-              ENVIRONMENT
-                  │
-                  ▼
-  ┌──────────────────────────────┐
-  │  L1: Printed Membrane        │  ThermochromicMixin
-  │  L2: Sensing Pads            │  light_intensity, membrane_temp
-  └──────────────┬───────────────┘
-                 │
-                 ▼
-  ┌──────────────────────────────┐
-  │  L3: Optical Transmission    │  signal_voltage = light / 1000 * 5.0
-  └──────────────┬───────────────┘
-                 │
-                 ▼
-  ┌──────────────────────────────┐
-  │  L4: Neuromorphic CPU        │  BaseSNN (leaky integrate-and-fire)
-  │      + L8 reflection input   │  reflection_coeff feeds prior output back
-  └──────────────┬───────────────┘
-                 │
-                 ▼
-  ┌──────────────────────────────┐
-  │  L5: Servo Actuation         │  target_angle = clip(snn_output * 180)
-  └──────────┬───────────┬───────┘
-             │           │
-    movement │           │ movement (friction)
-             │           │
-             │  ┌────────▼───────────────────────┐
-             │  │  L6: Energy Harvesting          │  EnergyHarvester
-             │  │  friction (piezo) + thermal     │  ◄── also receives L1 temp
-             │  └────────┬───────────────────────┘
-             │           │
-             │  ┌────────▼───────────────────────┐
-             │  │  L7: Ground Reference           │  noise floor / baseline
-             │  └────────┬───────────────────────┘
-             │           │
-             │  ┌────────▼───────────────────────┐
-             │  │  L8: Recursive Reflection       │  snn.previous_output
-             │  │  feeds back into L4 at          │  → re-enters SNN at
-             │  │  configurable gain              │    reflection_coeff
-             │  └────────┬───────────────────────┘
-             │           │
-             └───────────┘  ◄── THE LOOP CLOSES HERE
+                     ENVIRONMENT
+                          │
+                          ▼
+         ┌──────────────────────────────┐
+         │  L1: Printed Membrane        │  ThermochromicMixin
+         │  L2: Sensing Pads            │  light_intensity, membrane_temp
+         └──────┬───────────────────┬───┘
+                │ light_intensity   │ membrane_temp
+                ▼                   │  (thermal cross-link
+         ┌──────────────────────────┐   to L6, below)
+         │  L3: Optical Transmission│   │
+         │  signal = light/1000*5.0 │   │
+         └──────────────┬───────────┘   │
+                        │               │
+                        ▼               │
+         ┌──────────────────────────┐   │
+     ┌──►│  L4: Neuromorphic CPU    │   │
+     │   │  BaseSNN (leaky I&F)     │   │
+     │   │  snn.step(signal,        │   │
+     │   │    reflection_coeff)     │   │
+     │   └──────────────┬───────────┘   │
+     │                  │ snn_output,   │
+     │                  │ spike_count   │
+     │                  ▼               │
+     │   ┌──────────────────────────┐   │
+     │   │  L5: Servo Actuation     │   │
+     │   │  target_angle =          │   │
+     │   │    clip(snn_output*180)  │   │
+     │   └──────────────┬───────────┘   │
+     │                  │ movement      │
+     │                  ▼               ▼
+     │   ┌──────────────────────────────┐
+     │   │  L6: Energy Harvesting       │
+     │   │  harvest: friction + thermal │
+     │   │  consume: base + activity(   │
+     │   │           spike_count)       │
+     │   │  storage: capacity / decay   │
+     │   └──────────────┬───────────────┘
+     │                  │
+     │                  ▼
+     │   ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐
+     │      L7: Ground Reference
+     │   │  conceptual baseline /      │
+     │      noise floor — not a
+     │   │  runtime computation stage  │
+     │   └ ─ ─ ─ ─ ─ ─ ─┬ ─ ─ ─ ─ ─ ─ ─┘
+     │                  │
+     │                  ▼
+     │   ┌──────────────────────────────┐
+     │   │  L8: Recursive Reflection    │
+     │   │  prev_mean =                 │
+     │   │    membrane_potential.mean() │
+     │   │  CLI  coeff = 0.2 (fixed)    │
+     │   │  MCP  coeff = 0.2 + mod*0.1  │
+     │   └──────────────┬───────────────┘
+     │                  │
+     └──────────────────┘  ◄── THE LOOP CLOSES AT L4
 ```
 
 **Three signal pathways:**
 
 | Path | Route | Function |
 |------|-------|----------|
-| Main spine | L1→L2→L3→L4→L5→L6→L7→L8→L4 | Sense→process→actuate→harvest→reflect→loop |
+| Main spine | L1→L2→L3→L4→L5→L6→L8→L4 | Sense→process→actuate→harvest→reflect→loop. L7 is a conceptual baseline, not a runtime stage. |
 | Thermal cross-link | L1 membrane_temp → L6 | Heat from light absorption feeds thermoelectric harvesting directly |
-| Reflection feedback | L8 previous_output → L4 snn.step() | Self-observation at configurable gain (0.2 + modulation * 0.1) |
+| Reflection feedback | L8 `membrane_potential.mean()` → L4 `snn.step(..., reflection_coeff)` | Self-observation gain differs by execution path: **CLI fixed 0.2** (`phases/phase7_full_integration.py:151`), **MCP `0.2 + modulation * 0.1`** (`mcp/consciousness_mcp_server.py:145`). See Section 3 for per-path parameters. |
+
+**Notes on the diagram:**
+- **L6 harvests AND consumes.** The net energy delta is harvest − consume − self-discharge, capped by `capacity_mwh`. Consumption scales with L4 `spike_count` (`core/energy.py` `base_consumption_mw`, `activity_cost_linear`, `activity_cost_quadratic`).
+- **L7 is conceptual.** No code computes L7. It is a reference baseline cited in the 8-layer model; the runtime spine skips from L6 to L8.
+- **L8 output is the mean membrane potential** across all neurons (`core/base_snn.py:113` `self.previous_output = self.membrane_potential.mean()`), not a dedicated output neuron.
+- **Reflection coefficient differs per execution path.** Do not unify the two formulas — the CLI/MCP split is load-bearing (Section 3.3).
 
 ---
 
