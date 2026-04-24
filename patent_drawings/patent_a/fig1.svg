@@ -15,7 +15,7 @@
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- ENVIRONMENT BOUNDARY (10) — dashed enclosure           -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <rect x="100" y="80" width="650" height="730" rx="8" fill="none" stroke="black" stroke-width="1" stroke-dasharray="8,4" />
+    <rect x="101" y="81" width="648" height="728" rx="8" fill="none" stroke="black" stroke-width="1" stroke-dasharray="8,4" />
     <text x="105" y="100" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="black">ENVIRONMENT</text>
     <!-- Ref 10 -->
     <text x="715" y="100" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">10</text>

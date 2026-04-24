@@ -103,10 +103,8 @@
     <!--  routed inside SNN: right then down, exits right side of SNN -->
     <!--  at y=395 and continues down to Spike Vector Output box top. -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <line x1="615" y1="235" x2="690" y2="235" stroke="black" stroke-width="1.5" />
+    <path d="M 615 235 L 690 235 L 690 740 L 537 740" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
     <circle cx="690" cy="235" r="3" fill="black" />
-    <line x1="690" y1="235" x2="690" y2="740" stroke="black" stroke-width="1.5" />
-    <line x1="690" y1="740" x2="537" y2="740" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
     <!-- Ref 62 -->
     <text x="700" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">62</text>
     <line x1="698" y1="398" x2="692" y2="395" stroke="black" stroke-width="0.5" />
