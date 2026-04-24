@@ -160,6 +160,35 @@ class TextBox:
     content: str
 
 
+_REFERENCE_VIEWBOX_WIDTH = 850.0
+"""Reference canvas width used to parameterize size thresholds.
+
+All hardcoded constants in this module (800-unit max rect edge, 790-unit
+legend-zone cutoff, 400/40/15-unit legend-size thresholds, 12-unit min
+target-circle radius, 18-unit min target-polygon dimension) were sized
+for a canvas with ``viewBox="0 0 850 1100"``. At other canvas scales
+they are multiplied by ``detect_scale(content)`` so the thresholds track
+the drawing size proportionally.
+"""
+
+
+def detect_scale(content: str) -> float:
+    """Return the canvas scale factor relative to the 850x1100 reference.
+
+    Reads the outer ``<svg viewBox="0 0 W H">`` and returns W / 850. For
+    a standard 850x1100 SVG this is 1.0; for the historical 300-DPI
+    2550x3300 layout it is 3.0. Any size-derived threshold in the module
+    multiplies its reference value by this factor.
+    """
+    m = re.search(r'viewBox="[\s]*[-\d.]+[\s,]+[-\d.]+[\s,]+([\d.]+)[\s,]+[\d.]+"', content)
+    if not m:
+        return 1.0
+    try:
+        return float(m.group(1)) / _REFERENCE_VIEWBOX_WIDTH
+    except ValueError:
+        return 1.0
+
+
 def detect_transform_offset(content: str) -> Tuple[float, float]:
     """Detect the top-level <g transform="translate(x, y)"> offset."""
     m = re.search(r'<g\s+transform="translate\(([\d.]+)[,\s]+([\d.]+)\)"', content)
@@ -213,7 +242,7 @@ def _attr_f(tag_str: str, name: str, default: float = 0.0) -> float:
         return default
 
 
-def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
+def parse_rects(content: str, dx: float = 0, dy: float = 0, scale: float = 1.0) -> List[Rect]:
     """Extract all element boxes. Converts both ``<rect>`` and
     ``<circle>`` elements to bounding ``Rect`` instances.
 
@@ -244,6 +273,15 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
       docs/tooling_audit_2026-04-24.md §3 for the remaining HIGH bug.
     """
     rects = []
+    # Scale-aware thresholds (see module-level docstring on
+    # _REFERENCE_VIEWBOX_WIDTH for rationale). Values on the right-
+    # hand sides are reference-scale constants; multiplying by
+    # ``scale`` keeps them proportional at larger canvases (e.g.,
+    # 2550x3300 uses scale=3.0).
+    max_edge = 800 * scale
+    legend_y = 790 * scale
+    legend_w_max = 400 * scale
+    legend_xy_min = 15 * scale
 
     for m in re.finditer(r'<rect\b([^>]*)/?>', content):
         attrs = m.group(1)
@@ -253,21 +291,23 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
         h = _attr_f(attrs, 'height')
         if w == 0 or h == 0:
             continue
-        if w > 800 or h > 800:
+        if w > max_edge or h > max_edge:
             continue
-        # Legend-zone filter (bottom of page, y > 790). Three categories
-        # of rect live in this zone and need different treatment:
-        #  - Wide legend containers (w > 400, e.g. patent_a/fig7's
-        #    638x40 legend strip): skip.
-        #  - Tiny legend icons (w < 15 or h < 15, e.g. patent_a/fig7's
-        #    8x8 markers): skip — too small to be a diagram element,
-        #    typically bullet-markers inside a legend container.
-        #  - Regular diagram boxes in the 15..400 width range (e.g.,
+        # Legend-zone filter (bottom of page, y > legend_y). Three
+        # categories of rect live in this zone and need different
+        # treatment:
+        #  - Wide legend containers (w > legend_w_max, e.g.
+        #    patent_a/fig7's 638x40 legend strip): skip.
+        #  - Tiny legend icons (w < legend_xy_min or h < legend_xy_min,
+        #    e.g. patent_a/fig7's 8x8 markers): skip — too small to
+        #    be a diagram element, typically bullet markers inside a
+        #    legend container.
+        #  - Regular diagram boxes in the middle width range (e.g.,
         #    patent_a/fig4's 140x50 SNN dashed box at y=820,
         #    patent_c/fig5's 80x30 output boxes at y=800) remain
         #    valid G2 arrow targets.
-        # Above y=790, all rects are kept regardless of size.
-        if y > 790 and (w > 400 or w < 15 or h < 15):
+        # Above the legend zone, all rects are kept regardless of size.
+        if y > legend_y and (w > legend_w_max or w < legend_xy_min or h < legend_xy_min):
             continue
         rects.append(Rect(x, y, w, h))
 
@@ -284,10 +324,10 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
         # 12 (roughly 0.12 inch at reference scale) is chosen to admit
         # state-node circles (typically r=20..75) while rejecting
         # junction dots (r=3..8) and neuron-symbol circles (r=8..12).
-        if r < 12:
+        if r < 12 * scale:
             continue
         # Skip circles whose center sits in the legend zone.
-        if cy > 790:
+        if cy > legend_y:
             continue
         rects.append(Rect(cx - r, cy - r, 2 * r, 2 * r, kind="circle"))
 
@@ -299,7 +339,7 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
         ry = _attr_f(attrs, 'ry')
         if rx <= 0 or ry <= 0:
             continue
-        if cy > 790:
+        if cy > legend_y:
             continue
         # Store as kind="ellipse" so Rect.distance_to_edge uses the
         # quadratic implicit form rather than the circle approximation.
@@ -330,11 +370,11 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
         # Skip polygons that are arrowhead caps (tiny manual arrowhead
         # polygons used as alternatives to marker-end). Standard cap
         # size is under 18x18 at reference scale.
-        if w < 18 and h < 18:
+        if w < 18 * scale and h < 18 * scale:
             continue
-        if w > 800 or h > 800:
+        if w > max_edge or h > max_edge:
             continue
-        if y_min > 790 and (w > 100 or h > 40 or w < 15 or h < 15):
+        if y_min > legend_y and (w > legend_w_max or w < legend_xy_min or h < legend_xy_min):
             continue
         # Store as rect (axis-aligned bounding box). For compliance
         # tolerance (1.0u) this is accurate enough at the cardinal
@@ -571,17 +611,52 @@ def check_path_through_box(segments: List[Segment], rects: List[Rect]) -> List[s
     return issues
 
 
-def parse_texts(content: str, dx: float = 0, dy: float = 0) -> List[TextBox]:
-    """Extract text elements with approximate bounding boxes."""
-    texts = []
-    for m in re.finditer(r'<text\b([^>]*)>([^<]+)</text>', content):
-        attrs = m.group(1)
-        text = m.group(2).strip()
-        if not text:
-            continue
+_TEXT_BLOCK_RE = re.compile(r'<text\b([^>]*)>(.*?)</text>', re.DOTALL)
+_TSPAN_RE = re.compile(r'<tspan\b[^>]*>([^<]*)</tspan>', re.DOTALL)
+_ROTATE_RE = re.compile(
+    r'rotate\(\s*(-?[\d.]+)(?:\s*[,\s]\s*(-?[\d.]+)\s*[,\s]\s*(-?[\d.]+))?\s*\)'
+)
 
-        # Skip rotated text — different bbox calculation needed
-        if 'transform=' in attrs:
+
+def _extract_text_content(inner: str) -> str:
+    """Concatenate the visible text inside a ``<text>`` element, including
+    any ``<tspan>`` children. Preserves inter-tspan whitespace so
+    bounding-box width estimates scale with content length.
+
+    Returns '' when the element has no extractable text (e.g., an empty
+    text element or one containing only tspan tags with no content).
+    """
+    inner = inner.strip()
+    if not inner:
+        return ''
+    # If the element contains <tspan>, pull text from each tspan.
+    tspans = _TSPAN_RE.findall(inner)
+    if tspans:
+        return ' '.join(t.strip() for t in tspans if t.strip())
+    # Otherwise fall back to the raw inner text, stripping any other tags.
+    return re.sub(r'<[^>]+>', '', inner).strip()
+
+
+def parse_texts(content: str, dx: float = 0, dy: float = 0) -> List[TextBox]:
+    """Extract text elements with approximate bounding boxes.
+
+    Scope:
+    - Handles both plain ``<text>foo</text>`` and the nested
+      ``<text><tspan>foo</tspan><tspan>bar</tspan></text>`` form.
+    - Rotated text (``<text transform="rotate(angle)">`` or
+      ``rotate(angle cx cy)``): returns an axis-aligned bounding box
+      that fully contains the rotated text, computed from the rotation
+      angle and the unrotated width × height. For 0° / ±90° / 180° the
+      bbox is exact; for arbitrary angles it is a conservative
+      over-approximation (never under-reports overlap).
+    - Pure ``translate()`` transforms on the text element are applied
+      to ``x, y`` before the bbox is computed.
+    """
+    texts = []
+    for m in _TEXT_BLOCK_RE.finditer(content):
+        attrs = m.group(1)
+        text = _extract_text_content(m.group(2))
+        if not text:
             continue
 
         x = _attr_f(attrs, 'x') + dx
@@ -591,6 +666,25 @@ def parse_texts(content: str, dx: float = 0, dy: float = 0) -> List[TextBox]:
 
         char_width = font_size * 0.6  # approximate
         text_width = len(text) * char_width
+        text_height = font_size
+
+        # Parse transform= if present. We only treat translate(...) and
+        # rotate(...) — other transforms (scale, skew, matrix) fall
+        # through to the unrotated bbox and are documented as unsupported.
+        transform_val = _attr(attrs, 'transform') or ''
+        rotate_angle = 0.0
+        if transform_val:
+            tm = re.search(
+                r'translate\(\s*(-?[\d.]+)(?:\s*[,\s]\s*(-?[\d.]+))?\s*\)',
+                transform_val,
+            )
+            if tm:
+                x += float(tm.group(1))
+                if tm.group(2):
+                    y += float(tm.group(2))
+            rm = _ROTATE_RE.search(transform_val)
+            if rm:
+                rotate_angle = float(rm.group(1))
 
         if anchor == "middle":
             tx = x - text_width / 2
@@ -598,8 +692,48 @@ def parse_texts(content: str, dx: float = 0, dy: float = 0) -> List[TextBox]:
             tx = x - text_width
         else:  # start
             tx = x
+        ty = y - text_height
 
-        texts.append(TextBox(tx, y - font_size, text_width, font_size, text))
+        if rotate_angle:
+            # Axis-aligned bounding box of the rotated text. The unrotated
+            # text occupies rect (tx, ty, text_width, text_height); rotate
+            # its four corners about (x, y) (SVG's default rotation pivot
+            # for transform="rotate(a)") or about (cx, cy) when supplied.
+            rm = _ROTATE_RE.search(transform_val)
+            # Explicit rotate(angle, cx, cy) pivot coordinates are
+            # specified in the same local coordinate system as the
+            # text's x/y attributes, so they need the same outer
+            # translate offset applied. Without this, the rotated
+            # bbox lands in the wrong absolute position (observed in
+            # patent_a/fig2/fig5 and patent_c/fig3 where the rotated
+            # Y-axis titles were reported as overlapping with tick
+            # labels 50u away).
+            if rm and rm.group(2) and rm.group(3):
+                pivot_x = float(rm.group(2)) + dx
+                pivot_y = float(rm.group(3)) + dy
+            else:
+                pivot_x = x
+                pivot_y = y
+            angle_rad = math.radians(rotate_angle)
+            cos_a, sin_a = math.cos(angle_rad), math.sin(angle_rad)
+            corners = [
+                (tx, ty),
+                (tx + text_width, ty),
+                (tx, ty + text_height),
+                (tx + text_width, ty + text_height),
+            ]
+            rx_vals, ry_vals = [], []
+            for cx, cy in corners:
+                dx_p, dy_p = cx - pivot_x, cy - pivot_y
+                rx_vals.append(pivot_x + dx_p * cos_a - dy_p * sin_a)
+                ry_vals.append(pivot_y + dx_p * sin_a + dy_p * cos_a)
+            bbox_x = min(rx_vals)
+            bbox_y = min(ry_vals)
+            bbox_w = max(rx_vals) - bbox_x
+            bbox_h = max(ry_vals) - bbox_y
+            texts.append(TextBox(bbox_x, bbox_y, bbox_w, bbox_h, text))
+        else:
+            texts.append(TextBox(tx, ty, text_width, text_height, text))
 
     return texts
 
@@ -673,12 +807,13 @@ def validate_geometry(svg_file: str) -> bool:
     print(f"{'='*60}\n")
 
     dx, dy = detect_transform_offset(content)
+    scale = detect_scale(content)
     # Rotated nested groups contain local coordinates that can't be
     # directly composed without matrix math. Strip them so their
     # contents don't register as spurious content at x=0..20, y=0..20
     # (common diode/rectifier symbol positions after rotate(...)).
     parsed = strip_rotated_groups(content)
-    rects = parse_rects(parsed, dx, dy)
+    rects = parse_rects(parsed, dx, dy, scale=scale)
     line_segs = parse_lines(parsed, dx, dy)
     path_segs = parse_paths(parsed, dx, dy)
     all_segs = line_segs + path_segs
