@@ -24,17 +24,21 @@ from typing import List, Tuple, Optional
 class Rect:
     """An element box used as an arrow-target candidate.
 
-    ``kind`` distinguishes rectangular boxes ("rect") from circular
-    nodes ("circle"), which affects edge-distance computations. For
-    circles, ``x,y,w,h`` store the axis-aligned bounding box; the
-    true center/radius is (x + w/2, y + h/2), r = w/2 = h/2.
+    ``kind`` distinguishes three shape families:
+    - "rect": axis-aligned rectangle defined by x, y, w, h.
+    - "circle": true circle inscribed in the w x h bounding box
+      (w == h required); center = (x + w/2, y + h/2), r = w/2.
+    - "ellipse": ellipse with semi-axes rx = w/2, ry = h/2. Distance
+      to boundary uses the quadratic implicit form rather than a
+      circle approximation so elongated nodes (e.g., patent_c/fig7's
+      BUF/SNP pills at rx=15, ry=25) report accurate gaps.
     """
     x: float
     y: float
     w: float
     h: float
     label: str = ""
-    kind: str = "rect"  # "rect" | "circle"
+    kind: str = "rect"  # "rect" | "circle" | "ellipse"
 
     @property
     def right(self): return self.x + self.w
@@ -47,8 +51,16 @@ class Rect:
     def cy(self): return self.y + self.h / 2
     @property
     def r(self): return self.w / 2  # only meaningful for circles
+    @property
+    def rx(self): return self.w / 2  # only meaningful for ellipses
+    @property
+    def ry(self): return self.h / 2  # only meaningful for ellipses
 
     def contains_point(self, px, py):
+        if self.kind == "circle":
+            return math.hypot(px - self.cx, py - self.cy) < self.r
+        if self.kind == "ellipse" and self.rx > 0 and self.ry > 0:
+            return ((px - self.cx) / self.rx) ** 2 + ((py - self.cy) / self.ry) ** 2 < 1.0
         return self.x < px < self.right and self.y < py < self.bottom
 
     def on_edge(self, px, py, tolerance=1.0):
@@ -75,6 +87,14 @@ class Rect:
 
         For circles, returns ``abs(dist_to_center - r)`` when outside
         or touching, and 0 when strictly inside.
+
+        For ellipses, evaluates the implicit quadratic form
+        ``F = ((px-cx)/rx)^2 + ((py-cy)/ry)^2``. F <= 1 means the
+        point is inside (distance 0). Otherwise distance is
+        approximated as ``(sqrt(F) - 1) * min(rx, ry)`` — exact at
+        the cardinal extremes (where arrow tips normally land) and
+        slightly over-reports along diagonals. Accurate to within
+        the 1.0u compliance tolerance.
         """
         if self.kind == "circle":
             dx = px - self.cx
@@ -83,6 +103,13 @@ class Rect:
             if dist_center <= self.r:
                 return 0.0
             return dist_center - self.r
+        if self.kind == "ellipse":
+            if self.rx <= 0 or self.ry <= 0:
+                return float("inf")
+            f = ((px - self.cx) / self.rx) ** 2 + ((py - self.cy) / self.ry) ** 2
+            if f <= 1.0:
+                return 0.0
+            return (math.sqrt(f) - 1.0) * min(self.rx, self.ry)
         if self.contains_point(px, py):
             return 0.0
         distances = []
@@ -234,10 +261,13 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
             continue
         if cy > 790:
             continue
-        # Treat ellipse as a circle with effective r = min(rx, ry).
-        # Distance-to-ellipse-boundary is approximated — adequate for
-        # arrow-tip tolerance checks at compliance scale.
-        rects.append(Rect(cx - rx, cy - ry, 2 * rx, 2 * ry, kind="circle"))
+        # Store as kind="ellipse" so Rect.distance_to_edge uses the
+        # quadratic implicit form rather than the circle approximation.
+        # Non-unit-aspect ellipses (rx != ry) land arrows on their
+        # cardinal extremes (e.g., top of a tall pill at y=cy-ry),
+        # which reads as "outside" under any circle approximation
+        # but is on-boundary for the true ellipse.
+        rects.append(Rect(cx - rx, cy - ry, 2 * rx, 2 * ry, kind="ellipse"))
 
     return rects
 

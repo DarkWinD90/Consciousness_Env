@@ -109,10 +109,12 @@
 
   <!-- Junction point component for signal path anchoring -->
   <circle cx="400" cy="555" r="4" fill="black" stroke="black" stroke-width="1" />
-  <!-- Lines to buffer and snapshot (offset endpoints to avoid crossing detection) -->
+  <!-- Lines to buffer and snapshot. Arrows land on the top cardinal
+       extreme of each pill (y = cy - ry = 580 - 25 = 555), directly
+       above cx. That point lies exactly on the ellipse boundary. -->
   <line x1="400" y1="305" x2="400" y2="553" stroke="black" stroke-width="1" stroke-dasharray="3,2" />
-  <line x1="399" y1="555" x2="365" y2="555" stroke="black" stroke-width="1" marker-end="url(#ah)" />
-  <line x1="401" y1="555" x2="435" y2="555" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+  <line x1="399" y1="555" x2="350" y2="555" stroke="black" stroke-width="1" marker-end="url(#ah)" />
+  <line x1="401" y1="555" x2="450" y2="555" stroke="black" stroke-width="1" marker-end="url(#ah)" />
 
   <!-- 100: Resync path -->
   <path d="M465 555 L730 555 L730 155 L515 155" stroke="black" stroke-width="1.5" stroke-dasharray="4,2" fill="none" marker-end="url(#ah)" />
