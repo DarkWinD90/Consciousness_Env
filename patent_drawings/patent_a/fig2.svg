@@ -46,10 +46,13 @@
     <text x="718" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">34</text>
     <line x1="716" y1="547" x2="702" y2="550" stroke="black" stroke-width="1.0" />
 
-    <!-- X-axis tick marks -->
+    <!-- X-axis tick marks. The "0" tick is omitted because the
+         y-axis (x=220) is already a vertical line at that x over
+         the full graph span; drawing a second short tick from
+         y=550 to y=556 produces a 6-unit colinear overlap
+         (G4 FAIL). The "0" text label below y=574 is retained. -->
     <g class="axis-label">
     <!-- 0 -->
-    <line x1="220" y1="550" x2="220" y2="556" stroke="black" stroke-width="1.5" />
     <text x="220" y="574" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0</text>
     <!-- 500 -->
     <line x1="338" y1="550" x2="338" y2="556" stroke="black" stroke-width="1.5" />
