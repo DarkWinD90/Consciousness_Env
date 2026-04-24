@@ -161,22 +161,16 @@ def validate_references(svg_file):
     if not missing_leaders:
         print(f"[PASS] Reference Numerals: All {len(numerals)} have leader lines")
         return True
-    else:
-        missing_ratio = len(missing_leaders) / len(numerals) if numerals else 0
-        if missing_ratio > 0.3:
-            print(f"[FAIL] Reference Numerals: {len(missing_leaders)}/{len(numerals)} missing leader lines")
-            for num in missing_leaders[:5]:
-                print(f"       - '{num['value']}' at line {num['line']}")
-            if len(missing_leaders) > 5:
-                print(f"       ... and {len(missing_leaders) - 5} more")
-            return False
-        else:
-            print(f"[WARN] Reference Numerals: {len(missing_leaders)} may be missing leader lines")
-            for num in missing_leaders[:5]:
-                print(f"       - '{num['value']}' at line {num['line']}")
-            if len(missing_leaders) > 5:
-                print(f"       ... and {len(missing_leaders) - 5} more")
-            return True
+
+    # 37 CFR 1.84(p)(1): leader lines are required. Any missing leader is
+    # non-compliant — there is no passing-WARN level. Previously this function
+    # silently returned True for <30% missing; that masked real issues.
+    print(f"[FAIL] Reference Numerals: {len(missing_leaders)}/{len(numerals)} missing leader lines")
+    for num in missing_leaders[:10]:
+        print(f"       - '{num['value']}' at line {num['line']}")
+    if len(missing_leaders) > 10:
+        print(f"       ... and {len(missing_leaders) - 10} more")
+    return False
 
 
 if __name__ == '__main__':

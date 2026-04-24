@@ -394,6 +394,49 @@ def parse_texts(content: str, dx: float = 0, dy: float = 0) -> List[TextBox]:
     return texts
 
 
+def check_segment_overlaps(segments: List[Segment]) -> List[str]:
+    """G4: Two different signal paths share a colinear overlapping segment.
+
+    Two horizontal segments at the same y (within 0.5 tol) whose x-ranges
+    overlap by more than 1 unit are flagged. Same for vertical segments.
+    Endpoint-only touches are not reported.
+    """
+    issues = []
+
+    def overlap_len(a_lo, a_hi, b_lo, b_hi):
+        return max(0.0, min(a_hi, b_hi) - max(a_lo, b_lo))
+
+    h_segs = [s for s in segments if s.is_horizontal]
+    for i, a in enumerate(h_segs):
+        for b in h_segs[i + 1:]:
+            if a.path_id == b.path_id:
+                continue
+            if abs(a.y1 - b.y1) > 0.5:
+                continue
+            ov = overlap_len(a.min_x, a.max_x, b.min_x, b.max_x)
+            if ov > 1.0:
+                issues.append(
+                    f"SEGMENT OVERLAP (H, {ov:.0f}u) at y={a.y1:.0f}: "
+                    f"'{a.path_id}' and '{b.path_id}'"
+                )
+
+    v_segs = [s for s in segments if s.is_vertical]
+    for i, a in enumerate(v_segs):
+        for b in v_segs[i + 1:]:
+            if a.path_id == b.path_id:
+                continue
+            if abs(a.x1 - b.x1) > 0.5:
+                continue
+            ov = overlap_len(a.min_y, a.max_y, b.min_y, b.max_y)
+            if ov > 1.0:
+                issues.append(
+                    f"SEGMENT OVERLAP (V, {ov:.0f}u) at x={a.x1:.0f}: "
+                    f"'{a.path_id}' and '{b.path_id}'"
+                )
+
+    return issues
+
+
 def check_text_overlaps(texts: List[TextBox]) -> List[str]:
     """G5: Check for text-text overlaps."""
     issues = []
@@ -466,6 +509,17 @@ def validate_geometry(svg_file: str) -> bool:
         print("[PASS] G3 Path Through Box: No paths cross through boxes")
     all_issues.extend(through_issues)
 
+    # G4: Signal segment overlaps
+    overlap_issues = check_segment_overlaps(all_segs)
+    if overlap_issues:
+        print(f"[FAIL] G4 Segment Overlaps: {len(overlap_issues)} overlap(s) found")
+        for issue in overlap_issues:
+            print(f"       {issue}")
+        all_pass = False
+    else:
+        print("[PASS] G4 Segment Overlaps: No colinear path overlaps")
+    all_issues.extend(overlap_issues)
+
     # G5: Text overlaps
     text_issues = check_text_overlaps(texts)
     if text_issues:
@@ -478,9 +532,10 @@ def validate_geometry(svg_file: str) -> bool:
     all_issues.extend(text_issues)
 
     # Summary
-    checks = 4
+    checks = 5
     passed = checks - (1 if crossing_issues else 0) - (1 if arrow_issues else 0) \
-             - (1 if through_issues else 0) - (1 if text_issues else 0)
+             - (1 if through_issues else 0) - (1 if overlap_issues else 0) \
+             - (1 if text_issues else 0)
 
     print(f"\n{'-'*60}")
     print(f"GEOMETRIC SUMMARY: {passed}/{checks} checks passed")
@@ -500,6 +555,7 @@ if __name__ == '__main__':
         print("  G1: Signal-path-to-signal-path crossings")
         print("  G2: Arrow endpoints touching box edges")
         print("  G3: Signal paths passing through element boxes")
+        print("  G4: Colinear signal-path overlaps")
         print("  G5: Text-text overlaps")
         sys.exit(1)
 

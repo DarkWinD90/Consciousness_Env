@@ -1,13 +1,39 @@
 #!/usr/bin/env python
 """
-Fix numeral-path collisions in USPTO patent drawings.
-Moves reference numerals away from signal paths to comply with 37 CFR 1.84(p).
+DEPRECATED — DO NOT USE.
+
+This script relies on exact-substring `content.replace()` against raw SVG.
+The substrings include specific attribute orderings and whitespace that
+may not match the current SVG content; in that case the replace silently
+fails and the script still prints "Fixed filepath". It also has no
+backup, no XML validation, and references the old per-figure-100s numeral
+system (106, 108, 110, 120) that was superseded by the unified registry
+(NUMERAL_REGISTRY.md).
+
+For numeral collision fixes, edit the target SVG manually and re-run
+`.claude/skills/patent-drawer/validators/geometric_validator.py` (check G5)
+plus `tools/run_collision_check.py`.
+
+Deprecation rationale: the tooling audit on 2026-04-24 found this script
+unsafe for production filing artifacts, and its hardcoded numerals no
+longer match the unified scheme in NUMERAL_REGISTRY.md.
 """
 
 import os
+import sys
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent / 'patent_drawings'
+
+
+def _abort_deprecated():
+    sys.stderr.write(
+        "ERROR: fix_numeral_collisions.py is deprecated. This tool relies "
+        "on exact-substring replacement and the old per-figure numeral "
+        "scheme. Edit SVGs manually and re-validate.\n"
+    )
+    sys.exit(2)
+
 
 def fix_patent_a_fig1():
     """Fix collisions: 106, 108, 110, 120"""
@@ -239,6 +265,9 @@ def fix_patent_c_fig7():
 
 
 if __name__ == '__main__':
+    _abort_deprecated()
+
+    # Unreachable — preserved for git history reference.
     print("Fixing numeral-path collisions...")
     print("=" * 50)
 
