@@ -900,24 +900,36 @@ systems where stopping is not an option (robotics, prosthetics, space).
 
 ### 10.2 Filing Strategy
 
-**STATUS: PATENT APPLICATIONS IN PREPARATION (NOT YET FILED)**
+**STATUS: PATENT APPLICATIONS PREPARED (AWAITING SIGNATURE + FEES)**
 
 | Patent | Status | Notes |
 |--------|--------|-------|
-| Patent A (Energy Loop) | Not Filed | Specifications drafted, drawings compliance complete (2026-03-16) |
-| Patent B (Self-Observation) | Not Filed | Specifications drafted, drawings compliance complete (2026-03-16) |
-| Patent C (Cognitive Fallback) | Not Filed | Specifications drafted, drawings compliance complete (2026-03-16) |
+| Patent A (Energy Loop) | Prepared; not filed | Specifications drafted; 8 / 8 drawings PASS 37 CFR 1.84 (re-verified 2026-04-24 post-validator-audit) |
+| Patent B (Self-Observation) | Prepared; not filed | Specifications drafted with full numeral coverage in both brief and detailed descriptions; 6 / 6 drawings PASS |
+| Patent C (Cognitive Fallback) | Prepared; not filed | Specifications drafted with full numeral coverage in both brief and detailed descriptions; 7 / 7 drawings PASS |
 
-**Remaining blockers**: Inventor signature on declarations + USPTO filing fees.
-All 21 drawings passed full 37 CFR 1.84 compliance audit on 2026-03-16.
-Filing PDFs generated in `patents/pdfs/` (12 files, 4 per patent).
+**Remaining blockers**: Inventor signature on SB16 + SB15A forms + USPTO
+filing fees ($65 × 3 = $195 for micro-entity provisionals).
+
+**Compliance provenance**. An initial compliance audit on 2026-03-16 marked
+all 21 drawings as passing, but that claim rested on validators that were
+themselves subsequently audited (PR #151) and hardened (PR #153). The
+hardened validators re-verified 21 / 21 PASS on 2026-04-24 with zero
+false-negatives. Current compliance state is captured in
+`docs/post_fix_sweep_2026-04-24.md` and
+`patent_drawings/USPTO_Compliance_Report.md`; validator bug-fix history
+is in `docs/tooling_audit_2026-04-24.md`.
+
+Filing PDFs generated deterministically (reportlab invariant mode) in
+`patents/pdfs/` (12 files, 4 per patent). Byte-identity across runs is
+gated by `.github/workflows/filing-pdfs.yml`.
 
 **Timeline**:
 
 | Step | Timeline | Action |
 |------|----------|--------|
-| ⏳ 1 | TBD | File all three provisional patent applications |
-| ✅ 1b | Complete (2026-03-16) | All 21 patent drawings pass full 37 CFR 1.84 compliance |
+| ⏳ 1 | TBD (awaiting inventor signature + $195 fees) | File all three provisional patent applications |
+| ✅ 1b | Complete (re-verified 2026-04-24 under hardened validators) | All 21 patent drawings PASS full 37 CFR 1.84 compliance |
 | 2 | Month 1-3 (by 2026-04-30) | Validate Phase 8 STDP claims, create git tag history |
 | 3 | Month 3-6 (by 2026-07-30) | Build hardware prototype (Phase 11) for physical reduction to practice |
 | 4 | Month 6-9 (by 2026-10-30) | Document hardware validation results (Claims F11.1-F11.3) |

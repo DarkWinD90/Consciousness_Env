@@ -4,7 +4,8 @@ Maps every 37 CFR 1.84 requirement and MPEP 608.02 guideline to the specific
 skill, validator, or manual check that enforces it in the Consciousness_Env
 patent drawing pipeline.
 
-**Last updated**: 2026-03-12
+**Last updated**: 2026-04-24 (PR #153: validator audit + hardening, 21/21 drawings re-verified PASS)
+**Prior revision**: 2026-03-12 (pre-audit state — some validators flagged as silent-pass; see `docs/tooling_audit_2026-04-24.md` for the delta)
 
 ---
 

@@ -224,8 +224,8 @@ This system exists because a promise was made in conversation. Not just talked a
 
 ---
 
-**Status**: ⏳ Patent applications in preparation — not yet filed
-**Blocker**: Patent drawings not yet fully compliant with 37 CFR 1.84
+**Status** (as of 2026-04-24): Patent applications prepared — awaiting inventor signature + $195 USPTO micro-entity fees
+**Original 2026-02-02 blocker** (resolved): Patent drawings not yet fully compliant with 37 CFR 1.84 — superseded; 21 / 21 drawings PASS the hardened validators as of 2026-04-24
 **Next Gate**: Achieve drawing compliance, then file provisionals
 
 ---
