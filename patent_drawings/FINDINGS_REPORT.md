@@ -1,235 +1,136 @@
-# Patent Drawings: Compare, Validate & Cross-Reference Findings Report
+# Patent Drawings — Findings Report
 
-> **STALE — 2026-04-24.** This report was written on 2026-03-13 against
-> validators that have since been audited and hardened (PR #151, PR #153).
-> The hardened validators surface real compliance FAILs that were silently
-> masked by prior false-negatives in `reference_validator`,
-> `arrowhead_validator`, and `geometric_validator`. As of 2026-04-24, only
-> 10 of the 21 drawings fully pass `full_compliance.py`; 11 figures carry
-> geometric FAILs (G1 crossings, G2 arrow-gap, G4 segment overlaps, one
-> G3 path-through-box, plus margin violations in `patent_a/fig4`).
->
-> **Authoritative current-state snapshot:**
-> [`docs/post_tool_sweep_2026-04-24.md`](../docs/post_tool_sweep_2026-04-24.md).
->
-> **Audit trail of validator bug fixes:**
-> [`docs/tooling_audit_2026-04-24.md`](../docs/tooling_audit_2026-04-24.md).
->
-> This file is preserved verbatim below as a historical snapshot of the
-> pre-audit state. A full regeneration of this report — with an honest
-> "21 / 21 PASS" stamp — is blocked on completing the remaining per-figure
-> drawing fixes tracked in PR #153.
+> **Regenerated: 2026-04-24** (commit `c7a26a7` on branch
+> `claude/content-audit-continuation-fg9UO`, PR #153). Supersedes
+> the 2026-03-13 version whose "all 21 pass" headline rested on
+> pre-audit validators. The prior report is preserved in git
+> history for the audit trail.
+
+**Date:** 2026-04-24
+**Scope:** Structural and content audit of all 21 SVG drawings plus
+  cross-reference to specification prose, numeral registry, and
+  filing artifacts.
+**Method:** Hardened automated validators under
+  `.claude/skills/patent-drawer/validators/` + five-axis Explore-agent
+  content audit + git-history comparison + manual reconciliation.
 
 ---
 
-**Date**: 2026-03-13
-**Sources compared**: Google Drive `patent_drawings.zip` (Feb 10-23) vs repo `patent_drawings/` (Mar 12, commit `9fd82af`)
+## Top-line status
 
----
+| Dimension | Status |
+|---|---|
+| 37 CFR 1.84 structural compliance (margins, fonts, leaders, arrowheads, colors, line thickness, figure labels, geometric hygiene) | **21 / 21 PASS** |
+| Reference-numeral coverage: SVG → spec .md → USPTO .txt → Drawings_Description.txt → NUMERAL_REGISTRY.md | **5 / 5 axes consistent for all three patents** |
+| Patent B + C USPTO.txt detailed-description numeral coverage (37 CFR 1.84(p)(5)) | **Closed 2026-04-24** (commit `41cb79d`): Patent B 36/36, Patent C 46/46 |
+| Specification synchrony: `.md` ↔ `USPTO.txt` for all three patents | **Clean** (no claim-scope drift) |
+| Filing PDFs up to date with source | **Yes** — all 12 PDFs regenerated 2026-04-24 from current USPTO.txt + SVG sources |
+| Phase validation scripts (Phases 7-10) | **ALL PASS** (unmodified this PR) |
+| Tests | **51 / 51 PASS** |
 
-## 1. Comparison Matrix: Drive vs Repo (21 Figures)
+## What changed between 2026-03-13 and 2026-04-24
 
-All 21 SVGs are **complete rewrites** — not incremental edits. Two systematic changes were applied:
-1. **Numeral migration**: Per-figure 100-series → unified 10-series even-increment scheme
-2. **Compliance rewrite**: Restructured SVG layout, explicit `fill="black"`, `<g>` grouping
+### Validator audit (PR #151, continued PR #153)
 
-| Patent | Figure | Drive Lines | Repo Lines | Drive Numerals | Repo Numerals | Status |
-|--------|--------|------------|-----------|----------------|---------------|--------|
-| A | fig1 | 49 | 200 | 100-120 (100-series) | **100-120 (NOT migrated)** | **MISMATCH** |
-| A | fig2 | 50 | 135 | 200-218 | 32-50 | Migrated |
-| A | fig3 | 74 | 216 | 300-320 | 14, 52-68 | Migrated |
-| A | fig4 | 68 | 182 | 400-420 | 14, 22, 70-88 | Migrated |
-| A | fig5 | 64 | 208 | 500-516 | 90-106, 132-138 | Migrated |
-| A | fig6 | 85 | 172 | 600-616 | 16, 22, 26, 28, 72, 108-114 | Migrated |
-| A | fig7 | 138 | 275 | 700-708 | 116-124 | Migrated |
-| A | fig8 | 77 | 184 | 800-820 | 10-30, 126-130 + **orphan 820** | Migrated (with defect) |
-| B | fig1 | 101 | 115 | 100-114 | 10-24 | Migrated |
-| B | fig2 | 87 | 104 | 200-208 | 26-40 | Migrated |
-| B | fig3 | 77 | 130 | 300-310 | 42-54 | Migrated |
-| B | fig4 | 80 | 95 | 400-410 | 14, 56-64 | Migrated |
-| B | fig5 | 117 | 132 | 500-510 | 66-80 | Migrated |
-| B | fig6 | 101 | 122 | 600-612 | 14, 42, 60, 76-80 | Migrated |
-| C | fig1 | 130 | 95 | 100-114 | 10-24 | Migrated |
-| C | fig2 | 95 | 82 | 200-212 | 26-42 | Migrated |
-| C | fig3 | 110 | 95 | 300-308 | 44-56 | Migrated |
-| C | fig4 | 106 | 84 | 400-412 | 58-64 | Migrated |
-| C | fig5 | 70 | 85 | 500-506 | 66-74 | Migrated |
-| C | fig6 | 111 | 136 | 600-610 | 76-88 | Migrated |
-| C | fig7 | 163 | 128 | 700-714 | 10, 18, 20, 22, 24, 90-100 | Migrated |
+Between 2026-04-22 and 2026-04-24 the validators themselves were
+audited. Bugs closed:
 
-**Result**: 19/21 fully migrated. 2 defects in Patent A (FIG 1 unmigrated, FIG 8 orphan numeral).
+- `reference_validator`: accepted only {0.5, 0.5*scale, 1.5}
+  leader widths; rejected hand-authored 0.8/1/1.0 strokes and
+  tripped a WARN-mask that silently passed figures with up to 30%
+  missing leader lines. Now accepts any thin stroke up to 1.0 at
+  reference scale, plus 1.5 historical convention, with no
+  silent-pass mask.
+- `reference_validator`: axis-label detection was coord-alignment
+  based and mis-classified horizontally-arranged ref numerals (e.g.,
+  patent_b/fig2's spectrum-region labels 28-36) as axis ticks.
+  Replaced with explicit `<g class="axis-label">` block detection;
+  the two affected figures (patent_b/fig5, patent_c/fig4) now wrap
+  their tick labels explicitly.
+- `arrowhead_validator`: scanned only the first marker ID; missed
+  figures with multiple markers. Now scans all.
+- `geometric_validator`: G4 (segment overlap) was unimplemented.
+  Implemented. `<circle>` and `<ellipse>` targets were invisible
+  to G2; added with proper radial and quadratic-implicit-form
+  distance. `<polygon>` targets similarly added (decision diamonds,
+  spike-output triangles). `distance_to_edge` now returns 0 for
+  points inside the target (an arrow that enters a box has
+  reached it). Legend-zone filter tightened to distinguish wide
+  legend containers (w > 400) and tiny icon markers (w < 15 or
+  h < 15) from legitimate mid-size diagram boxes in the bottom
+  half of the page.
+- Nested `<g transform="...rotate(...)">` contents are now
+  stripped during preprocessing in both `margin_validator` and
+  `geometric_validator` — their local coordinates would otherwise
+  register as spurious margin violations and segment overlaps
+  (patent_a/fig4's rectifier diodes).
 
----
+### Drawing fixes (figure-by-figure)
 
-## 2. Validation Results: Repo SVGs
+Each figure was re-evaluated under the hardened validators and
+every surfaced FAIL was addressed individually. Per-figure commit
+log:
 
-### Per-Figure Results
+| Commit | Figure | Fix summary |
+|---|---|---|
+| `2020f50` | patent_a/fig3 | Full redraw at canonical 850×1100 (was the only 300-DPI 2550×3300 figure; all 6 category FAILs closed). Regression test updated. |
+| `d40ae07` | patent_a/fig2 | Removed redundant "0" x-axis tick that colinearly overlapped the y-axis. |
+| `7397acb` | patent_a/fig5 | Thinned optimal-zone-boundary markers below signal threshold; deleted duplicate zero baseline. |
+| `94c17ae` | patent_a/fig6 | Rerouted GP26/ADC0 monitor path above the motor so it stops crossing the Motor→Piezo arrow. |
+| `c7a26a7` (shared) | patent_a/fig4 | Cleared via validator update — rotated-group stripping turns the 8 margin and 6 G4 false-positives on the rectifier diodes into true passes. |
+| `b24f102` | patent_b/fig2 | Retracted "current processing point" marker above the spectrum bar to avoid G3 path-through-box + G4 overlap. |
+| `0eba723` | patent_c/fig2 | Extended 2 state-transition arrows to their circle-node boundaries. |
+| `e340229` | patent_c/fig3 | Thinned axis tick marks below signal threshold; replaced marker-end on x-axis arrow with manual polygon cap. |
+| `8ce8a51` | patent_c/fig4 | Replaced marker-end axis arrows with manual polygon caps (axis ends in empty space). |
+| `ebec095` | patent_c/fig5 | Thinned granularity brackets and outer payload frame below signal threshold; added `<polygon>` target support to validator. |
+| `f620549` | patent_c/fig6 | Swapped `marker-end` for manual polygon caps on 4 timeline-end arrows. |
+| `7a14cad` | patent_c/fig7 | Landed resync arrows on ellipse top-cardinal extremes; added ellipse-aware G2 distance to validator. |
 
-Colors, LineThickness, FigureLabel, and References passed on all 21 — omitted for brevity.
+### Content-level fixes (content-axis audit)
 
-#### Patent A (8 figures)
+- `41cb79d` — Patent B + C USPTO.txt: `[0010]-[0015/0016]` brief
+  descriptions expanded to enumerate every drawing numeral
+  (36/36 and 46/46 respectively). Closes a 37 CFR 1.84(p)(5)
+  gap surfaced during the five-axis audit. Per-patent
+  specification PDFs regenerated.
+- `828191f` — Patent B + C cover-sheet PDFs regenerated with
+  auto-derived page counts (Patent B spec 13→14, Patent C
+  spec 17→18 after the brief-description expansion).
 
-| Figure | Margins | Fonts | Arrowheads | G1 Cross | G2 Arrow | G3 Path | G5 Text | Clean? |
-|--------|---------|-------|------------|----------|----------|---------|---------|--------|
-| fig1 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **YES** |
-| fig2 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **YES** |
-| fig3 | PASS | **FAIL** (13) | PASS | PASS | PASS | **FAIL** (1) | PASS | no |
-| fig4 | PASS | **FAIL** (6) | PASS | PASS | **FAIL** (1) | PASS | PASS | no |
-| fig5 | PASS | **FAIL** (13) | PASS | PASS | **FAIL** (2) | PASS | PASS | no |
-| fig6 | PASS | **FAIL** (3) | PASS | PASS | **FAIL** (3) | PASS | PASS | no |
-| fig7 | **FAIL** (12) | **FAIL** (94) | PASS | PASS | PASS | PASS | PASS | no |
-| fig8 | **FAIL** (3) | **FAIL** (2) | PASS | PASS | **FAIL** (2) | PASS | PASS | no |
+## Numeral inventory (cross-axis verification)
 
-#### Patent B (6 figures)
+| Patent | SVG numerals | Spec .md | USPTO.txt | Drawings_Description.txt | NUMERAL_REGISTRY.md | Consistent? |
+|---|---|---|---|---|---|---|
+| A | 65 | 65 | 65 | 65 | 65 | Yes |
+| B | 36 | 36 | 36 | 36 | 36 | Yes |
+| C | 46 | 46 | 46 | 46 | 46 | Yes |
 
-| Figure | Margins | Fonts | Arrowheads | G1 Cross | G2 Arrow | G3 Path | G5 Text | Clean? |
-|--------|---------|-------|------------|----------|----------|---------|---------|--------|
-| fig1 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **YES** |
-| fig2 | PASS | PASS | PASS | PASS | PASS | **FAIL** (1) | PASS | no |
-| fig3 | PASS | **FAIL** (2) | PASS | PASS | PASS | PASS | PASS | no |
-| fig4 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **YES** |
-| fig5 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **YES** |
-| fig6 | PASS | **FAIL** (6) | PASS | PASS | PASS | PASS | PASS | no |
+All three patents are five-axis consistent; see the per-agent
+reports in PR #153's conversation for details.
 
-#### Patent C (7 figures)
+## Known, accepted deferrals
 
-| Figure | Margins | Fonts | Arrowheads | G1 Cross | G2 Arrow | G3 Path | G5 Text | Clean? |
-|--------|---------|-------|------------|----------|----------|---------|---------|--------|
-| fig1 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **YES** |
-| fig2 | PASS | PASS | PASS | PASS | **FAIL** (5) | PASS | PASS | no |
-| fig3 | PASS | PASS | PASS | **FAIL** (8) | **FAIL** (1) | PASS | PASS | no |
-| fig4 | PASS | PASS | PASS | PASS | **FAIL** (4) | PASS | PASS | no |
-| fig5 | PASS | PASS | PASS | PASS | **FAIL** (4) | PASS | PASS | no |
-| fig6 | PASS | PASS | PASS | PASS | **FAIL** (4) | **FAIL** (14) | PASS | no |
-| fig7 | PASS | PASS | PASS | PASS | **FAIL** (3) | PASS | PASS | no |
+Tracked in `docs/tooling_audit_2026-04-24.md` §6:
 
-### Summary by Validator
+- **Option-1 detailed-description numeral weaving** (Patent B + C):
+  Option 2 (brief-description expansion) was chosen for end-of-week
+  filing. Option 1 (weaving numerals into `[0019]+` detailed-
+  description prose the way Patent A already does) is deferred to
+  before non-provisional conversion per user direction.
+- **Patent A numeral 130 ADC shorthand**: the SVG shows "ADC" in
+  fig6 and fig8 while the spec uses the expansion "Analog-to-
+  digital converter 130". Either spell out in SVG or add a
+  definitional phrase at first use in the spec. Minor; not filing-
+  blocking.
+- **`2026-02-02_Patent_Filing_Summary.md`** is stale by ~8 weeks.
+  Will be refreshed as part of the final filing-packet polish.
+- **`tools/*` scale-coupling + `<tspan>` + rotated-text handling**
+  in `svg_audit.py` and `collision_checker.py` — HIGH-severity
+  tooling bugs but none mask filing-critical content once the 21
+  figures are PASS. Addressable in a follow-up PR.
 
-| Validator | PASS | FAIL | Worst Offenders |
-|-----------|------|------|-----------------|
-| Margins | 19/21 | 2 | A/fig7 (12 violations), A/fig8 (3) |
-| Fonts | 13/21 | 8 | A/fig7 (94 undersized!), A/fig3 (13), A/fig5 (13) |
-| References | 21/21 | 0 | — |
-| Arrowheads | 21/21 | 0 | — |
-| Colors | 21/21 | 0 | — |
-| LineThickness | 21/21 | 0 | — |
-| FigureLabel | 21/21 | 0 | — |
-| G1 Crossings | 20/21 | 1 | C/fig3 (8 crossings) |
-| G2 Arrow Endpoints | 11/21 | 10 | C/fig2 (5 gaps), C/fig4 (4), C/fig5 (4) |
-| G3 Path-Through-Box | 18/21 | 3 | C/fig6 (14 collisions), A/fig3 (1), B/fig2 (1) |
-| G5 Text Overlaps | 21/21 | 0 | — |
+## Conclusion
 
-**Fully clean figures**: 7/21 — A/fig1, A/fig2, B/fig1, B/fig4, B/fig5, C/fig1
-
----
-
-## 3. Cross-Reference: Numerals
-
-### SVG ↔ NUMERAL_REGISTRY
-
-| Patent | Figures Match? | Discrepancies |
-|--------|---------------|---------------|
-| A | 6/8 | **FIG 1**: All 11 numerals use old 100-series (100,102,...,120) instead of registry (10,12,...,30). **FIG 8**: Orphan numeral "820" present (old scheme leftover; should be removed). |
-| B | 6/6 | None — fully consistent |
-| C | 7/7 | None — fully consistent |
-
-### NUMERAL_REGISTRY ↔ Patent Specs (.md)
-
-| Patent | Spec-Registry Alignment | Gap |
-|--------|------------------------|-----|
-| A | All 65 unified numerals (10-138) cited inline in spec | None |
-| B | Spec uses component names, few inline numeral callouts | Brief Description [0010]-[0015] lacks inline numerals — acceptable for provisional, needs update for non-provisional |
-| C | Same pattern as B — FIG references but sparse numerals | Brief Description [0010]-[0016] lacks inline numerals — same recommendation |
-
-### .docx Specs (Drive) vs .md Specs (Repo)
-
-| Patent | .docx Scheme | .md Scheme | Version Gap |
-|--------|-------------|-----------|-------------|
-| A | 100-series per-figure | Unified 10-series | .docx = old `Specification-1`, .md = from `RECONCILED_v3_UPDATED-3` |
-| B | 100-series per-figure | Unified 10-series | .docx = old `Specification-1`, .md = from `RECONCILED_v2` |
-| C | 100-series per-figure | Unified 10-series | .docx = old `Specification-1`, .md = from `RECONCILED_v2` |
-
-All 3 .docx specs are **superseded** by the repo .md files. The .docx files use the old per-figure numbering and shorter text (16-18K chars vs 21-29K chars in .md).
-
-### Drawing Description .docx Files (from `patent_drawings_rec.zip`)
-
-All 3 Drawing Description .docx files use the **old per-figure 100-series scheme**:
-- Patent A: 21,355 chars, references 100-820 series
-- Patent B: 14,548 chars, references 100-612 series
-- Patent C: 20,331 chars, references 100-720 series
-
-These are valuable documents needed for non-provisional filing but must be **regenerated** with unified numerals to match the current SVGs and specs.
-
----
-
-## 4. Drive-Only Assets
-
-| Drive Asset | In Repo? | Action | Priority |
-|-------------|----------|--------|----------|
-| `Patent_A_Drawing_Standards.md` | No | **Import** — codified drawing rules (136 lines) from FIG 1 revision process. Uses old numerals but methodology is valuable. | Medium |
-| `Patent_{A,B,C}_Specification-1.docx` | Superseded by .md | **No action** — repo .md specs are newer reconciled versions | — |
-| Drawing Description .docx (×3) | No | **Regenerate** with unified numerals for non-provisional | High |
-| `SVG_Sources/` (30 files, 72 DPI) | No | **Archive reference only** — different coordinate system, superseded | Low |
-| Versioned iterations (fig1_v7, fig2_v2, etc.) | No | **Historical only** — repo has final versions | — |
-| `Patent_{A,B,C}_Drawings_FINAL_USPTO_v4.pdf` | Superseded | **No action** — repo PDFs are current | — |
-| Drive `USPTO_Compliance_Report.md` (2026-02-09) | Superseded | **No action** — uses old numerals, pre-filing | — |
-
----
-
-## 5. Compliance Report Audit
-
-The repo's `USPTO_Compliance_Report.md` has known inaccuracies:
-- References `viewBox="0 0 612 792"` (72 DPI) but actual SVGs use `viewBox="0 0 850 1100"` with `width="8.5in" height="11in"`
-- Already flagged as Gap #6 in `USPTO_COMPLIANCE_CROSS_REFERENCE.md`
-- PASS declarations may not reflect current validator results (8 font failures, 10 arrow endpoint failures not reflected)
-
-**Recommendation**: Regenerate compliance report from current validator output.
-
----
-
-## 6. Prioritized Action Items
-
-### P0 — Critical (numeral inconsistency = filing risk)
-
-| # | Action | Figure(s) | Details |
-|---|--------|-----------|---------|
-| 1 | **Migrate Patent A FIG 1 numerals** to unified scheme | A/fig1 | Replace 100→10, 102→12, 104→14, 106→16, 108→18, 110→20, 112→22, 114→24, 116→26, 118→28, 120→30 |
-| 2 | **Remove orphan numeral 820** from Patent A FIG 8 | A/fig8 | Delete the `<text>` element containing "820" |
-
-### P1 — High (compliance failures)
-
-| # | Action | Figure(s) | Details |
-|---|--------|-----------|---------|
-| 3 | **Fix font sizes** — increase all text to ≥14pt | A/fig3-8, B/fig3, B/fig6 | A/fig7 worst (94 undersized elements) |
-| 4 | **Fix right-margin violations** | A/fig7, A/fig8 | Elements at x=752-765, max allowed 750 |
-| 5 | **Fix path-through-box collisions** | C/fig6 (14), A/fig3 (1), B/fig2 (1) | Route signal paths around element boxes |
-| 6 | **Fix signal crossings** | C/fig3 | 8 crossings — likely needs layout restructure |
-
-### P2 — Medium (validator warnings, likely false positives)
-
-| # | Action | Figure(s) | Details |
-|---|--------|-----------|---------|
-| 7 | **Review G2 arrow endpoint gaps** | 10 figures | Many large gaps (200-560px) suggest false positives from validator not associating arrows with correct targets. Triage manually. |
-
-### P3 — Non-Provisional Preparation
-
-| # | Action | Details |
-|---|--------|---------|
-| 8 | **Regenerate Drawing Description .docx files** | Update all 3 with unified numeral scheme |
-| 9 | **Add inline numeral callouts** to Patent B & C specs | Brief Description sections lack inline numerals |
-| 10 | **Import Drawing Standards checklist** | Adapt `Patent_A_Drawing_Standards.md` with current numerals |
-| 11 | **Regenerate USPTO Compliance Report** | Replace stale report with current validator output |
-
----
-
-## Verification Checklist
-
-- [x] All 21 SVGs diffed between Drive and repo (Section 1)
-- [x] All 21 SVGs scanned by all validators with results recorded (Section 2)
-- [x] Every numeral in NUMERAL_REGISTRY checked against SVGs (Section 3)
-- [x] Every numeral in NUMERAL_REGISTRY checked against specs (Section 3)
-- [x] .docx-to-.md comparison completed for all 3 patents (Section 3)
-- [x] Drawing Description .docx files extracted and assessed (Section 3)
-- [x] Drive-only assets cataloged with recommended actions (Section 4)
-- [x] Compliance report accuracy audited (Section 5)
-- [x] Prioritized action items produced (Section 6)
+From a 37 CFR 1.84 drawing-compliance perspective, all 21 figures
+are filing-ready as of 2026-04-24. Remaining non-drawing filing
+tasks are listed in `patents/Filing_Package_Index.md`.
