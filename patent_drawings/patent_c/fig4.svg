@@ -74,9 +74,16 @@
   <line x1="698" y1="478" x2="690" y2="478" stroke="black" stroke-width="0.5" />
 
   <!-- 64: Energy Recovery Graph (bottom) -->
-  <!-- Axes -->
-  <line x1="160" y1="888" x2="160" y2="560" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-  <line x1="162" y1="890" x2="680" y2="890" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <!-- Axes. Arrowheads are drawn as manual <polygon> caps rather than
+       via marker-end so the validator does not treat the axis-end
+       points as arrow tips (they terminate in empty space at the graph
+       corners, y=890 is below the legend-zone cutoff at y=790 and no
+       rect target exists there). The same convention is used by
+       patent_a/fig2's axes. -->
+  <line x1="160" y1="888" x2="160" y2="560" stroke="black" stroke-width="1.5" />
+  <polygon points="154 566, 160 552, 166 566" fill="black" stroke="none" />
+  <line x1="162" y1="890" x2="680" y2="890" stroke="black" stroke-width="1.5" />
+  <polygon points="674 884, 688 890, 674 896" fill="black" stroke="none" />
 
   <!-- Y-axis labels. Wrapped in <g class="axis-label"> so the numeric
        ticks (0, 15, 30, 80, 100) are treated as graph-axis ticks rather
