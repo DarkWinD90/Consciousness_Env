@@ -114,11 +114,20 @@
     <!-- GP26/ADC0 — Piezo monitoring connection to MCU (108)   -->
     <!-- Spec [0037]: piezo 22 → MCU 108 via GP26 analog input  -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- New MCU right-side anchor for GP26/ADC0 input -->
-    <rect x="500" y="428" width="10" height="12" fill="none" stroke="black" stroke-width="1" />
-    <!-- Arrow: Piezo right electrode → right → up → MCU right side (GP26/ADC0) -->
-    <path d="M 650 490 L 710 490 L 710 434 L 510 434" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <text x="612" y="428" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">GP26/ADC0</text>
+    <!-- MCU right-side anchor for GP26/ADC0 input, repositioned to
+         y=310 (above the PWM row at y=380) so the return path can
+         clear both the motor box (y=350-410) and the Motor->Piezo
+         arrow (x=620, y=410-474) without crossing either. Prior
+         anchor at y=428 forced the return path through y=434 which
+         bisected the Motor->Piezo arrow. -->
+    <rect x="500" y="310" width="10" height="12" fill="none" stroke="black" stroke-width="1" />
+    <!-- Arrow: Piezo right electrode -> right -> up (right of motor) ->
+         left across top of motor -> MCU right side (GP26/ADC0 anchor).
+         Exits piezo at the bottom of its right electrode (y=506) so
+         the first horizontal leg is below the motor->piezo arrow's
+         termination point. -->
+    <path d="M 650 506 L 710 506 L 710 316 L 510 316" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <text x="660" y="330" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">GP26/ADC0</text>
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- AC SIGNAL (72) — from piezo to energy path             -->
