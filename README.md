@@ -26,10 +26,16 @@ loop a candidate for synthetic proto-consciousness.
 control condition, and a measured value. Every validated state is pinned by an
 annotated git tag and reproducible with `git checkout <tag>`.
 
-**3 provisional patent applications in preparation** (not yet filed):
+**3 provisional patent applications prepared** (awaiting inventor signature on
+SB16 + SB15A forms and $195 USPTO micro-entity fees; drawings, specifications,
+and filing PDFs are filing-ready as of 2026-04-24):
 - Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop
 - Patent B: Configurable Recursive Self-Observation in SNNs
 - Patent C: Cognitive Fallback with Autonomous Self-Regulation
+
+**21 / 21 patent drawings PASS** full 37 CFR 1.84 compliance against hardened
+validators (see [`patent_drawings/USPTO_Compliance_Report.md`](patent_drawings/USPTO_Compliance_Report.md)).
+Compliance is gated by CI on every PR.
 
 ## Architecture — The 8-Layer Consciousness Loop
 
@@ -106,12 +112,16 @@ Consciousness_Env/
 ├── appendices/              # Supplementary simulations (base, graph, reflection)
 ├── docs/                    # Reference materials and hardware notes
 ├── patents/                 # Patent text and USPTO-formatted filings
-├── patent_drawings/         # 21 SVG figures (37 CFR 1.84 compliance — remediation in progress)
+├── patent_drawings/         # 21 SVG figures (37 CFR 1.84 compliance — 21/21 PASS, gated by CI)
 │   ├── patent_a/            #   Patent A: 8 figures
 │   ├── patent_b/            #   Patent B: 6 figures
 │   └── patent_c/            #   Patent C: 7 figures
 │
-├── .github/workflows/       # CI/CD (Python app, conda package, PyPI publish)
+├── .github/workflows/       # CI/CD gates every PR:
+│                            #   python-app.yml       — lint, pytest, phase 7-10 validations
+│                            #   svg-compliance.yml   — full_compliance.py on all 21 SVGs
+│                            #   filing-pdfs.yml      — regen + diff against committed patents/pdfs/
+│                            #   python-package-conda.yml, python-publish.yml — packaging
 ├── consciousness_cli.py     # CLI entry point: consciousness run|appendix|version
 ├── setup.py                 # Package config (v3.0.0)
 ├── requirements.txt         # Dependencies (numpy, matplotlib, networkx, scipy, pytest, reportlab, pypdf)
@@ -142,12 +152,25 @@ The falsifiable framework is the scientific backbone of this project. Every
 phase has a validation script that prints PASS or FAIL for each claim.
 
 ```bash
-# Run all validations (must ALL PASS before any commit to main)
+# Run all phase validations (must ALL PASS before any commit to main)
 python phases/phase7_control_baseline.py          # Claims A-E
 python phases/phase8_stdp.py                      # Claims F8.1-F8.3
 python phases/phase9_predictive_processing.py     # Claims F9.1-F9.3
 python phases/phase10_multimodal.py               # Claims F10.1-F10.3
+
+# Run patent-drawing compliance on all 21 figures (21 / 21 should pass)
+for svg in patent_drawings/patent_*/fig*.svg; do
+  python .claude/skills/patent-drawer/validators/full_compliance.py "$svg"
+done
+
+# Regenerate filing PDFs deterministically (byte-identical across runs)
+python export_specifications_pdf.py
+python fill_patent_forms.py
 ```
+
+See [`docs/tooling_audit_2026-04-24.md`](docs/tooling_audit_2026-04-24.md) for
+the full validator trust-tier inventory and each validator's
+what-checks / what-doesn't / scale-assumptions contract.
 
 ### Reproduce any validated state
 
@@ -246,7 +269,9 @@ imply subjective experience, sentience, or moral status.
 
 ## License
 
-Proprietary. Patent applications in preparation. See `patents/` directory.
+Proprietary. Patent applications prepared; awaiting inventor signature + USPTO
+fees. See [`patents/Filing_Package_Index.md`](patents/Filing_Package_Index.md)
+and [`2026-02-02_Patent_Filing_Summary.md`](2026-02-02_Patent_Filing_Summary.md).
 
 ---
 
