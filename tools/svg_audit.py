@@ -105,7 +105,11 @@ def _collect_single(elem, rects, lines, paths, texts, dx, dy):
         y = float(elem.get('y', 0)) + dy
         anchor = elem.get('text-anchor', 'start')
         font_size = float(elem.get('font-size', 14))
-        content = elem.text or ''
+        # Collect text from both the element body and any <tspan> children.
+        # itertext() walks the subtree in document order, yielding both
+        # element.text and each child's text+tail, so nested tspan content
+        # is included. Fall back to '' when the element is empty.
+        content = ' '.join(t for t in elem.itertext() if t and t.strip())
         # Estimate text bounding box
         char_width = font_size * 0.6  # approximate
         text_width = len(content) * char_width
@@ -188,10 +192,31 @@ def bbox_overlaps_line(text, line):
     return False
 
 
+def _viewbox_scale(root) -> float:
+    """Return canvas-width / 850 from the <svg viewBox> attribute.
+
+    Used to scale the hardcoded 850x1100 reference thresholds
+    (margins, etc.) for larger canvases such as the historical
+    2550x3300 (scale=3.0). Defaults to 1.0 if viewBox is absent or
+    unparseable.
+    """
+    vb = root.get('viewBox', '')
+    if not vb:
+        return 1.0
+    parts = re.split(r'[\s,]+', vb.strip())
+    if len(parts) < 3:
+        return 1.0
+    try:
+        return float(parts[2]) / 850.0
+    except ValueError:
+        return 1.0
+
+
 def audit_figure(filepath):
     """Run full audit and return structured report."""
     root = parse_svg(filepath)
     rects, lines, paths, texts = get_all_elements(root)
+    scale = _viewbox_scale(root)
 
     # Separate solid boxes from dashed boundaries
     boxes = [r for r in rects if not r['stroke_dasharray'] and r['w'] > 20]
@@ -523,13 +548,19 @@ def audit_figure(filepath):
     # === SECTION 4: MARGIN CHECK ===
     report.append("")
     report.append(f"{'─'*70}")
-    report.append("MARGIN COMPLIANCE (left≥100, right≤750, top≥100, bottom≤1050)")
+    # Scale-aware margin thresholds. Reference values are the 850x1100
+    # canvas USPTO-compliant margins (left 1", right 5/8", top 1",
+    # bottom 3/8"); multiply by ``scale`` (viewBox_width / 850) to
+    # support larger canvases.
+    MARGIN_LEFT = 100 * scale
+    MARGIN_RIGHT = 750 * scale
+    MARGIN_TOP = 100 * scale
+    MARGIN_BOTTOM = 1050 * scale
+    report.append(
+        f"MARGIN COMPLIANCE (left>={MARGIN_LEFT:.0f}, right<={MARGIN_RIGHT:.0f}, "
+        f"top>={MARGIN_TOP:.0f}, bottom<={MARGIN_BOTTOM:.0f}; scale={scale:.2f}x)"
+    )
     report.append(f"{'─'*70}")
-
-    MARGIN_LEFT = 100
-    MARGIN_RIGHT = 750
-    MARGIN_TOP = 100  # absolute, including translate
-    MARGIN_BOTTOM = 1050
 
     for num in numerals:
         bx = num['bbox_x']

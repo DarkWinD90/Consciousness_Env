@@ -1,0 +1,79 @@
+# Gate every PR on patent-drawing compliance.
+#
+# Runs `.claude/skills/patent-drawer/validators/full_compliance.py` on
+# all 21 SVG drawings under `patent_drawings/patent_*/fig*.svg` and
+# fails the build if any figure reports a `[FAIL]` line or if the total
+# "READY FOR USPTO SUBMISSION" count is not exactly 21.
+#
+# This locks in the 21/21 PASS state established on 2026-04-24
+# (PR #153). See `docs/tooling_audit_2026-04-24.md` for the trust-tier
+# inventory of the validators this job exercises.
+
+name: SVG compliance
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'patent_drawings/**'
+      - '.claude/skills/patent-drawer/**'
+      - '.github/workflows/svg-compliance.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  full-compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      # The validators import only stdlib (re, math, pathlib, etc.),
+      # so no pip install is required. If a future validator needs
+      # numpy/scipy, add the install step here.
+
+      - name: Run full_compliance.py on all 21 SVGs
+        run: |
+          set -o pipefail
+          SCRIPT=.claude/skills/patent-drawer/validators/full_compliance.py
+          FAIL_COUNT=0
+          PASS_COUNT=0
+          for svg in patent_drawings/patent_a/*.svg \
+                     patent_drawings/patent_b/*.svg \
+                     patent_drawings/patent_c/*.svg; do
+            if python "$SCRIPT" "$svg" > /tmp/report.txt 2>&1; then
+              PASS_COUNT=$((PASS_COUNT + 1))
+            else
+              FAIL_COUNT=$((FAIL_COUNT + 1))
+              echo "::error file=$svg::SVG compliance FAIL"
+              grep -E '^\[FAIL\]' /tmp/report.txt | sed 's/^/  /'
+            fi
+          done
+          echo ""
+          echo "Results: $PASS_COUNT PASS, $FAIL_COUNT FAIL"
+          if [ "$PASS_COUNT" -ne 21 ]; then
+            echo "::error::Expected 21 / 21 PASS, got $PASS_COUNT / 21"
+            exit 1
+          fi
+
+      - name: "Sanity check: every figure reports READY FOR USPTO SUBMISSION"
+        run: |
+          SCRIPT=.claude/skills/patent-drawer/validators/full_compliance.py
+          READY=$(for svg in patent_drawings/patent_a/*.svg \
+                             patent_drawings/patent_b/*.svg \
+                             patent_drawings/patent_c/*.svg; do
+            python "$SCRIPT" "$svg" 2>&1 | grep -q 'READY FOR USPTO SUBMISSION' \
+              && echo ok || echo miss
+          done)
+          READY_COUNT=$(echo "$READY" | grep -c ok)
+          if [ "$READY_COUNT" -ne 21 ]; then
+            echo "::error::Expected 21 READY figures, got $READY_COUNT"
+            exit 1
+          fi

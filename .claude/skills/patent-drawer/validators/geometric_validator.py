@@ -1,39 +1,101 @@
 #!/usr/bin/env python3
 """Geometric collision validator for USPTO patent drawing SVGs.
 
-Checks for issues that XML-only validators miss:
-  G1: Signal-path-to-signal-path crossings
-  G2: Arrow endpoints not touching target box edges
-  G3: Signal paths passing through element boxes
-  G4: Overlapping signal path segments
-  G5: Text-text overlaps
+**What it checks** (37 CFR 1.84(l) + 1.84(p)(1) hygiene):
 
-These are the issues that repeatedly caused rejection-grade defects
-in patent drawings despite passing structural compliance checks.
+- **G1 Signal-path-to-signal-path crossings**: Any two segments
+  belonging to different path IDs that intersect at interior points.
+  Segments with stroke-width < 1.0 at reference scale are treated as
+  leader/decorative lines and skipped.
+- **G2 Arrow endpoint reaches target**: Every segment with
+  ``marker-end="url(#ah)"`` must terminate within 1.0 reference unit
+  of an element boundary (rect edge, circle circumference, ellipse
+  implicit form, or polygon bounding-box edge). Arrow tips INSIDE a
+  target count as reached (distance=0).
+- **G3 Signal path through element box**: A segment that ENTERS and
+  EXITS a rect (i.e., passes through without terminating inside) is
+  flagged. Arrows that terminate inside a box are allowed via G2.
+- **G4 Colinear segment overlaps**: Two segments from different path
+  IDs sharing a colinear overlap > 1 unit are flagged.
+- **G5 Text overlaps**: Approximate AA-bbox overlap between any two
+  text elements, including rotated text and ``<tspan>``-wrapped
+  content. Rotated-text bbox is exact at 0°/±90°/180° (the rotations
+  used in the current figures for Y-axis titles) and a conservative
+  over-approximation otherwise.
+
+**Scale assumptions.**
+Every magic number is derived from ``detect_scale(content)`` which
+reads the ``<svg viewBox>`` and returns width/850. At 850x1100
+scale=1.0; at 2550x3300 scale=3.0; parse_rects thresholds, the
+min circle radius for target candidates (12), the min polygon
+dimension (18), and the max-edge (800) all multiply by scale.
+
+**What it does NOT check.**
+- Affine composition of nested ``<g transform="...rotate(...)">``
+  groups. Those subtrees are stripped entirely via
+  ``strip_rotated_groups`` before parsing — their local coords would
+  otherwise register as literal segments at x=-7..7 (rectifier
+  diodes in patent_a/fig4 are the canonical case).
+- ``<path>`` curves and arcs — only line-like segments from path
+  ``d`` commands are extracted; Bezier control points are treated
+  as straight-line endpoints.
+- 3D or SVG filters / clip-paths / masks.
+- Text anti-aliasing artifacts; the char-width approximation is
+  ``font_size * 0.6``.
+- OBB (oriented bounding box) overlap for rotated text — the AA
+  bbox is used, which can over-report overlap at large rotation
+  angles.
 """
 
+import math
 import re
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List, Tuple, Optional
 
 
 @dataclass
 class Rect:
-    """A rectangle (element box) with its bounding coordinates."""
+    """An element box used as an arrow-target candidate.
+
+    ``kind`` distinguishes three shape families:
+    - "rect": axis-aligned rectangle defined by x, y, w, h.
+    - "circle": true circle inscribed in the w x h bounding box
+      (w == h required); center = (x + w/2, y + h/2), r = w/2.
+    - "ellipse": ellipse with semi-axes rx = w/2, ry = h/2. Distance
+      to boundary uses the quadratic implicit form rather than a
+      circle approximation so elongated nodes (e.g., patent_c/fig7's
+      BUF/SNP pills at rx=15, ry=25) report accurate gaps.
+    """
     x: float
     y: float
     w: float
     h: float
     label: str = ""
+    kind: str = "rect"  # "rect" | "circle" | "ellipse"
 
     @property
     def right(self): return self.x + self.w
     @property
     def bottom(self): return self.y + self.h
 
+    @property
+    def cx(self): return self.x + self.w / 2
+    @property
+    def cy(self): return self.y + self.h / 2
+    @property
+    def r(self): return self.w / 2  # only meaningful for circles
+    @property
+    def rx(self): return self.w / 2  # only meaningful for ellipses
+    @property
+    def ry(self): return self.h / 2  # only meaningful for ellipses
+
     def contains_point(self, px, py):
+        if self.kind == "circle":
+            return math.hypot(px - self.cx, py - self.cy) < self.r
+        if self.kind == "ellipse" and self.rx > 0 and self.ry > 0:
+            return ((px - self.cx) / self.rx) ** 2 + ((py - self.cy) / self.ry) ** 2 < 1.0
         return self.x < px < self.right and self.y < py < self.bottom
 
     def on_edge(self, px, py, tolerance=1.0):
@@ -43,6 +105,56 @@ class Rect:
         on_top = abs(py - self.y) <= tolerance and self.x <= px <= self.right
         on_bottom = abs(py - self.bottom) <= tolerance and self.x <= px <= self.right
         return on_left or on_right or on_top or on_bottom
+
+    def distance_to_edge(self, px, py):
+        """Shortest distance from (px, py) to the boundary of this element.
+
+        If the point lies inside the element, distance is 0. An arrow
+        whose tip enters a target box has semantically reached the
+        target; reporting a non-zero "gap" for a tip at the center of
+        a rect would be a false positive (commonly seen with the
+        10x10 axis-endpoint anchor rects in the Patent C figures).
+
+        For rectangles outside the box, returns the minimum over the
+        four edges, considering only edges whose perpendicular
+        projection from the point lands on the edge. Returns infinity
+        if the point's projection falls outside all four edge spans.
+
+        For circles, returns ``abs(dist_to_center - r)`` when outside
+        or touching, and 0 when strictly inside.
+
+        For ellipses, evaluates the implicit quadratic form
+        ``F = ((px-cx)/rx)^2 + ((py-cy)/ry)^2``. F <= 1 means the
+        point is inside (distance 0). Otherwise distance is
+        approximated as ``(sqrt(F) - 1) * min(rx, ry)`` — exact at
+        the cardinal extremes (where arrow tips normally land) and
+        slightly over-reports along diagonals. Accurate to within
+        the 1.0u compliance tolerance.
+        """
+        if self.kind == "circle":
+            dx = px - self.cx
+            dy = py - self.cy
+            dist_center = math.hypot(dx, dy)
+            if dist_center <= self.r:
+                return 0.0
+            return dist_center - self.r
+        if self.kind == "ellipse":
+            if self.rx <= 0 or self.ry <= 0:
+                return float("inf")
+            f = ((px - self.cx) / self.rx) ** 2 + ((py - self.cy) / self.ry) ** 2
+            if f <= 1.0:
+                return 0.0
+            return (math.sqrt(f) - 1.0) * min(self.rx, self.ry)
+        if self.contains_point(px, py):
+            return 0.0
+        distances = []
+        if self.x <= px <= self.right:
+            distances.append(abs(py - self.y))
+            distances.append(abs(py - self.bottom))
+        if self.y <= py <= self.bottom:
+            distances.append(abs(px - self.x))
+            distances.append(abs(px - self.right))
+        return min(distances) if distances else float("inf")
 
 
 @dataclass
@@ -83,12 +195,69 @@ class TextBox:
     content: str
 
 
+_REFERENCE_VIEWBOX_WIDTH = 850.0
+"""Reference canvas width used to parameterize size thresholds.
+
+All hardcoded constants in this module (800-unit max rect edge, 790-unit
+legend-zone cutoff, 400/40/15-unit legend-size thresholds, 12-unit min
+target-circle radius, 18-unit min target-polygon dimension) were sized
+for a canvas with ``viewBox="0 0 850 1100"``. At other canvas scales
+they are multiplied by ``detect_scale(content)`` so the thresholds track
+the drawing size proportionally.
+"""
+
+
+def detect_scale(content: str) -> float:
+    """Return the canvas scale factor relative to the 850x1100 reference.
+
+    Reads the outer ``<svg viewBox="0 0 W H">`` and returns W / 850. For
+    a standard 850x1100 SVG this is 1.0; for the historical 300-DPI
+    2550x3300 layout it is 3.0. Any size-derived threshold in the module
+    multiplies its reference value by this factor.
+    """
+    m = re.search(r'viewBox="[\s]*[-\d.]+[\s,]+[-\d.]+[\s,]+([\d.]+)[\s,]+[\d.]+"', content)
+    if not m:
+        return 1.0
+    try:
+        return float(m.group(1)) / _REFERENCE_VIEWBOX_WIDTH
+    except ValueError:
+        return 1.0
+
+
 def detect_transform_offset(content: str) -> Tuple[float, float]:
     """Detect the top-level <g transform="translate(x, y)"> offset."""
     m = re.search(r'<g\s+transform="translate\(([\d.]+)[,\s]+([\d.]+)\)"', content)
     if m:
         return float(m.group(1)), float(m.group(2))
     return 0.0, 0.0
+
+
+def strip_rotated_groups(content: str) -> str:
+    """Remove the contents of nested ``<g>`` groups whose transform
+    includes a ``rotate(...)`` component.
+
+    Rotated subtree contents use local coordinates that are not
+    directly comparable to canvas coordinates; composing the full
+    affine transform properly would require matrix math which this
+    validator deliberately does not implement. Instead we accept
+    that rotated subtree contents (typically small decorative
+    symbols like diode triangles, axis-label text, rectifier
+    symbols) are not evaluated for geometric collisions, and remove
+    them from the input stream entirely.
+
+    Handles single-level nesting only — if a rotated group contains
+    further `<g>` groups they are stripped with the parent. The
+    existing patent figures do not nest beyond one level inside a
+    rotated group.
+    """
+    if 'rotate(' not in content:
+        return content
+    # Non-greedy match of a <g ... transform="...rotate...">...</g> block
+    pattern = re.compile(
+        r'<g\s+[^>]*transform="[^"]*rotate\([^)]*\)[^"]*"[^>]*>.*?</g>',
+        re.DOTALL,
+    )
+    return pattern.sub('', content)
 
 
 def _attr(tag_str: str, name: str) -> Optional[str]:
@@ -108,9 +277,47 @@ def _attr_f(tag_str: str, name: str, default: float = 0.0) -> float:
         return default
 
 
-def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
-    """Extract all rect elements (excluding background and legend)."""
+def parse_rects(content: str, dx: float = 0, dy: float = 0, scale: float = 1.0) -> List[Rect]:
+    """Extract all element boxes. Converts both ``<rect>`` and
+    ``<circle>`` elements to bounding ``Rect`` instances.
+
+    State-diagram figures (e.g., patent_c/fig2) draw their nodes as
+    ``<circle>`` elements, so arrows landing on those nodes would be
+    reported as G2 "gap" failures if only rects were considered. A
+    circle is represented here as the axis-aligned bounding box of
+    its circumscribed square (x = cx-r, y = cy-r, w = h = 2r), which
+    lets ``check_arrow_endpoints`` see the circle boundary as four
+    linear edges. The approximation is slightly permissive near the
+    diagonals (the corner of the bbox lies ~0.41r outside the actual
+    circle), but in practice arrows point at the cardinal directions
+    of a node, not its 45-degree corners, so this is accurate enough
+    for compliance checking.
+
+    Ellipses are treated like circles: ``<ellipse cx cy rx ry>`` maps
+    to Rect(cx-rx, cy-ry, 2*rx, 2*ry).
+
+    Filters:
+    - ``w == 0`` or ``h == 0`` are skipped (degenerate).
+    - ``w > 800 or h > 800`` skipped — catches the full-page background
+      ``<rect width="100%" height="100%">`` (which parses to very
+      large w/h after integer coercion) and any unusually large
+      container.
+    - ``y > 790`` in reference-scale units is skipped to exclude
+      legend boxes at the bottom of the page from being treated as
+      arrow targets. This is scale-coupled — see
+      docs/tooling_audit_2026-04-24.md §3 for the remaining HIGH bug.
+    """
     rects = []
+    # Scale-aware thresholds (see module-level docstring on
+    # _REFERENCE_VIEWBOX_WIDTH for rationale). Values on the right-
+    # hand sides are reference-scale constants; multiplying by
+    # ``scale`` keeps them proportional at larger canvases (e.g.,
+    # 2550x3300 uses scale=3.0).
+    max_edge = 800 * scale
+    legend_y = 790 * scale
+    legend_w_max = 400 * scale
+    legend_xy_min = 15 * scale
+
     for m in re.finditer(r'<rect\b([^>]*)/?>', content):
         attrs = m.group(1)
         x = _attr_f(attrs, 'x') + dx
@@ -119,13 +326,97 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
         h = _attr_f(attrs, 'height')
         if w == 0 or h == 0:
             continue
-        # Skip full-page background rect and very large rects
-        if w > 800 or h > 800:
+        if w > max_edge or h > max_edge:
             continue
-        # Skip legend boxes (typically y > 790)
-        if y > 790:
+        # Legend-zone filter (bottom of page, y > legend_y). Three
+        # categories of rect live in this zone and need different
+        # treatment:
+        #  - Wide legend containers (w > legend_w_max, e.g.
+        #    patent_a/fig7's 638x40 legend strip): skip.
+        #  - Tiny legend icons (w < legend_xy_min or h < legend_xy_min,
+        #    e.g. patent_a/fig7's 8x8 markers): skip — too small to
+        #    be a diagram element, typically bullet markers inside a
+        #    legend container.
+        #  - Regular diagram boxes in the middle width range (e.g.,
+        #    patent_a/fig4's 140x50 SNN dashed box at y=820,
+        #    patent_c/fig5's 80x30 output boxes at y=800) remain
+        #    valid G2 arrow targets.
+        # Above the legend zone, all rects are kept regardless of size.
+        if y > legend_y and (w > legend_w_max or w < legend_xy_min or h < legend_xy_min):
             continue
         rects.append(Rect(x, y, w, h))
+
+    for m in re.finditer(r'<circle\b([^>]*)/?>', content):
+        attrs = m.group(1)
+        cx = _attr_f(attrs, 'cx') + dx
+        cy = _attr_f(attrs, 'cy') + dy
+        r = _attr_f(attrs, 'r')
+        if r <= 0:
+            continue
+        # Skip junction dots, spike-output junction markers, individual
+        # neuron circles inside a layer, and leader-line anchors — none
+        # of which are arrow targets in isolation. Radius threshold of
+        # 12 (roughly 0.12 inch at reference scale) is chosen to admit
+        # state-node circles (typically r=20..75) while rejecting
+        # junction dots (r=3..8) and neuron-symbol circles (r=8..12).
+        if r < 12 * scale:
+            continue
+        # Skip circles whose center sits in the legend zone.
+        if cy > legend_y:
+            continue
+        rects.append(Rect(cx - r, cy - r, 2 * r, 2 * r, kind="circle"))
+
+    for m in re.finditer(r'<ellipse\b([^>]*)/?>', content):
+        attrs = m.group(1)
+        cx = _attr_f(attrs, 'cx') + dx
+        cy = _attr_f(attrs, 'cy') + dy
+        rx = _attr_f(attrs, 'rx')
+        ry = _attr_f(attrs, 'ry')
+        if rx <= 0 or ry <= 0:
+            continue
+        if cy > legend_y:
+            continue
+        # Store as kind="ellipse" so Rect.distance_to_edge uses the
+        # quadratic implicit form rather than the circle approximation.
+        # Non-unit-aspect ellipses (rx != ry) land arrows on their
+        # cardinal extremes (e.g., top of a tall pill at y=cy-ry),
+        # which reads as "outside" under any circle approximation
+        # but is on-boundary for the true ellipse.
+        rects.append(Rect(cx - rx, cy - ry, 2 * rx, 2 * ry, kind="ellipse"))
+
+    for m in re.finditer(r'<polygon\b([^>]*)/?>', content):
+        attrs = m.group(1)
+        points_m = re.search(r'points="([^"]+)"', attrs)
+        if not points_m:
+            continue
+        # Extract coordinate pairs. Points can be separated by commas,
+        # spaces, or both; normalize to a list of floats.
+        numbers = re.findall(r'[-+]?\d*\.?\d+', points_m.group(1))
+        if len(numbers) < 6:  # need >= 3 vertices
+            continue
+        xs = [float(n) + dx for n in numbers[0::2]]
+        ys = [float(n) + dy for n in numbers[1::2]]
+        x_min, x_max = min(xs), max(xs)
+        y_min, y_max = min(ys), max(ys)
+        w = x_max - x_min
+        h = y_max - y_min
+        if w == 0 or h == 0:
+            continue
+        # Skip polygons that are arrowhead caps (tiny manual arrowhead
+        # polygons used as alternatives to marker-end). Standard cap
+        # size is under 18x18 at reference scale.
+        if w < 18 * scale and h < 18 * scale:
+            continue
+        if w > max_edge or h > max_edge:
+            continue
+        if y_min > legend_y and (w > legend_w_max or w < legend_xy_min or h < legend_xy_min):
+            continue
+        # Store as rect (axis-aligned bounding box). For compliance
+        # tolerance (1.0u) this is accurate enough at the cardinal
+        # extremes where arrows typically land on polygon targets
+        # (e.g., the top vertex of a decision diamond).
+        rects.append(Rect(x_min, y_min, w, h))
+
     return rects
 
 
@@ -269,44 +560,38 @@ def check_signal_crossings(segments: List[Segment]) -> List[str]:
 
 
 def check_arrow_endpoints(segments: List[Segment], rects: List[Rect]) -> List[str]:
-    """G2: Check that arrows terminate at box edges."""
+    """G2: Check that arrows terminate at element edges.
+
+    For rectangular targets, edge distance uses the perpendicular
+    projection to each side (see Rect.distance_to_edge). For circular
+    targets, edge distance is ``|dist_to_center - r|`` so arrows
+    correctly register as "touching" when they land anywhere on the
+    circumference, not just at the four cardinal points.
+
+    A gap above 1.0u triggers a FAIL. A small tolerance accommodates
+    hand-authored SVGs where the arrow endpoint rounds to an integer
+    and the target edge falls on a half-pixel.
+    """
     issues = []
 
     arrow_segs = [s for s in segments if s.has_arrow]
 
     for seg in arrow_segs:
-        # Arrow tip is at (x2, y2)
         tip_x, tip_y = seg.x2, seg.y2
 
-        # Find the closest rect edge
         best_dist = float('inf')
         best_rect = None
         for r in rects:
-            # Check distance to each edge
-            distances = []
-            # Top edge
-            if r.x <= tip_x <= r.right:
-                distances.append(abs(tip_y - r.y))
-            # Bottom edge
-            if r.x <= tip_x <= r.right:
-                distances.append(abs(tip_y - r.bottom))
-            # Left edge
-            if r.y <= tip_y <= r.bottom:
-                distances.append(abs(tip_x - r.x))
-            # Right edge
-            if r.y <= tip_y <= r.bottom:
-                distances.append(abs(tip_x - r.right))
-
-            if distances:
-                d = min(distances)
-                if d < best_dist:
-                    best_dist = d
-                    best_rect = r
+            d = r.distance_to_edge(tip_x, tip_y)
+            if d < best_dist:
+                best_dist = d
+                best_rect = r
 
         if best_rect and best_dist > 1.0:
+            shape = best_rect.kind
             issues.append(
                 f"ARROW GAP ({best_dist:.0f}px): arrow at ({tip_x:.0f}, {tip_y:.0f}) "
-                f"is {best_dist:.0f}px from nearest box edge "
+                f"is {best_dist:.0f}px from nearest {shape} edge "
                 f"(box at x={best_rect.x:.0f}, y={best_rect.y:.0f}, "
                 f"w={best_rect.w:.0f}, h={best_rect.h:.0f})"
             )
@@ -361,17 +646,52 @@ def check_path_through_box(segments: List[Segment], rects: List[Rect]) -> List[s
     return issues
 
 
-def parse_texts(content: str, dx: float = 0, dy: float = 0) -> List[TextBox]:
-    """Extract text elements with approximate bounding boxes."""
-    texts = []
-    for m in re.finditer(r'<text\b([^>]*)>([^<]+)</text>', content):
-        attrs = m.group(1)
-        text = m.group(2).strip()
-        if not text:
-            continue
+_TEXT_BLOCK_RE = re.compile(r'<text\b([^>]*)>(.*?)</text>', re.DOTALL)
+_TSPAN_RE = re.compile(r'<tspan\b[^>]*>([^<]*)</tspan>', re.DOTALL)
+_ROTATE_RE = re.compile(
+    r'rotate\(\s*(-?[\d.]+)(?:\s*[,\s]\s*(-?[\d.]+)\s*[,\s]\s*(-?[\d.]+))?\s*\)'
+)
 
-        # Skip rotated text — different bbox calculation needed
-        if 'transform=' in attrs:
+
+def _extract_text_content(inner: str) -> str:
+    """Concatenate the visible text inside a ``<text>`` element, including
+    any ``<tspan>`` children. Preserves inter-tspan whitespace so
+    bounding-box width estimates scale with content length.
+
+    Returns '' when the element has no extractable text (e.g., an empty
+    text element or one containing only tspan tags with no content).
+    """
+    inner = inner.strip()
+    if not inner:
+        return ''
+    # If the element contains <tspan>, pull text from each tspan.
+    tspans = _TSPAN_RE.findall(inner)
+    if tspans:
+        return ' '.join(t.strip() for t in tspans if t.strip())
+    # Otherwise fall back to the raw inner text, stripping any other tags.
+    return re.sub(r'<[^>]+>', '', inner).strip()
+
+
+def parse_texts(content: str, dx: float = 0, dy: float = 0) -> List[TextBox]:
+    """Extract text elements with approximate bounding boxes.
+
+    Scope:
+    - Handles both plain ``<text>foo</text>`` and the nested
+      ``<text><tspan>foo</tspan><tspan>bar</tspan></text>`` form.
+    - Rotated text (``<text transform="rotate(angle)">`` or
+      ``rotate(angle cx cy)``): returns an axis-aligned bounding box
+      that fully contains the rotated text, computed from the rotation
+      angle and the unrotated width × height. For 0° / ±90° / 180° the
+      bbox is exact; for arbitrary angles it is a conservative
+      over-approximation (never under-reports overlap).
+    - Pure ``translate()`` transforms on the text element are applied
+      to ``x, y`` before the bbox is computed.
+    """
+    texts = []
+    for m in _TEXT_BLOCK_RE.finditer(content):
+        attrs = m.group(1)
+        text = _extract_text_content(m.group(2))
+        if not text:
             continue
 
         x = _attr_f(attrs, 'x') + dx
@@ -381,6 +701,25 @@ def parse_texts(content: str, dx: float = 0, dy: float = 0) -> List[TextBox]:
 
         char_width = font_size * 0.6  # approximate
         text_width = len(text) * char_width
+        text_height = font_size
+
+        # Parse transform= if present. We only treat translate(...) and
+        # rotate(...) — other transforms (scale, skew, matrix) fall
+        # through to the unrotated bbox and are documented as unsupported.
+        transform_val = _attr(attrs, 'transform') or ''
+        rotate_angle = 0.0
+        if transform_val:
+            tm = re.search(
+                r'translate\(\s*(-?[\d.]+)(?:\s*[,\s]\s*(-?[\d.]+))?\s*\)',
+                transform_val,
+            )
+            if tm:
+                x += float(tm.group(1))
+                if tm.group(2):
+                    y += float(tm.group(2))
+            rm = _ROTATE_RE.search(transform_val)
+            if rm:
+                rotate_angle = float(rm.group(1))
 
         if anchor == "middle":
             tx = x - text_width / 2
@@ -388,8 +727,48 @@ def parse_texts(content: str, dx: float = 0, dy: float = 0) -> List[TextBox]:
             tx = x - text_width
         else:  # start
             tx = x
+        ty = y - text_height
 
-        texts.append(TextBox(tx, y - font_size, text_width, font_size, text))
+        if rotate_angle:
+            # Axis-aligned bounding box of the rotated text. The unrotated
+            # text occupies rect (tx, ty, text_width, text_height); rotate
+            # its four corners about (x, y) (SVG's default rotation pivot
+            # for transform="rotate(a)") or about (cx, cy) when supplied.
+            rm = _ROTATE_RE.search(transform_val)
+            # Explicit rotate(angle, cx, cy) pivot coordinates are
+            # specified in the same local coordinate system as the
+            # text's x/y attributes, so they need the same outer
+            # translate offset applied. Without this, the rotated
+            # bbox lands in the wrong absolute position (observed in
+            # patent_a/fig2/fig5 and patent_c/fig3 where the rotated
+            # Y-axis titles were reported as overlapping with tick
+            # labels 50u away).
+            if rm and rm.group(2) and rm.group(3):
+                pivot_x = float(rm.group(2)) + dx
+                pivot_y = float(rm.group(3)) + dy
+            else:
+                pivot_x = x
+                pivot_y = y
+            angle_rad = math.radians(rotate_angle)
+            cos_a, sin_a = math.cos(angle_rad), math.sin(angle_rad)
+            corners = [
+                (tx, ty),
+                (tx + text_width, ty),
+                (tx, ty + text_height),
+                (tx + text_width, ty + text_height),
+            ]
+            rx_vals, ry_vals = [], []
+            for cx, cy in corners:
+                dx_p, dy_p = cx - pivot_x, cy - pivot_y
+                rx_vals.append(pivot_x + dx_p * cos_a - dy_p * sin_a)
+                ry_vals.append(pivot_y + dx_p * sin_a + dy_p * cos_a)
+            bbox_x = min(rx_vals)
+            bbox_y = min(ry_vals)
+            bbox_w = max(rx_vals) - bbox_x
+            bbox_h = max(ry_vals) - bbox_y
+            texts.append(TextBox(bbox_x, bbox_y, bbox_w, bbox_h, text))
+        else:
+            texts.append(TextBox(tx, ty, text_width, text_height, text))
 
     return texts
 
@@ -463,11 +842,17 @@ def validate_geometry(svg_file: str) -> bool:
     print(f"{'='*60}\n")
 
     dx, dy = detect_transform_offset(content)
-    rects = parse_rects(content, dx, dy)
-    line_segs = parse_lines(content, dx, dy)
-    path_segs = parse_paths(content, dx, dy)
+    scale = detect_scale(content)
+    # Rotated nested groups contain local coordinates that can't be
+    # directly composed without matrix math. Strip them so their
+    # contents don't register as spurious content at x=0..20, y=0..20
+    # (common diode/rectifier symbol positions after rotate(...)).
+    parsed = strip_rotated_groups(content)
+    rects = parse_rects(parsed, dx, dy, scale=scale)
+    line_segs = parse_lines(parsed, dx, dy)
+    path_segs = parse_paths(parsed, dx, dy)
     all_segs = line_segs + path_segs
-    texts = parse_texts(content, dx, dy)
+    texts = parse_texts(parsed, dx, dy)
 
     print(f"[INFO] Found {len(rects)} element boxes")
     print(f"[INFO] Found {len(all_segs)} signal path segments")

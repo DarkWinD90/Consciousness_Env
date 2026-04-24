@@ -1,0 +1,72 @@
+# Detect stale filing PDFs in `patents/pdfs/`.
+#
+# Regenerates the 12 specification PDFs (Spec + Drawings_Description for
+# each of Patent A, B, C) via `export_specifications_pdf.py` and the 6
+# form PDFs (SB16 cover sheet + SB15A micro-entity certification for
+# each patent) via `fill_patent_forms.py`, then runs `git diff --exit-code
+# patents/pdfs/` to verify that the regenerated artifacts are byte-for-
+# byte identical to what is committed.
+#
+# A non-zero diff means the committed PDFs are out of sync with their
+# source (spec .md -> USPTO.txt -> PDF pipeline, or cover-sheet page-
+# count derivation), which would ship incorrect page/sheet counts to
+# USPTO. The job fails and reports the diff.
+#
+# Dependencies: reportlab (spec PDFs), pypdf (form filling),
+# cryptography + cffi (pypdf runtime). The first run in a clean env
+# also exercises the pip install pathway.
+#
+# See PR #153 commits 41cb79d (spec-PDF regen) and 828191f
+# (cover-sheet regen) for the baseline state this job guards.
+
+name: Filing PDF drift
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'patents/**'
+      - 'export_specifications_pdf.py'
+      - 'fill_patent_forms.py'
+      - '.github/workflows/filing-pdfs.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  regenerate-and-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      - name: Install PDF pipeline dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install reportlab pypdf cffi cryptography
+
+      - name: Regenerate specification PDFs
+        run: |
+          python export_specifications_pdf.py
+
+      - name: Regenerate form PDFs (cover sheets + micro-entity forms)
+        run: |
+          python fill_patent_forms.py
+
+      - name: Verify committed PDFs are in sync with source
+        run: |
+          if ! git diff --exit-code -- patents/pdfs/; then
+            echo ""
+            echo "::error::Committed filing PDFs in patents/pdfs/ are stale."
+            echo "Re-run `python export_specifications_pdf.py` and"
+            echo "`python fill_patent_forms.py` locally, then commit the"
+            echo "regenerated PDFs."
+            exit 1
+          fi
+          echo "All 12 filing PDFs in patents/pdfs/ are current."

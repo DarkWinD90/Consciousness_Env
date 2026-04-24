@@ -1,17 +1,32 @@
 # Patent Filing Summary
 
+> **2026-04-24 update.** This document was originally written 2026-02-02.
+> Since then: Phases 8-10 completed and tagged (v1.0.0, v2.0.0, v3.0.0);
+> all 21 patent drawings hardened to 21/21 PASS under the audited
+> `full_compliance.py` validators (PR #153); Patent B+C USPTO.txt
+> files expanded with full reference-numeral coverage in both brief
+> and detailed descriptions (37 CFR 1.84(p)(5)); all 12 filing PDFs
+> regenerated deterministically; CI workflows added to prevent
+> regression on the above. Filing blockers are now narrowed to
+> **inventor signatures on SB16 + SB15A forms and USPTO filing fees
+> ($65 × 3 = $195 for micro-entity provisionals)**. See PR #153 and
+> `patent_drawings/FINDINGS_REPORT.md` for the detailed delta. Content
+> below reflects the 2026-02-02 snapshot; inline status flags below
+> have been updated where they materially changed.
+
 ## Filing Status
 
-**All three provisional patent applications in preparation. Not yet filed.**
+**All three provisional patent applications prepared. Awaiting inventor
+signature + USPTO fees.**
 
-Filing will establish intellectual property protection for the consciousness loop architecture and begin the 12-month clock to non-provisional conversion. Patent drawings are still being brought into full 37 CFR 1.84 compliance.
+Filing will establish intellectual property protection for the consciousness loop architecture and begin the 12-month clock to non-provisional conversion. As of 2026-04-24, patent drawings pass full 37 CFR 1.84 compliance against the hardened validators.
 
 ---
 
 ## Patents in Preparation
 
 ### Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop
-**Status**: In preparation (not filed)
+**Status**: Prepared; awaiting inventor signature + $65 USPTO fee
 
 **Core Innovation**: A spiking neural network whose motor output generates piezoelectric + thermoelectric energy sufficient to power the network itself.
 
@@ -28,7 +43,7 @@ Filing will establish intellectual property protection for the consciousness loo
 ---
 
 ### Patent B: Configurable Recursive Self-Observation in Spiking Neural Networks
-**Status**: In preparation (not filed)
+**Status**: Prepared; awaiting inventor signature + $65 USPTO fee
 
 **Core Innovation**: A tunable "self-awareness dial" that feeds a network's previous output back as input at configurable gain.
 
@@ -44,7 +59,7 @@ Filing will establish intellectual property protection for the consciousness loo
 ---
 
 ### Patent C: Cognitive Fallback with Autonomous Self-Regulation and Resynchronization Protocol
-**Status**: In preparation (not filed)
+**Status**: Prepared; awaiting inventor signature + $65 USPTO fee
 
 **Core Innovation**: Continuous operation during cognitive layer disconnection via energy-aware autonomous regulation.
 
@@ -88,8 +103,9 @@ The three patents form an interlocking suite:
 
 | Deadline | Milestone | Status |
 |----------|-----------|--------|
-| **TBD** | File all three provisionals | ⏳ **Not filed** — drawings compliance in progress |
-| 2026-04-30 | Phase 8 STDP validation complete, tags created | ✅ **COMPLETE** |
+| **TBD (end of April 2026)** | File all three provisionals | ⏳ **Not filed** — awaiting inventor signature + $195 total fees; drawings and specs are filing-ready as of 2026-04-24 |
+| 2026-04-30 | Phase 8 STDP validation complete, tags created | ✅ **COMPLETE** (v1.0.0-phase8-stdp on 2026-02) |
+| 2026-04-24 | Drawings 21/21 PASS, USPTO.txt numeral coverage complete, deterministic PDFs, CI regression gates | ✅ **COMPLETE** (PR #153) |
 | 2026-07-30 | Phase 11 hardware prototype built and validated | 🔄 In planning |
 | 2026-10-30 | Hardware validation results documented (F11.1-F11.3) | ⏳ Pending |
 | 2026-12-30 | Non-provisional filings prepared with hardware evidence | ⏳ Pending |
@@ -147,9 +163,15 @@ Complete tag history established and pushed to GitHub:
 - ✅ Falsifiable framework (Phase 7: A-E, Phase 8: F8.1-F8.3, Phase 9: F9.1-F9.3, Phase 10: F10.1-F10.3)
 
 ### Patent Coverage
-- ⏳ **Patent A**: Energy harvesting method — In preparation (not filed)
-- ⏳ **Patent B**: Self-observation architecture — In preparation (not filed)
-- ⏳ **Patent C**: Cognitive fallback system — In preparation (not filed)
+- ⏳ **Patent A**: Energy harvesting method — Prepared; awaiting signature + fee
+- ⏳ **Patent B**: Self-observation architecture — Prepared; awaiting signature + fee
+- ⏳ **Patent C**: Cognitive fallback system — Prepared; awaiting signature + fee
+
+### Filing artifacts (as of 2026-04-24)
+- 21/21 SVGs PASS `full_compliance.py` (see `patent_drawings/USPTO_Compliance_Report.md`).
+- Patent A USPTO.txt: 65/65 numerals in spec. Patent B USPTO.txt: 36/36. Patent C: 46/46.
+- 12 filing PDFs (Spec + Drawings_Description + SB16 + SB15A per patent) regenerated deterministically in `patents/pdfs/` and gated by CI drift-check.
+- Five-axis consistency (SVG / registry / spec.md / USPTO.txt / Drawings_Description.txt): clean for all three patents.
 
 ### Next Critical Milestone
 - 🔄 **Phase 11**: Hardware prototype (2026-07-30)

@@ -79,9 +79,16 @@
     <line x1="617" y1="193" x2="617" y2="200" stroke="black" stroke-width="0.5" />
 
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- CURRENT PROCESSING POINT (38) — vertical dashed line   -->
+    <!-- CURRENT PROCESSING POINT (38) — vertical dashed marker.
+         Previously spanned y=195-265, crossing through the spectrum
+         bar (y=200-260) and overlapping the 0.2 scale tick
+         (y=260-280), producing a G3 path-through-box and G4 overlap.
+         The marker now sits entirely above the bar, ending at the
+         bar's top edge (y=200); the 0.2 tick and label below the
+         bar already anchor the reader's eye on the same x-column,
+         so semantic meaning is preserved. -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <line x1="260" y1="195" x2="260" y2="265" stroke="black" stroke-width="2" stroke-dasharray="5,3" />
+    <line x1="260" y1="180" x2="260" y2="200" stroke="black" stroke-width="2" stroke-dasharray="5,3" />
     <!-- Ref 38 — default reflection_coeff = 0.2 (base_reflection per spec) -->
     <text x="275" y="175" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">38</text>
     <line x1="273" y1="177" x2="262" y2="195" stroke="black" stroke-width="0.5" />

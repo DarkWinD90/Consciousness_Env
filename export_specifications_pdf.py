@@ -15,6 +15,17 @@ Formatting follows 37 CFR 1.52 and USPTO Patent Center PDF Guidelines:
 
 import os
 import re
+# Enable reportlab's invariant output mode before importing any
+# rendering classes. In invariant mode the PDF's CreationDate /
+# ModDate are fixed to a deterministic epoch and the document ID is
+# a content hash rather than a random nonce, making regenerated PDFs
+# byte-for-byte identical across runs. This is a prerequisite for
+# .github/workflows/filing-pdfs.yml's drift-detection diff against
+# the committed artifacts. Can be disabled with RL_INVARIANT=0 to
+# restore timestamped output for debugging.
+if os.environ.get('RL_INVARIANT', '1') != '0':
+    from reportlab import rl_config
+    rl_config.invariant = 1
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.lib.styles import ParagraphStyle

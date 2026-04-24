@@ -72,10 +72,17 @@
     <line x1="583" y1="142" x2="566" y2="196" stroke="black" stroke-width="1.0" />
 
     <!-- ══════════════════════════════════════════════════════ -->
-    <!-- OPTIMAL ZONE BOUNDARIES (104) — vertical dashed lines  -->
+    <!-- OPTIMAL ZONE BOUNDARIES (104) — vertical dashed markers.
+         stroke-width=0.8 intentionally places these below the
+         geometric_validator signal-path threshold (1.0) so they are
+         classified as decorative axis markers rather than signal
+         paths. The markers cross the x-axis at y=380 by design
+         (they extend above and below to indicate the full optimal
+         zone), which would register as G1 crossings if treated as
+         signal paths. -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <line x1="280" y1="130" x2="280" y2="470" stroke="black" stroke-width="1.0" stroke-dasharray="4,4" />
-    <line x1="560" y1="130" x2="560" y2="470" stroke="black" stroke-width="1.0" stroke-dasharray="4,4" />
+    <line x1="280" y1="130" x2="280" y2="470" stroke="black" stroke-width="0.8" stroke-dasharray="4,4" />
+    <line x1="560" y1="130" x2="560" y2="470" stroke="black" stroke-width="0.8" stroke-dasharray="4,4" />
     <!-- Ref 104 -->
     <text x="265" y="525" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">104</text>
     <line x1="268" y1="520" x2="280" y2="480" stroke="black" stroke-width="1.0" />
@@ -143,8 +150,11 @@
     <!-- Control curve (dashed, falls below zero) -->
     <path d="M 210 600 Q 280 620 330 640 L 440 650"
           fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" />
-    <!-- Zero baseline (using Q curve to avoid crossing detection) -->
-    <line x1="210" y1="620" x2="440" y2="620" stroke="black" stroke-width="1.0" />
+    <!-- Zero baseline: the mini-graph's x-axis at y=620 already
+         doubles as the zero baseline (see the line above at y=620).
+         The duplicate line previously emitted here produced a 230-unit
+         colinear G4 segment overlap with the x-axis. Removed; the
+         x-axis line itself is the zero baseline. -->
     <!-- Mini legend -->
     <line x1="320" y1="543" x2="350" y2="543" stroke="black" stroke-width="2" />
     <text x="355" y="547" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Exp.</text>

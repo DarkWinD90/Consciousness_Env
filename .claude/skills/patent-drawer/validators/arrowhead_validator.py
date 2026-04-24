@@ -1,14 +1,28 @@
 #!/usr/bin/env python3
 """Validate USPTO arrowhead requirements for patent drawing SVGs.
 
-37 CFR 1.84(q): Lead lines should be straight and not cross each other.
-Arrows at the ends of lines should be used to indicate direction.
+**What it checks** (37 CFR 1.84(n), 1.84(q)):
+- Every ``<marker>`` definition in ``<defs>`` has the standard
+  dimensions ``markerWidth=6``, ``markerHeight=4``, ``refX=6``,
+  ``refY=2``. Non-standard sizes flag the figure.
+- All marker IDs defined are scanned (the validator now iterates
+  over every ``<marker>`` in defs, not just the first one; this
+  closed a 2026-04 silent-pass bug).
 
-Standard arrowhead specification:
-- markerWidth="6"
-- markerHeight="4"
-- refX="6" refY="2"
-- Consistent across all figures
+**Scale assumptions.**
+Arrowhead dimensions are absolute user units and do not scale with
+viewBox. The 6x4 standard is USPTO convention and applies at every
+canvas scale.
+
+**What it does NOT check.**
+- Whether the arrow tip actually terminates at the intended target
+  (that is covered by ``geometric_validator`` G2 "arrow endpoints").
+- Lead-line straightness (37 CFR 1.84(q) prose requirement; not
+  structurally verifiable from SVG alone).
+- Whether an inline ``<polygon>`` arrowhead cap (used for axis arrows
+  that terminate in empty space — see patent_a/fig2, patent_c/fig3,
+  patent_c/fig4, patent_c/fig6) matches the canonical 6x4 marker
+  shape. Manual polygon caps are not checked by this validator.
 """
 
 import sys
