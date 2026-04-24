@@ -1,0 +1,443 @@
+[
+  {
+    "patent": "patent_a",
+    "figure": 1,
+    "sheet": "1/8",
+    "file": "patent_drawings/patent_a/fig1.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_a",
+    "figure": 2,
+    "sheet": "2/8",
+    "file": "patent_drawings/patent_a/fig2.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_a",
+    "figure": 3,
+    "sheet": "3/8",
+    "file": "patent_drawings/patent_a/fig3.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_a",
+    "figure": 4,
+    "sheet": "4/8",
+    "file": "patent_drawings/patent_a/fig4.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_a",
+    "figure": 5,
+    "sheet": "5/8",
+    "file": "patent_drawings/patent_a/fig5.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_a",
+    "figure": 6,
+    "sheet": "6/8",
+    "file": "patent_drawings/patent_a/fig6.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_a",
+    "figure": 7,
+    "sheet": "7/8",
+    "file": "patent_drawings/patent_a/fig7.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_a",
+    "figure": 8,
+    "sheet": "8/8",
+    "file": "patent_drawings/patent_a/fig8.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_b",
+    "figure": 1,
+    "sheet": "1/6",
+    "file": "patent_drawings/patent_b/fig1.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_b",
+    "figure": 2,
+    "sheet": "2/6",
+    "file": "patent_drawings/patent_b/fig2.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_b",
+    "figure": 3,
+    "sheet": "3/6",
+    "file": "patent_drawings/patent_b/fig3.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_b",
+    "figure": 4,
+    "sheet": "4/6",
+    "file": "patent_drawings/patent_b/fig4.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_b",
+    "figure": 5,
+    "sheet": "5/6",
+    "file": "patent_drawings/patent_b/fig5.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_b",
+    "figure": 6,
+    "sheet": "6/6",
+    "file": "patent_drawings/patent_b/fig6.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_c",
+    "figure": 1,
+    "sheet": "1/7",
+    "file": "patent_drawings/patent_c/fig1.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_c",
+    "figure": 2,
+    "sheet": "2/7",
+    "file": "patent_drawings/patent_c/fig2.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_c",
+    "figure": 3,
+    "sheet": "3/7",
+    "file": "patent_drawings/patent_c/fig3.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_c",
+    "figure": 4,
+    "sheet": "4/7",
+    "file": "patent_drawings/patent_c/fig4.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_c",
+    "figure": 5,
+    "sheet": "5/7",
+    "file": "patent_drawings/patent_c/fig5.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_c",
+    "figure": 6,
+    "sheet": "6/7",
+    "file": "patent_drawings/patent_c/fig6.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  },
+  {
+    "patent": "patent_c",
+    "figure": 7,
+    "sheet": "7/7",
+    "file": "patent_drawings/patent_c/fig7.svg",
+    "viewbox": true,
+    "margins": true,
+    "min_text": true,
+    "min_font_seen": 14.0,
+    "bw_only": true,
+    "fig_label": true,
+    "sheet_number": true,
+    "diagram_hygiene": true,
+    "status": "PASS",
+    "issues": {
+      "margins": [],
+      "text": [],
+      "color": [],
+      "diagram": []
+    }
+  }
+]

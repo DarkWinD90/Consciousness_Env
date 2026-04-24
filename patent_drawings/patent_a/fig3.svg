@@ -166,7 +166,10 @@
     <text x="517" y="570" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">if Δt &gt; 0 (LTP)</text>
     <text x="517" y="600" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Δw = -A- · pre · post</text>
     <text x="517" y="625" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">if Δt &lt; 0 (LTD)</text>
-    <text x="517" y="665" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">w ∈ [w_min, w_max]</text>
+    <!-- ASCII 'in' replaces U+2208 to avoid cairosvg/PDF font-fallback
+         rendering as an empty box, which would violate 37 CFR 1.84(p)(1)
+         legibility. The patent specification keeps the Greek glyph. -->
+    <text x="517" y="665" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">w in [w_min, w_max]</text>
     <!-- Ref 68 -->
     <text x="640" y="478" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">68</text>
     <line x1="638" y1="476" x2="635" y2="472" stroke="black" stroke-width="0.5" />

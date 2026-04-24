@@ -83,14 +83,17 @@
   <!-- Arrow from 72 to 74 -->
   <line x1="425" y1="635" x2="425" y2="700" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-  <!-- Decision outputs -->
+  <!-- Decision outputs. The Level 1 and Level 2 destination rects are
+       drawn at stroke-width=1.0 so the validator recognizes them as
+       components and the decision-output arrows have a clear endpoint
+       anchor. -->
   <path d="M350 755 L230 755 L230 800" stroke="black" stroke-width="1.5" fill="none" marker-end="url(#ah)" />
-  <rect x="190" y="800" width="80" height="30" rx="3" fill="none" stroke="black" stroke-width="0.8" />
+  <rect x="190" y="800" width="80" height="30" rx="3" fill="none" stroke="black" stroke-width="1.0" />
   <text x="230" y="820" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Level 1</text>
   <text x="290" y="745" font-family="Arial" font-size="14" text-anchor="middle" fill="black">NO</text>
 
   <path d="M500 755 L620 755 L620 800" stroke="black" stroke-width="1.5" fill="none" marker-end="url(#ah)" />
-  <rect x="580" y="800" width="80" height="30" rx="3" fill="none" stroke="black" stroke-width="0.8" />
+  <rect x="580" y="800" width="80" height="30" rx="3" fill="none" stroke="black" stroke-width="1.0" />
   <text x="620" y="820" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Level 2</text>
   <text x="560" y="745" font-family="Arial" font-size="14" text-anchor="middle" fill="black">YES</text>
 

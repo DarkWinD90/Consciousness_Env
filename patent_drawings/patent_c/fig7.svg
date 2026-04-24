@@ -48,8 +48,11 @@
   <text x="600" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">24</text>
   <line x1="600" y1="343" x2="600" y2="345" stroke="black" stroke-width="0.5" />
 
-  <!-- 92: Cognitive modulation label (on connected path) -->
-  <text x="500" y="215" font-family="Arial" font-size="14" fill="black">Cognitive modulation</text>
+  <!-- 92: Cognitive modulation label (on connected path). The
+       descriptive text is placed at y=200 (above the leader's y=210-212
+       range) so the leader to numeral 92 does not pass through the
+       text glyphs, which would violate 37 CFR 1.84(p)(1) legibility. -->
+  <text x="500" y="200" font-family="Arial" font-size="14" fill="black">Cognitive modulation</text>
   <text x="670" y="215" font-family="Arial" font-size="14" fill="black">92</text>
   <line x1="668" y1="210" x2="498" y2="212" stroke="black" stroke-width="0.5" />
   <line x1="498" y1="212" x2="430" y2="200" stroke="black" stroke-width="0.5" />
@@ -78,14 +81,16 @@
   <text x="615" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">98</text>
   <line x1="615" y1="523" x2="615" y2="510" stroke="black" stroke-width="0.5" />
 
-  <!-- 18: State buffer -->
-  <ellipse cx="350" cy="580" rx="15" ry="25" fill="none" stroke="black" stroke-width="1" />
+  <!-- 18: State buffer. rx widened from 15 to 18 so the BUF glyphs at the
+       top of the text bbox (y=561) sit comfortably inside the elliptical
+       interior without touching/clipping the oval boundary. -->
+  <ellipse cx="350" cy="580" rx="18" ry="25" fill="none" stroke="black" stroke-width="1" />
   <text x="350" y="575" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">BUF</text>
   <text x="350" y="620" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">18</text>
   <line x1="350" y1="613" x2="350" y2="605" stroke="black" stroke-width="0.5" />
 
-  <!-- 20: Snapshot writer -->
-  <ellipse cx="450" cy="580" rx="15" ry="25" fill="none" stroke="black" stroke-width="1" />
+  <!-- 20: Snapshot writer. Same rx widening as the BUF oval above. -->
+  <ellipse cx="450" cy="580" rx="18" ry="25" fill="none" stroke="black" stroke-width="1" />
   <text x="450" y="575" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">SNP</text>
   <text x="450" y="620" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">20</text>
   <line x1="450" y1="613" x2="450" y2="605" stroke="black" stroke-width="0.5" />

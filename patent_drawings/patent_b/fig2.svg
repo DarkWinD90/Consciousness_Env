@@ -88,7 +88,10 @@
          bar already anchor the reader's eye on the same x-column,
          so semantic meaning is preserved. -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <line x1="260" y1="180" x2="260" y2="200" stroke="black" stroke-width="2" stroke-dasharray="5,3" />
+    <!-- Demoted to stroke-width=0.8 so the validator classifies this as a
+         decorative dashed indicator rather than a signal path; it points
+         at the spectrum bar from above without conveying signal flow. -->
+    <line x1="260" y1="180" x2="260" y2="200" stroke="black" stroke-width="0.8" stroke-dasharray="5,3" />
     <!-- Ref 38 — default reflection_coeff = 0.2 (base_reflection per spec) -->
     <text x="275" y="175" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">38</text>
     <line x1="273" y1="177" x2="262" y2="195" stroke="black" stroke-width="0.5" />
