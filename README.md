@@ -40,27 +40,47 @@ Compliance is gated by CI on every PR.
 ## Architecture — The 8-Layer Consciousness Loop
 
 ```
-              ENVIRONMENT
-                  |
-                  v
-  L1: Printed Membrane        (thermochromic)
-  L2: Sensing Pads            (light, temperature)
-  L3: Optical Transmission    (signal voltage)
-                  |
-                  v
-  L4: Neuromorphic CPU         <-- L8 reflection feedback
-      (leaky integrate-and-fire SNN)
-                  |
-                  v
-  L5: Servo Actuation          (target angle from SNN output)
-        |               |
-   movement          movement
-        |               |
-  L6: Energy Harvesting        (harvest piezo + thermal; consume per spike)
-  L7: Ground Reference         (conceptual baseline; not a runtime stage)
-  L8: Recursive Reflection     (mean membrane potential, self-observation)
-        |
-        +---> feeds back into L4 (THE LOOP CLOSES AT L4)
+                         ENVIRONMENT
+                              |
+                              v
+  +-----------------------------------------------------+
+  | L1: Printed Membrane          (thermochromic)       |
+  | L2: Sensing Pads              (light, temperature)  |
+  | L3: Optical Transmission      (signal voltage)      |
+  +----------------------------+------------------------+
+                               |
+                               v
+  +-------------------------------------+  <----+
+  | L4: Neuromorphic CPU                |       |
+  |     (leaky integrate-and-fire SNN)  |       | L8
+  +-------------------------------------+       | reflection
+                               |                | feedback
+                               v                | (mean
+  +-------------------------------------+       |  membrane
+  | L5: Servo Actuation                 |       |  potential)
+  +-------------------------------------+       |
+                               |                |
+                               v                |
+  +-------------------------------------+       |
+  | L6: Energy Harvesting               |       |
+  |     (piezo + thermal harvest,       |       |
+  |      consume per spike)             |       |
+  +-------------------------------------+       |
+                               |                |
+                               v                |
+  +- - - - - - - - - - - - - - - - - - -+      |
+  | L7: Ground Reference                |       |   (L7 is a
+  |     (conceptual baseline, NOT a     |       |    conceptual
+  |      runtime stage)                 |       |    reference,
+  +- - - - - - - - - - - - - - - - - - -+      |    no code)
+                               |                |
+                               v                |
+  +-------------------------------------+       |
+  | L8: Recursive Reflection            +-------+
+  |     (aggregate mean membrane        |
+  |      potential at t-1)              |
+  +-------------------------------------+
+                                           THE LOOP CLOSES AT L4
 ```
 
 Reflection coefficient differs per execution path: CLI uses fixed `0.2`,
