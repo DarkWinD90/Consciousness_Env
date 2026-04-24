@@ -15,7 +15,27 @@ import sys
 import re
 from pathlib import Path
 
-_AXIS_VALUES = frozenset(['100', '200', '300', '400', '500'])
+def _axis_label_block_ranges(content):
+    """Return a list of (start_line, end_line) ranges for each
+    ``<g class="axis-label">`` block in ``content`` (line numbers are
+    1-indexed, inclusive).
+
+    Handles only flat, non-nested axis-label blocks — the existing
+    figures never nest them, and nesting would indicate a different
+    semantic intent.
+    """
+    ranges = []
+    lines = content.split('\n')
+    open_line = None
+    for i, line in enumerate(lines, 1):
+        if open_line is None:
+            if 'class="axis-label"' in line and '<g' in line:
+                open_line = i
+        else:
+            if '</g>' in line:
+                ranges.append((open_line, i))
+                open_line = None
+    return ranges
 
 
 def _detect_scale(content):
@@ -33,41 +53,52 @@ def _detect_scale(content):
         return 1.0
 
 
-def _is_graph_axis_label(content, numeral, x, y, align_tol=10, min_axis_count=3):
-    """Return True only when a centered numeral is part of a graph axis.
+def _is_graph_axis_label(content, x, y, line_num, axis_block_ranges=None):
+    """Return True when the numeral at ``line_num`` is inside an explicit
+    ``<g class="axis-label">`` block.
 
-    A graph axis is identified by having *min_axis_count* or more round
-    values from {100, 200, 300, 400, 500} aligned on the same
-    y-coordinate (horizontal axis) or x-coordinate (vertical axis)
-    within *align_tol* pixels.  A lone centered "100" is NOT an axis
-    label and must be validated like any other reference numeral.
+    **Scope** (what this function does and does not do):
+
+    - **DOES** classify as axis any ``<text>`` element whose source line
+      falls inside a ``<g class="axis-label">`` ... ``</g>`` range.
+      Authors mark up axis labels explicitly to distinguish them from
+      reference numerals, and we honor that markup as authoritative.
+
+    - **DOES NOT** perform coordinate-alignment inference to guess at
+      axis ticks. A prior implementation tried to detect axes by
+      clustering centered numeric text elements on the same y or x
+      coordinate. That heuristic mis-classified legitimate reference
+      numerals that happened to sit in a horizontal row (e.g., patent_b/
+      fig2's five spectrum-region numerals 28-36 are all at y=190 with
+      text-anchor="middle" and look exactly like axis ticks
+      coord-wise, but each labels a distinct part of the drawing). The
+      result was systematic false negatives. A purely explicit rule
+      avoids that ambiguity entirely at the cost of requiring figure
+      authors to wrap their tick labels in a ``<g class="axis-label">``
+      block when axes are present.
+
+    - **Non-argument**: the ``x``/``y`` parameters are preserved in the
+      signature for forward compatibility but are no longer consulted.
+      Callers may pass any values.
     """
-    if numeral not in _AXIS_VALUES:
-        return False
-
-    # Gather all centered axis-candidate numerals in the file
-    candidates = []
-    for m in re.finditer(
-        r'<text[^>]*x="([\d.]+)"[^>]*y="([\d.]+)"[^>]*text-anchor="middle"[^>]*>(\d{2,3})</text>',
-        content,
-    ):
-        if m.group(3) in _AXIS_VALUES:
-            candidates.append((float(m.group(1)), float(m.group(2))))
-
-    # Horizontal axis: multiple axis values share the same y (±tolerance)
-    if sum(1 for _, cy in candidates if abs(cy - y) < align_tol) >= min_axis_count:
-        return True
-
-    # Vertical axis: multiple axis values share the same x (±tolerance)
-    if sum(1 for cx, _ in candidates if abs(cx - x) < align_tol) >= min_axis_count:
-        return True
-
+    ranges = axis_block_ranges if axis_block_ranges is not None \
+        else _axis_label_block_ranges(content)
+    for start, end in ranges:
+        if start <= line_num <= end:
+            return True
     return False
 
 
 def find_reference_numerals(content):
-    """Find all reference numerals (standalone 2-3 digit numbers in text elements)."""
+    """Find all reference numerals (standalone 2-3 digit numbers in text elements).
+
+    Axis labels are filtered out via :func:`_is_graph_axis_label` (see that
+    function's docstring for the detection rules). Any numeric ``<text>``
+    element of 2-3 digits that doesn't look like a graph-axis tick label
+    is treated as a reference numeral and must have a leader line.
+    """
     numerals = []
+    axis_ranges = _axis_label_block_ranges(content)
 
     # Split content into lines for line number tracking
     lines = content.split('\n')
@@ -82,9 +113,12 @@ def find_reference_numerals(content):
             y = float(match.group(2))
             numeral = match.group(3)
 
-            # Skip only when the numeral is genuinely part of a graph axis
-            # (multiple round values aligned on the same coordinate).
-            if 'text-anchor="middle"' in line and _is_graph_axis_label(content, numeral, x, y):
+            # Axis-label detection: numeral is inside an explicit
+            # <g class="axis-label"> block. See _is_graph_axis_label for
+            # the rationale on why we do not use coord-alignment.
+            if _is_graph_axis_label(
+                content, x, y, line_num, axis_block_ranges=axis_ranges
+            ):
                 continue
 
             numerals.append({
@@ -97,32 +131,72 @@ def find_reference_numerals(content):
     return numerals
 
 
+_SIGNAL_STROKE_MIN = 1.0
+"""Minimum stroke width that counts as a main signal path.
+
+This boundary is shared with geometric_validator.parse_lines(), which
+applies the same cutoff (strict less-than) when deciding whether a line is
+a leader line (to be ignored during geometric collision checks) or a
+full-strength signal path. Keeping the two validators in sync prevents a
+line from being classified as a leader by one tool and a signal by the
+other.
+"""
+
+
+def _is_leader_stroke(width_str, scale=1.0):
+    """Return True when *width_str* is a plausible leader-line stroke width.
+
+    A leader line is any thin stroke below the main-signal minimum, plus
+    the explicit 0.5*scale and 1.5 values that prior sessions hand-authored
+    into the 2550x3300 (scale=3) figures. "Thin" is anything strictly less
+    than 1.0 at reference scale; at scale s, leaders may be up to
+    ~0.5*s (e.g., 1.5 at scale=3) to remain proportionally thin at render.
+    """
+    try:
+        w = float(width_str)
+    except (TypeError, ValueError):
+        return False
+    if w <= 0:
+        return False
+    # Thin at reference scale (catches 0.5, 0.8, 1 without decimal, 1.0 exactly).
+    # Using <= 1.0 closes the boundary ambiguity where geometric_validator uses
+    # strict < 1.0: we classify 1.0 as a leader here to reduce false-negatives
+    # on hand-drawn leader lines.
+    if w <= _SIGNAL_STROKE_MIN:
+        return True
+    # Historical convention: 1.5 has been used as a leader-line stroke in
+    # some 850x1100 figures (e.g., patent_b/fig5). Keep accepting it to
+    # avoid reintroducing the false-negatives the prior-session audit
+    # already removed. This is slightly permissive at reference scale —
+    # a main-signal stroke of exactly 1.5 adjacent to a numeral will be
+    # classified as a leader — which is acceptable because the adjacency
+    # itself is the dominant semantic signal.
+    if abs(w - 1.5) < 0.01:
+        return True
+    # At scaled canvases (2550x3300 uses scale=3), leaders may be drawn at
+    # 0.5*scale (=1.5 at scale 3) to stay visually thin after rasterization.
+    if scale > 1.0 and abs(w - 0.5 * scale) < 0.1:
+        return True
+    return False
+
+
 def find_leader_lines_near(content, x, y, tolerance=25, scale=1.0):
     """Check if a leader line exists near the given coordinates.
 
-    Leader line stroke width is expected to be 0.5 at reference scale (850
-    viewBox units). At scale s, leaders use stroke-width ~= 0.5*s; allow a
-    small band to accommodate rounding. Tolerance scales with viewBox.
+    A "leader" is any line whose stroke-width is thin relative to main
+    signal paths (see ``_is_leader_stroke``). Tolerance scales with the
+    viewBox width so large-coordinate figures (e.g., 2550x3300) still
+    see leader endpoints attached to the numeral text within a visually
+    proportional distance.
     """
     lines = content.split('\n')
     scaled_tol = tolerance * scale
-    # accept any thin stroke: 0.5 * scale ± small margin, or the reference
-    # string "stroke-width='0.5'" for backward compatibility
-    leader_widths = {f"{w:.1f}" for w in (0.5 * scale, 0.5, 1.5)}
 
     for line in lines:
-        # Look for thin lines matching expected leader widths
-        matched = False
-        sw = re.search(r'stroke-width="([\d.]+)"', line)
-        if sw:
-            if sw.group(1) in leader_widths:
-                matched = True
-        if not matched and 'stroke-width="0.5"' in line:
-            matched = True
-        if not matched:
-            continue
-
         if '<line' not in line:
+            continue
+        sw = re.search(r'stroke-width="([\d.]+)"', line)
+        if not sw or not _is_leader_stroke(sw.group(1), scale=scale):
             continue
 
         # Extract line coordinates
@@ -146,15 +220,31 @@ def find_leader_lines_near(content, x, y, tolerance=25, scale=1.0):
     return False
 
 
-def check_adjacent_leader_line(content, line_num):
-    """Check if there's a leader line on the next line after the text element."""
+def check_adjacent_leader_line(content, line_num, scale=1.0):
+    """Check if a leader line immediately follows the text element.
+
+    Looks at the next non-blank line after the numeral <text> element. If
+    it contains a <line> with a thin leader stroke-width, accept it. This
+    handles the hand-authored convention where each reference numeral is
+    followed verbatim by its leader line in the source file, even when
+    stroke-widths vary (0.5, 0.8, 1, 1.0 have all appeared historically).
+    """
     lines = content.split('\n')
 
-    if line_num < len(lines):
-        next_line = lines[line_num]  # line_num is 1-indexed, so this gets the next line
-        if '<line' in next_line and 'stroke-width="0.5"' in next_line:
-            return True
-
+    # line_num is 1-indexed; scan up to the next two non-blank lines so a
+    # blank separator between the <text> and the <line> doesn't cause a miss.
+    idx = line_num  # first candidate = line after the numeral text
+    checked = 0
+    while idx < len(lines) and checked < 2:
+        candidate = lines[idx]
+        if candidate.strip():
+            if '<line' in candidate:
+                sw = re.search(r'stroke-width="([\d.]+)"', candidate)
+                if sw and _is_leader_stroke(sw.group(1), scale=scale):
+                    return True
+            break  # first non-blank line was not a leader line; stop
+        idx += 1
+        checked += 1
     return False
 
 
@@ -180,7 +270,7 @@ def validate_references(svg_file):
         # Check for leader line near the numeral OR on the next line
         has_leader = (
             find_leader_lines_near(content, num['x'], num['y'], scale=scale) or
-            check_adjacent_leader_line(content, num['line'])
+            check_adjacent_leader_line(content, num['line'], scale=scale)
         )
 
         if not has_leader:

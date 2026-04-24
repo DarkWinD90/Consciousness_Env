@@ -35,12 +35,18 @@
   <text x="148" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">0.0</text>
   <text x="115" y="260" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black" transform="rotate(-90 115 260)">Input Value</text>
 
-  <!-- X-axis labels -->
-  <text x="160" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0</text>
-  <line x1="160" y1="393" x2="160" y2="383" stroke="black" stroke-width="0.5" />
-  <text x="420" y="415" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">250</text>
-  <text x="670" y="415" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">500</text>
-  <text x="420" y="435" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Autonomous Step Number</text>
+  <!-- X-axis labels. Wrapped in <g class="axis-label"> so tick numerics
+       ("0", "250", "500") are treated as graph-axis ticks rather than
+       reference numerals. The "Autonomous Step Number" caption is kept
+       inside the same block for proximity but is non-numeric so the
+       wrapper has no effect on its classification. -->
+  <g class="axis-label">
+    <text x="160" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">0</text>
+    <line x1="160" y1="393" x2="160" y2="383" stroke="black" stroke-width="0.5" />
+    <text x="420" y="415" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">250</text>
+    <text x="670" y="415" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">500</text>
+    <text x="420" y="435" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Autonomous Step Number</text>
+  </g>
 
   <!-- Sinusoidal base signal (smooth curve) -->
   <path d="M160 260 Q260 140, 360 260 T560 260 T670 260" fill="none" stroke="black" stroke-width="1.5" />
@@ -72,15 +78,19 @@
   <line x1="160" y1="888" x2="160" y2="560" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
   <line x1="162" y1="890" x2="680" y2="890" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-  <!-- Y-axis labels -->
-  <text x="148" y="575" font-family="Arial" font-size="14" text-anchor="end" fill="black">100</text>
-  <line x1="150" y1="572" x2="158" y2="572" stroke="black" stroke-width="0.5" />
-  <text x="148" y="625" font-family="Arial" font-size="14" text-anchor="end" fill="black">80</text>
-  <text x="148" y="720" font-family="Arial" font-size="14" text-anchor="end" fill="black">30</text>
-  <text x="148" y="775" font-family="Arial" font-size="14" text-anchor="end" fill="black">15</text>
-  <text x="148" y="885" font-family="Arial" font-size="14" text-anchor="end" fill="black">0</text>
-  <line x1="150" y1="882" x2="158" y2="882" stroke="black" stroke-width="0.5" />
-  <text x="130" y="730" font-family="Arial" font-size="14" text-anchor="middle" fill="black" transform="rotate(-90 130 730)">Energy (mWh)</text>
+  <!-- Y-axis labels. Wrapped in <g class="axis-label"> so the numeric
+       ticks (0, 15, 30, 80, 100) are treated as graph-axis ticks rather
+       than reference numerals. -->
+  <g class="axis-label">
+    <text x="148" y="575" font-family="Arial" font-size="14" text-anchor="end" fill="black">100</text>
+    <line x1="150" y1="572" x2="158" y2="572" stroke="black" stroke-width="0.5" />
+    <text x="148" y="625" font-family="Arial" font-size="14" text-anchor="end" fill="black">80</text>
+    <text x="148" y="720" font-family="Arial" font-size="14" text-anchor="end" fill="black">30</text>
+    <text x="148" y="775" font-family="Arial" font-size="14" text-anchor="end" fill="black">15</text>
+    <text x="148" y="885" font-family="Arial" font-size="14" text-anchor="end" fill="black">0</text>
+    <line x1="150" y1="882" x2="158" y2="882" stroke="black" stroke-width="0.5" />
+    <text x="130" y="730" font-family="Arial" font-size="14" text-anchor="middle" fill="black" transform="rotate(-90 130 730)">Energy (mWh)</text>
+  </g>
 
   <!-- X-axis label -->
   <text x="420" y="920" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Autonomous Step Number</text>
