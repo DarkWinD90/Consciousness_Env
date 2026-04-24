@@ -155,3 +155,62 @@ Per CLAUDE.md Sections 7.4 and 3.3:
 All validator and SVG fixes in this PR must leave the phase validation
 scripts green. Regression gate: the four phase scripts + the 21-figure
 compliance sweep must both pass before merge.
+
+---
+
+## 6. Deferred follow-up work (2026-04-24)
+
+Items surfaced during this audit that are intentionally **not** done in
+the same PR, either because they are lower priority or because the
+author requested a lighter-weight fix first. All are tracked as
+follow-up PRs off `main`.
+
+### 6.1 USPTO.txt numeral prose integration (Patents B and C)
+
+Patent B and C USPTO.txt files originally had near-zero drawing-numeral
+coverage in their detailed-description sections — a 37 CFR 1.84(p)(5)
+violation since every numeral in a drawing must be mentioned in the
+description. The fast-path fix applied in this PR was **Option 2**:
+expand the brief-description paragraphs `[0010]–[0015]` (and `[0016]`
+for Patent C) to enumerate every numeral, lifting the text verbatim
+from the corresponding `.md` files. This closes the filing blocker at
+minimal risk of scope drift.
+
+The more polished fix is **Option 1**: weave each numeral into the
+detailed-description prose the way Patent A already does in
+`¶[0019]–¶[0035]` (each component is introduced by name-plus-numeral
+at the point where its function is explained). This reads more
+natively to a USPTO examiner, but takes an order of magnitude more
+editing and carries a nonzero risk of accidental claim-scope narrowing
+if phrasing becomes too specific. Option 1 is deferred until time
+allows — ideally before the non-provisional conversion (Section 10.2
+step 7 of `CLAUDE.md`).
+
+Target commits when done:
+- `patents/uspto_formatted/Patent_B_USPTO.txt` — expand `¶[0016]+`
+  to introduce each numeral in the detailed-description prose.
+- `patents/uspto_formatted/Patent_C_USPTO.txt` — same.
+- Regenerate `patents/pdfs/*` after each.
+
+### 6.2 Per-figure geometric FAILs
+
+11 figures still have compliance FAILs as of this commit
+(`post_tool_sweep_2026-04-24.md`). See §4.1 above for the full
+inventory. Each is a per-figure drawing edit; no further validator
+work is needed.
+
+### 6.3 Remaining HIGH tooling bugs
+
+See §3 above for the list. Not blocking filing, but they can mask
+future regressions and should be closed before the next phase is
+added.
+
+### 6.4 Content-level refinements
+
+- Patent A "ADC" shorthand for numeral 130 (fig6 / fig8). Either
+  spell out "Analog-to-digital converter" in the SVGs or add a
+  definitional phrase such as "analog-to-digital converter (ADC) 130"
+  at first introduction in the USPTO.txt.
+- `2026-02-02_Patent_Filing_Summary.md` is stale by ~6 weeks; update
+  to reflect drawings complete as of 2026-04-24 and filing blockers
+  now being inventor signatures + fees only.
