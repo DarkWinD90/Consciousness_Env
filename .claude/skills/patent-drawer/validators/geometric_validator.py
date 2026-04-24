@@ -62,20 +62,29 @@ class Rect:
     def distance_to_edge(self, px, py):
         """Shortest distance from (px, py) to the boundary of this element.
 
-        For rectangles, returns the minimum over the four edges, but
-        only considers edges whose perpendicular projection from the
-        point lands on the edge (not past a corner). Returns infinity
-        if the point's projection falls outside all four edge spans —
-        this preserves the prior behavior of ``check_arrow_endpoints``
-        which only collected distances for edges where the point's
-        projection landed within the edge.
+        If the point lies inside the element, distance is 0. An arrow
+        whose tip enters a target box has semantically reached the
+        target; reporting a non-zero "gap" for a tip at the center of
+        a rect would be a false positive (commonly seen with the
+        10x10 axis-endpoint anchor rects in the Patent C figures).
 
-        For circles, returns ``abs(dist_to_center - r)``.
+        For rectangles outside the box, returns the minimum over the
+        four edges, considering only edges whose perpendicular
+        projection from the point lands on the edge. Returns infinity
+        if the point's projection falls outside all four edge spans.
+
+        For circles, returns ``abs(dist_to_center - r)`` when outside
+        or touching, and 0 when strictly inside.
         """
         if self.kind == "circle":
             dx = px - self.cx
             dy = py - self.cy
-            return abs(math.hypot(dx, dy) - self.r)
+            dist_center = math.hypot(dx, dy)
+            if dist_center <= self.r:
+                return 0.0
+            return dist_center - self.r
+        if self.contains_point(px, py):
+            return 0.0
         distances = []
         if self.x <= px <= self.right:
             distances.append(abs(py - self.y))

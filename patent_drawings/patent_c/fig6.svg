@@ -31,10 +31,11 @@
   <text x="502" y="165" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">RESYNC</text>
   <rect x="555" y="140" width="95" height="40" fill="none" stroke="black" stroke-width="1.5" />
   <text x="602" y="165" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">CONNECTED</text>
-  <!-- Annotations -->
-  <text x="235" y="200" font-family="Arial, sans-serif" font-size="14" fill="black">Claude silent</text>
-  <text x="340" y="200" font-family="Arial, sans-serif" font-size="14" fill="black">Fallback engages</text>
-  <text x="475" y="200" font-family="Arial, sans-serif" font-size="14" fill="black">resync()</text>
+  <!-- Annotations. x-positions staggered to clear 14pt bbox overlap
+       detected by G5 (approximate char-width = font_size * 0.6). -->
+  <text x="170" y="200" font-family="Arial, sans-serif" font-size="14" fill="black">Claude silent</text>
+  <text x="350" y="200" font-family="Arial, sans-serif" font-size="14" fill="black">Fallback engages</text>
+  <text x="540" y="200" font-family="Arial, sans-serif" font-size="14" fill="black">resync()</text>
 
   <!-- ══════════════════════════════════════════════════════ -->
   <!-- 78: Extended Disconnection Timeline                    -->
