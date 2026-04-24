@@ -18,6 +18,21 @@ from pathlib import Path
 _AXIS_VALUES = frozenset(['100', '200', '300', '400', '500'])
 
 
+def _detect_scale(content):
+    """Return viewBox-width / 850 as scale factor for scale-dependent thresholds."""
+    m = re.search(r'viewBox="([^"]+)"', content)
+    if not m:
+        return 1.0
+    parts = m.group(1).strip().split()
+    if len(parts) != 4:
+        return 1.0
+    try:
+        vb_w = float(parts[2])
+        return vb_w / 850.0 if vb_w > 0 else 1.0
+    except ValueError:
+        return 1.0
+
+
 def _is_graph_axis_label(content, numeral, x, y, align_tol=10, min_axis_count=3):
     """Return True only when a centered numeral is part of a graph axis.
 
@@ -82,13 +97,29 @@ def find_reference_numerals(content):
     return numerals
 
 
-def find_leader_lines_near(content, x, y, tolerance=25):
-    """Check if a leader line exists near the given coordinates."""
+def find_leader_lines_near(content, x, y, tolerance=25, scale=1.0):
+    """Check if a leader line exists near the given coordinates.
+
+    Leader line stroke width is expected to be 0.5 at reference scale (850
+    viewBox units). At scale s, leaders use stroke-width ~= 0.5*s; allow a
+    small band to accommodate rounding. Tolerance scales with viewBox.
+    """
     lines = content.split('\n')
+    scaled_tol = tolerance * scale
+    # accept any thin stroke: 0.5 * scale ± small margin, or the reference
+    # string "stroke-width='0.5'" for backward compatibility
+    leader_widths = {f"{w:.1f}" for w in (0.5 * scale, 0.5, 1.5)}
 
     for line in lines:
-        # Look for thin lines (stroke-width="0.5")
-        if 'stroke-width="0.5"' not in line:
+        # Look for thin lines matching expected leader widths
+        matched = False
+        sw = re.search(r'stroke-width="([\d.]+)"', line)
+        if sw:
+            if sw.group(1) in leader_widths:
+                matched = True
+        if not matched and 'stroke-width="0.5"' in line:
+            matched = True
+        if not matched:
             continue
 
         if '<line' not in line:
@@ -103,17 +134,13 @@ def find_leader_lines_near(content, x, y, tolerance=25):
         if x1_match and y1_match:
             lx1 = float(x1_match.group(1))
             ly1 = float(y1_match.group(1))
-
-            # Check if line starts near the numeral
-            if abs(lx1 - x) < tolerance and abs(ly1 - y) < tolerance:
+            if abs(lx1 - x) < scaled_tol and abs(ly1 - y) < scaled_tol:
                 return True
 
         if x2_match and y2_match:
             lx2 = float(x2_match.group(1))
             ly2 = float(y2_match.group(1))
-
-            # Check if line ends near the numeral
-            if abs(lx2 - x) < tolerance and abs(ly2 - y) < tolerance:
+            if abs(lx2 - x) < scaled_tol and abs(ly2 - y) < scaled_tol:
                 return True
 
     return False
@@ -140,18 +167,19 @@ def validate_references(svg_file):
         return False
 
     numerals = find_reference_numerals(content)
+    scale = _detect_scale(content)
 
     if not numerals:
         print("[INFO] Reference Numerals: None found (may be intentional)")
         return True
 
-    print(f"[INFO] Found {len(numerals)} reference numeral(s)")
+    print(f"[INFO] Found {len(numerals)} reference numeral(s) [scale={scale:.2f}x]")
 
     missing_leaders = []
     for num in numerals:
         # Check for leader line near the numeral OR on the next line
         has_leader = (
-            find_leader_lines_near(content, num['x'], num['y']) or
+            find_leader_lines_near(content, num['x'], num['y'], scale=scale) or
             check_adjacent_leader_line(content, num['line'])
         )
 
