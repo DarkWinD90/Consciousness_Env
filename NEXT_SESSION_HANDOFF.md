@@ -223,15 +223,21 @@ the order of fixes.
 
 ---
 
-## Open questions to resolve with user in next session
+## Decisions already locked in (do not re-ask)
 
-1. **fig3.svg (Patent A)** is still at 2550×3300 (300 DPI). The scale-aware tools now handle it correctly, but consistency with the other 20 figures (all 850×1100) would be cleaner. **Decision needed:** redraw fig3 at 850×1100, or leave at 300 DPI?
+1. **fig3.svg (Patent A)** → **REDRAW at 850×1100.** Consistency with the other 20 figures. USPTO doesn't care about internal coordinate system as long as rendered output is 8.5×11in. Removes the test_patent_diagram_regressions assertion dependency on the 2550×3300 coordinates (that test's hardcoded rect attributes at `x='320'[@y='200'][@width='1560'][@height='1100']` need to be updated to the 850×1100 equivalent position after redraw).
 
-2. **Some patent spec text uses generic `ρ ∈ [0, 1]` reflection coefficient language** — this is correct for claim scope. Any request to "fix" this to the CLI-fixed-0.2 or MCP-variable-0.2+mod×0.1 formulas would narrow claim scope and should be refused.
+2. **All false-negative validator bugs** → **FIX + DOCUMENT known limits.** Bucket-3 HIGH tooling bugs should be fixed in this session. For each validator, add a docstring block that explicitly states what it checks, what it doesn't, and the scale assumptions (where still coupled).
 
-3. **CI workflows (Bucket 4)** — in scope for this branch or deferred to a follow-up PR after filing? User originally said "Add CI checks now", but given time pressure, the answer may have changed.
+3. **CI workflows (Bucket 4)** → **ADD NOW on this branch.** User confirmed earlier. Don't defer.
 
-4. **FINDINGS_REPORT.md and USPTO_Compliance_Report.md** — these claim "All 21 drawings passed full 37 CFR 1.84 compliance audit on 2026-03-16." That claim is no longer accurate post-audit (several real compliance failures surfaced). Should these historical records be updated or left as-is with a note?
+4. **Patent claim scope** → **DO NOT NARROW.** Generic `ρ ∈ [0, 1]` and similar language is intentional for IP coverage. Never replace with specific implementation values.
+
+5. **Tagged states** → **RESPECT.** Section 7.2 policy. Do not modify phase validation scripts even if a claim threshold looks wrong.
+
+## Open questions still to confirm with user
+
+1. **FINDINGS_REPORT.md and USPTO_Compliance_Report.md** — these claim "All 21 drawings passed full 37 CFR 1.84 compliance audit on 2026-03-16." That claim is no longer accurate post-audit (several real compliance failures surfaced once validators became trustworthy). Should these historical records be updated to reflect today's post-fix state, or preserved with an appended note? Suggest asking the user before touching either file.
 
 ---
 
