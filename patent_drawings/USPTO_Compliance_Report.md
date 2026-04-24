@@ -1,5 +1,32 @@
 # USPTO PATENT DRAWING COMPLIANCE REPORT
 
+> **STALE — 2026-04-24.** The "all 21 drawings pass the automated
+> compliance validator" claim later in this document is no longer
+> accurate. Between 2026-04-22 and 2026-04-24 the validators themselves
+> were audited (PR #151) and hardened (PR #153); several silent-pass
+> bugs in `reference_validator`, `arrowhead_validator`, and
+> `geometric_validator` were closed. With the hardened validators,
+> 11 of the 21 figures still fail `full_compliance.py` and only 10
+> fully pass. Specific categories: G1 signal crossings, G2 arrow-gap
+> endpoints, G4 segment overlaps, one G3 path-through-box, and margin
+> violations in `patent_a/fig4`.
+>
+> **Authoritative current-state snapshot:**
+> [`docs/post_tool_sweep_2026-04-24.md`](../docs/post_tool_sweep_2026-04-24.md)
+> (one run of `full_compliance.py` on every figure with the hardened
+> validators).
+>
+> **Audit trail of validator bug fixes:**
+> [`docs/tooling_audit_2026-04-24.md`](../docs/tooling_audit_2026-04-24.md).
+>
+> This file is preserved verbatim below as the historical record of the
+> pre-audit state. It will be fully regenerated — with an honest
+> "21 / 21 PASS, validated 2026-04-XX" stamp — once the per-figure
+> drawing fixes in PR #153 close the remaining FAILs. Do NOT cite the
+> "all 21 pass" language below as current compliance evidence.
+
+---
+
 > **DISCLAIMER (2026-03-21)**: The automated validator results below do NOT
 > represent full USPTO compliance. The validator checks a limited set of
 > criteria (margins, font sizes, reference numerals, colors, line thickness).

@@ -1,5 +1,27 @@
 # Patent Drawings: Compare, Validate & Cross-Reference Findings Report
 
+> **STALE — 2026-04-24.** This report was written on 2026-03-13 against
+> validators that have since been audited and hardened (PR #151, PR #153).
+> The hardened validators surface real compliance FAILs that were silently
+> masked by prior false-negatives in `reference_validator`,
+> `arrowhead_validator`, and `geometric_validator`. As of 2026-04-24, only
+> 10 of the 21 drawings fully pass `full_compliance.py`; 11 figures carry
+> geometric FAILs (G1 crossings, G2 arrow-gap, G4 segment overlaps, one
+> G3 path-through-box, plus margin violations in `patent_a/fig4`).
+>
+> **Authoritative current-state snapshot:**
+> [`docs/post_tool_sweep_2026-04-24.md`](../docs/post_tool_sweep_2026-04-24.md).
+>
+> **Audit trail of validator bug fixes:**
+> [`docs/tooling_audit_2026-04-24.md`](../docs/tooling_audit_2026-04-24.md).
+>
+> This file is preserved verbatim below as a historical snapshot of the
+> pre-audit state. A full regeneration of this report — with an honest
+> "21 / 21 PASS" stamp — is blocked on completing the remaining per-figure
+> drawing fixes tracked in PR #153.
+
+---
+
 **Date**: 2026-03-13
 **Sources compared**: Google Drive `patent_drawings.zip` (Feb 10-23) vs repo `patent_drawings/` (Mar 12, commit `9fd82af`)
 
