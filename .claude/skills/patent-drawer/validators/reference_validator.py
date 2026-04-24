@@ -1,14 +1,37 @@
 #!/usr/bin/env python3
 """Validate USPTO reference numeral requirements for patent drawing SVGs.
 
-37 CFR 1.84(p): Reference characters must be placed to indicate the
-part to which they refer. Lead lines are required between reference
-characters and the parts they identify.
+**What it checks** (37 CFR 1.84(p), 1.84(q)):
+- Every 2- or 3-digit numeric ``<text>`` element is a reference
+  numeral unless explicitly marked as an axis label.
+- Each reference numeral has an accompanying leader line (a thin
+  ``<line>``) with a thin stroke-width (<= 1.0 at reference scale,
+  plus the historical 1.5 convention) whose endpoint lands within
+  25 units of the numeral's text anchor, OR a thin ``<line>`` on
+  the next non-blank source line after the numeral's ``<text>``.
 
-Requirements:
-- Reference numerals should be 2-3 digit numbers (10, 100, 102, etc.)
-- Each numeral should have a leader line (thin line pointing to element)
-- Leader lines should be 0.5px stroke-width
+**Axis-label handling.**
+A numeric ``<text>`` is classified as an axis tick label and
+skipped IFF it lies inside a ``<g class="axis-label">`` block.
+Authors mark up tick label groups explicitly; the coord-alignment
+heuristic used by the pre-2026-04 implementation (>= 3 round
+values aligned on same y/x) was retired because it
+mis-classified legitimate ref numerals that happened to sit in a
+row (e.g. patent_b/fig2's spectrum-region labels 28-36 at
+y=190 with text-anchor="middle").
+
+**Scale assumptions.**
+Tolerance (25-unit endpoint-to-text distance) and leader-width
+threshold (1.0) both scale with viewBox via ``_detect_scale``.
+At 850x1100 scale=1.0; at 2550x3300 scale=3.0.
+
+**What it does NOT check.**
+- Leader-line angle, length, or whether it actually points at the
+  element (only endpoint proximity).
+- Whether the numeral appears in the specification text (that is a
+  separate cross-axis check; see `five-axis audit` agents).
+- ``<tspan>``-wrapped numerals in a single text element (rare in
+  patent drawings).
 """
 
 import sys

@@ -1,12 +1,22 @@
 #!/usr/bin/env python3
 """Validate USPTO font requirements for patent drawing SVGs.
 
-37 CFR 1.84(p): Numbers, letters, and reference characters must be
-at least 0.32 cm (approximately 14 points) in height.
+**What it checks** (37 CFR 1.84(o), 1.84(p)(2)):
+- ``font-size`` on every ``<text>`` element is >= 14 points (the
+  1/8-inch / 0.32-cm minimum glyph height for reference characters).
+- ``font-family`` is one of Arial, sans-serif, Courier New, or
+  monospace; other families are flagged.
 
-Allowed fonts:
-- Arial, sans-serif (for labels and descriptive text)
-- Courier New, monospace (for code, values, and formulas)
+**Scale assumptions.**
+font-size is a raw-points value independent of the canvas viewBox, so
+the same 14pt threshold applies across 850x1100 and 2550x3300
+drawings. The validator does NOT scale the threshold with viewBox.
+
+**What it does NOT check.**
+- Rendered glyph size after ``transform`` scaling.
+- Font substitution in downstream PDF (handled by the PDF exporter).
+- tspan font-size inheritance nuances (tspan without an explicit
+  font-size inherits the parent's).
 """
 
 import sys

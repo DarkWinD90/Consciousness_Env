@@ -1,15 +1,50 @@
 #!/usr/bin/env python3
 """Geometric collision validator for USPTO patent drawing SVGs.
 
-Checks for issues that XML-only validators miss:
-  G1: Signal-path-to-signal-path crossings
-  G2: Arrow endpoints not touching target box edges
-  G3: Signal paths passing through element boxes
-  G4: Overlapping signal path segments
-  G5: Text-text overlaps
+**What it checks** (37 CFR 1.84(l) + 1.84(p)(1) hygiene):
 
-These are the issues that repeatedly caused rejection-grade defects
-in patent drawings despite passing structural compliance checks.
+- **G1 Signal-path-to-signal-path crossings**: Any two segments
+  belonging to different path IDs that intersect at interior points.
+  Segments with stroke-width < 1.0 at reference scale are treated as
+  leader/decorative lines and skipped.
+- **G2 Arrow endpoint reaches target**: Every segment with
+  ``marker-end="url(#ah)"`` must terminate within 1.0 reference unit
+  of an element boundary (rect edge, circle circumference, ellipse
+  implicit form, or polygon bounding-box edge). Arrow tips INSIDE a
+  target count as reached (distance=0).
+- **G3 Signal path through element box**: A segment that ENTERS and
+  EXITS a rect (i.e., passes through without terminating inside) is
+  flagged. Arrows that terminate inside a box are allowed via G2.
+- **G4 Colinear segment overlaps**: Two segments from different path
+  IDs sharing a colinear overlap > 1 unit are flagged.
+- **G5 Text overlaps**: Approximate AA-bbox overlap between any two
+  text elements, including rotated text and ``<tspan>``-wrapped
+  content. Rotated-text bbox is exact at 0°/±90°/180° (the rotations
+  used in the current figures for Y-axis titles) and a conservative
+  over-approximation otherwise.
+
+**Scale assumptions.**
+Every magic number is derived from ``detect_scale(content)`` which
+reads the ``<svg viewBox>`` and returns width/850. At 850x1100
+scale=1.0; at 2550x3300 scale=3.0; parse_rects thresholds, the
+min circle radius for target candidates (12), the min polygon
+dimension (18), and the max-edge (800) all multiply by scale.
+
+**What it does NOT check.**
+- Affine composition of nested ``<g transform="...rotate(...)">``
+  groups. Those subtrees are stripped entirely via
+  ``strip_rotated_groups`` before parsing — their local coords would
+  otherwise register as literal segments at x=-7..7 (rectifier
+  diodes in patent_a/fig4 are the canonical case).
+- ``<path>`` curves and arcs — only line-like segments from path
+  ``d`` commands are extracted; Bezier control points are treated
+  as straight-line endpoints.
+- 3D or SVG filters / clip-paths / masks.
+- Text anti-aliasing artifacts; the char-width approximation is
+  ``font_size * 0.6``.
+- OBB (oriented bounding box) overlap for rotated text — the AA
+  bbox is used, which can over-report overlap at large rotation
+  angles.
 """
 
 import math

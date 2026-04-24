@@ -3,6 +3,34 @@
 
 Runs all individual validators and produces a comprehensive report.
 Exit code 0 = all pass, 1 = failures found.
+
+**Validators invoked** (see each module's docstring for the
+what-checks / what-doesn't / scale-assumptions contract):
+
+1. viewBox + page-size check           (37 CFR 1.84(f))
+2. margin_validator                    (37 CFR 1.84(g))
+3. font_validator                      (37 CFR 1.84(o), 1.84(p)(2))
+4. reference_validator                 (37 CFR 1.84(p), 1.84(q))
+5. arrowhead_validator                 (37 CFR 1.84(n), 1.84(q))
+6. Color allowlist check               (37 CFR 1.84(a)(2))
+7. Line thickness check                (37 CFR 1.84(l))
+8. Figure label check                  (37 CFR 1.84(u))
+9. geometric_validator G1-G5           (37 CFR 1.84(l) + 1.84(p)(1))
+
+**What this wrapper does NOT check.**
+- Hand-illustration style / MPEP 608.02 aesthetic conventions
+  (legibility of hand-drawn line art, proper hatching density,
+  three-dimensional shading, etc.).
+- Filing-level concerns: sheet numbering placement, inventor
+  signature on cover sheets, USPTO fees, paper vs electronic
+  filing format.
+- Claim-drawing correspondence: whether each reference numeral
+  actually appears in the specification text (that is a separate
+  cross-axis audit; see PR #153 for the five-axis agent report).
+
+See ``docs/tooling_audit_2026-04-24.md`` for the full list of
+known validator limits and the trust-tier classification of every
+related tool under ``tools/``.
 """
 
 import sys
