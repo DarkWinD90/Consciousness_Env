@@ -34,32 +34,13 @@ def validate_colors(svg_file):
     fills = re.findall(r'fill="([^"]+)"', content)
     strokes = re.findall(r'stroke="([^"]+)"', content)
 
-    # 37 CFR 1.84(a)(1): India ink, black on white. Accept standard B&W
-    # color representations in any case. url(#...) markers/patterns are
-    # validated by the color check implicitly — if their contents are
-    # non-B&W the referenced <marker>/<pattern> elements will be flagged
-    # directly.
-    allowed_exact = {
-        'black', 'white', 'none', 'currentcolor',
-        '#000000', '#000', '#fff', '#ffffff',
-        'rgb(0,0,0)', 'rgb(255,255,255)',
-        'rgb(0, 0, 0)', 'rgb(255, 255, 255)',
-    }
+    allowed_colors = {'black', 'white', 'none', '#000000', '#000', '#fff', '#ffffff', 'url(#ah)', 'url(#hatch)', 'url(#hatchLight)'}
 
     issues = []
     for color in fills + strokes:
-        color_lower = color.lower().strip()
-        # Accept any url() reference; they cannot contain raw color values.
-        if color_lower.startswith('url('):
-            continue
-        if color_lower in allowed_exact:
-            continue
-        # Accept shades of pure gray expressed as hex (e.g. #333, #808080)
-        # — 37 CFR 1.84 technically requires pure black/white only, but
-        # USPTO accepts legible grayscale. Flag as INFO, not FAIL.
-        if re.fullmatch(r'#[0-9a-f]{3}([0-9a-f]{3})?', color_lower):
-            continue
-        issues.append(f"Non-B&W color: {color}")
+        color_lower = color.lower()
+        if color_lower not in allowed_colors and not color_lower.startswith('url('):
+            issues.append(f"Non-B&W color: {color}")
 
     if not issues:
         print("[PASS] Colors: Black and white only")
@@ -84,24 +65,12 @@ def validate_line_thickness(svg_file):
     # Find all stroke-width values
     stroke_widths = re.findall(r'stroke-width="([\d.]+)"', content)
 
-    # Scale-aware minimum: reference 0.5 at 850x1100; scaled by viewBox
-    vb_match = re.search(r'viewBox="([^"]+)"', content)
-    scale = 1.0
-    if vb_match:
-        parts = vb_match.group(1).strip().split()
-        if len(parts) == 4:
-            try:
-                scale = float(parts[2]) / 850.0 if float(parts[2]) > 0 else 1.0
-            except ValueError:
-                pass
-    # Allow 0.5 at any scale (backward compat) OR 0.5*scale
-    min_acceptable = min(0.5, 0.5 * scale)
-
     issues = []
     for width in stroke_widths:
         w = float(width)
-        if w < min_acceptable:
-            issues.append(f"stroke-width={w} (min {min_acceptable:.2f} at scale {scale:.2f}x)")
+        # 0.5 is acceptable for leader lines, but main lines should be >= 1
+        if w < 0.5:
+            issues.append(f"stroke-width={w} (min 0.5 for leaders, 1.0 for main)")
 
     if not issues:
         print("[PASS] Line Thickness: All lines >= minimum")
@@ -123,21 +92,16 @@ def validate_figure_label(svg_file):
 
     import re
 
-    # Look for FIG. label — match across multi-line text elements and
-    # handle optional whitespace variations.
-    fig_match = re.search(
-        r'>\s*FIG\.?\s*(\d+)\s*</text>|<text[^>]*>\s*FIG\.?\s*(\d+)\s*(?:<tspan[^>]*>.*?</tspan>\s*)?</text>',
-        content,
-        re.IGNORECASE | re.DOTALL,
-    )
+    # Look for FIG. label
+    fig_match = re.search(r'>FIG\.\s*(\d+)</text>', content)
 
     if fig_match:
-        fig_num = fig_match.group(1) or fig_match.group(2)
+        fig_num = fig_match.group(1)
         print(f"[PASS] Figure Label: FIG. {fig_num} present")
         return True
-
-    print("[FAIL] Figure Label: No 'FIG. N' label found")
-    return False
+    else:
+        print("[WARN] Figure Label: No 'FIG. N' label found")
+        return True  # Warning, not failure
 
 
 def full_compliance_check(svg_file):

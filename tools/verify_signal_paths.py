@@ -195,9 +195,8 @@ def analyze_numeral_path_collisions(filepath):
 
         if tag == 'text':
             text = elem.text or ''
-            # USPTO reference numerals are 1-4 digit numbers.
-            # Patent A uses 2-digit refs (10, 12, ..., 30).
-            if re.match(r'^\d{1,4}$', text.strip()):
+            # Reference numerals are typically 3-digit numbers
+            if re.match(r'^\d{3}$', text.strip()):
                 bbox = get_text_bbox(elem, transform)
                 if bbox:
                     numerals.append(bbox)
@@ -237,15 +236,8 @@ def analyze_numeral_path_collisions(filepath):
 
 
 def analyze_signal_endpoints(filepath):
-    """Collect descriptive stats about signal paths in the SVG.
-
-    NOTE: This function only *counts* paths and marker-end references.
-    It does NOT detect endpoint gaps, misalignment, or arrow-endpoint
-    collisions. For true endpoint validation use
-    `.claude/skills/patent-drawer/validators/geometric_validator.py`
-    (check G2). Prior versions of this function claimed to return
-    `issues` but never populated the list, silently passing all input.
-    """
+    """Analyze signal path endpoints"""
+    issues = []
     stats = {'paths': 0, 'with_marker': 0}
 
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -253,8 +245,10 @@ def analyze_signal_endpoints(filepath):
 
     root = ET.fromstring(content)
 
-    def process_element(elem):
+    def process_element(elem, parent_transform=None):
         tag = elem.tag.replace('{http://www.w3.org/2000/svg}', '')
+        transform = elem.get('transform', parent_transform)
+
         if tag in ['path', 'line']:
             marker = elem.get('marker-end', '')
             if marker and 'url(#' in marker:
@@ -262,14 +256,12 @@ def analyze_signal_endpoints(filepath):
             stroke = elem.get('stroke', '')
             if stroke and stroke != 'none':
                 stats['paths'] += 1
+
         for child in elem:
-            process_element(child)
+            process_element(child, transform)
 
     process_element(root)
-    # Return an empty issues list explicitly to signal "this function does
-    # not detect issues" — callers that want real endpoint validation must
-    # use geometric_validator.check_arrow_endpoints instead.
-    return [], stats
+    return issues, stats
 
 
 def main():

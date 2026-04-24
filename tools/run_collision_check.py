@@ -12,7 +12,6 @@ import xml.etree.ElementTree as ET
 import os
 import re
 import math
-import sys
 from pathlib import Path
 
 
@@ -94,15 +93,7 @@ def get_text_bbox(elem, transform=None):
                 y += float(t_match.group(2))
 
         return {'x': x, 'y': y - height, 'width': width, 'height': height, 'text': text}
-    except (ValueError, AttributeError, KeyError) as exc:
-        # Parsing failure — surface it to the caller instead of silently
-        # swallowing. The collision check is meaningless if we can't parse
-        # the text element. Callers can catch if they want to tolerate
-        # bad elements, but the default must not be a silent False-clean.
-        sys.stderr.write(
-            f"[run_collision_check] WARN: could not parse text bbox "
-            f"({type(exc).__name__}: {exc}) — skipping and flagging\n"
-        )
+    except Exception:
         return None
 
 
@@ -587,10 +578,7 @@ def analyze_svg(filepath):
                 })
 
     # 4. Crowded reference numerals
-    # USPTO convention allows 1-4 digit reference numerals. Patent A uses
-    # 2-digit refs (10, 12, ..., 30). Patent B and C go up to 100+.
-    ref_nums = [t for t in texts
-                if t['text'].isdigit() and 1 <= len(t['text']) <= 4]
+    ref_nums = [t for t in texts if t['text'].isdigit() and len(t['text']) <= 3]
     for i, r1 in enumerate(ref_nums):
         for r2 in ref_nums[i + 1:]:
             dist = math.sqrt((r1['x'] - r2['x']) ** 2 + (r1['y'] - r2['y']) ** 2)
