@@ -227,7 +227,16 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
             continue
         if w > 800 or h > 800:
             continue
-        if y > 790:
+        # Legend-zone filter (bottom of page, y > 790). Two categories
+        # of rect live in this zone and need different treatment:
+        #  - Legend containers (typically w > 100) and small legend
+        #    icons (w < 15 or h < 15) are decorative; skip them so
+        #    they are neither G2 targets nor G3 obstacles.
+        #  - Regular diagram boxes in the 15..100 size range (e.g.,
+        #    flow-diagram terminal boxes in patent_c/fig5 at y=800,
+        #    80x30) remain valid G2 arrow targets.
+        # Above y=790, all rects are kept.
+        if y > 790 and (w > 100 or h > 40 or w < 15 or h < 15):
             continue
         rects.append(Rect(x, y, w, h))
 
