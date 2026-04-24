@@ -11,7 +11,15 @@ from pathlib import Path
 
 
 def parse_transform(transform_str):
-    """Extract translation from transform attribute."""
+    """Extract translation from a transform attribute.
+
+    Scope: only ``translate(tx[, ty])`` is recognized. Other transform
+    functions (``rotate``, ``scale``, ``skewX``/``skewY``, ``matrix``)
+    are silently ignored — bounding boxes are computed in the untransformed
+    local coord system. Callers that parse figures with rotated or scaled
+    groups should pre-strip those groups (see ``has_unsupported_transform``
+    below) to avoid mixing local and canvas coordinates.
+    """
     if not transform_str:
         return 0, 0
     match = re.search(r'translate\s*\(\s*([\d.-]+)\s*,?\s*([\d.-]+)?\s*\)', transform_str)
@@ -20,6 +28,22 @@ def parse_transform(transform_str):
         ty = float(match.group(2)) if match.group(2) else 0
         return tx, ty
     return 0, 0
+
+
+def has_unsupported_transform(transform_str):
+    """Return True when the transform contains a function this tool can't
+    compose (anything other than a leading ``translate``).
+
+    Use this to skip subtrees whose local coordinates can't be directly
+    compared against canvas coordinates, rather than silently treating
+    their local coords as canvas coords. The main
+    ``.claude/skills/patent-drawer/validators/geometric_validator.py``
+    uses the same conservative strategy (see ``strip_rotated_groups``
+    there).
+    """
+    if not transform_str:
+        return False
+    return bool(re.search(r'\b(rotate|scale|skewX|skewY|matrix)\s*\(', transform_str))
 
 
 def get_text_bbox(elem, parent_transform=(0, 0)):
