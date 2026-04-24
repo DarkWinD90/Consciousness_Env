@@ -168,6 +168,34 @@ def detect_transform_offset(content: str) -> Tuple[float, float]:
     return 0.0, 0.0
 
 
+def strip_rotated_groups(content: str) -> str:
+    """Remove the contents of nested ``<g>`` groups whose transform
+    includes a ``rotate(...)`` component.
+
+    Rotated subtree contents use local coordinates that are not
+    directly comparable to canvas coordinates; composing the full
+    affine transform properly would require matrix math which this
+    validator deliberately does not implement. Instead we accept
+    that rotated subtree contents (typically small decorative
+    symbols like diode triangles, axis-label text, rectifier
+    symbols) are not evaluated for geometric collisions, and remove
+    them from the input stream entirely.
+
+    Handles single-level nesting only — if a rotated group contains
+    further `<g>` groups they are stripped with the parent. The
+    existing patent figures do not nest beyond one level inside a
+    rotated group.
+    """
+    if 'rotate(' not in content:
+        return content
+    # Non-greedy match of a <g ... transform="...rotate...">...</g> block
+    pattern = re.compile(
+        r'<g\s+[^>]*transform="[^"]*rotate\([^)]*\)[^"]*"[^>]*>.*?</g>',
+        re.DOTALL,
+    )
+    return pattern.sub('', content)
+
+
 def _attr(tag_str: str, name: str) -> Optional[str]:
     """Extract a single attribute value from an SVG tag string."""
     m = re.search(rf'{name}="([^"]*)"', tag_str)
@@ -227,16 +255,19 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
             continue
         if w > 800 or h > 800:
             continue
-        # Legend-zone filter (bottom of page, y > 790). Two categories
+        # Legend-zone filter (bottom of page, y > 790). Three categories
         # of rect live in this zone and need different treatment:
-        #  - Legend containers (typically w > 100) and small legend
-        #    icons (w < 15 or h < 15) are decorative; skip them so
-        #    they are neither G2 targets nor G3 obstacles.
-        #  - Regular diagram boxes in the 15..100 size range (e.g.,
-        #    flow-diagram terminal boxes in patent_c/fig5 at y=800,
-        #    80x30) remain valid G2 arrow targets.
-        # Above y=790, all rects are kept.
-        if y > 790 and (w > 100 or h > 40 or w < 15 or h < 15):
+        #  - Wide legend containers (w > 400, e.g. patent_a/fig7's
+        #    638x40 legend strip): skip.
+        #  - Tiny legend icons (w < 15 or h < 15, e.g. patent_a/fig7's
+        #    8x8 markers): skip — too small to be a diagram element,
+        #    typically bullet-markers inside a legend container.
+        #  - Regular diagram boxes in the 15..400 width range (e.g.,
+        #    patent_a/fig4's 140x50 SNN dashed box at y=820,
+        #    patent_c/fig5's 80x30 output boxes at y=800) remain
+        #    valid G2 arrow targets.
+        # Above y=790, all rects are kept regardless of size.
+        if y > 790 and (w > 400 or w < 15 or h < 15):
             continue
         rects.append(Rect(x, y, w, h))
 
@@ -642,11 +673,16 @@ def validate_geometry(svg_file: str) -> bool:
     print(f"{'='*60}\n")
 
     dx, dy = detect_transform_offset(content)
-    rects = parse_rects(content, dx, dy)
-    line_segs = parse_lines(content, dx, dy)
-    path_segs = parse_paths(content, dx, dy)
+    # Rotated nested groups contain local coordinates that can't be
+    # directly composed without matrix math. Strip them so their
+    # contents don't register as spurious content at x=0..20, y=0..20
+    # (common diode/rectifier symbol positions after rotate(...)).
+    parsed = strip_rotated_groups(content)
+    rects = parse_rects(parsed, dx, dy)
+    line_segs = parse_lines(parsed, dx, dy)
+    path_segs = parse_paths(parsed, dx, dy)
     all_segs = line_segs + path_segs
-    texts = parse_texts(content, dx, dy)
+    texts = parse_texts(parsed, dx, dy)
 
     print(f"[INFO] Found {len(rects)} element boxes")
     print(f"[INFO] Found {len(all_segs)} signal path segments")
