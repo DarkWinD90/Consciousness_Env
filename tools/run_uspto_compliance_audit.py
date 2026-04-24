@@ -389,7 +389,17 @@ def evaluate_diagram_hygiene(
                     break
         if not is_container:
             collision_components.append(c)
-    signal_paths = [s for s in shapes if s.tag in {"line", "polyline", "path"} and (s.has_marker or s.dashed)]
+    # Signal paths: line/polyline/path with marker or dash, AND stroke-width >= 1.0.
+    # The width gate lets SVG authors demote decorative dashed annotations
+    # (e.g., optimal-zone axis markers) below the threshold so they are not
+    # treated as functional signal lines for endpoint/crossing checks. The
+    # geometric_validator skill follows the same convention.
+    signal_paths = [
+        s for s in shapes
+        if s.tag in {"line", "polyline", "path"}
+        and (s.has_marker or s.dashed)
+        and s.stroke_width >= 1.0
+    ]
     # Leader lines: thin lines/paths with no marker and not dashed.
     # 37 CFR 1.84(q) leader lines are unbroken thin lines; real patent leaders
     # commonly use stroke-width 0.5-1.0. The marker/dashed exclusion separates
