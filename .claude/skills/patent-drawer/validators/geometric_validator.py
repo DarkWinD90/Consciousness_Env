@@ -278,6 +278,39 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
         # but is on-boundary for the true ellipse.
         rects.append(Rect(cx - rx, cy - ry, 2 * rx, 2 * ry, kind="ellipse"))
 
+    for m in re.finditer(r'<polygon\b([^>]*)/?>', content):
+        attrs = m.group(1)
+        points_m = re.search(r'points="([^"]+)"', attrs)
+        if not points_m:
+            continue
+        # Extract coordinate pairs. Points can be separated by commas,
+        # spaces, or both; normalize to a list of floats.
+        numbers = re.findall(r'[-+]?\d*\.?\d+', points_m.group(1))
+        if len(numbers) < 6:  # need >= 3 vertices
+            continue
+        xs = [float(n) + dx for n in numbers[0::2]]
+        ys = [float(n) + dy for n in numbers[1::2]]
+        x_min, x_max = min(xs), max(xs)
+        y_min, y_max = min(ys), max(ys)
+        w = x_max - x_min
+        h = y_max - y_min
+        if w == 0 or h == 0:
+            continue
+        # Skip polygons that are arrowhead caps (tiny manual arrowhead
+        # polygons used as alternatives to marker-end). Standard cap
+        # size is under 18x18 at reference scale.
+        if w < 18 and h < 18:
+            continue
+        if w > 800 or h > 800:
+            continue
+        if y_min > 790 and (w > 100 or h > 40 or w < 15 or h < 15):
+            continue
+        # Store as rect (axis-aligned bounding box). For compliance
+        # tolerance (1.0u) this is accurate enough at the cardinal
+        # extremes where arrows typically land on polygon targets
+        # (e.g., the top vertex of a decision diamond).
+        rects.append(Rect(x_min, y_min, w, h))
+
     return rects
 
 
