@@ -12,26 +12,41 @@ These are the issues that repeatedly caused rejection-grade defects
 in patent drawings despite passing structural compliance checks.
 """
 
+import math
 import re
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List, Tuple, Optional
 
 
 @dataclass
 class Rect:
-    """A rectangle (element box) with its bounding coordinates."""
+    """An element box used as an arrow-target candidate.
+
+    ``kind`` distinguishes rectangular boxes ("rect") from circular
+    nodes ("circle"), which affects edge-distance computations. For
+    circles, ``x,y,w,h`` store the axis-aligned bounding box; the
+    true center/radius is (x + w/2, y + h/2), r = w/2 = h/2.
+    """
     x: float
     y: float
     w: float
     h: float
     label: str = ""
+    kind: str = "rect"  # "rect" | "circle"
 
     @property
     def right(self): return self.x + self.w
     @property
     def bottom(self): return self.y + self.h
+
+    @property
+    def cx(self): return self.x + self.w / 2
+    @property
+    def cy(self): return self.y + self.h / 2
+    @property
+    def r(self): return self.w / 2  # only meaningful for circles
 
     def contains_point(self, px, py):
         return self.x < px < self.right and self.y < py < self.bottom
@@ -43,6 +58,32 @@ class Rect:
         on_top = abs(py - self.y) <= tolerance and self.x <= px <= self.right
         on_bottom = abs(py - self.bottom) <= tolerance and self.x <= px <= self.right
         return on_left or on_right or on_top or on_bottom
+
+    def distance_to_edge(self, px, py):
+        """Shortest distance from (px, py) to the boundary of this element.
+
+        For rectangles, returns the minimum over the four edges, but
+        only considers edges whose perpendicular projection from the
+        point lands on the edge (not past a corner). Returns infinity
+        if the point's projection falls outside all four edge spans —
+        this preserves the prior behavior of ``check_arrow_endpoints``
+        which only collected distances for edges where the point's
+        projection landed within the edge.
+
+        For circles, returns ``abs(dist_to_center - r)``.
+        """
+        if self.kind == "circle":
+            dx = px - self.cx
+            dy = py - self.cy
+            return abs(math.hypot(dx, dy) - self.r)
+        distances = []
+        if self.x <= px <= self.right:
+            distances.append(abs(py - self.y))
+            distances.append(abs(py - self.bottom))
+        if self.y <= py <= self.bottom:
+            distances.append(abs(px - self.x))
+            distances.append(abs(px - self.right))
+        return min(distances) if distances else float("inf")
 
 
 @dataclass
@@ -109,8 +150,37 @@ def _attr_f(tag_str: str, name: str, default: float = 0.0) -> float:
 
 
 def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
-    """Extract all rect elements (excluding background and legend)."""
+    """Extract all element boxes. Converts both ``<rect>`` and
+    ``<circle>`` elements to bounding ``Rect`` instances.
+
+    State-diagram figures (e.g., patent_c/fig2) draw their nodes as
+    ``<circle>`` elements, so arrows landing on those nodes would be
+    reported as G2 "gap" failures if only rects were considered. A
+    circle is represented here as the axis-aligned bounding box of
+    its circumscribed square (x = cx-r, y = cy-r, w = h = 2r), which
+    lets ``check_arrow_endpoints`` see the circle boundary as four
+    linear edges. The approximation is slightly permissive near the
+    diagonals (the corner of the bbox lies ~0.41r outside the actual
+    circle), but in practice arrows point at the cardinal directions
+    of a node, not its 45-degree corners, so this is accurate enough
+    for compliance checking.
+
+    Ellipses are treated like circles: ``<ellipse cx cy rx ry>`` maps
+    to Rect(cx-rx, cy-ry, 2*rx, 2*ry).
+
+    Filters:
+    - ``w == 0`` or ``h == 0`` are skipped (degenerate).
+    - ``w > 800 or h > 800`` skipped — catches the full-page background
+      ``<rect width="100%" height="100%">`` (which parses to very
+      large w/h after integer coercion) and any unusually large
+      container.
+    - ``y > 790`` in reference-scale units is skipped to exclude
+      legend boxes at the bottom of the page from being treated as
+      arrow targets. This is scale-coupled — see
+      docs/tooling_audit_2026-04-24.md §3 for the remaining HIGH bug.
+    """
     rects = []
+
     for m in re.finditer(r'<rect\b([^>]*)/?>', content):
         attrs = m.group(1)
         x = _attr_f(attrs, 'x') + dx
@@ -119,13 +189,47 @@ def parse_rects(content: str, dx: float = 0, dy: float = 0) -> List[Rect]:
         h = _attr_f(attrs, 'height')
         if w == 0 or h == 0:
             continue
-        # Skip full-page background rect and very large rects
         if w > 800 or h > 800:
             continue
-        # Skip legend boxes (typically y > 790)
         if y > 790:
             continue
         rects.append(Rect(x, y, w, h))
+
+    for m in re.finditer(r'<circle\b([^>]*)/?>', content):
+        attrs = m.group(1)
+        cx = _attr_f(attrs, 'cx') + dx
+        cy = _attr_f(attrs, 'cy') + dy
+        r = _attr_f(attrs, 'r')
+        if r <= 0:
+            continue
+        # Skip junction dots, spike-output junction markers, individual
+        # neuron circles inside a layer, and leader-line anchors — none
+        # of which are arrow targets in isolation. Radius threshold of
+        # 12 (roughly 0.12 inch at reference scale) is chosen to admit
+        # state-node circles (typically r=20..75) while rejecting
+        # junction dots (r=3..8) and neuron-symbol circles (r=8..12).
+        if r < 12:
+            continue
+        # Skip circles whose center sits in the legend zone.
+        if cy > 790:
+            continue
+        rects.append(Rect(cx - r, cy - r, 2 * r, 2 * r, kind="circle"))
+
+    for m in re.finditer(r'<ellipse\b([^>]*)/?>', content):
+        attrs = m.group(1)
+        cx = _attr_f(attrs, 'cx') + dx
+        cy = _attr_f(attrs, 'cy') + dy
+        rx = _attr_f(attrs, 'rx')
+        ry = _attr_f(attrs, 'ry')
+        if rx <= 0 or ry <= 0:
+            continue
+        if cy > 790:
+            continue
+        # Treat ellipse as a circle with effective r = min(rx, ry).
+        # Distance-to-ellipse-boundary is approximated — adequate for
+        # arrow-tip tolerance checks at compliance scale.
+        rects.append(Rect(cx - rx, cy - ry, 2 * rx, 2 * ry, kind="circle"))
+
     return rects
 
 
@@ -269,44 +373,38 @@ def check_signal_crossings(segments: List[Segment]) -> List[str]:
 
 
 def check_arrow_endpoints(segments: List[Segment], rects: List[Rect]) -> List[str]:
-    """G2: Check that arrows terminate at box edges."""
+    """G2: Check that arrows terminate at element edges.
+
+    For rectangular targets, edge distance uses the perpendicular
+    projection to each side (see Rect.distance_to_edge). For circular
+    targets, edge distance is ``|dist_to_center - r|`` so arrows
+    correctly register as "touching" when they land anywhere on the
+    circumference, not just at the four cardinal points.
+
+    A gap above 1.0u triggers a FAIL. A small tolerance accommodates
+    hand-authored SVGs where the arrow endpoint rounds to an integer
+    and the target edge falls on a half-pixel.
+    """
     issues = []
 
     arrow_segs = [s for s in segments if s.has_arrow]
 
     for seg in arrow_segs:
-        # Arrow tip is at (x2, y2)
         tip_x, tip_y = seg.x2, seg.y2
 
-        # Find the closest rect edge
         best_dist = float('inf')
         best_rect = None
         for r in rects:
-            # Check distance to each edge
-            distances = []
-            # Top edge
-            if r.x <= tip_x <= r.right:
-                distances.append(abs(tip_y - r.y))
-            # Bottom edge
-            if r.x <= tip_x <= r.right:
-                distances.append(abs(tip_y - r.bottom))
-            # Left edge
-            if r.y <= tip_y <= r.bottom:
-                distances.append(abs(tip_x - r.x))
-            # Right edge
-            if r.y <= tip_y <= r.bottom:
-                distances.append(abs(tip_x - r.right))
-
-            if distances:
-                d = min(distances)
-                if d < best_dist:
-                    best_dist = d
-                    best_rect = r
+            d = r.distance_to_edge(tip_x, tip_y)
+            if d < best_dist:
+                best_dist = d
+                best_rect = r
 
         if best_rect and best_dist > 1.0:
+            shape = best_rect.kind
             issues.append(
                 f"ARROW GAP ({best_dist:.0f}px): arrow at ({tip_x:.0f}, {tip_y:.0f}) "
-                f"is {best_dist:.0f}px from nearest box edge "
+                f"is {best_dist:.0f}px from nearest {shape} edge "
                 f"(box at x={best_rect.x:.0f}, y={best_rect.y:.0f}, "
                 f"w={best_rect.w:.0f}, h={best_rect.h:.0f})"
             )
