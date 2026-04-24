@@ -356,9 +356,28 @@ class EnhancedCollisionChecker:
 
     @staticmethod
     def _is_connector(line_bbox: BBox, rect_bbox: BBox) -> bool:
-        """Check if line is a connector touching a component."""
-        # Connectors typically touch component edges
-        return True  # For now, assume all line-rect contacts are connectors
+        """Check if a line's endpoint terminates on a rect edge (connector).
+
+        A line is treated as a connector (not a collision) when at least one
+        of its endpoints lies on one of the rect's edges within a small
+        tolerance. If a line merely *crosses* the rect interior without
+        terminating at its edge, it is NOT a connector and must be flagged.
+        """
+        tol = 2.0
+        x1, y1 = line_bbox.x1, line_bbox.y1
+        x2, y2 = line_bbox.x2, line_bbox.y2
+        rx, ry = rect_bbox.x1, rect_bbox.y1
+        r_right = rect_bbox.x2
+        r_bottom = rect_bbox.y2
+
+        def on_edge(px, py):
+            on_left = abs(px - rx) <= tol and ry - tol <= py <= r_bottom + tol
+            on_right = abs(px - r_right) <= tol and ry - tol <= py <= r_bottom + tol
+            on_top = abs(py - ry) <= tol and rx - tol <= px <= r_right + tol
+            on_bottom = abs(py - r_bottom) <= tol and rx - tol <= px <= r_right + tol
+            return on_left or on_right or on_top or on_bottom
+
+        return on_edge(x1, y1) or on_edge(x2, y2)
 
     @staticmethod
     def _is_pin_label(text: str) -> bool:
@@ -603,9 +622,15 @@ class EnhancedCollisionChecker:
         c1 = b1.center
         c2 = b2.center
 
-        # Find gap along the line
+        # Walk from c1 toward c2, tracking the longest contiguous run of
+        # "empty" samples (no dark pixels in the small window). That run
+        # length, in viewBox units, is the visible gap between the two
+        # elements. Previously this loop hit the empty branch with `pass`
+        # and never updated min_gap — the function always returned inf /
+        # None, defeating the pixel-level check.
         steps = 100
-        min_gap = float('inf')
+        current_gap_steps = 0
+        longest_gap_steps = 0
 
         for i in range(steps):
             t = i / steps
@@ -613,18 +638,24 @@ class EnhancedCollisionChecker:
             y = c1[1] + t * (c2[1] - c1[1])
             px, py = vb_to_px(x, y)
 
-            # Check a small window for dark pixels
-            window = pixels[max(0,py-3):py+4, max(0,px-3):px+4]
-            if window.size > 0:
-                dark = np.sum(window < 200)
-                if dark == 0:
-                    # Found a gap
-                    pass
-                else:
-                    min_gap = 0
-                    break
+            window = pixels[max(0, py - 3):py + 4, max(0, px - 3):px + 4]
+            if window.size == 0:
+                continue
+            dark = int(np.sum(window < 200))
+            if dark == 0:
+                current_gap_steps += 1
+                if current_gap_steps > longest_gap_steps:
+                    longest_gap_steps = current_gap_steps
+            else:
+                current_gap_steps = 0
 
-        return min_gap / scale if min_gap < float('inf') else None
+        if longest_gap_steps == 0:
+            # Elements touch or overlap — gap is 0.
+            return 0.0
+
+        # Convert step count back to viewBox units along the c1→c2 vector.
+        total_distance = ((c2[0] - c1[0]) ** 2 + (c2[1] - c1[1]) ** 2) ** 0.5
+        return (longest_gap_steps / steps) * total_distance
 
     def validate_with_pixels(self) -> List[Collision]:
         """Validate collisions using pixel-level rendering."""

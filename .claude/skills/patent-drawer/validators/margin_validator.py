@@ -14,19 +14,61 @@ import re
 from pathlib import Path
 
 
+def _detect_scale(svg_content):
+    """Return viewBox width/height/scale factor.
+
+    The reference coordinate system is 850x1100 (100 units/inch).
+    Scale = viewBox_width / 850.  All hardcoded thresholds expressed in
+    reference units are multiplied by `scale` to get threshold values in
+    the actual viewBox units.
+    """
+    m = re.search(r'viewBox="([^"]+)"', svg_content)
+    if not m:
+        return 850.0, 1100.0, 1.0
+    parts = m.group(1).strip().split()
+    if len(parts) != 4:
+        return 850.0, 1100.0, 1.0
+    try:
+        _, _, vb_w, vb_h = (float(p) for p in parts)
+    except ValueError:
+        return 850.0, 1100.0, 1.0
+    scale = vb_w / 850.0 if vb_w > 0 else 1.0
+    return vb_w, vb_h, scale
+
+
 def extract_coordinates(svg_content):
-    """Extract all x, y, x1, y1, x2, y2, cx, cy coordinates from SVG."""
+    """Extract all coordinate attributes and check them against
+    scale-aware 1-inch USPTO margins (37 CFR 1.84(g))."""
     issues = []
 
-    # Remove <defs>...</defs> section - these are pattern/marker definitions, not content
+    vb_w, vb_h, scale = _detect_scale(svg_content)
+
+    # Reference thresholds (850x1100 scale): left>=100, right<=750,
+    # top>=100, bottom<=1000. Header (y<=60) and footer (y>970) skipped.
+    left_min = 100 * scale
+    right_max = 750 * scale
+    top_min = 100 * scale
+    bottom_max = 1000 * scale
+    header_cutoff = 60 * scale
+    footer_cutoff = 970 * scale
+
+    # Remove <defs>...</defs> — pattern/marker definitions, not content
     content_without_defs = re.sub(r'<defs>.*?</defs>', '', svg_content, flags=re.DOTALL)
 
-    # Check for transform offset
-    has_transform = 'transform="translate(0, 50)"' in svg_content
-    y_offset = 50 if has_transform else 0
+    # Detect any top-level <g transform="translate(dx, dy)"> wrapper so that
+    # inner content coordinates are shifted to their rendered position
+    # before margin checks. Typical patterns: translate(0, 50) for 850x1100
+    # and translate(300, 300) for 2550x3300.
+    x_offset = 0.0
+    y_offset = 0.0
+    tm = re.search(
+        r'<g[^>]*\btransform="translate\(\s*(-?[\d.]+)\s*[,\s]\s*(-?[\d.]+)\s*\)"',
+        svg_content,
+    )
+    if tm:
+        x_offset = float(tm.group(1))
+        y_offset = float(tm.group(2))
 
-    # Find all coordinate attributes (excluding defs content)
-    # x="value" patterns
     x_coords = re.findall(r'\bx="([\d.]+)"', content_without_defs)
     y_coords = re.findall(r'\by="([\d.]+)"', content_without_defs)
     x1_coords = re.findall(r'\bx1="([\d.]+)"', content_without_defs)
@@ -36,35 +78,34 @@ def extract_coordinates(svg_content):
     cx_coords = re.findall(r'\bcx="([\d.]+)"', content_without_defs)
     cy_coords = re.findall(r'\bcy="([\d.]+)"', content_without_defs)
 
-    # Check rect elements for x + width bounds
-    rect_matches = re.findall(r'<rect[^>]*x="([\d.]+)"[^>]*width="([\d.]+)"', content_without_defs)
+    rect_matches = re.findall(
+        r'<rect[^>]*x="([\d.]+)"[^>]*width="([\d.]+)"',
+        content_without_defs,
+    )
 
-    # Check all x coordinates
-    all_x = x_coords + x1_coords + x2_coords + cx_coords
-    for x in all_x:
-        x_val = float(x)
-        if x_val < 100:
-            issues.append(f"Left margin violation: x={x_val} (min 100)")
-        if x_val > 750:
-            issues.append(f"Right margin violation: x={x_val} (max 750)")
+    for x in x_coords + x1_coords + x2_coords + cx_coords:
+        x_val = float(x) + x_offset
+        if x_val < left_min:
+            issues.append(f"Left margin violation: x={x_val:.1f} (min {left_min:.1f})")
+        if x_val > right_max:
+            issues.append(f"Right margin violation: x={x_val:.1f} (max {right_max:.1f})")
 
-    # Check rect right edges
     for x, width in rect_matches:
-        right_edge = float(x) + float(width)
-        if right_edge > 750:
-            issues.append(f"Right margin violation: rect extends to x={right_edge} (max 750)")
+        right_edge = float(x) + float(width) + x_offset
+        if right_edge > right_max:
+            issues.append(
+                f"Right margin violation: rect extends to x={right_edge:.1f} "
+                f"(max {right_max:.1f})"
+            )
 
-    # Check all y coordinates (accounting for transform)
-    all_y = y_coords + y1_coords + y2_coords + cy_coords
-    for y in all_y:
+    for y in y_coords + y1_coords + y2_coords + cy_coords:
         y_val = float(y) + y_offset
-        # Skip page number at top (y<=60) and FIG label at bottom (y>970)
-        if y_val <= 60 or y_val > 970:
+        if y_val <= header_cutoff or y_val > footer_cutoff:
             continue
-        if y_val < 100:
-            issues.append(f"Top margin violation: y={y_val} (min 100)")
-        if y_val > 1000:
-            issues.append(f"Bottom margin violation: y={y_val} (max 1000)")
+        if y_val < top_min:
+            issues.append(f"Top margin violation: y={y_val:.1f} (min {top_min:.1f})")
+        if y_val > bottom_max:
+            issues.append(f"Bottom margin violation: y={y_val:.1f} (max {bottom_max:.1f})")
 
     return issues
 
@@ -77,14 +118,29 @@ def validate_margins(svg_file):
         print(f"[ERROR] Could not read file: {e}")
         return False
 
-    # Check viewBox
+    # Check viewBox. USPTO 37 CFR 1.84(f) requires 8.5in x 11in sheets.
+    # Any aspect-correct viewBox is acceptable as long as the rendered
+    # size is 8.5x11 inches. We accept 0 0 W H when W:H ≈ 850:1100
+    # (ratio 0.7727). This correctly accepts 0 0 2550 3300 (300 DPI).
     viewbox_match = re.search(r'viewBox="([^"]+)"', content)
     if viewbox_match:
-        viewbox = viewbox_match.group(1)
-        if viewbox == "0 0 850 1100":
-            print(f"[PASS] ViewBox: {viewbox}")
+        viewbox = viewbox_match.group(1).strip()
+        parts = viewbox.split()
+        valid = False
+        if len(parts) == 4:
+            try:
+                _, _, vb_w, vb_h = (float(p) for p in parts)
+                if vb_w > 0 and vb_h > 0:
+                    ratio = vb_w / vb_h
+                    if abs(ratio - 850 / 1100) < 0.01:
+                        valid = True
+            except ValueError:
+                pass
+        if valid:
+            print(f"[PASS] ViewBox: {viewbox} (8.5:11 aspect)")
         else:
-            print(f"[FAIL] ViewBox: {viewbox} (expected '0 0 850 1100')")
+            print(f"[FAIL] ViewBox: {viewbox} (expected 8.5:11 aspect ratio, "
+                  f"e.g. '0 0 850 1100' or '0 0 2550 3300')")
             return False
     else:
         print("[FAIL] ViewBox: Not found")

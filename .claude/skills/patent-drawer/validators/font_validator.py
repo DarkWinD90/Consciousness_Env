@@ -14,13 +14,35 @@ import re
 from pathlib import Path
 
 
+def _detect_scale(content):
+    """Detect viewBox width and return scale factor vs reference 850 units."""
+    m = re.search(r'viewBox="([^"]+)"', content)
+    if not m:
+        return 1.0
+    parts = m.group(1).strip().split()
+    if len(parts) != 4:
+        return 1.0
+    try:
+        vb_w = float(parts[2])
+        return vb_w / 850.0 if vb_w > 0 else 1.0
+    except ValueError:
+        return 1.0
+
+
 def validate_fonts(svg_file):
-    """Validate font sizes and families in SVG file."""
+    """Validate font sizes (37 CFR 1.84(p)) — >= 14pt equivalent.
+
+    Scale-aware: thresholds in reference 850-unit viewBox multiplied by
+    the SVG's actual viewBox width / 850.
+    """
     try:
         content = Path(svg_file).read_text(encoding='utf-8')
     except Exception as e:
         print(f"[ERROR] Could not read file: {e}")
         return False
+
+    scale = _detect_scale(content)
+    min_font_size = 14 * scale
 
     # Find all text elements with font attributes
     text_pattern = r'<text[^>]*>'
@@ -30,15 +52,18 @@ def validate_fonts(svg_file):
     family_issues = []
 
     for i, elem in enumerate(text_elements, 1):
-        # Extract font-size
-        size_match = re.search(r'font-size="(\d+)"', elem)
+        # Extract font-size — accept int or decimal
+        size_match = re.search(r'font-size="([\d.]+)"', elem)
         if size_match:
-            size = int(size_match.group(1))
-            if size < 14:
+            size = float(size_match.group(1))
+            if size < min_font_size:
                 # Find line number
                 pos = content.find(elem)
                 line_num = content[:pos].count('\n') + 1
-                size_issues.append(f"Line {line_num}: font-size={size}pt (min 14pt)")
+                size_issues.append(
+                    f"Line {line_num}: font-size={size} "
+                    f"(min {min_font_size:.1f} at this scale)"
+                )
 
         # Extract font-family
         family_match = re.search(r'font-family="([^"]+)"', elem)

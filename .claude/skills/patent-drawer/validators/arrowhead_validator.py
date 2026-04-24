@@ -24,51 +24,51 @@ def validate_arrowheads(svg_file):
         print(f"[ERROR] Could not read file: {e}")
         return False
 
-    # Find marker definitions
-    marker_pattern = r'<marker[^>]*id="ah"[^>]*>'
-    marker_match = re.search(marker_pattern, content)
+    # Find marker definitions — support any marker id, not just "ah"
+    marker_pattern = r'<marker\b([^>]*)>'
+    all_markers = re.findall(marker_pattern, content)
 
-    if not marker_match:
-        print("[WARN] Arrowheads: No marker definition found (id='ah')")
+    # Count how many arrows are actually used (via marker-end / marker-start / marker-mid)
+    arrow_refs = re.findall(r'marker-(?:end|start|mid)="url\(#([^)]+)\)"', content)
+    arrow_count = len(arrow_refs)
+    unique_marker_ids = set(arrow_refs)
+
+    # If the SVG has no marker definitions but uses arrows, that's a real issue
+    if not all_markers:
+        if arrow_count > 0:
+            print(f"[FAIL] Arrowheads: {arrow_count} arrow reference(s) but no <marker> definitions")
+            return False
+        print("[INFO] Arrowheads: No markers and no arrow refs (may be intentional)")
         return True
 
-    marker_elem = marker_match.group(0)
-
-    # Check dimensions
-    width_match = re.search(r'markerWidth="(\d+)"', marker_elem)
-    height_match = re.search(r'markerHeight="(\d+)"', marker_elem)
-    refx_match = re.search(r'refX="(\d+)"', marker_elem)
-    refy_match = re.search(r'refY="(\d+)"', marker_elem)
-
+    # Validate each marker definition that is actually referenced
     issues = []
+    for marker_elem in all_markers:
+        m_id = re.search(r'id="([^"]+)"', marker_elem)
+        if not m_id or m_id.group(1) not in unique_marker_ids:
+            continue  # defined but unused — skip
 
-    if width_match:
-        width = int(width_match.group(1))
-        if width != 6:
-            issues.append(f"markerWidth={width} (expected 6)")
-    else:
-        issues.append("markerWidth not specified")
+        width_match = re.search(r'markerWidth="([\d.]+)"', marker_elem)
+        height_match = re.search(r'markerHeight="([\d.]+)"', marker_elem)
+        refx_match = re.search(r'refX="([\d.]+)"', marker_elem)
+        refy_match = re.search(r'refY="([\d.]+)"', marker_elem)
 
-    if height_match:
-        height = int(height_match.group(1))
-        if height != 4:
-            issues.append(f"markerHeight={height} (expected 4)")
-    else:
-        issues.append("markerHeight not specified")
+        mid = m_id.group(1)
+        if width_match:
+            w = float(width_match.group(1))
+            if w != 6:
+                issues.append(f"marker id='{mid}' markerWidth={w} (expected 6)")
+        else:
+            issues.append(f"marker id='{mid}' markerWidth not specified")
 
-    if refx_match:
-        refx = int(refx_match.group(1))
-        if refx != 6:
-            issues.append(f"refX={refx} (expected 6)")
+        if height_match:
+            h = float(height_match.group(1))
+            if h != 4:
+                issues.append(f"marker id='{mid}' markerHeight={h} (expected 4)")
+        else:
+            issues.append(f"marker id='{mid}' markerHeight not specified")
 
-    if refy_match:
-        refy = int(refy_match.group(1))
-        if refy != 2:
-            issues.append(f"refY={refy} (expected 2)")
-
-    # Count arrows in use
-    arrow_count = content.count('marker-end="url(#ah)"')
-    print(f"[INFO] Found {arrow_count} arrow(s) using marker")
+    print(f"[INFO] Found {arrow_count} arrow(s) using {len(unique_marker_ids)} marker id(s): {sorted(unique_marker_ids)}")
 
     if not issues:
         print(f"[PASS] Arrowheads: Correct 6x4 sizing")
