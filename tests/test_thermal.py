@@ -57,22 +57,39 @@ def test_zero_heat_does_not_peg_to_initial_value():
 
 
 def test_constant_heat_reaches_steady_state_above_ambient():
-    """Constant heat -> steady state above ambient; remove heat -> back to ambient."""
+    """
+    Constant heat -> steady state at the analytic Newton-cooling value;
+    remove heat -> back to ambient.
+
+    Steady state derivation: at equilibrium, heat-in per step = cooling per step.
+        (W * dt_ref) / C = k * (T_ss - T_amb)
+        T_ss = T_amb + W * dt_ref / (k * C)
+
+    Pinning to this formula (not a hardcoded 38.0) lets future ThermalConfig
+    retuning still verify the integrator against its own physics.
+    """
     cfg = ThermalConfig(ambient=20.0)
     thermal = ThermalState(cfg, initial_temperature=cfg.ambient)
+    watts = 0.5
 
-    # Drive 0.5 W until steady state
-    for _ in range(1000):
-        thermal.step(DT, 0.5)
-    steady = thermal.temperature
-    assert steady > cfg.ambient + 5.0, (
-        f"expected steady state well above ambient, got {steady}"
+    expected_steady = (
+        cfg.ambient
+        + watts * cfg.dt_reference_seconds
+        / (cfg.cooling_rate * cfg.thermal_mass_j_per_k)
     )
+
+    for _ in range(1000):
+        thermal.step(DT, watts)
+    steady = thermal.temperature
+    assert steady == pytest.approx(expected_steady, abs=1.0), (
+        f"steady state {steady:.3f} != analytic {expected_steady:.3f}"
+    )
+    assert steady > cfg.ambient + 5.0  # belt-and-braces sanity floor
 
     # Confirm it's actually steady (not still climbing)
     last = thermal.temperature
     for _ in range(100):
-        thermal.step(DT, 0.5)
+        thermal.step(DT, watts)
     assert abs(thermal.temperature - last) < 0.05
 
     # Remove heat -> returns to ambient
@@ -181,6 +198,13 @@ def test_l6_to_l1_overflow_heat_moves_membrane_temperature():
         "overflow_heat from L6 should perturb membrane temperature in L1; "
         f"max trajectory diff was only {max(diffs):.4f} C"
     )
+    # Direction check: overflow heat should make the system warmer on
+    # average, not just different. Without this, a sign flip in the wiring
+    # would still pass the max-diff assertion above.
+    assert np.mean(overflow_temps) > np.mean(baseline_temps), (
+        f"overflow temps mean ({np.mean(overflow_temps):.3f}) should exceed "
+        f"baseline mean ({np.mean(baseline_temps):.3f})"
+    )
 
 
 def test_l6_overflow_heat_scales_with_overflow_factor():
@@ -196,3 +220,41 @@ def test_l6_overflow_heat_scales_with_overflow_factor():
     thermal.step(cfg.dt_reference_seconds, watts)
     delta = thermal.temperature - pre
     assert delta == pytest.approx(0.5, abs=0.01)
+
+
+def test_photothermal_factor_matches_legacy_behavior():
+    """
+    Regression rail: with default ThermalConfig.photothermal_factor (0.002),
+    one step of light=500 from ambient must produce the same delta T as the
+    legacy `external_light / 500.0` -> celsius_per_step_to_watts pipeline.
+
+    Hand-computed expectation:
+        K-per-step from light: 500 * 0.002 = 1.0
+        watts: 1.0 * C / dt_ref = 1.0 * 5 / 18 = 0.27778 W
+        delta T over one step at near-ambient (cooling ~ 0): 1.0 K
+        T_after: ambient + 1.0 = 21.0 C
+    """
+    cfg = ThermalConfig()
+    light_value = 500.0
+
+    # New path: light kwarg through ThermalState
+    new = ThermalState(cfg, initial_temperature=cfg.ambient)
+    new.step(cfg.dt_reference_seconds, 0.0, light=light_value)
+    new_delta = new.temperature - cfg.ambient
+
+    # Legacy path: external_light / 500.0 fed through celsius_per_step_to_watts
+    legacy = ThermalState(cfg, initial_temperature=cfg.ambient)
+    legacy_celsius = light_value / 500.0
+    legacy_watts = celsius_per_step_to_watts(legacy_celsius, cfg)
+    legacy.step(cfg.dt_reference_seconds, legacy_watts)
+    legacy_delta = legacy.temperature - cfg.ambient
+
+    # Hand-computed expectation
+    assert new_delta == pytest.approx(1.0, abs=1e-9), (
+        f"new path delta {new_delta} != hand-computed 1.0"
+    )
+    # Bit-for-bit equivalence with the legacy pipeline
+    assert new.temperature == legacy.temperature, (
+        f"photothermal_factor default broke legacy compatibility: "
+        f"new={new.temperature} legacy={legacy.temperature}"
+    )
