@@ -14,6 +14,18 @@
 > below reflects the 2026-02-02 snapshot; inline status flags below
 > have been updated where they materially changed.
 
+> **2026-04-25 update.** Phase 13 (Recurrent Depth) completed on branch
+> `claude/consciousness-recurrent-structure-KPrLB`; claims F13.1, F13.2,
+> F13.3 PASS; pending tag `v4.0.0-phase13-recurrent-depth` post-merge.
+> Each Patent_X.md file now has a "PHASE 13 SUPPLEMENT" section appended
+> with 3 proposed new claims per patent (9 total): depth-amortized
+> energy accounting (Patent A), inner-iteration self-observation
+> (Patent B), depth-aware autonomous runner (Patent C). These
+> supplement claims must be reconciled into the Google Drive
+> source-of-truth specifications before any subsequent regeneration of
+> the .md files. USPTO-formatted .txt specs and patent drawings will
+> be updated in subsequent commits on the same branch.
+
 ## Filing Status
 
 **All three provisional patent applications prepared. Awaiting inventor
@@ -130,6 +142,7 @@ Complete tag history established and pushed to GitHub:
 | **v1.0.0-phase8-stdp** | 80cf3e5 | **Phase 8 STDP (F8.1-F8.3 PASS + regression PASS)** |
 | **v2.0.0-phase9-predictive** | 4baa21f | **Phase 9 Predictive Processing (F9.1-F9.3 PASS + regression PASS)** |
 | **v3.0.0-phase10-multimodal** | 9e2c333 | **Phase 10 Multi-Modal Integration (F10.1-F10.3 PASS + regression PASS)** |
+| **v4.0.0-phase13-recurrent-depth** | _pending merge_ (branch aac99fc) | **Phase 13 Recurrent Depth (F13.1-F13.3 PASS + regression PASS)** |
 
 **Reproducibility**: Any state can now be reproduced exactly via `git checkout <tag>`.
 

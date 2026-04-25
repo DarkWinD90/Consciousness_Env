@@ -109,3 +109,95 @@ A method and system for configurable recursive self-observation in spiking neura
 
 REFERENCE TO SOURCE CODE
 The complete implementation of this invention is available at the following repository: github.com/DarkWinD90/Consciousness_Env, validated state tagged as v3.0.0-phase10-multimodal at commit 9e2c333. Key implementation file is core/base_snn.py. Dynamic modulation is implemented in mcp/consciousness_mcp_server.py.
+
+
+---
+
+## PHASE 13 SUPPLEMENT — INNER-ITERATION SELF-OBSERVATION (2026-04-25)
+
+> **Provenance note.** This supplement was added on branch
+> `claude/consciousness-recurrent-structure-KPrLB` after the source-of-truth
+> Google Drive document (`Patent_B_Specification_RECONCILED_v2.docx`,
+> 2026-03-13) was regenerated. The proposed new claim language below
+> must be reconciled into the Google Drive document before any subsequent
+> regeneration of this file. The original claims 1–10 above are
+> unchanged.
+
+### New element — recurrent-depth feedback
+
+Phase 13 of the reference implementation adds an *inner loop* around the
+single-iteration leaky-integrate-and-fire step described in paragraphs
+[0017]–[0019]. When recurrent depth is enabled with depth parameter T,
+the spiking neural network executes T inner iterations of its
+integrate-and-fire dynamics per outer simulation timestep before the
+network's aggregate output is consumed by any downstream subsystem.
+
+The reflection feedback path described in paragraphs [0019]–[0023] is
+applied at *every* inner iteration, not only once per outer timestep:
+at each inner iteration k of T, the running mean of the membrane
+potential vector is computed and fed back as additional input on the
+next inner iteration, scaled by the configurable reflection coefficient.
+The feedback is therefore re-applied T times per outer timestep,
+producing a deeper attractor convergence than the single-iteration
+case. Empirical validation (claim F13.1) shows that the post-step
+hidden state at T=8 is more strongly correlated with the input signal
+than at T=1 (correlation ratio ≥ 1.05), demonstrating that
+depth-induced attractor convergence reveals the input-dependent fixed
+point more cleanly than transient/refractory state alone.
+
+### Proposed additional claims (to be reconciled to Google Drive)
+
+11. The method of claim 1 further comprising executing T inner iterations of
+said spiking neural network's integrate-and-fire dynamics per outer
+simulation timestep, where T is a configurable integer greater than or
+equal to one, and wherein said reflection coefficient feedback is applied
+at each of said T inner iterations such that the network observes its own
+running aggregate output T times per outer simulation timestep before any
+downstream subsystem consumes the network's final aggregate output.
+
+12. The method of claim 11 wherein the input signal is re-injected at each of
+said T inner iterations, and wherein the cumulative spike count produced
+across all T inner iterations is reported once per outer simulation
+timestep so that activity-dependent energy accounting is performed exactly
+once per outer simulation timestep regardless of the value of T.
+
+13. The system of claim 2 further comprising an inner-loop controller that
+invokes the spiking neural network's integrate-and-fire step T times per
+outer simulation timestep, wherein the self-observation state register is
+updated and fed back through the feedback injection module on each inner
+iteration, and wherein T is dynamically adjustable during operation by the
+modulation interface.
+
+### Mechanistic basis
+
+The leaky-integrate-and-fire update step is structurally one iteration of
+h_{t+1} = A·h_t + B·e + Transformer(h_t, e), where A corresponds to the
+membrane leak factor, B corresponds to the input scale at the designated
+input neuron, and the recurrent spike-propagation through the synaptic
+weight matrix corresponds to the Transformer term. The Phase 13
+supplement claims the *outer wrapper* that invokes this recurrence T
+times per outer timestep with reflection feedback applied at every
+inner iteration. The mechanism is therefore continuous-latent
+self-observation — the network never emits an intermediate decoded
+output between inner iterations, so reasoning occurs entirely in
+membrane-potential space.
+
+### Validation evidence
+
+- F13.1: corr(post-step h, input) at T=8 vs T=1 → ratio 1.0804 (PASS, threshold ≥ 1.05)
+- F13.2: across 200 outer steps with T=8, the energy harvester is charged
+  exactly once per outer step with cumulative spike count summed across
+  all 8 inner iterations (spike-accounting invariant verified
+  structurally; PASS)
+- F13.3: with fixed input held constant, late-window variance of the
+  per-inner-iteration aggregate output is 0.0379 of early-window
+  variance (PASS, threshold ≤ 0.7), confirming continuous-latent
+  attractor convergence
+
+### Source code reference (Phase 13)
+
+Implementation: `core/recurrent_depth.py` (`RecurrentDepthSNN`,
+`RecurrentDepthConfig`, `StepResult`). Validation:
+`phases/phase13_recurrent_depth.py`. Branch:
+`claude/consciousness-recurrent-structure-KPrLB`. Pending tag:
+`v4.0.0-phase13-recurrent-depth` (post-merge).

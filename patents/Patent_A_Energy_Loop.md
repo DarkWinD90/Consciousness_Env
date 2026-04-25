@@ -112,3 +112,90 @@ Claim 9 — VERIFIED, NO REVISION:
 Claim 9 uses the language 'medium activity levels' without specifying spike counts. The corrected zone boundaries (8–27 spikes) fully satisfy the structural requirement of low-drain / medium-surplus / high-drain, so no claim language revision is required. The shift in zone boundaries does not affect claim scope.
 
 All formulas independently verified:
+
+
+---
+
+## PHASE 13 SUPPLEMENT — DEPTH-AMORTIZED ENERGY ACCOUNTING (2026-04-25)
+
+> **Provenance note.** This supplement was added on branch
+> `claude/consciousness-recurrent-structure-KPrLB` after the source-of-truth
+> Google Drive document (`Patent_A_Specification_RECONCILED_v3_UPDATED-3.docx`,
+> 2026-03-13) was regenerated. The proposed new claim language below
+> must be reconciled into the Google Drive document before any subsequent
+> regeneration of this file. The original claims 1–11 above are unchanged.
+
+### New element — recurrent-depth inner loop with single-charge energy accounting
+
+Phase 13 of the reference implementation adds an *inner loop* around the
+single-iteration leaky-integrate-and-fire step described in paragraphs
+[0021]–[0027]. When recurrent depth is enabled with depth parameter T,
+the spiking neural network executes T inner iterations of its
+integrate-and-fire dynamics per outer simulation timestep before the
+motor 16 receives a control signal and the energy harvesting subsystem
+performs its energy-storage update.
+
+Two architectural consequences are claimed:
+
+1. **Linear neural compute, constant motor harvest.** Across T inner
+   iterations the cumulative spike count scales approximately linearly
+   with T (more neural compute per outer step), but motor actuation
+   occurs exactly once per outer step regardless of T (one Coda update
+   per outer step). For an empirical control of 200 outer steps under
+   the harsh `EnergyConfig`, total spikes scale 82 → 332 → 663 → 1326
+   for T = 1, 4, 8, 16 while motor activations remain at 200 across
+   all T. Depth amortizes mechanical-actuation cost while keeping
+   inner reasoning energy-cheap.
+
+2. **Single-charge energy contract.** The control logic block 26 charges
+   the energy store 28 exactly once per outer simulation timestep with
+   a cumulative spike count equal to the sum of inner-iteration spike
+   counts produced across all T inner iterations of that outer
+   timestep. Charging the energy store more than once per outer
+   timestep would violate the homeostatic equilibrium described in
+   paragraphs [0028]–[0030]; the single-charge contract preserves that
+   equilibrium across all values of T.
+
+### Proposed additional claims (to be reconciled to Google Drive)
+
+12. The system of claim 1 wherein said spiking neural network further
+comprises an inner-loop wrapper that executes T iterations of said
+leaky integrate-and-fire dynamics per outer simulation timestep, where
+T is a configurable integer greater than or equal to one, with the
+sensor input re-injected at each said inner iteration; and wherein said
+control logic block updates the energy store 28 exactly once per outer
+simulation timestep with a cumulative spike count summed across all T
+inner iterations of that outer simulation timestep.
+
+13. The system of claim 12 wherein the cumulative spike count grows
+approximately linearly with T while the count of motor 16 actuations
+remains at exactly one per outer simulation timestep, such that
+mechanical actuation cost is amortized over T inner reasoning
+iterations and the harvest contribution from servo movement variance is
+unaffected by the value of T.
+
+14. The method of claim 10 further comprising executing T inner
+iterations of said leaky integrate-and-fire dynamics per outer
+simulation timestep with re-injection of the sensory input at each
+said inner iteration, and updating the energy store exactly once per
+outer simulation timestep with the cumulative spike count summed
+across all T inner iterations.
+
+### Validation evidence
+
+- F13.2: across 200 outer steps with T=8, three structural invariants
+  hold: (a) the servo-actuation history has length 200, (b) the energy
+  store update_storage path is invoked exactly 200 times (not 8 × 200 =
+  1600), (c) the cumulative spike count charged to the harvester equals
+  the sum of inner-step spike counts (no double-counting; PASS).
+- Energy budget appendix: T = 1, 4, 8, 16 → spikes 82, 332, 663, 1326;
+  motor activations constant at 200 across all T.
+
+### Source code reference (Phase 13)
+
+Implementation: `core/recurrent_depth.py` (`RecurrentDepthSNN.step()`
+returns `StepResult.total_spike_count` for single-charge accounting).
+Validation: `phases/phase13_recurrent_depth.py` (the
+`CountingEnergyHarvester` subclass instruments
+`EnergyHarvester.update_storage` to verify the structural invariants).
+Pending tag: `v4.0.0-phase13-recurrent-depth` (post-merge).
