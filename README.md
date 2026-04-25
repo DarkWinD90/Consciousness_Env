@@ -21,8 +21,9 @@ loop a candidate for synthetic proto-consciousness.
 | Phase 8: STDP Learning | v1.0.0 | F8.1, F8.2, F8.3 | ALL PASS |
 | Phase 9: Predictive Processing | v2.0.0 | F9.1, F9.2, F9.3 | ALL PASS |
 | Phase 10: Multi-Modal Integration | v3.0.0 | F10.1, F10.2, F10.3 | ALL PASS |
+| Phase 13: Recurrent Depth | v4.0.0 (pending merge) | F13.1, F13.2, F13.3 | ALL PASS |
 
-**14 falsifiable claims validated.** Every claim has an explicit threshold, a
+**17 falsifiable claims validated.** Every claim has an explicit threshold, a
 control condition, and a measured value. Every validated state is pinned by an
 annotated git tag and reproducible with `git checkout <tag>`.
 
@@ -43,7 +44,9 @@ annotated git tag and reproducible with `git checkout <tag>`.
                   |
                   v
   L4: Neuromorphic CPU         <-- L8 reflection feedback
-      (leaky integrate-and-fire SNN)
+      (leaky integrate-and-fire SNN; optional inner-loop
+       recurrent depth — runs T iterations per outer step
+       before L5 reads its output, see Phase 13)
                   |
                   v
   L5: Servo Actuation          (target angle from SNN output)
@@ -78,6 +81,7 @@ Consciousness_Env/
 │   ├── history.py           #   Time-series recorder
 │   ├── predictive.py        #   Predictive processing (Phase 9)
 │   ├── multimodal.py        #   Multi-modal integration (Phase 10)
+│   ├── recurrent_depth.py   #   Inner-loop recurrent depth (Phase 13)
 │   ├── claude_interface.py  #   ClaudeNeuralInterface (bidirectional SNN-Claude)
 │   ├── neural_router.py     #   ClaudeOptimizedRouter (neural packet routing)
 │   ├── consciousness_enhancer.py  # Higher-order cognitive features
@@ -94,7 +98,8 @@ Consciousness_Env/
 │   ├── phase7_full_integration.py      # 8-layer loop, harsh energy
 │   ├── phase8_stdp.py                  # STDP validation (F8.1-F8.3)
 │   ├── phase9_predictive_processing.py # Predictive processing (F9.1-F9.3)
-│   └── phase10_multimodal.py           # Multi-modal integration (F10.1-F10.3)
+│   ├── phase10_multimodal.py           # Multi-modal integration (F10.1-F10.3)
+│   └── phase13_recurrent_depth.py      # Recurrent depth (F13.1-F13.3)
 │
 ├── mcp/                     # MCP servers (physics + cognitive layer)
 │   ├── consciousness_mcp_server.py   # Physics + SNN + fallback (v1.1.0)
@@ -147,6 +152,7 @@ python phases/phase7_control_baseline.py          # Claims A-E
 python phases/phase8_stdp.py                      # Claims F8.1-F8.3
 python phases/phase9_predictive_processing.py     # Claims F9.1-F9.3
 python phases/phase10_multimodal.py               # Claims F10.1-F10.3
+python phases/phase13_recurrent_depth.py          # Claims F13.1-F13.3
 ```
 
 ### Reproduce any validated state
@@ -157,6 +163,7 @@ git checkout v0.5.0-phase7-baseline    # exact Phase 7 state
 git checkout v1.0.0-phase8-stdp        # exact Phase 8 state
 git checkout v2.0.0-phase9-predictive  # exact Phase 9 state
 git checkout v3.0.0-phase10-multimodal # exact Phase 10 state
+git checkout v4.0.0-phase13-recurrent-depth  # exact Phase 13 state (post-merge)
 ```
 
 ## Falsifiable Claims
@@ -195,6 +202,14 @@ git checkout v3.0.0-phase10-multimodal # exact Phase 10 state
 | F10.2 | Weight entropy decreases | 2.31 -> 0.00 bits | final < initial |
 | F10.3 | Weight convergence | 0.178 | < 0.20 |
 
+### Phase 13: Recurrent Depth (3 claims)
+
+| Claim | Criterion | Measured | Threshold |
+|-------|-----------|----------|-----------|
+| F13.1 | corr(h, input) at T=8 vs T=1 | 1.0804x | ratio >= 1.05 |
+| F13.2 | Decision cadence preserved (3 invariants) | 200/200, 200/200, 663/663 | all equal |
+| F13.3 | Late-window variance vs early-window | 0.0379 | ratio <= 0.7 |
+
 ## Scientific Methodology
 
 Every phase follows the same pattern:
@@ -212,8 +227,10 @@ Every phase follows the same pattern:
 - [x] Phase 8: Spike-Timing Dependent Plasticity (STDP)
 - [x] Phase 9: Predictive Processing (dual-pathway prediction)
 - [x] Phase 10: Multi-Modal Sensory Integration (3-population cross-modal binding)
+- [x] Phase 13: Recurrent Depth (T inner SNN iterations per outer step; OpenMythos-style continuous-latent reasoning)
 - [ ] Phase 11: Hardware Embodiment (RPi Pico + piezo + servo, BOM < $25)
 - [ ] Phase 12: Full Autonomy (24-hour self-sustaining operation)
+- [ ] Phase 14 (candidate): Depth-conditioned subnetwork routing (MoE per inner-step index)
 
 ## Ethical Considerations
 
@@ -240,7 +257,7 @@ imply subjective experience, sentience, or moral status.
   author={Ward, Kevin Christopher},
   year={2026},
   url={https://github.com/DarkWinD90/Consciousness_Env},
-  note={v3.0.0: 14 falsifiable claims validated across Phases 7-10}
+  note={v4.0.0: 17 falsifiable claims validated across Phases 7-10, 13}
 }
 ```
 
