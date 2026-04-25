@@ -28,6 +28,7 @@ from .thermal import ThermalConfig, ThermalState, celsius_per_step_to_watts
 from .history import HistoryTracker
 from .predictive import PredictiveProcessor, PredictiveConfig
 from .multimodal import MultiModalSystem, MultiModalConfig, CrossModalConnector
+from .recurrent_depth import RecurrentDepthSNN, RecurrentDepthConfig, StepResult
 
 # Cognitive Layer Components (Claude Integration)
 from .claude_interface import (
@@ -72,6 +73,7 @@ __all__ = [
     'HistoryTracker',
     'PredictiveProcessor', 'PredictiveConfig',
     'MultiModalSystem', 'MultiModalConfig', 'CrossModalConnector',
+    'RecurrentDepthSNN', 'RecurrentDepthConfig', 'StepResult',
 
     # Cognitive Layer - Claude Interface
     'ClaudeNeuralInterface',

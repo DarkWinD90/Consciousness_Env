@@ -79,3 +79,7 @@ jobs:
       run: |
         python phases/phase10_multimodal.py 2>&1 | tee phase10.log
         grep -q "FAIL" phase10.log && exit 1 || true
+    - name: Phase 13 — Recurrent Depth (Claims F13.1-F13.3)
+      run: |
+        python phases/phase13_recurrent_depth.py 2>&1 | tee phase13.log
+        grep -q "FAIL" phase13.log && exit 1 || true
