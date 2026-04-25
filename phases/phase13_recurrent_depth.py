@@ -22,7 +22,12 @@ Claims:
     F13.2: Decision cadence is preserved -- across N outer steps with T=8,
            (a) the servo-angle history has length N, (b) update_storage is
            called exactly N times, (c) the cumulative spike count seen by
-           the energy harvester equals the sum of inner-step spike counts.
+           the energy harvester equals the sum of inner-step spike counts
+           reported by RecurrentDepthSNN, AND (d) that same cumulative
+           count equals an independent ground truth computed by replaying
+           the input sequence through BaseSNN.step() directly (bypassing
+           RecurrentDepthSNN). Invariants (c) and (d) together catch both
+           harness propagation errors and wrapper summation bugs.
     F13.3: With fixed input the membrane-potential trajectory converges --
            late-window variance is at most 0.7 x early-window variance,
            demonstrating continuous-latent attractor dynamics rather than
@@ -34,7 +39,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import numpy as np
-from core.base_snn import SNNConfig
+from core.base_snn import BaseSNN, SNNConfig
 from core.recurrent_depth import RecurrentDepthSNN, RecurrentDepthConfig
 from core.energy import EnergyHarvester, EnergyConfig
 
@@ -142,6 +147,44 @@ class CountingEnergyHarvester(EnergyHarvester):
         self.update_call_count += 1
         self.cumulative_spike_count_charged += spike_count
         return super().update_storage(friction_energy, thermal_energy, spike_count)
+
+
+def compute_independent_spike_ground_truth(num_inner_steps, n_outer_steps,
+                                            seed=SEED):
+    """
+    Independent ground-truth spike count for F13.2 invariant (d).
+
+    Replays the same input sequence as run_cadence_loop() but invokes
+    BaseSNN.step() directly T times per outer step instead of going
+    through RecurrentDepthSNN.step(). A bug in
+    RecurrentDepthSNN.step()'s spike summation would cause the wrapper
+    path's cumulative count to disagree with this independently
+    computed total, breaking invariant (d) below.
+
+    The RNG draws here mirror run_cadence_loop() exactly: one
+    rng.normal(0, NOISE_STD) per outer step for the input signal, plus
+    one rng.normal(0, 0.5) per outer step (consumed but unused) to
+    keep the RandomState advance aligned with the harness it shadows.
+    Without that alignment, the second and later outer-step inputs
+    would diverge between the two paths and the comparison would be
+    meaningless.
+    """
+    rng = np.random.RandomState(seed + 500)
+    np.random.seed(seed)
+    base_snn = BaseSNN(_make_base_snn_config())
+
+    total = 0
+    for t in range(n_outer_steps):
+        light = 0.5 + 0.4 * np.sin(2 * np.pi * t / INPUT_PERIOD)
+        signal = float(np.clip(light + rng.normal(0, NOISE_STD), 0.0, 1.0))
+        for k in range(num_inner_steps):
+            inj = signal  # inject_input_every_step=True semantics
+            _, spikes = base_snn.step(inj, reflection_coeff=REFLECTION_COEFF)
+            total += int(spikes.sum())
+        # Consume thermal-noise draw to keep RandomState in sync with
+        # run_cadence_loop's per-outer-step RNG sequence.
+        _ = rng.normal(0, 0.5)
+    return total
 
 
 def run_cadence_loop(num_inner_steps, n_outer_steps, seed=SEED):
@@ -268,15 +311,20 @@ def validate_f13_1(outputs_experimental, outputs_control, input_signal,
     return passed, corr_exp, corr_ctrl, ratio
 
 
-def validate_f13_2(loop_result, n_outer_steps):
+def validate_f13_2(loop_result, n_outer_steps, ground_truth_spikes):
     """
     F13.2: Decision cadence preserved across the L1->L8 loop.
 
-    Three concurrent invariants must hold:
+    Four concurrent invariants must hold:
         (a) len(servo_angles) == n_outer_steps
         (b) harvester.update_call_count == n_outer_steps
         (c) harvester.cumulative_spike_count_charged ==
             sum(inner_spike_aggregates)
+        (d) harvester.cumulative_spike_count_charged ==
+            ground_truth_spikes (independently computed by replaying
+            the same input sequence through BaseSNN.step() directly,
+            bypassing RecurrentDepthSNN.step(); guards against the
+            wrapper undercounting or overcounting inner spikes)
     """
     angles = loop_result['servo_angles']
     inners = loop_result['inner_spike_aggregates']
@@ -285,11 +333,13 @@ def validate_f13_2(loop_result, n_outer_steps):
     invariant_a = len(angles) == n_outer_steps
     invariant_b = harvester.update_call_count == n_outer_steps
     invariant_c = harvester.cumulative_spike_count_charged == sum(inners)
+    invariant_d = harvester.cumulative_spike_count_charged == ground_truth_spikes
 
-    passed = invariant_a and invariant_b and invariant_c
-    return (passed, invariant_a, invariant_b, invariant_c,
+    passed = invariant_a and invariant_b and invariant_c and invariant_d
+    return (passed, invariant_a, invariant_b, invariant_c, invariant_d,
             len(angles), harvester.update_call_count,
-            harvester.cumulative_spike_count_charged, sum(inners))
+            harvester.cumulative_spike_count_charged, sum(inners),
+            ground_truth_spikes)
 
 
 def validate_f13_3(trajectory):
@@ -410,16 +460,24 @@ def run_phase13():
         num_inner_steps=INNER_DEPTH_EXPERIMENTAL,
         n_outer_steps=F13_2_OUTER_STEPS,
     )
-    (passed, inv_a, inv_b, inv_c,
-     n_angles, n_calls, charged, summed) = validate_f13_2(
-        loop_result, F13_2_OUTER_STEPS,
+    print(f"  Computing independent spike ground truth via BaseSNN.step()...")
+    ground_truth = compute_independent_spike_ground_truth(
+        num_inner_steps=INNER_DEPTH_EXPERIMENTAL,
+        n_outer_steps=F13_2_OUTER_STEPS,
+    )
+    (passed, inv_a, inv_b, inv_c, inv_d,
+     n_angles, n_calls, charged, summed,
+     ground_truth_returned) = validate_f13_2(
+        loop_result, F13_2_OUTER_STEPS, ground_truth,
     )
     print(f"  (a) servo_angle history length:     {n_angles} "
           f"(expected: {F13_2_OUTER_STEPS}) [{inv_a}]")
     print(f"  (b) update_storage call count:      {n_calls} "
           f"(expected: {F13_2_OUTER_STEPS}) [{inv_b}]")
-    print(f"  (c) total spikes charged:           {charged} "
+    print(f"  (c) wrapper-internal spike sum:     {charged} "
           f"(expected: {summed}) [{inv_c}]")
+    print(f"  (d) independent ground-truth spike: {charged} "
+          f"(expected: {ground_truth_returned}) [{inv_d}]")
     result = "PASS" if passed else "FAIL"
     print(f"  Result: {result}")
     if not passed:
