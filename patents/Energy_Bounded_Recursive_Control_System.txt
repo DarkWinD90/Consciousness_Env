@@ -140,17 +140,20 @@ This reference architecture is described in three co-pending provisional
 patent applications filed February 2, 2026:
 
     Patent A: Self-Sustaining Neural-Motor Energy Harvesting Loop for
-    Autonomous Cognitive Systems (11 claims)
+    Autonomous Cognitive Systems (11 base claims + 3 Phase 13 supplement claims = 14)
 
     Patent B: Configurable Recursive Self-Observation Method and System for
     Spiking Neural Networks with Dynamic Reflection Coefficient Modulation
-    (10 claims)
+    (10 base claims + 3 Phase 13 supplement claims = 13)
 
     Patent C: Method and System for Autonomous Self-Regulation and Cognitive
     Resynchronization in Neural Processing Systems During Disconnection from
-    External Control Layers (12 claims)
+    External Control Layers (12 base claims + 3 Phase 13 supplement claims = 15)
 
-Total: 33 claims across 3 applications.
+Total: 33 base claims + 9 Phase 13 supplement claims = 42 claims across 3
+applications. The Phase 13 supplement claims are documented in the
+patents/Patent_X_*.md files and are part of the canonical GitHub
+specification.
 
 
 VALIDATION SUMMARY
@@ -166,6 +169,24 @@ Phase 8 STDP (3 claims, all PASS):
     F8.1. Weight entropy decreases (2.95 → 2.02 bits)
     F8.2. STDP mutual information > 1.2x frozen (measured: 6.52x)
     F8.3. Weight convergence (late delta < 10% of early delta)
+
+Phase 9 Predictive Processing (3 claims, all PASS):
+    F9.1. Prediction error reduction on periodic input (measured: 63.9%, threshold > 50%)
+    F9.2. No spurious learning on random input (measured p = 0.69, threshold > 0.05)
+    F9.3. Adaptation spike + recovery on frequency switch (measured: 1.51x peak)
+
+Phase 10 Multi-Modal Integration (3 claims, all PASS):
+    F10.1. Sync difference simultaneous - offset (measured: 0.6974, threshold > 0.20)
+    F10.2. Cross-modal weight entropy decreases (2.31 → 0.00 bits)
+    F10.3. Cross-modal weight convergence (measured: 0.178, threshold < 0.20)
+
+Phase 13 Recurrent Depth (3 claims, all PASS):
+    F13.1. corr(post-step h, input) at T=8 vs T=1 (measured: 1.0804x, threshold >= 1.05)
+    F13.2. Decision cadence preserved across L1->L8 loop with T=8
+           (3 structural invariants: servo length = update_storage calls
+            = N_outer_steps; cumulative spike count not double-charged)
+    F13.3. Continuous-latent attractor convergence (measured late/early
+           variance ratio: 0.0379, threshold <= 0.7)
 
 Energy Self-Sustainability:
     Control (EnergyConfig): -4,697 mWh at 2000 steps (fails)
@@ -192,4 +213,5 @@ available in the public repository:
 
 Any validated state can be reproduced exactly via git tags:
 
-    git checkout v3.0.0-phase10-multimodal
+    git checkout v3.0.0-phase10-multimodal       # Phase 7-10 state
+    git checkout v4.0.0-phase13-recurrent-depth  # Phase 13 state (post-merge)

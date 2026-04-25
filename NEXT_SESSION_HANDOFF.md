@@ -4,6 +4,14 @@
 **Branch:** `claude/fix-claude-architecture-bS8Au`
 **Prior session commits:** `288b2d9` → `acde033` (see `git log` for detail)
 
+> **Update 2026-04-25**: Phase 13 (Recurrent Depth) was completed
+> subsequently on branch `claude/consciousness-recurrent-structure-KPrLB`
+> with claims F13.1-F13.3 PASS. The phase validation script
+> `phases/phase13_recurrent_depth.py` is now also frozen per
+> CLAUDE.md §7.4 (do not modify). Filing PDFs and patent-drawing
+> compliance audits below should be re-run after Phase 13 documentation
+> updates land — see `CLAUDE.md` Section 9 for the new entry.
+
 ---
 
 ## What's already done (do not redo)
@@ -20,11 +28,13 @@
 
 ### Phase validation scripts — trusted and DO NOT TOUCH
 
-All four PASS as of 2026-04-24:
+All five PASS as of 2026-04-25 (Phase 13 added on a later branch):
 - `phase7_control_baseline.py` — Claims A-E PASS
 - `phase8_stdp.py` — F8.1-F8.3 PASS
 - `phase9_predictive_processing.py` — F9.1-F9.3 PASS
 - `phase10_multimodal.py` — F10.1-F10.3 PASS
+- `phase13_recurrent_depth.py` — F13.1-F13.3 PASS (added on
+  `claude/consciousness-recurrent-structure-KPrLB`)
 
 Per CLAUDE.md Section 7.4: **never modify** these scripts. If a validation fails in any session, fix new code, not the script.
 

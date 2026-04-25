@@ -10,11 +10,11 @@
 
 | Patent | Title | Claims | Pages | Key Innovation |
 |--------|-------|--------|-------|----------------|
-| **A** | Self-Sustaining Neural-Motor Energy Harvesting Loop | 11 claims (2 independent) | ~20 pages | Closed-loop energy: thinking → movement → power → thinking |
-| **B** | Configurable Recursive Self-Observation in SNNs | 10 claims (2 independent) | ~15 pages | Tunable self-awareness dial (reflection coefficient 0.0→1.0) |
-| **C** | Cognitive Fallback with Autonomous Self-Regulation | 12 claims (2 independent) | ~18 pages | Continuous intelligent operation during disconnection |
+| **A** | Self-Sustaining Neural-Motor Energy Harvesting Loop | 11 claims (2 independent) + 3 Phase 13 supplement claims | ~22 pages | Closed-loop energy: thinking → movement → power → thinking; depth-amortized energy accounting |
+| **B** | Configurable Recursive Self-Observation in SNNs | 10 claims (2 independent) + 3 Phase 13 supplement claims | ~17 pages | Tunable self-awareness dial (reflection coefficient 0.0→1.0); inner-iteration self-observation |
+| **C** | Cognitive Fallback with Autonomous Self-Regulation | 12 claims (2 independent) + 3 Phase 13 supplement claims | ~20 pages | Continuous intelligent operation during disconnection; depth-aware autonomous runner |
 
-**Total**: 33 claims across 3 applications (~53 pages)
+**Total**: 33 base claims + 9 Phase 13 supplement claims = 42 claims across 3 applications (~59 pages). The Phase 13 supplement claims are documented in the per-patent .md files at the bottom and are part of the canonical GitHub specification.
 
 ---
 
@@ -28,13 +28,19 @@ Claim 1 (Independent — METHOD): General self-sustaining neural-motor-energy lo
 ├── Claim 4: + recursive self-observation (→ Patent B)
 │   └── Claim 5: + dynamic reflection coefficient modulation
 ├── Claim 9: Activity-dependent energy management (quadratic cost model)
-└── Claim 11: + STDP learning
+├── Claim 11: + STDP learning
+└── Claim 14 (Phase 13 supplement): + recurrent-depth inner loop
+    with single-charge energy accounting (→ depends on Claims 1, 10)
 
 Claim 2 (Independent — SYSTEM): Hardware system with SNN + actuator + harvester
 ├── Claim 6: + autonomous fallback controller (→ Patent C)
 ├── Claim 7: Piezoelectric disc embodiment (27mm on servo shaft)
 │   └── Claim 8: + LC resonance with ferrite-backed inductor (Laird)
-└── Claim 10: Specific reference design (Pi Pico, servo, piezo disc)
+├── Claim 10: Specific reference design (Pi Pico, servo, piezo disc)
+├── Claim 12 (Phase 13 supplement): + inner-loop wrapper running T iterations
+│   per outer step; energy store charged exactly once per outer step
+└── Claim 13 (Phase 13 supplement): Linear neural compute, constant motor
+    harvest scaling property
 ```
 
 ### Patent B — Self-Observation
@@ -46,11 +52,18 @@ Claim 1 (Independent — METHOD): Recursive self-observation with configurable c
 ├── Claim 5: Internal energy-aware regulation
 ├── Claim 6: reflection_coeff = base + modulation × sensitivity
 ├── Claim 7: + STDP self-referential learning loop
-└── Claim 8: Single input neuron injection
+├── Claim 8: Single input neuron injection
+├── Claim 11 (Phase 13 supplement): + T inner iterations per outer
+│   timestep with reflection feedback at each inner iteration
+└── Claim 12 (Phase 13 supplement): + cumulative single-charge spike
+    accounting per outer timestep across all T inner iterations
 
 Claim 2 (Independent — SYSTEM): SNN system with self-observation components
 ├── Claim 9: Dual modulation sources (external + internal)
-└── Claim 10: Combined with self-sustaining energy loop (→ Patent A)
+├── Claim 10: Combined with self-sustaining energy loop (→ Patent A)
+└── Claim 13 (Phase 13 supplement): + inner-loop controller invoking T
+    integrate-and-fire steps with self-observation register update on
+    each inner iteration; T dynamically adjustable
 ```
 
 ### Patent C — Cognitive Fallback
@@ -63,12 +76,18 @@ Claim 1 (Independent — METHOD): Autonomous operation during disconnection
 ├── Claim 6: Two resync granularity levels (summary vs. full buffer)
 ├── Claim 7: Hard cap at 10,000 autonomous steps
 ├── Claim 8: Combined with energy harvesting loop (→ Patent A)
-└── Claim 9: Combined with recursive self-observation (→ Patent B)
+├── Claim 9: Combined with recursive self-observation (→ Patent B)
+├── Claim 13 (Phase 13 supplement): + recurrent-depth-enabled SNN driven
+│   by autonomous runner with depth parameter T per autonomous step
+└── Claim 14 (Phase 13 supplement): + energy-aware selection of T
+    (depth-as-energy-modulation-parameter)
 
 Claim 2 (Independent — SYSTEM): Neural processing system with fallback
 ├── Claim 10: Circadian input generator parameters
 ├── Claim 11: Crash recovery mechanism
-└── Claim 12: Clean shutdown handler
+├── Claim 12: Clean shutdown handler
+└── Claim 15 (Phase 13 supplement): + recurrent-depth controller
+    coupling autonomous input generator to neural processing unit
 ```
 
 ---
@@ -105,7 +124,7 @@ Claim 2 (Independent — SYSTEM): Neural processing system with fallback
 
 ## Evidence and Validation Summary
 
-### Software Validation (All PASS — 14 Claims)
+### Software Validation (All PASS — 17 Claims)
 
 | Phase | Claims | Status | Reproducible At |
 |-------|--------|--------|-----------------|
@@ -114,6 +133,7 @@ Claim 2 (Independent — SYSTEM): Neural processing system with fallback
 | Phase 8 STDP | F8.1, F8.2, F8.3 | ALL PASS | `git checkout v1.0.0-phase8-stdp` |
 | Phase 9 Predictive Processing | F9.1, F9.2, F9.3 | ALL PASS | `git checkout v2.0.0-phase9-predictive` |
 | Phase 10 Multi-Modal Integration | F10.1, F10.2, F10.3 | ALL PASS | `git checkout v3.0.0-phase10-multimodal` |
+| Phase 13 Recurrent Depth | F13.1, F13.2, F13.3 | ALL PASS | `git checkout v4.0.0-phase13-recurrent-depth` (post-merge) |
 | MCP Operational | Energy homeostasis at 100 mWh capacity | CONFIRMED | `git checkout v0.6.0-mcp-fallback` |
 | Long-Duration Stability | 2,000,000 steps, 7/7 stability checks PASS | CONFIRMED | `main` (latest) |
 
@@ -121,18 +141,19 @@ Claim 2 (Independent — SYSTEM): Neural processing system with fallback
 
 ```bash
 # Reproduce all validation results from latest validated state
-git checkout v3.0.0-phase10-multimodal
+git checkout v4.0.0-phase13-recurrent-depth     # post-merge; pre-merge: branch claude/consciousness-recurrent-structure-KPrLB
 python phases/phase7_control_baseline.py          # Claims A-E: ALL PASS
 python phases/phase8_stdp.py                      # Claims F8.1-F8.3: ALL PASS
 python phases/phase9_predictive_processing.py     # Claims F9.1-F9.3: ALL PASS
 python phases/phase10_multimodal.py               # Claims F10.1-F10.3: ALL PASS
+python phases/phase13_recurrent_depth.py          # Claims F13.1-F13.3: ALL PASS
 ```
 
 ### Source Code Repository
 
 - **Repository**: https://github.com/DarkWinD90/Consciousness_Env
-- **Current validated tag**: v3.0.0-phase10-multimodal (commit 9e2c333)
-- **Total validated claims**: 14 (5 + 3 + 3 + 3)
+- **Current validated tag**: v3.0.0-phase10-multimodal (commit 9e2c333); v4.0.0-phase13-recurrent-depth pending merge of `claude/consciousness-recurrent-structure-KPrLB`
+- **Total validated claims**: 17 (5 + 3 + 3 + 3 + 3)
 - **License**: Proprietary (patent applications in preparation)
 
 ---
@@ -210,11 +231,17 @@ python phases/phase10_multimodal.py               # Claims F10.1-F10.3: ALL PASS
 ```
 patents/
 ├── Filing_Package_Index.md          ← THIS FILE
-├── Patent_A_Energy_Loop.md          ← Patent A full application
-├── Patent_B_Self_Observation.md     ← Patent B full application
-├── Patent_C_Cognitive_Fallback.md   ← Patent C full application
+├── Patent_A_Energy_Loop.md          ← Patent A full application + Phase 13 supplement
+├── Patent_B_Self_Observation.md     ← Patent B full application + Phase 13 supplement
+├── Patent_C_Cognitive_Fallback.md   ← Patent C full application + Phase 13 supplement
+├── Energy_Bounded_Recursive_Control_System.txt  ← Reference architecture explanatory doc
 └── (future: drawings/, prior_art/)
 ```
+
+> **Phase 13 supplement note.** Each Patent_X.md file has a clearly-marked
+> `## PHASE 13 SUPPLEMENT` section appended at the bottom. The supplement
+> claims (3 per patent, totalling 9) were added on 2026-04-25 and are
+> part of the canonical GitHub specification.
 
 ---
 

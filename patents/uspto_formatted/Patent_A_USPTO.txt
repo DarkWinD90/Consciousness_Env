@@ -105,4 +105,27 @@ The prior ¶0030 listed stale zone boundaries (low: 5-15 spikes, medium: 30-50 s
 Claim 9 — VERIFIED, NO REVISION:
 Claim 9 uses the language 'medium activity levels' without specifying spike counts. The corrected zone boundaries (8–27 spikes) fully satisfy the structural requirement of low-drain / medium-surplus / high-drain, so no claim language revision is required. The shift in zone boundaries does not affect claim scope.
 
-All formulas independently verified:
+All formulas independently verified.
+
+
+SUPPLEMENTARY APPLICATION CONTENT — PHASE 13 RECURRENT DEPTH
+
+PROVENANCE NOTE
+This supplementary section was added on 2026-04-25 on branch claude/consciousness-recurrent-structure-KPrLB to capture the new claims introduced by Phase 13 (Recurrent Depth). It is part of the canonical GitHub specification; no external reconciliation is required. Claims 1 through 11 above are unchanged.
+
+PHASE 13 SUMMARY OF NEW ELEMENT
+Phase 13 of the reference implementation adds an inner-loop wrapper around the single-iteration leaky integrate-and-fire step described in paragraphs 0021 through 0027. When recurrent depth is enabled with depth parameter T, the spiking neural network 14 executes T inner iterations of its integrate-and-fire dynamics per outer simulation timestep before the motor 16 receives a control signal and the energy harvesting subsystem performs its energy-storage update. Two architectural consequences are claimed: (1) cumulative spike count grows approximately linearly with T (more neural compute) while motor 16 actuations remain at exactly one per outer simulation timestep (constant Coda harvest contribution), so depth amortizes mechanical actuation cost; (2) the control logic block 26 charges the energy store 28 exactly once per outer simulation timestep with cumulative spike count summed across all T inner iterations, preserving the homeostatic equilibrium described in paragraphs 0028 through 0030 across all values of T.
+
+ADDITIONAL CLAIMS (PROPOSED FOR INCORPORATION)
+
+12. The system of claim 1 wherein said spiking neural network further comprises an inner-loop wrapper that executes T iterations of said leaky integrate-and-fire dynamics per outer simulation timestep, where T is a configurable integer greater than or equal to one, with the sensor input re-injected at each said inner iteration; and wherein said control logic block updates the energy store exactly once per outer simulation timestep with a cumulative spike count summed across all T inner iterations of that outer simulation timestep.
+
+13. The system of claim 12 wherein the cumulative spike count grows approximately linearly with T while the count of motor actuations remains at exactly one per outer simulation timestep, such that mechanical actuation cost is amortized over T inner reasoning iterations and the harvest contribution from servo movement variance is unaffected by the value of T.
+
+14. The method of claim 10 further comprising executing T inner iterations of said leaky integrate-and-fire dynamics per outer simulation timestep with re-injection of the sensory input at each said inner iteration, and updating the energy store exactly once per outer simulation timestep with the cumulative spike count summed across all T inner iterations.
+
+VALIDATION EVIDENCE FOR CLAIMS 12-14
+Phase 13 falsifiable claim F13.2: across 200 outer simulation steps with T equal to 8, three structural invariants hold: (a) the servo-actuation history has length 200, (b) the energy store update_storage path is invoked exactly 200 times rather than 8 times 200, (c) the cumulative spike count charged to the energy harvester equals the sum of inner-step spike counts (no double-counting). All three invariants PASS in the reference implementation (phases/phase13_recurrent_depth.py). Energy budget appendix at T = 1, 4, 8, 16: cumulative spikes 82, 332, 663, 1326 (linear with T); motor activations constant at 200 across all T.
+
+REFERENCE TO SOURCE CODE (PHASE 13)
+Repository: github.com/DarkWinD90/Consciousness_Env. Branch: claude/consciousness-recurrent-structure-KPrLB. Commit at time of supplement: aac99fc. Pending tag: v4.0.0-phase13-recurrent-depth (post-merge to main). Implementation file: core/recurrent_depth.py (RecurrentDepthSNN, RecurrentDepthConfig, StepResult). Validation script: phases/phase13_recurrent_depth.py.
