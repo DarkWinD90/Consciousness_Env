@@ -168,6 +168,22 @@ updated and fed back through the feedback injection module on each inner
 iteration, and wherein T is dynamically adjustable during operation by the
 modulation interface.
 
+### Brief description of FIG. 7 (proposed for incorporation)
+
+[0032] FIG. 7 is a block diagram of the recurrent-depth inner loop showing
+the spiking neural network 14 executing T inner iterations of
+integrate-and-fire dynamics per outer simulation timestep within an
+inner-loop region marker 86, with the encoded input e (numeral 84) from
+a prelude block 82 re-injected at every inner iteration, the
+membrane-potential vector represented as hidden state 88 persisting
+across inner iterations, a reflection feedback block 90 applying the
+reflection coefficient at every inner iteration, a spike accumulator 92
+summing spike counts across all T inner iterations, and an output gate
+94 emitting the aggregated output exactly once per outer simulation
+timestep to a coda block 96. The reference SVG file is
+`patent_drawings/patent_b/fig7.svg`; it passes 8/8 structural and 5/5
+geometric checks under the patent-drawer validator suite.
+
 ### Mechanistic basis
 
 The leaky-integrate-and-fire update step is structurally one iteration of

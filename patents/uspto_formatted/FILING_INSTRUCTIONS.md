@@ -168,13 +168,17 @@ Create simple black and white line drawings for each patent. You can use:
 - FIG. 7: Validation Results Summary (claims table)
 - FIG. 8: Energy-Bounded Recursive Control Architecture
 
-### Patent B Drawings (6 figures):
+### Patent B Drawings (6 figures, 7 with Phase 13 supplement):
 - FIG. 1: Self-Observation Feedback Loop
 - FIG. 2: Reflection Coefficient Spectrum
 - FIG. 3: Dynamic Modulation Sources
 - FIG. 4: Self-Referential Learning Loop (STDP + self-observation)
 - FIG. 5: Energy-Aware Self-Observation Regulation
 - FIG. 6: End-to-End Signal Flow with Self-Observation Integration
+- **FIG. 7 (Phase 13 supplement, 2026-04-25): Recurrent Depth Inner Loop**
+  — passes 8/8 structural and 5/5 geometric checks; include only if
+  filing under Option (ii) (reconcile-then-regenerate) per the top-level
+  decision-point note above.
 
 ### Patent C Drawings (7 figures):
 - FIG. 1: System Architecture with Fallback

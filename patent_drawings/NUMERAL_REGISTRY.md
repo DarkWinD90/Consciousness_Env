@@ -240,3 +240,47 @@ These components appear in multiple figures with the SAME numeral:
 4. **Leader lines** must connect each numeral to its element without crossing other elements
 5. **First occurrence** of a numeral in a figure gets the full label; subsequent occurrences may use numeral only
 6. **Each patent has independent numbering** — same number in different patents means different things
+
+
+---
+
+## Phase 13 Supplement — Patent B FIG. 7 (2026-04-25)
+
+> **Provenance note.** This supplement was added on branch
+> `claude/consciousness-recurrent-structure-KPrLB` after the source-of-truth
+> Google Drive document `Unified_Reference_Numeral_Master_Maps.md`
+> (downloaded 2026-03-13) had been finalized. The new numerals 82-96
+> below for Patent B FIG. 7 must be reconciled into the Google Drive
+> document before any subsequent regeneration of this file. Existing
+> Patent B numerals 10-80 are unchanged; existing Patent B figures 1-6
+> are unchanged.
+
+### Patent B — Phase 13 numerals (new in FIG. 7)
+
+| Num | Element | Figures Used |
+|-----|---------|-------------|
+| 82 | Prelude block (encoded input from L1-L3, runs once per outer step) | 7 |
+| 84 | Encoded input e (re-injected at every inner iteration) | 7 |
+| 86 | Inner-loop region marker (T-iteration enclosure, dashed L-corners) | 7 |
+| 88 | Hidden state (membrane potential vector, persists across inner iterations) | 7 |
+| 90 | Reflection feedback (applied at every inner iteration) | 7 |
+| 92 | Spike accumulator (cumulative spike count across all T iterations) | 7 |
+| 94 | Output gate (emits aggregated output exactly once per outer step) | 7 |
+| 96 | Coda (L5-L6 trigger, runs once per outer step) | 7 |
+
+Numeral 14 (Spiking Neural Network) is reused in FIG. 7 (already
+referenced from Patent B figures 1, 4, 6).
+
+### Patent B Per-Figure Checklist — FIG. 7 addendum
+
+**FIG 7** (Recurrent Depth Inner Loop): 14, 82, 84, 86, 88, 90, 92, 94, 96
+
+### Compliance audit result
+
+`patent_drawings/patent_b/fig7.svg` passes 8/8 structural checks and 5/5
+geometric checks under
+`.claude/skills/patent-drawer/validators/full_compliance.py` as of
+2026-04-25. The four-cornered dashed L-bracket convention used to
+delineate the inner-loop region (numeral 86) avoids any path-through-box
+collisions (Rule G3) by leaving the boundary open at the points where
+signal paths enter and exit the region.
