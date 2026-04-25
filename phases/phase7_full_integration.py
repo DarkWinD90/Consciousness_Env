@@ -145,20 +145,22 @@ class IntegratedConsciousnessSystem(ThermochromicMixin):
         # LAYER 1-2: SENSE (Membrane + Sensing Pads)
         self.state.light_intensity = external_light
 
-        # Thermal step: photothermal absorption (from incident light) + L6
-        # overflow heat carried over from the previous step. Newton's-law
-        # cooling toward ambient is applied per-dt by ThermalState (was
-        # previously per-event, which double-cooled or skipped depending on
-        # heat-event count).
+        # Thermal step: incident illuminance is fed through ThermalState as
+        # the `light` kwarg (photothermal_factor lives in ThermalConfig now;
+        # the prior /500.0 magic number is gone). The L6 overflow heat
+        # carried over from the previous step is still Celsius-denominated,
+        # so it goes through the watts path via celsius_per_step_to_watts.
+        # Newton's-law cooling toward ambient is applied per-dt by
+        # ThermalState, not per heat event.
         thermal_cfg = self._thermal.config
-        photothermal_celsius = external_light / 500.0
-        total_heat_celsius = (
-            photothermal_celsius + self._pending_overflow_heat_celsius
+        overflow_watts = celsius_per_step_to_watts(
+            self._pending_overflow_heat_celsius, thermal_cfg
         )
-        total_heat_watts = celsius_per_step_to_watts(
-            total_heat_celsius, thermal_cfg
+        self._thermal.step(
+            thermal_cfg.dt_reference_seconds,
+            heat_in_watts=overflow_watts,
+            light=external_light,
         )
-        self._thermal.step(thermal_cfg.dt_reference_seconds, total_heat_watts)
         self.state.membrane_temp = self._thermal.temperature
 
         # Update membrane color using shared ThermochromicMixin
