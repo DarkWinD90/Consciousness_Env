@@ -103,3 +103,26 @@ A method and system for configurable recursive self-observation in spiking neura
 
 REFERENCE TO SOURCE CODE
 The complete implementation of this invention is available at the following repository: github.com/DarkWinD90/Consciousness_Env, validated state tagged as v3.0.0-phase10-multimodal at commit 9e2c333. Key implementation file is core/base_snn.py. Dynamic modulation is implemented in mcp/consciousness_mcp_server.py.
+
+
+SUPPLEMENTARY APPLICATION CONTENT — PHASE 13 RECURRENT DEPTH
+
+PROVENANCE NOTE
+This supplementary section was added on 2026-04-25 on branch claude/consciousness-recurrent-structure-KPrLB after the source-of-truth Google Drive document Patent_B_Specification_RECONCILED_v2.docx (regenerated 2026-03-13) had been finalized. The proposed new claims 11, 12, and 13 must be reconciled into the Google Drive specification before any subsequent regeneration of this USPTO-formatted file. Claims 1 through 10 above are unchanged.
+
+PHASE 13 SUMMARY OF NEW ELEMENT
+Phase 13 of the reference implementation adds an inner loop around the single-iteration leaky integrate-and-fire step described in paragraphs 0017 through 0019. When recurrent depth is enabled with depth parameter T, the spiking neural network executes T inner iterations of its integrate-and-fire dynamics per outer simulation timestep before the network's aggregate output is consumed by any downstream subsystem. The reflection feedback path described in paragraphs 0019 through 0023 is applied at every inner iteration, not only once per outer timestep: at each inner iteration k of T, the running mean of the membrane potential vector is computed and fed back as additional input on the next inner iteration, scaled by the configurable reflection coefficient. The feedback is therefore re-applied T times per outer timestep, producing a deeper attractor convergence than the single-iteration case. Empirical validation (claim F13.1) shows that the post-step hidden state at T equal to 8 is more strongly correlated with the input signal than at T equal to 1 (correlation ratio greater than or equal to 1.05), demonstrating that depth-induced attractor convergence reveals the input-dependent fixed point more cleanly than transient or refractory state alone.
+
+ADDITIONAL CLAIMS (PROPOSED FOR INCORPORATION)
+
+11. The method of claim 1 further comprising executing T inner iterations of said spiking neural network's integrate-and-fire dynamics per outer simulation timestep, where T is a configurable integer greater than or equal to one, and wherein said reflection coefficient feedback is applied at each of said T inner iterations such that the network observes its own running aggregate output T times per outer simulation timestep before any downstream subsystem consumes the network's final aggregate output.
+
+12. The method of claim 11 wherein the input signal is re-injected at each of said T inner iterations, and wherein the cumulative spike count produced across all T inner iterations is reported once per outer simulation timestep so that activity-dependent energy accounting is performed exactly once per outer simulation timestep regardless of the value of T.
+
+13. The system of claim 2 further comprising an inner-loop controller that invokes the spiking neural network's integrate-and-fire step T times per outer simulation timestep, wherein the self-observation state register is updated and fed back through the feedback injection module on each inner iteration, and wherein T is dynamically adjustable during operation by the modulation interface.
+
+VALIDATION EVIDENCE FOR CLAIMS 11-13
+Phase 13 falsifiable claim F13.1: correlation between the post-step aggregate output and the input signal (after a 100-step burn-in) at T=8 versus T=1 — measured ratio 1.0804, threshold greater than or equal to 1.05. PASS. Phase 13 falsifiable claim F13.3: with fixed input held constant, late-window variance of the per-inner-iteration aggregate output is 0.0379 of early-window variance, threshold less than or equal to 0.7. PASS. These two claims confirm that the network reaches its input-dependent attractor each outer step (continuous-latent attractor convergence) and that the attractor more cleanly reflects the input than the transient state observed at T=1.
+
+REFERENCE TO SOURCE CODE (PHASE 13)
+Repository: github.com/DarkWinD90/Consciousness_Env. Branch: claude/consciousness-recurrent-structure-KPrLB. Commit at time of supplement: aac99fc. Pending tag: v4.0.0-phase13-recurrent-depth (post-merge to main). Implementation file: core/recurrent_depth.py (RecurrentDepthSNN, RecurrentDepthConfig, StepResult). Validation script: phases/phase13_recurrent_depth.py.
