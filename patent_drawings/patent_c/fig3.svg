@@ -20,7 +20,7 @@
        chart) is not floating-endpoint-checked against unrelated
        components. Convention shared with the X-axis below. -->
   <line x1="160" y1="680" x2="160" y2="156" stroke="black" stroke-width="1.5" />
-  <polygon points="154 156, 160 142, 166 156" fill="black" stroke="none" stroke-width="0" />
+  <polygon points="154 156, 160 142, 166 156" fill="black" stroke="none" />
   <text x="145" y="145" font-family="Arial, sans-serif" font-size="14" fill="black">44</text>
   <line x1="157" y1="148" x2="160" y2="155" stroke="black" stroke-width="0.5" />
   <!-- Rotated Y-axis title. Shifted from x=120 to x=112 so the

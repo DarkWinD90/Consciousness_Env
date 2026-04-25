@@ -1,13 +1,13 @@
 # Gate every PR on patent-drawing compliance.
 #
 # Runs `.claude/skills/patent-drawer/validators/full_compliance.py` on
-# all 21 SVG drawings under `patent_drawings/patent_*/fig*.svg` and
+# all 22 SVG drawings under `patent_drawings/patent_*/fig*.svg` and
 # fails the build if any figure reports a `[FAIL]` line or if the total
-# "READY FOR USPTO SUBMISSION" count is not exactly 21.
+# "READY FOR USPTO SUBMISSION" count is not exactly 22.
 #
-# This locks in the 21/21 PASS state established on 2026-04-24
-# (PR #153). See `docs/tooling_audit_2026-04-24.md` for the trust-tier
-# inventory of the validators this job exercises.
+# This locks in the 22/22 PASS state established on 2026-04-25
+# (PR #157, Phase 13 Recurrent Depth — adds patent_b/fig7.svg to the
+# baseline previously locked by PR #153 at 21/21).
 
 name: SVG compliance
 
@@ -39,7 +39,7 @@ jobs:
       # so no pip install is required. If a future validator needs
       # numpy/scipy, add the install step here.
 
-      - name: Run full_compliance.py on all 21 SVGs
+      - name: Run full_compliance.py on all 22 SVGs
         run: |
           set -o pipefail
           SCRIPT=.claude/skills/patent-drawer/validators/full_compliance.py
@@ -58,8 +58,8 @@ jobs:
           done
           echo ""
           echo "Results: $PASS_COUNT PASS, $FAIL_COUNT FAIL"
-          if [ "$PASS_COUNT" -ne 21 ]; then
-            echo "::error::Expected 21 / 21 PASS, got $PASS_COUNT / 21"
+          if [ "$PASS_COUNT" -ne 22 ]; then
+            echo "::error::Expected 22 / 22 PASS, got $PASS_COUNT / 22"
             exit 1
           fi
 
@@ -73,7 +73,7 @@ jobs:
               && echo ok || echo miss
           done)
           READY_COUNT=$(echo "$READY" | grep -c ok)
-          if [ "$READY_COUNT" -ne 21 ]; then
-            echo "::error::Expected 21 READY figures, got $READY_COUNT"
+          if [ "$READY_COUNT" -ne 22 ]; then
+            echo "::error::Expected 22 READY figures, got $READY_COUNT"
             exit 1
           fi

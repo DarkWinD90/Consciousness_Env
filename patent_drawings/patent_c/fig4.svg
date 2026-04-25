@@ -19,9 +19,9 @@
        anchor rects that previously needed to receive their arrowhead
        endpoints. Convention shared with patent_c/fig3, fig6, fig7. -->
   <line x1="160" y1="378" x2="160" y2="136" stroke="black" stroke-width="1.5" />
-  <polygon points="154 136, 160 122, 166 136" fill="black" stroke="none" stroke-width="0" />
+  <polygon points="154 136, 160 122, 166 136" fill="black" stroke="none" />
   <line x1="162" y1="380" x2="674" y2="380" stroke="black" stroke-width="1.5" />
-  <polygon points="674 374, 688 380, 674 386" fill="black" stroke="none" stroke-width="0" />
+  <polygon points="674 374, 688 380, 674 386" fill="black" stroke="none" />
 
   <!-- Y-axis labels -->
   <text x="148" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">1.0</text>
