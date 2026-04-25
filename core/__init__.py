@@ -24,6 +24,7 @@ Architecture:
 from .base_snn import BaseSNN, SNNConfig
 from .thermochromic import ThermochromicMixin, ColorState
 from .energy import EnergyHarvester, EnergyConfig
+from .thermal import ThermalConfig, ThermalState, celsius_per_step_to_watts
 from .history import HistoryTracker
 from .predictive import PredictiveProcessor, PredictiveConfig
 from .multimodal import MultiModalSystem, MultiModalConfig, CrossModalConnector
@@ -67,6 +68,7 @@ __all__ = [
     'BaseSNN', 'SNNConfig',
     'ThermochromicMixin', 'ColorState',
     'EnergyHarvester', 'EnergyConfig',
+    'ThermalConfig', 'ThermalState', 'celsius_per_step_to_watts',
     'HistoryTracker',
     'PredictiveProcessor', 'PredictiveConfig',
     'MultiModalSystem', 'MultiModalConfig', 'CrossModalConnector',
