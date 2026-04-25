@@ -35,7 +35,16 @@ class ThermalConfig:
         event arrives per step.
       - dt_reference_seconds 18.0 = EnergyConfig.time_step_hours * 3600.
       - thermal_mass_j_per_k 5.0: small printed-membrane device.
-      - soft_cap 80 / bleed 0.2: damper, not a hard physical limit.
+      - photothermal_factor 0.002 K per (lux * reference-step). Calibrated
+        to the simulation's `external_light` input range (0-1000, indoor
+        through bright-office illuminance). 0.002 * 500 lux mean = 1.0 K
+        per step, consistent with sub-watt absorption on a small membrane
+        (1.0 K * 5 J/K / 18 s ~= 0.28 W). NOT a physical W/m^2 mapping --
+        the input is an illuminance signal, not irradiance.
+      - soft_cap 80 / bleed 0.2: NUMERICAL runaway-prevention rail, not a
+        substrate property. PET softens around 70 C; the 80 C threshold
+        sits above the real thermal failure point on purpose so it never
+        masks pathological dynamics, it only bounds them.
       - ambient_amplitude/noise default off so phase validators stay
         deterministic; tests opt in.
     """
@@ -46,6 +55,7 @@ class ThermalConfig:
     cooling_rate: float = 0.1
     dt_reference_seconds: float = 18.0
     thermal_mass_j_per_k: float = 5.0
+    photothermal_factor: float = 0.002
     soft_cap: float = 80.0
     soft_cap_bleed: float = 0.2
 
@@ -100,10 +110,11 @@ class ThermalState:
         Advance thermal state by dt seconds. Returns the new temperature.
 
         heat_in_watts: average heat injected over the dt window (positive = warming).
-        light: reserved for future radiative coupling; currently unused.
+        light: incident illuminance (lux). Converted to a watts contribution via
+            photothermal_factor; combined with heat_in_watts before integration.
+            A 1-unit lux input produces photothermal_factor K of heating per
+            reference step at the membrane (default: 0.002 K per lux per step).
         """
-        del light  # placeholder for L1 photothermal coupling
-
         cfg = self.config
         if dt <= 0.0:
             return self._temperature
@@ -111,7 +122,16 @@ class ThermalState:
         self._t_seconds += dt
         t_ambient = self.ambient_at(self._t_seconds)
 
-        delta_from_heat = (heat_in_watts * dt) / cfg.thermal_mass_j_per_k
+        # Photothermal: light (lux) * photothermal_factor (K/lux/step) gives
+        # K-per-reference-step; convert to watts using the same algebra as
+        # celsius_per_step_to_watts so the two heat paths are unit-consistent.
+        light_heat_watts = (
+            light * cfg.photothermal_factor * cfg.thermal_mass_j_per_k
+            / cfg.dt_reference_seconds
+        )
+        total_watts = heat_in_watts + light_heat_watts
+
+        delta_from_heat = (total_watts * dt) / cfg.thermal_mass_j_per_k
 
         steps_elapsed = dt / cfg.dt_reference_seconds
         delta_from_cooling = (
