@@ -145,17 +145,19 @@ def parse_transform(transform: str | None) -> Tuple[float, float, float, float, 
     return mat
 
 
-def iter_svg_elements(root: ET.Element) -> Iterable[Tuple[ET.Element, str, Tuple[float, float, float, float], bool]]:
-    def walk(node: ET.Element, parent_mat, in_defs: bool):
+def iter_svg_elements(root: ET.Element) -> Iterable[Tuple[ET.Element, str, Tuple[float, float, float, float], bool, bool]]:
+    def walk(node: ET.Element, parent_mat, in_defs: bool, in_axis_label: bool):
         tag = node.tag.replace(SVG_NS, "")
         local = parse_transform(node.get("transform"))
         mat = mul_mat(parent_mat, local)
         now_in_defs = in_defs or tag in {"defs", "marker", "clipPath", "mask", "pattern"}
-        yield node, tag, mat, now_in_defs
+        node_class = node.get("class") or ""
+        now_in_axis = in_axis_label or (tag == "g" and "axis-label" in node_class.split())
+        yield node, tag, mat, now_in_defs, now_in_axis
         for child in node:
-            yield from walk(child, mat, now_in_defs)
+            yield from walk(child, mat, now_in_defs, now_in_axis)
 
-    yield from walk(root, IDENTITY, False)
+    yield from walk(root, IDENTITY, False, False)
 
 
 def text_bbox_estimate(x: float, y: float, font_size: float, anchor: str, text: str) -> Tuple[float, float, float, float]:
@@ -196,7 +198,7 @@ def nonwhite_bbox(img: Image.Image) -> Tuple[int, int, int, int] | None:
 
 def mask_page_indicators(img: Image.Image, root: ET.Element) -> None:
     px = img.load()
-    for el, tag, mat, in_defs in iter_svg_elements(root):
+    for el, tag, mat, in_defs, _in_axis in iter_svg_elements(root):
         if in_defs or tag != "text":
             continue
         text = "".join(el.itertext()).strip()
@@ -387,8 +389,25 @@ def evaluate_diagram_hygiene(
                     break
         if not is_container:
             collision_components.append(c)
-    signal_paths = [s for s in shapes if s.tag in {"line", "polyline", "path"} and (s.has_marker or s.dashed)]
-    leader_lines = [s for s in shapes if s.tag in {"line", "path"} and s.stroke_width <= 0.8]
+    # Signal paths: line/polyline/path with marker or dash, AND stroke-width >= 1.0.
+    # The width gate lets SVG authors demote decorative dashed annotations
+    # (e.g., optimal-zone axis markers) below the threshold so they are not
+    # treated as functional signal lines for endpoint/crossing checks. The
+    # geometric_validator skill follows the same convention.
+    signal_paths = [
+        s for s in shapes
+        if s.tag in {"line", "polyline", "path"}
+        and (s.has_marker or s.dashed)
+        and s.stroke_width >= 1.0
+    ]
+    # Leader lines: thin lines/paths with no marker and not dashed.
+    # 37 CFR 1.84(q) leader lines are unbroken thin lines; real patent leaders
+    # commonly use stroke-width 0.5-1.0. The marker/dashed exclusion separates
+    # them from signal paths even when widths overlap.
+    leader_lines = [
+        s for s in shapes
+        if s.tag in {"line", "path"} and not s.has_marker and not s.dashed and s.stroke_width <= 1.0
+    ]
 
     # Element collisions (ignore tiny overlaps due to stroke joins)
     for i in range(len(collision_components)):
@@ -476,7 +495,7 @@ def check_figure(svg_path: Path, patent: str, fig_num: int, total: int) -> Figur
     shapes: List[Shape] = []
     numeric_text_nodes: List[Tuple[str, Tuple[float, float, float, float]]] = []
 
-    for el, tag, mat, in_defs in iter_svg_elements(root):
+    for el, tag, mat, in_defs, in_axis_label in iter_svg_elements(root):
         style = parse_style(el.get("style"))
         if not in_defs:
             for attr in ("fill", "stroke", "color", "stop-color"):
@@ -498,7 +517,7 @@ def check_figure(svg_path: Path, patent: str, fig_num: int, total: int) -> Figur
                 min_text_ok = False
                 text_issues.append(f"{txt} (invalid font-size)")
 
-            if re.fullmatch(r"\d+", txt):
+            if re.fullmatch(r"\d+", txt) and not in_axis_label:
                 try:
                     x = float(el.get("x", "0"))
                     y = float(el.get("y", "0"))

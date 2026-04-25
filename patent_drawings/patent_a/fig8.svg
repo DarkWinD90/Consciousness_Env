@@ -93,7 +93,7 @@
 
     <!-- Arrows: Motor splits to Thermal and Piezo -->
     <path d="M 380 460 L 380 485 L 260 485 L 260 510" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-    <path d="M 460 460 L 460 485 L 580 485 L 580 500" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+    <path d="M 460 460 L 460 485 L 580 485 L 580 515" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- THERMAL HARVESTER (20)                                 -->
@@ -107,17 +107,22 @@
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- PIEZOELECTRIC ELEMENT (22)                             -->
+    <!-- IEEE electrode-crystal-electrode symbol matching A:4/A:6 -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <circle cx="580" cy="535" r="35" fill="none" stroke="black" stroke-width="1.5" />
-    <path d="M 555 535 A 25 25 0 1 0 605 535 A 25 25 0 1 0 555 535 Z" fill="none" stroke="black" stroke-width="1.5" />
-    <text x="580" y="540" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
-    <!-- Ref 22 -->
+    <!-- Left electrode -->
+    <line x1="552" y1="515" x2="552" y2="545" stroke="black" stroke-width="2" />
+    <!-- Crystal body -->
+    <rect x="558" y="515" width="44" height="30" fill="none" stroke="black" stroke-width="1.5" />
+    <!-- Right electrode -->
+    <line x1="608" y1="515" x2="608" y2="545" stroke="black" stroke-width="2" />
+    <text x="580" y="533" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="black">PIEZO</text>
+    <!-- Ref 22 — leader points to top of right electrode -->
     <text x="630" y="510" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">22</text>
-    <line x1="628" y1="513" x2="616" y2="525" stroke="black" stroke-width="0.5" />
+    <line x1="628" y1="513" x2="610" y2="517" stroke="black" stroke-width="0.5" />
 
     <!-- Both harvesters → Energy Store -->
     <path d="M 260 560 L 260 585 L 420 585" fill="none" stroke="black" stroke-width="1.5" />
-    <path d="M 580 570 L 580 585 L 420 585" fill="none" stroke="black" stroke-width="1.5" />
+    <path d="M 580 545 L 580 585 L 420 585" fill="none" stroke="black" stroke-width="1.5" />
     <!-- Junction point where both harvester outputs merge -->
     <circle cx="420" cy="585" r="3" fill="black" stroke="black" stroke-width="1" />
     <line x1="420" y1="585" x2="420" y2="610" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
@@ -131,8 +136,13 @@
     <text x="515" y="618" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">28</text>
     <line x1="513" y1="621" x2="502" y2="628" stroke="black" stroke-width="0.5" />
 
-    <!-- Arrow: Energy Store feeds back up to SNN — routed at x=155 to clear thermal box -->
-    <path d="M 340 635 L 155 635 L 155 345 L 330 345" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#ah)" />
+    <!-- Arrow: Energy Store feeds back up to SNN — routed at x=155 to clear
+         thermal box, and enters SNN at the bottom-left corner (330, 380)
+         so the horizontal return segment passes BELOW the COGNITIVE
+         MODULATION cloud (y range 305-372) instead of through it; the
+         previous y=345 routing crossed through the "MODULATION" text
+         glyphs, violating 37 CFR 1.84(p)(1) legibility. -->
+    <path d="M 340 635 L 155 635 L 155 380 L 330 380" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#ah)" />
 
     <!-- ══════════════════════════════════════════════════════ -->
     <!-- REFLECTION FEEDBACK PATH (30) — self-loop on SNN        -->

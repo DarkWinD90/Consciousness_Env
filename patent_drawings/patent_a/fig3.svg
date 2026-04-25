@@ -103,10 +103,8 @@
     <!--  routed inside SNN: right then down, exits right side of SNN -->
     <!--  at y=395 and continues down to Spike Vector Output box top. -->
     <!-- ══════════════════════════════════════════════════════ -->
-    <line x1="615" y1="235" x2="690" y2="235" stroke="black" stroke-width="1.5" />
+    <path d="M 615 235 L 690 235 L 690 740 L 537 740" fill="none" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
     <circle cx="690" cy="235" r="3" fill="black" />
-    <line x1="690" y1="235" x2="690" y2="740" stroke="black" stroke-width="1.5" />
-    <line x1="690" y1="740" x2="537" y2="740" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
     <!-- Ref 62 -->
     <text x="700" y="400" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">62</text>
     <line x1="698" y1="398" x2="692" y2="395" stroke="black" stroke-width="0.5" />
@@ -132,7 +130,7 @@
     <line x1="135" y1="635" x2="135" y2="710" stroke="black" stroke-width="1" />
     <line x1="135" y1="710" x2="355" y2="710" stroke="black" stroke-width="1" />
     <line x1="135" y1="655" x2="355" y2="655" stroke="black" stroke-width="0.8" stroke-dasharray="3,2" />
-    <text x="358" y="659" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">V_th</text>
+    <text x="358" y="659" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Vth</text>
     <path d="M 135 705 L 165 675 L 170 655 L 172 710 L 200 680 L 225 660 L 227 710 L 255 680 L 280 660 L 282 710 L 310 680 L 335 660 L 337 710 L 355 700"
           fill="none" stroke="black" stroke-width="1.5" />
     <!-- Ref 64 -->
@@ -168,7 +166,10 @@
     <text x="517" y="570" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">if Δt &gt; 0 (LTP)</text>
     <text x="517" y="600" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">Δw = -A- · pre · post</text>
     <text x="517" y="625" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">if Δt &lt; 0 (LTD)</text>
-    <text x="517" y="665" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">w ∈ [w_min, w_max]</text>
+    <!-- ASCII 'in' replaces U+2208 to avoid cairosvg/PDF font-fallback
+         rendering as an empty box, which would violate 37 CFR 1.84(p)(1)
+         legibility. The patent specification keeps the Greek glyph. -->
+    <text x="517" y="665" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="black">w in [w_min, w_max]</text>
     <!-- Ref 68 -->
     <text x="640" y="478" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">68</text>
     <line x1="638" y1="476" x2="635" y2="472" stroke="black" stroke-width="0.5" />

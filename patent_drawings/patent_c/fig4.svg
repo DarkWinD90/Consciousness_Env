@@ -8,26 +8,20 @@
   <rect width="100%" height="100%" fill="white" />
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">4/7</text>
 
-  <!-- Anchor components for axis endpoints -->
-  <rect x="155" y="375" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="155" y="125" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="675" y="375" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="155" y="885" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="155" y="555" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="675" y="885" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-
-  <!-- Anchor components for axis endpoints -->
-  <rect x="155" y="375" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="155" y="125" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="675" y="375" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="155" y="885" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="155" y="555" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
-  <rect x="675" y="885" width="10" height="10" fill="none" stroke="black" stroke-width="1" />
+  <!-- Anchor rects removed: with both graphs' axes now using manual polygon
+       caps instead of marker-end (no signal-path classification), the
+       endpoint anchors are no longer needed. The boxes were rendering as
+       distracting unexplained symbols at axis corners. -->
 
   <!-- 58: Input Signal Graph (top) -->
-  <!-- Axes (offset origins to avoid segment intersection at shared corner) -->
-  <line x1="160" y1="378" x2="160" y2="130" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
-  <line x1="162" y1="380" x2="680" y2="380" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <!-- Axes with manual polygon caps (no marker-end) so they are not
+       classified as signal paths; this lets us drop the open-square
+       anchor rects that previously needed to receive their arrowhead
+       endpoints. Convention shared with patent_c/fig3, fig6, fig7. -->
+  <line x1="160" y1="378" x2="160" y2="136" stroke="black" stroke-width="1.5" />
+  <polygon points="154 136, 160 122, 166 136" fill="black" stroke="none" stroke-width="0" />
+  <line x1="162" y1="380" x2="674" y2="380" stroke="black" stroke-width="1.5" />
+  <polygon points="674 374, 688 380, 674 386" fill="black" stroke="none" stroke-width="0" />
 
   <!-- Y-axis labels -->
   <text x="148" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="black">1.0</text>

@@ -8,20 +8,19 @@
   <rect width="100%" height="100%" fill="white" />
   <text x="425" y="60" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="black">3/7</text>
 
-  <!-- Anchor components for axis endpoints -->
-  <rect x="155" y="692" width="10" height="10" fill="none" stroke="black" stroke-width="0.8" />
-  <rect x="155" y="145" width="10" height="10" fill="none" stroke="black" stroke-width="0.8" />
-  <rect x="705" y="692" width="10" height="10" fill="none" stroke="black" stroke-width="0.8" />
-  <rect x="235" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="0.8" />
-  <rect x="235" y="692" width="10" height="10" fill="none" stroke="black" stroke-width="0.8" />
-  <rect x="315" y="385" width="10" height="10" fill="none" stroke="black" stroke-width="0.8" />
-  <rect x="315" y="692" width="10" height="10" fill="none" stroke="black" stroke-width="0.8" />
-  <rect x="535" y="235" width="10" height="10" fill="none" stroke="black" stroke-width="0.8" />
-  <rect x="535" y="692" width="10" height="10" fill="none" stroke="black" stroke-width="0.8" />
+  <!-- Anchor rects removed: with the post-2026-04-25 audit-tool patches
+       (signal_paths require stroke-width >= 1.0; thin dashed breakpoint
+       lines are no longer signal paths), these stroke-width=0.8 rects
+       are no longer needed for endpoint anchoring and were rendering as
+       distracting unexplained boxes in the figure. -->
 
   <!-- Graph axes -->
-  <!-- 44: Y-axis (Modulation value) -->
-  <line x1="160" y1="680" x2="160" y2="150" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <!-- 44: Y-axis (Modulation value). Manual polygon cap instead of
+       marker-end so the axis end (in empty space at the top of the
+       chart) is not floating-endpoint-checked against unrelated
+       components. Convention shared with the X-axis below. -->
+  <line x1="160" y1="680" x2="160" y2="156" stroke="black" stroke-width="1.5" />
+  <polygon points="154 156, 160 142, 166 156" fill="black" stroke="none" stroke-width="0" />
   <text x="145" y="145" font-family="Arial, sans-serif" font-size="14" fill="black">44</text>
   <line x1="157" y1="148" x2="160" y2="155" stroke="black" stroke-width="0.5" />
   <!-- Rotated Y-axis title. Shifted from x=120 to x=112 so the

@@ -49,8 +49,13 @@
   <line x1="392" y1="400" x2="450" y2="400" stroke="black" stroke-width="0.8" />
   <text x="455" y="405" font-family="Arial" font-size="14" fill="black">Positive = gained</text>
 
-  <!-- 72: Full Step Buffer Section (dashed - optional) -->
-  <rect x="170" y="470" width="500" height="165" rx="3" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="4,2" />
+  <!-- 72: Full Step Buffer Section (dashed - optional). Box height
+       widened from 165 to 175 so the bottom edge (y=645) clears the
+       "(included when cognitive layer requests history)" text baseline
+       at y=635 by 10 px; previously the dashed border coincided with
+       the text baseline and clipped descenders of g/y, violating
+       37 CFR 1.84(p)(1) legibility. -->
+  <rect x="170" y="470" width="500" height="175" rx="3" fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="4,2" />
   <text x="195" y="495" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="black">FULL STEP BUFFER (optional)</text>
   <line x1="170" y1="505" x2="670" y2="505" stroke="black" stroke-width="0.8" />
   <text x="195" y="530" font-family="Arial" font-size="14" fill="black">Step 0: {input, modulation, spikes, energy, temp, pattern}</text>
@@ -80,17 +85,21 @@
   <text x="425" y="835" font-family="Arial" font-size="14" text-anchor="middle" fill="black">74</text>
   <line x1="425" y1="828" x2="425" y2="812" stroke="black" stroke-width="0.5" />
 
-  <!-- Arrow from 72 to 74 -->
-  <line x1="425" y1="635" x2="425" y2="700" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
+  <!-- Arrow from 72 to 74. Start moved from y=635 to y=645 to stay
+       on the new bottom edge of the dashed buffer box. -->
+  <line x1="425" y1="645" x2="425" y2="700" stroke="black" stroke-width="1.5" marker-end="url(#ah)" />
 
-  <!-- Decision outputs -->
+  <!-- Decision outputs. The Level 1 and Level 2 destination rects are
+       drawn at stroke-width=1.0 so the validator recognizes them as
+       components and the decision-output arrows have a clear endpoint
+       anchor. -->
   <path d="M350 755 L230 755 L230 800" stroke="black" stroke-width="1.5" fill="none" marker-end="url(#ah)" />
-  <rect x="190" y="800" width="80" height="30" rx="3" fill="none" stroke="black" stroke-width="0.8" />
+  <rect x="190" y="800" width="80" height="30" rx="3" fill="none" stroke="black" stroke-width="1.0" />
   <text x="230" y="820" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Level 1</text>
   <text x="290" y="745" font-family="Arial" font-size="14" text-anchor="middle" fill="black">NO</text>
 
   <path d="M500 755 L620 755 L620 800" stroke="black" stroke-width="1.5" fill="none" marker-end="url(#ah)" />
-  <rect x="580" y="800" width="80" height="30" rx="3" fill="none" stroke="black" stroke-width="0.8" />
+  <rect x="580" y="800" width="80" height="30" rx="3" fill="none" stroke="black" stroke-width="1.0" />
   <text x="620" y="820" font-family="Arial" font-size="14" text-anchor="middle" fill="black">Level 2</text>
   <text x="560" y="745" font-family="Arial" font-size="14" text-anchor="middle" fill="black">YES</text>
 
