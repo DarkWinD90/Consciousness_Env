@@ -21,7 +21,9 @@ C. Low-Voltage Modulation:
    - Effects: Electrochromic opacity shifts, conductivity changes
    - Response time: Seconds for real-time adaptation
 
-REFACTORED: Now uses shared core.ThermochromicMixin module.
+REFACTORED: thermal dynamics delegated to core.ThermalState (Newton's-law
+cooling per dt, not per heat event). apply_heat() buffers the heat input
+into the next step(); cooling advances exactly once per simulation step.
 """
 
 import numpy as np
@@ -29,13 +31,18 @@ import matplotlib.pyplot as plt
 import sys
 sys.path.insert(0, '/home/user/Consciousness_Env')
 
-from core import ThermochromicMixin, ColorState, HistoryTracker
+from core import (
+    ThermochromicMixin, ColorState, HistoryTracker,
+    ThermalConfig, ThermalState, celsius_per_step_to_watts,
+)
 
 
 class AdaptiveMembrane(ThermochromicMixin):
     """Phase 5: Printed adaptive membrane with thermochromic response
 
     Inherits from ThermochromicMixin for consolidated color shift logic.
+    Temperature dynamics live in a ThermalState instance; apply_heat()
+    buffers heat events and step_thermal() flushes them once per timestep.
     """
 
     # Override class-level thermochromic parameters
@@ -43,8 +50,13 @@ class AdaptiveMembrane(ThermochromicMixin):
     warm_threshold = 25.0
     temp_range = 15.0  # More sensitive range for membrane
 
-    def __init__(self):
-        self.temperature = 20.0
+    def __init__(self, thermal_config: ThermalConfig | None = None):
+        self._thermal = ThermalState(
+            thermal_config or ThermalConfig(),
+            initial_temperature=20.0,
+        )
+        self._pending_heat_celsius = 0.0
+        self._pending_heat_watts = 0.0
         self._color = ColorState(r=0.5, g=0.5, b=0.5)
         self.opacity = 0.5  # 50% opacity
         self.conductivity = 1.0  # Normalized
@@ -55,14 +67,42 @@ class AdaptiveMembrane(ThermochromicMixin):
         ])
 
     @property
+    def temperature(self) -> float:
+        return self._thermal.temperature
+
+    @temperature.setter
+    def temperature(self, value: float) -> None:
+        self._thermal.temperature = value
+
+    @property
     def color_rgb(self):
         return self._color.to_list()
 
     def apply_heat(self, heat_gain):
-        """Absorb heat and update temperature"""
-        self.temperature += heat_gain
-        # Natural cooling toward ambient
-        self.temperature += (20 - self.temperature) * 0.1
+        """
+        Buffer a heat event (in degrees Celsius equivalent) for the next
+        step_thermal(). Multiple calls within a single step accumulate;
+        cooling happens once when step_thermal() runs.
+        """
+        self._pending_heat_celsius += float(heat_gain)
+
+    def apply_heat_watts(self, watts):
+        """Buffer a heat event already expressed in watts."""
+        self._pending_heat_watts += float(watts)
+
+    def step_thermal(self, dt: float | None = None) -> float:
+        """
+        Advance the thermal model by one timestep, flushing buffered heat.
+        Returns the new temperature.
+        """
+        cfg = self._thermal.config
+        dt_seconds = cfg.dt_reference_seconds if dt is None else dt
+        watts = self._pending_heat_watts
+        if self._pending_heat_celsius != 0.0:
+            watts += celsius_per_step_to_watts(self._pending_heat_celsius, cfg)
+        self._pending_heat_celsius = 0.0
+        self._pending_heat_watts = 0.0
+        return self._thermal.step(dt_seconds, watts)
 
     def update_color_shift(self):
         """Thermochromic color response using shared mixin"""
@@ -83,8 +123,9 @@ class AdaptiveMembrane(ThermochromicMixin):
             # Simulate varying heat
             heat_input = 2 * np.sin(step / 10) + np.random.randn() * 0.5
 
-            # Apply heat
+            # Buffer heat, then advance the thermal model exactly once per step
             self.apply_heat(heat_input)
+            self.step_thermal()
 
             # Update color using shared thermochromic logic
             self.update_color_shift()

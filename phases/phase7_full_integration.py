@@ -42,6 +42,7 @@ from core import (
     BaseSNN, SNNConfig,
     ThermochromicMixin, ColorState,
     EnergyHarvester, EnergyConfig,
+    ThermalConfig, ThermalState, celsius_per_step_to_watts,
     HistoryTracker
 )
 
@@ -120,6 +121,15 @@ class IntegratedConsciousnessSystem(ThermochromicMixin):
             initial_energy=50.0
         )
 
+        # Layer 1 thermal state. Heat sources: photothermal absorption from L1
+        # incident light, plus L6 energy-storage overflow heat (closes the
+        # L6 -> L1 thermal cross-link diagrammed in CLAUDE.md Section 2 and
+        # Patent A). Overflow_heat is latched between steps with a one-step
+        # lag because it is computed during update_storage(), which runs
+        # after the thermal step in the loop ordering below.
+        self._thermal = ThermalState(ThermalConfig(), initial_temperature=20.0)
+        self._pending_overflow_heat_celsius = 0.0
+
         # Use shared HistoryTracker from core module
         self.history = HistoryTracker(fields=[
             'light', 'temp', 'energy', 'servo_angle',
@@ -134,8 +144,22 @@ class IntegratedConsciousnessSystem(ThermochromicMixin):
         """
         # LAYER 1-2: SENSE (Membrane + Sensing Pads)
         self.state.light_intensity = external_light
-        self.state.membrane_temp += external_light / 500
-        self.state.membrane_temp *= 0.95  # Cooling
+
+        # Thermal step: photothermal absorption (from incident light) + L6
+        # overflow heat carried over from the previous step. Newton's-law
+        # cooling toward ambient is applied per-dt by ThermalState (was
+        # previously per-event, which double-cooled or skipped depending on
+        # heat-event count).
+        thermal_cfg = self._thermal.config
+        photothermal_celsius = external_light / 500.0
+        total_heat_celsius = (
+            photothermal_celsius + self._pending_overflow_heat_celsius
+        )
+        total_heat_watts = celsius_per_step_to_watts(
+            total_heat_celsius, thermal_cfg
+        )
+        self._thermal.step(thermal_cfg.dt_reference_seconds, total_heat_watts)
+        self.state.membrane_temp = self._thermal.temperature
 
         # Update membrane color using shared ThermochromicMixin
         color_state = self.compute_thermochromic_color(self.state.membrane_temp)
@@ -161,6 +185,12 @@ class IntegratedConsciousnessSystem(ThermochromicMixin):
         friction_energy = self.energy_harvester.harvest_friction(movement)
         thermal_energy = self.energy_harvester.harvest_thermal(self.state.membrane_temp)
         self.energy_harvester.update_storage(friction_energy, thermal_energy)
+
+        # Latch L6 overflow heat for injection into L1 on the next step.
+        # Closes the L6 -> L1 thermal cross-link. With EnergyConfig (no
+        # capacity_mwh) this stays at 0.0; with BalancedEnergyConfig it
+        # becomes nonzero whenever stored energy hits capacity.
+        self._pending_overflow_heat_celsius = self.energy_harvester.overflow_heat
 
         # Update state from harvester
         self.state.friction_harvest = friction_energy
