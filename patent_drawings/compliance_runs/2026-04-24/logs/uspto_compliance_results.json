@@ -5,18 +5,16 @@
     "sheet": "1/8",
     "file": "patent_drawings/patent_a/fig1.svg",
     "viewbox": true,
-    "margins": false,
+    "margins": true,
     "min_text": true,
     "min_font_seen": 14.0,
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
     "diagram_hygiene": true,
-    "status": "FAIL",
+    "status": "PASS",
     "issues": {
-      "margins": [
-        "left content at x=99"
-      ],
+      "margins": [],
       "text": [],
       "color": [],
       "diagram": []
@@ -55,15 +53,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #6 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -99,26 +95,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 100 missing nearby leader line",
-        "reference numeral 102 missing nearby leader line",
-        "reference numeral 104 missing nearby leader line",
-        "reference numeral 106 missing nearby leader line",
-        "reference numeral 132 missing nearby leader line",
-        "reference numeral 134 missing nearby leader line",
-        "reference numeral 134 overlaps element",
-        "reference numeral 136 missing nearby leader line",
-        "reference numeral 138 missing nearby leader line",
-        "reference numeral 90 missing nearby leader line",
-        "reference numeral 92 missing nearby leader line",
-        "reference numeral 94 missing nearby leader line"
-      ]
+      "diagram": []
     }
   },
   {
@@ -133,15 +116,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -156,15 +137,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 120 overlaps element"
-      ]
+      "diagram": []
     }
   },
   {
@@ -200,15 +179,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #7 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -223,15 +200,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -330,15 +305,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "component overlap/collision detected"
-      ]
+      "diagram": []
     }
   },
   {
@@ -374,18 +347,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #1 has floating start/end",
-        "signal path #2 has floating start/end",
-        "signal path #3 has floating start/end",
-        "signal path #4 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
@@ -400,16 +368,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "reference numeral 250 missing nearby leader line",
-        "reference numeral 500 missing nearby leader line"
-      ]
+      "diagram": []
     }
   },
   {
@@ -424,16 +389,13 @@
     "bw_only": true,
     "fig_label": true,
     "sheet_number": true,
-    "diagram_hygiene": false,
-    "status": "FAIL",
+    "diagram_hygiene": true,
+    "status": "PASS",
     "issues": {
       "margins": [],
       "text": [],
       "color": [],
-      "diagram": [
-        "signal path #3 has floating start/end",
-        "signal path #4 has floating start/end"
-      ]
+      "diagram": []
     }
   },
   {
