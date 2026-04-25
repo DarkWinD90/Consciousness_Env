@@ -86,7 +86,7 @@ Reference numerals: Unified numbering system. Each unique component receives one
 SUPPLEMENTARY DRAWING CONTENT — PHASE 13 RECURRENT DEPTH (2026-04-25)
 
 PROVENANCE NOTE
-This supplementary section was added on 2026-04-25 on branch claude/consciousness-recurrent-structure-KPrLB. The new figure FIG. 7 and its associated reference numerals 82, 84, 86, 88, 90, 92, 94, and 96 must be reconciled into the source-of-truth Google Drive specification before any subsequent regeneration of this drawings-description file. The original FIGS. 1 through 6 above are unchanged.
+This supplementary section was added on 2026-04-25 on branch claude/consciousness-recurrent-structure-KPrLB to capture the new figure (FIG. 7) and reference numerals 82, 84, 86, 88, 90, 92, 94, and 96 introduced by Phase 13 (Recurrent Depth). It is part of the canonical GitHub specification; no external reconciliation is required. The original FIGS. 1 through 6 above are unchanged.
 
 UPDATED COUNTS WITH SUPPLEMENT
 Total Drawing Sheets: 7

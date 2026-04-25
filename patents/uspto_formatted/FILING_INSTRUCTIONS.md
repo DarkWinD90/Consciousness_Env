@@ -1,26 +1,24 @@
 # USPTO Filing Instructions — Step by Step
 
 > **2026-04-25 update — Phase 13 supplement.** Phase 13 (Recurrent Depth)
-> was developed on branch `claude/consciousness-recurrent-structure-KPrLB`
-> after the source-of-truth Google Drive specifications were last
-> regenerated (2026-03-13). Each `Patent_X_USPTO.txt` now has a
+> was developed on branch `claude/consciousness-recurrent-structure-KPrLB`.
+> Each `Patent_X_USPTO.txt` now has a
 > `SUPPLEMENTARY APPLICATION CONTENT — PHASE 13 RECURRENT DEPTH` section
-> appended at the bottom containing 3 proposed new claims per patent
-> (9 total). Decision point before filing:
+> appended at the bottom, containing 3 proposed new claims per patent
+> (9 total) plus the new FIG. 7 description for Patent B. Decision point
+> before filing:
 >
 > - **Option (i) — File now with original 33 claims.** Strip the
 >   supplement sections from each `.txt` before regenerating filing
 >   PDFs. The Phase 13 claims become a continuation patent later.
 >   Cleaner audit chain and faster filing path.
-> - **Option (ii) — Reconcile Phase 13 supplements into Google Drive
->   first, then regenerate `.docx → .md → .txt → .pdf`.** Broader
->   initial filing scope. Adds approximately one week of reconciliation
->   work before filing.
+> - **Option (ii) — File now with all 42 claims (33 base + 9 Phase 13).**
+>   Leave the supplement sections in place when regenerating filing
+>   PDFs. Broader initial filing scope.
 >
-> The current per-patent PDFs in `patents/pdfs/` were generated from the
-> 2026-03-13 source-of-truth and do not yet reflect the supplement
-> sections. PDF regeneration is required for either option (drop
-> supplement first for Option i; reconcile-then-regenerate for Option ii).
+> The current per-patent PDFs in `patents/pdfs/` were generated before
+> Phase 13 and do not yet reflect the supplement sections. PDF
+> regeneration is required for either option.
 
 ## Before You Start
 
@@ -177,7 +175,7 @@ Create simple black and white line drawings for each patent. You can use:
 - FIG. 6: End-to-End Signal Flow with Self-Observation Integration
 - **FIG. 7 (Phase 13 supplement, 2026-04-25): Recurrent Depth Inner Loop**
   — passes 8/8 structural and 5/5 geometric checks; include only if
-  filing under Option (ii) (reconcile-then-regenerate) per the top-level
+  filing under Option (ii) (file with all 42 claims) per the top-level
   decision-point note above.
 
 ### Patent C Drawings (7 figures):

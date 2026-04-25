@@ -14,7 +14,7 @@
 | **B** | Configurable Recursive Self-Observation in SNNs | 10 claims (2 independent) + 3 Phase 13 supplement claims | ~17 pages | Tunable self-awareness dial (reflection coefficient 0.0→1.0); inner-iteration self-observation |
 | **C** | Cognitive Fallback with Autonomous Self-Regulation | 12 claims (2 independent) + 3 Phase 13 supplement claims | ~20 pages | Continuous intelligent operation during disconnection; depth-aware autonomous runner |
 
-**Total**: 33 base claims + 9 Phase 13 supplement claims = 42 claims across 3 applications (~59 pages). The Phase 13 supplement claims are documented in the per-patent .md files at the bottom; they are pending reconciliation into the source-of-truth Google Drive specifications.
+**Total**: 33 base claims + 9 Phase 13 supplement claims = 42 claims across 3 applications (~59 pages). The Phase 13 supplement claims are documented in the per-patent .md files at the bottom and are part of the canonical GitHub specification.
 
 ---
 
@@ -240,10 +240,8 @@ patents/
 
 > **Phase 13 supplement note.** Each Patent_X.md file has a clearly-marked
 > `## PHASE 13 SUPPLEMENT` section appended at the bottom. The supplement
-> claims (3 per patent, totalling 9) are post-source-of-truth additions
-> dated 2026-04-25 and must be reconciled into the corresponding Google
-> Drive specification documents before any subsequent regeneration of
-> the .md files.
+> claims (3 per patent, totalling 9) were added on 2026-04-25 and are
+> part of the canonical GitHub specification.
 
 ---
 

@@ -152,8 +152,8 @@ patent applications filed February 2, 2026:
 
 Total: 33 base claims + 9 Phase 13 supplement claims = 42 claims across 3
 applications. The Phase 13 supplement claims are documented in the
-patents/Patent_X_*.md files; pending reconciliation into the source-of-truth
-Google Drive specification documents.
+patents/Patent_X_*.md files and are part of the canonical GitHub
+specification.
 
 
 VALIDATION SUMMARY

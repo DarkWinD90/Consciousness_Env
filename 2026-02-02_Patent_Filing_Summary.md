@@ -21,10 +21,10 @@
 > with 3 proposed new claims per patent (9 total): depth-amortized
 > energy accounting (Patent A), inner-iteration self-observation
 > (Patent B), depth-aware autonomous runner (Patent C). These
-> supplement claims must be reconciled into the Google Drive
-> source-of-truth specifications before any subsequent regeneration of
-> the .md files. USPTO-formatted .txt specs and patent drawings will
-> be updated in subsequent commits on the same branch.
+> supplement claims are part of the canonical GitHub specification as
+> of this update; the prior Google Drive documents are now legacy
+> reference. USPTO-formatted .txt specs and patent drawings updated in
+> subsequent commits on the same branch.
 
 ## Filing Status
 

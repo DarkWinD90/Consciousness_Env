@@ -356,8 +356,10 @@ This skill is designed for the Consciousness_Env patent portfolio:
 
 All 21 figures follow the same compliance standards defined here.
 
-**Authoritative references:**
+**Authoritative references (canonical: GitHub repository):**
 - Numeral registry: `patent_drawings/NUMERAL_REGISTRY.md`
-- Patent A spec: `Patent_A_Spec_RECONCILED_v3_UPDATED-3.docx` (Google Drive)
-- Patent B spec: `Patent_B_Spec_UPDATED.docx` (Google Drive)
-- Patent C spec: `Patent_C_Spec_RECONCILED_v2.docx` (Google Drive)
+- Patent A spec: `patents/Patent_A_Energy_Loop.md` and `patents/uspto_formatted/Patent_A_USPTO.txt`
+- Patent B spec: `patents/Patent_B_Self_Observation.md` and `patents/uspto_formatted/Patent_B_USPTO.txt`
+- Patent C spec: `patents/Patent_C_Cognitive_Fallback.md` and `patents/uspto_formatted/Patent_C_USPTO.txt`
+
+Legacy Google Drive copies (`Patent_A_Spec_RECONCILED_v3_UPDATED-3.docx`, `Patent_B_Spec_UPDATED.docx`, `Patent_C_Spec_RECONCILED_v2.docx`) are no longer regenerated and are not authoritative. Use them only as historical reference.
