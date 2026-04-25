@@ -242,13 +242,28 @@ def validate_f13_1(outputs_experimental, outputs_control, input_signal,
     After burn_in outer steps, the Pearson correlation corr(previous_output,
     input) under T=8 must be at least F13_1_CORR_RATIO_THRESHOLD x the
     correlation under T=1.
+
+    Precondition: the control correlation (corr_ctrl) must be finite and
+    strictly positive. A non-positive or non-finite corr_ctrl indicates a
+    degenerate baseline (uncorrelated, anti-correlated, or NaN trace) for
+    which the ratio test is undefined; this is treated as a precondition
+    failure rather than silently allowing the claim to pass via division-
+    by-zero / inf.
     """
     inp = input_signal[burn_in:]
     exp = outputs_experimental[burn_in:]
     ctrl = outputs_control[burn_in:]
     corr_exp = float(np.corrcoef(exp, inp)[0, 1])
     corr_ctrl = float(np.corrcoef(ctrl, inp)[0, 1])
-    ratio = corr_exp / corr_ctrl if corr_ctrl > 0 else float('inf')
+
+    precondition_ok = (
+        np.isfinite(corr_exp) and np.isfinite(corr_ctrl) and corr_ctrl > 0
+    )
+    if not precondition_ok:
+        # Degenerate baseline; do not compute a misleading ratio.
+        return False, corr_exp, corr_ctrl, float('nan')
+
+    ratio = corr_exp / corr_ctrl
     passed = ratio >= F13_1_CORR_RATIO_THRESHOLD
     return passed, corr_exp, corr_ctrl, ratio
 
@@ -374,8 +389,12 @@ def run_phase13():
           f"{corr_exp:.6f}")
     print(f"  corr(previous_output, input) at T={INNER_DEPTH_CONTROL}: "
           f"{corr_ctrl:.6f}")
-    print(f"  Ratio (exp / ctrl):                 {ratio:.4f}  "
-          f"(threshold: >= {F13_1_CORR_RATIO_THRESHOLD})")
+    if np.isnan(ratio):
+        print(f"  Ratio (exp / ctrl):                 undefined  "
+              f"(precondition: corr_ctrl > 0 and finite)")
+    else:
+        print(f"  Ratio (exp / ctrl):                 {ratio:.4f}  "
+              f"(threshold: >= {F13_1_CORR_RATIO_THRESHOLD})")
     result = "PASS" if passed else "FAIL"
     print(f"  Result: {result}")
     if not passed:
