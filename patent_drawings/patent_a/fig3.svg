@@ -130,7 +130,7 @@
     <line x1="135" y1="635" x2="135" y2="710" stroke="black" stroke-width="1" />
     <line x1="135" y1="710" x2="355" y2="710" stroke="black" stroke-width="1" />
     <line x1="135" y1="655" x2="355" y2="655" stroke="black" stroke-width="0.8" stroke-dasharray="3,2" />
-    <text x="358" y="659" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">V_th</text>
+    <text x="358" y="659" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="black">Vth</text>
     <path d="M 135 705 L 165 675 L 170 655 L 172 710 L 200 680 L 225 660 L 227 710 L 255 680 L 280 660 L 282 710 L 310 680 L 335 660 L 337 710 L 355 700"
           fill="none" stroke="black" stroke-width="1.5" />
     <!-- Ref 64 -->
